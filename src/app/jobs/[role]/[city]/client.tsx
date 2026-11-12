@@ -136,27 +136,54 @@ export default function JobsClient({
         ]}
       />
 
-      {/* 1. INDEED-STYLE SEARCH HERO */}
-      <section className="phero jobs-hero-indeed">
+      {/* 1. HERO WITH DUAL SEARCH & RIGHT BAND-CARD */}
+      <section className="phero jobs-hero">
         <div className="wrap">
-          <SearchHeroDual
-            currentRoleSlug={roleSlug}
-            currentCitySlug={citySlug}
-            eyebrow={`Confidential Legal Jobs · ${city.name}, ${city.state}`}
-            headline={
-              <h1>
-                {role.name} jobs in <span className="h1-accent">{city.name}</span>
-              </h1>
-            }
-            subtitle={
-              <>
-                Screened roles at small and mid-size firms with verified base salary ranges.{" "}
-                <b>No firm sees your name until you say yes.</b>
-              </>
-            }
-          />
-          <div className="hero-trust-bar-compact">
+          <div>
+            <span className="eyebrow">
+              Confidential Legal Jobs · {city.name}, {city.state} · employers kept confidential
+            </span>
+            <h1>
+              {role.name} jobs in <span className="h1-accent">{city.name}</span>
+            </h1>
+            <p className="lede">
+              Open roles at small and mid-size firms with verified base salary ranges.{" "}
+              <b>No firm sees your name until you say yes.</b>
+            </p>
+
+            {/* DUAL WHAT & WHERE SEARCH BAR */}
+            <div className="hero-search-wrapper">
+              <SearchHeroDual
+                currentRoleSlug={roleSlug}
+                currentCitySlug={citySlug}
+                buttonText="Find jobs"
+              />
+            </div>
+
             <TrustLine kind="candidate" />
+          </div>
+
+          {/* RESTORED ORIGINAL HERO BAND-CARD */}
+          <div className="band-card">
+            <h2 className="mini-h">Open now in {city.name}</h2>
+            <div className="nums">
+              <div>
+                <div className="big-num" id="n-jobs">
+                  <Mark>{String(matchingJobs.length)}</Mark>
+                </div>
+                <p className="big-num-l">open roles</p>
+              </div>
+              <div>
+                <div className="big-num" id="pay-span">
+                  <Mark>{fmt.range([lo, hi])}</Mark>
+                </div>
+                <p className="big-num-l">base pay range across them</p>
+              </div>
+            </div>
+            <p className="card-foot" id="hero-foot">
+              <Icon name="lock" className="ico" />
+              <span>Employers named on your first call with Jon, before anything is sent</span>
+            </p>
           </div>
         </div>
       </section>
