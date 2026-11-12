@@ -64,7 +64,7 @@ export function PersonCard({ pid, row = false }: { pid: "justin" | "jon"; row?: 
         <div className="person-avatar-wrap">
           <div className="portrait-ring">
             <Image
-              src={`/${p.photo}`}
+              src={p.photo.startsWith("/") ? p.photo : `/${p.photo}`}
               alt={p.name}
               className="portrait-img"
               width={80}

@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustLine } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
@@ -131,10 +129,8 @@ export default function FindCandidatesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
-      <main id="main">
-        <Breadcrumb
-          items={[
+      <Breadcrumb
+        items={[
             { name: "Home", href: "/" },
             { name: "Employers", href: "/employers" },
             { name: "Find candidates" },
@@ -519,8 +515,6 @@ export default function FindCandidatesPage() {
           href={trust.calendly || "https://calendly.com/orionplacement/call-with-justin"}
           cal={false}
         />
-      </main>
-      <Footer />
       <div className="mbar">
         <a className="btn btn-primary" href="#gate" id="mbar-cta">
           {unlocked ? "Request a profile" : "Get the full profiles"}

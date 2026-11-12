@@ -68,8 +68,6 @@ export default function EmployersPage() {
         @media (max-width:860px){.ways{grid-template-columns:1fr}}
         @media (max-width:640px){.ways .ill{display:none}.ways>li{padding:16px 14px 12px}.emp-hero .sheet .sx:nth-child(n+4){display:none}}
       `}</style>
-      <Header />
-      <main id="main">
         <Breadcrumb
           items={[
             { name: "Home", href: "/" },
@@ -368,8 +366,6 @@ export default function EmployersPage() {
           button="Find candidates"
           href="/find-candidates"
         />
-      </main>
-      <Footer />
       <div className="mbar">
         <Link className="btn btn-primary" href="/find-candidates">
           Find candidates

@@ -78,8 +78,6 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
-      <main id="main">
         {/* 1. Hero */}
         <section className="hero3" aria-labelledby="h1">
           <div className="wrap">
@@ -430,8 +428,6 @@ export default function HomePage() {
 
         {/* 13. CTA band */}
         <CtaBand />
-      </main>
-      <Footer />
       <div className="mbar">
         <Link className="btn btn-primary" href="/find-candidates">
           See candidates for my seat

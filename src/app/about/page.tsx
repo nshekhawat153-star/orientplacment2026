@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustBar, TrustLine, RatingBadge } from "@/components/Rating";
 import { PeopleSection } from "@/components/PeopleSection";
@@ -87,10 +85,8 @@ export default function AboutPage() {
         @media (max-width:860px){.wall .reviews-2 .reviews,.contact-grid{grid-template-columns:1fr}}
         @media (max-width:640px){#p-firms .reviews>.review:nth-child(n+3){display:flex}}
       `}</style>
-      <Header />
-      <main id="main">
-        <Breadcrumb
-          items={[
+      <Breadcrumb
+        items={[
             { name: "Home", href: "/" },
             { name: "About" },
           ]}
@@ -130,7 +126,7 @@ export default function AboutPage() {
                 <div className="sender">
                   <div className="portrait sm">
                     <Image
-                      src={`/${justin.photo}`}
+                      src={justin.photo.startsWith("/") ? justin.photo : `/${justin.photo}`}
                       alt={justin.name}
                       className="portrait-img"
                       width={48}
@@ -160,7 +156,7 @@ export default function AboutPage() {
                 <div className="sender">
                   <div className="portrait sm">
                     <Image
-                      src={`/${jon.photo}`}
+                      src={jon.photo.startsWith("/") ? jon.photo : `/${jon.photo}`}
                       alt={jon.name}
                       className="portrait-img"
                       width={48}
@@ -477,8 +473,6 @@ export default function AboutPage() {
           href={trust.calendly}
           cal={false}
         />
-      </main>
-      <Footer />
       <div className="mbar">
         <a
           className="btn btn-primary"

@@ -72,8 +72,6 @@ export default function CandidatesPage() {
         @media (max-width:860px){.reviews-2 .reviews{grid-template-columns:1fr}}
         @media (max-width:640px){.open-card .nlist li:nth-child(n+4){display:none}#jobs-now .cards>.job:nth-child(n+3){display:none}}
       `}</style>
-      <Header />
-      <main id="main">
         <Breadcrumb
           items={[
             { name: "Home", href: "/" },
@@ -443,8 +441,6 @@ export default function CandidatesPage() {
           button="Upload your resume"
           href="/upload-resume"
         />
-      </main>
-      <Footer />
       <div className="mbar">
         <Link className="btn btn-primary" href="/upload-resume">
           Upload your resume

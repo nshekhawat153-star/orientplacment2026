@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustLine } from "@/components/Rating";
 import { TermsTiles } from "@/components/TermsTiles";
@@ -104,10 +102,8 @@ export default function FeesPage() {
           .calc-out .stat b{font-size:1.4rem}
         }
       `}</style>
-      <Header />
-      <main id="main">
-        <Breadcrumb
-          items={[
+      <Breadcrumb
+        items={[
             { name: "Home", href: "/" },
             { name: "Employers", href: "/employers" },
             { name: "Fees" },
@@ -430,8 +426,6 @@ export default function FeesPage() {
           button="Find candidates"
           href="/find-candidates"
         />
-      </main>
-      <Footer />
       <div className="mbar">
         <Link className="btn btn-primary" href="/find-candidates">
           Find candidates

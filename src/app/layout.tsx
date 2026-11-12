@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { DM_Serif_Display, DM_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { SiteProvider } from "@/context/SiteContext";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
@@ -42,10 +44,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${dmSerifDisplay.variable} ${dmMono.variable} ${inter.variable}`}
     >
-      <body className="clean">
-        <SiteProvider>{children}</SiteProvider>
+      <body className="clean" suppressHydrationWarning>
+        <SiteProvider>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </SiteProvider>
       </body>
     </html>
   );

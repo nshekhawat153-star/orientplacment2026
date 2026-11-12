@@ -39,7 +39,7 @@ export const people: Person[] = [
     "email": "justin@orionplacement.com",
     "note": "Sends most candidate introductions and agrees terms with firms.",
     "does": "Your first call. Takes the seat brief, sends the shortlist and agrees terms with your firm.",
-    "photo": "assets/images/founders/justin-sofman.png",
+    "photo": "/images/founders/justin-sofman.png",
     "calendly": "https://calendly.com/orionplacement/call-with-justin"
   },
   {
@@ -51,7 +51,7 @@ export const people: Person[] = [
     "email": "jon@orionplacement.com",
     "note": "Screens candidates before any profile is sent.",
     "does": "Screens every candidate before you see a profile, and stays with them through the move.",
-    "photo": "assets/images/founders/jon-missirlian.jpg"
+    "photo": "/images/founders/jon-missirlian.jpg"
   }
 ];
 export const reviews: Review[] = [

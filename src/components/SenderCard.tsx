@@ -21,7 +21,7 @@ export function SenderCard({
       <div className="portrait sm">
         {p.photo ? (
           <Image
-            src={p.photo}
+            src={p.photo.startsWith("/") ? p.photo : `/${p.photo}`}
             alt={p.name}
             width={56}
             height={56}
