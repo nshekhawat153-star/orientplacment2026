@@ -113,7 +113,7 @@ export default function AboutPage() {
                 </a>
                 <Link
                   className="text-link"
-                  href="/jobs/estate-planning-attorney/houston-tx"
+                  href="/jobs"
                 >
                   See open jobs
                 </Link>

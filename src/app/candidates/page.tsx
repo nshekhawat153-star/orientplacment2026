@@ -95,7 +95,7 @@ export default function CandidatesPage() {
                 </Link>
                 <Link
                   className="text-link"
-                  href="/jobs/estate-planning-attorney/houston-tx"
+                  href="/jobs"
                 >
                   See open jobs
                 </Link>
@@ -169,7 +169,7 @@ export default function CandidatesPage() {
               </div>
               <Link
                 className="more link-arrow hide-sm"
-                href="/jobs/estate-planning-attorney/houston-tx"
+                href="/jobs"
               >
                 All open jobs
               </Link>
@@ -240,7 +240,7 @@ export default function CandidatesPage() {
             <div className="sec-foot">
               <Link
                 className="btn btn-ghost"
-                href="/jobs/estate-planning-attorney/houston-tx"
+                href="/jobs"
               >
                 See all open jobs
               </Link>

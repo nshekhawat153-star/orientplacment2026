@@ -74,25 +74,30 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
         </div>
 
         <div className="clean-firm-line">
-          <span className="firm-name-link">{job.firmType} ({job.firmSize})</span>
-          <span className="firm-rating">5.0 ★</span>
+          <span className="firm-name-link">
+            {job.firmType} ({job.firmSize})
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: 4 }}>
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+            </svg>
+          </span>
+          <span className="firm-rating">4.8 ★</span>
         </div>
 
         <div className="clean-location-line">
-          <span>{job.area}, {cityObj?.name || job.city}</span>
+          <span>{job.area}, {cityObj?.name || job.city} • {job.mode === "on-site" ? "On-site" : "Hybrid"}</span>
         </div>
 
         <div className="clean-work-type">
-          <span>Full-time · {job.mode === "on-site" ? "On-site" : "Hybrid"}</span>
+          <span>{fmt.range(job.band)} a year - Full-time</span>
         </div>
 
-        {/* PRIMARY ACTION BAR */}
+        {/* PRIMARY ACTION BAR MATCHING SCREENSHOT */}
         <div className="clean-action-bar">
           <a
             href="#quick-apply"
             className="btn btn-primary clean-apply-btn"
           >
-            Apply Confidentially
+            Apply now
           </a>
 
           <button
@@ -102,19 +107,37 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
             title={saved ? "Job saved" : "Save job"}
             aria-label="Save job"
           >
-            <svg viewBox="0 0 24 24" width="20" height="20" fill={saved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.75">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill={saved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.75">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
             </svg>
           </button>
 
-          <Link
-            href={`/upload-resume#role=${job.role}&city=${job.city}&job=${job.id}`}
+          <button
+            type="button"
             className="clean-icon-btn"
-            title="Upload resume for match"
-            aria-label="Upload resume"
+            title="Not interested"
+            aria-label="Not interested"
           >
-            <Icon name="upload" className="ico-clean" />
-          </Link>
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            className="clean-icon-btn"
+            title="Share job"
+            aria-label="Share job"
+            onClick={() => {
+              if (typeof navigator !== "undefined" && navigator.clipboard) {
+                navigator.clipboard.writeText(window.location.href);
+              }
+            }}
+          >
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
+            </svg>
+          </button>
         </div>
       </div>
 

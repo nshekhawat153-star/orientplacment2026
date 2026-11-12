@@ -108,7 +108,7 @@ export default function HomePage() {
                 Looking for a role?{" "}
                 <Link
                   className="link-arrow"
-                  href="/jobs/estate-planning-attorney/houston-tx"
+                  href="/jobs"
                 >
                   See open jobs
                 </Link>
@@ -358,7 +358,7 @@ export default function HomePage() {
               </div>
               <Link
                 className="btn btn-primary btn-lg"
-                href="/jobs/estate-planning-attorney/houston-tx"
+                href="/jobs"
               >
                 See open jobs
               </Link>

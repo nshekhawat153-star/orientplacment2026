@@ -272,7 +272,7 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                       <ul className="mega-list">
                         <li>
                           {renderLink(
-                            "/jobs/estate-planning-attorney/houston-tx",
+                            "/jobs",
                             true,
                             "Open jobs",
                             "Confidential roles with the pay on every listing"
@@ -558,7 +558,7 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
               <ul className="mega-list">
                 <li>
                   {renderLink(
-                    "/jobs/estate-planning-attorney/houston-tx",
+                    "/jobs",
                     true,
                     "Open jobs",
                     "Confidential roles with the pay on every listing"

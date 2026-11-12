@@ -60,47 +60,80 @@ export function JobCard({
         }}
         aria-current={selected ? "true" : undefined}
       >
-        <div className="feed-card-top">
-          <h3 className="feed-card-title">
-            <Mark>{j.title}</Mark>
-          </h3>
-          <button
-            type="button"
-            className="feed-bookmark-btn"
-            aria-label="Save job"
-            onClick={(e) => e.stopPropagation()}
-            title="Save job"
-          >
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-            </svg>
-          </button>
+        {/* TOP STATUS BADGES & ACTION ICONS */}
+        <div className="feed-card-badge-row">
+          <div className="feed-badges-left">
+            {(j.easilyApply || true) && (
+              <span className="indeed-badge-easily-apply">Easily apply</span>
+            )}
+            {j.urgentlyHiring && (
+              <span className="indeed-badge-urgently-hiring">Urgently hiring</span>
+            )}
+          </div>
+          <div className="feed-card-actions-right">
+            <button
+              type="button"
+              className="feed-icon-action-btn"
+              aria-label="Save job"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              title="Save job"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className="feed-icon-action-btn"
+              aria-label="Not interested"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              title="Not interested"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75">
+                <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17" />
+              </svg>
+            </button>
+          </div>
         </div>
 
+        {/* JOB TITLE */}
+        <h3 className="feed-card-title">
+          <Mark>{j.title}</Mark>
+        </h3>
+
+        {/* FIRM & RATING */}
         <div className="feed-card-firm">
           <span>{j.firmType} ({j.firmSize})</span>
+          <span className="firm-star-rating">4.8 ★</span>
         </div>
 
+        {/* LOCATION */}
         <div className="feed-card-location">
-          <span>{j.area}, {city ? city.name : j.city}</span>
+          <span>{j.mode === "hybrid" ? "Hybrid in " : ""}{j.area}, {city ? city.name : j.city}</span>
         </div>
 
+        {/* SALARY & WORK TYPE PILLS */}
         <div className="feed-card-tags">
-          <span className="feed-tag feed-tag-pay">
+          <span className="feed-tag-gray-pill">
             <Mark>{fmt.range(j.band)} a year</Mark>
           </span>
-          <span className={`feed-tag feed-tag-mode ${j.mode}`}>
-            {j.mode === "on-site" ? "On-site" : "Hybrid"}
+          <span className="feed-tag-gray-pill">
+            Full-time
           </span>
-          <span className="feed-tag feed-tag-exp">
-            {j.years}
+          <span className="feed-tag-gray-pill">
+            {j.mode === "on-site" ? "On-site" : "Hybrid work"}
           </span>
         </div>
 
+        {/* FOOTER */}
         <div className="feed-card-footer">
           <span className="feed-posted">Active {fmt.date(j.posted)}</span>
           <span className="feed-dot">·</span>
-          <span className="feed-confidential">Confidential law firm</span>
+          <span className="feed-confidential">Confidential employer</span>
         </div>
       </article>
     );

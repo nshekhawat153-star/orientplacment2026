@@ -84,6 +84,8 @@ export interface Job {
   mode: "on-site" | "hybrid";
   years: string;
   posted: string;
+  urgentlyHiring?: boolean;
+  easilyApply?: boolean;
 }
 
 export interface PlaceToPost {

@@ -142,7 +142,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
               <ul>
                 <li>
                   {renderLink(
-                    "/jobs/estate-planning-attorney/houston-tx",
+                    "/jobs",
                     true,
                     "Open jobs"
                   )}
