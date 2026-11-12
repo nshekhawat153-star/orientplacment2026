@@ -188,31 +188,19 @@ export default function JobsClient({
         </div>
       </section>
 
-      {/* 2. INDEED-STYLE MASTER-DETAIL SEARCH & BROWSE */}
+      {/* 2. CLEAN INDEED-STYLE JOB STREAM */}
       <section className="block alt indeed-search-section" id="jobs-stream">
         <div className="wrap">
-          <div className="indeed-section-header">
-            <div className="sec-head-left">
-              <span className="eyebrow">Interactive Job Search</span>
-              <h2>Browse seats with live specifications</h2>
-              <p>
-                Select any seat on the left to inspect practice mix, billable expectations,
-                and local salary positioning in the live preview.
-              </p>
-            </div>
-
-            <div className="indeed-market-stat-capsule">
-              <span className="stat-capsule-item">
-                <b>{matchingJobs.length}</b> total {role.short} seats in {city.name}
-              </span>
-              <span className="stat-capsule-sep">·</span>
-              <span className="stat-capsule-item">
-                Market range: <b>{fmt.range([lo, hi])}</b> base
-              </span>
-            </div>
+          <div className="indeed-clean-feed-header">
+            <h2 className="indeed-clean-feed-title">
+              Jobs in {city.name}
+            </h2>
+            <span className="indeed-clean-feed-count">
+              Showing {filteredList.length} of {matchingJobs.length} {role.short} {filteredList.length === 1 ? "role" : "roles"}
+            </span>
           </div>
 
-          {/* FILTER CHIPS STRIP */}
+          {/* FLAT FILTER CHIPS */}
           <FilterChipsBar
             filters={filters}
             onChange={setFilters}

@@ -14,6 +14,7 @@ interface JobDetailPaneProps {
 
 export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
   const [applied, setApplied] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [applicantName, setApplicantName] = useState("");
   const [applicantEmail, setApplicantEmail] = useState("");
   const [applicantPhone, setApplicantPhone] = useState("");
@@ -25,10 +26,10 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
       <div className="indeed-empty-pane">
         <div className="indeed-empty-pane-content">
           <Icon name="brief" className="empty-pane-ico" />
-          <h3>Select a role to view details</h3>
+          <h3>Select a job to view details</h3>
           <p className="muted">
             Click on any job card on the left to inspect full seat specifications,
-            confidential firm overview, and market compensation comparison.
+            compensation details, and confidential firm overview.
           </p>
         </div>
       </div>
@@ -49,8 +50,8 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
   };
 
   return (
-    <article className="indeed-detail-pane" aria-labelledby="detail-title">
-      {/* MOBILE CLOSE HEADER */}
+    <article className="indeed-clean-detail-pane" aria-labelledby="detail-title">
+      {/* MOBILE CLOSE */}
       {onCloseMobile && (
         <div className="mobile-pane-bar">
           <button
@@ -59,266 +60,289 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
             onClick={onCloseMobile}
             aria-label="Back to job listings"
           >
-            ← Back to listings
+            ← Back to jobs
           </button>
         </div>
       )}
 
-      {/* STICKY TOP ACTION HEADER */}
-      <div className="detail-sticky-head">
-        <div className="detail-meta-top">
-          <span className="confidential-pill">
-            <Icon name="lock" className="conf-ico" />
-            Confidential Law Firm
-          </span>
-          <span className="posted-meta">
-            Posted <Mark>{fmt.date(job.posted)}</Mark>
-          </span>
+      {/* TOP HEADER (MATCHING INDEED SCREENSHOT 2) */}
+      <div className="clean-detail-header">
+        <div className="detail-title-row">
+          <h2 id="detail-title" className="clean-job-title">
+            {job.title}
+          </h2>
         </div>
 
-        <h2 id="detail-title" className="detail-job-title">
-          {job.title}
-        </h2>
-
-        <p className="detail-firm-line">
-          <b>{job.firmType}</b> ({job.firmSize}) · {job.area}, {cityObj?.name || job.city}
-        </p>
-
-        {/* INDEED-STYLE SALARY & MODE PILL GROUP */}
-        <div className="detail-pills-row">
-          <div className="indeed-salary-pill">
-            <span className="salary-fig">{fmt.range(job.band)}</span>
-            <span className="salary-label">first-year base pay</span>
-          </div>
-
-          <span className="mode-pill-accent">
-            {job.mode === "on-site" ? "On-site · Monday to Friday" : "Hybrid · Set WFH days"}
-          </span>
-
-          <span className="exp-pill-accent">{job.years} experience</span>
+        <div className="clean-firm-line">
+          <span className="firm-name-link">{job.firmType} ({job.firmSize})</span>
+          <span className="firm-rating">5.0 ★</span>
         </div>
 
-        {/* PRIMARY CTA BAR */}
-        <div className="detail-cta-actions">
+        <div className="clean-location-line">
+          <span>{job.area}, {cityObj?.name || job.city}</span>
+        </div>
+
+        <div className="clean-work-type">
+          <span>Full-time · {job.mode === "on-site" ? "On-site" : "Hybrid"}</span>
+        </div>
+
+        {/* PRIMARY ACTION BAR */}
+        <div className="clean-action-bar">
           <a
-            href="#apply-box"
-            className="btn btn-primary btn-lg detail-primary-btn"
+            href="#quick-apply"
+            className="btn btn-primary clean-apply-btn"
           >
             Apply Confidentially
           </a>
+
+          <button
+            type="button"
+            className={`clean-icon-btn ${saved ? "saved" : ""}`}
+            onClick={() => setSaved(!saved)}
+            title={saved ? "Job saved" : "Save job"}
+            aria-label="Save job"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill={saved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.75">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+            </svg>
+          </button>
+
           <Link
             href={`/upload-resume#role=${job.role}&city=${job.city}&job=${job.id}`}
-            className="btn btn-line btn-lg"
+            className="clean-icon-btn"
+            title="Upload resume for match"
+            aria-label="Upload resume"
           >
-            Match My Resume
+            <Icon name="upload" className="ico-clean" />
           </Link>
-          <a
-            href={trust.calendly}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-ghost btn-lg detail-cal-btn"
-            title="Book 15 minutes with Jon"
-          >
-            Ask Jon a Question
-          </a>
         </div>
       </div>
 
-      {/* DETAIL BODY SECTIONS */}
-      <div className="detail-scroll-body">
-        {/* SECTION 1: SEAT OVERVIEW */}
-        <section className="detail-section">
-          <h3 className="detail-sec-h">Role Overview & Firm Dynamics</h3>
-          <div className="detail-specs-grid">
-            <div className="spec-card">
-              <span className="spec-label">Practice Focus</span>
-              <b className="spec-val">{job.mix}</b>
-            </div>
-            <div className="spec-card">
-              <span className="spec-label">Experience Level</span>
-              <b className="spec-val">{job.years}</b>
-            </div>
-            <div className="spec-card">
-              <span className="spec-label">Location / Work Mode</span>
-              <b className="spec-val">
-                {job.area} ({job.mode === "on-site" ? "On-site" : "Hybrid"})
-              </b>
-            </div>
-            <div className="spec-card">
-              <span className="spec-label">Firm Environment</span>
-              <b className="spec-val">
-                {job.firmType} ({job.firmSize})
-              </b>
-            </div>
-          </div>
-        </section>
+      <hr className="detail-clean-hr" />
 
-        {/* SECTION 2: WHAT THIS FIRM OFFERS */}
-        <section className="detail-section">
-          <h3 className="detail-sec-h">What This Seat Offers</h3>
-          <ul className="detail-bullet-list">
-            <li>
-              <b>Direct Partner Mentorship:</b> Work alongside established partners with
-              collaborative caseload management and active paralegal support.
-            </li>
-            <li>
-              <b>Realistic Billable Expectations:</b> Unlike mega-firms requiring 2,000+
-              annual hours, boutique & mid-size seats focus on client retention, work
-              quality, and work-life balance.
-            </li>
-            <li>
-              <b>Clear Advancement:</b> Definite path to senior associate or partnership
-              track with merit-based bonus origination structures.
-            </li>
-            <li>
-              <b>Discretion & Confidentiality:</b> This search is exclusively handled by
-              Orion. Your current firm is never contacted or informed.
-            </li>
-          </ul>
-        </section>
+      {/* JOB DETAILS SECTION (INDEED STYLE) */}
+      <div className="clean-detail-body">
+        <section className="clean-job-details-block">
+          <h3 className="clean-subhead">Job details</h3>
+          <p className="clean-subhead-note">
+            Here&apos;s how the job details align with market requirements.
+          </p>
 
-        {/* SECTION 3: MARKET SALARY BENCHMARK */}
-        <section className="detail-section">
-          <div className="detail-sec-head-flex">
-            <div>
-              <h3 className="detail-sec-h" style={{ marginBottom: 2 }}>
-                Market Compensation Benchmark
-              </h3>
-              <p className="detail-sub-note">
-                How this base pay compares to {roleObj?.name || job.role} roles in{" "}
-                {cityObj?.name || job.city}:
-              </p>
+          <div className="clean-facts-list">
+            <div className="fact-item">
+              <span className="fact-icon">💵</span>
+              <div className="fact-content">
+                <span className="fact-title">Pay</span>
+                <span className="fact-value fact-pay-highlight">
+                  {fmt.range(job.band)} a year <span className="fact-sub">(first-year base)</span>
+                </span>
+              </div>
             </div>
-            <Link
-              href={`/salaries/${job.role}/${job.city}`}
-              className="detail-benchmark-link"
-            >
-              See full salary report →
-            </Link>
-          </div>
 
-          <div className="detail-band-container">
-            <SalaryBandBar
-              citySlug={job.city}
-              roleSlug={job.role}
-              marker={(job.band[0] + job.band[1]) / 2}
-            />
-          </div>
-        </section>
-
-        {/* SECTION 4: TRUST & SCREENING PROMISE */}
-        <section className="detail-trust-box">
-          <div className="trust-box-content">
-            <div className="trust-avatar-badge">
-              <span>JM</span>
+            <div className="fact-item">
+              <span className="fact-icon">💼</span>
+              <div className="fact-content">
+                <span className="fact-title">Job type</span>
+                <span className="fact-value">Full-time</span>
+              </div>
             </div>
-            <div>
-              <h4>Screened Personally by Jon Missirlian</h4>
-              <p>
-                Co-Founder & Head of Screening at Orion. Jon reviews every application
-                confidentially. No resume is ever distributed without your prior
-                written authorization.
-              </p>
-              <div className="trust-mini-strip">
-                <span>⭐ 5.0 Google Rating</span>
-                <span>·</span>
-                <span>Named in 47 client reviews</span>
-                <span>·</span>
-                <span>Direct Line: (954) 859-9941</span>
+
+            <div className="fact-item">
+              <span className="fact-icon">📍</span>
+              <div className="fact-content">
+                <span className="fact-title">Location</span>
+                <span className="fact-value">{job.area}, {cityObj?.name || job.city}</span>
+              </div>
+            </div>
+
+            <div className="fact-item">
+              <span className="fact-icon">🏢</span>
+              <div className="fact-content">
+                <span className="fact-title">Work arrangement</span>
+                <span className="fact-value">
+                  {job.mode === "on-site" ? "On-site, Monday to Friday" : "Hybrid with set WFH days"}
+                </span>
+              </div>
+            </div>
+
+            <div className="fact-item">
+              <span className="fact-icon">⚖️</span>
+              <div className="fact-content">
+                <span className="fact-title">Practice focus</span>
+                <span className="fact-value">{job.mix}</span>
+              </div>
+            </div>
+
+            <div className="fact-item">
+              <span className="fact-icon">🎓</span>
+              <div className="fact-content">
+                <span className="fact-title">Experience level</span>
+                <span className="fact-value">{job.years}</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION 5: EMBEDDED CONFIDENTIAL INTAKE / APPLY BOX */}
-        <section className="detail-section" id="apply-box">
-          <div className="detail-intake-card">
-            <span className="eyebrow">Quick Confidential Apply</span>
-            <h3 style={{ margin: "6px 0 10px" }}>Apply for {job.title}</h3>
-            <p className="muted" style={{ fontSize: "0.92rem", marginBottom: 18 }}>
-              Send your contact info directly to Jon. We will get back to you within 24 hours.
+        <hr className="detail-clean-hr" />
+
+        {/* FULL JOB DESCRIPTION */}
+        <section className="clean-description-block">
+          <h3 className="clean-subhead">Full job description</h3>
+
+          <div className="clean-desc-text">
+            <p>
+              A reputable small-to-midsize legal firm in <b>{job.area}</b> is seeking an
+              experienced <b>{job.title}</b> ({job.years}) to handle active caseloads in{" "}
+              <b>{job.mix}</b>.
             </p>
 
-            {applied ? (
-              <div className="apply-success-box">
-                <Icon name="check" className="success-ico" />
-                <div>
-                  <h4>Application Received Confidentially</h4>
-                  <p>
-                    Jon Missirlian has received your interest in <b>{job.title}</b>. He will
-                    review your note and reach out to <b>{applicantEmail}</b> directly.
-                  </p>
+            <h4>What this seat offers:</h4>
+            <ul>
+              <li>
+                <b>Manageable Billable Targets:</b> Focus on work quality and client relationships,
+                avoiding 2,000+ annual hour pressure.
+              </li>
+              <li>
+                <b>Direct Partner Mentorship:</b> Work collaboratively with senior partners and
+                dedicated paralegal support.
+              </li>
+              <li>
+                <b>Merit-Based Origination:</b> Structured bonus models with transparent financial metrics.
+              </li>
+              <li>
+                <b>100% Confidential Representation:</b> Managed directly by Orion Placement.
+                Your current firm is never notified without your prior written approval.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <hr className="detail-clean-hr" />
+
+        {/* MARKET COMPENSATION BENCHMARK */}
+        <section className="clean-benchmark-block">
+          <div className="benchmark-head">
+            <h3 className="clean-subhead">Market Compensation Benchmark</h3>
+            <Link
+              href={`/salaries/${job.role}/${job.city}`}
+              className="benchmark-link"
+            >
+              See {cityObj?.name} salary guide →
+            </Link>
+          </div>
+          <p className="muted" style={{ fontSize: "13px", margin: "2px 0 12px" }}>
+            Where this seat sits relative to {roleObj?.name || job.role} base salaries:
+          </p>
+
+          <SalaryBandBar
+            citySlug={job.city}
+            roleSlug={job.role}
+            marker={(job.band[0] + job.band[1]) / 2}
+          />
+        </section>
+
+        <hr className="detail-clean-hr" />
+
+        {/* JON SCREENING TRUST CARD */}
+        <section className="clean-trust-card">
+          <div className="trust-avatar">JM</div>
+          <div className="trust-text">
+            <h4>Screened by Jon Missirlian</h4>
+            <p>
+              Head of Screening at Orion. Jon speaks with you privately before any profile
+              is shared with a firm.
+            </p>
+            <div className="trust-links">
+              <span>⭐ 5.0 Google Rating (60 reviews)</span>
+              <span>·</span>
+              <a href={trust.calendly} target="_blank" rel="noopener noreferrer">
+                Book 15 mins with Jon
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* QUICK APPLICATION BOX */}
+        <section className="clean-apply-box" id="quick-apply">
+          <h3 className="clean-subhead">Apply Confidentially</h3>
+          <p className="muted" style={{ fontSize: "13.5px", margin: "4px 0 16px" }}>
+            Submit your information directly to Jon. No one at your current firm will ever know.
+          </p>
+
+          {applied ? (
+            <div className="clean-success-alert">
+              <Icon name="check" className="alert-ico" />
+              <div>
+                <b>Application received confidentially.</b>
+                <p>Jon Missirlian will review your note and contact you at {applicantEmail}.</p>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleQuickApply} className="clean-apply-form">
+              <div className="form-row-2">
+                <div className="field">
+                  <label htmlFor="qa-name">Full name</label>
+                  <input
+                    id="qa-name"
+                    type="text"
+                    required
+                    placeholder="Your name"
+                    value={applicantName}
+                    onChange={(e) => setApplicantName(e.target.value)}
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="qa-email">Personal email</label>
+                  <input
+                    id="qa-email"
+                    type="email"
+                    required
+                    placeholder="personal@gmail.com"
+                    value={applicantEmail}
+                    onChange={(e) => setApplicantEmail(e.target.value)}
+                  />
                 </div>
               </div>
-            ) : (
-              <form onSubmit={handleQuickApply} className="detail-quick-form">
-                <div className="form-two-col">
-                  <div className="field">
-                    <label htmlFor="app-name">Your Full Name</label>
-                    <input
-                      id="app-name"
-                      type="text"
-                      required
-                      placeholder="e.g. Sarah Jenkins"
-                      value={applicantName}
-                      onChange={(e) => setApplicantName(e.target.value)}
-                    />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="app-email">Confidential Email</label>
-                    <input
-                      id="app-email"
-                      type="email"
-                      required
-                      placeholder="personal@gmail.com (not work)"
-                      value={applicantEmail}
-                      onChange={(e) => setApplicantEmail(e.target.value)}
-                    />
-                  </div>
-                </div>
 
-                <div className="form-two-col">
-                  <div className="field">
-                    <label htmlFor="app-phone">Direct Mobile Phone</label>
-                    <input
-                      id="app-phone"
-                      type="tel"
-                      placeholder="(555) 000-0000"
-                      value={applicantPhone}
-                      onChange={(e) => setApplicantPhone(e.target.value)}
-                    />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="app-note">Quick note / State Bar Admissions</label>
-                    <input
-                      id="app-note"
-                      type="text"
-                      placeholder="e.g. TX Bar 2021, 4 yrs estate planning"
-                      value={applicantNote}
-                      onChange={(e) => setApplicantNote(e.target.value)}
-                    />
-                  </div>
+              <div className="form-row-2">
+                <div className="field">
+                  <label htmlFor="qa-phone">Phone number</label>
+                  <input
+                    id="qa-phone"
+                    type="tel"
+                    placeholder="(555) 000-0000"
+                    value={applicantPhone}
+                    onChange={(e) => setApplicantPhone(e.target.value)}
+                  />
                 </div>
+                <div className="field">
+                  <label htmlFor="qa-note">State Bar / Experience</label>
+                  <input
+                    id="qa-note"
+                    type="text"
+                    placeholder="e.g. TX Bar 2021, 4 yrs exp"
+                    value={applicantNote}
+                    onChange={(e) => setApplicantNote(e.target.value)}
+                  />
+                </div>
+              </div>
 
-                <div className="form-submit-row">
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-lg"
-                    disabled={submitting}
-                  >
-                    {submitting ? "Sending..." : "Submit Application to Jon"}
-                  </button>
-                  <span className="form-privacy-note">
-                    <Icon name="lock" className="lock-sm" />
-                    100% confidential · Never shared with your current firm
-                  </span>
-                </div>
-              </form>
-            )}
-          </div>
+              <div className="form-actions-clean">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={submitting}
+                >
+                  {submitting ? "Submitting..." : "Submit Confidential Application"}
+                </button>
+                <span className="privacy-badge">
+                  <Icon name="lock" className="lock-ico-sm" /> 100% Confidential
+                </span>
+              </div>
+            </form>
+          )}
         </section>
       </div>
     </article>
   );
 }
-

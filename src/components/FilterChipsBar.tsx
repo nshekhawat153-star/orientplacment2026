@@ -1,11 +1,10 @@
 "use client";
 
 import React from "react";
-import { Icon } from "./icons";
 
 export interface FilterChipsState {
   mode: "all" | "on-site" | "hybrid";
-  minPay: number | null; // e.g. 100, 125, 150 (in thousands)
+  minPay: number | null; // e.g. 110, 130, 150 (in thousands)
   experience: "any" | "b1" | "b2" | "b3";
 }
 
@@ -25,16 +24,25 @@ export function FilterChipsBar({
   const hasActiveFilters =
     filters.mode !== "all" || filters.minPay !== null || filters.experience !== "any";
 
-  const handleModeChange = (mode: "all" | "on-site" | "hybrid") => {
-    onChange({ ...filters, mode });
+  const handleModeToggle = (mode: "hybrid" | "on-site") => {
+    onChange({
+      ...filters,
+      mode: filters.mode === mode ? "all" : mode,
+    });
   };
 
-  const handlePayChange = (minPay: number | null) => {
-    onChange({ ...filters, minPay });
+  const handlePayToggle = (pay: number) => {
+    onChange({
+      ...filters,
+      minPay: filters.minPay === pay ? null : pay,
+    });
   };
 
-  const handleExpChange = (experience: "any" | "b1" | "b2" | "b3") => {
-    onChange({ ...filters, experience });
+  const handleExpToggle = (exp: "b2" | "b3") => {
+    onChange({
+      ...filters,
+      experience: filters.experience === exp ? "any" : exp,
+    });
   };
 
   const handleReset = () => {
@@ -42,114 +50,89 @@ export function FilterChipsBar({
   };
 
   return (
-    <div className="indeed-filters-strip">
-      <div className="indeed-chips-scroll">
-        {/* Mode Pills */}
-        <div className="filter-pill-group" role="group" aria-label="Work mode filter">
-          <button
-            type="button"
-            className={`filter-pill ${filters.mode === "all" ? "active" : ""}`}
-            onClick={() => handleModeChange("all")}
-          >
-            All Modes
-          </button>
-          <button
-            type="button"
-            className={`filter-pill ${filters.mode === "hybrid" ? "active" : ""}`}
-            onClick={() => handleModeChange("hybrid")}
-          >
-            Hybrid
-          </button>
-          <button
-            type="button"
-            className={`filter-pill ${filters.mode === "on-site" ? "active" : ""}`}
-            onClick={() => handleModeChange("on-site")}
-          >
-            On-site
-          </button>
-        </div>
+    <div className="indeed-flat-filters-bar">
+      <div className="indeed-flat-chips">
+        {/* Work Mode Chips */}
+        <button
+          type="button"
+          className={`flat-chip ${filters.mode === "hybrid" ? "active" : ""}`}
+          onClick={() => handleModeToggle("hybrid")}
+        >
+          <span>Hybrid</span>
+          <span className="chip-chevron">▾</span>
+        </button>
 
-        <div className="filter-chip-sep" aria-hidden="true" />
+        <button
+          type="button"
+          className={`flat-chip ${filters.mode === "on-site" ? "active" : ""}`}
+          onClick={() => handleModeToggle("on-site")}
+        >
+          <span>On-site</span>
+          <span className="chip-chevron">▾</span>
+        </button>
 
-        {/* Salary Pills */}
-        <div className="filter-pill-group" role="group" aria-label="Salary filter">
-          <button
-            type="button"
-            className={`filter-pill ${filters.minPay === null ? "active" : ""}`}
-            onClick={() => handlePayChange(null)}
-          >
-            Any Pay
-          </button>
-          <button
-            type="button"
-            className={`filter-pill ${filters.minPay === 110 ? "active" : ""}`}
-            onClick={() => handlePayChange(filters.minPay === 110 ? null : 110)}
-          >
-            $110k+
-          </button>
-          <button
-            type="button"
-            className={`filter-pill ${filters.minPay === 130 ? "active" : ""}`}
-            onClick={() => handlePayChange(filters.minPay === 130 ? null : 130)}
-          >
-            $130k+
-          </button>
-          <button
-            type="button"
-            className={`filter-pill ${filters.minPay === 150 ? "active" : ""}`}
-            onClick={() => handlePayChange(filters.minPay === 150 ? null : 150)}
-          >
-            $150k+
-          </button>
-        </div>
+        {/* Salary Chips */}
+        <button
+          type="button"
+          className={`flat-chip ${filters.minPay === 110 ? "active" : ""}`}
+          onClick={() => handlePayToggle(110)}
+        >
+          <span>$110k+</span>
+          <span className="chip-chevron">▾</span>
+        </button>
 
-        <div className="filter-chip-sep" aria-hidden="true" />
+        <button
+          type="button"
+          className={`flat-chip ${filters.minPay === 130 ? "active" : ""}`}
+          onClick={() => handlePayToggle(130)}
+        >
+          <span>$130k+</span>
+          <span className="chip-chevron">▾</span>
+        </button>
 
-        {/* Experience Pills */}
-        <div className="filter-pill-group" role="group" aria-label="Experience filter">
-          <button
-            type="button"
-            className={`filter-pill ${filters.experience === "any" ? "active" : ""}`}
-            onClick={() => handleExpChange("any")}
-          >
-            Any Exp
-          </button>
-          <button
-            type="button"
-            className={`filter-pill ${filters.experience === "b2" ? "active" : ""}`}
-            onClick={() => handleExpChange(filters.experience === "b2" ? "any" : "b2")}
-          >
-            4–7 yrs
-          </button>
-          <button
-            type="button"
-            className={`filter-pill ${filters.experience === "b3" ? "active" : ""}`}
-            onClick={() => handleExpChange(filters.experience === "b3" ? "any" : "b3")}
-          >
-            8+ yrs
-          </button>
-        </div>
+        <button
+          type="button"
+          className={`flat-chip ${filters.minPay === 150 ? "active" : ""}`}
+          onClick={() => handlePayToggle(150)}
+        >
+          <span>$150k+</span>
+          <span className="chip-chevron">▾</span>
+        </button>
 
-        {/* Reset Button */}
+        {/* Experience Chips */}
+        <button
+          type="button"
+          className={`flat-chip ${filters.experience === "b2" ? "active" : ""}`}
+          onClick={() => handleExpToggle("b2")}
+        >
+          <span>4–7 yrs</span>
+          <span className="chip-chevron">▾</span>
+        </button>
+
+        <button
+          type="button"
+          className={`flat-chip ${filters.experience === "b3" ? "active" : ""}`}
+          onClick={() => handleExpToggle("b3")}
+        >
+          <span>8+ yrs</span>
+          <span className="chip-chevron">▾</span>
+        </button>
+
+        {/* Reset Action */}
         {hasActiveFilters && (
           <button
             type="button"
-            className="filter-reset-btn"
+            className="flat-chip chip-reset"
             onClick={handleReset}
-            title="Reset filters"
           >
-            <span>Reset</span>
-            <span className="reset-x">×</span>
+            Clear filters ×
           </button>
         )}
       </div>
 
-      <div className="indeed-filter-stats">
-        <span>
-          Showing <b>{filteredCount}</b> of <b>{totalCount}</b> jobs
-        </span>
+      <div className="indeed-results-stat">
+        Showing <b>{filteredCount}</b> of <b>{totalCount}</b> jobs
       </div>
     </div>
   );
 }
-

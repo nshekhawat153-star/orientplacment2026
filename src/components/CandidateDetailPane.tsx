@@ -40,7 +40,7 @@ export function CandidateDetailPane({
   const bars = c.bars.length ? c.bars.join(", ") : "Active state bar in good standing";
 
   return (
-    <article className="indeed-detail-pane cand-dossier-pane" aria-labelledby="cand-title">
+    <article className="indeed-clean-detail-pane cand-clean-pane" aria-labelledby="cand-title">
       {/* MOBILE CLOSE */}
       {onCloseMobile && (
         <div className="mobile-pane-bar">
@@ -55,53 +55,50 @@ export function CandidateDetailPane({
         </div>
       )}
 
-      {/* STICKY DOSSIER HEADER */}
-      <div className="detail-sticky-head">
-        <div className="detail-meta-top">
+      {/* TOP HEADER (CLEAN INDEED STYLE) */}
+      <div className="clean-detail-header">
+        <div className="detail-meta-top" style={{ marginBottom: 6 }}>
           <span className="confidential-pill">
             <Icon name="shield" className="conf-ico" />
-            Verified &amp; Pre-Screened Candidate
+            Verified &amp; Pre-Screened
           </span>
           <span className="candidate-id-badge">{c.id}</span>
         </div>
 
-        <h2 id="cand-title" className="detail-job-title">
+        <h2 id="cand-title" className="clean-job-title">
           {c.headline}
         </h2>
 
-        <p className="detail-firm-line">
-          {c.years} years of legal practice · Now at a {c.firmType.toLowerCase()} of {c.firmSize} ·{" "}
-          {c.area}
-        </p>
-
-        {/* PILLS ROW */}
-        <div className="detail-pills-row">
-          <div className="indeed-salary-pill">
-            <span className="salary-fig">{fmt.range(c.pay)}</span>
-            <span className="salary-label">expected base</span>
-          </div>
-
-          <span className="mode-pill-accent">
-            {c.modes.includes("hybrid") ? "Open to Hybrid or On-site" : "On-site"}
-          </span>
-
-          <span className="exp-pill-accent">Available: {c.availability}</span>
+        <div className="clean-firm-line">
+          <span className="firm-name-link">{c.years} yrs experience · {c.firmType}</span>
+          <span className="firm-rating">5.0 ★</span>
         </div>
 
-        {/* PRIMARY CTA */}
-        <div className="detail-cta-actions">
+        <div className="clean-location-line">
+          <span>{c.area} · {bars}</span>
+        </div>
+
+        <div className="clean-work-type">
+          <span className="feed-tag feed-tag-pay" style={{ marginRight: 6 }}>
+            {fmt.range(c.pay)} expected
+          </span>
+          <span>{c.modes.includes("hybrid") ? "Hybrid / On-site" : "On-site"} · Available: {c.availability}</span>
+        </div>
+
+        {/* PRIMARY ACTION BAR */}
+        <div className="clean-action-bar">
           {onRequestProfile ? (
             <button
               type="button"
-              className="btn btn-primary btn-lg detail-primary-btn"
+              className="btn btn-primary clean-apply-btn"
               onClick={() => onRequestProfile(c.id)}
             >
-              Request Full Resume for {c.id}
+              Request Full Resume ({c.id})
             </button>
           ) : (
             <Link
               href={`/candidate/${c.id.toLowerCase()}`}
-              className="btn btn-primary btn-lg detail-primary-btn"
+              className="btn btn-primary clean-apply-btn"
             >
               View Full Profile
             </Link>
@@ -111,15 +108,90 @@ export function CandidateDetailPane({
             href={justin.calendly || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-line btn-lg"
+            className="clean-icon-btn"
+            title="Book Call with Justin"
+            aria-label="Book Call with Justin"
+            style={{ width: "auto", padding: "0 14px", gap: 6, fontSize: 13.5, fontWeight: 500 }}
           >
-            Discuss with Justin
+            <Icon name="phone" className="ico-clean" />
+            <span>Call Justin</span>
           </a>
         </div>
       </div>
 
-      {/* SCROLL BODY */}
-      <div className="detail-scroll-body">
+      <hr className="detail-clean-hr" />
+
+      {/* CANDIDATE DETAILS BODY */}
+      <div className="clean-detail-body">
+        {/* STRUCTURED SPECS LIST */}
+        <section className="clean-job-details-block">
+          <h3 className="clean-subhead">Candidate details</h3>
+          <p className="clean-subhead-note">
+            Key qualifications verified directly by Orion Placement.
+          </p>
+
+          <div className="clean-facts-list">
+            <div className="fact-item">
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+              </span>
+              <div className="fact-content">
+                <span className="fact-title">Expected compensation</span>
+                <span className="fact-value fact-pay-highlight">
+                  {fmt.range(c.pay)} base salary
+                </span>
+              </div>
+            </div>
+
+            <div className="fact-item">
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+              </span>
+              <div className="fact-content">
+                <span className="fact-title">Current firm background</span>
+                <span className="fact-value">
+                  {c.years} years practice at a {c.firmType.toLowerCase()} of {c.firmSize}
+                </span>
+              </div>
+            </div>
+
+            <div className="fact-item">
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <div className="fact-content">
+                <span className="fact-title">Location &amp; Bar status</span>
+                <span className="fact-value">
+                  {c.area} · {bars}
+                  {c.relocate && c.relocate.length > 0 ? ` (Open to ${c.relocate.join(", ")})` : ""}
+                </span>
+              </div>
+            </div>
+
+            <div className="fact-item">
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </span>
+              <div className="fact-content">
+                <span className="fact-title">Availability</span>
+                <span className="fact-value">{c.availability}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr className="detail-clean-hr" />
         {/* SECTION 1: PRACTICE MIX BREAKDOWN */}
         <section className="detail-section">
           <h3 className="detail-sec-h">Practice Area Breakdown</h3>

@@ -43,24 +43,75 @@ export function JobCard({
     .filter(Boolean)
     .join(" ");
 
+  // When rendered in Indeed-style master-detail feed
+  if (onSelect) {
+    return (
+      <article
+        className={`indeed-feed-card ${selected ? "selected" : ""}`}
+        data-id={j.id}
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onSelect(j);
+          }
+        }}
+        aria-current={selected ? "true" : undefined}
+      >
+        <div className="feed-card-top">
+          <h3 className="feed-card-title">
+            <Mark>{j.title}</Mark>
+          </h3>
+          <button
+            type="button"
+            className="feed-bookmark-btn"
+            aria-label="Save job"
+            onClick={(e) => e.stopPropagation()}
+            title="Save job"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="feed-card-firm">
+          <span>{j.firmType} ({j.firmSize})</span>
+        </div>
+
+        <div className="feed-card-location">
+          <span>{j.area}, {city ? city.name : j.city}</span>
+        </div>
+
+        <div className="feed-card-tags">
+          <span className="feed-tag feed-tag-pay">
+            <Mark>{fmt.range(j.band)} a year</Mark>
+          </span>
+          <span className={`feed-tag feed-tag-mode ${j.mode}`}>
+            {j.mode === "on-site" ? "On-site" : "Hybrid"}
+          </span>
+          <span className="feed-tag feed-tag-exp">
+            {j.years}
+          </span>
+        </div>
+
+        <div className="feed-card-footer">
+          <span className="feed-posted">Active {fmt.date(j.posted)}</span>
+          <span className="feed-dot">·</span>
+          <span className="feed-confidential">Confidential law firm</span>
+        </div>
+      </article>
+    );
+  }
+
+  // Classic standalone card fallback for other pages
   return (
     <article
       className={articleClasses}
       data-id={j.id}
       onClick={handleClick}
-      role={onSelect ? "button" : undefined}
-      tabIndex={onSelect ? 0 : undefined}
-      onKeyDown={
-        onSelect
-          ? (e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                onSelect(j);
-              }
-            }
-          : undefined
-      }
-      aria-current={selected ? "true" : undefined}
     >
       <div className="job-top">
         <span className="job-conf-label">Confidential employer</span>

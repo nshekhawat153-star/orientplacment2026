@@ -206,6 +206,55 @@ export function CandidateCard({
     .map((x) => `${x[0]} ${x[1]}%`)
     .join(" · ");
 
+  if (onSelect) {
+    return (
+      <article
+        className={`indeed-feed-card ${selected ? "selected" : ""}`}
+        data-id={c.id}
+        onClick={handleCardClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onSelect(c);
+          }
+        }}
+        aria-current={selected ? "true" : undefined}
+      >
+        <div className="feed-card-top">
+          <h3 className="feed-card-title">
+            <Mark>{c.headline}</Mark>
+          </h3>
+          <span className="feed-cand-id">{c.id}</span>
+        </div>
+
+        <div className="feed-card-firm">
+          <span>{c.years} yrs exp · {c.firmType} ({c.firmSize})</span>
+        </div>
+
+        <div className="feed-card-location">
+          <span>{c.area.replace(/^[^,]+, /, "")} · {bars}</span>
+        </div>
+
+        <div className="feed-card-tags">
+          <span className="feed-tag feed-tag-pay">
+            <Mark>{fmt.range(c.pay)} expected</Mark>
+          </span>
+          <span className="feed-tag feed-tag-mode">
+            {c.modes.includes("hybrid") ? "Hybrid / On-site" : "On-site"}
+          </span>
+        </div>
+
+        <div className="feed-card-footer">
+          <span className="feed-posted">Available: {c.availability}</span>
+          <span className="feed-dot">·</span>
+          <span className="feed-confidential">Screened by Jon</span>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article
       className={`cand ${selected ? "job-selected cand-selected" : ""} ${
