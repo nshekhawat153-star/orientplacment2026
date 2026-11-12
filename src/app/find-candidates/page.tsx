@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustLine } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
+import { CandidateDetailPane } from "@/components/CandidateDetailPane";
 import { GateForm } from "@/components/GateForm";
 import { TermsTiles } from "@/components/TermsTiles";
 import { CtaBand } from "@/components/CtaBand";
@@ -32,6 +33,8 @@ export default function FindCandidatesPage() {
   const [selectedMust, setSelectedMust] = useState<string[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [folded, setFolded] = useState(true);
+  const [selectedCandidateId, setSelectedCandidateId] = useState<string | null>(null);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   // Check URL hash / search params on mount
   useEffect(() => {
@@ -96,6 +99,27 @@ export default function FindCandidatesPage() {
     setSelectedIds([id]);
     const el = document.getElementById("gate");
     if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    if (results.length > 0) {
+      if (!selectedCandidateId || !results.some((r) => r.c.id === selectedCandidateId)) {
+        setSelectedCandidateId(results[0].c.id);
+      }
+    } else {
+      setSelectedCandidateId(null);
+    }
+  }, [results, selectedCandidateId]);
+
+  const activeCandidate = useMemo(() => {
+    return results.find((r) => r.c.id === selectedCandidateId)?.c || results[0]?.c || null;
+  }, [results, selectedCandidateId]);
+
+  const handleSelectCandidate = (cand: any) => {
+    setSelectedCandidateId(cand.id);
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      setMobileDrawerOpen(true);
+    }
   };
 
   const jsonLd = {
@@ -330,18 +354,51 @@ export default function FindCandidatesPage() {
                 </div>
               ) : (
                 <>
-                  <div id="r-list">
-                    <div className="cards">
-                      {openCards.map((r) => (
-                        <CandidateCard
-                          key={r.c.id}
-                          candidate={r.c}
-                          result={r}
-                          onRequestProfile={handleRequestProfile}
-                        />
-                      ))}
+                  <div className="indeed-split-grid" style={{ marginTop: 14 }}>
+                    <div className="indeed-feed-column">
+                      <div id="r-list">
+                        <div className="indeed-card-stack">
+                          {openCards.map((r) => (
+                            <CandidateCard
+                              key={r.c.id}
+                              candidate={r.c}
+                              result={r}
+                              selected={activeCandidate?.id === r.c.id}
+                              onSelect={handleSelectCandidate}
+                              onRequestProfile={handleRequestProfile}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="indeed-detail-column">
+                      <CandidateDetailPane
+                        candidate={activeCandidate}
+                        onRequestProfile={handleRequestProfile}
+                      />
                     </div>
                   </div>
+
+                  {mobileDrawerOpen && activeCandidate && (
+                    <div
+                      className="mobile-detail-overlay"
+                      onClick={() => setMobileDrawerOpen(false)}
+                    >
+                      <div
+                        className="mobile-detail-modal"
+                        onClick={(e) => e.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                      >
+                        <CandidateDetailPane
+                          candidate={activeCandidate}
+                          onRequestProfile={handleRequestProfile}
+                          onCloseMobile={() => setMobileDrawerOpen(false)}
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   <div id="gate">
                     <GateForm

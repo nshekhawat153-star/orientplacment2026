@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import {
   jobs,
@@ -11,16 +11,17 @@ import {
   findBand,
   yearsRange,
   fmt,
-  asOf,
-  source,
+  Job,
 } from "@/data";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustLine } from "@/components/Rating";
 import { JobCard } from "@/components/JobCard";
-import { SalaryBandBar } from "@/components/SalaryBand";
 import { GateForm } from "@/components/GateForm";
 import { Mark } from "@/components/Mark";
 import { Icon } from "@/components/icons";
+import { SearchHeroDual } from "@/components/SearchHeroDual";
+import { FilterChipsBar, FilterChipsState } from "@/components/FilterChipsBar";
+import { JobDetailPane } from "@/components/JobDetailPane";
 
 export default function JobsClient({
   roleParam,
@@ -35,7 +36,11 @@ export default function JobsClient({
   const role = findRole(roleSlug) || roles[0];
   const city = findCity(citySlug) || cities[0];
 
-  const [filter, setFilter] = useState<"all" | "on-site" | "hybrid" | "senior">("all");
+  const [filters, setFilters] = useState<FilterChipsState>({
+    mode: "all",
+    minPay: null,
+    experience: "any",
+  });
 
   const matchingJobs = useMemo(() => {
     return jobs
@@ -48,14 +53,54 @@ export default function JobsClient({
 
   const filteredList = useMemo(() => {
     return matchingJobs.filter((j) => {
-      if (filter === "all") return true;
-      if (filter === "senior") {
-        const yr = yearsRange(j.years);
-        return yr[1] >= 6 && yr[0] >= 6;
+      // Work mode filter
+      if (filters.mode !== "all" && j.mode !== filters.mode) {
+        return false;
       }
-      return j.mode === filter;
+
+      // Min pay filter
+      if (filters.minPay !== null && j.band[1] < filters.minPay) {
+        return false;
+      }
+
+      // Experience filter
+      if (filters.experience !== "any") {
+        const yr = yearsRange(j.years);
+        if (filters.experience === "b1" && (yr[0] > 3 || yr[1] < 1)) return false;
+        if (filters.experience === "b2" && (yr[1] < 4 || yr[0] > 7)) return false;
+        if (filters.experience === "b3" && yr[1] < 8) return false;
+      }
+
+      return true;
     });
-  }, [matchingJobs, filter]);
+  }, [matchingJobs, filters]);
+
+  // Selected job for master-detail preview
+  const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    if (filteredList.length > 0) {
+      // If current selection is still in filteredList, keep it; otherwise pick first
+      if (!selectedJobId || !filteredList.some((j) => j.id === selectedJobId)) {
+        setSelectedJobId(filteredList[0].id);
+      }
+    } else {
+      setSelectedJobId(null);
+    }
+  }, [filteredList, selectedJobId]);
+
+  const activeJob = useMemo(() => {
+    return filteredList.find((j) => j.id === selectedJobId) || filteredList[0] || null;
+  }, [filteredList, selectedJobId]);
+
+  const handleSelectJob = (job: Job) => {
+    setSelectedJobId(job.id);
+    // On screens < 1024px, open mobile drawer
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      setMobileDrawerOpen(true);
+    }
+  };
 
   // Other roles and other cities
   const otherRoles = useMemo(() => {
@@ -85,151 +130,160 @@ export default function JobsClient({
       <Breadcrumb
         crumbs={[
           { label: "Home", href: "/" },
+          { label: "Candidates", href: "/candidates" },
           { label: city.name, href: `/locations/texas/${city.slug.replace(/-[a-z]+$/, "")}` },
           { label: `${role.name} jobs`, current: true },
         ]}
       />
 
-      {/* 1. Hero */}
-      <section className="phero jobs-hero">
+      {/* 1. INDEED-STYLE SEARCH HERO */}
+      <section className="phero jobs-hero-indeed">
         <div className="wrap">
-          <div>
-            <span className="eyebrow">
-              Jobs · {city.name}, {city.state} · employers kept confidential
-            </span>
-            <h1>
-              {role.name} jobs in {city.name}
-            </h1>
-            <p className="lede">
-              Open roles at small and mid-size firms, with the base pay on each. No firm sees your name until you say yes.
-            </p>
-            <div className="hero-act">
-              <a className="btn btn-primary btn-lg" href="#list">
-                Apply confidentially
-              </a>
-              <a className="text-link" href="#alerts-block">
-                Email me new roles
-              </a>
-            </div>
+          <SearchHeroDual
+            currentRoleSlug={roleSlug}
+            currentCitySlug={citySlug}
+            eyebrow={`Confidential Legal Jobs · ${city.name}, ${city.state}`}
+            headline={
+              <h1>
+                {role.name} jobs in <span className="h1-accent">{city.name}</span>
+              </h1>
+            }
+            subtitle={
+              <>
+                Screened roles at small and mid-size firms with verified base salary ranges.{" "}
+                <b>No firm sees your name until you say yes.</b>
+              </>
+            }
+          />
+          <div className="hero-trust-bar-compact">
             <TrustLine kind="candidate" />
           </div>
-
-          <div className="band-card">
-            <h2 className="mini-h">Open now in {city.name}</h2>
-            <div className="nums">
-              <div>
-                <div className="big-num" id="n-jobs">
-                  <Mark>{String(matchingJobs.length)}</Mark>
-                </div>
-                <p className="big-num-l">open roles</p>
-              </div>
-              <div>
-                <div className="big-num" id="pay-span">
-                  <Mark>{fmt.range([lo, hi])}</Mark>
-                </div>
-                <p className="big-num-l">base pay range across them</p>
-              </div>
-            </div>
-            <p className="card-foot" id="hero-foot">
-              <Icon name="lock" className="ico" />
-              <span>Employers named on your first call with Jon, before anything is sent</span>
-            </p>
-          </div>
         </div>
       </section>
 
-      {/* 2. Job cards with filter chips */}
-      <section className="block alt" id="list">
+      {/* 2. INDEED-STYLE MASTER-DETAIL SEARCH & BROWSE */}
+      <section className="block alt indeed-search-section" id="jobs-stream">
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Open roles</span>
-            <h2>Pick a role and apply confidentially</h2>
-            <p>Each card shows the base range, firm type and how the seat works.</p>
-          </div>
-
-          <div className="results-head" aria-live="polite">
-            <div className="chips" id="filters" role="group" aria-label="Filter roles">
-              <button
-                type="button"
-                className="chip"
-                aria-pressed={filter === "all"}
-                onClick={() => setFilter("all")}
-              >
-                All
-              </button>
-              <button
-                type="button"
-                className="chip"
-                aria-pressed={filter === "on-site"}
-                onClick={() => setFilter("on-site")}
-              >
-                On-site
-              </button>
-              <button
-                type="button"
-                className="chip"
-                aria-pressed={filter === "hybrid"}
-                onClick={() => setFilter("hybrid")}
-              >
-                Hybrid
-              </button>
-              <button
-                type="button"
-                className="chip"
-                aria-pressed={filter === "senior"}
-                onClick={() => setFilter("senior")}
-              >
-                6+ years
-              </button>
+          <div className="indeed-section-header">
+            <div className="sec-head-left">
+              <span className="eyebrow">Interactive Job Search</span>
+              <h2>Browse seats with live specifications</h2>
+              <p>
+                Select any seat on the left to inspect practice mix, billable expectations,
+                and local salary positioning in the live preview.
+              </p>
             </div>
-            <span className="small muted" id="r-sub">
-              Showing <Mark>{String(filteredList.length)}</Mark> of <Mark>{String(matchingJobs.length)}</Mark>, newest first
-            </span>
+
+            <div className="indeed-market-stat-capsule">
+              <span className="stat-capsule-item">
+                <b>{matchingJobs.length}</b> total {role.short} seats in {city.name}
+              </span>
+              <span className="stat-capsule-sep">·</span>
+              <span className="stat-capsule-item">
+                Market range: <b>{fmt.range([lo, hi])}</b> base
+              </span>
+            </div>
           </div>
 
-          <div id="r-list">
-            {filteredList.length > 0 ? (
-              <div className="cards">
-                {filteredList.map((job) => (
-                  <JobCard key={job.id} job={job} outlined />
-                ))}
+          {/* FILTER CHIPS STRIP */}
+          <FilterChipsBar
+            filters={filters}
+            onChange={setFilters}
+            totalCount={matchingJobs.length}
+            filteredCount={filteredList.length}
+          />
+
+          {/* MASTER-DETAIL 2-COLUMN SPLIT */}
+          <div className="indeed-split-grid">
+            {/* LEFT COLUMN: STREAM OF JOB CARDS (40% width) */}
+            <div className="indeed-feed-column" aria-label="Job listings stream">
+              {filteredList.length > 0 ? (
+                <div className="indeed-card-stack">
+                  {filteredList.map((job) => (
+                    <JobCard
+                      key={job.id}
+                      job={job}
+                      selected={activeJob?.id === job.id}
+                      onSelect={handleSelectJob}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="indeed-empty-feed">
+                  <Icon name="search" className="empty-feed-ico" />
+                  <h3>No open roles match this exact filter</h3>
+                  <p className="muted">
+                    Try broadening your salary threshold or experience filter to see more
+                    seats, or set up a job alert below.
+                  </p>
+                  <button
+                    type="button"
+                    className="btn btn-outline btn-sm"
+                    onClick={() =>
+                      setFilters({ mode: "all", minPay: null, experience: "any" })
+                    }
+                  >
+                    Reset all filters
+                  </button>
+                </div>
+              )}
+
+              <div className="indeed-feed-footer-cta">
+                <Link
+                  className="btn btn-ghost btn-sm"
+                  href={`/upload-resume#role=${roleSlug}&city=${citySlug}`}
+                >
+                  <Icon name="upload" className="btn-ico-sm" />
+                  <span>Am I a fit? Upload your resume</span>
+                </Link>
+                <span className="feed-footer-note">
+                  Jon Missirlian compares your experience confidentially.
+                </span>
               </div>
-            ) : (
-              <div className="empty-state">
-                <p>
-                  <b>No listed role matches this filter today.</b>{" "}
-                  <a href="#alerts-block">Get an email</a> when one opens.
-                </p>
-              </div>
-            )}
+            </div>
+
+            {/* RIGHT COLUMN: STICKY LIVE DETAIL PANE (60% width) */}
+            <div className="indeed-detail-column" aria-label="Selected job details">
+              <JobDetailPane job={activeJob} />
+            </div>
           </div>
 
-          <div className="sec-foot">
-            <Link
-              className="btn btn-ghost"
-              href={`/upload-resume#role=${roleSlug}&city=${citySlug}`}
-            >
-              Am I a fit? Upload your resume
-            </Link>
-            <span className="small muted">We read it and show how you fit each role.</span>
-          </div>
+          {/* MOBILE SLIDE-OVER DRAWER FOR SCREENS < 1024px */}
+          {mobileDrawerOpen && activeJob && (
+            <div className="mobile-detail-overlay" onClick={() => setMobileDrawerOpen(false)}>
+              <div
+                className="mobile-detail-modal"
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+              >
+                <JobDetailPane
+                  job={activeJob}
+                  onCloseMobile={() => setMobileDrawerOpen(false)}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* 3. Alerts form beside candidate review */}
+      {/* 3. ALERTS SECTION */}
       <section className="block" id="alerts-block">
         <div className="wrap split">
           <div>
             <div className="sec-head">
-              <span className="eyebrow">Job alerts</span>
+              <span className="eyebrow">Confidential Job Alerts</span>
               <h2>Email me new roles like these</h2>
-              <p>Many are filled before they are posted anywhere else. Hear about them first.</p>
+              <p>
+                Many small firm seats are filled confidentially before ever being
+                publicly advertised. Be first in line.
+              </p>
             </div>
             <ul className="ticks">
-              <li>New {role.name} roles in {city.name}</li>
-              <li>The base range, firm type and on-site or hybrid on each</li>
+              <li>Verified {role.name} roles in {city.name}</li>
+              <li>Base salary range, firm size, and hybrid terms published upfront</li>
               <li>
-                Usually <Mark>2 to 4 a month</Mark>. Unsubscribe in one click
+                Low volume: usually <Mark>2 to 4 a month</Mark>. Unsubscribe anytime in one click.
               </li>
             </ul>
           </div>
@@ -244,110 +298,97 @@ export default function JobsClient({
               city={citySlug}
               fine="Use a personal email, not your work one. No firm sees your name until you say yes."
               steps={[
-                ["Now", `Alerts are on for ${role.name} roles in ${city.name}.`, true],
-                ["As roles open", "Each new role with its pay band, firm size and on-site or hybrid. Usually 2 to 4 a month."],
-                ["When one fits", "Reply to the email. Jon tells you who the firm is before anything is sent."],
-                ["Any time", "Unsubscribe in one click, and your email is deleted."],
+                ["Now", `Alerts are active for ${role.name} roles in ${city.name}.`, true],
+                [
+                  "As roles open",
+                  "Each new confidential seat with transparent pay and firm dynamics.",
+                ],
+                [
+                  "When one fits",
+                  "Reply directly. Jon speaks with you before anything is shared with a firm.",
+                ],
+                ["Any time", "Unsubscribe in one click, and your records are deleted."],
               ]}
             />
           </div>
         </div>
       </section>
 
-      {/* 4. How applying works */}
+      {/* 4. HOW APPLYING WORKS */}
       <section className="block alt">
         <div className="wrap">
           <div className="sec-head">
-            <span className="eyebrow">How applying works</span>
-            <h2>Nothing goes to the firm without your yes</h2>
-            <p>Applying sends your resume to Jon only.</p>
+            <span className="eyebrow">Confidential Process</span>
+            <h2>Nothing goes to a firm without your explicit permission</h2>
+            <p>
+              Your current employer will never know you are exploring the market.
+            </p>
           </div>
           <ol className="steps-line three">
             <li>
-              <span className="when">You apply</span>
-              <h3>Personal email and resume</h3>
-              <p>Nothing goes to the firm yet.</p>
+              <span className="when">1. Submit Interest</span>
+              <h3>Confidential Contact or Resume</h3>
+              <p>Your submission is delivered exclusively to Jon Missirlian.</p>
             </li>
             <li>
               <span className="when">
-                <Mark>Within one business day</Mark>
+                <Mark>Within 24 Hours</Mark>
               </span>
-              <h3>Jon calls you</h3>
-              <p>Who the firm is, who you would work for and the full pay.</p>
+              <h3>Private Call with Jon</h3>
+              <p>
+                Learn exact firm identities, partner styles, caseloads, and bonus
+                potential.
+              </p>
             </li>
             <li>
-              <span className="when">Your yes</span>
-              <h3>One firm sees your name</h3>
-              <p>Only the firm you said yes to. Free for you.</p>
+              <span className="when">3. Your Call</span>
+              <h3>Interview on Your Terms</h3>
+              <p>
+                Only firms you approve receive your resume. 100% free for candidates.
+              </p>
             </li>
           </ol>
         </div>
       </section>
 
-      {/* 5. What this role pays in city */}
+      {/* 5. EXPLORE DIRECTORY LINKS */}
       <section className="block">
         <div className="wrap">
           <div className="sec-head row">
             <div>
-              <span className="eyebrow">Pay</span>
-              <h2>What this role pays in {city.name}</h2>
-              <p>The listings above sit inside these bands.</p>
+              <span className="eyebrow">Explore Markets</span>
+              <h2>More legal jobs by practice area and metro</h2>
+              <p>Explore compensation benchmarks across other key regions.</p>
             </div>
             <Link className="more link-arrow" href={`/salaries/${roleSlug}/${citySlug}`}>
-              Full salary guide
+              View {city.name} Salary Guide →
             </Link>
           </div>
-          <div className="band-card">
-            <SalaryBandBar citySlug={citySlug} roleSlug={roleSlug} highlightKey="b2" />
-            <p className="source">
-              Source: {source}. Updated {asOf}. Base salary only.
-            </p>
-          </div>
-          <div className="sec-foot">
-            <Link className="btn btn-ghost" href={`/salary-check#role=${roleSlug}&city=${citySlug}`}>
-              Check my pay
-            </Link>
-            <span className="small muted">Your base against this band, and the roles that pay more.</span>
-          </div>
-        </div>
-      </section>
 
-      {/* 6. More roles */}
-      <section className="block alt">
-        <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">More roles</span>
-            <h2>Other roles and other cities</h2>
-          </div>
-          <div className="neighbours">
+          <div className="directory-sub-grid">
             <div>
-              <h3>Other roles in {city.name}</h3>
-              <ul className="nlist" id="other-roles">
+              <h3 className="mini-h">Other roles in {city.name}</h3>
+              <ul className="directory-mini-list">
                 {otherRoles.map(({ role: r, count }) => (
                   <li key={r.slug}>
-                    <Link href={`/jobs/${r.slug}/${citySlug}`}>
+                    <Link href={`/jobs/${r.slug}/${citySlug}`} className="dir-link">
                       <span>{r.name}</span>
-                      <span className="v"><Mark>{count} open</Mark></span>
+                      <span className="dir-count">{count}</span>
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
+
             <div>
-              <h3>{role.name} jobs in other cities</h3>
-              <ul className="nlist" id="other-cities">
-                {otherCities.map(({ city: c, count, band }) => (
+              <h3 className="mini-h">{role.name} in other cities</h3>
+              <ul className="directory-mini-list">
+                {otherCities.map(({ city: c, count, band: b }) => (
                   <li key={c.slug}>
-                    <Link href={`/jobs/${roleSlug}/${c.slug}`}>
-                      <span>
-                        {c.name}, {c.state}
-                      </span>
-                      <span className="v">
-                        {count ? (
-                          <Mark>{count} open</Mark>
-                        ) : band ? (
-                          <>median <Mark>{fmt.k(band.median)}</Mark></>
-                        ) : null}
+                    <Link href={`/jobs/${roleSlug}/${c.slug}`} className="dir-link">
+                      <span>{c.name}, {c.state}</span>
+                      <span className="dir-count">
+                        {count > 0 ? `${count} open` : b ? fmt.range(b.b2) : "Explore"}
                       </span>
                     </Link>
                   </li>
@@ -355,79 +396,8 @@ export default function JobsClient({
               </ul>
             </div>
           </div>
-          <p className="sec-foot">
-            <Link className="link-arrow" href={`/best-law-firms/${citySlug}`}>
-              Best small firms to work for in {city.name}
-            </Link>
-            <Link className="link-arrow" href={`/roles/${roleSlug}`}>
-              {role.name} hub
-            </Link>
-          </p>
         </div>
       </section>
-
-      {/* 7. FAQ */}
-      <section className="block">
-        <div className="wrap split">
-          <div className="sec-head">
-            <span className="eyebrow">Questions</span>
-            <h2>About these jobs</h2>
-            <p>
-              Rather talk first? <Link href="/about#contact">Reach Jon directly</Link>.
-            </p>
-          </div>
-          <div className="faq">
-            <details>
-              <summary>Why are the employers not named?</summary>
-              <p>
-                So you can look without anyone knowing, and so firms can hire without announcing it. Jon names the firm on your first call, before anything is sent.
-              </p>
-            </details>
-            <details>
-              <summary>Are the pay bands the real offer range?</summary>
-              <p>
-                Yes. Each band is the base range the firm agreed with us for that seat. Bonus and benefits are on top.
-              </p>
-            </details>
-            <details>
-              <summary>Will the firm see my resume if I apply?</summary>
-              <p>
-                Not until you say yes to that firm. Applying sends your resume to Jon only.
-              </p>
-            </details>
-            <details>
-              <summary>Does it cost me anything?</summary>
-              <p>
-                No. The hiring firm pays Orion&apos;s fee when you start, and your offer is not reduced to cover it.
-              </p>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. CTA band */}
-      <div className="wrap">
-        <div className="cta-band">
-          <div className="wrap row">
-            <div>
-              <h2>Not sure which role fits? Send your resume</h2>
-              <p>Jon reviews it and matches you to current and upcoming confidential roles.</p>
-            </div>
-            <Link
-              className="btn btn-primary btn-lg"
-              href={`/upload-resume#role=${roleSlug}&city=${citySlug}`}
-            >
-              Am I a fit? Upload your resume
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="mbar">
-        <a className="btn btn-primary" href="#list">
-          Apply confidentially
-        </a>
-      </div>
     </>
   );
 }

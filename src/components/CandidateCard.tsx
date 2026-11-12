@@ -12,6 +12,8 @@ export interface CandidateCardProps {
   locked?: boolean;
   long?: boolean;
   actions?: boolean;
+  selected?: boolean;
+  onSelect?: (candidate: Candidate) => void;
   result?: {
     met: number;
     total: number;
@@ -26,6 +28,8 @@ export function CandidateCard({
   locked = false,
   long = false,
   actions = true,
+  selected = false,
+  onSelect,
   result: r,
   onRequestProfile,
   onRequest,
@@ -35,6 +39,15 @@ export function CandidateCard({
   const role = findRole(c.role);
   const isBuilt = c.id === "EP-TX-0412";
   const bars = c.bars.length ? c.bars.join(", ") : "Not required";
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest("a, button")) {
+      return;
+    }
+    if (onSelect) {
+      onSelect(c);
+    }
+  };
 
   const handleRequest = () => {
     if (reqHandler) {
@@ -118,7 +131,13 @@ export function CandidateCard({
 
   if (long) {
     return (
-      <article className="cand cand-long" data-id={c.id}>
+      <article
+        className={`cand cand-long ${selected ? "job-selected cand-selected" : ""} ${
+          onSelect ? "job-clickable" : ""
+        }`}
+        data-id={c.id}
+        onClick={handleCardClick}
+      >
         {top}
         <h3>
           <Mark>{c.headline}</Mark>
@@ -188,7 +207,13 @@ export function CandidateCard({
     .join(" · ");
 
   return (
-    <article className="cand" data-id={c.id}>
+    <article
+      className={`cand ${selected ? "job-selected cand-selected" : ""} ${
+        onSelect ? "job-clickable" : ""
+      }`}
+      data-id={c.id}
+      onClick={handleCardClick}
+    >
       {top}
       <h3>
         <Mark>{c.headline}</Mark>
