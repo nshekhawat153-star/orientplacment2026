@@ -4,17 +4,17 @@ import React, { useState } from "react";
 import Link from "next/link";
 import "./design-concept.css";
 
-const SWATCHES = [
-  { name: "Navy Obsidian", hex: "#060D18", bg: "#060D18", border: "#1E293B" },
-  { name: "Boardroom Midnight", hex: "#0B1728", bg: "#0B1728", border: "#1E293B" },
-  { name: "Frosted Glass Surface", hex: "#11233D", bg: "#11233D", border: "#334155" },
-  { name: "Luminous Sapphire", hex: "#60A5FA", bg: "#60A5FA", border: "#93C5FD" },
-  { name: "Warm Legal Paper", hex: "#FAF9F5", bg: "#FAF9F5", border: "#E2E8F0" },
-  { name: "Tinted Cream (Reviews)", hex: "#F4F0E6", bg: "#F4F0E6", border: "#CBD5E1" },
-  { name: "Savile Heritage Navy", hex: "#1B3A6B", bg: "#1B3A6B", border: "#2563EB" },
-  { name: "Legal Sapphire Pop", hex: "#2F62B8", bg: "#2F62B8", border: "#60A5FA" },
-  { name: "Deep Legal Ink", hex: "#1A1917", bg: "#1A1917", border: "#334155" },
-  { name: "Champagne Gold Seal", hex: "#C99738", bg: "#C99738", border: "#FDE047" },
+const LUXURY_SWATCHES = [
+  { name: "Deep Obsidian Void", hex: "#040914", bg: "#040914", border: "#1E293B", category: "Dark Foundation" },
+  { name: "Velvet Boardroom Navy", hex: "#0B1628", bg: "#0B1628", border: "#1E293B", category: "Dark Foundation" },
+  { name: "Midnight Executive", hex: "#152A4A", bg: "#152A4A", border: "#334155", category: "Dark Elevation" },
+  { name: "Aurora Ice Accent", hex: "#7DD3FC", bg: "#7DD3FC", border: "#BAE6FD", category: "Luminous Accent" },
+  { name: "Royal Cobalt Sapphire", hex: "#1D4ED8", bg: "#1D4ED8", border: "#3B82F6", category: "Brand Core" },
+  { name: "Electric Sapphire Pop", hex: "#3B82F6", bg: "#3B82F6", border: "#93C5FD", category: "Interactive CTA" },
+  { name: "Warm Editorial Ivory", hex: "#FAF8F5", bg: "#FAF8F5", border: "#E2E8F0", category: "Light Foundation" },
+  { name: "Unbleached Linen Cream", hex: "#F3EFE6", bg: "#F3EFE6", border: "#CBD5E1", category: "Light Tint (Reviews)" },
+  { name: "Midnight Sumi Ink", hex: "#111625", bg: "#111625", border: "#334155", category: "Light Typography" },
+  { name: "Antiqued 24K Gold", hex: "#D4AF37", bg: "#D4AF37", border: "#FDE047", category: "Trust & Stars" },
 ];
 
 export default function DesignConceptPage() {
@@ -28,25 +28,25 @@ export default function DesignConceptPage() {
 
   return (
     <div className="dc-container">
-      {/* 0. STICKY ARCHITECTURAL CONTROL BAR */}
+      {/* 0. ARCHITECTURAL CONTROL BAR */}
       <header className="dc-spec-bar">
         <div className="dc-spec-bar-inner">
           <div className="dc-brand-tag">
-            <span className="dc-badge-godmode">ORION SPEC · V2.0</span>
-            <span className="dc-brand-title">Orion Placement Design Architecture</span>
+            <span className="dc-badge-godmode">ULTRA-LUXURY ARCHITECTURE · V3.0</span>
+            <span className="dc-brand-title">Orion Placement Executive Palette</span>
           </div>
 
           <nav className="dc-nav-pills" aria-label="Section navigation">
             <a href="#executive-dark" className="dc-nav-pill">
-              1. Executive Dark Section
+              1. Executive Midnight (Dark)
             </a>
             <a href="#editorial-light" className="dc-nav-pill">
-              2. Warm Editorial Light Section
+              2. Savile Row Linen (Light)
             </a>
             <a href="#specimen-board" className="dc-nav-pill">
-              3. UI Specimen Board
+              3. Luxury Token Specimen
             </a>
-            <Link href="/hire-attorneys" className="dc-nav-pill" style={{ color: "#60A5FA" }}>
+            <Link href="/hire-attorneys" className="dc-nav-pill" style={{ color: "#7DD3FC" }}>
               ← Return to Live Page
             </Link>
           </nav>
@@ -54,8 +54,8 @@ export default function DesignConceptPage() {
       </header>
 
       {/* ========================================================
-          1. EXECUTIVE MIDNIGHT DARK ATMOSPHERE
-          Orion's Sourcing Engine (Boardroom Midnight Palette)
+          1. ULTRA-LUXURY EXECUTIVE MIDNIGHT (DARK)
+          Obsidian, Velvet Navy & Aurora Backlight
           ======================================================== */}
       <section id="executive-dark" className="dc-dark-section">
         <div className="dc-dark-wrap">
@@ -90,12 +90,12 @@ export default function DesignConceptPage() {
             </div>
           </div>
 
-          {/* 3 FROSTED GLASS CARDS (THE SOURCING ENGINE) */}
+          {/* 3 SMOKED OBSIDIAN GLASS PILLARS */}
           <div className="dc-dark-pillars-3">
             {/* PILLAR 1 */}
             <article className="dc-frosted-card">
               <div className="dc-card-icon-wrap" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="1.5" fill="none">
+                <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="1.5" fill="none">
                   <path d="M12 3v18M3 8l9-5 9 5M6 13l-3-5h6l-3 5zm12 0l-3-5h6l-3 5zM4 21h16" />
                 </svg>
               </div>
@@ -109,7 +109,7 @@ export default function DesignConceptPage() {
             {/* PILLAR 2 */}
             <article className="dc-frosted-card">
               <div className="dc-card-icon-wrap" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="1.5" fill="none">
+                <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="1.5" fill="none">
                   <circle cx="12" cy="12" r="9" />
                   <circle cx="12" cy="12" r="5" />
                   <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
@@ -125,7 +125,7 @@ export default function DesignConceptPage() {
             {/* PILLAR 3 */}
             <article className="dc-frosted-card">
               <div className="dc-card-icon-wrap" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="1.5" fill="none">
+                <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="1.5" fill="none">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                   <path d="m9 12 2 2 4-4" />
                 </svg>
@@ -141,8 +141,8 @@ export default function DesignConceptPage() {
       </section>
 
       {/* ========================================================
-          2. WARM EDITORIAL LIGHT ATMOSPHERE
-          Warm Paper (#FAF9F5) + Tinted Cream (#F4F0E6)
+          2. SAVILE ROW EDITORIAL LINEN (LIGHT)
+          Warm Paper (#FAF8F5) + Unbleached Linen (#F3EFE6)
           ======================================================== */}
       <section id="editorial-light" className="dc-light-section">
         <div className="dc-light-wrap">
@@ -223,7 +223,7 @@ export default function DesignConceptPage() {
             </article>
           </div>
 
-          {/* Tinted Stats Strip (The warm #F4F0E6 background user loved) */}
+          {/* Unbleached Linen Stats Strip (The #F3EFE6 user praised) */}
           <div className="dc-tinted-stats-strip">
             <div>
               <div className="dc-stat-num">30+</div>
@@ -246,20 +246,20 @@ export default function DesignConceptPage() {
       </section>
 
       {/* ========================================================
-          3. DESIGN SYSTEM TOKEN & COMPONENT SPECIMEN BOARD
+          3. LUXURY DESIGN SYSTEM SPECIMEN BOARD
           ======================================================== */}
       <section id="specimen-board" className="dc-specimen-section">
         <div className="dc-specimen-wrap">
-          <h2 className="dc-specimen-title">Design System Token &amp; Component Specimen</h2>
+          <h2 className="dc-specimen-title">Pinnacle Tier Design Token Specimen</h2>
           <p className="dc-specimen-sub">
-            Architectural tokens configured for both the Executive Midnight Dark and Warm Editorial Light atmospheres. Click any swatch to copy hex code.
+            Harmonized dual-atmosphere color physics: Executive Midnight Obsidian &amp; Savile Row Editorial Linen. Click any swatch to copy its exact hex code.
           </p>
 
           {/* COLOR PALETTE */}
           <div className="dc-spec-group">
-            <div className="dc-group-h3">Color Palette Swatches</div>
+            <div className="dc-group-h3">Executive Color Palette Swatches</div>
             <div className="dc-swatch-grid">
-              {SWATCHES.map((s) => (
+              {LUXURY_SWATCHES.map((s) => (
                 <div
                   key={s.name}
                   className="dc-swatch-card"
@@ -270,6 +270,7 @@ export default function DesignConceptPage() {
                   <div className="dc-swatch-color" style={{ background: s.bg, borderBottom: `1px solid ${s.border}` }} />
                   <div className="dc-swatch-meta">
                     <div className="dc-swatch-name">{s.name}</div>
+                    <div style={{ fontSize: 11, color: "#64748B", marginBottom: 4 }}>{s.category}</div>
                     <div className="dc-swatch-hex">
                       {copiedHex === s.hex ? "✓ Copied!" : s.hex}
                     </div>
@@ -281,23 +282,23 @@ export default function DesignConceptPage() {
 
           {/* BUTTON SPECIMENS */}
           <div className="dc-spec-group">
-            <div className="dc-group-h3">Button &amp; CTA Geometries (8px Crisp vs 999px Capsule)</div>
+            <div className="dc-group-h3">High-Conversion CTA Geometries (8px Crisp Tailored vs 999px Capsule)</div>
             <div className="dc-buttons-row">
               <button type="button" className="dc-btn-primary-sapphire">
-                Primary Sapphire Action (8px)
+                Dual-Layer Sapphire Action (8px)
               </button>
               <button type="button" className="dc-btn-outline-boardroom">
-                Boardroom Outline Button (8px)
+                Frosted Boardroom Outline (8px)
               </button>
               <button type="button" className="dc-btn-capsule-gold">
-                Gold Guarantee Capsule (999px)
+                Antiqued 24K Guarantee Capsule (999px)
               </button>
             </div>
           </div>
 
           {/* 1.5PX OUTLINE ICONOGRAPHY */}
           <div className="dc-spec-group">
-            <div className="dc-group-h3">1.5px Hairline Outline Iconography Library</div>
+            <div className="dc-group-h3">1.5px Hairline Outline Iconography Library (Legal Gravitas)</div>
             <div className="dc-icons-row">
               <div className="dc-icon-box">
                 <svg viewBox="0 0 24 24">
@@ -354,7 +355,7 @@ export default function DesignConceptPage() {
           {/* TYPOGRAPHY LADDER */}
           <div className="dc-spec-group">
             <div className="dc-group-h3">Typography Scale &amp; Pairing Hierarchy</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
               <div>
                 <span style={{ fontSize: 12, color: "#64748B", fontFamily: "var(--font-dm-mono, monospace)" }}>DISPLAY H1 · DM SERIF DISPLAY (56px)</span>
                 <div style={{ fontFamily: "var(--font-dm-serif, serif)", fontSize: 44, color: "#FFFFFF", marginTop: 4 }}>
@@ -363,19 +364,19 @@ export default function DesignConceptPage() {
               </div>
               <div>
                 <span style={{ fontSize: 12, color: "#64748B", fontFamily: "var(--font-dm-mono, monospace)" }}>ITALIC ACCENT · DM SERIF DISPLAY ITALIC</span>
-                <div style={{ fontFamily: "var(--font-dm-serif, serif)", fontStyle: "italic", fontSize: 36, color: "#93C5FD", marginTop: 4 }}>
+                <div style={{ fontFamily: "var(--font-dm-serif, serif)", fontStyle: "italic", fontSize: 36, color: "#BAE6FD", marginTop: 4 }}>
                   &ldquo;We&apos;re the recruiters who get the job done.&rdquo;
                 </div>
               </div>
               <div>
-                <span style={{ fontSize: 12, color: "#64748B", fontFamily: "var(--font-dm-mono, monospace)" }}>ASTRONOMICAL KICKER · DM MONO (12px / +0.18em)</span>
-                <div style={{ fontFamily: "var(--font-dm-mono, monospace)", fontSize: 13, letterSpacing: "0.18em", color: "#60A5FA", marginTop: 4 }}>
+                <span style={{ fontSize: 12, color: "#64748B", fontFamily: "var(--font-dm-mono, monospace)" }}>EXECUTIVE KICKER · DM MONO (11.5px / +0.20em)</span>
+                <div style={{ fontFamily: "var(--font-dm-mono, monospace)", fontSize: 13, letterSpacing: "0.20em", color: "#7DD3FC", marginTop: 4 }}>
                   STEP 01 · PRECISION INTAKE · PRACTICE &amp; CULTURE MAPPING
                 </div>
               </div>
               <div>
-                <span style={{ fontSize: 12, color: "#64748B", fontFamily: "var(--font-dm-mono, monospace)" }}>BODY EDITORIAL · INTER SANS (16px / 1.65 line-height)</span>
-                <div style={{ fontFamily: "var(--font-inter, sans-serif)", fontSize: 16, color: "#CBD5E1", maxWidth: 680, lineHeight: 1.65, marginTop: 4 }}>
+                <span style={{ fontSize: 12, color: "#64748B", fontFamily: "var(--font-dm-mono, monospace)" }}>BODY EDITORIAL · INTER SANS (16px / 1.70 line-height)</span>
+                <div style={{ fontFamily: "var(--font-inter, sans-serif)", fontSize: 16, color: "#CBD5E1", maxWidth: 680, lineHeight: 1.7, marginTop: 4 }}>
                   We operate exclusively on a non-exclusive, contingency-based model at 23% of the candidate&apos;s compensation. Clients only pay when they successfully hire. Invoiced on the first day of employment, due in 15 days.
                 </div>
               </div>
