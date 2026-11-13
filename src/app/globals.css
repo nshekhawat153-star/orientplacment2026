@@ -3335,6 +3335,9 @@ body.clean .reviews-sec .mark{background:none;border:0}
   max-width: 660px;
   margin: 0 auto;
 }
+#questionnaire {
+  scroll-margin-top: 100px;
+}
 
 /* BOTTOM CTA */
 .ha-bottom-cta {
@@ -3379,49 +3382,70 @@ body.clean .reviews-sec .mark{background:none;border:0}
 
 .q-card-box {
   background: var(--white);
-  border-radius: 14px;
-  padding: 36px 30px;
+  border-radius: 16px;
+  padding: 38px 30px;
   border: 1px solid var(--rule);
-  box-shadow: 0 20px 50px -15px rgba(27, 58, 107, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 24px 60px -15px rgba(27, 58, 107, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
   text-align: left;
 }
 @media (min-width: 640px) {
   .q-card-box {
-    padding: 44px 40px;
+    padding: 48px 44px;
   }
 }
 
-.q-progress-step {
-  font: 500 11.5px/1.4 var(--mono);
-  letter-spacing: 0.1em;
+/* PROGRESS BAR & HEADER */
+.q-progress-wrap {
+  margin-bottom: 28px;
+}
+.q-progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.q-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--ice);
+  border: 1px solid var(--ice-line);
+  color: var(--navy);
+  font: 600 11.5px/1 var(--mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-3);
 }
-.q-progress-pct {
-  font: 600 12px/1.4 var(--mono);
+.q-pct-badge {
+  font: 600 12.5px/1 var(--mono);
   color: var(--pop);
+  letter-spacing: 0.04em;
 }
-
-.q-progress-bar-bg {
+.q-progress-track {
+  width: 100%;
   height: 6px;
-  background: var(--rule-2);
+  background: #E8ECEF;
   border-radius: 9999px;
   overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 }
-.q-progress-bar-fill {
+.q-progress-fill {
   height: 100%;
-  background: var(--pop);
+  background: linear-gradient(90deg, var(--pop) 0%, #3B7BF0 100%);
   border-radius: 9999px;
-  transition: width 0.3s ease;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px rgba(47, 98, 184, 0.35);
 }
 
 .q-title {
   font-family: var(--display) !important;
-  font-size: clamp(23px, 2.8vw, 30px) !important;
+  font-size: clamp(24px, 2.8vw, 32px) !important;
   font-weight: 400 !important;
   color: var(--head) !important;
-  line-height: 1.2 !important;
-  margin: 0 0 10px !important;
+  line-height: 1.22 !important;
+  margin: 0 0 12px !important;
 }
 .q-sub-text {
   font-size: 15px;
@@ -3568,13 +3592,16 @@ body.clean .reviews-sec .mark{background:none;border:0}
   font: 500 14px var(--body);
   color: var(--ink-3);
   background: none;
-  border: 0;
-  padding: 8px 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 6px 12px;
   cursor: pointer;
-  transition: color var(--t-fast) var(--ease);
+  transition: all var(--t-fast) var(--ease);
 }
 .q-btn-back:hover {
   color: var(--head);
+  background: var(--ice);
+  border-color: var(--ice-line);
 }
 
 .q-btn-skip {
@@ -3608,11 +3635,15 @@ body.clean .reviews-sec .mark{background:none;border:0}
 
 .q-choice-btn {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
   text-align: left;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1.5px solid var(--rule);
   background: var(--white);
-  padding: 16px 20px;
+  padding: 17px 20px;
   font: 500 15px/1.35 var(--body);
   color: var(--head);
   cursor: pointer;
@@ -3629,7 +3660,31 @@ body.clean .reviews-sec .mark{background:none;border:0}
   border-color: var(--pop);
   background: var(--pop);
   color: #ffffff;
-  box-shadow: 0 6px 18px rgba(47, 98, 184, 0.25);
+  box-shadow: 0 8px 22px rgba(47, 98, 184, 0.28);
+}
+.q-choice-label {
+  flex: 1;
+}
+.q-choice-indicator {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all var(--t-fast) var(--ease);
+}
+.q-choice-btn:hover .q-choice-indicator {
+  border-color: var(--pop);
+}
+.q-choice-btn.selected .q-choice-indicator {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--pop);
 }
 
 .q-fee-btn {

@@ -186,7 +186,9 @@ export function Questionnaire() {
   // Scroll to questionnaire on step change
   const scrollToCard = () => {
     if (cardRef.current) {
-      const top = cardRef.current.getBoundingClientRect().top + window.scrollY - 80;
+      const section = document.getElementById("questionnaire");
+      const target = section || cardRef.current;
+      const top = target.getBoundingClientRect().top + window.scrollY - 85;
       window.scrollTo({ top, behavior: "smooth" });
     }
   };
@@ -264,8 +266,14 @@ export function Questionnaire() {
   if (viewState === "booking") {
     return (
       <div ref={cardRef} className="q-card-box step-in">
-        <div className="q-progress-bar-bg">
-          <div className="q-progress-bar-fill" style={{ width: "100%" }} />
+        <div className="q-progress-wrap">
+          <div className="q-progress-meta">
+            <span className="q-step-badge">Final Step</span>
+            <span className="q-pct-badge">100% complete</span>
+          </div>
+          <div className="q-progress-track">
+            <div className="q-progress-fill" style={{ width: "100%" }} />
+          </div>
         </div>
 
         <p className="q-eyebrow-accent">YOU&apos;RE ALMOST DONE</p>
@@ -446,15 +454,17 @@ export function Questionnaire() {
   return (
     <div ref={cardRef} className="q-card-box step-in">
       {/* TOP PROGRESS BAR */}
-      <div className="flex items-center justify-between mb-3 text-xs font-semibold">
-        <span className="q-progress-step">
-          Question {currentIndex + 1} of {QUESTIONS.length}
-        </span>
-        <span className="q-progress-pct">{progressPercent}%</span>
-      </div>
+      <div className="q-progress-wrap">
+        <div className="q-progress-meta">
+          <span className="q-step-badge">
+            Step {currentIndex + 1} of {QUESTIONS.length}
+          </span>
+          <span className="q-pct-badge">{progressPercent}% complete</span>
+        </div>
 
-      <div className="q-progress-bar-bg mb-6">
-        <div className="q-progress-bar-fill" style={{ width: `${progressPercent}%` }} />
+        <div className="q-progress-track" role="progressbar" aria-valuenow={progressPercent} aria-valuemin={0} aria-valuemax={100}>
+          <div className="q-progress-fill" style={{ width: `${progressPercent}%` }} />
+        </div>
       </div>
 
       {/* CALLOUT INTRO IF PRESENT */}
@@ -542,7 +552,7 @@ export function Questionnaire() {
       {/* 2. CHOICE TYPE */}
       {currentQ.kind === "choice" && (
         <div className="mt-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             {(currentQ.options || []).map((opt) => {
               const isSelected = answers[currentQ.id] === opt && !isOtherSelected;
               return (
@@ -556,7 +566,10 @@ export function Questionnaire() {
                   }}
                   className={`q-choice-btn ${isSelected ? "selected" : ""}`}
                 >
-                  {opt}
+                  <span className="q-choice-label">{opt}</span>
+                  <span className="q-choice-indicator" aria-hidden="true">
+                    {isSelected ? "✓" : ""}
+                  </span>
                 </button>
               );
             })}
@@ -567,7 +580,10 @@ export function Questionnaire() {
                 onClick={() => setIsOtherSelected(true)}
                 className={`q-choice-btn ${isOtherSelected ? "selected" : ""}`}
               >
-                {currentQ.otherOption}
+                <span className="q-choice-label">{currentQ.otherOption}</span>
+                <span className="q-choice-indicator" aria-hidden="true">
+                  {isOtherSelected ? "✓" : ""}
+                </span>
               </button>
             )}
           </div>
