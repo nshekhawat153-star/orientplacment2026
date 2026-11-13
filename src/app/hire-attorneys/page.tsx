@@ -1,16 +1,8 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Image from "next/image";
 import { Questionnaire } from "./Questionnaire";
-import { ShortlistDeck } from "@/components/ShortlistDeck";
-import { TrustBar, TrustLine, RatingBadge, CalendlyLink } from "@/components/Rating";
-import { ProcessSteps } from "@/components/ProcessSteps";
-import { TermsTiles } from "@/components/TermsTiles";
-import { ReviewsSection } from "@/components/ReviewCard";
-import { PeopleSection } from "@/components/PeopleSection";
-import { CtaBand } from "@/components/CtaBand";
-import { AwardIcon } from "@/components/icons";
-import { orionLine } from "@/data";
+import { reviews } from "@/data";
 
 export const metadata: Metadata = {
   title: "Hire Qualified Attorneys for Your Law Firm | Orion Placement",
@@ -22,153 +14,199 @@ export const metadata: Metadata = {
 };
 
 export default function HireAttorneysLandingPage() {
+  const clientReviews = reviews.filter((r) => r.kind === "employer").slice(0, 3);
+
   return (
-    <>
-      {/* 1. HERO SECTION (Aligned with Homepage hero3) */}
-      <section className="hero3" aria-labelledby="h1">
+    <div className="ha-page">
+      {/* 1. HERO SECTION (Centered, Clean, Minimal) */}
+      <section className="ha-hero">
         <div className="wrap">
-          <div>
-            <span className="eyebrow">ONLY FOR LAW FIRMS HIRING ATTORNEYS</span>
-            <h1 id="h1">
+          <div className="ha-hero-inner">
+            <span className="ha-badge">Only for Law Firms Hiring Attorneys</span>
+
+            <h1 className="ha-hero-h1">
               Get qualified attorney candidates sent straight to{" "}
-              <span className="h1-accent">your firm</span>
+              <span className="ha-serif-accent">your firm.</span>
             </h1>
-            <p className="lede">
-              You only pay if you hire. Sign one simple agreement. We send
-              attorneys who match your practice area, level, and timeline. If you
-              don&apos;t hire, you don&apos;t pay. No upfront cost.
+
+            <p className="ha-hero-sub">You only pay if you hire.</p>
+
+            <p className="ha-hero-p">
+              Sign one simple agreement. We send attorneys who match your practice
+              area, level, and timeline. If you don&apos;t hire, you don&apos;t pay. No upfront cost.
             </p>
-            <div className="hero-act">
-              <a className="btn btn-primary btn-lg" href="#questionnaire">
-                Check candidate availability
+
+            <div className="ha-hero-act">
+              <a href="#questionnaire" className="ha-cta-btn">
+                <span>Check candidate availability</span>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 20 20"
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                >
+                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                </svg>
               </a>
-              <CalendlyLink
-                label="Book 15 minutes with Justin"
-                className="btn btn-outline btn-lg"
-              />
-            </div>
-            <TrustLine />
-          </div>
-          <ShortlistDeck />
-        </div>
-      </section>
-
-      {/* 2. TRUST STRIP (Orion in numbers) */}
-      <section className="trust-strip" aria-label="Orion in numbers">
-        <div className="wrap">
-          <TrustBar />
-        </div>
-      </section>
-
-      {/* 3. CLIENT RESULTS / FIRMS WE'VE HELPED HIRE */}
-      <section className="block reviews-sec" id="results">
-        <div className="wrap">
-          <div className="sec-head-premium">
-            <div className="badge-capsule">
-              <span className="badge-dot" />
-              CLIENT RESULTS · 5.0 GOOGLE REVIEWS
-            </div>
-            <h2 className="sec-title-lg">
-              Firms we&apos;ve helped <span className="serif-accent">hire</span>
-            </h2>
-            <p className="who-lede">
-              Direct feedback from managing partners and firm administrators who hired through Orion.
-            </p>
-            <div className="reviews-rating-pill">
-              <RatingBadge link />
+              <p className="ha-micro-trust">
+                Takes about 2 minutes · No upfront cost · 90-day replacement guarantee
+              </p>
             </div>
           </div>
-          <ReviewsSection kind="employer" limit={3} />
         </div>
       </section>
 
-      {/* 4. HOW IT WORKS (3-Step Hiring Process) */}
-      <section className="block how-it-works-sec" id="how-it-works">
+      {/* 2. CLIENT RESULTS / FIRMS WE'VE HELPED HIRE */}
+      <section className="ha-sec ha-sec-tinted">
         <div className="wrap">
-          <div className="sec-head-premium">
-            <div className="badge-capsule">
-              <span className="badge-dot" />
-              HOW IT WORKS · 3-STEP HIRING PROCESS
-            </div>
-            <h2 className="sec-title-lg">
-              You only pay if you <span className="serif-accent">hire</span>
-            </h2>
-            <p className="who-lede">
+          <div className="ha-sec-header ha-text-center">
+            <span className="ha-sec-kicker">Client results</span>
+            <h2 className="ha-sec-title">Firms we&apos;ve helped hire</h2>
+          </div>
+
+          <div className="ha-cards-3">
+            {clientReviews.map((rev) => (
+              <figure key={rev.id} className="ha-card ha-review-card">
+                <div className="ha-review-card-top">
+                  <span className="ha-quote-icon" aria-hidden="true">“</span>
+                  <span className="ha-star-badge">5.0 ★ Google Review</span>
+                </div>
+
+                <h3 className="ha-review-headline">
+                  {rev.name === "Travis Bowen"
+                    ? "Placed 2 attorneys with fast turnaround"
+                    : rev.name === "Lainie James"
+                    ? "Consistent delivery of top-tier talent"
+                    : "Found the perfect candidate for our firm"}
+                </h3>
+
+                <blockquote className="ha-review-quote">
+                  &ldquo;{rev.quote}&rdquo;
+                </blockquote>
+
+                <figcaption className="ha-review-author">
+                  <div className="ha-avatar-circle" aria-hidden="true">⚖</div>
+                  <div>
+                    <b className="ha-author-name">{rev.name}</b>
+                    <span className="ha-author-title">Law Firm Client</span>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. HOW IT WORKS */}
+      <section className="ha-sec">
+        <div className="wrap">
+          <div className="ha-sec-header ha-text-center">
+            <span className="ha-sec-kicker">How it works</span>
+            <h2 className="ha-sec-title">You only pay if you hire.</h2>
+            <p className="ha-sec-desc">
               Sign a simple agreement. We send candidates. You interview the ones you like.
               A fee is due only if you hire one of them.
             </p>
           </div>
-          <ProcessSteps kind="employer" />
+
+          <div className="ha-cards-3">
+            <div className="ha-card ha-step-card">
+              <span className="ha-step-number">01</span>
+              <h3 className="ha-step-title">No upfront cost</h3>
+              <p className="ha-step-desc">
+                No retainer and nothing to pay to get started. You see candidate
+                dossiers before you spend a single dollar.
+              </p>
+            </div>
+
+            <div className="ha-card ha-step-card">
+              <span className="ha-step-number">02</span>
+              <h3 className="ha-step-title">Candidates who fit</h3>
+              <p className="ha-step-desc">
+                We pre-screen attorneys for your exact practice mix, local bar
+                admissions, billable expectations, and compensation band.
+              </p>
+            </div>
+
+            <div className="ha-card ha-step-card">
+              <span className="ha-step-number">03</span>
+              <h3 className="ha-step-title">90-day guarantee</h3>
+              <p className="ha-step-desc">
+                You stay in full control. If a placed attorney leaves within 90
+                days, we conduct a replacement search at zero extra fee.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 5. TRANSPARENT TERMS */}
-      <section className="block terms-sec" id="terms">
+      {/* 4. MEET YOUR RECRUITER */}
+      <section className="ha-sec ha-sec-tinted">
         <div className="wrap">
-          <div className="sec-head-premium">
-            <div className="badge-capsule">
-              <span className="badge-dot" />
-              WHAT IT COSTS · TRANSPARENT TERMS
+          <div className="ha-recruiter-grid">
+            {/* Recruiter Photo */}
+            <div className="ha-recruiter-photo-wrap">
+              <div className="ha-recruiter-card">
+                <Image
+                  src="/images/founders/justin-sofman.png"
+                  alt="Justin Sofman"
+                  width={220}
+                  height={220}
+                  className="ha-recruiter-portrait"
+                  priority
+                />
+                <div className="ha-recruiter-card-info">
+                  <b className="ha-recruiter-name-tag">Justin Sofman</b>
+                  <span className="ha-recruiter-role-tag">Co-Founder &amp; Managing Partner</span>
+                </div>
+              </div>
             </div>
-            <h2 className="sec-title-lg">
-              One fee, and only if you <span className="serif-accent">hire</span>
-            </h2>
-            <p className="who-lede">
-              The same terms for every firm. Zero upfront retainer. 90-day replacement guarantee.{" "}
-              <Link className="terms-link-accent" href="/fees">
-                Fees and calculator →
-              </Link>
-            </p>
+
+            {/* Recruiter Content */}
+            <div className="ha-recruiter-content">
+              <span className="ha-sec-kicker">Meet your recruiter</span>
+              <h2 className="ha-recruiter-name">Hi, I&apos;m Justin Sofman.</h2>
+              <p className="ha-recruiter-sub">Co-Founder &amp; Managing Partner, Orion Placement</p>
+
+              <div className="ha-recruiter-paragraphs">
+                <p>
+                  I co-founded Orion Placement alongside Jon Missirlian to solve the biggest frustration law firms face: paying huge upfront retainers for resume spammers who have never even spoken to the attorney they&apos;re submitting.
+                </p>
+                <p>
+                  Since 2022, we have placed over <b>500+ attorneys and paralegals</b> with <b>200+ small and mid-size law firms</b> across Texas and the United States. Jon conducts in-depth screening calls on every single candidate before you ever see a profile.
+                </p>
+                <p>
+                  We specialize in Estate Planning &amp; Wealth Transfer, Commercial Litigation, Real Estate, Corporate M&amp;A, Family Law, and Employment.
+                </p>
+              </div>
+
+              <div className="ha-recruiter-quote">
+                &ldquo;I only get paid when you find the right attorney, so I&apos;m 100% invested in sending people actually worth your time.&rdquo;
+              </div>
+
+              <div className="ha-recruiter-contact">
+                <span><b>Direct line:</b> <a href="tel:2015729538">(201) 572-9538</a></span>
+                <span className="ha-contact-sep">·</span>
+                <span><b>Email:</b> <a href="mailto:justin@orionplacement.com">justin@orionplacement.com</a></span>
+              </div>
+            </div>
           </div>
-          <TermsTiles />
         </div>
       </section>
 
-      {/* 6. MEET YOUR RECRUITERS (PeopleSection) */}
-      <section className="block who-we-are-sec" id="meet-recruiter">
+      {/* 5. INTERACTIVE QUESTIONNAIRE */}
+      <section id="questionnaire" className="ha-sec">
         <div className="wrap">
-          <div className="sec-head-premium">
-            <div className="badge-capsule">
-              <span className="badge-dot" />
-              WHO WE ARE · DIRECT FOUNDER SEARCH
-            </div>
-            <h2 className="sec-title-lg">
-              Two recruiters you can call by{" "}
-              <span className="serif-accent">name</span>
-            </h2>
-            <p className="who-lede" id="orion-line">
-              {orionLine}
-            </p>
-            <div className="who-trust-strip">
-              <RatingBadge size="lg" />
-              <span className="trust-sep">·</span>
-              <span className="jon-trust-pill">
-                <AwardIcon />
-                Jon is named in <b>47 of our 60</b> Google reviews
-              </span>
-            </div>
-          </div>
-          <PeopleSection />
-        </div>
-      </section>
-
-      {/* 7. INTERACTIVE CANDIDATE AVAILABILITY QUESTIONNAIRE */}
-      <section className="block questionnaire-sec" id="questionnaire">
-        <div className="wrap">
-          <div className="sec-head-premium">
-            <div className="badge-capsule">
-              <span className="badge-dot" />
-              CHECK CANDIDATE AVAILABILITY · FREE 2-MINUTE BRIEF
-            </div>
-            <h2 className="sec-title-lg">
-              Tell us who you&apos;re looking <span className="serif-accent">for</span>
-            </h2>
-            <p className="who-lede">
-              A few quick questions. Takes 2 minutes. Zero upfront cost, and you only pay if you hire.
+          <div className="ha-sec-header ha-text-center">
+            <span className="ha-sec-kicker">Check candidate availability</span>
+            <h2 className="ha-sec-title">Tell us who you&apos;re looking for</h2>
+            <p className="ha-sec-desc">
+              A few quick questions. Takes 2 minutes. You only pay if you hire.
             </p>
           </div>
 
-          <div className="q-wrap-centered">
+          <div className="ha-q-center-box">
             <Suspense fallback={<div className="q-card-box text-center py-12 text-[#5b6577]">Loading questionnaire...</div>}>
               <Questionnaire />
             </Suspense>
@@ -176,15 +214,30 @@ export default function HireAttorneysLandingPage() {
         </div>
       </section>
 
-      {/* 8. BOTTOM CTA BAND */}
-      <CtaBand
-        title="Ready to see who's available?"
-        text="One simple agreement. Candidates sent to your inbox. No upfront cost, and you only pay if you hire."
-        button="Check candidate availability"
-        href="#questionnaire"
-        kind="employer"
-        cal={true}
-      />
-    </>
+      {/* 6. BOTTOM CALL TO ACTION */}
+      <section className="ha-sec ha-sec-tinted ha-bottom-cta">
+        <div className="wrap">
+          <div className="ha-bottom-cta-content">
+            <h2 className="ha-cta-h2">Ready to see who&apos;s available?</h2>
+            <p className="ha-cta-desc">
+              One simple agreement. Candidates sent to your inbox. No upfront cost, and you{" "}
+              <b>only pay if you hire</b>.
+            </p>
+            <a href="#questionnaire" className="ha-cta-btn">
+              <span>Check candidate availability</span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 20 20"
+                width="18"
+                height="18"
+                fill="currentColor"
+              >
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

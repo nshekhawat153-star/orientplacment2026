@@ -2945,19 +2945,397 @@ body.clean .reviews-sec .mark{background:none;border:0}
 
 /* ========================================================
    ADS LANDING PAGE STYLES (/hire-attorneys)
-   Homepage-Aligned Design System
+   Homepage-Aligned Minimal Funnel
    ======================================================== */
 
-.questionnaire-sec {
+.ha-page {
   background: var(--paper);
-  padding: 60px 0 90px;
-}
-.q-wrap-centered {
-  max-width: 680px;
-  margin: 0 auto;
-  width: 100%;
+  color: var(--ink);
+  min-height: 100vh;
 }
 
+/* 1. HERO SECTION */
+.ha-hero {
+  padding: 64px 0 72px;
+  text-align: center;
+  background: var(--paper);
+}
+@media (min-width: 640px) {
+  .ha-hero {
+    padding: 80px 0 92px;
+  }
+}
+.ha-hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.ha-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--ice);
+  border: 1px solid rgba(27, 58, 102, 0.18);
+  color: var(--brand);
+  font: 600 11.5px/1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.ha-hero-h1 {
+  font-family: var(--serif) !important;
+  font-size: clamp(2.3rem, 4.8vw, 3.85rem) !important;
+  font-weight: 500 !important;
+  color: var(--head) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 0 16px !important;
+  text-wrap: balance;
+}
+.ha-serif-accent {
+  font-style: italic;
+  color: var(--accent);
+}
+.ha-hero-sub {
+  font-family: var(--serif) !important;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem) !important;
+  font-style: italic !important;
+  color: var(--accent) !important;
+  margin: 0 0 20px !important;
+}
+.ha-hero-p {
+  font-size: 1.15rem !important;
+  color: var(--ink-2) !important;
+  line-height: 1.65 !important;
+  max-width: 640px !important;
+  margin: 0 auto 36px !important;
+}
+.ha-hero-act {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.ha-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--brand) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 1.05rem !important;
+  padding: 15px 34px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  box-shadow: 0 8px 24px -6px rgba(27, 58, 102, 0.3) !important;
+  transition: all 0.2s ease !important;
+}
+.ha-cta-btn:hover {
+  background: var(--brand-2) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(27, 58, 102, 0.45) !important;
+}
+.ha-micro-trust {
+  font-size: 0.875rem !important;
+  color: var(--ink-3) !important;
+  margin: 0 !important;
+}
+
+/* SECTION UTILITIES */
+.ha-sec {
+  padding: 80px 0;
+  background: var(--paper);
+}
+.ha-sec-tinted {
+  background: #f5f2ea;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.ha-text-center {
+  text-align: center;
+}
+.ha-sec-header {
+  margin-bottom: 44px;
+}
+.ha-sec-kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+.ha-sec-title {
+  font-family: var(--serif) !important;
+  font-size: clamp(1.85rem, 3.2vw, 2.6rem) !important;
+  font-weight: 500 !important;
+  color: var(--head) !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+.ha-sec-desc {
+  font-size: 1.05rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 12px auto 0;
+}
+
+/* 3-COLUMN CARDS GRID */
+.ha-cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 860px) {
+  .ha-cards-3 {
+    grid-template-columns: 1fr;
+  }
+}
+.ha-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 18px -8px rgba(0, 0, 0, 0.05);
+  margin: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ha-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.08);
+}
+
+/* REVIEW CARDS */
+.ha-review-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ha-review-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.ha-quote-icon {
+  font-family: var(--serif);
+  font-size: 36px;
+  line-height: 1;
+  color: var(--accent);
+}
+.ha-star-badge {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(217, 164, 0, 0.12);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 164, 0, 0.28);
+}
+.ha-review-headline {
+  font-family: var(--serif) !important;
+  font-size: 1.15rem !important;
+  font-weight: 600 !important;
+  color: var(--head) !important;
+  line-height: 1.35 !important;
+  margin: 0 0 10px !important;
+}
+.ha-review-quote {
+  font-size: 0.925rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0 0 18px;
+  flex-grow: 1;
+}
+.ha-review-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sand);
+}
+.ha-avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ice);
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.ha-author-name {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.ha-author-title {
+  display: block;
+  font-size: 0.775rem;
+  color: var(--ink-3);
+}
+
+/* HOW IT WORKS / STEP CARDS */
+.ha-step-number {
+  font-family: var(--mono);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 12px;
+}
+.ha-step-title {
+  font-family: var(--serif) !important;
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  color: var(--head) !important;
+  margin: 0 0 8px !important;
+}
+.ha-step-desc {
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* MEET YOUR RECRUITER */
+.ha-recruiter-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 52px;
+  align-items: center;
+}
+@media (max-width: 860px) {
+  .ha-recruiter-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+.ha-recruiter-photo-wrap {
+  display: flex;
+  justify-content: center;
+}
+.ha-recruiter-card {
+  width: 240px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.08);
+}
+.ha-recruiter-portrait {
+  width: 100% !important;
+  height: 240px !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block;
+}
+.ha-recruiter-card-info {
+  padding: 12px 14px;
+  text-align: center;
+  background: var(--white);
+  border-top: 1px solid var(--sand);
+}
+.ha-recruiter-name-tag {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--head);
+}
+.ha-recruiter-role-tag {
+  display: block;
+  font-size: 0.775rem;
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+.ha-recruiter-content {
+  max-width: 680px;
+}
+.ha-recruiter-name {
+  font-family: var(--serif) !important;
+  font-size: clamp(2rem, 3.2vw, 2.6rem) !important;
+  font-weight: 500 !important;
+  color: var(--head) !important;
+  line-height: 1.15 !important;
+  margin: 0 0 6px !important;
+}
+.ha-recruiter-sub {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin: 0 0 18px;
+}
+.ha-recruiter-paragraphs p {
+  font-size: 0.975rem;
+  color: var(--ink-2);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+.ha-recruiter-quote {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--head);
+  background: var(--ice);
+  border-left: 3px solid var(--brand);
+  padding: 14px 18px;
+  border-radius: 0 8px 8px 0;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+.ha-recruiter-contact {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  font-size: 0.925rem;
+  color: var(--ink-2);
+}
+.ha-recruiter-contact a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ha-contact-sep {
+  color: var(--rule);
+}
+
+/* QUESTIONNAIRE CENTER BOX */
+.ha-q-center-box {
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+/* BOTTOM CTA */
+.ha-bottom-cta {
+  text-align: center;
+}
+.ha-bottom-cta-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.ha-cta-h2 {
+  font-family: var(--serif) !important;
+  font-size: clamp(2rem, 3.6vw, 2.75rem) !important;
+  font-weight: 500 !important;
+  color: var(--head) !important;
+  line-height: 1.2 !important;
+  margin: 0 0 14px !important;
+}
+.ha-cta-desc {
+  font-size: 1.125rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0 auto 32px;
+}
+
+/* ========================================================
+   QUESTIONNAIRE COMPONENT STYLES
+   ======================================================== */
 @keyframes step-in {
   0% {
     opacity: 0;
