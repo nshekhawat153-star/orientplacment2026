@@ -3,8 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ShortlistDeck } from "@/components/ShortlistDeck";
-import { TrustBar, TrustLine, RatingBadge, CalendlyLink } from "@/components/Rating";
+import { TrustBar, RatingBadge, CalendlyLink } from "@/components/Rating";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { TermsTiles } from "@/components/TermsTiles";
 import { CandidateCard } from "@/components/CandidateCard";
@@ -78,43 +77,64 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-        {/* 1. Hero */}
-        <section className="hero3" aria-labelledby="h1">
-          <div className="wrap">
-            <div>
-              <span className="eyebrow">Contingency legal recruiting</span>
-              <h1 id="h1">
+        {/* 1. CINEMATIC WATER SPLASH HERO */}
+        <section className="hero-cinematic" aria-labelledby="h1">
+          {/* Background Water Splash Video */}
+          <div className="hero-video-wrap" aria-hidden="true">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="hero-video-el"
+            >
+              <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+            </video>
+            <div className="hero-video-gradient" />
+            <div className="hero-video-radial-aura" />
+          </div>
+
+          <div className="wrap hero-content-wrap">
+            <div className="hero-content-center">
+              <div className="hero-eyebrow-capsule">
+                <span className="hero-eyebrow-dot" aria-hidden="true" />
+                <span>NATIONWIDE CONTINGENCY LEGAL RECRUITING · 23% DUE ONLY IF YOU HIRE</span>
+              </div>
+
+              <h1 id="h1" className="hero-display-h1">
                 Legal recruiters for small and mid-size{" "}
-                <span className="h1-accent">law firms</span>
+                <span className="hero-accent-serif">law firms.</span>
               </h1>
-              <p className="lede">
-                See screened attorneys and paralegals for your open seat today. No
-                fee unless you hire.
+
+              <p className="hero-lead-p">
+                Direct-hire attorney and legal support placements sent straight to your inbox.
+                Zero upfront fees, non-exclusive agreement, and a full 90-day replacement guarantee.
+                You only pay when you hire.
               </p>
-              <div className="hero-act">
+
+              <div className="hero-actions-group">
                 <Link
-                  className="btn btn-primary btn-lg"
+                  className="btn-hero-primary"
                   href="/find-candidates"
                 >
-                  See candidates for my seat
+                  <span>See candidates for my seat</span>
+                  <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                    <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                  </svg>
                 </Link>
                 <CalendlyLink
                   label="Book 15 minutes with Justin"
-                  className="btn btn-outline btn-lg"
+                  className="btn-hero-secondary"
                 />
               </div>
-              <TrustLine />
-              <p className="hero-sub">
+
+              <div className="hero-subline">
                 Looking for a role?{" "}
-                <Link
-                  className="link-arrow"
-                  href="/jobs"
-                >
-                  See open jobs
+                <Link className="hero-subline-link" href="/jobs">
+                  See open jobs →
                 </Link>
-              </p>
+              </div>
             </div>
-            <ShortlistDeck />
           </div>
         </section>
 

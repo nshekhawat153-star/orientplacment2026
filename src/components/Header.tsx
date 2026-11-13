@@ -20,11 +20,22 @@ const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is buil
 
 export function Header({ minimal = false }: { minimal?: boolean }) {
   const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
   const [toastMsg, setToastMsg] = useState<string | null>(null);
   const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const showToast = (msg: string) => {
     if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
@@ -115,7 +126,11 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
 
   return (
     <>
-      <header className="site-header">
+      <header
+        className={`site-header ${isScrolled ? "scrolled" : "at-top"} ${
+          isHome ? "header-on-dark" : ""
+        }`}
+      >
         <div className="wrap">
           <Link className="logo" href="/" aria-label="Orion Placement">
             <Image
