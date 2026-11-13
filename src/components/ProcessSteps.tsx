@@ -169,7 +169,7 @@ export function ProcessSteps({ kind = "employer" }: { kind?: "employer" | "candi
           title: "Interview, hire, then pay",
           body: (
             <>
-              Invoice on the start date, <Mark>due in 30 days</Mark>.{" "}
+              Invoice on the start date, <Mark>due in 15 days</Mark>.{" "}
               <Mark>{terms.guarantee}</Mark> if it does not work out.
             </>
           ),

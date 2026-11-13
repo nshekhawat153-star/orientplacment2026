@@ -275,7 +275,7 @@ export default async function CityLocationPage({ params }: PageProps) {
             <details>
               <summary>What does it cost to hire in {city.name}?</summary>
               <p>
-                The same as anywhere: <Mark>20% of first-year base salary</Mark>, invoiced <Mark>on the start date and due in 30 days</Mark>, with a <Mark>90-day replacement</Mark> guarantee.
+                The same as anywhere: <Mark>23% of candidate&apos;s compensation</Mark>, invoiced <Mark>on the first day of employment and due in 15 days</Mark>, with a <Mark>90-day replacement</Mark> guarantee.
               </p>
             </details>
           </div>

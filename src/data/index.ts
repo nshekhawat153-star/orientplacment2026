@@ -8,13 +8,13 @@ export const orionLine = "Orion Placement is a legal recruiting firm in Fort Lau
 export const sendingDomains: string[] = ["orionplacement.com","[second sending domain to confirm]"];
 
 export const terms = {
-  "fee": "20% of first-year base salary",
-  "feeRate": 0.2,
+  "fee": "23% of candidate's compensation",
+  "feeRate": 0.23,
   "guarantee": "90-day replacement",
   "guaranteeDays": 90,
   "guaranteeDetail": "If the hire leaves or is let go within 90 days of the start date, we search again and send replacements at no extra fee.",
-  "payment": "invoice on the start date, due in 30 days",
-  "exclusivity": "Not required. Keep posting and using other recruiters.",
+  "payment": "invoiced on the first day of employment, due in 15 days",
+  "exclusivity": "Not required. Non-exclusive contingency agreement.",
   "upfront": "Nothing. No retainer, no fee unless you hire someone we introduced."
 };
 export const trust = {
@@ -24,8 +24,13 @@ export const trust = {
   "jonNamed": 47,
   "since": "2022",
   "place": "Fort Lauderdale, Florida",
+  "address": "510 Southeast 5th Avenue, Unit 1513, Fort Lauderdale, FL 33301",
   "placements": "500+",
+  "last12MonthsPlacements": "200+",
+  "monthlyPlacements": "30+",
+  "activePool": "100,000+",
   "clientFirms": "200+",
+  "repeatClients": "28",
   "calendly": "https://calendly.com/orionplacement/call-with-justin",
   "google": "https://www.google.com/search?q=Orion+Placement+reviews"
 };
@@ -35,9 +40,8 @@ export const people: Person[] = [
     "name": "Justin Sofman",
     "initials": "JS",
     "title": "Co-Founder & Managing Partner",
-    "phone": "(201) 572-9538",
     "email": "justin@orionplacement.com",
-    "note": "Sends most candidate introductions and agrees terms with firms.",
+    "note": "11 years of recruiting industry experience, including recruitment consulting for SMBs and enterprise talent acquisition.",
     "does": "Your first call. Takes the seat brief, sends the shortlist and agrees terms with your firm.",
     "photo": "/images/founders/justin-sofman.png",
     "calendly": "https://calendly.com/orionplacement/call-with-justin"
@@ -47,9 +51,8 @@ export const people: Person[] = [
     "name": "Jon Missirlian",
     "initials": "JM",
     "title": "Co-Founder & Head of Screening",
-    "phone": "(954) 859-9941",
     "email": "jon@orionplacement.com",
-    "note": "Screens candidates before any profile is sent.",
+    "note": "Approximately 20 years of recruiting experience, bringing extensive expertise in talent acquisition and recruiting operations.",
     "does": "Screens every candidate before you see a profile, and stays with them through the move.",
     "photo": "/images/founders/jon-missirlian.jpg"
   }

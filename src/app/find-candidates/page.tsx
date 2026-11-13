@@ -496,7 +496,7 @@ export default function FindCandidatesPage() {
                 <span className="when">When they start</span>
                 <h3>You pay the fee</h3>
                 <p>
-                  Invoice on the start date, <Mark>due in 30 days</Mark>.
+                  Invoice on the start date, <Mark>due in 15 days</Mark>.
                 </p>
               </li>
             </ol>

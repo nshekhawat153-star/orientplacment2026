@@ -113,8 +113,8 @@ export function CandidateDetailPane({
             aria-label="Book Call with Justin"
             style={{ width: "auto", padding: "0 14px", gap: 6, fontSize: 13.5, fontWeight: 500 }}
           >
-            <Icon name="phone" className="ico-clean" />
-            <span>Call Justin</span>
+            <Icon name="calendar" className="ico-clean" />
+            <span>Book Call</span>
           </a>
         </div>
       </div>
@@ -300,14 +300,12 @@ export function CandidateDetailPane({
             <div>
               <h4>Orion One-Fee Contingency Guarantee</h4>
               <p>
-                No retainer. You owe <b>20% of first-year base</b> only if you hire {c.id},
+                No retainer. You owe <b>23% of candidate&apos;s compensation</b> only if you hire {c.id},
                 backed by our <b>90-day replacement guarantee</b>. You keep all your other
                 recruiting channels open.
               </p>
               <div className="trust-mini-strip">
                 <span>Direct Contact: Justin Sofman</span>
-                <span>·</span>
-                <span>(201) 572-9538</span>
                 <span>·</span>
                 <span>justin@orionplacement.com</span>
               </div>

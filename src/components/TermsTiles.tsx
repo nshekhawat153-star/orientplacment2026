@@ -9,7 +9,7 @@ export function TermsTiles() {
       icon: "percent",
       label: "Fee",
       val: <Mark>{Math.round(terms.feeRate * 100)}%</Mark>,
-      desc: "of first-year base salary, only if you hire someone we introduced",
+      desc: "of candidate's compensation, only if you hire someone we introduced",
     },
     {
       icon: "shield",
@@ -29,7 +29,7 @@ export function TermsTiles() {
       val: <Mark>Start date</Mark>,
       desc: (
         <>
-          Invoice when the hire starts, <Mark>due in 30 days</Mark>
+          Invoice when the hire starts, <Mark>due in 15 days</Mark>
         </>
       ),
     },

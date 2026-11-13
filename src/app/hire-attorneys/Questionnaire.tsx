@@ -240,7 +240,7 @@ export function Questionnaire() {
         <div className="q-icon-disc">🤝</div>
         <h3 className="q-title mt-4">Thanks for being upfront.</h3>
         <p className="q-sub-text">
-          Our service works on a one-time contingency fee that is due <b>only if you hire</b> a candidate we introduce, backed by a 90-day replacement guarantee. If that doesn&apos;t align with your firm&apos;s current model, we might not be the right partner right now, and that is completely okay.
+          Our service works on a one-time 23% contingency fee that is due <b>only if you hire</b> a candidate we introduce, backed by a 90-day replacement guarantee. If that doesn&apos;t align with your firm&apos;s current model, we might not be the right partner right now, and that is completely okay.
         </p>
         <div className="mt-8 space-y-3 max-w-sm mx-auto">
           <button
@@ -427,11 +427,11 @@ export function Questionnaire() {
 
         {/* DIRECT CONTACT REMINDER */}
         <div className="rounded-xl bg-[#fff8d9] border border-[#d9a400]/40 p-4 text-xs text-[#6b4e00] flex items-center gap-3">
-          <span className="text-xl">📞</span>
+          <span className="text-xl">📅</span>
           <div>
-            <b>Need candidates faster?</b> You can call Justin directly at{" "}
-            <a href="tel:2015729538" className="underline font-bold text-[#0a1a33]">
-              (201) 572-9538
+            <b>Need candidates faster?</b> You can book directly with Justin via{" "}
+            <a href="https://calendly.com/orionplacement/call-with-justin" target="_blank" rel="noopener noreferrer" className="underline font-bold text-[#0a1a33]">
+              Calendly
             </a>{" "}
             or email{" "}
             <a href="mailto:justin@orionplacement.com" className="underline font-bold text-[#0a1a33]">
@@ -679,7 +679,7 @@ export function Questionnaire() {
               className="q-fee-btn yes"
             >
               <span className="block text-xl font-bold text-[#1A1917]">Yes</span>
-              <span className="block text-xs text-[#546359] mt-1">20% fee only upon hire</span>
+              <span className="block text-xs text-[#546359] mt-1">23% fee only upon hire</span>
             </button>
             <button
               type="button"

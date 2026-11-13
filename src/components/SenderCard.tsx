@@ -35,7 +35,15 @@ export function SenderCard({
         <b>{p.name}</b>, {p.title} at Orion Placement
         <p>{p.note}</p>
         <p>
-          Direct line: <Mark>{p.phone}</Mark> · <Mark>{p.email}</Mark>
+          Email: <Mark>{p.email}</Mark>
+          {p.calendly && (
+            <>
+              {" "}·{" "}
+              <a href={p.calendly} target="_blank" rel="noopener noreferrer">
+                Book a 15-min call
+              </a>
+            </>
+          )}
         </p>
         {withDomains && (
           <p className="keep">

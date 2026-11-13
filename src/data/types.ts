@@ -3,7 +3,7 @@ export interface Person {
   name: string;
   initials: string;
   title: string;
-  phone: string;
+  phone?: string;
   email: string;
   note: string;
   does: string;

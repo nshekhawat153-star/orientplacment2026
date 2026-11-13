@@ -237,7 +237,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
               reply.
             </p>
             <p>
-              Prototype: sample values await Orion&apos;s figures. {marksBtn}
+              © 2026 Orion Placement LLC · 510 Southeast 5th Avenue, Unit 1513, Fort Lauderdale, FL 33301. All rights reserved.
             </p>
           </div>
         </div>

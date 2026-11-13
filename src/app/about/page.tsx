@@ -137,8 +137,7 @@ export default function AboutPage() {
                     <b>{justin.name}</b>, {justin.title} at Orion Placement
                     <p>{justin.note}</p>
                     <p>
-                      Direct line: <Mark>{justin.phone}</Mark> ·{" "}
-                      <Mark>{justin.email}</Mark>
+                      Email: <Mark>{justin.email}</Mark>
                     </p>
                     <p className="keep">
                       Orion emails come only from{" "}
@@ -167,8 +166,7 @@ export default function AboutPage() {
                     <b>{jon.name}</b>, {jon.title} at Orion Placement
                     <p>{jon.note}</p>
                     <p>
-                      Direct line: <Mark>{jon.phone}</Mark> ·{" "}
-                      <Mark>{jon.email}</Mark>
+                      Email: <Mark>{jon.email}</Mark>
                     </p>
                   </div>
                 </div>
@@ -398,13 +396,15 @@ export default function AboutPage() {
                   <dd>
                     <Mark>{justin.email}</Mark>
                   </dd>
-                  <dt>Direct line</dt>
+                  <dt>Meeting</dt>
                   <dd>
-                    <Mark>{justin.phone}</Mark>
+                    <a href={justin.calendly} target="_blank" rel="noopener noreferrer">
+                      <Mark>Book 15 min via Calendly</Mark>
+                    </a>
                   </dd>
                   <dt>Replies</dt>
                   <dd>
-                    <Mark>Within one business day</Mark>
+                    <Mark>Typically within 1 hour</Mark>
                   </dd>
                 </dl>
                 <p className="foot">
@@ -422,18 +422,14 @@ export default function AboutPage() {
                     {jon.name}, <Mark>{jon.title}</Mark>
                   </dd>
                   <dt>For</dt>
-                  <dd>Confidential calls about roles and pay</dd>
+                  <dd>Confidential screening and career moves</dd>
                   <dt>Email</dt>
                   <dd>
                     <Mark>{jon.email}</Mark>
                   </dd>
-                  <dt>Direct line</dt>
-                  <dd>
-                    <Mark>{jon.phone}</Mark>
-                  </dd>
                   <dt>Replies</dt>
                   <dd>
-                    <Mark>Within one business day</Mark>
+                    <Mark>Typically within 1 hour</Mark>
                   </dd>
                 </dl>
                 <p className="foot">

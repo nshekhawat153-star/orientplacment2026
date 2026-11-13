@@ -34,7 +34,7 @@ export default function FeesPage() {
     !isNaN(new Date(startDate + "T12:00:00").getTime());
 
   const fee = baseSalary * terms.feeRate;
-  const dueDate = okDate ? addDays(startDate, 30) : "";
+  const dueDate = okDate ? addDays(startDate, 15) : "";
   const guaranteeDate = okDate ? addDays(startDate, terms.guaranteeDays) : "";
 
   const otherNum = parseFloat(otherRate);

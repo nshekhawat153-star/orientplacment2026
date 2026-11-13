@@ -180,7 +180,7 @@ export default function HireAttorneysLandingPage() {
                   I co-founded Orion Placement alongside Jon Missirlian to solve the biggest frustration law firms face: paying huge upfront retainers for resume spammers who have never even spoken to the attorney they&apos;re submitting.
                 </p>
                 <p>
-                  Since 2022, we have placed over <b>500+ attorneys and paralegals</b> with <b>200+ small and mid-size law firms</b> across Texas and the United States. Jon conducts in-depth screening calls on every single candidate before you ever see a profile.
+                  With <b>11 years</b> of recruiting industry experience and Jon&apos;s <b>20 years</b> of talent acquisition expertise, we facilitate over <b>30 hires per month</b> (over 200 hires in the past 12 months) for law firms across Texas and nationwide, backed by an active pool of <b>100,000+ legal professionals</b>.
                 </p>
                 <p>
                   We specialize in Estate Planning &amp; Wealth Transfer, Commercial Litigation, Real Estate, Corporate M&amp;A, Family Law, and Employment.
@@ -200,8 +200,8 @@ export default function HireAttorneysLandingPage() {
                 >
                   Book 15 min with Justin →
                 </a>
-                <a href="tel:2015729538" className="btn btn-outline btn-sm">
-                  Call (201) 572-9538
+                <a href="#questionnaire" className="btn btn-outline btn-sm">
+                  Check candidate availability
                 </a>
                 <a href="mailto:justin@orionplacement.com" className="ha-email-link">
                   justin@orionplacement.com

@@ -386,10 +386,10 @@ export default function HomePage() {
               <details>
                 <summary>What does it cost?</summary>
                 <p>
-                  <Mark>20% of the hire&apos;s first-year base salary</Mark>,
-                  invoiced <Mark>on their start date and due in 30 days</Mark>.
-                  Nothing upfront and nothing if you do not hire. Terms for
-                  several hires can be arranged.
+                  <Mark>23% of the candidate&apos;s compensation</Mark>,
+                  invoiced <Mark>on their first day and due in 15 days</Mark>.
+                  Nothing upfront and nothing if you do not hire. Non-exclusive
+                  contingency agreement.
                 </p>
               </details>
               <details>

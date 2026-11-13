@@ -210,3 +210,4 @@
 
 #### 30. Should the job board stay on the site, and should candidates get their own page so the homepage speaks to employers?
 > *Not sure.* (Client is open to recommendation).
+
