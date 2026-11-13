@@ -58,10 +58,6 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
     setMobileOpen(false);
   }, [pathname]);
 
-  if (pathname.startsWith("/hire-attorneys")) {
-    return null;
-  }
-
   if (minimal || pathname.startsWith("/candidate/")) {
     return (
       <header className="site-header header-minimal">
