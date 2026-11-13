@@ -51,7 +51,49 @@ export function TrustLine({ kind = "employer" }: { kind?: "employer" | "candidat
   );
 }
 
-export function TrustBar({ kind = "employer" }: { kind?: "employer" | "candidate" }) {
+export function TrustTicker() {
+  const items = [
+    { num: "200+", label: "Hires in Past 12 Months" },
+    { num: "30+", label: "Hires Facilitated Monthly" },
+    { num: "100,000+", label: "Active Legal Talent Pool" },
+    { num: "28", label: "Repeat Client Law Firms" },
+    { num: "90 Days", label: "Replacement Guarantee" },
+    { num: "23%", label: "Contingency Fee · $0 Upfront" },
+    { num: "5.0 ★", label: "Google Rating (60 Reviews)" },
+    { num: "< 1 Week", label: "First Qualified Candidate" },
+    { num: "50–500", label: "Firm Sweet Spot (Attorneys)" },
+    { num: "100%", label: "Permanent Direct-Hire" },
+  ];
+
+  return (
+    <div className="ticker-wrapper" aria-hidden="true">
+      <div className="ticker-track">
+        {/* Loop Set 1 */}
+        {items.map((item, idx) => (
+          <div key={`t1-${idx}`} className="ticker-pill">
+            <span className="ticker-bullet" aria-hidden="true">✦</span>
+            <b className="ticker-num">{item.num}</b>
+            <span className="ticker-lbl">{item.label}</span>
+          </div>
+        ))}
+        {/* Loop Set 2 (for 100% seamless infinite scroll) */}
+        {items.map((item, idx) => (
+          <div key={`t2-${idx}`} className="ticker-pill">
+            <span className="ticker-bullet" aria-hidden="true">✦</span>
+            <b className="ticker-num">{item.num}</b>
+            <span className="ticker-lbl">{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function TrustBar({
+  kind = "employer",
+}: {
+  kind?: "employer" | "candidate";
+}) {
   const fmtNum = (n: string | number) => {
     const s = String(n);
     if (s.endsWith("+")) {
@@ -96,12 +138,12 @@ export function TrustBar({ kind = "employer" }: { kind?: "employer" | "candidate
           },
           {
             num: "$0",
-            label: <span className="tb-sub">cost to candidates, always</span>,
+            label: <span className="tb-sub">cost to candidates, always confidential</span>,
           },
           {
             num: trust.since,
             label: (
-              <span className="tb-sub">recruiting since, from {placeCity}</span>
+              <span className="tb-sub">recruiting since, based in {placeCity}</span>
             ),
           },
         ]
@@ -118,22 +160,16 @@ export function TrustBar({ kind = "employer" }: { kind?: "employer" | "candidate
             ),
           },
           {
-            num: fmtNum(trust.placements),
-            label: (
-              <span className="tb-sub">attorneys and paralegals placed</span>
-            ),
+            num: fmtNum(trust.last12MonthsPlacements || trust.placements),
+            label: <span className="tb-sub">hires in past 12 months</span>,
           },
           {
-            num: fmtNum(trust.clientFirms),
-            label: (
-              <span className="tb-sub">law firms we have hired for</span>
-            ),
+            num: fmtNum(trust.activePool),
+            label: <span className="tb-sub">active legal talent pool</span>,
           },
           {
-            num: trust.since,
-            label: (
-              <span className="tb-sub">recruiting since, from {placeCity}</span>
-            ),
+            num: "90 Days",
+            label: <span className="tb-sub">full replacement guarantee</span>,
           },
         ];
 

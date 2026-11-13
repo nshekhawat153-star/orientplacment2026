@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { TrustBar, RatingBadge, CalendlyLink } from "@/components/Rating";
+import { TrustBar, TrustTicker, RatingBadge, CalendlyLink } from "@/components/Rating";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { TermsTiles } from "@/components/TermsTiles";
 import { CandidateCard } from "@/components/CandidateCard";
@@ -138,11 +138,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 2. Trust bar */}
-        <section className="trust-strip" aria-label="Orion in numbers">
-          <div className="wrap">
-            <TrustBar />
-          </div>
+        {/* 2. Sleek Continuous Moving Trust Ticker */}
+        <section className="trust-ticker-strip" aria-label="Orion verified numbers">
+          <TrustTicker />
         </section>
 
         {/* 3. How it works */}

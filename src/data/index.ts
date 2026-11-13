@@ -31,6 +31,11 @@ export const trust = {
   "activePool": "100,000+",
   "clientFirms": "200+",
   "repeatClients": "28",
+  "guarantee": "90 Days",
+  "fee": "23%",
+  "feeTerms": "Net 15 · Zero Upfront",
+  "turnaround": "Within 1 Week",
+  "sweetSpot": "50–500 Employees",
   "calendly": "https://calendly.com/orionplacement/call-with-justin",
   "google": "https://www.google.com/search?q=Orion+Placement+reviews"
 };
