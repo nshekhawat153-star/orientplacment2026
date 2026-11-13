@@ -1,19 +1,19 @@
 /* ========================================================
-   ORION PLACEMENT — DESIGN SYSTEM CONCEPT & SPECIMEN
+   ORION PLACEMENT — MASTER DESIGN SYSTEM & PROTOTYPE
    Scoped styles for /design-concept
    ======================================================== */
 
 .dc-container {
   min-height: 100vh;
-  background: #03070E;
+  background: #081120;
   color: #E2E8F0;
   font-family: var(--font-inter, sans-serif);
 }
 
 /* TOP SPEC BAR */
 .dc-spec-bar {
-  background: rgba(5, 11, 20, 0.95);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 17, 32, 0.94);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 14px 24px;
   position: sticky;
   top: 0;
@@ -32,17 +32,18 @@
 .dc-brand-tag {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .dc-badge-godmode {
-  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  background: linear-gradient(135deg, #1B3A6B 0%, #2F62B8 100%);
   color: #FFFFFF;
   font: 700 11px/1 var(--font-dm-mono, monospace);
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 999px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  border: 1px solid rgba(147, 197, 253, 0.3);
+  border: 1px solid rgba(94, 168, 255, 0.35);
+  box-shadow: 0 0 14px rgba(47, 98, 184, 0.35);
 }
 .dc-brand-title {
   font-family: var(--font-dm-serif, serif);
@@ -68,31 +69,31 @@
 .dc-nav-pill:hover,
 .dc-nav-pill.active {
   color: #FFFFFF;
-  background: rgba(94, 168, 255, 0.15);
-  border-color: rgba(94, 168, 255, 0.4);
+  background: rgba(47, 98, 184, 0.25);
+  border-color: rgba(94, 168, 255, 0.5);
 }
 
 /* ========================================================
-   SECTION 1: THE ORION CELESTIAL DARK SECTION
-   1:1 recreation of the reference screenshot
+   SECTION 1: EXECUTIVE MIDNIGHT DARK ATMOSPHERE
+   Orion's Sourcing Engine (Boardroom Midnight Palette)
    ======================================================== */
 .dc-dark-section {
   position: relative;
-  background: radial-gradient(circle at 85% 20%, #10264c 0%, #060e1d 55%, #040812 100%);
+  background: radial-gradient(ellipse at 80% 20%, #162F58 0%, #0F1E38 50%, #081120 100%);
   padding: 100px 24px 120px;
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Subtle cosmic grid background */
+/* Subtle architectural grid pattern */
 .dc-dark-section::before {
   content: "";
   position: absolute;
   inset: 0;
   background-image: 
-    radial-gradient(rgba(94, 168, 255, 0.12) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.4;
+    radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -101,171 +102,126 @@
   margin: 0 auto;
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 64px;
-  align-items: start;
-}
-@media (max-width: 900px) {
-  .dc-dark-wrap {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
 }
 
-/* LEFT COLUMN: HERO HEADLINE & CTA */
-.dc-dark-left {
-  position: sticky;
-  top: 100px;
+.dc-dark-header {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 56px;
 }
 .dc-eyebrow {
   display: inline-block;
   font-family: var(--font-dm-mono, monospace);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #5EA8FF;
-  margin-bottom: 22px;
+  color: #60A5FA;
+  margin-bottom: 20px;
 }
 .dc-dark-h1 {
   font-family: var(--font-dm-serif, serif);
-  font-size: clamp(38px, 4.4vw, 56px);
+  font-size: clamp(38px, 4.6vw, 56px);
   font-weight: 400;
   color: #FFFFFF;
   line-height: 1.12;
   letter-spacing: -0.02em;
-  margin: 0 0 24px;
+  margin: 0 0 20px;
 }
 .dc-italic-accent {
   font-style: italic;
-  background: linear-gradient(135deg, #A5B4FC 0%, #7DD3FC 50%, #60A5FA 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #93C5FD 55%, #60A5FA 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   padding-right: 4px;
 }
 .dc-dark-lead {
-  font-size: 17px;
-  color: #94A3B8;
+  font-size: 18px;
+  color: #CBD5E1;
   line-height: 1.65;
-  margin: 0 0 36px;
-  max-width: 440px;
+  margin: 0 auto 36px;
+  max-width: 640px;
 }
-.dc-btn-ghost-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 28px;
-  border-radius: 999px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  text-decoration: none;
-  backdrop-filter: blur(8px);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 20px -4px rgba(94, 168, 255, 0.25);
-}
-.dc-btn-ghost-pill:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: #5EA8FF;
-  color: #FFFFFF;
-  box-shadow: 0 0 30px 2px rgba(94, 168, 255, 0.45);
-  transform: translateY(-2px);
-}
-.dc-dark-trust-micro {
-  margin-top: 28px;
-  font-size: 12.5px;
-  color: #64748B;
+.dc-dark-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-/* RIGHT COLUMN: VERTICAL CELESTIAL TIMELINE */
-.dc-dark-right {
+/* 3 FROSTED GLASS CARDS (THE SOURCING ENGINE) */
+.dc-dark-pillars-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 64px;
+}
+@media (max-width: 900px) {
+  .dc-dark-pillars-3 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.dc-frosted-card {
+  background: linear-gradient(180deg, rgba(22, 47, 88, 0.45) 0%, rgba(11, 23, 40, 0.75) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
+  padding: 36px 30px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
   position: relative;
-  padding-left: 36px;
+  overflow: hidden;
 }
-.dc-timeline-track {
-  position: absolute;
-  top: 14px;
-  bottom: 40px;
-  left: 5px;
-  width: 2px;
-  background: linear-gradient(
-    to bottom,
-    #5EA8FF 0%,
-    rgba(94, 168, 255, 0.6) 40%,
-    rgba(125, 211, 252, 0.25) 85%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  box-shadow: 0 0 10px rgba(94, 168, 255, 0.5);
+.dc-frosted-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(94, 168, 255, 0.4);
+  box-shadow: 0 16px 40px -10px rgba(47, 98, 184, 0.3);
 }
 
-.dc-timeline-step {
-  position: relative;
-  margin-bottom: 56px;
+.dc-card-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(94, 168, 255, 0.10);
+  border: 1px solid rgba(94, 168, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60A5FA;
+  margin-bottom: 22px;
 }
-.dc-timeline-step:last-child {
-  margin-bottom: 0;
-}
-
-/* THE GLOWING CELESTIAL NODE */
-.dc-timeline-node {
-  position: absolute;
-  left: -36px;
-  top: 6px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #FFFFFF;
-  box-shadow: 
-    0 0 0 3px rgba(94, 168, 255, 0.4),
-    0 0 18px 6px rgba(94, 168, 255, 0.8),
-    0 0 36px 12px rgba(147, 197, 253, 0.4);
-  transform: translateX(-5px);
-  transition: all 0.3s ease;
-}
-.dc-timeline-step:hover .dc-timeline-node {
-  transform: translateX(-5px) scale(1.3);
-  box-shadow: 
-    0 0 0 4px rgba(94, 168, 255, 0.6),
-    0 0 24px 8px rgba(94, 168, 255, 1),
-    0 0 48px 16px rgba(147, 197, 253, 0.6);
-}
-
-.dc-step-header {
+.dc-card-step-badge {
   font-family: var(--font-dm-mono, monospace);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.16em;
-  color: #70A8FF;
+  color: #93C5FD;
   text-transform: uppercase;
+  display: block;
   margin-bottom: 8px;
 }
-.dc-step-title {
+.dc-card-title-dark {
   font-family: var(--font-dm-serif, serif);
-  font-size: clamp(24px, 2.5vw, 32px);
+  font-size: 22px;
   font-weight: 400;
   color: #FFFFFF;
-  line-height: 1.2;
   margin: 0 0 12px;
-  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
-.dc-step-desc {
-  font-size: 15.5px;
+.dc-card-desc-dark {
+  font-size: 15px;
   color: #94A3B8;
   line-height: 1.65;
   margin: 0;
-  max-width: 580px;
 }
 
 /* ========================================================
-   SECTION 2: THE LEGAL EDITORIAL LIGHT SECTION
-   Elevating the warm paper (#FAF9F5) and cream tint (#f5f2ea)
+   SECTION 2: WARM EDITORIAL LIGHT ATMOSPHERE
+   Warm Paper (#FAF9F5) + Tinted Cream (#F4F0E6)
    ======================================================== */
 .dc-light-section {
   background: #FAF9F5;
@@ -296,7 +252,7 @@
   font-family: var(--font-dm-serif, serif);
   font-size: clamp(32px, 3.8vw, 48px);
   font-weight: 400;
-  color: #0F172A;
+  color: #1A1917;
   line-height: 1.15;
   letter-spacing: -0.02em;
   margin: 0 0 16px;
@@ -308,7 +264,7 @@
   margin: 0;
 }
 
-/* 3-COLUMN REVIEW CARDS */
+/* 3 REVIEW CARDS */
 .dc-light-cards-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -366,7 +322,7 @@
   font-family: var(--font-dm-serif, serif);
   font-size: 20px;
   font-weight: 400;
-  color: #0F172A;
+  color: #1A1917;
   margin: 0 0 14px;
   line-height: 1.3;
 }
@@ -385,29 +341,29 @@
   padding-top: 16px;
 }
 .dc-avatar {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: #E2E8F0;
+  background: #EEF3F9;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  color: #1E3A8A;
-  border: 1px solid #CBD5E1;
+  color: #1B3A6B;
+  border: 1px solid #D9E3EF;
 }
 .dc-author-name {
   display: block;
   font-size: 14.5px;
   font-weight: 600;
-  color: #0F172A;
+  color: #1A1917;
 }
 .dc-author-role {
   font-size: 12.5px;
   color: #64748B;
 }
 
-/* TRUST PROOF STATS BAR (TINTED SECTION) */
+/* TINTED STATS BAR (THE #F4F0E6 USER PRAISED) */
 .dc-tinted-stats-strip {
   background: #F4F0E6;
   border: 1px solid #E5E0D5;
@@ -427,7 +383,7 @@
 }
 .dc-stat-num {
   font-family: var(--font-dm-serif, serif);
-  font-size: 36px;
+  font-size: 38px;
   font-weight: 400;
   color: #1B3A6B;
   line-height: 1.1;
@@ -435,7 +391,7 @@
 }
 .dc-stat-label {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: #64748B;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -446,7 +402,7 @@
    Colors, Typography, Geometry, and Iconography
    ======================================================== */
 .dc-specimen-section {
-  background: #070F1C;
+  background: #060D18;
   color: #E2E8F0;
   padding: 100px 24px 120px;
 }
@@ -475,10 +431,10 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #5EA8FF;
+  color: #60A5FA;
   margin: 0 0 20px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* PALETTE SWATCHES */
@@ -524,50 +480,97 @@
   gap: 16px;
   flex-wrap: wrap;
 }
-.dc-btn-primary-blue {
+.dc-btn-primary-sapphire {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: #2F62B8;
   color: #FFFFFF;
   font-size: 15px;
   font-weight: 600;
-  padding: 13px 26px;
+  padding: 14px 28px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 8px 20px -4px rgba(47, 98, 184, 0.4);
+  box-shadow: 0 10px 24px -4px rgba(47, 98, 184, 0.4);
   transition: all 0.2s ease;
+  text-decoration: none;
 }
-.dc-btn-primary-blue:hover {
-  background: #204B91;
+.dc-btn-primary-sapphire:hover {
+  background: #25529C;
   transform: translateY(-2px);
+  box-shadow: 0 14px 30px -4px rgba(47, 98, 184, 0.55);
 }
-.dc-btn-outline-white {
-  background: transparent;
+.dc-btn-outline-boardroom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
   color: #FFFFFF;
   font-size: 15px;
   font-weight: 600;
-  padding: 13px 26px;
+  padding: 14px 28px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   cursor: pointer;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
-.dc-btn-outline-white:hover {
-  border-color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.08);
+.dc-btn-outline-boardroom:hover {
+  border-color: #60A5FA;
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
 }
-.dc-btn-gold-action {
+.dc-btn-capsule-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: #C99738;
   color: #0F172A;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
-  padding: 13px 26px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
   border: none;
   cursor: pointer;
   box-shadow: 0 8px 20px -4px rgba(201, 151, 56, 0.4);
   transition: all 0.2s ease;
 }
-.dc-btn-gold-action:hover {
+.dc-btn-capsule-gold:hover {
   background: #DCAB4A;
   transform: translateY(-2px);
+}
+
+/* OUTLINE ICONS SHOWCASE */
+.dc-icons-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.dc-icon-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.dc-icon-box svg {
+  width: 32px;
+  height: 32px;
+  stroke: #60A5FA;
+  stroke-width: 1.5;
+  fill: none;
+}
+.dc-icon-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.dc-icon-role {
+  font-size: 12px;
+  color: #94A3B8;
 }
