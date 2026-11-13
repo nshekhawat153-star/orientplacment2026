@@ -52,6 +52,10 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
     </button>
   );
 
+  if (pathname.startsWith("/hire-attorneys")) {
+    return null;
+  }
+
   if (isMinimal) {
     return (
       <>
