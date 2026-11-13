@@ -446,11 +446,11 @@ export function Questionnaire() {
   return (
     <div ref={cardRef} className="q-card-box step-in">
       {/* TOP PROGRESS BAR */}
-      <div className="flex items-center justify-between mb-4 text-xs font-semibold text-[#5b6577]">
-        <span>
+      <div className="flex items-center justify-between mb-3 text-xs font-semibold">
+        <span className="q-progress-step">
           Question {currentIndex + 1} of {QUESTIONS.length}
         </span>
-        <span className="text-[#a8843a]">{progressPercent}%</span>
+        <span className="q-progress-pct">{progressPercent}%</span>
       </div>
 
       <div className="q-progress-bar-bg mb-6">
@@ -486,7 +486,7 @@ export function Questionnaire() {
           />
 
           {currentQ.id === "location" && (
-            <div className="flex flex-wrap gap-2 mt-3">
+            <div className="q-quick-chips-wrap">
               {["Austin, TX", "Houston, TX", "Dallas, TX", "San Antonio, TX", "Remote / Anywhere in TX"].map((city) => (
                 <button
                   key={city}
@@ -495,7 +495,7 @@ export function Questionnaire() {
                     setCustomText(city);
                     submitTextAnswer(city);
                   }}
-                  className="text-xs bg-[#e6ebf3] hover:bg-[#1b3a66] hover:text-white px-3 py-1.5 rounded-full text-[#0a1a33] font-medium transition"
+                  className="q-quick-chip"
                 >
                   {city}
                 </button>
@@ -508,7 +508,7 @@ export function Questionnaire() {
               <button
                 type="button"
                 onClick={() => handleNext(currentIndex - 1)}
-                className="text-sm font-semibold text-[#5b6577] hover:text-[#0a1a33]"
+                className="q-btn-back"
               >
                 ← Back
               </button>
@@ -522,7 +522,7 @@ export function Questionnaire() {
                     handleAnswer(currentQ.skipLabel || "Skipped");
                     handleNext(currentIndex + 1);
                   }}
-                  className="text-sm text-[#5b6577] hover:underline"
+                  className="q-btn-skip"
                 >
                   {currentQ.skipLabel}
                 </button>
@@ -605,7 +605,7 @@ export function Questionnaire() {
               <button
                 type="button"
                 onClick={() => handleNext(currentIndex - 1)}
-                className="text-sm font-semibold text-[#5b6577] hover:text-[#0a1a33]"
+                className="q-btn-back"
               >
                 ← Back
               </button>
@@ -635,7 +635,7 @@ export function Questionnaire() {
             <button
               type="button"
               onClick={() => handleNext(currentIndex - 1)}
-              className="text-sm font-semibold text-[#5b6577] hover:text-[#0a1a33]"
+              className="q-btn-back"
             >
               ← Back
             </button>
@@ -662,8 +662,8 @@ export function Questionnaire() {
               }}
               className="q-fee-btn yes"
             >
-              <span className="block text-xl font-bold text-[#0a1a33]">Yes</span>
-              <span className="block text-xs text-[#5b6577] mt-1">20% fee only upon hire</span>
+              <span className="block text-xl font-bold text-[#1A1917]">Yes</span>
+              <span className="block text-xs text-[#546359] mt-1">20% fee only upon hire</span>
             </button>
             <button
               type="button"
@@ -673,8 +673,8 @@ export function Questionnaire() {
               }}
               className="q-fee-btn no"
             >
-              <span className="block text-xl font-bold text-[#5b6577]">No</span>
-              <span className="block text-xs text-[#5b6577] mt-1">We don&apos;t pay fees</span>
+              <span className="block text-xl font-bold text-[#546359]">No</span>
+              <span className="block text-xs text-[#546359] mt-1">We don&apos;t pay fees</span>
             </button>
           </div>
 
@@ -682,7 +682,7 @@ export function Questionnaire() {
             <button
               type="button"
               onClick={() => handleNext(currentIndex - 1)}
-              className="text-sm font-semibold text-[#5b6577] hover:text-[#0a1a33]"
+              className="q-btn-back"
             >
               ← Back
             </button>
@@ -694,7 +694,7 @@ export function Questionnaire() {
       {currentQ.kind === "contact" && (
         <form className="mt-6 space-y-4" onSubmit={handleContactSubmit}>
           <div>
-            <label className="block text-xs font-semibold text-[#0a1a33] uppercase mb-1">Your Name</label>
+            <label className="q-label">Your Name</label>
             <input
               type="text"
               required
@@ -704,12 +704,12 @@ export function Questionnaire() {
               onChange={(e) => setContact({ ...contact, name: e.target.value })}
             />
             {contactSubmitted && !isNameValid && (
-              <p className="text-xs text-red-500 mt-1">Please enter your full name.</p>
+              <p className="q-field-err">Please enter your full name.</p>
             )}
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#0a1a33] uppercase mb-1">Work Email</label>
+            <label className="q-label">Work Email</label>
             <input
               type="email"
               required
@@ -719,12 +719,12 @@ export function Questionnaire() {
               onChange={(e) => setContact({ ...contact, email: e.target.value })}
             />
             {contactSubmitted && !isEmailValid && (
-              <p className="text-xs text-red-500 mt-1">Please enter a valid work email.</p>
+              <p className="q-field-err">Please enter a valid work email.</p>
             )}
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#0a1a33] uppercase mb-1">Direct Phone</label>
+            <label className="q-label">Direct Phone</label>
             <input
               type="tel"
               required
@@ -734,7 +734,7 @@ export function Questionnaire() {
               onChange={(e) => setContact({ ...contact, phone: e.target.value })}
             />
             {contactSubmitted && !isPhoneValid && (
-              <p className="text-xs text-red-500 mt-1">Please enter a direct phone number.</p>
+              <p className="q-field-err">Please enter a direct phone number.</p>
             )}
           </div>
 
@@ -743,9 +743,9 @@ export function Questionnaire() {
               type="submit"
               className="q-btn-primary"
             >
-              See candidate availability & book call →
+              See candidate availability &amp; book call →
             </button>
-            <p className="text-xs text-center text-[#5b6577] mt-3">
+            <p className="text-xs text-center text-[#546359] mt-3">
               🔒 100% confidential · Never shared with other recruiters or external portals
             </p>
           </div>
