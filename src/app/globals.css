@@ -2950,60 +2950,62 @@ body.clean .reviews-sec .mark{background:none;border:0}
 
 .ha-page {
   background: var(--paper);
-  color: var(--ink);
+  color: var(--ink-2);
   min-height: 100vh;
 }
 
 /* 1. HERO SECTION */
 .ha-hero {
-  padding: 64px 0 72px;
+  padding: 56px 0 76px;
   text-align: center;
   background: var(--paper);
+  position: relative;
 }
 @media (min-width: 640px) {
   .ha-hero {
-    padding: 80px 0 92px;
+    padding: 72px 0 96px;
   }
 }
 .ha-hero-inner {
-  max-width: 760px;
+  max-width: 780px;
   margin: 0 auto;
 }
 .ha-badge {
   display: inline-block;
-  padding: 6px 16px;
+  padding: 7px 18px;
   border-radius: 999px;
   background: var(--ice);
-  border: 1px solid rgba(27, 58, 102, 0.18);
-  color: var(--brand);
-  font: 600 11.5px/1 var(--mono);
+  border: 1px solid var(--ice-line);
+  color: var(--navy);
+  font: 600 12px/1 var(--mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 24px;
 }
 .ha-hero-h1 {
-  font-family: var(--serif) !important;
-  font-size: clamp(2.3rem, 4.8vw, 3.85rem) !important;
-  font-weight: 500 !important;
+  font-family: var(--display) !important;
+  font-size: clamp(38px, 5.2vw, 62px) !important;
+  font-weight: 400 !important;
   color: var(--head) !important;
-  line-height: 1.15 !important;
+  line-height: 1.08 !important;
   letter-spacing: -0.02em !important;
-  margin: 0 0 16px !important;
+  margin: 0 0 18px !important;
   text-wrap: balance;
 }
 .ha-serif-accent {
   font-style: italic;
-  color: var(--accent);
+  color: var(--pop);
 }
 .ha-hero-sub {
-  font-family: var(--serif) !important;
-  font-size: clamp(1.35rem, 2.4vw, 1.85rem) !important;
+  font-family: var(--display) !important;
+  font-size: clamp(22px, 2.6vw, 30px) !important;
   font-style: italic !important;
-  color: var(--accent) !important;
+  color: var(--pop) !important;
   margin: 0 0 20px !important;
+  font-weight: 400 !important;
 }
 .ha-hero-p {
-  font-size: 1.15rem !important;
+  font-size: 17px !important;
   color: var(--ink-2) !important;
   line-height: 1.65 !important;
   max-width: 640px !important;
@@ -3020,34 +3022,37 @@ body.clean .reviews-sec .mark{background:none;border:0}
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: var(--brand) !important;
+  background: var(--pop) !important;
   color: #ffffff !important;
+  font-family: var(--body) !important;
   font-weight: 600 !important;
-  font-size: 1.05rem !important;
-  padding: 15px 34px !important;
+  font-size: 16px !important;
+  padding: 15px 32px !important;
   border-radius: 8px !important;
   text-decoration: none !important;
-  box-shadow: 0 8px 24px -6px rgba(27, 58, 102, 0.3) !important;
-  transition: all 0.2s ease !important;
+  box-shadow: 0 10px 24px rgba(47, 98, 184, 0.25) !important;
+  transition: all var(--t-fast) var(--ease) !important;
+  cursor: pointer;
 }
 .ha-cta-btn:hover {
-  background: var(--brand-2) !important;
+  background: var(--pop-deep) !important;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px -6px rgba(27, 58, 102, 0.45) !important;
+  box-shadow: 0 14px 30px rgba(47, 98, 184, 0.35) !important;
+  color: #ffffff !important;
 }
 .ha-micro-trust {
-  font-size: 0.875rem !important;
+  font-size: 13.5px !important;
   color: var(--ink-3) !important;
   margin: 0 !important;
 }
 
 /* SECTION UTILITIES */
 .ha-sec {
-  padding: 80px 0;
+  padding: 88px 0;
   background: var(--paper);
 }
 .ha-sec-tinted {
-  background: #f5f2ea;
+  background: var(--soft);
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
@@ -3055,32 +3060,33 @@ body.clean .reviews-sec .mark{background:none;border:0}
   text-align: center;
 }
 .ha-sec-header {
-  margin-bottom: 44px;
+  margin-bottom: 48px;
 }
 .ha-sec-kicker {
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .ha-sec-title {
-  font-family: var(--serif) !important;
-  font-size: clamp(1.85rem, 3.2vw, 2.6rem) !important;
-  font-weight: 500 !important;
+  font-family: var(--display) !important;
+  font-size: clamp(30px, 3.8vw, 46px) !important;
+  font-weight: 400 !important;
   color: var(--head) !important;
-  line-height: 1.2 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
   margin: 0 !important;
 }
 .ha-sec-desc {
-  font-size: 1.05rem;
+  font-size: 16px;
   color: var(--ink-2);
   line-height: 1.6;
-  max-width: 600px;
-  margin: 12px auto 0;
+  max-width: 620px;
+  margin: 14px auto 0;
 }
 
 /* 3-COLUMN CARDS GRID */
@@ -3089,7 +3095,7 @@ body.clean .reviews-sec .mark{background:none;border:0}
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
-@media (max-width: 860px) {
+@media (max-width: 880px) {
   .ha-cards-3 {
     grid-template-columns: 1fr;
   }
@@ -3098,14 +3104,14 @@ body.clean .reviews-sec .mark{background:none;border:0}
   background: var(--white);
   border: 1px solid var(--rule);
   border-radius: 12px;
-  padding: 28px 24px;
-  box-shadow: 0 4px 18px -8px rgba(0, 0, 0, 0.05);
+  padding: 32px 26px;
+  box-shadow: 0 4px 18px -6px rgba(0, 0, 0, 0.05);
   margin: 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
 }
 .ha-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 28px -6px rgba(27, 58, 107, 0.08);
 }
 
 /* REVIEW CARDS */
@@ -3118,51 +3124,54 @@ body.clean .reviews-sec .mark{background:none;border:0}
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .ha-quote-icon {
-  font-family: var(--serif);
-  font-size: 36px;
+  font-family: var(--display);
+  font-size: 38px;
   line-height: 1;
-  color: var(--accent);
+  color: var(--pop);
 }
 .ha-star-badge {
-  font-size: 11.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--accent);
-  background: rgba(217, 164, 0, 0.12);
+  color: var(--pop);
+  background: var(--ice);
   padding: 4px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(217, 164, 0, 0.28);
+  border: 1px solid var(--ice-line);
 }
 .ha-review-headline {
-  font-family: var(--serif) !important;
-  font-size: 1.15rem !important;
-  font-weight: 600 !important;
+  font-family: var(--display) !important;
+  font-size: 19px !important;
+  font-weight: 400 !important;
   color: var(--head) !important;
-  line-height: 1.35 !important;
-  margin: 0 0 10px !important;
+  line-height: 1.3 !important;
+  margin: 0 0 12px !important;
 }
 .ha-review-quote {
-  font-size: 0.925rem;
+  font-size: 15px;
   color: var(--ink-2);
   line-height: 1.6;
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   flex-grow: 1;
 }
 .ha-review-author {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-top: 16px;
-  border-top: 1px solid var(--sand);
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
 }
 .ha-avatar-circle {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: var(--ice);
-  color: var(--brand);
+  color: var(--navy);
   display: grid;
   place-items: center;
   font-size: 16px;
@@ -3170,34 +3179,39 @@ body.clean .reviews-sec .mark{background:none;border:0}
 }
 .ha-author-name {
   display: block;
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--head);
 }
 .ha-author-title {
   display: block;
-  font-size: 0.775rem;
+  font-size: 12.5px;
   color: var(--ink-3);
 }
 
 /* HOW IT WORKS / STEP CARDS */
 .ha-step-number {
   font-family: var(--mono);
-  font-size: 1.45rem;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 12px;
+  letter-spacing: 0.12em;
+  color: var(--pop);
+  background: var(--ice);
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 16px;
+  border: 1px solid var(--ice-line);
 }
 .ha-step-title {
-  font-family: var(--serif) !important;
-  font-size: 1.3rem !important;
-  font-weight: 600 !important;
+  font-family: var(--display) !important;
+  font-size: 21px !important;
+  font-weight: 400 !important;
   color: var(--head) !important;
-  margin: 0 0 8px !important;
+  margin: 0 0 10px !important;
 }
 .ha-step-desc {
-  font-size: 0.95rem;
+  font-size: 15px;
   color: var(--ink-2);
   line-height: 1.6;
   margin: 0;
@@ -3207,13 +3221,13 @@ body.clean .reviews-sec .mark{background:none;border:0}
 .ha-recruiter-grid {
   display: grid;
   grid-template-columns: 260px 1fr;
-  gap: 52px;
+  gap: 56px;
   align-items: center;
 }
-@media (max-width: 860px) {
+@media (max-width: 880px) {
   .ha-recruiter-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 36px;
   }
 }
 .ha-recruiter-photo-wrap {
@@ -3222,11 +3236,11 @@ body.clean .reviews-sec .mark{background:none;border:0}
 }
 .ha-recruiter-card {
   width: 240px;
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--rule);
   background: var(--white);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 36px -10px rgba(27, 58, 107, 0.08);
 }
 .ha-recruiter-portrait {
   width: 100% !important;
@@ -3236,19 +3250,19 @@ body.clean .reviews-sec .mark{background:none;border:0}
   display: block;
 }
 .ha-recruiter-card-info {
-  padding: 12px 14px;
+  padding: 14px 16px;
   text-align: center;
   background: var(--white);
-  border-top: 1px solid var(--sand);
+  border-top: 1px solid var(--rule);
 }
 .ha-recruiter-name-tag {
   display: block;
-  font-size: 0.95rem;
+  font-size: 15px;
   color: var(--head);
 }
 .ha-recruiter-role-tag {
   display: block;
-  font-size: 0.775rem;
+  font-size: 12.5px;
   color: var(--ink-3);
   margin-top: 2px;
 }
@@ -3256,52 +3270,53 @@ body.clean .reviews-sec .mark{background:none;border:0}
   max-width: 680px;
 }
 .ha-recruiter-name {
-  font-family: var(--serif) !important;
-  font-size: clamp(2rem, 3.2vw, 2.6rem) !important;
-  font-weight: 500 !important;
+  font-family: var(--display) !important;
+  font-size: clamp(30px, 3.8vw, 44px) !important;
+  font-weight: 400 !important;
   color: var(--head) !important;
-  line-height: 1.15 !important;
+  line-height: 1.12 !important;
   margin: 0 0 6px !important;
 }
 .ha-recruiter-sub {
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--pop);
   margin: 0 0 18px;
 }
 .ha-recruiter-paragraphs p {
-  font-size: 0.975rem;
+  font-size: 15.5px;
   color: var(--ink-2);
   line-height: 1.65;
   margin-bottom: 12px;
 }
+.ha-recruiter-paragraphs b {
+  color: var(--head);
+}
 .ha-recruiter-quote {
-  font-family: var(--serif);
-  font-size: 1.1rem;
+  font-family: var(--display);
+  font-size: 18px;
   font-style: italic;
   color: var(--head);
   background: var(--ice);
-  border-left: 3px solid var(--brand);
-  padding: 14px 18px;
+  border-left: 3px solid var(--pop);
+  padding: 16px 20px;
   border-radius: 0 8px 8px 0;
-  margin: 20px 0;
+  margin: 22px 0;
   line-height: 1.5;
 }
-.ha-recruiter-contact {
+.ha-recruiter-footer-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px 12px;
-  font-size: 0.925rem;
-  color: var(--ink-2);
+  gap: 12px 18px;
+  margin-top: 22px;
 }
-.ha-recruiter-contact a {
-  color: var(--brand);
+.ha-email-link {
+  font-size: 14.5px;
+  color: var(--pop);
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 3px;
-}
-.ha-contact-sep {
-  color: var(--rule);
 }
 
 /* QUESTIONNAIRE CENTER BOX */
@@ -3313,24 +3328,295 @@ body.clean .reviews-sec .mark{background:none;border:0}
 /* BOTTOM CTA */
 .ha-bottom-cta {
   text-align: center;
+  padding: 96px 0;
 }
 .ha-bottom-cta-content {
   max-width: 640px;
   margin: 0 auto;
 }
 .ha-cta-h2 {
-  font-family: var(--serif) !important;
-  font-size: clamp(2rem, 3.6vw, 2.75rem) !important;
-  font-weight: 500 !important;
+  font-family: var(--display) !important;
+  font-size: clamp(32px, 4vw, 48px) !important;
+  font-weight: 400 !important;
   color: var(--head) !important;
-  line-height: 1.2 !important;
-  margin: 0 0 14px !important;
+  line-height: 1.15 !important;
+  margin: 0 0 16px !important;
 }
 .ha-cta-desc {
-  font-size: 1.125rem;
+  font-size: 17px;
   color: var(--ink-2);
   line-height: 1.6;
-  margin: 0 auto 32px;
+  margin: 0 auto 36px;
+}
+
+/* ========================================================
+   QUESTIONNAIRE COMPONENT STYLES
+   ======================================================== */
+@keyframes step-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.step-in {
+  animation: step-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.q-card-box {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 36px 32px;
+  border: 1px solid var(--rule);
+  box-shadow: 0 16px 45px rgba(27, 58, 107, 0.06);
+  text-align: left;
+}
+@media (min-width: 640px) {
+  .q-card-box {
+    padding: 44px 40px;
+  }
+}
+
+.q-progress-bar-bg {
+  height: 6px;
+  background: var(--rule);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.q-progress-bar-fill {
+  height: 100%;
+  background: var(--pop);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.q-title {
+  font-family: var(--display) !important;
+  font-size: clamp(22px, 2.8vw, 28px) !important;
+  font-weight: 400 !important;
+  color: var(--head) !important;
+  line-height: 1.22 !important;
+  margin: 0 0 8px !important;
+}
+.q-sub-text {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin: 0;
+}
+.q-eyebrow-accent {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pop);
+  margin: 0;
+}
+
+.q-intro-banner {
+  background: var(--ice);
+  border: 1px solid var(--ice-line);
+  color: var(--navy);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.q-input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--field-line);
+  background: var(--white);
+  padding: 13px 16px;
+  font-size: 15px;
+  color: var(--head);
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.q-input:focus {
+  border-color: var(--pop);
+  box-shadow: 0 0 0 3px rgba(47, 98, 184, 0.15);
+}
+
+.q-choice-btn {
+  width: 100%;
+  text-align: left;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  padding: 14px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--head);
+  cursor: pointer;
+  transition: all var(--t-fast) var(--ease);
+}
+.q-choice-btn:hover {
+  border-color: var(--pop);
+  background: var(--ice);
+  transform: translateY(-1px);
+}
+.q-choice-btn.selected {
+  border-color: var(--pop);
+  background: var(--pop);
+  color: #ffffff;
+}
+
+.q-fee-btn {
+  border-radius: 12px;
+  border: 1.5px solid var(--rule);
+  background: var(--white);
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--t-fast) var(--ease);
+}
+.q-fee-btn:hover {
+  border-color: var(--pop);
+  background: var(--ice);
+  transform: translateY(-2px);
+}
+.q-fee-btn.yes:hover {
+  border-color: var(--pop);
+}
+
+.q-btn-primary {
+  display: inline-flex;
+  width: 100%;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--pop) !important;
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+  padding: 0 24px;
+}
+.q-btn-primary:hover:not(:disabled) {
+  background: var(--pop-deep) !important;
+  transform: translateY(-1px);
+}
+.q-btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.q-btn-continue {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--pop) !important;
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  padding: 0 22px;
+  transition: background var(--t-fast) var(--ease);
+}
+.q-btn-continue:hover:not(:disabled) {
+  background: var(--pop-deep) !important;
+}
+.q-btn-continue:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.q-days-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin: 0 -12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  scroll-snap-type: x mandatory;
+}
+@media (min-width: 640px) {
+  .q-days-scroll {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow-x: visible;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.q-day-pill {
+  min-width: 72px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  padding: 10px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--t-fast) var(--ease);
+}
+.q-day-pill:hover {
+  border-color: var(--pop);
+  background: var(--ice);
+}
+.q-day-pill.selected {
+  border-color: var(--pop);
+  background: var(--pop);
+  color: #ffffff;
+}
+
+.q-time-pill {
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  color: var(--head);
+  transition: all var(--t-fast) var(--ease);
+}
+.q-time-pill:hover {
+  border-color: var(--pop);
+  background: var(--ice);
+}
+.q-time-pill.selected {
+  border-color: var(--pop);
+  background: var(--pop);
+  color: #ffffff;
+}
+
+.q-icon-disc {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ice);
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  margin: 0 auto;
+}
+.q-check-disc {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--pop);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
 }
 
 /* ========================================================

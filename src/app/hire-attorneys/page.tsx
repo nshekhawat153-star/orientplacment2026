@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Questionnaire } from "./Questionnaire";
+import { Stars, GMark } from "@/components/icons";
 import { reviews } from "@/data";
 
 export const metadata: Metadata = {
@@ -63,14 +64,19 @@ export default function HireAttorneysLandingPage() {
           <div className="ha-sec-header ha-text-center">
             <span className="ha-sec-kicker">Client results</span>
             <h2 className="ha-sec-title">Firms we&apos;ve helped hire</h2>
+            <p className="ha-sec-desc">
+              Direct feedback from managing partners and firm administrators who hired through Orion.
+            </p>
           </div>
 
           <div className="ha-cards-3">
             {clientReviews.map((rev) => (
               <figure key={rev.id} className="ha-card ha-review-card">
                 <div className="ha-review-card-top">
-                  <span className="ha-quote-icon" aria-hidden="true">“</span>
-                  <span className="ha-star-badge">5.0 ★ Google Review</span>
+                  <Stars />
+                  <span className="ha-star-badge">
+                    <GMark /> Google review
+                  </span>
                 </div>
 
                 <h3 className="ha-review-headline">
@@ -112,7 +118,7 @@ export default function HireAttorneysLandingPage() {
 
           <div className="ha-cards-3">
             <div className="ha-card ha-step-card">
-              <span className="ha-step-number">01</span>
+              <span className="ha-step-number">STEP 01</span>
               <h3 className="ha-step-title">No upfront cost</h3>
               <p className="ha-step-desc">
                 No retainer and nothing to pay to get started. You see candidate
@@ -121,7 +127,7 @@ export default function HireAttorneysLandingPage() {
             </div>
 
             <div className="ha-card ha-step-card">
-              <span className="ha-step-number">02</span>
+              <span className="ha-step-number">STEP 02</span>
               <h3 className="ha-step-title">Candidates who fit</h3>
               <p className="ha-step-desc">
                 We pre-screen attorneys for your exact practice mix, local bar
@@ -130,7 +136,7 @@ export default function HireAttorneysLandingPage() {
             </div>
 
             <div className="ha-card ha-step-card">
-              <span className="ha-step-number">03</span>
+              <span className="ha-step-number">STEP 03</span>
               <h3 className="ha-step-title">90-day guarantee</h3>
               <p className="ha-step-desc">
                 You stay in full control. If a placed attorney leaves within 90
@@ -151,8 +157,8 @@ export default function HireAttorneysLandingPage() {
                 <Image
                   src="/images/founders/justin-sofman.png"
                   alt="Justin Sofman"
-                  width={220}
-                  height={220}
+                  width={240}
+                  height={240}
                   className="ha-recruiter-portrait"
                   priority
                 />
@@ -185,10 +191,21 @@ export default function HireAttorneysLandingPage() {
                 &ldquo;I only get paid when you find the right attorney, so I&apos;m 100% invested in sending people actually worth your time.&rdquo;
               </div>
 
-              <div className="ha-recruiter-contact">
-                <span><b>Direct line:</b> <a href="tel:2015729538">(201) 572-9538</a></span>
-                <span className="ha-contact-sep">·</span>
-                <span><b>Email:</b> <a href="mailto:justin@orionplacement.com">justin@orionplacement.com</a></span>
+              <div className="ha-recruiter-footer-actions">
+                <a
+                  href="https://calendly.com/orionplacement/call-with-justin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary btn-sm"
+                >
+                  Book 15 min with Justin →
+                </a>
+                <a href="tel:2015729538" className="btn btn-outline btn-sm">
+                  Call (201) 572-9538
+                </a>
+                <a href="mailto:justin@orionplacement.com" className="ha-email-link">
+                  justin@orionplacement.com
+                </a>
               </div>
             </div>
           </div>
