@@ -22,13 +22,13 @@
 | # | Route URL | File Path | Type | Primary Audience | Status |
 | :-: | :--- | :--- | :-: | :--- | :-: |
 | **01** | `/` | `src/app/page.tsx` | Static | All (Homepage) | ✅ **Redesigned & Live** |
-| **02** | `/employers` | `src/app/employers/page.tsx` | Static | Law Firm Partners & Hiring Chairs | 📋 Needs Review |
-| **03** | `/hire-attorneys` | `src/app/hire-attorneys/page.tsx` | Static | Law Firm Decision Makers | 📋 Needs Review |
-| **04** | `/submit-job` | `src/app/submit-job/page.tsx` | Static | Law Firms (Direct Mandate Intake) | 📋 Needs Review |
+| **02** | `/employers` | `src/app/employers/page.tsx` | Static | Law Firm Partners & Hiring Chairs | ✅ **Redesigned & Live** |
+| **03** | `/hire-attorneys` | `src/app/hire-attorneys/page.tsx` | Static | Law Firm Decision Makers | ✅ **Redesigned & Live** |
+| **04** | `/submit-job` | `src/app/submit-job/page.tsx` | Static | Law Firms (Direct Mandate Intake) | 📋 Up Next |
 | **05** | `/find-candidates` | `src/app/find-candidates/page.tsx` | Static | Law Firms (Talent Discovery) | 📋 Needs Review |
-| **06** | `/fees` | `src/app/fees/page.tsx` | Static | Law Firms (Fee Schedule & Guarantee) | 📋 Needs Review |
-| **07** | `/candidates` | `src/app/candidates/page.tsx` | Static | Attorneys & Paralegals | 📋 Needs Review |
-| **08** | `/jobs` | `src/app/jobs/page.tsx` | Static | Active Job Seekers | 📋 Needs Review |
+| **06** | `/fees` | `src/app/fees/page.tsx` | Static | Law Firms (Fee Schedule & Guarantee) | ✅ **Redesigned & Live** |
+| **07** | `/candidates` | `src/app/candidates/page.tsx` | Static | Attorneys & Paralegals | ✅ **Redesigned & Live** |
+| **08** | `/jobs` | `src/app/jobs/page.tsx` | Static | Active Job Seekers | ✅ **Redesigned & Live** |
 | **09** | `/upload-resume` | `src/app/upload-resume/page.tsx` | Static | Candidates (Confidential Upload) | 📋 Needs Review |
 | **10** | `/candidate/[slug]` | `src/app/candidate/[slug]/page.tsx` | Dynamic | Law Firms & Candidates (Profile Dossier) | 📋 Needs Review |
 | **11** | `/jobs/[role]/[city]` | `src/app/jobs/[role]/[city]/page.tsx` | Dynamic | Targeted Practice Area Job Seekers | 📋 Needs Review |
