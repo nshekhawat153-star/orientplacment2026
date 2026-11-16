@@ -135,37 +135,54 @@ export function JobsSearchClient() {
 
   return (
     <div className="indeed-search-portal-page">
-      {/* 1. LUXURY TOP SEARCH HEADER BANNER */}
+      {/* 1. LUXURY TOP SEARCH HEADER BANNER WITH CINEMATIC WATER SPLASH VIDEO */}
       <section
         className="jobs-luxury-header-sec"
         style={{
           background: "#08142A",
           color: "#FFFFFF",
           paddingTop: "116px",
-          paddingBottom: "56px",
+          paddingBottom: "64px",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        <div className="wrap">
-          <div className="jobs-header-intro">
-            <div className="badge-capsule">
+        {/* Background Water Splash Video constrained to this header */}
+        <div className="hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="hero-video-el"
+          >
+            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-video-gradient" />
+          <div className="hero-video-radial-aura" />
+        </div>
+
+        <div className="wrap" style={{ position: "relative", zIndex: 3 }}>
+          <div className="jobs-header-intro" style={{ textAlign: "center", margin: "0 auto 32px", maxWidth: "840px" }}>
+            <div className="badge-capsule" style={{ margin: "0 auto 16px", display: "inline-flex" }}>
               <span className="badge-dot" />
               CONFIDENTIAL LEGAL SEARCH · 100% SALARY TRANSPARENCY
             </div>
-            <h1 className="jobs-header-title" style={{ color: "#FFFFFF" }}>
+            <h1 className="jobs-header-title" style={{ color: "#FFFFFF", textAlign: "center" }}>
               Legal jobs in <span className="serif-accent" style={{ color: "#60A5FA" }}>Texas</span>
             </h1>
-            <p className="jobs-header-sub" style={{ color: "#94A3B8" }}>
+            <p className="jobs-header-sub" style={{ color: "#CBD5E1", textAlign: "center", margin: "0 auto", maxWidth: "680px" }}>
               Direct lateral openings at premier boutique and mid-size law firms. Verified pay bands and exact compensation disclosed on every seat.
             </p>
           </div>
 
-          <IndeedTopSearchBar
-            initialQuery={searchQuery}
-            initialLocation={searchLocation}
-            onSearch={handleSearch}
-          />
+          <div style={{ maxWidth: "1040px", margin: "0 auto", width: "100%" }}>
+            <IndeedTopSearchBar
+              initialQuery={searchQuery}
+              initialLocation={searchLocation}
+              onSearch={handleSearch}
+            />
+          </div>
         </div>
       </section>
 
@@ -266,7 +283,6 @@ export function JobsSearchClient() {
               <div className="indeed-detail-column">
                 <JobDetailPane
                   job={activeJob}
-                  onCloseMobile={() => setMobileDrawerOpen(false)}
                 />
               </div>
             </div>
