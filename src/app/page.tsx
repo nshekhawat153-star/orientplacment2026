@@ -7,6 +7,7 @@ import { TrustBar, TrustTicker, RatingBadge, CalendlyLink } from "@/components/R
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { TermsTiles } from "@/components/TermsTiles";
 import { CandidateCard } from "@/components/CandidateCard";
+import { InteractiveCandidateShowcase } from "@/components/InteractiveCandidateShowcase";
 import { ReviewsSection } from "@/components/ReviewCard";
 import { PeopleSection } from "@/components/PeopleSection";
 import { ResourceCards } from "@/components/ResourceCards";
@@ -14,7 +15,7 @@ import { CityTiles, RoleTiles } from "@/components/DirectoryTiles";
 import { CtaBand } from "@/components/CtaBand";
 import { Mark } from "@/components/Mark";
 import { Icon, AwardIcon } from "@/components/icons";
-import { findCandidate, orionLine } from "@/data";
+import { findCandidate, orionLine, trust } from "@/data";
 
 export const metadata: Metadata = {
   title: "Legal recruiters for small and mid-size law firms | Orion",
@@ -29,6 +30,7 @@ export default function HomePage() {
   const c1 = findCandidate("EP-TX-0412");
   const c2 = findCandidate("LIT-TX-0390");
   const c3 = findCandidate("RE-TX-0274");
+  const c4 = findCandidate("LIT-TX-0422");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -143,48 +145,199 @@ export default function HomePage() {
           <TrustTicker />
         </section>
 
-        {/* 3. How it works */}
-        <section className="block how-it-works-sec" id="how-it-works">
+        {/* 3. The Orion Search Protocol - Asymmetric Light Editorial (Zero Clutter, Zero Cards) */}
+        <section className="how-it-works-sec light-editorial-sec" id="how-it-works" aria-labelledby="protocol-h2">
           <div className="wrap">
-            <div className="sec-head-premium">
-              <div className="badge-capsule">
-                <span className="badge-dot" />
-                HOW IT WORKS · 3-STEP HIRING PROCESS
+            <div className="editorial-split-grid">
+              {/* Left Column: Sticky Editorial Statement */}
+              <div className="editorial-left-col">
+                <div className="editorial-pill">
+                  <span className="editorial-pill-dot" />
+                  <span>HOW A SEARCH RUNS</span>
+                </div>
+
+                <h2 id="protocol-h2" className="editorial-h2">
+                  Built for precision,{" "}
+                  <span className="serif-accent">run for speed.</span>
+                </h2>
+
+                <p className="editorial-desc">
+                  Every search follows a disciplined, three-step hiring protocol. Zero upfront retainer, non-exclusive search, and you only pay when your candidate starts.
+                </p>
+
+                <div className="editorial-cta-wrap">
+                  <Link href="/find-candidates" className="btn-editorial-cta">
+                    <span>See candidates for your seat</span>
+                    <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                      <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
-              <h2 className="sec-title-lg">
-                From open seat to shortlist in{" "}
-                <span className="serif-accent">days</span>
-              </h2>
-              <p className="who-lede">
-                You describe the seat once. We send screened people who fit it,
-                and you pay only when one of them starts.
-              </p>
+
+              {/* Right Column: 3 Clean Spaced Milestones (Connected by a minimalist vertical spine) */}
+              <div className="editorial-timeline">
+                <div className="timeline-hairline" aria-hidden="true" />
+
+                {/* Step 01 */}
+                <div className="timeline-step">
+                  <div className="timeline-node">
+                    <span className="node-dot" />
+                  </div>
+                  <div className="timeline-content">
+                    <div className="step-kicker">01 · DAY 0 · INTAKE</div>
+                    <h3 className="step-title">Consultation &amp; Practice Mapping</h3>
+                    <p className="step-body">
+                      A focused 15-minute consultation with Justin to map your firm&apos;s practice demands, billable hours, bar standing, and culture. We respond to every inquiry in under one hour.
+                    </p>
+                    <div className="step-metric-inline">
+                      <span className="metric-bold">&lt; 1 Hour</span>
+                      <span className="metric-text">Response SLA to your inquiry</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 02 */}
+                <div className="timeline-step">
+                  <div className="timeline-node">
+                    <span className="node-dot" />
+                  </div>
+                  <div className="timeline-content">
+                    <div className="step-kicker">02 · DAYS 5–7 · SOURCING</div>
+                    <h3 className="step-title">100,000+ Sourcing &amp; Screened Shortlist</h3>
+                    <p className="step-body">
+                      We headhunt across our 100,000+ attorney network, reaching high-performing passive candidates not on public job boards. You receive tailored dossiers with verified pay expectations and fit notes.
+                    </p>
+                    <div className="step-metric-inline">
+                      <span className="metric-bold">~1 Week</span>
+                      <span className="metric-text">Average turnaround to first qualified candidate</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 03 */}
+                <div className="timeline-step">
+                  <div className="timeline-node">
+                    <span className="node-dot" />
+                  </div>
+                  <div className="timeline-content">
+                    <div className="step-kicker">03 · START DATE · TERMS</div>
+                    <h3 className="step-title">Interview, Hire, Then Pay</h3>
+                    <p className="step-body">
+                      You interview only the candidates you want. No upfront retainer. A standard 23% contingency fee is invoiced on your hire&apos;s start date (Net 15), backed by our full 90-day replacement guarantee.
+                    </p>
+                    <div className="step-metric-inline">
+                      <span className="metric-bold">90 Days</span>
+                      <span className="metric-text">Full replacement guarantee on every placement</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <ProcessSteps />
           </div>
         </section>
 
-        {/* 4. What it costs */}
-        <section className="block terms-sec" id="terms">
+        {/* 4. What It Costs - Transparent Contingency Terms */}
+        <section className="block terms-sec" id="terms" aria-labelledby="terms-h2">
           <div className="wrap">
-            <div className="sec-head-premium">
-              <div className="badge-capsule">
-                <span className="badge-dot" />
-                WHAT IT COSTS · TRANSPARENT TERMS
+            <div className="terms-head">
+              <div className="terms-eyebrow">
+                <span className="terms-eyebrow-dot" />
+                <span>WHAT IT COSTS · TRANSPARENT TERMS</span>
               </div>
-              <h2 className="sec-title-lg">
-                One fee, and only if you{" "}
-                <span className="serif-accent">hire</span>
+              <h2 id="terms-h2" className="terms-h2">
+                One fee, and only if you <span className="serif-accent">hire.</span>
               </h2>
-              <p className="who-lede">
-                The same terms for every firm. Nothing to sign until you want to
-                meet someone.{" "}
-                <Link className="terms-link-accent" href="/fees">
-                  Fees and a calculator →
-                </Link>
+              <p className="terms-lede">
+                Identical, non-exclusive contingency terms for every firm. Zero retainers, zero invoice until candidate starts, and a full 90-day replacement guarantee.
               </p>
             </div>
-            <TermsTiles />
+
+            {/* 4 Executive Terms Pillars */}
+            <div className="terms-pillars-grid">
+              {/* Pillar 01: 23% Fee */}
+              <div className="terms-pillar">
+                <div className="pillar-kicker">01 · CONTINGENCY</div>
+                <div className="pillar-val">23%</div>
+                <div className="pillar-label">Fee</div>
+                <p className="pillar-desc">
+                  Of candidate&apos;s compensation, only if you hire someone we introduced.
+                </p>
+                <div className="pillar-badge">
+                  <span>Contingency Only</span>
+                </div>
+              </div>
+
+              {/* Pillar 02: 90 Days */}
+              <div className="terms-pillar">
+                <div className="pillar-kicker">02 · GUARANTEE</div>
+                <div className="pillar-val">90 Days</div>
+                <div className="pillar-label">Guarantee</div>
+                <p className="pillar-desc">
+                  If the hire leaves in that time, we replace them at no extra charge.
+                </p>
+                <div className="pillar-badge">
+                  <span>100% Free Replacement</span>
+                </div>
+              </div>
+
+              {/* Pillar 03: $0 Upfront */}
+              <div className="terms-pillar">
+                <div className="pillar-kicker">03 · ZERO RISK</div>
+                <div className="pillar-val">$0</div>
+                <div className="pillar-label">Upfront</div>
+                <p className="pillar-desc">
+                  No retainer and no exclusivity. Keep your other recruiters.
+                </p>
+                <div className="pillar-badge">
+                  <span>Non-Exclusive</span>
+                </div>
+              </div>
+
+              {/* Pillar 04: Net 15 */}
+              <div className="terms-pillar">
+                <div className="pillar-kicker">04 · PAYMENT SCHEDULE</div>
+                <div className="pillar-val">Net 15</div>
+                <div className="pillar-label">When you pay</div>
+                <p className="pillar-desc">
+                  Invoice when the hire starts, due in 15 days.
+                </p>
+                <div className="pillar-badge">
+                  <span>Start Date Invoice</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Reassurance & Calculator Bar */}
+            <div className="terms-bottom-bar">
+              <div className="terms-reassurance-list">
+                <span className="terms-check-item">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                  </svg>
+                  <span>100% Free for all candidates</span>
+                </span>
+                <span className="terms-check-item">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                  </svg>
+                  <span>Non-exclusive contingency agreement</span>
+                </span>
+                <span className="terms-check-item">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                  </svg>
+                  <span>Zero upfront retainer required</span>
+                </span>
+              </div>
+
+              <Link href="/fees" className="btn-terms-calc">
+                <span>Fees and a calculator</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -197,29 +350,15 @@ export default function HomePage() {
                 AVAILABLE NOW · PRE-SCREENED TALENT
               </div>
               <h2 className="sec-title-lg">
-                Candidates open to a <span className="serif-accent">move</span>
+                Candidates open to a <span className="serif-accent">move.</span>
               </h2>
               <p className="who-lede">
-                Screened by Jon. Names and firms stay hidden until you ask for the
-                profile.
+                Screened by Jon. Names and firms stay hidden until you ask for the profile.
               </p>
             </div>
-            <div className="cards teaser">
-              {c1 && <CandidateCard candidate={c1} />}
-              {c2 && <CandidateCard candidate={c2} />}
-              {c3 && <CandidateCard candidate={c3} />}
-            </div>
-            <div className="sec-foot">
-              <Link
-                className="btn btn-primary btn-lg"
-                href="/find-candidates"
-              >
-                See all candidates
-              </Link>
-              <span className="small muted">
-                Filter by role, city, years and must-haves.
-              </span>
-            </div>
+
+            {/* Interactive Candidate Showcase: Left 4 Pills + Right Dossier + Bottom Banner */}
+            <InteractiveCandidateShowcase c1={c1} c2={c2} c3={c3} c4={c4} />
           </div>
         </section>
 
@@ -239,7 +378,29 @@ export default function HomePage() {
                 <RatingBadge link />
               </div>
             </div>
+
             <ReviewsSection kind="mixed" />
+
+            {/* Bottom Reassurance & All Reviews Link */}
+            <div className="reviews-bottom-bar">
+              <div className="reviews-bottom-trust">
+                <span className="reviews-bottom-dot" />
+                <span>
+                  100% verified public Google reviews · Jon is named in <strong>{trust.jonNamed} of {trust.reviews}</strong> reviews
+                </span>
+              </div>
+              <a
+                href={trust.google}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-reviews-google"
+              >
+                <span>Read all {trust.reviews} reviews on Google</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                </svg>
+              </a>
+            </div>
           </div>
         </section>
 
@@ -275,31 +436,67 @@ export default function HomePage() {
         <section className="block flush post-job-band-sec" id="post-a-job">
           <div className="wrap">
             <div className="post-job-band">
-              <div>
-                <div className="badge-capsule badge-capsule-dark">
+              <div className="post-job-content">
+                <div className="badge-capsule">
                   <span className="badge-dot" />
                   EMPLOYER PORTAL · FREE JOB POSTING
                 </div>
-                <h2>
+                <h2 className="post-job-title">
                   Post your open seat today,{" "}
                   <span className="serif-accent">free</span>
                 </h2>
-                <p>
+                <p className="post-job-lede">
                   Attorneys, paralegals and legal assistants across the US.
                   Describe your seat in 2 minutes. No upfront fee, no retainer,
                   and nothing to pay unless you hire.
                 </p>
+                <div className="post-job-perks">
+                  <div className="post-job-perk-item">
+                    <span className="perk-check" aria-hidden="true">✓</span>
+                    <span>Zero upfront retainer</span>
+                  </div>
+                  <div className="post-job-perk-item">
+                    <span className="perk-check" aria-hidden="true">✓</span>
+                    <span>5–7 business day shortlist</span>
+                  </div>
+                  <div className="post-job-perk-item">
+                    <span className="perk-check" aria-hidden="true">✓</span>
+                    <span>90-day replacement guarantee</span>
+                  </div>
+                </div>
               </div>
-              <div className="post-job-act">
+
+              <div className="post-job-card">
+                <div className="post-job-card-top">
+                  <span className="post-job-portal-badge">DIRECT INTAKE PORTAL</span>
+                  <span className="post-job-time-badge">~2 min submission</span>
+                </div>
                 <Link
-                  className="btn btn-primary btn-lg"
+                  className="btn-post-job-submit"
                   href="/submit-job"
                 >
-                  Submit a job for free
+                  <span>Submit a job for free</span>
+                  <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                    <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                  </svg>
                 </Link>
-                <span className="post-job-note">
-                  Screened candidates within days · 100% confidential
-                </span>
+                <div className="post-job-note">
+                  <span className="post-job-lock-icon" aria-hidden="true">🔒</span>
+                  <span>Screened candidates within days · 100% confidential</span>
+                </div>
+                <div className="post-job-card-divider" />
+                <div className="post-job-alt-action">
+                  <span>Prefer to discuss the mandate first?</span>
+                  <a
+                    href={trust.calendly}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="post-job-call-link"
+                  >
+                    <span>Book 15 min with Justin</span>
+                    <span className="call-arrow" aria-hidden="true">→</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
