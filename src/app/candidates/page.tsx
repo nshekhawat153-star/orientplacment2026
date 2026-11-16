@@ -1,18 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { Breadcrumb } from "@/components/Breadcrumb";
-import { TrustBar, TrustLine, RatingBadge } from "@/components/Rating";
+import { TrustBar, RatingBadge } from "@/components/Rating";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { ReviewsSection } from "@/components/ReviewCard";
 import { ResumeSheet } from "@/components/ResumeSheet";
-import { GateForm } from "@/components/GateForm";
 import { CtaBand } from "@/components/CtaBand";
 import { Mark } from "@/components/Mark";
-import { Icon } from "@/components/icons";
-import { jobs, orionLine, fmt, plural } from "@/data";
+import { jobs, fmt, trust } from "@/data";
 
 export const metadata: Metadata = {
   title: "Confidential legal jobs with pay bands | Orion Placement",
@@ -59,388 +54,383 @@ export default function CandidatesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <style>{`
-        .open-card .nlist{border-top:0}
-        .open-card .nlist .row{align-items:flex-start;padding:12px 0}
-        .open-card .nlist .row>span:first-child{min-width:0}
-        .open-card .nlist .t{display:block;font-weight:600}
-        .open-card .nlist .small{display:block;margin-top:2px}
-        .open-card .v{font-family:var(--serif);font-size:1.12rem;color:var(--ink)}
-        .card-foot{display:flex;align-items:center;gap:8px;font-size:.86rem;color:var(--ink-2);padding:12px 0 6px}
-        .card-foot .ico{width:18px;height:18px;color:var(--green);flex-shrink:0}
-        .reviews-2 .reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
-        @media (max-width:860px){.reviews-2 .reviews{grid-template-columns:1fr}}
-        @media (max-width:640px){.open-card .nlist li:nth-child(n+4){display:none}#jobs-now .cards>.job:nth-child(n+3){display:none}}
-      `}</style>
-        <Breadcrumb
-          items={[
-            { name: "Home", href: "/" },
-            { name: "Candidates" },
-          ]}
-        />
 
-        {/* 1. Hero */}
-        <section className="phero">
-          <div className="wrap">
+      {/* 1. CINEMATIC WATER SPLASH HERO */}
+      <section className="hero-cinematic" aria-labelledby="cand-hero-h1">
+        {/* Background Water Splash Video */}
+        <div className="hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="hero-video-el"
+          >
+            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-video-gradient" />
+          <div className="hero-video-radial-aura" />
+        </div>
+
+        <div className="wrap hero-content-wrap">
+          <div className="hero-content-center">
+            <div className="hero-eyebrow-capsule">
+              <span className="hero-eyebrow-dot" aria-hidden="true" />
+              <span>CANDIDATE PORTAL · 100% CONFIDENTIAL &amp; FREE</span>
+            </div>
+
+            <h1 id="cand-hero-h1" className="hero-display-h1">
+              Confidential legal jobs,{" "}
+              <span className="hero-accent-serif">with the pay shown.</span>
+            </h1>
+
+            <p className="hero-lead-p">
+              Direct lateral opportunities at leading boutique and mid-size law firms.
+              Always 100% free for candidates. No firm ever sees your name until you say yes.
+            </p>
+
+            <div className="hero-actions-group">
+              <Link className="btn-hero-primary" href="/upload-resume">
+                <span>Upload your resume</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                </svg>
+              </Link>
+              <Link className="btn-hero-secondary" href="/jobs">
+                <span>Browse open roles with pay</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+
+            <div className="emp-hero-perks">
+              <div className="emp-hero-perk-item">
+                <span className="perk-check" aria-hidden="true">✓</span>
+                <span>100% confidential representation</span>
+              </div>
+              <div className="emp-hero-perk-item">
+                <span className="perk-check" aria-hidden="true">✓</span>
+                <span>Exact salary &amp; bonus disclosed upfront</span>
+              </div>
+              <div className="emp-hero-perk-item">
+                <span className="perk-check" aria-hidden="true">✓</span>
+                <span>Zero contact with current firm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Trust Bar */}
+      <section className="trust-strip" aria-label="Orion for candidates">
+        <div className="wrap">
+          <TrustBar kind="candidate" />
+        </div>
+      </section>
+
+      {/* 3. How It Works (Candidate Workflow) */}
+      <section className="block emp-process-sec" id="how-it-works">
+        <div className="wrap">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              CONFIDENTIAL 3-STEP PROCESS
+            </div>
+            <h2 className="sec-title-lg">
+              Three steps, and you stay in <span className="serif-accent">complete control</span>
+            </h2>
+            <p className="who-lede">
+              Nothing goes to any firm until you pick it. Jon personally reviews every resume and discusses lateral opportunities directly.
+            </p>
+          </div>
+          <ProcessSteps kind="candidate" />
+        </div>
+      </section>
+
+      {/* 4. Open Roles with Pay Shown */}
+      <section className="block cand-open-roles-sec" id="open-roles">
+        <div className="wrap">
+          <div className="sec-head-premium sec-head-row">
             <div>
-              <span className="eyebrow">For attorneys and paralegals</span>
-              <h1>Confidential legal jobs with the pay shown</h1>
-              <p className="lede">
-                Roles at small and mid-size firms. Free for candidates. No firm
-                sees your name until you say yes.
-              </p>
-              <div className="hero-act">
-                <Link className="btn btn-primary btn-lg" href="/upload-resume">
-                  Upload your resume
-                </Link>
-                <Link
-                  className="text-link"
-                  href="/jobs"
-                >
-                  See open jobs
-                </Link>
+              <div className="badge-capsule">
+                <span className="badge-dot" />
+                ACTIVE SEARCHES · PAY DISCLOSED
               </div>
-              <TrustLine kind="candidate" />
-              <p className="hero-sub" id="orion-line">
-                {orionLine}
-              </p>
-            </div>
-            <div className="band-card open-card">
-              <h2 className="mini-h" id="open-h">
-                Open now in Houston · <Mark>{hou.length} {plural(hou.length, "role")}</Mark>
+              <h2 className="sec-title-lg">
+                Roles with base pay on every <span className="serif-accent">card</span>
               </h2>
-              <ul className="nlist" id="open-list">
-                {hou.slice(0, 5).map((j) => (
-                  <li key={j.id}>
-                    <div className="row">
-                      <span>
-                        <span className="t">
-                          <Mark>{j.title}</Mark>
-                        </span>
-                        <span className="small muted">
-                          <Mark>
-                            {j.firmType}, {j.area}
-                          </Mark>{" "}
-                          · {j.mode === "on-site" ? "On-site" : "Hybrid"}
-                        </span>
-                      </span>
-                      <span className="v">
-                        <Mark>{fmt.range(j.band)}</Mark>
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <p className="card-foot" id="open-foot">
-                <Icon name="lock" />
-                <span>Employers named on your first call, before anything is sent</span>
+              <p className="who-lede">
+                Boutique and mid-size firms with verified compensation and transparent practice areas.
               </p>
             </div>
+            <Link className="btn-emp-primary" href="/jobs" style={{ whiteSpace: "nowrap" }}>
+              <span>View all open roles</span>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
-        </section>
 
-        {/* 2. Trust bar */}
-        <section className="trust-strip" aria-label="Orion for candidates">
-          <div className="wrap">
-            <TrustBar kind="candidate" />
+          <div className="cand-jobs-grid">
+            {featuredJobs.map((j) => (
+              <article key={j.id} className="cand-job-card">
+                <div>
+                  <div className="cand-job-card-top">
+                    <span className="cand-job-pill">{j.mode === "on-site" ? "On-site" : "Hybrid"}</span>
+                    <span className="cand-job-posted">Posted {fmt.date(j.posted)}</span>
+                  </div>
+
+                  <h3 className="cand-job-title">
+                    <Mark>{j.title}</Mark>
+                  </h3>
+
+                  <div className="cand-job-pay">
+                    <Mark>{fmt.range(j.band)}</Mark>
+                    <span className="cand-job-pay-sub">Base Target</span>
+                  </div>
+
+                  <div className="cand-job-specs">
+                    <div className="cand-job-spec-row">
+                      <span className="cand-job-spec-k">Firm Profile</span>
+                      <span className="cand-job-spec-v">{j.firmType}, {j.firmSize}</span>
+                    </div>
+                    <div className="cand-job-spec-row">
+                      <span className="cand-job-spec-k">Practice Focus</span>
+                      <span className="cand-job-spec-v">{j.mix}</span>
+                    </div>
+                    <div className="cand-job-spec-row">
+                      <span className="cand-job-spec-k">Location</span>
+                      <span className="cand-job-spec-v">{j.area}, Houston</span>
+                    </div>
+                    <div className="cand-job-spec-row">
+                      <span className="cand-job-spec-k">Experience</span>
+                      <span className="cand-job-spec-v">{j.years} Years</span>
+                    </div>
+                  </div>
+                </div>
+
+                <Link className="btn-cand-job-cta" href={`/jobs?q=${encodeURIComponent(j.title)}`}>
+                  <span>Explore Confidential Opening</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </article>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* 3. How it works */}
-        <section className="block alt">
-          <div className="wrap">
-            <div className="sec-head">
-              <span className="eyebrow">How it works</span>
-              <h2>Three steps, and you stay in control</h2>
-              <p>Nothing goes to a firm until you pick it. Jon reads every resume himself.</p>
+      {/* 5. DARK SECTION: Candidate Privacy Promise ("What a firm sees before your yes") */}
+      <section className="cand-promise-dark-sec" id="privacy-promise">
+        <div className="wrap">
+          <div className="cand-promise-content">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              ANONYMITY GUARANTEE · ZERO RISK
             </div>
-            <ProcessSteps kind="candidate" />
-          </div>
-        </section>
 
-        {/* 4. Open roles */}
-        <section className="block">
-          <div className="wrap">
-            <div className="sec-head row">
-              <div>
-                <span className="eyebrow">Open now</span>
-                <h2>Roles with the base pay on every card</h2>
-                <p>Employers stay confidential until your first call with Jon.</p>
+            <h2 className="sec-title-lg" style={{ color: "#FFFFFF" }}>
+              What a firm sees before your <span className="serif-accent" style={{ color: "#60A5FA" }}>yes</span>
+            </h2>
+
+            <p className="who-lede" style={{ color: "#94A3B8" }}>
+              We never contact your current law firm, partners, or colleagues. Your name, current employer,
+              and law school stay 100% hidden until you specifically greenlight an interview.
+            </p>
+
+            <div className="cand-promise-pillars">
+              <div className="cand-promise-item">
+                <span className="cand-promise-icon" aria-hidden="true">✓</span>
+                <p className="cand-promise-text">
+                  <b>No unsolicited submissions:</b> Your resume and identity are shared only with the specific firms you explicitly choose.
+                </p>
               </div>
-              <Link
-                className="more link-arrow hide-sm"
-                href="/jobs"
-              >
-                All open jobs
-              </Link>
-            </div>
-            <div id="jobs-now">
-              <div className="cards">
-                {featuredJobs.map((j) => (
-                  <article key={j.id} className="job" data-id={j.id}>
-                    <div className="job-top">
-                      <span>Confidential employer</span>
-                      <span>
-                        Posted <Mark>{fmt.date(j.posted)}</Mark>
-                      </span>
-                    </div>
-                    <h3>
-                      <Mark>{j.title}</Mark>
-                    </h3>
-                    <div className="pay">
-                      <Mark>{fmt.range(j.band)}</Mark>{" "}
-                      <span className="small muted">base</span>
-                    </div>
-                    <dl className="facts">
-                      <div>
-                        <dt>Firm</dt>
-                        <dd>
-                          <Mark>
-                            {j.firmType}, {j.firmSize}
-                          </Mark>
-                        </dd>
-                      </div>
-                      <div>
-                        <dt>Practice</dt>
-                        <dd>
-                          <Mark>{j.mix}</Mark>
-                        </dd>
-                      </div>
-                      <div>
-                        <dt>Where</dt>
-                        <dd>
-                          <Mark>{j.area}, Houston</Mark>
-                        </dd>
-                      </div>
-                      <div>
-                        <dt>Works</dt>
-                        <dd>
-                          <Mark>{j.mode === "on-site" ? "On-site" : "Hybrid"}</Mark>
-                        </dd>
-                      </div>
-                      <div>
-                        <dt>Experience</dt>
-                        <dd>
-                          <Mark>{j.years}</Mark>
-                        </dd>
-                      </div>
-                    </dl>
-                    <div className="actions">
-                      <Link
-                        href="/upload-resume"
-                        className="btn btn-line btn-sm"
-                      >
-                        Apply confidentially
-                      </Link>
-                    </div>
-                  </article>
-                ))}
+
+              <div className="cand-promise-item">
+                <span className="cand-promise-icon" aria-hidden="true">✓</span>
+                <p className="cand-promise-text">
+                  <b>Zero contact with your firm:</b> We never reach out to your managing partner, colleagues, or HR under any circumstance.
+                </p>
+              </div>
+
+              <div className="cand-promise-item">
+                <span className="cand-promise-icon" aria-hidden="true">✓</span>
+                <p className="cand-promise-text">
+                  <b>Upfront salary disclosure:</b> Every single opportunity includes verified base compensation and bonus structure upfront.
+                </p>
+              </div>
+
+              <div className="cand-promise-item">
+                <span className="cand-promise-icon" aria-hidden="true">✓</span>
+                <p className="cand-promise-text">
+                  <b>Right to be forgotten:</b> Ask us to delete your resume at any time and we purge all records within 24 hours.
+                </p>
               </div>
             </div>
-            <div className="sec-foot">
-              <Link
-                className="btn btn-ghost"
-                href="/jobs"
-              >
-                See all open jobs
-              </Link>
-              <span className="small muted">
-                Filter by on-site, hybrid and years of practice.
+          </div>
+
+          {/* Right Column: Redacted Resume Sheet */}
+          <div className="cand-promise-preview-shell">
+            <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontFamily: "var(--mono)", fontSize: "11px", fontWeight: "700", color: "#1D4ED8", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                REDACTED DOSSIER PREVIEW
+              </span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: "11px", color: "#059669", fontWeight: "600" }}>
+                ● 100% Anonymized
               </span>
             </div>
+            <ResumeSheet candidateId="EP-TX-0412" />
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* 5. Reviews */}
-        <section className="block alt" id="reviews">
-          <div className="wrap">
-            <div className="sec-head row">
-              <div>
-                <span className="eyebrow">Reviews</span>
-                <h2>What candidates say</h2>
-                <p>
-                  Jon is named in <b>47 of our 60</b> Google reviews.
-                </p>
-              </div>
-              <RatingBadge link />
-            </div>
-            <div className="reviews-2">
-              <ReviewsSection kind="candidate" limit={2} />
-            </div>
-          </div>
-        </section>
-
-        {/* 6. Three tools */}
-        <section className="block">
-          <div className="wrap">
-            <div className="sec-head">
-              <span className="eyebrow">Free tools</span>
-              <h2>Look around before you talk to anyone</h2>
-              <p>No sign-up and no name needed for any of them.</p>
-            </div>
-            <div className="rcards">
-              <div>
-                <Link href="/upload-resume" className="rcard">
-                  <Icon name="upload" />
-                  <h3>Upload your resume</h3>
-                  <p>We read it into a short profile and match it to open roles.</p>
-                  <p className="rget">
-                    <b>You get</b> Matching roles with pay, in two minutes
-                  </p>
-                  <span className="rgo">
-                    Open <Icon name="arrow" />
-                  </span>
-                </Link>
-              </div>
-              <div>
-                <Link href="/salary-check" className="rcard">
-                  <Icon name="chart" />
-                  <h3>Check your salary</h3>
-                  <p>Your base against what firms in your city pay at your level.</p>
-                  <p className="rget">
-                    <b>You get</b> Your place in the band, and roles that pay more
-                  </p>
-                  <span className="rgo">
-                    Open <Icon name="arrow" />
-                  </span>
-                </Link>
-              </div>
-              <div>
-                <Link href="/best-law-firms/houston-tx" className="rcard">
-                  <Icon name="scale" />
-                  <h3>Best firms to work for</h3>
-                  <p>Houston firms judged on five tests, with pay and reviews.</p>
-                  <p className="rget">
-                    <b>You get</b> A shortlist of firms worth a call
-                  </p>
-                  <span className="rgo">
-                    Open <Icon name="arrow" />
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 7. Confidentiality promises */}
-        <section className="block alt" id="privacy">
-          <div className="wrap split">
+      {/* 6. Candidate Reviews */}
+      <section className="block" id="reviews">
+        <div className="wrap">
+          <div className="sec-head-premium sec-head-row">
             <div>
-              <div className="sec-head">
-                <span className="eyebrow">Confidential</span>
-                <h2>Your firm never hears about it</h2>
-                <p>Four promises we keep for every candidate, every time.</p>
+              <div className="badge-capsule">
+                <span className="badge-dot" />
+                VERIFIED GOOGLE 5.0 RATING
               </div>
-              <ul className="ticks promise-ticks">
-                <li>Your name and resume go to no firm until you say yes to that one role.</li>
-                <li>We never contact your current firm or anyone who works there.</li>
-                <li>Every role shows its base pay before you apply.</li>
-                <li>Ask us to delete your resume and we do it the same day.</li>
-              </ul>
-            </div>
-            <div>
-              <p className="mini-h">What a firm sees before your yes</p>
-              <div id="sheet">
-                <ResumeSheet candidateId="EP-TX-0412" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 8. Job alerts */}
-        <section className="block" id="alerts-block">
-          <div className="wrap split">
-            <div>
-              <div className="sec-head">
-                <span className="eyebrow">Job alerts</span>
-                <h2>Get new roles by email</h2>
-                <p>Many roles are filled before they are posted anywhere. Hear about them first.</p>
-              </div>
-              <ul className="ticks">
-                <li>Each new role with its base range</li>
-                <li>Firm type, practice mix, on-site or hybrid</li>
-                <li>One email a week at most. Unsubscribe in one click</li>
-              </ul>
-            </div>
-            <div id="alerts">
-              <GateForm
-                id="cand-alerts"
-                eyebrow="Job alerts"
-                title="Email me new roles"
-                audience="candidate"
-                button="Email me new roles"
-                bullets={["Roles that match your field and city", "The base range on every one"]}
-                fine="Use a personal email, not your work one. No firm sees your name until you say yes."
-                steps={[
-                  ["Now", "Alerts are on. Nothing has gone to any firm.", true],
-                  ["Within one business day", "Jon emails to ask your field, city and the base you would move for."],
-                  ["As roles open", "Each new role with its pay band. Reply to ask who the firm is."],
-                  ["Any time", "Unsubscribe in one click and your email is deleted."],
-                ]}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* 9. FAQ */}
-        <section className="block alt">
-          <div className="wrap split">
-            <div className="sec-head">
-              <span className="eyebrow">Questions</span>
-              <h2>What candidates ask first</h2>
-              <p>
-                Rather talk it through? <Link href="/about#contact">Reach Jon directly</Link>.
+              <h2 className="sec-title-lg">
+                What candidates <span className="serif-accent">say</span>
+              </h2>
+              <p className="who-lede">
+                Real attorneys and paralegals who made lateral career moves through Orion Placement.
               </p>
             </div>
-            <div className="faq">
-              <details>
-                <summary>Will my current firm find out?</summary>
-                <p>
-                  No. We never contact your firm, and no employer sees your name
-                  or resume until you say yes to that specific role. Profiles we
-                  share before that show firm type and size only.
-                </p>
-              </details>
-              <details>
-                <summary>Do I pay anything?</summary>
-                <p>
-                  No. The hiring firm pays Orion when you start. Your offer is
-                  not reduced to cover it.
-                </p>
-              </details>
-              <details>
-                <summary>Are the pay bands real?</summary>
-                <p>
-                  Each band is the base range the firm agreed with us for that
-                  role. Bonus and benefits are on top and are shared on the first
-                  call.
-                </p>
-              </details>
-              <details>
-                <summary>What if nothing listed fits me?</summary>
-                <p>
-                  Upload your resume anyway. Many roles are filled before they
-                  are posted, and Jon matches you to new ones as they open.
-                </p>
-              </details>
-              <details>
-                <summary>Can I talk after work hours?</summary>
-                <p>
-                  Yes. Calls before or after work, or by email only, can be
-                  arranged. Say what suits you when you send your resume.
-                </p>
-              </details>
+            <RatingBadge link />
+          </div>
+          <ReviewsSection kind="candidate" />
+        </div>
+      </section>
+
+      {/* 7. Candidate FAQ */}
+      <section className="block faq-sec" id="faq">
+        <div className="wrap split">
+          <div className="sec-head-premium sec-head-left faq-head-col">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              QUESTIONS &amp; ANSWERS · FOR CANDIDATES
+            </div>
+            <h2 className="sec-title-lg">
+              What candidates ask <span className="serif-accent">first</span>
+            </h2>
+            <p className="who-lede">
+              Confidentiality, compensation transparency, and how representation works.
+            </p>
+            <div className="faq-side-card">
+              <p className="faq-side-note">
+                Rather speak confidentially after business hours?
+              </p>
+              <div className="faq-side-actions">
+                <Link href="/upload-resume" className="btn-faq-fees">
+                  <span>Upload resume privately</span>
+                  <span className="faq-arrow" aria-hidden="true">→</span>
+                </Link>
+                <a
+                  href={trust.calendly}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="faq-cal-pill"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="15"
+                    height="15"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                  <span>Schedule confidential call</span>
+                </a>
+              </div>
+              <div className="faq-side-reassurance">
+                <span className="reassurance-check" aria-hidden="true">✓</span>
+                <span>100% free representation for all candidates</span>
+              </div>
             </div>
           </div>
-        </section>
 
-        {/* 10. CTA band */}
-        <CtaBand
-          kind="candidate"
-          title="See the roles that fit you, with the pay"
-          button="Upload your resume"
-          href="/upload-resume"
-        />
+          <div className="faq">
+            <details>
+              <summary>
+                <span>Will my current firm find out?</span>
+                <span className="faq-toggle-icon" aria-hidden="true" />
+              </summary>
+              <div className="faq-body">
+                <p>
+                  No. We never contact your firm, and <Mark>no employer sees your name or resume</Mark> until
+                  you say yes to that specific role. Profiles we share before that show firm type and size only.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>
+                <span>Do I pay anything?</span>
+                <span className="faq-toggle-icon" aria-hidden="true" />
+              </summary>
+              <div className="faq-body">
+                <p>
+                  No. Orion&apos;s fee is paid entirely by the hiring law firm upon your start date.
+                  Your compensation offer is <Mark>never reduced</Mark> to cover our contingency fee.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>
+                <span>Are the pay bands real?</span>
+                <span className="faq-toggle-icon" aria-hidden="true" />
+              </summary>
+              <div className="faq-body">
+                <p>
+                  Yes. Each band reflects the verified base range agreed directly with the managing partners.
+                  Bonus potential, benefits, and originations are shared on your initial private call with Jon.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>
+                <span>What if nothing listed fits me right now?</span>
+                <span className="faq-toggle-icon" aria-hidden="true" />
+              </summary>
+              <div className="faq-body">
+                <p>
+                  Upload your resume anyway. Over 60% of our lateral placements are made for confidential,
+                  unposted mandates. Jon proactively reaches out as matching boutique seats open.
+                </p>
+              </div>
+            </details>
+            <details open>
+              <summary>
+                <span>Can I speak confidentially after work hours?</span>
+                <span className="faq-toggle-icon" aria-hidden="true" />
+              </summary>
+              <div className="faq-body">
+                <p>
+                  Yes. Calls before 8:00 AM, in the evenings after 6:00 PM, or on weekends can easily be arranged.
+                  Simply note your preferred time window when you submit your resume.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. CTA Band */}
+      <CtaBand
+        kind="candidate"
+        title="See the roles that fit you, with the pay"
+        button="Upload your resume"
+        href="/upload-resume"
+      />
+
+      {/* Mobile Sticky Bar */}
       <div className="mbar">
         <Link className="btn btn-primary" href="/upload-resume">
           Upload your resume

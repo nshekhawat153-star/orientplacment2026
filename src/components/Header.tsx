@@ -20,7 +20,12 @@ const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is buil
 
 export function Header({ minimal = false }: { minimal?: boolean }) {
   const pathname = usePathname();
-  const isHome = pathname === "/" || pathname === "/employers" || pathname === "/candidates";
+  const isHome =
+    pathname === "/" ||
+    pathname === "/employers" ||
+    pathname === "/candidates" ||
+    pathname === "/jobs" ||
+    pathname.startsWith("/jobs/");
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);

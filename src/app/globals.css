@@ -9128,3 +9128,339 @@ table.data.compare td.us{background:#F5F8FC}
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ==========================================================================
+   28. CANDIDATE PAGE LUXURY REDESIGN (/candidates)
+   ========================================================================== */
+
+/* 1. Open Roles Grid & Cards */
+.cand-open-roles-sec {
+  background: #FAF9F5 !important;
+  padding: 104px 0 112px !important;
+  border-bottom: 1px solid #EAE7DC !important;
+}
+
+.cand-jobs-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  margin-top: 48px !important;
+}
+
+.cand-job-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 16px !important;
+  padding: 28px 26px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.cand-job-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: #1D4ED8 !important;
+  box-shadow: 0 16px 36px -8px rgba(29, 78, 216, 0.12) !important;
+}
+
+.cand-job-card-top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 14px !important;
+}
+
+.cand-job-pill {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #1D4ED8 !important;
+  background: rgba(29, 78, 216, 0.08) !important;
+  border: 1px solid rgba(29, 78, 216, 0.18) !important;
+  border-radius: 999px !important;
+  padding: 3px 10px !important;
+}
+
+.cand-job-posted {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  color: #64748B !important;
+}
+
+.cand-job-title {
+  font-family: var(--display) !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  color: #08142A !important;
+  margin: 0 0 12px !important;
+  line-height: 1.2 !important;
+}
+
+.cand-job-pay {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #1D4ED8 !important;
+  margin-bottom: 20px !important;
+}
+
+.cand-job-pay-sub {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #64748B !important;
+  text-transform: uppercase !important;
+}
+
+.cand-job-specs {
+  display: grid !important;
+  gap: 10px !important;
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+  padding: 14px !important;
+  margin-bottom: 22px !important;
+  font-size: 13px !important;
+}
+
+.cand-job-spec-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.cand-job-spec-k {
+  color: #64748B !important;
+  font-weight: 500 !important;
+}
+
+.cand-job-spec-v {
+  color: #08142A !important;
+  font-weight: 600 !important;
+  text-align: right !important;
+}
+
+.btn-cand-job-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #1D4ED8 !important;
+  text-decoration: none !important;
+  background: rgba(29, 78, 216, 0.06) !important;
+  border: 1px solid rgba(29, 78, 216, 0.15) !important;
+  border-radius: 7px !important;
+  padding: 10px 16px !important;
+  transition: all 0.2s ease !important;
+  width: 100% !important;
+}
+
+.btn-cand-job-cta:hover {
+  background: #1D4ED8 !important;
+  color: #FFFFFF !important;
+}
+
+/* 2. Candidate Privacy Promise: Dark Section */
+.cand-promise-dark-sec {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  background: #08142A !important;
+  color: #FFFFFF !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 104px 0 120px !important;
+}
+
+.cand-promise-dark-sec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 82% 20%, rgba(29, 78, 216, 0.24) 0%, rgba(8, 20, 42, 0) 60%),
+    radial-gradient(circle at 12% 80%, rgba(14, 165, 233, 0.15) 0%, rgba(8, 20, 42, 0) 55%);
+}
+
+.cand-promise-dark-sec > .wrap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(380px, 460px);
+  gap: 56px;
+  align-items: center;
+}
+
+.cand-promise-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cand-promise-pillars {
+  display: grid;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.cand-promise-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: all 0.2s ease;
+}
+
+.cand-promise-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.cand-promise-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(5, 150, 105, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #34D399;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cand-promise-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #CBD5E1;
+  margin: 0;
+}
+
+.cand-promise-preview-shell {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 960px) {
+  .cand-jobs-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .cand-promise-dark-sec > .wrap {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+}
+
+/* ==========================================================================
+   29. JOBS BOARD LUXURY REDESIGN (/jobs)
+   ========================================================================== */
+
+.jobs-luxury-header-sec {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  background: #08142A !important;
+  color: #FFFFFF !important;
+  padding: 64px 0 54px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.jobs-luxury-header-sec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 75% 25%, rgba(29, 78, 216, 0.25) 0%, rgba(8, 20, 42, 0) 65%),
+    radial-gradient(circle at 20% 75%, rgba(14, 165, 233, 0.15) 0%, rgba(8, 20, 42, 0) 55%);
+}
+
+.jobs-luxury-header-sec > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.jobs-header-intro {
+  max-width: 800px;
+  margin-bottom: 28px;
+}
+
+.jobs-luxury-header-sec .badge-capsule {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  padding: 6px 14px !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #93C5FD !important;
+  margin-bottom: 16px !important;
+}
+
+.jobs-header-title {
+  font-family: var(--display) !important;
+  font-size: clamp(32px, 3.8vw, 46px) !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
+  color: #FFFFFF !important;
+  margin: 0 0 10px !important;
+}
+
+.jobs-header-title .serif-accent {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  color: #60A5FA !important;
+}
+
+.jobs-header-sub {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: #94A3B8 !important;
+  margin: 0 !important;
+}
+
+/* Elevated search box on dark background */
+.jobs-luxury-header-sec .indeed-search-box-unified {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5) !important;
+  padding: 6px 8px 6px 16px !important;
+}
+
+.jobs-luxury-header-sec .indeed-submit-btn {
+  background: #1D4ED8 !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 12px 28px !important;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+
+.jobs-luxury-header-sec .indeed-submit-btn:hover {
+  background: #2563EB !important;
+  transform: translateY(-1px) !important;
+}

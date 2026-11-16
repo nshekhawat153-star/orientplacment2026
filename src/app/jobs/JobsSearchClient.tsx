@@ -135,9 +135,22 @@ export function JobsSearchClient() {
 
   return (
     <div className="indeed-search-portal-page">
-      {/* 1. TOP SEARCH BAR CONTAINER (DIRECTLY BELOW NAVBAR) */}
-      <section className="indeed-top-search-section">
+      {/* 1. LUXURY TOP SEARCH HEADER BANNER */}
+      <section className="jobs-luxury-header-sec">
         <div className="wrap">
+          <div className="jobs-header-intro">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              CONFIDENTIAL LEGAL SEARCH · 100% SALARY TRANSPARENCY
+            </div>
+            <h1 className="jobs-header-title">
+              Legal jobs in <span className="serif-accent">Texas</span>
+            </h1>
+            <p className="jobs-header-sub">
+              Direct lateral openings at premier boutique and mid-size law firms. Verified pay bands and exact compensation disclosed on every seat.
+            </p>
+          </div>
+
           <IndeedTopSearchBar
             initialQuery={searchQuery}
             initialLocation={searchLocation}
