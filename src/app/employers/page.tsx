@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustBar, RatingBadge } from "@/components/Rating";
 import { ResourceCards } from "@/components/ResourceCards";
 import { ReviewsSection } from "@/components/ReviewCard";
@@ -46,7 +47,7 @@ export default function EmployersPage() {
       />
 
       {/* 1. CINEMATIC WATER SPLASH HERO */}
-      <section className="hero-cinematic" aria-labelledby="emp-hero-h1">
+      <section className="hero-cinematic" aria-labelledby="emp-hero-h1" style={{ padding: "124px 0 76px" }}>
         {/* Background Water Splash Video */}
         <div className="hero-video-wrap" aria-hidden="true">
           <video
@@ -56,13 +57,24 @@ export default function EmployersPage() {
             playsInline
             className="hero-video-el"
           >
+            <source src="/media/splash.mp4" type="video/mp4" />
             <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
           </video>
           <div className="hero-video-gradient" />
           <div className="hero-video-radial-aura" />
         </div>
 
-        <div className="wrap hero-content-wrap">
+        <div className="wrap hero-content-wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+          {/* Breadcrumb Navigation */}
+          <div style={{ marginBottom: 20 }}>
+            <Breadcrumb
+              crumbs={[
+                { label: "Home", href: "/" },
+                { label: "Employers", current: true },
+              ]}
+            />
+          </div>
+
           <div className="hero-content-center">
             <div className="hero-eyebrow-capsule">
               <span className="hero-eyebrow-dot" aria-hidden="true" />

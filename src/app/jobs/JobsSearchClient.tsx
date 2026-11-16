@@ -7,6 +7,7 @@ import { IndeedTopSearchBar } from "@/components/IndeedTopSearchBar";
 import { FilterChipsBar, FilterChipsState } from "@/components/FilterChipsBar";
 import { JobCard } from "@/components/JobCard";
 import { JobDetailPane } from "@/components/JobDetailPane";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import Link from "next/link";
 
@@ -141,8 +142,7 @@ export function JobsSearchClient() {
         style={{
           background: "#08142A",
           color: "#FFFFFF",
-          paddingTop: "116px",
-          paddingBottom: "64px",
+          padding: "124px 0 64px",
           position: "relative",
           overflow: "hidden",
         }}
@@ -156,13 +156,23 @@ export function JobsSearchClient() {
             playsInline
             className="hero-video-el"
           >
-            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+            <source src="/media/splash.mp4" type="video/mp4" />
           </video>
           <div className="hero-video-gradient" />
           <div className="hero-video-radial-aura" />
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 3 }}>
+        <div className="wrap" style={{ position: "relative", zIndex: 3, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+          {/* Breadcrumb Navigation */}
+          <div style={{ marginBottom: 20 }}>
+            <Breadcrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Legal Jobs", current: true },
+              ]}
+            />
+          </div>
+
           <div className="jobs-header-intro" style={{ textAlign: "center", margin: "0 auto 32px", maxWidth: "840px" }}>
             <div className="badge-capsule" style={{ margin: "0 auto 16px", display: "inline-flex" }}>
               <span className="badge-dot" />
