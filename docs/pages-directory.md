@@ -41,7 +41,7 @@
 | **18** | `/where-to-post/[city]` | `src/app/where-to-post/[city]/page.tsx` | Dynamic | Legal Job Posting Board Comparisons | ✅ **Redesigned & Live** |
 | **19** | `/hiring-kit/[role]` | `src/app/hiring-kit/[role]/page.tsx` | Dynamic | Free Hiring Kit & Interview Templates | ✅ **Redesigned & Live** |
 | **20** | `/about` | `src/app/about/page.tsx` | Static | General / Firm Credibility | ✅ **Redesigned & Live** |
-| **21** | `/design-concept` | `src/app/design-concept/page.tsx` | Static | Internal UI Design Sandbox | 🛠️ Sandbox |
+| **21** | `/design-concept` | `src/app/design-concept/page.tsx` | Static | Internal UI Design Sandbox | ✅ **Design Tokens & Sandbox Active** |
 
 ---
 
