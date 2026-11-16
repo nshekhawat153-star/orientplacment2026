@@ -129,7 +129,7 @@ export default async function RolePage({ params }: PageProps) {
             <Breadcrumb
               items={[
                 { label: "Home", href: "/" },
-                { label: "Practice Areas", href: "/roles/estate-planning-attorney" },
+                { label: "Practice Specializations", href: "/find-candidates" },
                 { label: role.name, current: true },
               ]}
             />
@@ -406,7 +406,7 @@ export default async function RolePage({ params }: PageProps) {
                 fontWeight: 500,
               }}
             >
-              {role.name} compensation, <span className="serif-accent" style={{ fontStyle: "italic" }}>metro by metro</span>
+              {role.name} compensation, <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>metro by metro</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
               Compare experience tiers across Texas and national markets. Click any city to launch its customized compensation guide.
@@ -485,7 +485,7 @@ export default async function RolePage({ params }: PageProps) {
                 EXECUTIVE HIRING TEMPLATES
               </span>
               <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
-                Complete hiring kit for <span className="serif-accent" style={{ fontStyle: "italic" }}>{role.name}s</span>
+                Complete hiring kit for <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>{role.name}s</span>
               </h2>
               <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 0 24px" }}>
                 Everything needed to recruit and vet {/^[aeiou]/i.test(role.name) ? "an" : "a"} {role.name.toLowerCase()} for your firm, designed specifically for managing partners and hiring chairs.
@@ -493,21 +493,36 @@ export default async function RolePage({ params }: PageProps) {
             </div>
 
             <div style={{ display: "grid", gap: 14 }}>
-              <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 18px" }}>
-                <strong style={{ color: "#08142A", fontSize: 14, display: "block" }}>Part 1: High-Converting Job Posting</strong>
-                <p style={{ fontSize: 13, color: "#64748B", margin: "4px 0 0", lineHeight: 1.5 }}>Pre-drafted requirements, caseload expectations, and transparent compensation disclosure.</p>
+              <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 18px", boxShadow: "0 2px 8px rgba(15,23,42,0.02)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, color: "#1D4ED8", background: "rgba(29,78,216,0.08)", padding: "2px 8px", borderRadius: 4 }}>PART 01</span>
+                  <strong style={{ color: "#08142A", fontSize: 14.5 }}>High-Converting Job Posting</strong>
+                </div>
+                <p style={{ fontSize: 13, color: "#64748B", margin: 0, lineHeight: 1.5 }}>Pre-drafted requirements, caseload expectations, and transparent compensation disclosure.</p>
               </div>
-              <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 18px" }}>
-                <strong style={{ color: "#08142A", fontSize: 14, display: "block" }}>Part 2: Partner Interview Questions</strong>
-                <p style={{ fontSize: 13, color: "#64748B", margin: "4px 0 0", lineHeight: 1.5 }}>Practice-specific behavioral questions and diagnostic client scenarios with ideal answers.</p>
+
+              <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 18px", boxShadow: "0 2px 8px rgba(15,23,42,0.02)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, color: "#1D4ED8", background: "rgba(29,78,216,0.08)", padding: "2px 8px", borderRadius: 4 }}>PART 02</span>
+                  <strong style={{ color: "#08142A", fontSize: 14.5 }}>Partner Interview Questions</strong>
+                </div>
+                <p style={{ fontSize: 13, color: "#64748B", margin: 0, lineHeight: 1.5 }}>Practice-specific behavioral questions and diagnostic client scenarios with ideal answers.</p>
               </div>
-              <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 18px" }}>
-                <strong style={{ color: "#08142A", fontSize: 14, display: "block" }}>Part 3: Candidate Evaluation Scorecard</strong>
-                <p style={{ fontSize: 13, color: "#64748B", margin: "4px 0 0", lineHeight: 1.5 }}>Weighted 1–5 ranking framework for billable rigor, matter autonomy, and culture alignment.</p>
+
+              <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 18px", boxShadow: "0 2px 8px rgba(15,23,42,0.02)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, color: "#1D4ED8", background: "rgba(29,78,216,0.08)", padding: "2px 8px", borderRadius: 4 }}>PART 03</span>
+                  <strong style={{ color: "#08142A", fontSize: 14.5 }}>Candidate Evaluation Scorecard</strong>
+                </div>
+                <p style={{ fontSize: 13, color: "#64748B", margin: 0, lineHeight: 1.5 }}>Weighted 1–5 ranking framework for billable rigor, matter autonomy, and culture alignment.</p>
               </div>
-              <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 18px" }}>
-                <strong style={{ color: "#08142A", fontSize: 14, display: "block" }}>Part 4: Offer-Letter Outline</strong>
-                <p style={{ fontSize: 13, color: "#64748B", margin: "4px 0 0", lineHeight: 1.5 }}>Contingency bonus language, collection fee splits, and partnership track provisions.</p>
+
+              <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 18px", boxShadow: "0 2px 8px rgba(15,23,42,0.02)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, color: "#1D4ED8", background: "rgba(29,78,216,0.08)", padding: "2px 8px", borderRadius: 4 }}>PART 04</span>
+                  <strong style={{ color: "#08142A", fontSize: 14.5 }}>Offer-Letter Outline</strong>
+                </div>
+                <p style={{ fontSize: 13, color: "#64748B", margin: 0, lineHeight: 1.5 }}>Contingency bonus language, collection fee splits, and partnership track provisions.</p>
               </div>
             </div>
           </div>
@@ -560,7 +575,7 @@ export default async function RolePage({ params }: PageProps) {
                 fontWeight: 500,
               }}
             >
-              How law firms structure pay for this <span className="serif-accent" style={{ fontStyle: "italic" }}>role</span>
+              How law firms structure pay for this <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>role</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
               The three prevailing compensation models deployed by small and mid-size firms.
@@ -569,23 +584,46 @@ export default async function RolePage({ params }: PageProps) {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
             {models.map((p, i) => (
-              <div key={i} style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 14, padding: "28px 24px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div
+                key={i}
+                style={{
+                  background: "#FAF9F5",
+                  border: "1.5px solid #EAE7DC",
+                  borderRadius: 14,
+                  padding: "28px 24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 4px 16px rgba(15,23,42,0.03)",
+                }}
+              >
                 <div>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", display: "block", marginBottom: 6 }}>
-                    Model {i + 1}
+                  <span
+                    style={{
+                      fontFamily: "var(--mono)",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: "#1D4ED8",
+                      display: "block",
+                      marginBottom: 8,
+                    }}
+                  >
+                    0{i + 1} · COMPENSATION MODEL
                   </span>
-                  <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 10px", fontWeight: 600 }}>
+                  <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 12px", fontWeight: 600 }}>
                     {p.name}
                   </h3>
-                  <p style={{ fontSize: 14, color: "#475569", lineHeight: 1.6, marginBottom: 16 }}>
+                  <p style={{ fontSize: 14, color: "#475569", lineHeight: 1.6, marginBottom: 20 }}>
                     {p.how}
                   </p>
                 </div>
-                <div style={{ borderTop: "1px solid #E2E8F0", paddingTop: 14 }}>
-                  <div style={{ fontSize: 13, color: "#64748B", marginBottom: 6 }}>
-                    <strong>Best for:</strong> {p.fits}
+                <div style={{ borderTop: "1px solid #E2E8F0", paddingTop: 16, display: "grid", gap: 8 }}>
+                  <div style={{ fontSize: 13, color: "#64748B" }}>
+                    <strong style={{ color: "#08142A" }}>Best for:</strong> {p.fits}
                   </div>
-                  <div style={{ fontSize: 13, color: "#08142A", fontWeight: 600 }}>
+                  <div style={{ fontSize: 13, color: "#1D4ED8", fontWeight: 600 }}>
                     <strong>Typical Terms:</strong> {p.typical}
                   </div>
                 </div>

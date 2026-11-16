@@ -104,7 +104,7 @@ export default async function CityLocationPage({ params }: PageProps) {
             <Breadcrumb
               items={[
                 { label: "Home", href: "/" },
-                { label: "Locations", href: `/locations/${stateParam}/${cityParam}` },
+                { label: "Regional Markets", href: "/find-candidates" },
                 { label: `${city.name}, ${city.state}`, current: true },
               ]}
             />
@@ -225,14 +225,14 @@ export default async function CityLocationPage({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Right Column: Elevated City Snapshot Card */}
+            {/* Right Column: Elevated City Snapshot Terminal */}
             <div>
               <div
                 style={{
                   background: "#FFFFFF",
                   border: "1.5px solid #E2E8F0",
                   borderRadius: 14,
-                  padding: "28px 24px",
+                  padding: "24px",
                   boxShadow: "0 24px 60px -12px rgba(0, 0, 0, 0.55)",
                   color: "#08142A",
                   textAlign: "left",
@@ -266,7 +266,7 @@ export default async function CityLocationPage({ params }: PageProps) {
                 ACTIVE {city.name.toUpperCase()} TALENT
               </span>
               <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: 0, fontWeight: 500 }}>
-                Pre-screened candidates open to <span className="serif-accent" style={{ fontStyle: "italic" }}>{city.name}</span> seats
+                Pre-screened candidates open to <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>{city.name}</span> seats
               </h2>
             </div>
             <Link
@@ -315,7 +315,7 @@ export default async function CityLocationPage({ params }: PageProps) {
                 fontWeight: 500,
               }}
             >
-              What law firms pay in <span className="serif-accent" style={{ fontStyle: "italic" }}>{city.name}</span>
+              What law firms pay in <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>{city.name}</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
               Base compensation by practice area. Select any role to view detailed experience tiers and matching candidate expectations.
@@ -323,7 +323,7 @@ export default async function CityLocationPage({ params }: PageProps) {
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 36, alignItems: "start" }}>
-            <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 14, padding: "28px" }}>
+            <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 14, padding: "28px", boxShadow: "0 4px 16px rgba(15,23,42,0.03)" }}>
               <CityPayTable citySlug={city.slug} />
               <p style={{ fontSize: 12.5, color: "#64748B", marginTop: 20, paddingTop: 14, borderTop: "1px solid #EAE7DC", margin: "20px 0 0" }}>
                 Source: {source}, updated {asOf}. Base salary only before discretionary bonuses.
@@ -378,7 +378,7 @@ export default async function CityLocationPage({ params }: PageProps) {
                 fontWeight: 500,
               }}
             >
-              From open seat to shortlist in <span className="serif-accent" style={{ fontStyle: "italic" }}>days</span>
+              From open seat to shortlist in <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>days</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
               The proven 3-step intake workflow for every {city.name} opening, from senior litigation associate to boutique paralegal.
@@ -416,7 +416,7 @@ export default async function CityLocationPage({ params }: PageProps) {
                 fontWeight: 500,
               }}
             >
-              One fee, and only if you <span className="serif-accent" style={{ fontStyle: "italic" }}>hire</span>
+              One fee, and only if you <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>hire</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
               {city.name} firms pay the standard 23% contingency fee. Zero upfront retainer.
@@ -454,7 +454,7 @@ export default async function CityLocationPage({ params }: PageProps) {
                 fontWeight: 500,
               }}
             >
-              Hiring in {city.name} on your <span className="serif-accent" style={{ fontStyle: "italic" }}>own</span>
+              Hiring in {city.name} on your <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>own</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
               Where to post job listings, law school talent pipelines, and customizable job description templates.
