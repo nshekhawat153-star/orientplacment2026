@@ -81,43 +81,88 @@ export default async function RolePage({ params }: PageProps) {
   const openRolesCount = jobs.filter((j) => j.role === role.slug).length;
 
   return (
-    <>
-      <Breadcrumb
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Salaries", href: "/salary-check" },
-          { label: role.name },
-        ]}
-      />
+    <div className="role-hub-page">
+      {/* 1. LUXURY HERO WITH VIDEO & NATIONAL BAND */}
+      <section className="emp-luxury-hero-sec role-hub-hero" aria-labelledby="role-hero-h1">
+        <div className="emp-hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="emp-hero-video"
+          >
+            <source src="/media/splash.mp4" type="video/mp4" />
+          </video>
+          <div className="emp-hero-overlay" />
+          <div className="emp-hero-glow" />
+        </div>
 
-      {/* 1. Hero */}
-      <section className="phero rh-hero">
-        <div className="wrap">
-          <div>
-            <span className="eyebrow">Role guide · United States</span>
-            <h1>{role.name}: salary, hiring and jobs</h1>
-            <div className="big-num" id="nat-median">
-              <Mark>{fmt.k(natMedian)}</Mark>
+        <div className="wrap emp-hero-content" style={{ maxWidth: 900 }}>
+          <div className="emp-hero-badge-wrap">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>PRACTICE SPECIALIZATION · NATIONAL DIRECTORY</span>
             </div>
-            <p className="big-num-l">
-              median base salary across <Mark>{String(cityBands.length)}</Mark> US cities, all levels
-            </p>
-            <div className="hero-act">
-              <Link
-                className="btn btn-primary btn-lg"
-                href={`/find-candidates#role=${role.slug}`}
-              >
-                See {role.short} candidates
-              </Link>
-              <a className="text-link" href="#kit">
-                Email me the hiring kit
-              </a>
-            </div>
-            <TrustLine />
           </div>
 
-          <div className="band-card">
-            <h2 className="mini-h">National base salary by years of practice</h2>
+          <h1 id="role-hero-h1" className="emp-hero-h1">
+            {role.name}: <span className="serif-accent">Salary, Hiring &amp; Jobs</span>
+          </h1>
+
+          <p className="emp-hero-lead">
+            National compensation intelligence, turnkey law firm hiring templates, and active pre-screened lateral attorney candidates across all major regional legal markets.
+          </p>
+
+          <div className="emp-reassurance-row" style={{ marginBottom: 32 }}>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>{cityBands.length} US metro markets benchmarked</span>
+            </div>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>Updated quarterly ({asOf})</span>
+            </div>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>Turnkey partner interview kits</span>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "baseline", gap: 12, marginBottom: 32 }}>
+            <span style={{ fontFamily: "var(--display)", fontSize: "clamp(44px, 5.5vw, 68px)", fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>
+              {fmt.k(natMedian)}
+            </span>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>
+              National Median Base Salary
+            </span>
+          </div>
+
+          <div className="emp-hero-actions" style={{ marginBottom: 36 }}>
+            <Link
+              className="btn-emp-primary"
+              href={`/find-candidates#role=${role.slug}`}
+            >
+              <span>See {role.short} candidates</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <a className="btn-emp-ghost" href="#kit">
+              <span>Get the free hiring kit</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          {/* Elevated National Band Card */}
+          <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "32px 28px", boxShadow: "0 20px 48px -12px rgba(0, 0, 0, 0.45)", color: "#08142A", textAlign: "left" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1px solid #E2E8F0", paddingBottom: 14, marginBottom: 20 }}>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 500, color: "#08142A", margin: 0 }}>
+                National Base Salary by Experience Tier
+              </h2>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8" }}>
+                INTERQUARTILE RANGE
+              </span>
+            </div>
+
             <div id="nat-band" className="band-wrap">
               <div
                 className="band"
@@ -169,54 +214,64 @@ export default async function RolePage({ params }: PageProps) {
                   <span className="med" style={{ left: `${x(natMedian)}%` }} />
                 </div>
               </div>
-              <div className="band-key">
-                <span className="k-range">Middle half of base salaries</span>
+              <div className="band-key" style={{ marginTop: 16 }}>
+                <span className="k-range">Middle 50% of prevailing offers</span>
                 <span className="k-med">
-                  Median <Mark>{fmt.k(natMedian)}</Mark>
+                  National Median: <Mark>{fmt.k(natMedian)}</Mark>
                 </span>
               </div>
             </div>
-            <p className="source">
-              Median of the city bands below. Source: {source}. Updated {asOf}. Base only, before bonus.
+
+            <p style={{ fontSize: 12.5, color: "#64748B", marginTop: 20, paddingTop: 14, borderTop: "1px solid #E2E8F0" }}>
+              Composite median calculated across all covered US metros. Source: {source}, updated {asOf}. Base salary only before collections bonuses.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 2. Pay by city */}
-      <section className="block alt" id="pay">
+      {/* 2. PAY BY CITY TABLE */}
+      <section className="emp-process-sec" id="pay" style={{ background: "#FAF9F5", padding: "96px 0 108px", borderBottom: "1px solid #EAE7DC" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Pay by city</span>
-            <h2>What firms pay, city by city</h2>
-            <p>
-              Base salary by years of practice. Pick a city for its full guide, what moves pay and an offer check.
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 48px" }}>
+            <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>METRO MARKET COMPARISON</span>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "10px 0 14px" }}>
+              {role.name} compensation, metro by metro
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16 }}>
+              Compare experience tiers across Texas and national markets. Click any city to launch its customized compensation guide.
             </p>
           </div>
-          <RolePayTable roleSlug={role.slug} hereCitySlug="houston-tx" />
-          <p className="source">
-            Source: {source}, {asOf}. Each range is the middle half of base salaries for that level.
-          </p>
+
+          <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px", boxShadow: "0 4px 16px rgba(15, 23, 42, 0.04)" }}>
+            <RolePayTable roleSlug={role.slug} hereCitySlug="houston-tx" />
+            <p style={{ fontSize: 12.5, color: "#64748B", marginTop: 20, paddingTop: 14, borderTop: "1px solid #E2E8F0" }}>
+              Source: {source}, updated {asOf}. Every published band reflects the middle 50% of verified offers for that seniority level.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* 3. Candidates */}
-      <section className="block" id="candidates">
+      {/* 3. CANDIDATES AVAILABLE NOW */}
+      <section className="emp-process-sec" id="candidates" style={{ background: "#FFFFFF", padding: "96px 0 108px" }}>
         <div className="wrap">
-          <div className="sec-head row">
+          <div className="sec-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 36, flexWrap: "wrap", gap: 14 }}>
             <div>
-              <span className="eyebrow">Available now</span>
-              <h2>{role.name}s open to a move</h2>
-              <p>Screened by Jon. Names and firms stay hidden until you ask for the profile.</p>
+              <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>PRE-SCREENED TALENT</span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "8px 0 0" }}>
+                {role.name}s open to confidential moves
+              </h2>
             </div>
             <Link
               className="more link-arrow hide-sm"
               href={`/find-candidates#role=${role.slug}`}
+              style={{ fontSize: 14, fontWeight: 600, color: "#1D4ED8", textDecoration: "none" }}
             >
-              Match them to your seat
+              <span>Match candidates to your open seat</span>
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
-          <div className="cards">
+
+          <div className="cards" style={{ display: "grid", gap: 20 }}>
             {roleCandidates.map((r) => (
               <CandidateCard key={r.c.id} candidate={r.c} result={r} />
             ))}
@@ -224,233 +279,126 @@ export default async function RolePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 4. Hiring kit teaser + email gate */}
-      <section className="block alt" id="kit">
-        <div className="wrap kit-split">
+      {/* 4. TURNKEY HIRING KIT SECTION */}
+      <section className="emp-process-sec" id="kit" style={{ background: "#FAF9F5", padding: "96px 0 108px", borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #EAE7DC" }}>
+        <div className="wrap split">
           <div>
             <div className="sec-head">
-              <span className="eyebrow">Free hiring kit</span>
-              <h2>Run the hire with a ready kit</h2>
-              <p>
-                Everything to hire {/^[aeiou]/i.test(role.name) ? "an" : "a"} {role.name.toLowerCase()} yourself, written for small and mid-size firms.
+              <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>EXECUTIVE HIRING TEMPLATES</span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: "10px 0 14px" }}>
+                Complete hiring kit for {role.name}s
+              </h2>
+              <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6 }}>
+                Everything needed to recruit and vet {/^[aeiou]/i.test(role.name) ? "an" : "a"} {role.name.toLowerCase()} for your firm, designed specifically for managing partners and hiring chairs.
               </p>
             </div>
 
-            <div
-              className="kitfan"
-              role="img"
-              aria-label="The hiring kit: posting template, interview questions, scorecard and offer-letter outline"
-            >
-              <div className="kf kf-0">
-                <span className="kf-k">
-                  <Icon name="doc" className="ico" /> Part 4
-                </span>
-                <b>Offer-letter outline</b>
-                <i style={{ width: "88%" }} />
-                <i style={{ width: "70%" }} />
-                <i className="on" style={{ width: "80%" }} />
-                <i className="kf-extra" style={{ width: "60%" }} />
+            <div style={{ display: "grid", gap: 14, marginTop: 24 }}>
+              <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 10, padding: "14px 18px" }}>
+                <strong style={{ color: "#08142A", fontSize: 14 }}>Part 1: High-Converting Job Posting</strong>
+                <p style={{ fontSize: 13, color: "#64748B", margin: "4px 0 0" }}>Pre-drafted requirements, caseload expectations, and transparent compensation disclosure.</p>
               </div>
-              <div className="kf kf-1">
-                <span className="kf-k">
-                  <Icon name="check" className="ico" /> Part 3
-                </span>
-                <b>Scorecard</b>
-                <div className="kf-row">
-                  <i style={{ width: "90%" }} />
-                  <span>4</span>
-                </div>
-                <div className="kf-row">
-                  <i style={{ width: "76%" }} />
-                  <span>5</span>
-                </div>
-                <div className="kf-row kf-extra">
-                  <i style={{ width: "84%" }} />
-                  <span>3</span>
-                </div>
+              <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 10, padding: "14px 18px" }}>
+                <strong style={{ color: "#08142A", fontSize: 14 }}>Part 2: Partner Interview Questions</strong>
+                <p style={{ fontSize: 13, color: "#64748B", margin: "4px 0 0" }}>Practice-specific behavioral questions and diagnostic client scenarios with ideal answers.</p>
               </div>
-              <div className="kf kf-2">
-                <span className="kf-k">
-                  <Icon name="list" className="ico" /> Part 2
-                </span>
-                <b>Interview questions</b>
-                <i style={{ width: "92%" }} />
-                <i className="on" style={{ width: "66%" }} />
-                <i style={{ width: "84%" }} />
-                <i className="kf-extra" style={{ width: "72%" }} />
+              <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 10, padding: "14px 18px" }}>
+                <strong style={{ color: "#08142A", fontSize: 14 }}>Part 3: Candidate Evaluation Scorecard</strong>
+                <p style={{ fontSize: 13, color: "#64748B", margin: "4px 0 0" }}>Weighted 1–5 ranking framework for billable rigor, matter autonomy, and culture alignment.</p>
               </div>
-              <div className="kf kf-3">
-                <span className="kf-k">
-                  <Icon name="brief" className="ico" /> Part 1
-                </span>
-                <b>Job posting</b>
-                <i style={{ width: "80%" }} />
-                <i className="on" style={{ width: "94%" }} />
-                <i style={{ width: "86%" }} />
-                <i className="on" style={{ width: "62%" }} />
-                <i className="kf-extra" style={{ width: "78%" }} />
-                <i className="kf-extra" style={{ width: "58%" }} />
+              <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 10, padding: "14px 18px" }}>
+                <strong style={{ color: "#08142A", fontSize: 14 }}>Part 4: Offer-Letter Outline</strong>
+                <p style={{ fontSize: 13, color: "#64748B", margin: "4px 0 0" }}>Contingency bonus language, collection fee splits, and partnership track provisions.</p>
               </div>
             </div>
-
-            <p className="sec-foot">
-              <Link className="link-arrow" href={`/hiring-kit/${role.slug}#tab=posting`}>
-                Copy the posting now
-              </Link>
-              <Link className="link-arrow" href={`/hiring-kit/${role.slug}#tab=questions`}>
-                See the interview questions
-              </Link>
-            </p>
           </div>
 
           <div id="kit-gate">
             <GateForm
-              eyebrow="Free PDF and Word"
-              title="Email me the hiring kit"
+              eyebrow="FREE PDF &amp; WORD TEMPLATES"
+              title={`Download the ${role.name} Hiring Kit`}
               bullets={[
-                "Job posting template you can edit",
-                "Interview questions with good answers",
-                "Weighted scorecard and offer-letter outline",
+                "Editable Word document templates for your hiring committee",
+                "Interview questions with partner evaluation rubric",
+                "Weighted scorecard and lateral offer-letter structure",
               ]}
-              button="Email me the kit"
+              button="Email me the turnkey kit"
               preset="kit"
               role={role.slug}
               city="houston-tx"
               reviewSlug="daffner-law"
-              fine="One email with the kit. No list, and no call unless you ask for one."
+              fine="Delivered immediately to your inbox. No ongoing sales calls unless requested."
             />
           </div>
         </div>
       </section>
 
-      {/* 5. How firms pay this role */}
-      <section className="block" id="models">
+      {/* 5. COMPENSATION MODELS */}
+      <section className="emp-process-sec" id="models" style={{ background: "#FFFFFF", padding: "96px 0 108px" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Pay models</span>
-            <h2>How firms pay this role</h2>
-            <p>
-              The three models we see most at small and mid-size firms. Each one can be combined with the others.
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 48px" }}>
+            <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>COMPENSATION ARCHITECTURE</span>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "10px 0 14px" }}>
+              How law firms structure pay for this role
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16 }}>
+              The three prevailing compensation models deployed by small and mid-size firms.
             </p>
           </div>
-          <div className="levers" id="models-cards">
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
             {models.map((p, i) => (
-              <div key={i} className="lever">
-                <span className="tt-k">Model {i + 1}</span>
-                <b>{p.name}</b>
-                <p>{p.how}</p>
-                <p className="lv-t">
-                  <b>Fits</b>
-                  {p.fits}
-                </p>
-                <p className="lv-t">
-                  <b>Typical terms</b>
-                  <Mark>{p.typical}</Mark>
-                </p>
+              <div key={i} style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", display: "block", marginBottom: 6 }}>
+                    Model {i + 1}
+                  </span>
+                  <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 10px" }}>
+                    {p.name}
+                  </h3>
+                  <p style={{ fontSize: 14, color: "#475569", lineHeight: 1.6, marginBottom: 16 }}>
+                    {p.how}
+                  </p>
+                </div>
+                <div style={{ borderTop: "1px solid #E2E8F0", paddingTop: 14 }}>
+                  <div style={{ fontSize: 13, color: "#64748B", marginBottom: 6 }}>
+                    <strong>Best for:</strong> {p.fits}
+                  </div>
+                  <div style={{ fontSize: 13, color: "#08142A", fontWeight: 600 }}>
+                    <strong>Typical Terms:</strong> {p.typical}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. For candidates */}
-      <section className="block flush">
-        <div className="wrap">
-          <div className="cand-band">
-            <div>
-              <span className="eyebrow">{role.name} yourself?</span>
-              <h2>Confidential roles with the pay shown</h2>
-              <ul className="ticks">
-                <li>
-                  <Mark>{openRolesCount}</Mark> open {openRolesCount === 1 ? "role" : "roles"}
-                </li>
-                <li>
-                  <Link href="/salary-check">Check your salary</Link>
-                </li>
-                <li>
-                  <Link href="/upload-resume">Upload your resume</Link>
-                </li>
-              </ul>
-            </div>
-            <Link
-              className="btn btn-ghost"
-              href={`/jobs/${role.slug}/houston-tx`}
-            >
-              See open roles
+      {/* 6. BOTTOM MIDNIGHT NAVY CTA */}
+      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "100px 0 108px", textAlign: "center" }}>
+        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto" }}>
+          <div className="badge-capsule" style={{ marginBottom: 18 }}>
+            <span className="badge-dot" />
+            <span>PRACTICE PLACEMENT SPECIALISTS</span>
+          </div>
+          <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4.2vw, 48px)", color: "#FFFFFF", margin: "0 0 16px" }}>
+            Find pre-screened <span className="serif-accent" style={{ color: "#60A5FA" }}>{role.short} candidates</span>
+          </h2>
+          <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 32 }}>
+            Access verified candidate dossiers ready for immediate interview. 23% fee due only if you hire.
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+            <Link href={`/find-candidates#role=${role.slug}`} className="btn-emp-primary" style={{ padding: "14px 34px", fontSize: 16 }}>
+              <span>View {role.short} candidates</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link href="/submit-job" className="btn-emp-ghost" style={{ padding: "14px 34px", fontSize: 16 }}>
+              <span>Submit your mandate</span>
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
       </section>
-
-      {/* 7. FAQ */}
-      <section className="block alt">
-        <div className="wrap split">
-          <div className="sec-head">
-            <span className="eyebrow">Questions</span>
-            <h2>{role.name} pay</h2>
-            <p>
-              City detail is in each{" "}
-              <Link href={`/salaries/${role.slug}/houston-tx`}>
-                salary guide
-              </Link>.
-            </p>
-          </div>
-          <div className="faq">
-            <details>
-              <summary>How much does an {role.short} make?</summary>
-              <p>
-                Across the cities we track, the median base is about <Mark>{fmt.k(natMedian)}</Mark>.
-              </p>
-            </details>
-            <details>
-              <summary>What does an {role.short} do at a small firm?</summary>
-              <p>
-                Meets clients, designs the plan, drafts legal documents, and runs matters end to end, often with paralegal support.
-              </p>
-            </details>
-            <details>
-              <summary>What raises an {role.short}'s pay most?</summary>
-              <p>
-                A portable book of existing clients, specialized practice experience, and leading client intake directly.
-              </p>
-            </details>
-            <details>
-              <summary>Do {role.short}s get a bonus?</summary>
-              <p>
-                Often. Small firms pay a bonus on collections above a threshold, or a share of origination fees on clients brought in.
-              </p>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. CTA band */}
-      <div className="wrap">
-        <div className="cta-band">
-          <div className="wrap row">
-            <div>
-              <h2>See {role.short} candidates for your seat</h2>
-              <p>Screened candidates ready to interview. One fee only if you hire.</p>
-            </div>
-            <Link
-              className="btn btn-primary btn-lg"
-              href={`/find-candidates#role=${role.slug}`}
-            >
-              See {role.short} candidates
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="mbar">
-        <Link
-          className="btn btn-primary"
-          href={`/find-candidates#role=${role.slug}`}
-          id="mbar-cta"
-        >
-          See {role.short} candidates
-        </Link>
-      </div>
-    </>
+    </div>
   );
 }
