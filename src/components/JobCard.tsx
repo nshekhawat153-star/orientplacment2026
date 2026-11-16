@@ -64,10 +64,18 @@ export function JobCard({
         <div className="feed-card-badge-row">
           <div className="feed-badges-left">
             {(j.easilyApply || true) && (
-              <span className="indeed-badge-easily-apply">Easily apply</span>
+              <span className="indeed-badge-easily-apply">
+                <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                </svg>
+                Easily apply
+              </span>
             )}
             {j.urgentlyHiring && (
-              <span className="indeed-badge-urgently-hiring">Urgently hiring</span>
+              <span className="indeed-badge-urgently-hiring">
+                <span className="urgent-dot" />
+                Urgently hiring
+              </span>
             )}
           </div>
           <div className="feed-card-actions-right">
@@ -80,7 +88,7 @@ export function JobCard({
               }}
               title="Save job"
             >
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.75">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
               </svg>
             </button>
@@ -93,7 +101,7 @@ export function JobCard({
               }}
               title="Not interested"
             >
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.75">
                 <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17" />
               </svg>
             </button>
@@ -108,23 +116,32 @@ export function JobCard({
         {/* FIRM & RATING */}
         <div className="feed-card-firm">
           <span>{j.firmType} ({j.firmSize})</span>
-          <span className="firm-star-rating">4.8 ★</span>
+          <span className="firm-star-rating">
+            <svg viewBox="0 0 16 16" width="10.5" height="10.5" fill="currentColor" aria-hidden="true">
+              <path d="M8 1.5l2 4.2 4.6.7-3.3 3.2.8 4.6L8 12l-4.1 2.2.8-4.6-3.3-3.2 4.6-.7L8 1.5z" />
+            </svg>
+            4.8
+          </span>
         </div>
 
         {/* LOCATION */}
         <div className="feed-card-location">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0, opacity: 0.75 }}>
+            <path d="M8 1.5a4.5 4.5 0 0 0-4.5 4.5c0 3.375 4.5 8.5 4.5 8.5s4.5-5.125 4.5-8.5A4.5 4.5 0 0 0 8 1.5z" />
+            <circle cx="8" cy="6" r="1.5" />
+          </svg>
           <span>{j.mode === "hybrid" ? "Hybrid in " : ""}{j.area}, {city ? city.name : j.city}</span>
         </div>
 
         {/* SALARY & WORK TYPE PILLS */}
         <div className="feed-card-tags">
-          <span className="feed-tag-gray-pill">
-            <Mark>{fmt.range(j.band)} a year</Mark>
+          <span className="feed-tag-salary-pill">
+            <Mark>{fmt.range(j.band)}</Mark> <span className="feed-tag-yr">/yr</span>
           </span>
-          <span className="feed-tag-gray-pill">
+          <span className="feed-tag-pill">
             Full-time
           </span>
-          <span className="feed-tag-gray-pill">
+          <span className="feed-tag-pill">
             {j.mode === "on-site" ? "On-site" : "Hybrid work"}
           </span>
         </div>
@@ -133,7 +150,13 @@ export function JobCard({
         <div className="feed-card-footer">
           <span className="feed-posted">Active {fmt.date(j.posted)}</span>
           <span className="feed-dot">·</span>
-          <span className="feed-confidential">Confidential employer</span>
+          <span className="feed-confidential">
+            <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="3" y="6.5" width="10" height="7.5" rx="1.5" />
+              <path d="M5.5 6.5V4.5a2.5 2.5 0 0 1 5 0v2" />
+            </svg>
+            Confidential employer
+          </span>
         </div>
       </article>
     );

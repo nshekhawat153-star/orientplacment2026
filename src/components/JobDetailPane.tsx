@@ -153,7 +153,12 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
 
           <div className="clean-facts-list">
             <div className="fact-item">
-              <span className="fact-icon">💵</span>
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="5" width="20" height="14" rx="2" />
+                  <line x1="2" y1="10" x2="22" y2="10" />
+                </svg>
+              </span>
               <div className="fact-content">
                 <span className="fact-title">Pay</span>
                 <span className="fact-value fact-pay-highlight">
@@ -163,7 +168,12 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
             </div>
 
             <div className="fact-item">
-              <span className="fact-icon">💼</span>
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="14" rx="2" />
+                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                </svg>
+              </span>
               <div className="fact-content">
                 <span className="fact-title">Job type</span>
                 <span className="fact-value">Full-time</span>
@@ -171,7 +181,12 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
             </div>
 
             <div className="fact-item">
-              <span className="fact-icon">📍</span>
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
               <div className="fact-content">
                 <span className="fact-title">Location</span>
                 <span className="fact-value">{job.area}, {cityObj?.name || job.city}</span>
@@ -179,7 +194,16 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
             </div>
 
             <div className="fact-item">
-              <span className="fact-icon">🏢</span>
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="4" y="2" width="16" height="20" rx="2" />
+                  <path d="M9 22v-4h6v4" />
+                  <line x1="8" y1="6" x2="10" y2="6" />
+                  <line x1="14" y1="6" x2="16" y2="6" />
+                  <line x1="8" y1="10" x2="10" y2="10" />
+                  <line x1="14" y1="10" x2="16" y2="10" />
+                </svg>
+              </span>
               <div className="fact-content">
                 <span className="fact-title">Work arrangement</span>
                 <span className="fact-value">
@@ -189,7 +213,11 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
             </div>
 
             <div className="fact-item">
-              <span className="fact-icon">⚖️</span>
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 3v18M3 7h18M6 7l-3 7h6L6 7zm12 0l-3 7h6l-3-7z" />
+                </svg>
+              </span>
               <div className="fact-content">
                 <span className="fact-title">Practice focus</span>
                 <span className="fact-value">{job.mix}</span>
@@ -197,7 +225,12 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
             </div>
 
             <div className="fact-item">
-              <span className="fact-icon">🎓</span>
+              <span className="fact-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+              </span>
               <div className="fact-content">
                 <span className="fact-title">Experience level</span>
                 <span className="fact-value">{job.years}</span>
