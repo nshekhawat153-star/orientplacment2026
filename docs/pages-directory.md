@@ -39,8 +39,8 @@
 | **16** | `/best-law-firms/[city]` | `src/app/best-law-firms/[city]/page.tsx` | Dynamic | Editorial Guide (Top Boutique Firms) | ✅ **Redesigned & Live** |
 | **17** | `/where-to-hire/[city]` | `src/app/where-to-hire/[city]/page.tsx` | Dynamic | Talent Source Guide (Law Schools/Bar) | ✅ **Redesigned & Live** |
 | **18** | `/where-to-post/[city]` | `src/app/where-to-post/[city]/page.tsx` | Dynamic | Legal Job Posting Board Comparisons | ✅ **Redesigned & Live** |
-| **19** | `/hiring-kit/[role]` | `src/app/hiring-kit/[role]/page.tsx` | Dynamic | Free Hiring Kit & Interview Templates | 📋 Needs Review |
-| **20** | `/about` | `src/app/about/page.tsx` | Static | General / Firm Credibility | 📋 Needs Review |
+| **19** | `/hiring-kit/[role]` | `src/app/hiring-kit/[role]/page.tsx` | Dynamic | Free Hiring Kit & Interview Templates | ✅ **Redesigned & Live** |
+| **20** | `/about` | `src/app/about/page.tsx` | Static | General / Firm Credibility | ✅ **Redesigned & Live** |
 | **21** | `/design-concept` | `src/app/design-concept/page.tsx` | Static | Internal UI Design Sandbox | 🛠️ Sandbox |
 
 ---
