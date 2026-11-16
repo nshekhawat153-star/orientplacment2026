@@ -30,114 +30,57 @@ export function CtaBand({
   const defaultText =
     text ||
     (isCand
-      ? "Free for candidates. No firm sees your name until you say yes."
-      : "Screened attorneys and paralegals, no retainer, and no fee unless you hire.");
+      ? "Direct lateral opportunities at leading law firms. Free for candidates. No firm sees your name until you say yes."
+      : "Screened attorneys and paralegals across the US. No retainer, and zero fee unless you hire.");
   const defaultButton =
     button || (isCand ? "Upload your resume" : "See candidates for my seat");
   const eyebrow = isCand
-    ? "CONFIDENTIAL CANDIDATE SEARCH"
-    : "ORION PLACEMENT GUARANTEE";
+    ? "CONFIDENTIAL CANDIDATE SEARCH · 100% FREE"
+    : "ORION PLACEMENT GUARANTEE · ZERO RISK";
+
+  // Split title to apply luxury italic serif accent to the last word
+  const renderTitle = (titleStr: string) => {
+    const words = titleStr.split(" ");
+    if (words.length > 1) {
+      const lastWord = words.pop();
+      return (
+        <>
+          {words.join(" ")}{" "}
+          <span className="serif-accent">{lastWord}</span>
+        </>
+      );
+    }
+    return titleStr;
+  };
 
   const perks = isCand ? (
     <div className="cta-perks">
       <span className="cta-perk">
-        <svg
-          viewBox="0 0 16 16"
-          width="13"
-          height="13"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 8.5l3.5 3.5L13 4" />
-        </svg>{" "}
-        100% confidential
+        <span className="cta-perk-check" aria-hidden="true">✓</span>
+        <span>100% confidential</span>
       </span>
       <span className="cta-perk">
-        <svg
-          viewBox="0 0 16 16"
-          width="13"
-          height="13"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 8.5l3.5 3.5L13 4" />
-        </svg>{" "}
-        Free for candidates
+        <span className="cta-perk-check" aria-hidden="true">✓</span>
+        <span>Free for candidates</span>
       </span>
       <span className="cta-perk">
-        <svg
-          viewBox="0 0 16 16"
-          width="13"
-          height="13"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 8.5l3.5 3.5L13 4" />
-        </svg>{" "}
-        Direct partner access
+        <span className="cta-perk-check" aria-hidden="true">✓</span>
+        <span>Direct partner access</span>
       </span>
     </div>
   ) : (
     <div className="cta-perks">
       <span className="cta-perk">
-        <svg
-          viewBox="0 0 16 16"
-          width="13"
-          height="13"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 8.5l3.5 3.5L13 4" />
-        </svg>{" "}
-        No retainer
+        <span className="cta-perk-check" aria-hidden="true">✓</span>
+        <span>No retainer</span>
       </span>
       <span className="cta-perk">
-        <svg
-          viewBox="0 0 16 16"
-          width="13"
-          height="13"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 8.5l3.5 3.5L13 4" />
-        </svg>{" "}
-        Zero fee unless you hire
+        <span className="cta-perk-check" aria-hidden="true">✓</span>
+        <span>Zero fee unless you hire</span>
       </span>
       <span className="cta-perk">
-        <svg
-          viewBox="0 0 16 16"
-          width="13"
-          height="13"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 8.5l3.5 3.5L13 4" />
-        </svg>{" "}
-        2-year guarantee
+        <span className="cta-perk-check" aria-hidden="true">✓</span>
+        <span>90-day replacement guarantee</span>
       </span>
     </div>
   );
@@ -151,13 +94,13 @@ export function CtaBand({
               <span className="cta-pulse" aria-hidden="true" />
               <span>{eyebrow}</span>
             </div>
-            <h2>{defaultTitle}</h2>
+            <h2 className="cta-title">{renderTitle(defaultTitle)}</h2>
             {perks}
           </div>
           <div className="cta-col-action cta-act">
-            <p>{defaultText}</p>
+            <p className="cta-lede">{defaultText}</p>
             <div className="cta-actions-row">
-              <Link className="btn btn-cta-primary btn-light" href={defaultHref}>
+              <Link className="btn btn-cta-primary" href={defaultHref}>
                 <span>{defaultButton}</span>
                 <BtnArrow />
               </Link>
@@ -188,12 +131,12 @@ export function CtaBand({
                 </a>
               )}
             </div>
-            <div className="cta-trust-badge trust-line">
+            <div className="cta-trust-badge">
               <Stars />
               <span className="cta-trust-text">
                 <b>{trust.rating} on Google</b> ·{" "}
                 {isCand
-                  ? "free for candidates, confidential"
+                  ? "free for candidates, 100% confidential"
                   : "no fee unless you hire"}
               </span>
             </div>
@@ -203,3 +146,4 @@ export function CtaBand({
     </section>
   );
 }
+

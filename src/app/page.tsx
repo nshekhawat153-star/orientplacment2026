@@ -480,10 +480,9 @@ export default function HomePage() {
                     <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
                   </svg>
                 </Link>
-                <div className="post-job-note">
-                  <span className="post-job-lock-icon" aria-hidden="true">🔒</span>
-                  <span>Screened candidates within days · 100% confidential</span>
-                </div>
+                <p className="post-job-note">
+                  Screened candidates within days · 100% confidential
+                </p>
                 <div className="post-job-card-divider" />
                 <div className="post-job-alt-action">
                   <span>Prefer to discuss the mandate first?</span>
@@ -515,11 +514,28 @@ export default function HomePage() {
                 <span className="serif-accent">us</span>
               </h2>
               <p className="who-lede">
-                Pay data, a ready posting and where to find people. No sign-up
-                to read any of it.
+                Verified pay data, attorney hiring kits, and recruiting directories.
+                Zero sign-up, zero email gate, and completely free to use.
               </p>
             </div>
             <ResourceCards set="home" />
+
+            {/* Bottom Ungated Intelligence Reassurance Bar */}
+            <div className="resources-bottom-bar">
+              <div className="resources-bottom-left">
+                <span className="resources-bottom-tag">100% UNGATED LEGAL INTELLIGENCE</span>
+                <p className="resources-bottom-text">
+                  All compensation benchmarks, interview frameworks, and recruitment guides are publicly available.
+                  No email wall, no form to fill, and no subscription.
+                </p>
+              </div>
+              <div className="resources-bottom-right">
+                <Link href="/salaries/estate-planning-attorney/houston-tx" className="btn-resources-action">
+                  <span>Explore salary directory</span>
+                  <span className="resources-btn-arrow" aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -535,48 +551,128 @@ export default function HomePage() {
                 Pay and candidates near{" "}
                 <span className="serif-accent">you</span>
               </h2>
+              <p className="who-lede">
+                Compensation intelligence, median salary baselines, and legal practice staffing directories across major US legal markets.
+              </p>
             </div>
-            <div className="browse">
-              <div>
-                <h3 id="by-city">
-                  <Icon name="pin" /> By city
-                </h3>
+
+            <div className="browse-panels-grid">
+              {/* Panel 1: Cities */}
+              <div className="browse-panel">
+                <div className="browse-panel-header">
+                  <div className="browse-panel-title-group">
+                    <div className="browse-panel-icon-wrap">
+                      <Icon name="pin" />
+                    </div>
+                    <div>
+                      <h3 className="browse-panel-title">Major Metro Markets</h3>
+                      <p className="browse-panel-subtitle">Legal staffing hubs &amp; verified compensation</p>
+                    </div>
+                  </div>
+                  <span className="browse-panel-badge">10 METRO HUBS</span>
+                </div>
                 <CityTiles />
               </div>
-              <div>
-                <h3 id="by-role">
-                  <Icon name="scale" /> By role
-                </h3>
+
+              {/* Panel 2: Practice Roles */}
+              <div className="browse-panel">
+                <div className="browse-panel-header">
+                  <div className="browse-panel-title-group">
+                    <div className="browse-panel-icon-wrap">
+                      <Icon name="scale" />
+                    </div>
+                    <div>
+                      <h3 className="browse-panel-title">Practice Specializations</h3>
+                      <p className="browse-panel-subtitle">Attorney, counsel &amp; paralegal roles</p>
+                    </div>
+                  </div>
+                  <span className="browse-panel-badge">11 PRACTICE ROLES</span>
+                </div>
                 <RoleTiles city="houston-tx" />
+              </div>
+            </div>
+
+            {/* Bottom Directory Reassurance Banner */}
+            <div className="browse-bottom-bar">
+              <div className="browse-bottom-left">
+                <span className="browse-bottom-tag">NATIONWIDE LEGAL SEARCH REACH</span>
+                <p className="browse-bottom-text">
+                  Need customized compensation benchmarking or a lateral search in a market not listed above?
+                  Justin and Jon run mandates across all 50 states.
+                </p>
+              </div>
+              <div className="browse-bottom-right">
+                <Link href="/hire-attorneys" className="btn-browse-action">
+                  <span>Inquire about your city</span>
+                  <span className="browse-btn-arrow" aria-hidden="true">→</span>
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
         {/* 11. For candidates */}
-        <section className="block flush cand-band-sec">
+        <section className="block flush cand-band-sec" id="for-candidates">
           <div className="wrap">
             <div className="cand-band">
-              <div>
-                <div className="badge-capsule badge-capsule-dark">
+              <div className="cand-band-content">
+                <div className="badge-capsule">
                   <span className="badge-dot" />
-                  FOR ATTORNEYS AND PARALEGALS
+                  CANDIDATE PORTAL · 100% CONFIDENTIAL
                 </div>
-                <h2>
+                <h2 className="cand-band-title">
                   Confidential roles with the pay{" "}
                   <span className="serif-accent">shown</span>
                 </h2>
-                <p>
-                  Roles at small and mid-size firms. Free for candidates. No firm
-                  sees your name until you say yes.
+                <p className="cand-band-lede">
+                  Direct lateral opportunities at leading boutique and mid-size law firms.
+                  Always 100% free for candidates. No firm ever sees your name until you say yes.
                 </p>
+                <div className="cand-band-perks">
+                  <div className="cand-band-perk-item">
+                    <span className="perk-check" aria-hidden="true">✓</span>
+                    <span>100% confidential representation</span>
+                  </div>
+                  <div className="cand-band-perk-item">
+                    <span className="perk-check" aria-hidden="true">✓</span>
+                    <span>Exact salary &amp; bonus disclosed upfront</span>
+                  </div>
+                  <div className="cand-band-perk-item">
+                    <span className="perk-check" aria-hidden="true">✓</span>
+                    <span>Zero contact with firms without approval</span>
+                  </div>
+                </div>
               </div>
-              <Link
-                className="btn btn-primary btn-lg"
-                href="/jobs"
-              >
-                See open jobs
-              </Link>
+
+              <div className="cand-band-card">
+                <div className="cand-band-card-top">
+                  <span className="cand-portal-badge">ACTIVE CAREER PORTAL</span>
+                  <span className="cand-time-badge">Free for Candidates</span>
+                </div>
+                <Link
+                  className="btn-cand-submit"
+                  href="/jobs"
+                >
+                  <span>See open jobs</span>
+                  <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                    <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                  </svg>
+                </Link>
+                <p className="cand-band-note">
+                  No firm sees your resume or name until you approve
+                </p>
+                <div className="cand-card-divider" />
+                <div className="cand-alt-action">
+                  <span>Looking for a discreet career move?</span>
+                  <Link
+                    href="/upload-resume"
+                    className="cand-call-link"
+                  >
+                    <span>Submit resume confidentially</span>
+                    <span className="call-arrow" aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -584,7 +680,7 @@ export default function HomePage() {
         {/* 12. FAQ */}
         <section className="block faq-sec" id="faq">
           <div className="wrap split">
-            <div className="sec-head-premium sec-head-left">
+            <div className="sec-head-premium sec-head-left faq-head-col">
               <div className="badge-capsule">
                 <span className="badge-dot" />
                 QUESTIONS &amp; ANSWERS · ZERO OBLIGATION
@@ -593,49 +689,112 @@ export default function HomePage() {
                 What firms ask <span className="serif-accent">first</span>
               </h2>
               <p className="who-lede">
-                More on the <Link href="/fees">fees and guarantee</Link> page,
-                or ask Justin directly.
+                Simple terms, 90-day replacement guarantee, zero retainers. Explore our complete fee schedule or speak with a founder.
               </p>
+              <div className="faq-side-card">
+                <p className="faq-side-note">
+                  Have a specific placement scenario or practice area in mind?
+                </p>
+                <div className="faq-side-actions">
+                  <Link href="/fees" className="btn-faq-fees">
+                    <span>Fee schedule &amp; terms</span>
+                    <span className="faq-arrow" aria-hidden="true">→</span>
+                  </Link>
+                  <a
+                    href={trust.calendly}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="faq-cal-pill"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="15"
+                      height="15"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    <span>Book 15 min with Justin</span>
+                  </a>
+                </div>
+                <div className="faq-side-reassurance">
+                  <span className="reassurance-check" aria-hidden="true">✓</span>
+                  <span>Direct founder accountability on every legal mandate</span>
+                </div>
+              </div>
             </div>
             <div className="faq">
               <details>
-                <summary>What does it cost?</summary>
-                <p>
-                  <Mark>23% of the candidate&apos;s compensation</Mark>,
-                  invoiced <Mark>on their first day and due in 15 days</Mark>.
-                  Nothing upfront and nothing if you do not hire. Non-exclusive
-                  contingency agreement.
-                </p>
+                <summary>
+                  <span>What does it cost?</span>
+                  <span className="faq-toggle-icon" aria-hidden="true" />
+                </summary>
+                <div className="faq-body">
+                  <p>
+                    <Mark>23% of the candidate&apos;s compensation</Mark>,
+                    invoiced <Mark>on their first day and due in 15 days</Mark>.
+                    Nothing upfront and nothing if you do not hire. Non-exclusive
+                    contingency agreement.
+                  </p>
+                </div>
               </details>
               <details>
-                <summary>What if the hire leaves early?</summary>
-                <p>
-                  If they leave or are let go within <Mark>90 days</Mark> of
-                  starting, we search again and send replacements at no extra fee.
-                </p>
+                <summary>
+                  <span>What if the hire leaves early?</span>
+                  <span className="faq-toggle-icon" aria-hidden="true" />
+                </summary>
+                <div className="faq-body">
+                  <p>
+                    If they leave or are let go within <Mark>90 days</Mark> of
+                    starting, we search again and send replacements at no extra fee.
+                  </p>
+                </div>
               </details>
               <details>
-                <summary>Do we have to work only with you?</summary>
-                <p>
-                  No. Keep posting and keep your other recruiters. You owe a fee
-                  only for a hire we introduced.
-                </p>
+                <summary>
+                  <span>Do we have to work only with you?</span>
+                  <span className="faq-toggle-icon" aria-hidden="true" />
+                </summary>
+                <div className="faq-body">
+                  <p>
+                    No. Keep posting and keep your other recruiters. You owe a fee
+                    only for a hire we introduced.
+                  </p>
+                </div>
               </details>
               <details>
-                <summary>How do you keep candidates anonymous?</summary>
-                <p>
-                  Profiles show firm type and size, never names. The full
-                  redacted resume goes to you on request, and names follow when
-                  both sides agree to meet.
-                </p>
+                <summary>
+                  <span>How do you keep candidates anonymous?</span>
+                  <span className="faq-toggle-icon" aria-hidden="true" />
+                </summary>
+                <div className="faq-body">
+                  <p>
+                    Profiles show firm type and size, never names. The full
+                    redacted resume goes to you on request, and names follow when
+                    both sides agree to meet.
+                  </p>
+                </div>
               </details>
-              <details>
-                <summary>Which seats do you fill?</summary>
-                <p>
-                  Attorneys, paralegals and legal assistants at small and mid-size
-                  law firms across the US. Other legal seats can be arranged;
-                  ask Justin.
-                </p>
+              <details open>
+                <summary>
+                  <span>Which seats do you fill?</span>
+                  <span className="faq-toggle-icon" aria-hidden="true" />
+                </summary>
+                <div className="faq-body">
+                  <p>
+                    Attorneys, paralegals and legal assistants at small and mid-size
+                    law firms across the US. Other legal seats can be arranged;
+                    ask Justin.
+                  </p>
+                </div>
               </details>
             </div>
           </div>

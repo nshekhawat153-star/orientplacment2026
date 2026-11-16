@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { cities, roles, findBand, findCity, fmt } from "@/data";
-import { Mark } from "./Mark";
 
 const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is built.";
 
@@ -25,17 +24,24 @@ export function CityTiles() {
 
           if (isBuilt) {
             return (
-              <Link key={c.slug} href={href} className="tile">
-                <b>{c.name}</b>
-                <span>
-                  {c.stateName}
-                  {b && (
-                    <>
-                      {" "}
-                      · median <Mark>{fmt.k(b.median)}</Mark>
-                    </>
-                  )}
-                </span>
+              <Link key={c.slug} href={href} className="dir-tile dir-tile-built" title={`View ${c.name} legal market`}>
+                <div className="dir-tile-main">
+                  <div className="dir-tile-name-row">
+                    <span className="dir-tile-name">{c.name}</span>
+                    <span className="dir-tile-state-pill">{c.state}</span>
+                  </div>
+                  <div className="dir-tile-meta">
+                    {b ? (
+                      <>
+                        <span className="dir-median-label">Median</span>{" "}
+                        <strong className="dir-median-val">{fmt.k(b.median)}</strong>
+                      </>
+                    ) : (
+                      <span>{c.stateName}</span>
+                    )}
+                  </div>
+                </div>
+                <span className="dir-tile-arrow" aria-hidden="true">→</span>
               </Link>
             );
           }
@@ -45,22 +51,30 @@ export function CityTiles() {
               key={c.slug}
               href="#"
               data-unbuilt={UNBUILT_MSG}
-              className="tile"
+              className="dir-tile"
+              title={`${c.name}, ${c.state}`}
               onClick={(e) => {
                 e.preventDefault();
                 showToast();
               }}
             >
-              <b>{c.name}</b>
-              <span>
-                {c.stateName}
-                {b && (
-                  <>
-                    {" "}
-                    · median <Mark>{fmt.k(b.median)}</Mark>
-                  </>
-                )}
-              </span>
+              <div className="dir-tile-main">
+                <div className="dir-tile-name-row">
+                  <span className="dir-tile-name">{c.name}</span>
+                  <span className="dir-tile-state-pill">{c.state}</span>
+                </div>
+                <div className="dir-tile-meta">
+                  {b ? (
+                    <>
+                      <span className="dir-median-label">Median</span>{" "}
+                      <strong className="dir-median-val">{fmt.k(b.median)}</strong>
+                    </>
+                  ) : (
+                    <span>{c.stateName}</span>
+                  )}
+                </div>
+              </div>
+              <span className="dir-tile-arrow" aria-hidden="true">→</span>
             </a>
           );
         })}
@@ -93,17 +107,23 @@ export function RoleTiles({ city = "houston-tx" }: { city?: string }) {
 
           if (isBuilt) {
             return (
-              <Link key={r.slug} href={href} className="tile">
-                <b>{r.name}</b>
-                <span>
-                  {b && currentCity ? (
-                    <>
-                      {currentCity.name} median <Mark>{fmt.k(b.median)}</Mark>
-                    </>
-                  ) : (
-                    "Pay by city"
-                  )}
-                </span>
+              <Link key={r.slug} href={href} className="dir-tile dir-tile-built" title={`View ${r.name} benchmarks`}>
+                <div className="dir-tile-main">
+                  <div className="dir-tile-name-row">
+                    <span className="dir-tile-name">{r.name}</span>
+                  </div>
+                  <div className="dir-tile-meta">
+                    {b && currentCity ? (
+                      <>
+                        <span className="dir-median-label">{currentCity.name}</span>{" "}
+                        <strong className="dir-median-val">{fmt.k(b.median)}</strong>
+                      </>
+                    ) : (
+                      <span>Pay by city</span>
+                    )}
+                  </div>
+                </div>
+                <span className="dir-tile-arrow" aria-hidden="true">→</span>
               </Link>
             );
           }
@@ -113,22 +133,29 @@ export function RoleTiles({ city = "houston-tx" }: { city?: string }) {
               key={r.slug}
               href="#"
               data-unbuilt={UNBUILT_MSG}
-              className="tile"
+              className="dir-tile"
+              title={r.name}
               onClick={(e) => {
                 e.preventDefault();
                 showToast();
               }}
             >
-              <b>{r.name}</b>
-              <span>
-                {b && currentCity ? (
-                  <>
-                    {currentCity.name} median <Mark>{fmt.k(b.median)}</Mark>
-                  </>
-                ) : (
-                  "Pay by city"
-                )}
-              </span>
+              <div className="dir-tile-main">
+                <div className="dir-tile-name-row">
+                  <span className="dir-tile-name">{r.name}</span>
+                </div>
+                <div className="dir-tile-meta">
+                  {b && currentCity ? (
+                    <>
+                      <span className="dir-median-label">{currentCity.name}</span>{" "}
+                      <strong className="dir-median-val">{fmt.k(b.median)}</strong>
+                    </>
+                  ) : (
+                    <span>Pay by city</span>
+                  )}
+                </div>
+              </div>
+              <span className="dir-tile-arrow" aria-hidden="true">→</span>
             </a>
           );
         })}

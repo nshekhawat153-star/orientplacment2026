@@ -16,42 +16,47 @@ export function ResourceCards({
   const set = setType || passedSet || "home";
   const all: Record<
     string,
-    { href: string; icon: string; title: string; desc: string; get: string }
+    { href: string; icon: string; tag: string; title: string; desc: string; get: string }
   > = {
     leaf: {
       href: "/salaries/estate-planning-attorney/houston-tx",
       icon: "chart",
+      tag: "COMPENSATION",
       title: "Salary guides",
-      desc: "What firms pay by role, city and years of practice.",
-      get: "Bands, the median and the source, free",
+      desc: "Verified law firm compensation bands by practice area, city, and years of experience.",
+      get: "Market bands, median base pay, and bonus structures",
     },
     kit: {
       href: "/hiring-kit/estate-planning-attorney",
       icon: "doc",
-      title: "Hiring kit",
-      desc: "Everything to run the hire yourself, ready to copy.",
-      get: "Posting, interview questions, scorecard",
+      tag: "INTERVIEW KIT",
+      title: "Hiring kits",
+      desc: "Complete attorney and paralegal interview kits, scoring rubrics, and job descriptions.",
+      get: "Job posting template, screening questions, rubric",
     },
     post: {
       href: "/where-to-post/houston-tx",
       icon: "post",
+      tag: "JOB BOARDS",
       title: "Where to post a job",
-      desc: "Job boards compared on cost and speed.",
-      get: "Cost and time to the first applicant",
+      desc: "Legal job boards compared on candidate quality, cost-per-applicant, and fill speed.",
+      get: "Board cost comparisons & time-to-first-applicant",
     },
     hire: {
       href: "/where-to-hire/houston-tx",
       icon: "school",
+      tag: "TALENT POOLS",
       title: "Where to hire from",
-      desc: "Law schools, programmes and bar groups.",
-      get: "Who to contact and when they hire",
+      desc: "Accredited law schools, clerkship programmes, and regional legal bar associations.",
+      get: "Direct placement contacts & recruitment calendar",
     },
     fees: {
       href: "/fees",
       icon: "percent",
+      tag: "CONTINGENCY",
       title: "Fee calculator",
-      desc: "The fee on your salary, and what the guarantee covers.",
-      get: "Your number in ten seconds",
+      desc: "Transparent contingency calculation for your target salary and 90-day replacement terms.",
+      get: "Instant fee estimate & guarantee breakdown",
     },
   };
 
@@ -77,15 +82,22 @@ export function ResourceCards({
       {list.map((r, idx) => (
         <div key={idx}>
           <Link href={r.href} className="rcard">
-            <Icon name={r.icon} />
+            <div className="rcard-top-row">
+              <div className="rcard-icon-wrap">
+                <Icon name={r.icon} />
+              </div>
+              <span className="rcard-tag">{r.tag}</span>
+            </div>
             <h3>{r.title}</h3>
             <p>{r.desc}</p>
-            <p className="rget">
-              <b>You get</b> {r.get}
-            </p>
-            <span className="rgo">
-              Open <Icon name="arrow" />
-            </span>
+            <div className="rget">
+              <b>You get</b>
+              <span className="rget-text">{r.get}</span>
+            </div>
+            <div className="rgo">
+              <span>Access resource</span>
+              <span className="rgo-arrow-wrap" aria-hidden="true">→</span>
+            </div>
           </Link>
         </div>
       ))}

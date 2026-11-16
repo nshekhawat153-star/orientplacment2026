@@ -99,8 +99,10 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                 height={48}
               />
             </Link>
-            <p>{orionLine}</p>
-            <RatingBadge size="sm" dark />
+            <p className="f-tagline">{orionLine}</p>
+            <div className="f-rating-wrap">
+              <RatingBadge size="sm" dark />
+            </div>
           </div>
 
           <div className="cols">
@@ -225,7 +227,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
           </div>
 
           <div className="base">
-            <p>
+            <p className="f-security-note">
               Orion emails come only from{" "}
               {sendingDomains.map((d, i) => (
                 <React.Fragment key={d}>
@@ -236,9 +238,14 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
               . If a message uses another domain, forward it to us before you
               reply.
             </p>
-            <p>
-              © 2026 Orion Placement LLC · 510 Southeast 5th Avenue, Unit 1513, Fort Lauderdale, FL 33301. All rights reserved.
-            </p>
+            <div className="f-bottom-row">
+              <p className="f-copyright">
+                © 2026 Orion Placement LLC · 510 Southeast 5th Avenue, Unit 1513, Fort Lauderdale, FL 33301. All rights reserved.
+              </p>
+              <div className="f-sample-marks-wrap">
+                {marksBtn}
+              </div>
+            </div>
           </div>
         </div>
       </footer>
