@@ -3,12 +3,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { TrustLine } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
 import { CandidateDetailPane } from "@/components/CandidateDetailPane";
 import { GateForm } from "@/components/GateForm";
-import { TermsTiles } from "@/components/TermsTiles";
-import { CtaBand } from "@/components/CtaBand";
 import { Mark } from "@/components/Mark";
 import {
   roles,
@@ -153,430 +150,524 @@ export default function FindCandidatesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Breadcrumb
-        items={[
-            { name: "Home", href: "/" },
-            { name: "Employers", href: "/employers" },
-            { name: "Find candidates" },
-          ]}
-        />
 
-        <header className="phero compact">
-          <div className="wrap">
-            <span className="eyebrow">For firms hiring</span>
-            <h1>Find candidates for your open seat</h1>
-            <p className="lede">
-              Describe the seat and screened candidates update as you go. The top
-              three are open now.
-            </p>
-            <TrustLine />
+      {/* 1. LUXURY HERO WITH SPLASH VIDEO */}
+      <section className="emp-luxury-hero-sec fc-luxury-hero-sec">
+        <div className="emp-hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="emp-hero-video"
+          >
+            <source src="/media/splash.mp4" type="video/mp4" />
+          </video>
+          <div className="emp-hero-overlay" />
+          <div className="emp-hero-glow" />
+        </div>
+
+        <div className="wrap emp-hero-content">
+          <div className="emp-hero-badge-wrap">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>PRE-SCREENED TALENT · 100% CONTINGENCY</span>
+            </div>
           </div>
-        </header>
 
-        <section className="wrap tool-sec">
-          <div className="tool">
-            <form
-              className={`tool-form${folded ? " folded editing" : ""}`}
-              id="brief"
-              aria-label="Your seat"
-            >
-              <div className="brief-sum" id="brief-sum">
-                <p>
-                  <span className="small muted">Your seat</span>
-                  <b id="brief-sum-t">{summaryBits.join(" · ")}</b>
-                </p>
-                <button
-                  type="button"
-                  className="btn btn-ghost btn-sm"
-                  id="brief-edit"
-                  aria-expanded={!folded}
-                  onClick={() => setFolded(!folded)}
-                >
-                  {folded ? "Edit" : "Done"}
-                </button>
-              </div>
+          <h1 className="emp-hero-h1">
+            Find candidates for your <span className="serif-accent">open seat</span>
+          </h1>
 
-              <h2>Your seat</h2>
+          <p className="emp-hero-lead">
+            Select your practice area, location, experience requirements, and notice window.
+            Pre-screened lateral attorney dossiers update dynamically in real time.
+          </p>
 
-              <div className="field">
-                <label htmlFor="b-role">Role</label>
-                <select
-                  id="b-role"
-                  name="role"
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                >
-                  {roles.map((r) => (
-                    <option key={r.slug} value={r.slug}>
-                      {r.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <div className="emp-hero-actions">
+            <a href="#brief" className="btn-emp-primary">
+              <span>Filter candidate pool</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
+            <Link href="/submit-job" className="btn-emp-ghost">
+              <span>Submit a job instead</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </Link>
+          </div>
 
-              <div className="field">
-                <label htmlFor="b-city">City</label>
-                <select
-                  id="b-city"
-                  name="city"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                >
-                  {cities.map((c) => (
-                    <option key={c.slug} value={c.slug}>
-                      {c.name}, {c.state}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          {/* Micro Reassurances */}
+          <div className="emp-reassurance-row">
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Top candidates available now</span>
+            </div>
+            <span className="emp-dot-sep">·</span>
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Names confidential until approved</span>
+            </div>
+            <span className="emp-dot-sep">·</span>
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Zero fee unless you hire (23% Net 15)</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              <div className="field">
-                <label htmlFor="b-years">Years of practice</label>
-                <select
-                  id="b-years"
-                  name="years"
-                  value={years}
-                  onChange={(e) => setYears(e.target.value)}
-                >
-                  <option value="any">Any</option>
-                  {expBands.map((e) => (
-                    <option key={e.key} value={e.key}>
-                      {e.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+      {/* 2. MAIN TOOL WORKSPACE */}
+      <section className="wrap tool-sec" style={{ padding: "64px 0 88px" }}>
+        <div className="tool">
+          {/* FILTER BRIEF FORM */}
+          <form
+            className={`tool-form${folded ? " folded editing" : ""}`}
+            id="brief"
+            aria-label="Your seat"
+            style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "24px 28px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}
+          >
+            <div className="brief-sum" id="brief-sum" style={{ borderBottom: "1px solid #E2E8F0", paddingBottom: 16, marginBottom: 16 }}>
+              <p style={{ margin: 0 }}>
+                <span className="small muted" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 4 }}>Current Seat Filter</span>
+                <b id="brief-sum-t" style={{ fontFamily: "var(--display)", fontSize: 18, color: "#08142A" }}>{summaryBits.join(" · ")}</b>
+              </p>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                id="brief-edit"
+                aria-expanded={!folded}
+                onClick={() => setFolded(!folded)}
+                style={{ borderRadius: 6, fontWeight: 600, padding: "6px 14px", border: "1px solid #CBD5E1" }}
+              >
+                {folded ? "Change Filters" : "Done"}
+              </button>
+            </div>
 
-              <div className="field">
-                <label htmlFor="b-mode">Work arrangement</label>
-                <select
-                  id="b-mode"
-                  name="mode"
-                  value={mode}
-                  onChange={(e) => setMode(e.target.value as any)}
-                >
-                  <option value="any">Either</option>
-                  <option value="on-site">On-site</option>
-                  <option value="hybrid">Hybrid</option>
-                </select>
-              </div>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 16px" }}>Filter Seat Specifications</h2>
 
-              <div className="field">
-                <label htmlFor="b-pay">
-                  Top of your pay band{" "}
-                  <span className="hint">($ base per year, optional)</span>
-                </label>
-                <div className="money">
-                  <input
-                    id="b-pay"
-                    name="pay"
-                    type="number"
-                    inputMode="numeric"
-                    min="30000"
-                    step="5000"
-                    placeholder="145000"
-                    value={pay || ""}
-                    onChange={(e) =>
-                      setPay(e.target.value ? Number(e.target.value) : null)
-                    }
-                  />
-                </div>
-              </div>
+            <div className="field" style={{ marginBottom: 16 }}>
+              <label htmlFor="b-role" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>Role</label>
+              <select
+                id="b-role"
+                name="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+              >
+                {roles.map((r) => (
+                  <option key={r.slug} value={r.slug}>
+                    {r.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              <fieldset className="field" style={{ border: 0 }}>
-                <legend className="label" style={{ marginBottom: 6 }}>
-                  Must-haves <span className="hint">(tap to add)</span>
-                </legend>
-                <div className="chips" id="b-must">
-                  {availableMustHaves.map((tag) => {
-                    const isPressed = selectedMust.includes(tag);
-                    return (
-                      <button
-                        key={tag}
-                        type="button"
-                        className="chip"
-                        aria-pressed={isPressed}
-                        data-tag={tag}
-                        onClick={() => toggleMustHave(tag)}
-                      >
-                        {tag}
-                      </button>
-                    );
-                  })}
-                </div>
-              </fieldset>
-            </form>
+            <div className="field" style={{ marginBottom: 16 }}>
+              <label htmlFor="b-city" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>City</label>
+              <select
+                id="b-city"
+                name="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+              >
+                {cities.map((c) => (
+                  <option key={c.slug} value={c.slug}>
+                    {c.name}, {c.state}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <div className="tool-results">
-              <div className="results-head" aria-live="polite">
-                <b id="r-count">
-                  {results.length ? (
-                    <>
-                      <Mark>{results.length}</Mark>{" "}
-                      {results.length === 1 ? "candidate" : "candidates"} for{" "}
-                      {rObj ? rObj.short : role}, {cObj ? cObj.name : city}
-                    </>
-                  ) : (
-                    "No exact matches yet"
-                  )}
-                </b>
-                <span className="small muted" id="r-sub">
-                  {results.length
-                    ? unlocked
-                      ? "All open"
-                      : results.length > 3
-                      ? `Top 3 open, ${results.length - 3} more by email`
-                      : "All open"
-                    : ""}
-                </span>
-              </div>
+            <div className="field" style={{ marginBottom: 16 }}>
+              <label htmlFor="b-years" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>Years of experience</label>
+              <select
+                id="b-years"
+                name="years"
+                value={years}
+                onChange={(e) => setYears(e.target.value)}
+                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+              >
+                <option value="any">Any experience</option>
+                {expBands.map((eb) => (
+                  <option key={eb.key} value={eb.key}>
+                    {eb.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              {!results.length ? (
-                <div className="empty-state" id="r-list">
-                  <p>
-                    <b>No one in our current list fits this exact seat.</b> We search
-                    our wider network for seats like this one. Send it and Justin
-                    replies within <Mark>one business day</Mark>.
-                  </p>
-                  <p className="actions" style={{ marginTop: 12 }}>
-                    <Link className="btn btn-primary btn-sm" href="/submit-job">
-                      Send this seat
-                    </Link>
+            <div className="field" style={{ marginBottom: 16 }}>
+              <label htmlFor="b-mode" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>Work arrangement</label>
+              <select
+                id="b-mode"
+                name="mode"
+                value={mode}
+                onChange={(e) => setMode(e.target.value as any)}
+                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+              >
+                <option value="any">Either on-site or hybrid</option>
+                <option value="on-site">On-site only</option>
+                <option value="hybrid">Hybrid only</option>
+              </select>
+            </div>
+
+            <div className="field" style={{ marginBottom: 16 }}>
+              <label htmlFor="b-pay" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>
+                Target base pay ($/yr)
+              </label>
+              <input
+                id="b-pay"
+                name="pay"
+                type="number"
+                inputMode="numeric"
+                min="30000"
+                step="5000"
+                placeholder="145000"
+                value={pay || ""}
+                onChange={(e) =>
+                  setPay(e.target.value ? Number(e.target.value) : null)
+                }
+                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+              />
+            </div>
+
+            <fieldset className="field" style={{ border: 0, padding: 0 }}>
+              <legend className="label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 8 }}>
+                Must-haves <span className="hint" style={{ color: "#64748B", fontWeight: 400 }}>(tap to add)</span>
+              </legend>
+              <div className="chips" id="b-must">
+                {availableMustHaves.map((tag) => {
+                  const isPressed = selectedMust.includes(tag);
+                  return (
                     <button
+                      key={tag}
                       type="button"
-                      className="btn btn-ghost btn-sm"
-                      id="widen"
-                      onClick={() => setSelectedMust([])}
+                      className="chip"
+                      aria-pressed={isPressed}
+                      data-tag={tag}
+                      onClick={() => toggleMustHave(tag)}
                     >
-                      Clear must-haves
+                      {tag}
                     </button>
-                  </p>
+                  );
+                })}
+              </div>
+            </fieldset>
+          </form>
+
+          {/* RESULTS DISPLAY */}
+          <div className="tool-results">
+            <div className="results-head" aria-live="polite" style={{ marginBottom: 18 }}>
+              <b id="r-count" style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A" }}>
+                {results.length ? (
+                  <>
+                    <Mark>{results.length}</Mark>{" "}
+                    {results.length === 1 ? "candidate" : "candidates"} for{" "}
+                    {rObj ? rObj.short : role}, {cObj ? cObj.name : city}
+                  </>
+                ) : (
+                  "No exact matches yet"
+                )}
+              </b>
+              <span className="small muted" id="r-sub" style={{ display: "block", marginTop: 4 }}>
+                {results.length
+                  ? unlocked
+                    ? "All open"
+                    : results.length > 3
+                    ? `Top 3 open, ${results.length - 3} more by email`
+                    : "All open"
+                  : ""}
+              </span>
+            </div>
+
+            {!results.length ? (
+              <div className="empty-state" id="r-list" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "36px 32px", textAlign: "center" }}>
+                <p style={{ fontSize: 16, color: "#08142A", margin: "0 0 16px" }}>
+                  <b>No one in our current pool fits this exact seat.</b> We search
+                  our wider network of 100,000+ legal professionals for seats like this one. Send it and Justin
+                  replies within <Mark>one business day</Mark>.
+                </p>
+                <div style={{ display: "flex", justifyContent: "center", gap: 12 }}>
+                  <Link className="btn btn-primary btn-sm" href="/submit-job" style={{ borderRadius: 7, fontWeight: 600, padding: "10px 20px" }}>
+                    Send this seat to Justin →
+                  </Link>
+                  <button
+                    type="button"
+                    className="btn btn-ghost btn-sm"
+                    id="widen"
+                    onClick={() => setSelectedMust([])}
+                    style={{ borderRadius: 7, fontWeight: 600, padding: "10px 18px" }}
+                  >
+                    Clear must-haves
+                  </button>
                 </div>
-              ) : (
-                <>
-                  <div className="indeed-split-grid" style={{ marginTop: 14 }}>
-                    <div className="indeed-feed-column">
-                      <div id="r-list">
-                        <div className="indeed-card-stack">
-                          {openCards.map((r) => (
-                            <CandidateCard
-                              key={r.c.id}
-                              candidate={r.c}
-                              result={r}
-                              selected={activeCandidate?.id === r.c.id}
-                              onSelect={handleSelectCandidate}
-                              onRequestProfile={handleRequestProfile}
-                            />
-                          ))}
-                        </div>
+              </div>
+            ) : (
+              <>
+                <div className="indeed-split-grid" style={{ marginTop: 14 }}>
+                  <div className="indeed-feed-column">
+                    <div id="r-list">
+                      <div className="indeed-card-stack">
+                        {openCards.map((r) => (
+                          <CandidateCard
+                            key={r.c.id}
+                            candidate={r.c}
+                            result={r}
+                            selected={activeCandidate?.id === r.c.id}
+                            onSelect={handleSelectCandidate}
+                            onRequestProfile={handleRequestProfile}
+                          />
+                        ))}
                       </div>
                     </div>
+                  </div>
 
-                    <div className="indeed-detail-column">
+                  <div className="indeed-detail-column">
+                    <CandidateDetailPane
+                      candidate={activeCandidate}
+                      onRequestProfile={handleRequestProfile}
+                    />
+                  </div>
+                </div>
+
+                {mobileDrawerOpen && activeCandidate && (
+                  <div
+                    className="mobile-detail-overlay"
+                    onClick={() => setMobileDrawerOpen(false)}
+                  >
+                    <div
+                      className="mobile-detail-modal"
+                      onClick={(e) => e.stopPropagation()}
+                      role="dialog"
+                      aria-modal="true"
+                    >
                       <CandidateDetailPane
                         candidate={activeCandidate}
                         onRequestProfile={handleRequestProfile}
+                        onCloseMobile={() => setMobileDrawerOpen(false)}
                       />
                     </div>
                   </div>
+                )}
 
-                  {mobileDrawerOpen && activeCandidate && (
-                    <div
-                      className="mobile-detail-overlay"
-                      onClick={() => setMobileDrawerOpen(false)}
-                    >
-                      <div
-                        className="mobile-detail-modal"
-                        onClick={(e) => e.stopPropagation()}
-                        role="dialog"
-                        aria-modal="true"
-                      >
-                        <CandidateDetailPane
-                          candidate={activeCandidate}
-                          onRequestProfile={handleRequestProfile}
-                          onCloseMobile={() => setMobileDrawerOpen(false)}
-                        />
+                <div id="gate" style={{ marginTop: 48 }}>
+                  <GateForm
+                    id="finder-gate"
+                    eyebrow={
+                      results.length > 3
+                        ? `See all ${results.length}`
+                        : "Full profiles"
+                    }
+                    title={
+                      selectedIds.length
+                        ? `Send me the full profile for ${selectedIds.join(", ")}`
+                        : "Get the full profiles"
+                    }
+                    bullets={[
+                      `Redacted resumes for ${
+                        selectedIds.length
+                          ? selectedIds.join(", ")
+                          : results.length === 1
+                          ? "this candidate"
+                          : `all ${results.length} candidates`
+                      }`,
+                      "Pay expectation, bar admission and notice period",
+                      "Our one-page terms, within one business hour",
+                    ]}
+                    button={
+                      selectedIds.length
+                        ? "Send me the full profile"
+                        : "Send me the full profiles"
+                    }
+                    ids={selectedIds.length ? selectedIds : results.map((r) => r.c.id)}
+                    role={role}
+                    city={city}
+                    gateNote={selectedIds.join(", ")}
+                  />
+                </div>
+
+                <div id="r-locked" style={{ marginTop: 32 }}>
+                  {lockedCards.length > 0 && (
+                    <>
+                      <p className="mini-h locked-h" style={{ fontFamily: "var(--mono)", fontSize: 12, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginBottom: 16 }}>
+                        <Mark>{lockedCards.length} more {plural(lockedCards.length, "candidate")}</Mark>{" "}
+                        with the full profiles
+                      </p>
+                      <div className="cards">
+                        {lockedCards.map((r) => (
+                          <CandidateCard
+                            key={r.c.id}
+                            candidate={r.c}
+                            result={r}
+                            locked
+                          />
+                        ))}
                       </div>
-                    </div>
+                    </>
                   )}
-
-                  <div id="gate">
-                    <GateForm
-                      id="finder-gate"
-                      eyebrow={
-                        results.length > 3
-                          ? `See all ${results.length}`
-                          : "Full profiles"
-                      }
-                      title={
-                        selectedIds.length
-                          ? `Send me the full profile for ${selectedIds.join(", ")}`
-                          : "Get the full profiles"
-                      }
-                      bullets={[
-                        `Redacted resumes for ${
-                          selectedIds.length
-                            ? selectedIds.join(", ")
-                            : results.length === 1
-                            ? "this candidate"
-                            : `all ${results.length} candidates`
-                        }`,
-                        "Pay expectation, bar admission and notice period",
-                        "Our one-page terms, within one business hour",
-                      ]}
-                      button={
-                        selectedIds.length
-                          ? "Send me the full profile"
-                          : "Send me the full profiles"
-                      }
-                      ids={selectedIds.length ? selectedIds : results.map((r) => r.c.id)}
-                      role={role}
-                      city={city}
-                      gateNote={selectedIds.join(", ")}
-                    />
-                  </div>
-
-                  <div id="r-locked">
-                    {lockedCards.length > 0 && (
-                      <>
-                        <p className="mini-h locked-h">
-                          <Mark>{lockedCards.length} more {plural(lockedCards.length, "candidate")}</Mark>{" "}
-                          with the full profiles
-                        </p>
-                        <div className="cards">
-                          {lockedCards.map((r) => (
-                            <CandidateCard
-                              key={r.c.id}
-                              candidate={r.c}
-                              result={r}
-                              locked
-                            />
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Steps */}
-        <section className="block alt">
-          <div className="wrap">
-            <div className="sec-head">
-              <span className="eyebrow">What happens next</span>
-              <h2>From your email to a first interview</h2>
+      {/* 3. 4-STEP WORKFLOW */}
+      <section className="block alt" style={{ padding: "88px 0" }}>
+        <div className="wrap">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>THE PROCESS · 4 EASY STEPS</span>
             </div>
-            <ol className="steps-line">
-              <li>
-                <span className="when">You ask</span>
-                <h3>One email address</h3>
-                <p>No agreement and no fee to see profiles.</p>
-              </li>
-              <li>
-                <span className="when">
-                  <Mark>Within one business hour</Mark>
-                </span>
-                <h3>Full profiles arrive</h3>
-                <p>
-                  Redacted resumes for the candidates you picked, and our
-                  one-page terms.
-                </p>
-              </li>
-              <li>
-                <span className="when">
-                  <Mark>Within one business day</Mark>
-                </span>
-                <h3>Justin books interviews</h3>
-                <p>With the people you choose, at times that suit you.</p>
-              </li>
-              <li>
-                <span className="when">When they start</span>
-                <h3>You pay the fee</h3>
-                <p>
-                  Invoice on the start date, <Mark>due in 15 days</Mark>.
-                </p>
-              </li>
-            </ol>
+            <h2 className="sec-title-lg">
+              From your request to a first <span className="serif-accent">interview</span>
+            </h2>
+            <p className="who-lede">
+              Transparent, discreet candidate introductions with zero obligation.
+            </p>
           </div>
-        </section>
 
-        {/* What it costs */}
-        <section className="block">
-          <div className="wrap">
-            <div className="sec-head row">
-              <div>
-                <span className="eyebrow">What it costs</span>
-                <h2>One fee, and only if you hire</h2>
-              </div>
-              <Link className="more link-arrow" href="/fees">
-                Fees and a calculator
-              </Link>
-            </div>
-            <TermsTiles />
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="block alt">
-          <div className="wrap split">
-            <div className="sec-head">
-              <span className="eyebrow">Questions</span>
-              <h2>About these candidates</h2>
-              <p>
-                Rather paste your posting? <Link href="/submit-job">Submit a job</Link>.
+          <div className="terms-pillars-grid" style={{ marginTop: 36 }}>
+            <div className="terms-pillar">
+              <div className="pillar-kicker">STEP 01 · REQUEST</div>
+              <div className="pillar-val" style={{ fontSize: 26 }}>One Email</div>
+              <div className="pillar-label">Select profiles</div>
+              <p className="pillar-desc">
+                No agreement and no fee to see candidate dossiers. Your firm identity stays confidential.
               </p>
             </div>
-            <div className="faq">
-              <details>
-                <summary>Who are these candidates?</summary>
-                <p>
-                  Attorneys and paralegals who have spoken with Jon in the last
-                  few weeks and are open to a move. Each one has agreed to be shown
-                  anonymously.
-                </p>
-              </details>
-              <details>
-                <summary>Why can&apos;t I see names?</summary>
-                <p>
-                  So their current firm never learns they are looking. Names
-                  follow when you both agree to meet, usually within a day of your
-                  request.
-                </p>
-              </details>
-              <details>
-                <summary>What if nobody fits?</summary>
-                <p>
-                  Send the seat anyway. We search our wider network and send a
-                  first shortlist, usually within <Mark>five business days</Mark>.
-                </p>
-              </details>
-              <details>
-                <summary>Do we have to sign anything to see profiles?</summary>
-                <p>
-                  No. You sign a one-page agreement only when you want to interview
-                  someone.
-                </p>
-              </details>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">STEP 02 · 1 HOUR</div>
+              <div className="pillar-val" style={{ fontSize: 26 }}>Full Profiles</div>
+              <div className="pillar-label">Dossiers delivered</div>
+              <p className="pillar-desc">
+                Redacted resumes for the candidates you choose, along with our one-page contingency terms.
+              </p>
+            </div>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">STEP 03 · 1 DAY</div>
+              <div className="pillar-val" style={{ fontSize: 26 }}>Interviews</div>
+              <div className="pillar-label">Justin coordinates calls</div>
+              <p className="pillar-desc">
+                We coordinate interviews with the candidates you want to meet, at dates and times that suit you.
+              </p>
+            </div>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">STEP 04 · WHEN HIRED</div>
+              <div className="pillar-val" style={{ fontSize: 26 }}>Pay on Start</div>
+              <div className="pillar-label">Net 15 Invoice</div>
+              <p className="pillar-desc">
+                Fee due 15 days after candidate starts. Covered by our 90-day replacement warranty.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <CtaBand
-          title="Rather talk the seat through?"
-          text="Fifteen minutes with Justin: the seat, the pay, and who is available now."
-          button="Book 15 minutes with Justin"
-          href={trust.calendly || "https://calendly.com/orionplacement/call-with-justin"}
-          cal={false}
-        />
-      <div className="mbar">
-        <a className="btn btn-primary" href="#gate" id="mbar-cta">
-          {unlocked ? "Request a profile" : "Get the full profiles"}
-        </a>
-      </div>
+      {/* 4. THE 4 TERMS PILLARS */}
+      <section className="block" style={{ padding: "88px 0" }}>
+        <div className="wrap">
+          <div className="sec-head-premium" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16 }}>
+            <div>
+              <div className="badge-capsule">
+                <span className="badge-dot" />
+                <span>TERMS TRANSPARENCY</span>
+              </div>
+              <h2 className="sec-title-lg" style={{ margin: "8px 0 0" }}>
+                One fee, and only if you <span className="serif-accent">hire</span>
+              </h2>
+            </div>
+            <Link className="btn btn-outline btn-sm" href="/fees" style={{ borderRadius: 7, fontWeight: 600, padding: "10px 20px" }}>
+              Fees and calculator →
+            </Link>
+          </div>
+
+          <div className="terms-pillars-grid" style={{ marginTop: 36 }}>
+            <div className="terms-pillar">
+              <div className="pillar-kicker">01 · CONTINGENCY FEE</div>
+              <div className="pillar-val">23%</div>
+              <div className="pillar-label">Of first-year base</div>
+              <p className="pillar-desc">
+                Calculated strictly on base salary. Discretionary bonuses and benefits are never included.
+              </p>
+            </div>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">02 · REPLACEMENT WARRANTY</div>
+              <div className="pillar-val">90 Days</div>
+              <div className="pillar-label">Calendar day guarantee</div>
+              <p className="pillar-desc">
+                If the hire leaves or is let go within 90 days, we conduct a replacement search at zero extra fee.
+              </p>
+            </div>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">03 · CLIENT FREEDOM</div>
+              <div className="pillar-val">Zero</div>
+              <div className="pillar-label">Upfront retainer or lock-in</div>
+              <p className="pillar-desc">
+                No retainer and no exclusivity. Keep your internal pipeline and other recruiters active.
+              </p>
+            </div>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">04 · PAYMENT SCHEDULE</div>
+              <div className="pillar-val">Net 15</div>
+              <div className="pillar-label">Invoice on start date</div>
+              <p className="pillar-desc">
+                We issue the invoice only when the candidate physically begins work, payable within 15 calendar days.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. BOTTOM DARK CTA SECTION */}
+      <section className="emp-terms-dark-sec">
+        <div className="wrap">
+          <div className="emp-terms-head">
+            <div className="badge-capsule-dark">
+              <span className="badge-dot-dark" />
+              <span>DIRECT MANDATE ADVISORY</span>
+            </div>
+            <h2 className="emp-terms-h2">
+              Rather talk the seat through <span className="serif-accent-dark">first?</span>
+            </h2>
+            <p className="emp-terms-lead">
+              Book a 15-minute briefing directly with founder Justin Sofman: the seat, the market compensation band, and who is available right now.
+            </p>
+
+            <div style={{ marginTop: 32 }}>
+              <a
+                href={trust.calendly || "https://calendly.com/orionplacement/call-with-justin"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-emp-primary"
+                style={{ padding: "16px 36px", fontSize: 16 }}
+              >
+                <span>Book 15 min with Justin</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

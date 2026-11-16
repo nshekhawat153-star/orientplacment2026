@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useId } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import {
   roles,
@@ -14,10 +14,7 @@ import {
   fmt,
   matchCandidates,
   mustHaves,
-  Candidate,
 } from "@/data";
-import { TrustLine } from "@/components/Rating";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { CandidateCard } from "@/components/CandidateCard";
 import { SalaryBandBar } from "@/components/SalaryBand";
 import { GateForm } from "@/components/GateForm";
@@ -125,28 +122,40 @@ export default function SubmitJobPage() {
 
   return (
     <>
-      <Breadcrumb
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Employers", href: "/employers" },
-          { label: "Submit a job" },
-        ]}
-      />
+      {/* 1. LUXURY HERO WITH PASTE BOX */}
+      <section className="emp-luxury-hero-sec sj-luxury-hero-sec">
+        <div className="emp-hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="emp-hero-video"
+          >
+            <source src="/media/splash.mp4" type="video/mp4" />
+          </video>
+          <div className="emp-hero-overlay" />
+          <div className="emp-hero-glow" />
+        </div>
 
-      {/* 1. Hero with paste box */}
-      <section className="phero sj-hero">
-        <div className="wrap">
-          <div>
-            <span className="eyebrow">Submit a job · for firms hiring</span>
-            <h1>Paste your job posting, see who fits</h1>
-            <p className="lede">
-              We read the role, city, years and pay, check the pay against the market and show matching candidates. Your posting is not published anywhere.
-            </p>
-            <TrustLine />
+        <div className="wrap emp-hero-content" style={{ maxWidth: 880 }}>
+          <div className="emp-hero-badge-wrap">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>DIRECT MANDATE INTAKE · 100% CONFIDENTIAL</span>
+            </div>
           </div>
 
+          <h1 className="emp-hero-h1">
+            Paste your job posting, see <span className="serif-accent">who fits</span>
+          </h1>
+
+          <p className="emp-hero-lead">
+            We instantly extract the practice role, location, experience requirements, and compensation band — check the pay against live market data, and reveal pre-screened matching candidates. Your posting is never published.
+          </p>
+
           <form
-            className="tool-form"
+            className="sj-luxury-form-card"
             id="post-form"
             aria-label="Your job posting"
             onSubmit={(e) => {
@@ -158,53 +167,94 @@ export default function SubmitJobPage() {
               handleReadPosting(postingText, false);
             }}
           >
-            <div className="field">
-              <label htmlFor="p-text">
-                Your job posting <span className="hint">(paste the text)</span>
+            <div style={{ textAlign: "left", marginBottom: 14 }}>
+              <label htmlFor="p-text" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 8 }}>
+                Your job posting <span style={{ color: "#64748B", fontWeight: 400 }}>(paste full description or requirements)</span>
               </label>
               <textarea
                 id="p-text"
-                rows={6}
-                placeholder="Paste the posting from your site, LinkedIn or a job board."
+                rows={5}
+                placeholder="Paste the posting text from your careers site, LinkedIn, or an internal mandate note..."
                 value={postingText}
                 onChange={(e) => setPostingText(e.target.value)}
+                style={{ width: "100%", padding: "14px 16px", borderRadius: 8, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", outline: "none", background: "#FFFFFF", resize: "vertical", lineHeight: 1.5 }}
               />
             </div>
-            <div className="hero-act">
-              <button className="btn btn-primary" type="submit">
-                Read my posting
-              </button>
-              <button
-                className="linkbtn"
-                type="button"
-                id="p-sample"
-                onClick={() => {
-                  setPostingText(samplePosting);
-                  handleReadPosting(samplePosting, true);
-                }}
-              >
-                Use a sample posting
-              </button>
+
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  style={{ background: "#1D4ED8", borderRadius: 7, fontWeight: 600, padding: "12px 24px", fontSize: 14.5, border: "none", color: "#FFFFFF", cursor: "pointer", boxShadow: "0 4px 14px rgba(29,78,216,0.3)" }}
+                >
+                  Read my posting →
+                </button>
+                <button
+                  className="btn btn-ghost"
+                  type="button"
+                  id="p-sample"
+                  onClick={() => {
+                    setPostingText(samplePosting);
+                    handleReadPosting(samplePosting, true);
+                  }}
+                  style={{ borderRadius: 7, fontWeight: 600, padding: "11px 18px", fontSize: 14, color: "#475569", background: "#F1F5F9", border: "1.5px solid #E2E8F0", cursor: "pointer" }}
+                >
+                  Use sample posting
+                </button>
+              </div>
+
+              {note && (
+                <p style={{ margin: 0, fontFamily: "var(--mono)", fontSize: 12, color: "#059669", fontWeight: 600 }} id="p-note" aria-live="polite">
+                  ✓ {note}
+                </p>
+              )}
             </div>
-            {note && (
-              <p className="small muted" id="p-note" aria-live="polite">
-                {note}
-              </p>
-            )}
           </form>
+
+          {/* Micro Reassurances */}
+          <div className="emp-reassurance-row">
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>100% confidential intake</span>
+            </div>
+            <span className="emp-dot-sep">·</span>
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Live market compensation check</span>
+            </div>
+            <span className="emp-dot-sep">·</span>
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Pre-screened attorney matches</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 2. What we read */}
-      <section className="block alt" id="read">
+      {/* 2. WHAT WE READ */}
+      <section className="block alt" id="read" style={{ padding: "88px 0" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">What we read</span>
-            <h2>Check what we read</h2>
-            <p>Green fields came from your posting. Change any of them and the pay check and matches update.</p>
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>INTELLIGENT PARSER · ADJUSTABLE FILTERS</span>
+            </div>
+            <h2 className="sec-title-lg">
+              Check what we <span className="serif-accent">read</span>
+            </h2>
+            <p className="who-lede">
+              Green fields came from your posting. Change any of them and the pay check and matches update immediately.
+            </p>
           </div>
 
-          <div className="sj-read">
+          <div className="sj-read" style={{ marginTop: 32 }}>
             <div className="pchips" id="chips">
               <label className={`pchip ${foundFields.role ? "found" : ""}`} data-f="role">
                 <span>Role</span>
@@ -317,11 +367,11 @@ export default function SubmitJobPage() {
               </label>
             </div>
 
-            <fieldset>
-              <legend>
-                Must-haves we found <span className="muted" style={{ fontWeight: 400 }}>(tap to add or remove)</span>
+            <fieldset style={{ border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "20px 24px", background: "#FFFFFF", marginTop: 20 }}>
+              <legend style={{ fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#08142A", padding: "0 8px" }}>
+                Must-haves we found <span style={{ color: "#64748B", fontWeight: 400 }}>(tap to add or remove)</span>
               </legend>
-              <div className="chips" id="c-must">
+              <div className="chips" id="c-must" style={{ marginTop: 8 }}>
                 {availableMustTags.map((tag) => {
                   const active = mustTags.includes(tag);
                   return (
@@ -342,18 +392,28 @@ export default function SubmitJobPage() {
         </div>
       </section>
 
-      {/* 3. Pay check and matched candidates, gate beside them */}
-      <section className="block" id="results">
+      {/* 3. PAY CHECK AND MATCHED CANDIDATES */}
+      <section className="block" id="results" style={{ padding: "88px 0" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Your result</span>
-            <h2>Pay check and who fits</h2>
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>MARKET BENCHMARK · MATCHED TALENT</span>
+            </div>
+            <h2 className="sec-title-lg">
+              Pay check &amp; who <span className="serif-accent">fits</span>
+            </h2>
+            <p className="who-lede">
+              Verified market compensation range for this seat and available pre-screened candidate dossiers.
+            </p>
           </div>
 
-          <div className="sj-res">
+          <div className="sj-res" style={{ marginTop: 36 }}>
             <div>
-              <div className="pay-card" id="paycheck" aria-live="polite">
-                <span className="mini-h">Pay check</span>
+              <div className="pay-card" id="paycheck" aria-live="polite" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
+                <span className="mini-h" style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", background: "rgba(29,78,216,0.08)", padding: "4px 10px", borderRadius: 6, display: "inline-block", marginBottom: 12 }}>
+                  Market Pay check
+                </span>
                 {!lo && !hi ? (
                   <div className="empty-state small">
                     Add the posted pay above and we check it against what {cityObj.name} firms pay.
@@ -368,7 +428,7 @@ export default function SubmitJobPage() {
                   </div>
                 ) : (
                   <>
-                    <p className="small muted">
+                    <p className="small muted" style={{ marginBottom: 14 }}>
                       {roleObj.name}, {cityObj.name}, base salary by experience.
                     </p>
                     <SalaryBandBar
@@ -378,7 +438,7 @@ export default function SubmitJobPage() {
                       marker={lo && hi ? (lo + hi) / 2 : lo || hi || undefined}
                     />
                     {payVerdict && (
-                      <div className="verdict">
+                      <div className="verdict" style={{ marginTop: 16 }}>
                         <b>
                           Your posted range <Mark>{payVerdict.rangeText}</Mark> is{" "}
                           {payVerdict.where === "in" ? "in line with" : payVerdict.where} the market.
@@ -392,8 +452,8 @@ export default function SubmitJobPage() {
                 )}
               </div>
 
-              <div className="results-head" aria-live="polite">
-                <b id="r-count">
+              <div className="results-head" aria-live="polite" style={{ marginTop: 28, marginBottom: 16 }}>
+                <b id="r-count" style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A" }}>
                   {matches.length ? (
                     <>
                       <Mark>{String(matches.length)}</Mark> candidate{" "}
@@ -403,7 +463,7 @@ export default function SubmitJobPage() {
                     "No exact matches in our current list"
                   )}
                 </b>
-                <span className="small muted" id="r-sub">
+                <span className="small muted" id="r-sub" style={{ display: "block", marginTop: 4 }}>
                   {matches.length
                     ? unlocked
                       ? "All open"
@@ -478,103 +538,135 @@ export default function SubmitJobPage() {
         </div>
       </section>
 
-      {/* 4. What happens next */}
-      <section className="block alt">
+      {/* 4. WHAT HAPPENS NEXT */}
+      <section className="block alt" style={{ padding: "88px 0" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">What happens next</span>
-            <h2>From your posting to a first interview</h2>
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>THE WORKFLOW · 4 EASY STEPS</span>
+            </div>
+            <h2 className="sec-title-lg">
+              From your posting to a first <span className="serif-accent">interview</span>
+            </h2>
+            <p className="who-lede">
+              A frictionless process engineered for busy managing partners.
+            </p>
           </div>
-          <ol className="steps-line">
-            <li>
-              <span className="when">You send</span>
-              <h3>One email address</h3>
-              <p>No agreement and no fee to send a job. Nothing is published.</p>
-            </li>
-            <li>
-              <span className="when">
-                <Mark>Within one business hour</Mark>
-              </span>
-              <h3>Full profiles arrive</h3>
-              <p>Redacted resumes for the matches, and our one-page terms.</p>
-            </li>
-            <li>
-              <span className="when">
-                <Mark>Within five business days</Mark>
-              </span>
-              <h3>A wider shortlist</h3>
-              <p>More people from our network if you want more to meet.</p>
-            </li>
-            <li>
-              <span className="when">When they start</span>
-              <h3>You pay the fee</h3>
-              <p>One invoice on the start date. Replacement at no charge if they leave early.</p>
-            </li>
-          </ol>
+
+          <div className="terms-pillars-grid" style={{ marginTop: 36 }}>
+            <div className="terms-pillar">
+              <div className="pillar-kicker">STEP 01 · SUBMISSION</div>
+              <div className="pillar-val" style={{ fontSize: 26 }}>One Email</div>
+              <div className="pillar-label">You send the mandate</div>
+              <p className="pillar-desc">
+                No agreement and no fee to send a job. Your posting stays strictly confidential.
+              </p>
+            </div>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">STEP 02 · 1 HOUR</div>
+              <div className="pillar-val" style={{ fontSize: 26 }}>Full Profiles</div>
+              <div className="pillar-label">Redacted dossiers arrive</div>
+              <p className="pillar-desc">
+                Screened resumes for the matches, verified compensation, and our one-page terms.
+              </p>
+            </div>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">STEP 03 · 5 DAYS</div>
+              <div className="pillar-val" style={{ fontSize: 26 }}>Wider Shortlist</div>
+              <div className="pillar-label">Active search extension</div>
+              <p className="pillar-desc">
+                Targeted outreach across our 100,000+ legal network if you want additional candidates.
+              </p>
+            </div>
+
+            <div className="terms-pillar">
+              <div className="pillar-kicker">STEP 04 · WHEN HIRED</div>
+              <div className="pillar-val" style={{ fontSize: 26 }}>Pay on Start</div>
+              <div className="pillar-label">One contingency invoice</div>
+              <p className="pillar-desc">
+                One invoice due 15 days after start date. Protected by our 90-day replacement warranty.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 5. FAQ */}
-      <section className="block">
+      <section className="block" style={{ padding: "88px 0" }}>
         <div className="wrap split">
-          <div className="sec-head">
-            <span className="eyebrow">Questions</span>
-            <h2>About submitting a job</h2>
-            <p>
+          <div className="sec-head-premium sec-head-left">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>QUESTIONS &amp; ANSWERS</span>
+            </div>
+            <h2 className="sec-title-lg">
+              About submitting a <span className="serif-accent">job</span>
+            </h2>
+            <p className="who-lede">
               No posting yet? Start from our{" "}
-              <Link href="/hiring-kit/estate-planning-attorney">posting template</Link>, or{" "}
-              <Link href="/find-candidates">describe the seat</Link> instead.
+              <Link href="/hiring-kit/estate-planning-attorney" style={{ color: "#1D4ED8", textDecoration: "underline" }}>posting template</Link>, or{" "}
+              <Link href="/find-candidates" style={{ color: "#1D4ED8", textDecoration: "underline" }}>describe the seat</Link> instead.
             </p>
           </div>
-          <div className="faq">
-            <details>
-              <summary>Is my posting published anywhere?</summary>
-              <p>
-                No. We use it to match candidates and brief Justin. Candidates see a description of the seat, never your firm's name, until you agree to meet.
+
+          <div className="faq" style={{ marginTop: 28 }}>
+            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 20px", marginBottom: 12 }}>
+              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>Is my posting published anywhere?</summary>
+              <p style={{ marginTop: 12, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
+                No. We use it to match candidates and brief Justin. Candidates see a general description of the seat, never your firm&apos;s name, until you agree to interview.
               </p>
             </details>
-            <details>
-              <summary>Can I keep the job on other boards?</summary>
-              <p>
-                Yes. We ask for no exclusivity. Keep it on your site, LinkedIn or the bar association boards.
+            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 20px", marginBottom: 12 }}>
+              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>Can I keep the job on other boards?</summary>
+              <p style={{ marginTop: 12, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
+                Yes. We work on a non-exclusive basis. Keep it on your firm website, LinkedIn, or local bar association boards.
               </p>
             </details>
-            <details>
-              <summary>What if the pay check says my range is low?</summary>
-              <p>
-                You can still send it. Justin will tell you which candidates would talk at your range and what a small change at the top would add.
+            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 20px", marginBottom: 12 }}>
+              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>What if the pay check says my range is low?</summary>
+              <p style={{ marginTop: 12, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
+                You can still submit it. Justin will advise you on which candidates would be open at your current band and what a small adjustment would unlock.
               </p>
             </details>
-            <details>
-              <summary>What does it cost to send a job?</summary>
-              <p>
-                Nothing. The fee is due only if you hire someone we introduced, on their start date.
+            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 20px" }}>
+              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>What does it cost to send a job?</summary>
+              <p style={{ marginTop: 12, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
+                Zero. Orion operates strictly on a contingency fee (23%) due only if you hire an introduced candidate, payable on their start date.
               </p>
             </details>
           </div>
         </div>
       </section>
 
-      {/* 6. CTA band */}
-      <div className="wrap">
-        <div className="cta-band">
-          <div className="wrap row">
-            <div>
-              <h2>Send this job and meet the matches</h2>
-              <p>Full profiles within the hour. No retainer, and no fee unless you hire.</p>
+      {/* 6. BOTTOM DARK CTA SECTION */}
+      <section className="emp-terms-dark-sec">
+        <div className="wrap">
+          <div className="emp-terms-head">
+            <div className="badge-capsule-dark">
+              <span className="badge-dot-dark" />
+              <span>DIRECT MANDATE · RAPID SHORTLIST</span>
             </div>
-            <a className="btn btn-primary btn-lg" href="#gate">
-              Send this job
-            </a>
+            <h2 className="emp-terms-h2">
+              Send this job and meet the <span className="serif-accent-dark">matches</span>
+            </h2>
+            <p className="emp-terms-lead">
+              Full candidate profiles within the hour. Zero retainer, zero exclusivity, and no fee unless you hire.
+            </p>
+
+            <div style={{ marginTop: 32 }}>
+              <a href="#gate" className="btn-emp-primary" style={{ padding: "16px 36px", fontSize: 16 }}>
+                <span>Send this job to Justin</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="mbar">
-        <a className="btn btn-primary" href="#gate" id="mbar-cta">
-          Send this job
-        </a>
-      </div>
+      </section>
     </>
   );
 }

@@ -24,8 +24,8 @@
 | **01** | `/` | `src/app/page.tsx` | Static | All (Homepage) | ✅ **Redesigned & Live** |
 | **02** | `/employers` | `src/app/employers/page.tsx` | Static | Law Firm Partners & Hiring Chairs | ✅ **Redesigned & Live** |
 | **03** | `/hire-attorneys` | `src/app/hire-attorneys/page.tsx` | Static | Law Firm Decision Makers | ✅ **Redesigned & Live** |
-| **04** | `/submit-job` | `src/app/submit-job/page.tsx` | Static | Law Firms (Direct Mandate Intake) | 📋 Up Next |
-| **05** | `/find-candidates` | `src/app/find-candidates/page.tsx` | Static | Law Firms (Talent Discovery) | 📋 Needs Review |
+| **04** | `/submit-job` | `src/app/submit-job/page.tsx` | Static | Law Firms (Direct Mandate Intake) | ✅ **Redesigned & Live** |
+| **05** | `/find-candidates` | `src/app/find-candidates/page.tsx` | Static | Law Firms (Talent Discovery) | ✅ **Redesigned & Live** |
 | **06** | `/fees` | `src/app/fees/page.tsx` | Static | Law Firms (Fee Schedule & Guarantee) | ✅ **Redesigned & Live** |
 | **07** | `/candidates` | `src/app/candidates/page.tsx` | Static | Attorneys & Paralegals | ✅ **Redesigned & Live** |
 | **08** | `/jobs` | `src/app/jobs/page.tsx` | Static | Active Job Seekers | ✅ **Redesigned & Live** |
