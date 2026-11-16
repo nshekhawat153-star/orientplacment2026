@@ -19,40 +19,82 @@ export default function HireAttorneysLandingPage() {
 
   return (
     <div className="ha-page">
-      {/* 1. HERO SECTION (Centered, Clean, Minimal) */}
-      <section className="ha-hero">
-        <div className="wrap">
-          <div className="ha-hero-inner">
-            <span className="ha-badge">Only for Law Firms Hiring Attorneys</span>
+      {/* 1. LUXURY HERO SECTION (Centered with Water Splash Video & Blue Glow) */}
+      <section className="emp-luxury-hero-sec ha-luxury-hero-sec">
+        {/* Background Video Layer */}
+        <div className="emp-hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="emp-hero-video"
+          >
+            <source src="/media/splash.mp4" type="video/mp4" />
+          </video>
+          <div className="emp-hero-overlay" />
+          <div className="emp-hero-glow" />
+        </div>
 
-            <h1 className="ha-hero-h1">
-              Get qualified attorney candidates sent straight to{" "}
-              <span className="ha-serif-accent">your firm.</span>
-            </h1>
+        <div className="wrap emp-hero-content">
+          <div className="emp-hero-badge-wrap">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>DIRECT INTAKE · ZERO RETAINER</span>
+            </div>
+          </div>
 
-            <p className="ha-hero-sub">You only pay if you hire.</p>
+          <h1 className="emp-hero-h1">
+            Get qualified attorney candidates sent straight to{" "}
+            <span className="serif-accent">your firm.</span>
+          </h1>
 
-            <p className="ha-hero-p">
-              Sign one simple agreement. We send attorneys who match your practice
-              area, level, and timeline. If you don&apos;t hire, you don&apos;t pay. No upfront cost.
-            </p>
+          <p className="emp-hero-lead">
+            Sign one simple agreement. Pre-screened lateral attorneys matched to your exact
+            practice mix, local bar admissions, and compensation band. You only pay if you hire.
+          </p>
 
-            <div className="ha-hero-act">
-              <a href="#questionnaire" className="ha-cta-btn">
-                <span>Check candidate availability</span>
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 20 20"
-                  width="18"
-                  height="18"
-                  fill="currentColor"
-                >
-                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-                </svg>
-              </a>
-              <p className="ha-micro-trust">
-                Takes about 2 minutes · No upfront cost · 90-day replacement guarantee
-              </p>
+          <div className="emp-hero-actions">
+            <a href="#questionnaire" className="btn-emp-primary">
+              <span>Check candidate availability</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
+            <a
+              href="https://calendly.com/orionplacement/call-with-justin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-emp-ghost"
+            >
+              <span>Book 15 min with Justin</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
+          </div>
+
+          {/* Micro Reassurances */}
+          <div className="emp-reassurance-row">
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Takes ~2 minutes</span>
+            </div>
+            <span className="emp-dot-sep">·</span>
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Zero upfront cost</span>
+            </div>
+            <span className="emp-dot-sep">·</span>
+            <div className="emp-reassurance-item">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>90-day replacement guarantee</span>
             </div>
           </div>
         </div>
@@ -61,10 +103,15 @@ export default function HireAttorneysLandingPage() {
       {/* 2. CLIENT RESULTS / FIRMS WE'VE HELPED HIRE */}
       <section className="ha-sec ha-sec-tinted">
         <div className="wrap">
-          <div className="ha-sec-header ha-text-center">
-            <span className="ha-sec-kicker">Client results</span>
-            <h2 className="ha-sec-title">Firms we&apos;ve helped hire</h2>
-            <p className="ha-sec-desc">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>CLIENT RESULTS · VERIFIED FEEDBACK</span>
+            </div>
+            <h2 className="sec-title-lg">
+              Firms we&apos;ve helped <span className="serif-accent">hire</span>
+            </h2>
+            <p className="who-lede">
               Direct feedback from managing partners and firm administrators who hired through Orion.
             </p>
           </div>
@@ -92,7 +139,11 @@ export default function HireAttorneysLandingPage() {
                 </blockquote>
 
                 <figcaption className="ha-review-author">
-                  <div className="ha-avatar-circle" aria-hidden="true">⚖</div>
+                  <div className="ha-avatar-circle" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 3v18M3 7h18M6 7l-3 7h6L6 7zm12 0l-3 7h6l-3-7z" />
+                    </svg>
+                  </div>
                   <div>
                     <b className="ha-author-name">{rev.name}</b>
                     <span className="ha-author-title">Law Firm Client</span>
@@ -107,10 +158,15 @@ export default function HireAttorneysLandingPage() {
       {/* 3. HOW IT WORKS */}
       <section className="ha-sec">
         <div className="wrap">
-          <div className="ha-sec-header ha-text-center">
-            <span className="ha-sec-kicker">How it works</span>
-            <h2 className="ha-sec-title">You only pay if you hire.</h2>
-            <p className="ha-sec-desc">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>THE CONTINGENCY MODEL · ZERO RISK</span>
+            </div>
+            <h2 className="sec-title-lg">
+              You only pay if you <span className="serif-accent">hire.</span>
+            </h2>
+            <p className="who-lede">
               Sign a simple agreement. We send candidates. You interview the ones you like.
               A fee is due only if you hire one of them.
             </p>
@@ -171,8 +227,13 @@ export default function HireAttorneysLandingPage() {
 
             {/* Recruiter Content */}
             <div className="ha-recruiter-content">
-              <span className="ha-sec-kicker">Meet your recruiter</span>
-              <h2 className="ha-recruiter-name">Hi, I&apos;m Justin Sofman.</h2>
+              <div className="badge-capsule" style={{ marginBottom: 14 }}>
+                <span className="badge-dot" />
+                <span>FOUNDER SPOTLIGHT</span>
+              </div>
+              <h2 className="ha-recruiter-name">
+                Hi, I&apos;m <span className="serif-accent">Justin Sofman.</span>
+              </h2>
               <p className="ha-recruiter-sub">Co-Founder &amp; Managing Partner, Orion Placement</p>
 
               <div className="ha-recruiter-paragraphs">
@@ -197,10 +258,15 @@ export default function HireAttorneysLandingPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary btn-sm"
+                  style={{ borderRadius: 7, fontWeight: 600, padding: "10px 20px" }}
                 >
                   Book 15 min with Justin →
                 </a>
-                <a href="#questionnaire" className="btn btn-outline btn-sm">
+                <a
+                  href="#questionnaire"
+                  className="btn btn-outline btn-sm"
+                  style={{ borderRadius: 7, fontWeight: 600, padding: "10px 20px" }}
+                >
                   Check candidate availability
                 </a>
                 <a href="mailto:justin@orionplacement.com" className="ha-email-link">
@@ -215,10 +281,15 @@ export default function HireAttorneysLandingPage() {
       {/* 5. INTERACTIVE QUESTIONNAIRE */}
       <section id="questionnaire" className="ha-sec">
         <div className="wrap">
-          <div className="ha-sec-header ha-text-center">
-            <span className="ha-sec-kicker">Check candidate availability</span>
-            <h2 className="ha-sec-title">Tell us who you&apos;re looking for</h2>
-            <p className="ha-sec-desc">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>START YOUR SEARCH · 2 MINUTES</span>
+            </div>
+            <h2 className="sec-title-lg">
+              Tell us who you&apos;re looking <span className="serif-accent">for</span>
+            </h2>
+            <p className="who-lede">
               A few quick questions. Takes 2 minutes. You only pay if you hire.
             </p>
           </div>
@@ -231,27 +302,30 @@ export default function HireAttorneysLandingPage() {
         </div>
       </section>
 
-      {/* 6. BOTTOM CALL TO ACTION */}
-      <section className="ha-sec ha-sec-tinted ha-bottom-cta">
+      {/* 6. BOTTOM DARK CTA SECTION */}
+      <section className="emp-terms-dark-sec ha-terms-dark-sec">
         <div className="wrap">
-          <div className="ha-bottom-cta-content">
-            <h2 className="ha-cta-h2">Ready to see who&apos;s available?</h2>
-            <p className="ha-cta-desc">
-              One simple agreement. Candidates sent to your inbox. No upfront cost, and you{" "}
-              <b>only pay if you hire</b>.
+          <div className="emp-terms-head">
+            <div className="badge-capsule-dark">
+              <span className="badge-dot-dark" />
+              <span>100% CONTINGENCY · RISK REVERSAL</span>
+            </div>
+            <h2 className="emp-terms-h2">
+              Ready to see who&apos;s <span className="serif-accent-dark">available?</span>
+            </h2>
+            <p className="emp-terms-lead">
+              One simple agreement. Pre-screened attorney dossiers sent to your inbox within days.
+              No upfront cost, and you <b>only pay if you hire</b>.
             </p>
-            <a href="#questionnaire" className="ha-cta-btn">
-              <span>Check candidate availability</span>
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                width="18"
-                height="18"
-                fill="currentColor"
-              >
-                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-              </svg>
-            </a>
+
+            <div style={{ marginTop: 32 }}>
+              <a href="#questionnaire" className="btn-emp-primary" style={{ padding: "16px 36px", fontSize: 16 }}>
+                <span>Check candidate availability</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>
