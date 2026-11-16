@@ -220,40 +220,526 @@ body.clean .mark{background:none;border:0;padding:0}
 .header-cta{flex-shrink:0}
 .menu-btn{display:none}
 
-/* ---------- 5. mega menu: white panel, hairlines, generous space, soft fade ---------- */
-.mega{position:absolute;left:0;right:0;top:100%;background:var(--white);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);box-shadow:var(--shadow-pop);z-index:59}
-.mega:not([hidden]){animation:megaIn .38s var(--ease) both}
-@keyframes megaIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-.mega-in{display:grid;grid-template-columns:minmax(0,1fr);gap:56px;padding-top:44px;padding-bottom:48px}
-.mega-in.has-aside{grid-template-columns:minmax(0,1fr) 300px}
-.mega-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
-.mega-list li{border-top:1px solid var(--rule-2)}
-.mi{display:block;padding:16px 0 15px;color:var(--ink);text-decoration:none}
-.mi b{display:block;font:500 15px/1.35 var(--body);color:var(--ink);transition:color var(--t-fast) var(--ease)}
-.mi span{display:block;margin-top:3px;font-size:13.5px;line-height:1.5;color:var(--ink-3)}
-.mi:hover b{color:var(--accent)}
-.mi b::after{content:" \2192";display:inline-block;opacity:0;transform:translateX(-4px);transition:opacity var(--t) var(--ease),transform var(--t) var(--ease);color:var(--accent)}
-.mi:hover b::after{opacity:1;transform:none}
-/* salary guides: featured guide + two compact columns */
-.is-cols .mega-main{display:grid;grid-template-columns:260px minmax(0,1.6fr) minmax(0,1.2fr);gap:48px;align-items:start}
-.mega-col h3{font:500 11.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding-bottom:12px}
-.mega-list.compact{column-gap:32px}
-.mega-list.compact .mi{padding:10px 0 9px}
-.mega-list.compact .mi b{font-size:14px;font-weight:400}
-.mega-list.compact .mi span{display:none}
-.mi-feature{display:block;padding:26px 24px;background:var(--ice);border:1px solid var(--ice-line);border-radius:var(--r);transition:border-color var(--t) var(--ease)}
-.mi-feature:hover{border-color:var(--accent)}
-.mi-feature .eyebrow{display:block;margin-bottom:12px;font-size:11.5px}
-.mi-feature b{font:400 22px/1.2 var(--display);color:var(--ink)}
-.mi-feature span:not(.eyebrow){margin-top:10px;font-size:14px;color:var(--ink-2)}
-.mega-aside{display:flex;flex-direction:column;gap:20px;padding-left:40px;border-left:1px solid var(--rule)}
-.mega-aside .eyebrow{display:block;margin-bottom:8px;font-size:11.5px}
-.mega-aside p{font-size:14px;color:var(--ink-2);line-height:1.6}
-.mega-aside-talk .link-arrow,.mega-aside-talk .cal-link{display:inline-block;margin-top:10px;font-size:14px}
-.mega-aside-ctas{display:grid;gap:10px}
-.mega-aside-rating{padding-top:18px;border-top:1px solid var(--rule)}
-.mega-aside .rating.on-dark{background:var(--white);border-color:var(--rule);color:var(--ink)}
-.mega-aside .rating.on-dark .rc{color:var(--ink-3)}
+/* ---------- 5. mega menu: luxury desktop dropdown drawer ---------- */
+.mega {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 59;
+  background: #FFFFFF;
+  border-top: 1px solid #E2E8F0;
+  border-bottom: 1.5px solid #CBD5E1;
+  box-shadow: 0 24px 60px -8px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.mega:not([hidden]) {
+  animation: megaIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes megaIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mega-in {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 48px !important;
+  padding-top: 36px !important;
+  padding-bottom: 40px !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+.mega-in.has-aside {
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 360px) !important;
+  gap: 48px !important;
+  align-items: start !important;
+}
+
+.mega-list {
+  list-style: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px 20px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mega-list li {
+  border-top: none !important;
+  list-style: none !important;
+}
+
+.mi {
+  display: block !important;
+  padding: 13px 16px !important;
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.mi b {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  font-family: var(--body) !important;
+  font-size: 14.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  color: #08142A !important;
+  transition: color 0.18s ease !important;
+}
+
+.mi b::after {
+  content: "→" !important;
+  font-size: 14px !important;
+  color: #1D4ED8 !important;
+  opacity: 0 !important;
+  transform: translateX(-4px) !important;
+  transition: all 0.18s ease !important;
+}
+
+.mi:hover {
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  transform: translateX(3px) !important;
+}
+
+.mi:hover b {
+  color: #1D4ED8 !important;
+}
+
+.mi:hover b::after {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+.mi span {
+  display: block !important;
+  margin-top: 4px !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  color: #64748B !important;
+  font-weight: 400 !important;
+}
+
+/* Mega Aside Card */
+.mega-aside {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+  padding: 26px !important;
+  border-left: none !important;
+  background: #F8FAFC !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+}
+
+.mega-aside .eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-bottom: 10px !important;
+  font-family: var(--mono) !important;
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #1D4ED8 !important;
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  border-radius: 999px !important;
+  padding: 4px 12px !important;
+  width: fit-content !important;
+}
+
+.mega-aside p {
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: #475569 !important;
+  margin: 0 !important;
+}
+
+.mega-aside-talk .link-arrow,
+.mega-aside-talk .cal-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-top: 10px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #1D4ED8 !important;
+  text-decoration: none !important;
+  transition: all 0.18s ease !important;
+}
+
+.mega-aside-talk .link-arrow:hover,
+.mega-aside-talk .cal-link:hover {
+  color: #2563EB !important;
+  transform: translateX(2px) !important;
+}
+
+.mega-aside-ctas {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+.mega-btn-primary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #1D4ED8 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 7px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  padding: 12px 18px !important;
+  min-height: 44px !important;
+  text-decoration: none !important;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.25) !important;
+  transition: all 0.2s ease !important;
+}
+
+.mega-btn-primary:hover {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.35) !important;
+}
+
+.mega-btn-outline {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #CBD5E1 !important;
+  color: #08142A !important;
+  border-radius: 7px !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  padding: 11px 18px !important;
+  min-height: 42px !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.mega-btn-outline:hover {
+  border-color: #1D4ED8 !important;
+  color: #1D4ED8 !important;
+  background: #F8FAFC !important;
+}
+
+.mega-aside-rating {
+  padding-top: 14px !important;
+  border-top: 1px solid #E2E8F0 !important;
+}
+
+.mega-aside .rating {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 999px !important;
+  padding: 6px 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+}
+
+.mega-aside .rating b {
+  color: #08142A !important;
+  font-weight: 700 !important;
+}
+
+.mega-aside .stars {
+  color: #F59E0B !important;
+}
+
+.mega-aside .rc {
+  color: #64748B !important;
+  font-size: 13px !important;
+}
+
+/* Salary guides: 3-column layout */
+.is-cols .mega-main {
+  display: grid !important;
+  grid-template-columns: minmax(280px, 320px) minmax(0, 1.4fr) minmax(0, 1.2fr) !important;
+  gap: 40px !important;
+  align-items: start !important;
+}
+
+.mega-col h3 {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #64748B !important;
+  margin: 0 0 14px 0 !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+.mega-list.compact {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  grid-template-columns: 1fr !important;
+}
+
+.mega-list.compact .mi {
+  padding: 8px 12px !important;
+  border-radius: 7px !important;
+  margin-bottom: 0 !important;
+}
+
+.mega-list.compact .mi b {
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+}
+
+.mega-list.compact .mi span {
+  display: none !important;
+}
+
+.mi-feature {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  padding: 26px !important;
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
+  border: 1.5px solid #BFDBFE !important;
+  border-radius: 14px !important;
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.06) !important;
+}
+
+.mi-feature:hover {
+  border-color: #2563EB !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(29, 78, 216, 0.15) !important;
+}
+
+.mi-feature .eyebrow {
+  display: inline-flex !important;
+  font-family: var(--mono) !important;
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #1D4ED8 !important;
+  margin: 0 !important;
+}
+
+.mi-feature b {
+  font-family: var(--display) !important;
+  font-size: 21px !important;
+  font-weight: 400 !important;
+  line-height: 1.25 !important;
+  color: #08142A !important;
+}
+
+.mi-feature span:not(.eyebrow):not(.mega-feature-cta) {
+  font-size: 13.5px !important;
+  line-height: 1.5 !important;
+  color: #475569 !important;
+  margin: 0 !important;
+}
+
+.mega-feature-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #1D4ED8 !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  margin-top: 6px !important;
+  transition: transform 0.2s ease !important;
+}
+
+.mi-feature:hover .mega-feature-cta {
+  color: #2563EB !important;
+}
+
+.mi-feature:hover .feature-arrow {
+  transform: translateX(3px) !important;
+}
+
+/* ==========================================================================
+   5B. MEGA MENU ON DARK HEADER (ORION MIDNIGHT NAVY - #08142A)
+   ========================================================================== */
+.site-header.header-on-dark .mega {
+  background: #08142A !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 32px 80px -12px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.site-header.header-on-dark .mi {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.site-header.header-on-dark .mi b {
+  color: #FFFFFF !important;
+}
+
+.site-header.header-on-dark .mi b::after {
+  color: #60A5FA !important;
+}
+
+.site-header.header-on-dark .mi:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(96, 165, 250, 0.35) !important;
+  transform: translateX(3px) !important;
+}
+
+.site-header.header-on-dark .mi:hover b {
+  color: #60A5FA !important;
+}
+
+.site-header.header-on-dark .mi span {
+  color: #94A3B8 !important;
+}
+
+.site-header.header-on-dark .mega-aside {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.site-header.header-on-dark .mega-aside .eyebrow {
+  background: rgba(96, 165, 250, 0.12) !important;
+  border: 1px solid rgba(96, 165, 250, 0.25) !important;
+  color: #93C5FD !important;
+}
+
+.site-header.header-on-dark .mega-aside p {
+  color: #94A3B8 !important;
+}
+
+.site-header.header-on-dark .mega-aside-talk .link-arrow,
+.site-header.header-on-dark .mega-aside-talk .cal-link {
+  color: #60A5FA !important;
+}
+
+.site-header.header-on-dark .mega-aside-talk .link-arrow:hover,
+.site-header.header-on-dark .mega-aside-talk .cal-link:hover {
+  color: #93C5FD !important;
+}
+
+.site-header.header-on-dark .mega-btn-primary {
+  background: #1D4ED8 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.35) !important;
+}
+
+.site-header.header-on-dark .mega-btn-primary:hover {
+  background: #2563EB !important;
+}
+
+.site-header.header-on-dark .mega-btn-outline {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #FFFFFF !important;
+}
+
+.site-header.header-on-dark .mega-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.site-header.header-on-dark .mega-aside-rating {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.site-header.header-on-dark .mega-aside .rating {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+}
+
+.site-header.header-on-dark .mega-aside .rating b {
+  color: #FFFFFF !important;
+}
+
+.site-header.header-on-dark .mega-aside .stars {
+  color: #FBBF24 !important;
+}
+
+.site-header.header-on-dark .mega-aside .rc {
+  color: #94A3B8 !important;
+}
+
+/* Salary guides dark adjustments */
+.site-header.header-on-dark .mi-feature {
+  background: linear-gradient(135deg, rgba(29, 78, 216, 0.22) 0%, rgba(14, 165, 233, 0.12) 100%) !important;
+  border: 1px solid rgba(96, 165, 250, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+.site-header.header-on-dark .mi-feature:hover {
+  border-color: #60A5FA !important;
+  box-shadow: 0 12px 32px rgba(29, 78, 216, 0.25) !important;
+}
+
+.site-header.header-on-dark .mi-feature .eyebrow {
+  color: #93C5FD !important;
+}
+
+.site-header.header-on-dark .mi-feature b {
+  color: #FFFFFF !important;
+}
+
+.site-header.header-on-dark .mi-feature span:not(.eyebrow):not(.mega-feature-cta) {
+  color: #94A3B8 !important;
+}
+
+.site-header.header-on-dark .mega-feature-cta {
+  color: #60A5FA !important;
+}
+
+.site-header.header-on-dark .mega-col h3 {
+  color: #60A5FA !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.site-header.header-on-dark .mega-list.compact .mi {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid transparent !important;
+}
+
+.site-header.header-on-dark .mega-list.compact .mi:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(96, 165, 250, 0.25) !important;
+}
+
+.site-header.header-on-dark .mega-list.compact .mi b {
+  color: #E2E8F0 !important;
+}
+
+.site-header.header-on-dark .mega-list.compact .mi:hover b {
+  color: #FFFFFF !important;
+}
+
 
 /* ---------- 6. phone menu (site.js: .menu-btn, #mnav, .acc) ---------- */
 .mnav{position:fixed;inset:0;z-index:90;background:var(--paper);display:flex;flex-direction:column;animation:fadeIn .3s var(--ease) both}
@@ -1354,8 +1840,7 @@ a.id:hover{color:var(--accent)}
   display: flex;
   flex-direction: column;
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-top: 4px solid #1D4ED8;
+  border: 1.5px solid #E2E8F0;
   border-radius: 12px;
   padding: 22px 28px 18px;
   box-shadow: 0 16px 44px -12px rgba(15, 23, 42, 0.08);

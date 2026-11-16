@@ -228,9 +228,9 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                     </div>
                     <aside className="mega-aside">
                       <div className="mega-aside-talk">
-                        <span className="eyebrow">Talk it through</span>
+                        <span className="eyebrow">Direct partner access</span>
                         <p>
-                          Fifteen minutes with Justin: the seat, the pay, who is
+                          Fifteen minutes with Justin: the seat, the pay, and who is
                           available now.
                         </p>
                         <CalendlyLink className="link-arrow" />
@@ -329,10 +329,10 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                     </div>
                     <aside className="mega-aside">
                       <div className="mega-aside-talk">
-                        <span className="eyebrow">For candidates</span>
+                        <span className="eyebrow">Confidential career move</span>
                         <p>
-                          Free for candidates. No firm sees your name until you
-                          say yes to a role.
+                          Always 100% free for candidates. No firm sees your name until you
+                          say yes to an interview.
                         </p>
                       </div>
                       <div className="mega-aside-ctas">
@@ -341,6 +341,13 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                           href="/upload-resume"
                         >
                           <span>Upload resume</span>
+                          <BtnArrow />
+                        </Link>
+                        <Link
+                          className="btn btn-outline btn-sm btn-block mega-btn-outline"
+                          href="/jobs"
+                        >
+                          <span>See open jobs</span>
                           <BtnArrow />
                         </Link>
                       </div>
@@ -378,11 +385,14 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                           href="/salaries/estate-planning-attorney/houston-tx"
                           className="mi mi-feature"
                         >
-                          <span className="eyebrow">Featured guide</span>
+                          <span className="eyebrow">Featured benchmark · Houston</span>
                           <b>Estate planning attorney pay in Houston</b>
                           <span>
-                            Bands by years of practice, the median and the
-                            source
+                            Bands by years of practice, the median, and verified market source
+                          </span>
+                          <span className="mega-feature-cta">
+                            <span>Explore full report</span>
+                            <span className="feature-arrow" aria-hidden="true">→</span>
                           </span>
                         </Link>
                       </div>
