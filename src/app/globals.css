@@ -9777,3 +9777,552 @@ table.data.compare td.us{background:#F5F8FC}
   line-height: 1.6;
   margin: 0;
 }
+
+/* ==========================================================================
+   30. UNIVERSAL LUXURY HERO & CANDIDATE INTAKE STYLES
+   ========================================================================== */
+
+.emp-luxury-hero-sec {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  background: #08142A !important;
+  color: #FFFFFF !important;
+  padding: 120px 0 68px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.emp-hero-video-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+}
+
+.emp-hero-video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  pointer-events: none !important;
+  opacity: 0.85 !important;
+}
+
+.emp-hero-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 20, 42, 0.50) 0%,
+    rgba(8, 20, 42, 0.35) 45%,
+    rgba(8, 20, 42, 0.88) 100%
+  ) !important;
+}
+
+.emp-hero-glow {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  background: radial-gradient(
+    circle at 50% 48%,
+    rgba(29, 78, 216, 0.16) 0%,
+    rgba(8, 20, 42, 0.70) 100%
+  ) !important;
+}
+
+.emp-hero-content {
+  position: relative !important;
+  z-index: 3 !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.emp-hero-badge-wrap {
+  display: flex !important;
+  justify-content: center !important;
+  margin-bottom: 18px !important;
+}
+
+.emp-hero-h1 {
+  font-family: var(--display) !important;
+  font-size: clamp(34px, 4.4vw, 52px) !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  color: #FFFFFF !important;
+  margin: 0 auto 16px !important;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5) !important;
+  text-wrap: balance !important;
+}
+
+.emp-hero-h1 .serif-accent {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  color: #60A5FA !important;
+}
+
+.emp-hero-lead {
+  font-size: 16.5px !important;
+  line-height: 1.65 !important;
+  color: #CBD5E1 !important;
+  max-width: 680px !important;
+  margin: 0 auto 28px !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+.emp-hero-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 24px !important;
+}
+
+.btn-emp-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #1D4ED8 !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  padding: 13px 28px !important;
+  border-radius: 7px !important;
+  text-decoration: none !important;
+  border: 1px solid #1D4ED8 !important;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.35) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+.btn-emp-primary:hover {
+  background: #2563EB !important;
+  transform: translateY(-1px) !important;
+  color: #FFFFFF !important;
+}
+
+.btn-emp-ghost {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  padding: 13px 28px !important;
+  border-radius: 7px !important;
+  text-decoration: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  backdrop-filter: blur(8px) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+.btn-emp-ghost:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  color: #FFFFFF !important;
+}
+
+/* Reassurance Row */
+.emp-reassurance-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
+  font-size: 13.5px !important;
+  color: #94A3B8 !important;
+}
+
+.emp-reassurance-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+.emp-reassurance-item .check {
+  color: #38BDF8 !important;
+  font-weight: 700 !important;
+}
+
+/* ==========================================================================
+   31. UPLOAD RESUME LUXURY STYLES (/upload-resume)
+   ========================================================================== */
+
+.ur-drop-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.45) !important;
+  padding: 32px 28px !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  color: #08142A !important;
+}
+
+.ur-drop-zone {
+  border: 2px dashed #CBD5E1 !important;
+  border-radius: 12px !important;
+  background: #F8FAFC !important;
+  padding: 36px 24px !important;
+  transition: all 0.22s ease !important;
+  cursor: pointer !important;
+}
+
+.ur-drop-zone:hover,
+.ur-drop-zone.over {
+  border-color: #1D4ED8 !important;
+  background: rgba(29, 78, 216, 0.04) !important;
+  transform: translateY(-1px) !important;
+}
+
+.ur-drop-icon-disc {
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 50% !important;
+  background: rgba(29, 78, 216, 0.08) !important;
+  color: #1D4ED8 !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 auto 16px !important;
+}
+
+.ur-drop-h {
+  font-family: var(--display) !important;
+  font-size: 21px !important;
+  font-weight: 500 !important;
+  color: #08142A !important;
+  margin-bottom: 6px !important;
+}
+
+.ur-drop-sub {
+  font-size: 13.5px !important;
+  color: #64748B !important;
+  margin-bottom: 20px !important;
+  max-width: 460px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1.5 !important;
+}
+
+.ur-drop-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 12px !important;
+}
+
+.ur-sample-btn {
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #1D4ED8 !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px !important;
+  padding: 8px 12px !important;
+  transition: color 0.15s ease !important;
+}
+
+.ur-sample-btn:hover {
+  color: #2563EB !important;
+}
+
+.ur-file-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: var(--mono) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #059669 !important;
+  background: #ECFDF5 !important;
+  border: 1px solid #A7F3D0 !important;
+  border-radius: 999px !important;
+  padding: 6px 14px !important;
+  margin-top: 14px !important;
+}
+
+.ur-paste-toggle {
+  margin-top: 20px !important;
+  border-top: 1px solid #E2E8F0 !important;
+  padding-top: 16px !important;
+  text-align: left !important;
+  font-size: 13.5px !important;
+  color: #64748B !important;
+}
+
+.ur-paste-textarea {
+  width: 100% !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 8px !important;
+  padding: 12px 14px !important;
+  font-family: var(--mono) !important;
+  font-size: 13px !important;
+  color: #08142A !important;
+  margin-top: 10px !important;
+  resize: vertical !important;
+  box-sizing: border-box !important;
+  background: #FFFFFF !important;
+}
+
+.ur-paste-textarea:focus {
+  outline: none !important;
+  border-color: #1D4ED8 !important;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15) !important;
+}
+
+/* Studio 2-Column layout */
+.ur-parsed-studio {
+  display: grid !important;
+  grid-template-columns: 380px minmax(0, 1fr) !important;
+  gap: 32px !important;
+  align-items: start !important;
+  margin-top: 40px !important;
+}
+
+@media (max-width: 960px) {
+  .ur-parsed-studio {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.ur-studio-form-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 14px !important;
+  padding: 28px 24px !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+  position: sticky !important;
+  top: 96px !important;
+}
+
+.ur-chips-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 7px !important;
+  margin-top: 6px !important;
+}
+
+.ur-chip-btn {
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  padding: 5px 12px !important;
+  border-radius: 999px !important;
+  border: 1px solid #CBD5E1 !important;
+  background: #FFFFFF !important;
+  color: #334155 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.ur-chip-btn:hover {
+  border-color: #1D4ED8 !important;
+  color: #1D4ED8 !important;
+}
+
+.ur-chip-btn.active {
+  background: #1D4ED8 !important;
+  color: #FFFFFF !important;
+  border-color: #1D4ED8 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 6px rgba(29, 78, 216, 0.25) !important;
+}
+
+.ur-security-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  margin-top: 36px !important;
+}
+
+@media (max-width: 960px) {
+  .ur-security-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .ur-security-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.ur-security-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 14px !important;
+  padding: 24px 20px !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
+  transition: all 0.22s ease !important;
+}
+
+.ur-security-card:hover {
+  transform: translateY(-3px) !important;
+  border-color: #1D4ED8 !important;
+  box-shadow: 0 14px 28px -6px rgba(29, 78, 216, 0.12) !important;
+}
+
+.ur-security-icon {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  background: rgba(5, 150, 105, 0.1) !important;
+  color: #059669 !important;
+  display: grid !important;
+  place-items: center !important;
+  margin-bottom: 14px !important;
+}
+
+.ur-security-title {
+  font-family: var(--display) !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: #08142A !important;
+  margin-bottom: 6px !important;
+}
+
+.ur-security-desc {
+  font-size: 13.5px !important;
+  color: #475569 !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================================
+   32. SALARY CHECK LUXURY STYLES (/salary-check)
+   ========================================================================== */
+
+.sc-calc-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.45) !important;
+  padding: 32px 30px !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  color: #08142A !important;
+  text-align: left !important;
+}
+
+.sc-grid-pair {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 16px !important;
+}
+
+@media (max-width: 600px) {
+  .sc-grid-pair {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.sc-results-wrap {
+  background: #FAF9F5 !important;
+  padding: 90px 0 100px !important;
+  border-bottom: 1px solid #EAE7DC !important;
+}
+
+.sc-metrics-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  margin-bottom: 28px !important;
+}
+
+@media (max-width: 800px) {
+  .sc-metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.sc-metric-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  padding: 22px 20px !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.sc-metric-label {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: #64748B !important;
+  margin-bottom: 6px !important;
+}
+
+.sc-metric-val {
+  font-family: var(--display) !important;
+  font-size: 28px !important;
+  font-weight: 500 !important;
+  color: #08142A !important;
+  line-height: 1.1 !important;
+}
+
+.sc-metric-sub {
+  font-size: 12px !important;
+  color: #64748B !important;
+  margin-top: 4px !important;
+}
+
+.sc-verdict-box {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 14px !important;
+  padding: 28px !important;
+  margin-top: 24px !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+}
+
+.sc-verdict-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  padding: 4px 12px !important;
+  border-radius: 999px !important;
+  margin-bottom: 12px !important;
+}
+
+.sc-verdict-badge.above {
+  background: #ECFDF5 !important;
+  color: #059669 !important;
+  border: 1px solid #A7F3D0 !important;
+}
+
+.sc-verdict-badge.within {
+  background: #EFF6FF !important;
+  color: #1D4ED8 !important;
+  border: 1px solid #BFDBFE !important;
+}
+
+.sc-verdict-badge.below {
+  background: #FEF3C7 !important;
+  color: #D97706 !important;
+  border: 1px solid #FDE68A !important;
+}
+

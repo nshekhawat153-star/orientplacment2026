@@ -29,7 +29,9 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
     pathname === "/hire-attorneys" ||
     pathname === "/fees" ||
     pathname === "/submit-job" ||
-    pathname === "/find-candidates";
+    pathname === "/find-candidates" ||
+    pathname === "/upload-resume" ||
+    pathname === "/salary-check";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
