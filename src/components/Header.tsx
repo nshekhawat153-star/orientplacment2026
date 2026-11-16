@@ -31,7 +31,8 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
     pathname === "/submit-job" ||
     pathname === "/find-candidates" ||
     pathname === "/upload-resume" ||
-    pathname === "/salary-check";
+    pathname === "/salary-check" ||
+    pathname.startsWith("/candidate/");
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);

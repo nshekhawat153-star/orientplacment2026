@@ -81,7 +81,6 @@ export default function JobsClient({
 
   useEffect(() => {
     if (filteredList.length > 0) {
-      // If current selection is still in filteredList, keep it; otherwise pick first
       if (!selectedJobId || !filteredList.some((j) => j.id === selectedJobId)) {
         setSelectedJobId(filteredList[0].id);
       }
@@ -96,7 +95,6 @@ export default function JobsClient({
 
   const handleSelectJob = (job: Job) => {
     setSelectedJobId(job.id);
-    // On screens < 1024px, open mobile drawer
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setMobileDrawerOpen(true);
     }
@@ -126,35 +124,64 @@ export default function JobsClient({
   }, [roleSlug, citySlug]);
 
   return (
-    <>
-      <Breadcrumb
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Candidates", href: "/candidates" },
-          { label: city.name, href: `/locations/texas/${city.slug.replace(/-[a-z]+$/, "")}` },
-          { label: `${role.name} jobs`, current: true },
-        ]}
-      />
+    <div className="jobs-role-city-page">
+      {/* 1. LUXURY MIDNIGHT NAVY HERO WITH SPLASH VIDEO & EMBEDDED SEARCH */}
+      <section className="jobs-luxury-header-sec" aria-labelledby="jobs-feed-h1">
+        <div className="emp-hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="emp-hero-video"
+          >
+            <source src="/media/splash.mp4" type="video/mp4" />
+          </video>
+          <div className="emp-hero-overlay" />
+          <div className="emp-hero-glow" />
+        </div>
 
-      {/* 1. TOP INDEED SEARCH BAR (ZERO HERO BANNER) */}
-      <section className="indeed-top-search-section">
-        <div className="wrap">
-          <IndeedTopSearchBar
-            initialQuery={role.name}
-            initialLocation={`${city.name}, ${city.state}`}
-          />
+        <div className="wrap" style={{ position: "relative", zIndex: 3 }}>
+          <div className="jobs-header-intro">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>CONFIDENTIAL LEGAL SEARCH · 100% SALARY TRANSPARENCY</span>
+            </div>
+
+            <h1 id="jobs-feed-h1" className="jobs-header-title">
+              {role.name} jobs in <span className="serif-accent">{city.name}</span>
+            </h1>
+
+            <p className="jobs-header-sub">
+              Direct lateral openings at premier boutique and mid-size law firms. Verified pay bands and exact compensation disclosed on every seat.
+            </p>
+          </div>
+
+          {/* Centered Luxury Indeed Search Bar */}
+          <div className="indeed-top-search-form" style={{ maxWidth: 1040, margin: "0 auto" }}>
+            <IndeedTopSearchBar
+              initialQuery={role.name}
+              initialLocation={`${city.name}, ${city.state}`}
+            />
+          </div>
         </div>
       </section>
 
-      {/* 2. CLEAN INDEED-STYLE JOB STREAM */}
-      <section className="block alt indeed-search-section" id="jobs-stream">
+      {/* 2. MASTER-DETAIL JOB STREAM */}
+      <section className="block alt indeed-search-section" id="jobs-stream" style={{ background: "#FAF9F5", padding: "40px 0 80px" }}>
         <div className="wrap">
-          <div className="indeed-clean-feed-header">
-            <h1 className="indeed-clean-feed-title" style={{ fontSize: "1.35rem" }}>
-              {role.name} jobs in {city.name}, {city.state}
-            </h1>
-            <span className="indeed-clean-feed-count">
-              Showing {filteredList.length} of {matchingJobs.length} {role.short} {filteredList.length === 1 ? "role" : "roles"}
+          {/* Header & Result Count */}
+          <div className="indeed-clean-feed-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, flexWrap: "wrap", gap: 10 }}>
+            <div>
+              <span style={{ fontSize: 13, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700 }}>
+                ACTIVE LEGAL OPENINGS
+              </span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "4px 0 0" }}>
+                Confidential {role.short} positions in {city.name}
+              </h2>
+            </div>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "#1D4ED8", fontWeight: 600 }}>
+              Showing {filteredList.length} of {matchingJobs.length} verified seats
             </span>
           </div>
 
@@ -167,11 +194,11 @@ export default function JobsClient({
           />
 
           {/* MASTER-DETAIL 2-COLUMN SPLIT */}
-          <div className="indeed-split-grid">
-            {/* LEFT COLUMN: STREAM OF JOB CARDS (40% width) */}
+          <div className="indeed-split-grid" style={{ marginTop: 24 }}>
+            {/* LEFT COLUMN: STREAM OF HOMEPAGE LUXURY JOB CARDS */}
             <div className="indeed-feed-column" aria-label="Job listings stream">
               {filteredList.length > 0 ? (
-                <div className="indeed-card-stack">
+                <div className="indeed-card-stack" style={{ display: "grid", gap: 16 }}>
                   {filteredList.map((job) => (
                     <JobCard
                       key={job.id}
@@ -182,16 +209,20 @@ export default function JobsClient({
                   ))}
                 </div>
               ) : (
-                <div className="indeed-empty-feed">
-                  <Icon name="search" className="empty-feed-ico" />
-                  <h3>No open roles match this exact filter</h3>
-                  <p className="muted">
-                    Try broadening your salary threshold or experience filter to see more
-                    seats, or set up a job alert below.
+                <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "48px 32px", textAlign: "center" }}>
+                  <div style={{ width: 44, height: 44, margin: "0 auto 16px", color: "#64748B" }}>
+                    <Icon name="search" className="empty-feed-ico" />
+                  </div>
+                  <h3 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: "0 0 8px" }}>
+                    No open roles match this exact filter
+                  </h3>
+                  <p style={{ color: "#64748B", fontSize: 14, maxWidth: 420, margin: "0 auto 20px" }}>
+                    Try expanding your salary expectation or experience filter to view additional seats, or set up a confidential alert below.
                   </p>
                   <button
                     type="button"
-                    className="btn btn-outline btn-sm"
+                    className="btn-emp-ghost"
+                    style={{ color: "#08142A !important", borderColor: "#CBD5E1", padding: "10px 20px", fontSize: 14 }}
                     onClick={() =>
                       setFilters({ mode: "all", minPay: null, experience: "any" })
                     }
@@ -201,21 +232,27 @@ export default function JobsClient({
                 </div>
               )}
 
-              <div className="indeed-feed-footer-cta">
+              <div style={{ marginTop: 28, background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "20px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 14 }}>
+                <div>
+                  <div style={{ fontWeight: 600, color: "#08142A", fontSize: 14.5 }}>
+                    Not seeing your target firm or exact compensation?
+                  </div>
+                  <div style={{ fontSize: 12.5, color: "#64748B", marginTop: 2 }}>
+                    Upload your resume for confidential off-market matching by Orion founder Justin.
+                  </div>
+                </div>
                 <Link
-                  className="btn btn-ghost btn-sm"
+                  className="btn-emp-primary"
+                  style={{ padding: "10px 20px", fontSize: 13.5 }}
                   href={`/upload-resume#role=${roleSlug}&city=${citySlug}`}
                 >
-                  <Icon name="upload" className="btn-ico-sm" />
-                  <span>Am I a fit? Upload your resume</span>
+                  <span>Upload resume</span>
+                  <span aria-hidden="true">→</span>
                 </Link>
-                <span className="feed-footer-note">
-                  Jon Missirlian compares your experience confidentially.
-                </span>
               </div>
             </div>
 
-            {/* RIGHT COLUMN: STICKY LIVE DETAIL PANE (60% width) */}
+            {/* RIGHT COLUMN: STICKY LIVE DETAIL PANE */}
             <div className="indeed-detail-column" aria-label="Selected job details">
               <JobDetailPane job={activeJob} />
             </div>
@@ -241,126 +278,112 @@ export default function JobsClient({
       </section>
 
       {/* 3. ALERTS SECTION */}
-      <section className="block" id="alerts-block">
+      <section className="emp-process-sec" id="alerts-block" style={{ background: "#FFFFFF", padding: "96px 0 108px", borderTop: "1px solid #E2E8F0" }}>
         <div className="wrap split">
           <div>
             <div className="sec-head">
-              <span className="eyebrow">Confidential Job Alerts</span>
-              <h2>Email me new roles like these</h2>
-              <p>
-                Many small firm seats are filled confidentially before ever being
-                publicly advertised. Be first in line.
+              <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>CONFIDENTIAL MARKET ALERTS</span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: "10px 0 14px" }}>
+                Be the first to hear of new {role.name} seats in {city.name}
+              </h2>
+              <p style={{ color: "#64748B", fontSize: 16 }}>
+                Many boutique and mid-size law firms hire lateral talent without posting publicly. Receive confidential updates when seats fitting your criteria become available.
               </p>
             </div>
-            <ul className="ticks">
-              <li>Verified {role.name} roles in {city.name}</li>
-              <li>Base salary range, firm size, and hybrid terms published upfront</li>
-              <li>
-                Low volume: usually <Mark>2 to 4 a month</Mark>. Unsubscribe anytime in one click.
-              </li>
-            </ul>
+            <div style={{ display: "grid", gap: 14, marginTop: 28 }}>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: 14, color: "#334155" }}>
+                  <strong>Verified Compensation:</strong> Exact base pay band, expected bonus history, and billable requirement disclosed upfront.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: 14, color: "#334155" }}>
+                  <strong>Low Volume &amp; High Signal:</strong> Typically 2 to 4 curated openings per month. No spam, ever.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: 14, color: "#334155" }}>
+                  <strong>Strict Confidentiality:</strong> Your firm is never contacted, and you can unsubscribe in a single click.
+                </span>
+              </div>
+            </div>
           </div>
+
           <div id="alerts">
             <GateForm
-              eyebrow="Job alerts"
-              title={`${role.name} roles, ${city.name}`}
+              eyebrow="JOB ALERTS"
+              title={`${role.name} Roles in ${city.name}`}
               audience="candidate"
-              button="Email me new roles"
-              review="n-brown"
+              button="Subscribe to confidential alerts"
+              reviewSlug="n-brown"
               role={roleSlug}
               city={citySlug}
-              fine="Use a personal email, not your work one. No firm sees your name until you say yes."
+              fine="Always enter your personal email address. No employer sees your name without your prior authorization."
               steps={[
-                ["Now", `Alerts are active for ${role.name} roles in ${city.name}.`, true],
-                [
-                  "As roles open",
-                  "Each new confidential seat with transparent pay and firm dynamics.",
-                ],
-                [
-                  "When one fits",
-                  "Reply directly. Jon speaks with you before anything is shared with a firm.",
-                ],
-                ["Any time", "Unsubscribe in one click, and your records are deleted."],
+                ["Immediate Confirmation", `Job alert registered for ${role.name} seats in ${city.name}.`, true],
+                ["As New Openings Arise", "You receive direct alerts with firm culture notes, practice dynamics, and verified base pay."],
+                ["Before Any Interview", "Justin speaks with you directly to confirm mutual alignment before any materials are shared."],
+                ["Total Freedom", "Unsubscribe or request data deletion anytime in one click."],
               ]}
             />
           </div>
         </div>
       </section>
 
-      {/* 4. HOW APPLYING WORKS */}
-      <section className="block alt">
+      {/* 4. EXPLORE OTHER REGIONAL MARKETS & ROLES */}
+      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "96px 0 108px", borderTop: "1px solid #E2E8F0" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Confidential Process</span>
-            <h2>Nothing goes to a firm without your explicit permission</h2>
-            <p>
-              Your current employer will never know you are exploring the market.
-            </p>
-          </div>
-          <ol className="steps-line three">
-            <li>
-              <span className="when">1. Submit Interest</span>
-              <h3>Confidential Contact or Resume</h3>
-              <p>Your submission is delivered exclusively to Jon Missirlian.</p>
-            </li>
-            <li>
-              <span className="when">
-                <Mark>Within 24 Hours</Mark>
-              </span>
-              <h3>Private Call with Jon</h3>
-              <p>
-                Learn exact firm identities, partner styles, caseloads, and bonus
-                potential.
-              </p>
-            </li>
-            <li>
-              <span className="when">3. Your Call</span>
-              <h3>Interview on Your Terms</h3>
-              <p>
-                Only firms you approve receive your resume. 100% free for candidates.
-              </p>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      {/* 5. EXPLORE DIRECTORY LINKS */}
-      <section className="block">
-        <div className="wrap">
-          <div className="sec-head row">
+          <div className="sec-head row" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 40, flexWrap: "wrap", gap: 14 }}>
             <div>
-              <span className="eyebrow">Explore Markets</span>
-              <h2>More legal jobs by practice area and metro</h2>
-              <p>Explore compensation benchmarks across other key regions.</p>
+              <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>RELATED MARKETS</span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "8px 0 0" }}>
+                Additional legal opportunities across Texas
+              </h2>
             </div>
-            <Link className="more link-arrow" href={`/salaries/${roleSlug}/${citySlug}`}>
-              View {city.name} Salary Guide →
+            <Link className="more link-arrow" href={`/salaries/${roleSlug}/${citySlug}`} style={{ fontSize: 14, fontWeight: 600, color: "#1D4ED8", textDecoration: "none" }}>
+              <span>View {city.name} {role.short} Salary Guide</span>
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
 
-          <div className="directory-sub-grid">
-            <div>
-              <h3 className="mini-h">Other roles in {city.name}</h3>
-              <ul className="directory-mini-list">
+          <div className="directory-sub-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 32 }}>
+            <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px" }}>
+              <h3 style={{ fontFamily: "var(--display)", fontSize: 19, color: "#08142A", margin: "0 0 18px", borderBottom: "1px solid #E2E8F0", paddingBottom: 10 }}>
+                Other practice areas in {city.name}
+              </h3>
+              <ul className="directory-mini-list" style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 12 }}>
                 {otherRoles.map(({ role: r, count }) => (
                   <li key={r.slug}>
-                    <Link href={`/jobs/${r.slug}/${citySlug}`} className="dir-link">
-                      <span>{r.name}</span>
-                      <span className="dir-count">{count}</span>
+                    <Link
+                      href={`/jobs/${r.slug}/${citySlug}`}
+                      style={{ display: "flex", justifyContent: "space-between", alignItems: "center", textDecoration: "none", color: "#08142A", fontSize: 14, padding: "6px 0", borderBottom: "1px solid #F1F5F9" }}
+                    >
+                      <span style={{ fontWeight: 500 }}>{r.name}</span>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: 12, fontWeight: 600, color: "#1D4ED8", background: "rgba(29, 78, 216, 0.08)", padding: "2px 8px", borderRadius: 999 }}>
+                        {count} {count === 1 ? "seat" : "seats"}
+                      </span>
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <h3 className="mini-h">{role.name} in other cities</h3>
-              <ul className="directory-mini-list">
+            <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px" }}>
+              <h3 style={{ fontFamily: "var(--display)", fontSize: 19, color: "#08142A", margin: "0 0 18px", borderBottom: "1px solid #E2E8F0", paddingBottom: 10 }}>
+                {role.name} in other Texas metros
+              </h3>
+              <ul className="directory-mini-list" style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 12 }}>
                 {otherCities.map(({ city: c, count, band: b }) => (
                   <li key={c.slug}>
-                    <Link href={`/jobs/${roleSlug}/${c.slug}`} className="dir-link">
-                      <span>{c.name}, {c.state}</span>
-                      <span className="dir-count">
+                    <Link
+                      href={`/jobs/${roleSlug}/${c.slug}`}
+                      style={{ display: "flex", justifyContent: "space-between", alignItems: "center", textDecoration: "none", color: "#08142A", fontSize: 14, padding: "6px 0", borderBottom: "1px solid #F1F5F9" }}
+                    >
+                      <span style={{ fontWeight: 500 }}>{c.name}, {c.state}</span>
+                      <span style={{ fontFamily: "var(--mono)", fontSize: 12, fontWeight: 600, color: "#059669", background: "#ECFDF5", padding: "2px 8px", borderRadius: 999 }}>
                         {count > 0 ? `${count} open` : b ? fmt.range(b.b2) : "Explore"}
                       </span>
                     </Link>
@@ -371,6 +394,32 @@ export default function JobsClient({
           </div>
         </div>
       </section>
-    </>
+
+      {/* 5. BOTTOM MIDNIGHT NAVY CTA */}
+      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "100px 0 108px", textAlign: "center" }}>
+        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto" }}>
+          <div className="badge-capsule" style={{ marginBottom: 18 }}>
+            <span className="badge-dot" />
+            <span>CONFIDENTIAL LATERAL INTAKE</span>
+          </div>
+          <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4.2vw, 48px)", color: "#FFFFFF", margin: "0 0 16px" }}>
+            Ready to explore verified legal roles in <span className="serif-accent" style={{ color: "#60A5FA" }}>{city.name}?</span>
+          </h2>
+          <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 32 }}>
+            Upload your resume confidentially or speak directly with founder Justin to evaluate your market leverage.
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+            <Link href="/upload-resume" className="btn-emp-primary" style={{ padding: "14px 34px", fontSize: 16 }}>
+              <span>Upload your resume</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link href="/salary-check" className="btn-emp-ghost" style={{ padding: "14px 34px", fontSize: 16 }}>
+              <span>Check your market pay</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

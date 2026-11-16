@@ -30,8 +30,8 @@
 | **07** | `/candidates` | `src/app/candidates/page.tsx` | Static | Attorneys & Paralegals | ✅ **Redesigned & Live** |
 | **08** | `/jobs` | `src/app/jobs/page.tsx` | Static | Active Job Seekers | ✅ **Redesigned & Live** |
 | **09** | `/upload-resume` | `src/app/upload-resume/page.tsx` | Static | Candidates (Confidential Upload) | ✅ **Redesigned & Live** |
-| **10** | `/candidate/[slug]` | `src/app/candidate/[slug]/page.tsx` | Dynamic | Law Firms & Candidates (Profile Dossier) | 📋 Needs Review |
-| **11** | `/jobs/[role]/[city]` | `src/app/jobs/[role]/[city]/page.tsx` | Dynamic | Targeted Practice Area Job Seekers | 📋 Needs Review |
+| **10** | `/candidate/[slug]` | `src/app/candidate/[slug]/page.tsx` | Dynamic | Law Firms & Candidates (Profile Dossier) | ✅ **Redesigned & Live** |
+| **11** | `/jobs/[role]/[city]` | `src/app/jobs/[role]/[city]/page.tsx` | Dynamic | Targeted Practice Area Job Seekers | ✅ **Redesigned & Live** |
 | **12** | `/salary-check` | `src/app/salary-check/page.tsx` | Static | Market Compensation Check Tool | ✅ **Redesigned & Live** |
 | **13** | `/salaries/[role]/[city]` | `src/app/salaries/[role]/[city]/page.tsx` | Dynamic | Compensation Benchmarks by Role & City | 📋 Needs Review |
 | **14** | `/locations/[state]/[city]` | `src/app/locations/[state]/[city]/page.tsx` | Dynamic | Regional Legal Market Directory | 📋 Needs Review |
