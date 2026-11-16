@@ -29,7 +29,7 @@ export default function FindCandidatesPage() {
   const [pay, setPay] = useState<number | null>(null);
   const [selectedMust, setSelectedMust] = useState<string[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [folded, setFolded] = useState(true);
+  const [folded, setFolded] = useState(false);
   const [selectedCandidateId, setSelectedCandidateId] = useState<string | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
@@ -42,7 +42,7 @@ export default function FindCandidatesPage() {
         const r = params.get("role");
         const c = params.get("city");
         const y = params.get("years");
-        const m = params.get("mode") as any;
+        const m = params.get("mode") as "any" | "on-site" | "hybrid" | null;
         const p = params.get("pay");
         const ids = params.get("ids");
         const must = params.get("must");
@@ -112,7 +112,7 @@ export default function FindCandidatesPage() {
     return results.find((r) => r.c.id === selectedCandidateId)?.c || results[0]?.c || null;
   }, [results, selectedCandidateId]);
 
-  const handleSelectCandidate = (cand: any) => {
+  const handleSelectCandidate = (cand: { id: string }) => {
     setSelectedCandidateId(cand.id);
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setMobileDrawerOpen(true);
@@ -138,21 +138,30 @@ export default function FindCandidatesPage() {
       {
         "@type": "ListItem",
         position: 3,
-        name: "Find candidates",
+        name: "Find Candidates",
         item: "https://www.orionplacement.com/find-candidates/",
       },
     ],
   };
 
   return (
-    <>
+    <div style={{ background: "#FAF9F5", color: "#08142A" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 1. LUXURY HERO WITH SPLASH VIDEO */}
-      <section className="emp-luxury-hero-sec fc-luxury-hero-sec">
+      {/* 1. LUXURY HERO WITH VIDEO & BREADCRUMB */}
+      <section
+        className="emp-luxury-hero-sec fc-luxury-hero-sec"
+        style={{
+          position: "relative",
+          background: "#08142A",
+          color: "#FFFFFF",
+          padding: "124px 0 76px",
+          overflow: "hidden",
+        }}
+      >
         <div className="emp-hero-video-wrap" aria-hidden="true">
           <video
             autoPlay
@@ -160,108 +169,297 @@ export default function FindCandidatesPage() {
             muted
             playsInline
             className="emp-hero-video"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              opacity: 0.22,
+            }}
           >
             <source src="/media/splash.mp4" type="video/mp4" />
           </video>
-          <div className="emp-hero-overlay" />
-          <div className="emp-hero-glow" />
+          <div
+            className="emp-hero-overlay"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "linear-gradient(180deg, rgba(8,20,42,0.85) 0%, rgba(8,20,42,0.96) 100%)",
+            }}
+          />
         </div>
 
-        <div className="wrap emp-hero-content">
-          <div className="emp-hero-badge-wrap">
-            <div className="badge-capsule">
-              <span className="badge-dot" />
-              <span>PRE-SCREENED TALENT · 100% CONTINGENCY</span>
-            </div>
+        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+          {/* Breadcrumb Navigation */}
+          <div style={{ marginBottom: 20 }}>
+            <Breadcrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Employers", href: "/employers" },
+                { label: "Find Candidates", current: true },
+              ]}
+            />
           </div>
 
-          <h1 className="emp-hero-h1">
-            Find candidates for your <span className="serif-accent">open seat</span>
-          </h1>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 36, alignItems: "center" }}>
+            <div>
+              <div className="emp-hero-badge-wrap" style={{ marginBottom: 16 }}>
+                <div
+                  className="badge-capsule"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    background: "rgba(255,255,255,0.08)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    borderRadius: 999,
+                    padding: "6px 14px",
+                    fontFamily: "var(--mono)",
+                    fontSize: 11,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "#93C5FD",
+                  }}
+                >
+                  <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+                  <span>PRE-SCREENED LATERAL TALENT · 100% CONTINGENCY</span>
+                </div>
+              </div>
 
-          <p className="emp-hero-lead">
-            Select your practice area, location, experience requirements, and notice window.
-            Pre-screened lateral attorney dossiers update dynamically in real time.
-          </p>
+              <h1
+                className="emp-hero-h1"
+                style={{
+                  fontFamily: "var(--display)",
+                  fontSize: "clamp(34px, 4.4vw, 52px)",
+                  lineHeight: 1.12,
+                  fontWeight: 500,
+                  color: "#FFFFFF",
+                  margin: "0 0 18px",
+                }}
+              >
+                Find candidates for your{" "}
+                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+                  open seat
+                </span>
+              </h1>
 
-          <div className="emp-hero-actions">
-            <a href="#brief" className="btn-emp-primary">
-              <span>Filter candidate pool</span>
-              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-              </svg>
-            </a>
-            <Link href="/submit-job" className="btn-emp-ghost">
-              <span>Submit a job instead</span>
-              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-              </svg>
-            </Link>
-          </div>
+              <p
+                className="emp-hero-lead"
+                style={{
+                  fontSize: 17,
+                  lineHeight: 1.6,
+                  color: "#CBD5E1",
+                  maxWidth: 580,
+                  margin: "0 0 28px",
+                }}
+              >
+                Select your practice area, location, experience requirements, and notice window.
+                Pre-screened lateral attorney and paralegal dossiers update dynamically in real time.
+              </p>
 
-          {/* Micro Reassurances */}
-          <div className="emp-reassurance-row">
-            <div className="emp-reassurance-item">
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-              </svg>
-              <span>Top candidates available now</span>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
+                <a
+                  href="#brief"
+                  className="btn-emp-primary"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    background: "#1D4ED8",
+                    color: "#FFFFFF",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    padding: "13px 26px",
+                    borderRadius: 7,
+                    textDecoration: "none",
+                  }}
+                >
+                  <span>Filter candidate pool</span>
+                  <span aria-hidden="true">↓</span>
+                </a>
+                <Link
+                  href="/submit-job"
+                  className="btn-emp-ghost"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.18)",
+                    color: "#FFFFFF",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    padding: "13px 24px",
+                    borderRadius: 7,
+                    textDecoration: "none",
+                  }}
+                >
+                  <span>Submit open mandate instead</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+
+              {/* Micro Reassurances */}
+              <div style={{ display: "grid", gap: 8 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "#E2E8F0" }}>
+                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+                  <span>Active verified candidates available for lateral interviews this week</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "#E2E8F0" }}>
+                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+                  <span>Strict confidentiality: candidate and firm identities protected prior to mutual approval</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "#E2E8F0" }}>
+                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+                  <span>Zero fee unless you hire (23% contingency Net 15, 90-day replacement warranty)</span>
+                </div>
+              </div>
             </div>
-            <span className="emp-dot-sep">·</span>
-            <div className="emp-reassurance-item">
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-              </svg>
-              <span>Names confidential until approved</span>
-            </div>
-            <span className="emp-dot-sep">·</span>
-            <div className="emp-reassurance-item">
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-              </svg>
-              <span>Zero fee unless you hire (23% Net 15)</span>
+
+            {/* Quick Live Snapshot Badge Card */}
+            <div>
+              <div
+                style={{
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: 14,
+                  padding: "26px 24px",
+                  backdropFilter: "blur(12px)",
+                  boxShadow: "0 20px 48px rgba(0,0,0,0.45)",
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1px solid rgba(255,255,255,0.12)", paddingBottom: 12, marginBottom: 18 }}>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                    LIVE TALENT RADAR
+                  </span>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#60A5FA", fontWeight: 700 }}>
+                    ACTIVE {cObj ? cObj.name.toUpperCase() : "TEXAS"}
+                  </span>
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>
+                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <div style={{ fontSize: 11.5, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 3 }}>
+                      Role Target
+                    </div>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: "#FFFFFF" }}>
+                      {rObj ? rObj.short : role}
+                    </div>
+                  </div>
+
+                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <div style={{ fontSize: 11.5, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 3 }}>
+                      Regional Hub
+                    </div>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: "#FFFFFF" }}>
+                      {cObj ? `${cObj.name}, TX` : city}
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ background: "rgba(29, 78, 216, 0.2)", border: "1px solid rgba(96, 165, 250, 0.3)", borderRadius: 8, padding: "14px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div>
+                    <div style={{ fontSize: 11, fontFamily: "var(--mono)", color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                      Matching Candidates
+                    </div>
+                    <div style={{ fontSize: 13, color: "#E2E8F0", marginTop: 2 }}>
+                      Pre-screened &amp; interview ready
+                    </div>
+                  </div>
+                  <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#60A5FA" }}>
+                    {results.length}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* 2. MAIN TOOL WORKSPACE */}
-      <section className="wrap tool-sec" style={{ padding: "64px 0 88px" }}>
+      <section className="wrap tool-sec" style={{ maxWidth: 1240, margin: "0 auto", padding: "64px 24px 88px" }}>
         <div className="tool">
           {/* FILTER BRIEF FORM */}
           <form
             className={`tool-form${folded ? " folded editing" : ""}`}
             id="brief"
             aria-label="Your seat"
-            style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "24px 28px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 24px",
+              boxShadow: "0 4px 16px rgba(15,23,42,0.04)",
+              position: "sticky",
+              top: 96,
+            }}
           >
-            <div className="brief-sum" id="brief-sum" style={{ borderBottom: "1px solid #E2E8F0", paddingBottom: 16, marginBottom: 16 }}>
-              <p style={{ margin: 0 }}>
-                <span className="small muted" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 4 }}>Current Seat Filter</span>
-                <b id="brief-sum-t" style={{ fontFamily: "var(--display)", fontSize: 18, color: "#08142A" }}>{summaryBits.join(" · ")}</b>
-              </p>
-              <button
-                type="button"
-                className="btn btn-ghost btn-sm"
-                id="brief-edit"
-                aria-expanded={!folded}
-                onClick={() => setFolded(!folded)}
-                style={{ borderRadius: 6, fontWeight: 600, padding: "6px 14px", border: "1px solid #CBD5E1" }}
-              >
-                {folded ? "Change Filters" : "Done"}
-              </button>
+            <div className="brief-sum" id="brief-sum" style={{ borderBottom: "1px solid #E2E8F0", paddingBottom: 14, marginBottom: 14 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <span style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 3 }}>
+                    Active Filters
+                  </span>
+                  <div id="brief-sum-t" style={{ fontFamily: "var(--display)", fontSize: 16, color: "#08142A", fontWeight: 600 }}>
+                    {summaryBits.join(" · ")}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  id="brief-edit"
+                  aria-expanded={!folded}
+                  onClick={() => setFolded(!folded)}
+                  style={{ borderRadius: 6, fontWeight: 600, padding: "5px 12px", border: "1px solid #CBD5E1", fontSize: 12.5 }}
+                >
+                  {folded ? "Change" : "Hide"}
+                </button>
+              </div>
             </div>
 
-            <h2 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 16px" }}>Filter Seat Specifications</h2>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: 0, fontWeight: 600 }}>
+                Seat Specifications
+              </h2>
+              {(selectedMust.length > 0 || years !== "any" || mode !== "any" || pay !== null) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setYears("any");
+                    setMode("any");
+                    setPay(null);
+                    setSelectedMust([]);
+                  }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: "#1D4ED8",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                >
+                  Reset all
+                </button>
+              )}
+            </div>
 
-            <div className="field" style={{ marginBottom: 16 }}>
-              <label htmlFor="b-role" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>Role</label>
+            <div className="field" style={{ marginBottom: 14 }}>
+              <label htmlFor="b-role" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
+                Practice Area / Role
+              </label>
               <select
                 id="b-role"
                 name="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
               >
                 {roles.map((r) => (
                   <option key={r.slug} value={r.slug}>
@@ -271,14 +469,16 @@ export default function FindCandidatesPage() {
               </select>
             </div>
 
-            <div className="field" style={{ marginBottom: 16 }}>
-              <label htmlFor="b-city" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>City</label>
+            <div className="field" style={{ marginBottom: 14 }}>
+              <label htmlFor="b-city" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
+                Location
+              </label>
               <select
                 id="b-city"
                 name="city"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
               >
                 {cities.map((c) => (
                   <option key={c.slug} value={c.slug}>
@@ -288,14 +488,16 @@ export default function FindCandidatesPage() {
               </select>
             </div>
 
-            <div className="field" style={{ marginBottom: 16 }}>
-              <label htmlFor="b-years" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>Years of experience</label>
+            <div className="field" style={{ marginBottom: 14 }}>
+              <label htmlFor="b-years" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
+                Experience Band
+              </label>
               <select
                 id="b-years"
                 name="years"
                 value={years}
                 onChange={(e) => setYears(e.target.value)}
-                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
               >
                 <option value="any">Any experience</option>
                 {expBands.map((eb) => (
@@ -306,14 +508,16 @@ export default function FindCandidatesPage() {
               </select>
             </div>
 
-            <div className="field" style={{ marginBottom: 16 }}>
-              <label htmlFor="b-mode" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>Work arrangement</label>
+            <div className="field" style={{ marginBottom: 14 }}>
+              <label htmlFor="b-mode" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
+                Arrangement
+              </label>
               <select
                 id="b-mode"
                 name="mode"
                 value={mode}
-                onChange={(e) => setMode(e.target.value as any)}
-                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+                onChange={(e) => setMode(e.target.value as "any" | "on-site" | "hybrid")}
+                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
               >
                 <option value="any">Either on-site or hybrid</option>
                 <option value="on-site">On-site only</option>
@@ -322,8 +526,8 @@ export default function FindCandidatesPage() {
             </div>
 
             <div className="field" style={{ marginBottom: 16 }}>
-              <label htmlFor="b-pay" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 6 }}>
-                Target base pay ($/yr)
+              <label htmlFor="b-pay" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
+                Target Base Compensation ($/yr)
               </label>
               <input
                 id="b-pay"
@@ -337,15 +541,15 @@ export default function FindCandidatesPage() {
                 onChange={(e) =>
                   setPay(e.target.value ? Number(e.target.value) : null)
                 }
-                style={{ width: "100%", padding: "10px 14px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 14.5, color: "#08142A", background: "#FFFFFF" }}
+                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
               />
             </div>
 
-            <fieldset className="field" style={{ border: 0, padding: 0 }}>
-              <legend className="label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 8 }}>
-                Must-haves <span className="hint" style={{ color: "#64748B", fontWeight: 400 }}>(tap to add)</span>
+            <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
+              <legend className="label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 8 }}>
+                Must-haves <span className="hint" style={{ color: "#64748B", fontWeight: 400 }}>(tap to toggle)</span>
               </legend>
-              <div className="chips" id="b-must">
+              <div className="chips" id="b-must" style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                 {availableMustHaves.map((tag) => {
                   const isPressed = selectedMust.includes(tag);
                   return (
@@ -356,6 +560,17 @@ export default function FindCandidatesPage() {
                       aria-pressed={isPressed}
                       data-tag={tag}
                       onClick={() => toggleMustHave(tag)}
+                      style={{
+                        padding: "6px 12px",
+                        borderRadius: 6,
+                        fontSize: 12,
+                        fontWeight: 600,
+                        cursor: "pointer",
+                        transition: "all 0.15s ease",
+                        background: isPressed ? "#1D4ED8" : "#F1F5F9",
+                        color: isPressed ? "#FFFFFF" : "#334155",
+                        border: `1px solid ${isPressed ? "#1D4ED8" : "#E2E8F0"}`,
+                      }}
                     >
                       {tag}
                     </button>
@@ -367,46 +582,71 @@ export default function FindCandidatesPage() {
 
           {/* RESULTS DISPLAY */}
           <div className="tool-results">
-            <div className="results-head" aria-live="polite" style={{ marginBottom: 18 }}>
-              <b id="r-count" style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A" }}>
-                {results.length ? (
-                  <>
-                    <Mark>{results.length}</Mark>{" "}
-                    {results.length === 1 ? "candidate" : "candidates"} for{" "}
-                    {rObj ? rObj.short : role}, {cObj ? cObj.name : city}
-                  </>
-                ) : (
-                  "No exact matches yet"
-                )}
-              </b>
-              <span className="small muted" id="r-sub" style={{ display: "block", marginTop: 4 }}>
-                {results.length
-                  ? unlocked
-                    ? "All open"
-                    : results.length > 3
-                    ? `Top 3 open, ${results.length - 3} more by email`
-                    : "All open"
-                  : ""}
-              </span>
+            <div className="results-head" aria-live="polite" style={{ marginBottom: 18, borderBottom: "1.5px solid #E2E8F0", paddingBottom: 14 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 10 }}>
+                <b id="r-count" style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", fontWeight: 600 }}>
+                  {results.length ? (
+                    <>
+                      <Mark>{results.length}</Mark>{" "}
+                      {results.length === 1 ? "candidate" : "candidates"} for{" "}
+                      {rObj ? rObj.short : role}, {cObj ? cObj.name : city}
+                    </>
+                  ) : (
+                    "No exact matches yet"
+                  )}
+                </b>
+                <span className="small muted" id="r-sub" style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                  {results.length
+                    ? unlocked
+                      ? "ALL DOSSIERS UNLOCKED"
+                      : results.length > 3
+                      ? `TOP 3 OPEN · ${results.length - 3} MORE BY EMAIL`
+                      : "ALL OPEN"
+                    : ""}
+                </span>
+              </div>
             </div>
 
             {!results.length ? (
-              <div className="empty-state" id="r-list" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "36px 32px", textAlign: "center" }}>
-                <p style={{ fontSize: 16, color: "#08142A", margin: "0 0 16px" }}>
-                  <b>No one in our current pool fits this exact seat.</b> We search
-                  our wider network of 100,000+ legal professionals for seats like this one. Send it and Justin
-                  replies within <Mark>one business day</Mark>.
+              <div className="empty-state" id="r-list" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "40px 32px", textAlign: "center" }}>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 10px" }}>
+                  No candidate in our active pool fits this exact combination.
+                </h3>
+                <p style={{ fontSize: 15, color: "#64748B", maxWidth: 560, margin: "0 auto 24px", lineHeight: 1.6 }}>
+                  We continually source across our network of 100,000+ legal professionals. Submit your exact criteria and Justin will review our off-market candidate radar within one business day.
                 </p>
-                <div style={{ display: "flex", justifyContent: "center", gap: 12 }}>
-                  <Link className="btn btn-primary btn-sm" href="/submit-job" style={{ borderRadius: 7, fontWeight: 600, padding: "10px 20px" }}>
-                    Send this seat to Justin →
+                <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
+                  <Link
+                    className="btn-emp-primary"
+                    href="/submit-job"
+                    style={{
+                      background: "#1D4ED8",
+                      color: "#FFFFFF",
+                      borderRadius: 7,
+                      fontWeight: 600,
+                      padding: "12px 24px",
+                      fontSize: 14,
+                      textDecoration: "none",
+                    }}
+                  >
+                    Submit this seat to Justin →
                   </Link>
                   <button
                     type="button"
-                    className="btn btn-ghost btn-sm"
-                    id="widen"
-                    onClick={() => setSelectedMust([])}
-                    style={{ borderRadius: 7, fontWeight: 600, padding: "10px 18px" }}
+                    onClick={() => {
+                      setSelectedMust([]);
+                      setYears("any");
+                    }}
+                    style={{
+                      background: "#F8FAFC",
+                      color: "#08142A",
+                      border: "1.5px solid #CBD5E1",
+                      borderRadius: 7,
+                      fontWeight: 600,
+                      padding: "12px 20px",
+                      fontSize: 14,
+                      cursor: "pointer",
+                    }}
                   >
                     Clear must-haves
                   </button>
@@ -465,13 +705,13 @@ export default function FindCandidatesPage() {
                     id="finder-gate"
                     eyebrow={
                       results.length > 3
-                        ? `See all ${results.length}`
-                        : "Full profiles"
+                        ? `See all ${results.length} candidates`
+                        : "Full candidate profiles"
                     }
                     title={
                       selectedIds.length
-                        ? `Send me the full profile for ${selectedIds.join(", ")}`
-                        : "Get the full profiles"
+                        ? `Send me the complete profile for ${selectedIds.join(", ")}`
+                        : `Get all ${results.length} candidate profiles`
                     }
                     bullets={[
                       `Redacted resumes for ${
@@ -481,13 +721,13 @@ export default function FindCandidatesPage() {
                           ? "this candidate"
                           : `all ${results.length} candidates`
                       }`,
-                      "Pay expectation, bar admission and notice period",
-                      "Our one-page terms, within one business hour",
+                      "Compensation expectation, Texas bar admission status, and notice period",
+                      "Our standard one-page contingency terms, delivered within one business hour",
                     ]}
                     button={
                       selectedIds.length
                         ? "Send me the full profile"
-                        : "Send me the full profiles"
+                        : "Send me all candidate profiles"
                     }
                     ids={selectedIds.length ? selectedIds : results.map((r) => r.c.id)}
                     role={role}
@@ -501,7 +741,7 @@ export default function FindCandidatesPage() {
                     <>
                       <p className="mini-h locked-h" style={{ fontFamily: "var(--mono)", fontSize: 12, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginBottom: 16 }}>
                         <Mark>{lockedCards.length} more {plural(lockedCards.length, "candidate")}</Mark>{" "}
-                        with the full profiles
+                        with full dossiers
                       </p>
                       <div className="cards">
                         {lockedCards.map((r) => (
@@ -523,55 +763,96 @@ export default function FindCandidatesPage() {
       </section>
 
       {/* 3. 4-STEP WORKFLOW */}
-      <section className="block alt" style={{ padding: "88px 0" }}>
-        <div className="wrap">
-          <div className="sec-head-premium">
-            <div className="badge-capsule">
-              <span className="badge-dot" />
+      <section className="block alt" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderTop: "1px solid #EAE7DC", borderBottom: "1px solid #EAE7DC" }}>
+        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+          <div className="sec-head-premium" style={{ textAlign: "center", maxWidth: 740, margin: "0 auto 44px" }}>
+            <div
+              className="badge-capsule"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 14,
+              }}
+            >
+              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
               <span>THE PROCESS · 4 EASY STEPS</span>
             </div>
-            <h2 className="sec-title-lg">
-              From your request to a first <span className="serif-accent">interview</span>
+            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
+              From your request to a first <span className="serif-accent" style={{ fontStyle: "italic" }}>interview</span>
             </h2>
-            <p className="who-lede">
-              Transparent, discreet candidate introductions with zero obligation.
+            <p className="who-lede" style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+              Transparent, discreet candidate introductions with zero obligation and zero upfront retainers.
             </p>
           </div>
 
-          <div className="terms-pillars-grid" style={{ marginTop: 36 }}>
-            <div className="terms-pillar">
-              <div className="pillar-kicker">STEP 01 · REQUEST</div>
-              <div className="pillar-val" style={{ fontSize: 26 }}>One Email</div>
-              <div className="pillar-label">Select profiles</div>
-              <p className="pillar-desc">
-                No agreement and no fee to see candidate dossiers. Your firm identity stays confidential.
+          <div className="terms-pillars-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
+            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px" }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                STEP 01 · REQUEST
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+                One Email
+              </div>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#64748B", marginBottom: 12 }}>
+                Select candidate IDs
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+                No agreement and no fee to see candidate dossiers. Your firm identity stays completely confidential.
               </p>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">STEP 02 · 1 HOUR</div>
-              <div className="pillar-val" style={{ fontSize: 26 }}>Full Profiles</div>
-              <div className="pillar-label">Dossiers delivered</div>
-              <p className="pillar-desc">
-                Redacted resumes for the candidates you choose, along with our one-page contingency terms.
+            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px" }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                STEP 02 · 1 HOUR
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+                Full Profiles
+              </div>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#64748B", marginBottom: 12 }}>
+                Dossiers delivered
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+                Redacted resumes for the candidates you choose, along with our simple one-page contingency agreement.
               </p>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">STEP 03 · 1 DAY</div>
-              <div className="pillar-val" style={{ fontSize: 26 }}>Interviews</div>
-              <div className="pillar-label">Justin coordinates calls</div>
-              <p className="pillar-desc">
-                We coordinate interviews with the candidates you want to meet, at dates and times that suit you.
+            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px" }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                STEP 03 · 1 DAY
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+                Interviews
+              </div>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#64748B", marginBottom: 12 }}>
+                Justin coordinates calls
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+                We coordinate interviews with the candidates you want to meet, strictly at dates and times that suit you.
               </p>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">STEP 04 · WHEN HIRED</div>
-              <div className="pillar-val" style={{ fontSize: 26 }}>Pay on Start</div>
-              <div className="pillar-label">Net 15 Invoice</div>
-              <p className="pillar-desc">
-                Fee due 15 days after candidate starts. Covered by our 90-day replacement warranty.
+            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px" }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                STEP 04 · WHEN HIRED
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+                Pay on Start
+              </div>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#64748B", marginBottom: 12 }}>
+                Net 15 Invoice
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+                Fee due 15 calendar days after candidate physically starts work. Covered by our 90-day replacement warranty.
               </p>
             </div>
           </div>
@@ -579,56 +860,110 @@ export default function FindCandidatesPage() {
       </section>
 
       {/* 4. THE 4 TERMS PILLARS */}
-      <section className="block" style={{ padding: "88px 0" }}>
-        <div className="wrap">
-          <div className="sec-head-premium" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16 }}>
+      <section className="block" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
+        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+          <div className="sec-head-premium" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16, marginBottom: 40 }}>
             <div>
-              <div className="badge-capsule">
-                <span className="badge-dot" />
+              <div
+                className="badge-capsule"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#EFF6FF",
+                  border: "1px solid #DBEAFE",
+                  borderRadius: 999,
+                  padding: "6px 14px",
+                  fontFamily: "var(--mono)",
+                  fontSize: 11,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "#1D4ED8",
+                  marginBottom: 10,
+                }}
+              >
+                <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
                 <span>TERMS TRANSPARENCY</span>
               </div>
-              <h2 className="sec-title-lg" style={{ margin: "8px 0 0" }}>
-                One fee, and only if you <span className="serif-accent">hire</span>
+              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: 0, fontWeight: 500 }}>
+                One fee, and only if you <span className="serif-accent" style={{ fontStyle: "italic" }}>hire</span>
               </h2>
             </div>
-            <Link className="btn btn-outline btn-sm" href="/fees" style={{ borderRadius: 7, fontWeight: 600, padding: "10px 20px" }}>
-              Fees and calculator →
+            <Link
+              className="btn btn-outline btn-sm"
+              href="/fees"
+              style={{
+                borderRadius: 7,
+                fontWeight: 600,
+                padding: "11px 22px",
+                border: "1.5px solid #CBD5E1",
+                color: "#08142A",
+                textDecoration: "none",
+                fontSize: 14,
+              }}
+            >
+              <span>Explore fee schedule &amp; calculator</span>
+              <span aria-hidden="true"> →</span>
             </Link>
           </div>
 
-          <div className="terms-pillars-grid" style={{ marginTop: 36 }}>
-            <div className="terms-pillar">
-              <div className="pillar-kicker">01 · CONTINGENCY FEE</div>
-              <div className="pillar-val">23%</div>
-              <div className="pillar-label">Of first-year base</div>
-              <p className="pillar-desc">
-                Calculated strictly on base salary. Discretionary bonuses and benefits are never included.
+          <div className="terms-pillars-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
+            <div className="terms-pillar" style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                01 · CONTINGENCY FEE
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 36, fontWeight: 600, color: "#1D4ED8", marginBottom: 4 }}>
+                23%
+              </div>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                Of first-year base pay
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+                Calculated strictly on base salary. Discretionary bonuses and health benefits are never included.
               </p>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">02 · REPLACEMENT WARRANTY</div>
-              <div className="pillar-val">90 Days</div>
-              <div className="pillar-label">Calendar day guarantee</div>
-              <p className="pillar-desc">
+            <div className="terms-pillar" style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                02 · REPLACEMENT WARRANTY
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 36, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+                90 Days
+              </div>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                Calendar day guarantee
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
                 If the hire leaves or is let go within 90 days, we conduct a replacement search at zero extra fee.
               </p>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">03 · CLIENT FREEDOM</div>
-              <div className="pillar-val">Zero</div>
-              <div className="pillar-label">Upfront retainer or lock-in</div>
-              <p className="pillar-desc">
-                No retainer and no exclusivity. Keep your internal pipeline and other recruiters active.
+            <div className="terms-pillar" style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                03 · CLIENT FREEDOM
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 36, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+                Zero
+              </div>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                Upfront retainer or lock-in
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+                No retainer and no exclusivity. Keep your internal pipeline and other recruiting sources active.
               </p>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">04 · PAYMENT SCHEDULE</div>
-              <div className="pillar-val">Net 15</div>
-              <div className="pillar-label">Invoice on start date</div>
-              <p className="pillar-desc">
+            <div className="terms-pillar" style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                04 · PAYMENT SCHEDULE
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 36, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+                Net 15
+              </div>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                Invoice on physical start date
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
                 We issue the invoice only when the candidate physically begins work, payable within 15 calendar days.
               </p>
             </div>
@@ -637,37 +972,95 @@ export default function FindCandidatesPage() {
       </section>
 
       {/* 5. BOTTOM DARK CTA SECTION */}
-      <section className="emp-terms-dark-sec">
-        <div className="wrap">
-          <div className="emp-terms-head">
-            <div className="badge-capsule-dark">
-              <span className="badge-dot-dark" />
-              <span>DIRECT MANDATE ADVISORY</span>
-            </div>
-            <h2 className="emp-terms-h2">
-              Rather talk the seat through <span className="serif-accent-dark">first?</span>
-            </h2>
-            <p className="emp-terms-lead">
-              Book a 15-minute briefing directly with founder Justin Sofman: the seat, the market compensation band, and who is available right now.
-            </p>
+      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "96px 0 108px", textAlign: "center" }}>
+        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            className="badge-capsule"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              background: "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              borderRadius: 999,
+              padding: "6px 14px",
+              fontFamily: "var(--mono)",
+              fontSize: 11,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: "#93C5FD",
+              marginBottom: 18,
+            }}
+          >
+            <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+            <span>DIRECT MANDATE ADVISORY</span>
+          </div>
 
-            <div style={{ marginTop: 32 }}>
-              <a
-                href={trust.calendly || "https://calendly.com/orionplacement/call-with-justin"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-emp-primary"
-                style={{ padding: "16px 36px", fontSize: 16 }}
-              >
-                <span>Book 15 min with Justin</span>
-                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-                </svg>
-              </a>
-            </div>
+          <h2
+            style={{
+              fontFamily: "var(--display)",
+              fontSize: "clamp(32px, 4.2vw, 48px)",
+              color: "#FFFFFF",
+              margin: "0 0 16px",
+              fontWeight: 500,
+              lineHeight: 1.15,
+            }}
+          >
+            Rather talk the seat through{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              first?
+            </span>
+          </h2>
+
+          <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 34, maxWidth: 640, margin: "0 auto 34px" }}>
+            Book a 15-minute briefing directly with founder Justin Sofman: the seat, current Texas market compensation bands, and who is available right now.
+          </p>
+
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+            <a
+              href={trust.calendly || "https://calendly.com/orionplacement/call-with-justin"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-emp-primary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 16,
+                padding: "14px 34px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Book 15 min with Justin</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <Link
+              href="/submit-job"
+              className="btn-emp-ghost"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 16,
+                padding: "14px 34px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Submit open job</span>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
