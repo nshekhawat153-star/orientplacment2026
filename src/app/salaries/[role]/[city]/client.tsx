@@ -14,7 +14,6 @@ import { JobCard } from "@/components/JobCard";
 import { GateForm } from "@/components/GateForm";
 import { Neighbours } from "@/components/PayTables";
 import { ReviewCard } from "@/components/ReviewCard";
-import { CtaBand } from "@/components/CtaBand";
 
 export default function SalaryLeafClient({
   roleParam,
@@ -33,8 +32,8 @@ export default function SalaryLeafClient({
   const [marker, setMarker] = useState<number | null>(130);
   const [hasChecked, setHasChecked] = useState<boolean>(false);
   const [verdict, setVerdict] = useState<{
-    employerVerdict: { title: string; desc: string };
-    candidateVerdict: { title: string; desc: string };
+    employerVerdict: { title: string; desc: string; status: "in" | "above" | "below" };
+    candidateVerdict: { title: string; desc: string; status: "in" | "above" | "below" };
   } | null>(null);
 
   if (!role || !city) {
@@ -70,15 +69,18 @@ export default function SalaryLeafClient({
     const pos = salaryPosition(city.slug, role.slug, expKey, k);
     const expLabel = DATA.expBands.find((e) => e.key === expKey)?.label || expKey;
     const r = pos.range || [0, 0];
+    const whereStatus = pos.where === "above" ? "above" : pos.where === "below" ? "below" : "in";
 
     setVerdict({
       employerVerdict: {
-        title: `Your offer of ${fmt.k(k)} sits ${pos.where === "in" ? "inside" : pos.where} the range.`,
-        desc: `It is ${pos.text}`,
+        title: `Your offer of ${fmt.k(k)} sits ${pos.where === "in" ? "inside" : pos.where} the standard market range.`,
+        desc: `It is ${pos.text}. Most ${role.short}s at this seniority tier in ${city.name} expect ${fmt.range(r)} base.`,
+        status: whereStatus,
       },
       candidateVerdict: {
-        title: `Your base of ${fmt.k(k)} is ${pos.where === "in" ? "inside" : pos.where} the usual range for ${expLabel}.`,
-        desc: `In ${city.name} that range is $${r[0]}k–$${r[1]}k base. ${pos.where === "above" ? "Roles at this level are rare; we can tell you when one opens." : "Roles paying more are open now."}`,
+        title: `Your base of ${fmt.k(k)} sits ${pos.where === "in" ? "inside" : pos.where} the usual market range for ${expLabel}.`,
+        desc: `In ${city.name}, the competitive band spans ${fmt.range(r)} base. ${pos.where === "above" ? "Offers at this level reflect senior leadership or origination bonuses." : "Positions with higher compensation bands are actively open now."}`,
+        status: whereStatus,
       },
     });
   };
@@ -104,176 +106,282 @@ export default function SalaryLeafClient({
   }
 
   return (
-    <>
-      <Breadcrumb
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: city.name, href: `/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}` },
-          { label: `${role.name} salary`, current: true },
-        ]}
-      />
+    <div className="salary-leaf-page">
+      {/* 1. LUXURY HERO WITH VIDEO, MEDIAN CALLOUT & SALARY BAND BAR */}
+      <section className="emp-luxury-hero-sec salary-leaf-hero" aria-labelledby="salary-hero-h1">
+        <div className="emp-hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="emp-hero-video"
+          >
+            <source src="/media/splash.mp4" type="video/mp4" />
+          </video>
+          <div className="emp-hero-overlay" />
+          <div className="emp-hero-glow" />
+        </div>
 
-      {/* 1. Hero */}
-      <section className="phero leaf-hero">
-        <div className="wrap">
-          <div>
-            <span className="eyebrow">Salary guide · {city.name}, {city.state}</span>
-            <h1>{role.name} salary in {city.name}</h1>
-            <div className="big-num"><Mark>{fmt.k(bandData.median)}</Mark></div>
-            <p className="big-num-l">median base salary, all levels</p>
-
-            <div className="door-row">
-              <span className="door-label">I&apos;m</span>
-              <div className="door" role="group" aria-label="I am">
-                <button
-                  type="button"
-                  className={door === "employer" ? "active" : ""}
-                  onClick={() => setDoor("employer")}
-                >
-                  hiring
-                </button>
-                <button
-                  type="button"
-                  className={door === "candidate" ? "active" : ""}
-                  onClick={() => setDoor("candidate")}
-                >
-                  looking
-                </button>
-              </div>
+        <div className="wrap emp-hero-content" style={{ maxWidth: 900 }}>
+          <div className="emp-hero-badge-wrap">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>LEGAL SALARY GUIDE · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
             </div>
-
-            <div className="hero-act">
-              <a className="btn btn-primary" href="#check">
-                {door === "employer" ? "Check my offer" : "Check my pay"}
-              </a>
-            </div>
-
-            <TrustLine kind={door === "employer" ? "employer" : "candidate"} />
           </div>
 
-          <div className="band-card">
-            <h2 className="mini-h">Base salary by years of practice</h2>
+          <h1 id="salary-hero-h1" className="emp-hero-h1">
+            {role.name} salary in <span className="serif-accent">{city.name}</span>
+          </h1>
+
+          <p className="emp-hero-lead">
+            Verified compensation benchmarks derived from executed boutique law firm offers and active lateral placements across {city.name}. Base salaries published transparently with quarterly market updates.
+          </p>
+
+          <div className="emp-reassurance-row" style={{ marginBottom: 28 }}>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>Verified Texas boutique placements</span>
+            </div>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>Updated quarterly ({DATA.asOf})</span>
+            </div>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>Base salary disclosed upfront</span>
+            </div>
+          </div>
+
+          {/* Interactive Role Mode Switcher */}
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(255, 255, 255, 0.08)", padding: "6px 14px", borderRadius: 999, border: "1px solid rgba(255, 255, 255, 0.16)", marginBottom: 28, backdropFilter: "blur(8px)" }}>
+            <span style={{ fontSize: 13, color: "#94A3B8", fontWeight: 600 }}>I am:</span>
+            <button
+              type="button"
+              onClick={() => setDoor("employer")}
+              style={{
+                background: door === "employer" ? "#1D4ED8" : "transparent",
+                color: "#FFFFFF",
+                border: "none",
+                borderRadius: 999,
+                padding: "6px 16px",
+                fontSize: 13,
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              Hiring for a firm
+            </button>
+            <button
+              type="button"
+              onClick={() => setDoor("candidate")}
+              style={{
+                background: door === "candidate" ? "#1D4ED8" : "transparent",
+                color: "#FFFFFF",
+                border: "none",
+                borderRadius: 999,
+                padding: "6px 16px",
+                fontSize: 13,
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              Evaluating my pay
+            </button>
+          </div>
+
+          {/* Median Stat Banner */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "baseline", gap: 12, marginBottom: 32 }}>
+            <span style={{ fontFamily: "var(--display)", fontSize: "clamp(44px, 5.5vw, 68px)", fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>
+              {fmt.k(bandData.median)}
+            </span>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>
+              Median Base Salary across all levels
+            </span>
+          </div>
+
+          {/* Elevated Interactive Distribution Visualizer Card */}
+          <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "32px 28px", boxShadow: "0 20px 48px -12px rgba(0, 0, 0, 0.45)", color: "#08142A", textAlign: "left" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1px solid #E2E8F0", paddingBottom: 14, marginBottom: 20 }}>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 500, color: "#08142A", margin: 0 }}>
+                Base Salary by Years of Practice
+              </h2>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8" }}>
+                INTERQUARTILE BANDS
+              </span>
+            </div>
+
             <SalaryBand
               citySlug={city.slug}
               roleSlug={role.slug}
               highlightKey={expKey}
               marker={marker ?? undefined}
             />
-            <p className="source">
-              Source: <Mark>{DATA.source}</Mark>. Updated <Mark>{DATA.asOf}</Mark>. Base only, before bonus.{" "}
-              <a href="#method">How we measure</a>
-            </p>
+
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginTop: 24, paddingTop: 16, borderTop: "1px solid #E2E8F0" }}>
+              <span style={{ fontSize: 12.5, color: "#64748B" }}>
+                Source: {DATA.source}. Updated {DATA.asOf}. Base salary only before discretionary bonus.
+              </span>
+              <a href="#check" className="btn-emp-primary" style={{ padding: "10px 22px", fontSize: 13.5 }}>
+                <span>{door === "employer" ? "Benchmark an offer" : "Benchmark your pay"}</span>
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Check tool */}
-      <section className="block alt" id="check">
+      {/* 2. INTERACTIVE COMPENSATION EVALUATION TOOL */}
+      <section className="emp-process-sec" id="check" style={{ background: "#FAF9F5", padding: "96px 0 108px", borderBottom: "1px solid #EAE7DC" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Check a number</span>
-            <h2>{door === "employer" ? "Check your offer" : "Check my pay"}</h2>
-            <p>
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 40px" }}>
+            <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>LIVE MARKET EVALUATION</span>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "10px 0 14px" }}>
+              {door === "employer" ? "Benchmark your planned lateral offer" : "Check where your compensation sits"}
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16 }}>
               {door === "employer"
-                ? "Enter the base you plan to offer. The brass line moves to it, and the candidates in that band appear below."
-                : "Enter your current base. See where it sits, then Houston roles that pay more."}
+                ? "Enter the base compensation you plan to offer. Compare it against active candidate expectations and market median."
+                : "Enter your current base salary. Compare where you stand against local peers and view matching lateral openings."}
             </p>
           </div>
 
-          <form className="finder offer" onSubmit={handleCheck}>
-            <div className="field">
-              <label htmlFor="o-pay">
-                <span>{door === "employer" ? "Base you plan to offer" : "Your current base"}</span>{" "}
-                <span className="hint">($ per year)</span>
-              </label>
-              <div className="money">
-                <input
-                  id="o-pay"
-                  type="number"
-                  inputMode="numeric"
-                  min="30000"
-                  max="400000"
-                  step="1000"
-                  value={payInput}
-                  onChange={(e) => handlePayChange(e.target.value)}
-                  placeholder="130000"
-                />
+          <div style={{ maxWidth: 680, margin: "0 auto", background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "32px 28px", boxShadow: "0 4px 16px rgba(15, 23, 42, 0.04)" }}>
+            <form onSubmit={handleCheck}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
+                <div className="field">
+                  <label htmlFor="o-pay" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 6, display: "block" }}>
+                    {door === "employer" ? "Base Salary Planned" : "Current Base Salary"} <span style={{ fontWeight: 400, color: "#64748B" }}>($/yr)</span>
+                  </label>
+                  <input
+                    id="o-pay"
+                    type="number"
+                    inputMode="numeric"
+                    min="30000"
+                    max="400000"
+                    step="1000"
+                    value={payInput}
+                    onChange={(e) => handlePayChange(e.target.value)}
+                    placeholder="130000"
+                    style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: "1.5px solid #CBD5E1", fontSize: 14, color: "#08142A" }}
+                  />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="o-exp" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 6, display: "block" }}>
+                    Seniority Level
+                  </label>
+                  <select
+                    id="o-exp"
+                    value={expKey}
+                    onChange={(e) => {
+                      setExpKey(e.target.value);
+                      if (payInput) handleCheck();
+                    }}
+                    style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: "1.5px solid #CBD5E1", fontSize: 14, color: "#08142A" }}
+                  >
+                    {DATA.expBands.map((e) => (
+                      <option key={e.key} value={e.key}>{e.label}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
-            </div>
 
-            <div className="field">
-              <label htmlFor="o-exp">Years of practice</label>
-              <select
-                id="o-exp"
-                value={expKey}
-                onChange={(e) => {
-                  setExpKey(e.target.value);
-                  if (payInput) handleCheck();
-                }}
-              >
-                {DATA.expBands.map((e) => (
-                  <option key={e.key} value={e.key}>{e.label}</option>
-                ))}
-              </select>
-            </div>
+              <button className="btn-emp-primary" type="submit" style={{ width: "100%", padding: "14px 28px", fontSize: 15 }}>
+                <span>{door === "employer" ? "Evaluate offer competitiveness" : "Benchmark my salary"}</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </form>
 
-            <button className="btn btn-primary" type="submit">
-              <span>{door === "employer" ? "Check offer" : "Check my pay"}</span>
-            </button>
-          </form>
-
-          {hasChecked && verdict && (
-            <div id="verdict" aria-live="polite">
-              <div className="verdict">
-                <b>{door === "employer" ? verdict.employerVerdict.title : verdict.candidateVerdict.title}</b>
-                <br />
-                {door === "employer" ? verdict.employerVerdict.desc : verdict.candidateVerdict.desc}
+            {hasChecked && verdict && (
+              <div style={{ marginTop: 24, paddingTop: 20, borderTop: "1px solid #E2E8F0" }}>
+                <div style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  fontFamily: "var(--mono)",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  padding: "4px 12px",
+                  borderRadius: 999,
+                  marginBottom: 10,
+                  background: (door === "employer" ? verdict.employerVerdict.status : verdict.candidateVerdict.status) === "above" ? "#ECFDF5" : (door === "employer" ? verdict.employerVerdict.status : verdict.candidateVerdict.status) === "below" ? "#FEF3C7" : "#EFF6FF",
+                  color: (door === "employer" ? verdict.employerVerdict.status : verdict.candidateVerdict.status) === "above" ? "#059669" : (door === "employer" ? verdict.employerVerdict.status : verdict.candidateVerdict.status) === "below" ? "#D97706" : "#1D4ED8",
+                  border: `1px solid ${(door === "employer" ? verdict.employerVerdict.status : verdict.candidateVerdict.status) === "above" ? "#A7F3D0" : (door === "employer" ? verdict.employerVerdict.status : verdict.candidateVerdict.status) === "below" ? "#FDE68A" : "#BFDBFE"}`,
+                }}>
+                  <span aria-hidden="true">●</span>
+                  <span>{(door === "employer" ? verdict.employerVerdict.status : verdict.candidateVerdict.status) === "above" ? "Above Market Benchmark" : (door === "employer" ? verdict.employerVerdict.status : verdict.candidateVerdict.status) === "below" ? "Below Market Median" : "Within Market Band"}</span>
+                </div>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 19, color: "#08142A", margin: "0 0 6px" }}>
+                  {door === "employer" ? verdict.employerVerdict.title : verdict.candidateVerdict.title}
+                </h3>
+                <p style={{ fontSize: 14, color: "#475569", lineHeight: 1.55, margin: 0 }}>
+                  {door === "employer" ? verdict.employerVerdict.desc : verdict.candidateVerdict.desc}
+                </p>
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
+          {/* Conditional Next Steps for Employer or Candidate */}
           {hasChecked && (
-            <div id="offer-next" style={{ margin: "32px 0 0" }}>
+            <div style={{ marginTop: 48 }}>
               {door === "employer" ? (
                 <div>
-                  <h3 className="mini-h">
-                    {inBand.length > 0 ? `${inBand.length} candidate${inBand.length === 1 ? "" : "s"} in your band` : "Candidates near your band"}
-                  </h3>
-                  <div className="cand-grid">
+                  <div style={{ textAlign: "center", marginBottom: 28 }}>
+                    <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>TALENT MATCH</span>
+                    <h3 style={{ fontFamily: "var(--display)", fontSize: 26, color: "#08142A", margin: "6px 0 0" }}>
+                      {inBand.length > 0 ? `${inBand.length} Pre-Screened Candidates in Your Target Band` : "Candidates Near Your Target Band"}
+                    </h3>
+                  </div>
+                  <div className="cards" style={{ display: "grid", gap: 20 }}>
                     {inBand.map((r) => (
                       <CandidateCard key={r.c.id} candidate={r.c} />
                     ))}
                   </div>
-                  <div style={{ marginTop: 24 }}>
+                  <div style={{ marginTop: 32, maxWidth: 640, margin: "32px auto 0" }}>
                     <GateForm
-                      title={inBand.length === 1 ? "Get this candidate's full profile" : `Get the full profiles for these ${inBand.length}`}
+                      title={inBand.length === 1 ? "Request this candidate's full profile" : `Request full profiles for these ${inBand.length} candidates`}
                       bullets={[
-                        "Redacted resumes, by email within the hour",
-                        "Pay expectation and notice period for each",
-                        "Our one-page terms. No agreement to see them",
+                        "Redacted resumes by email within one business hour",
+                        "Disclosed pay expectation and notice window",
+                        "Standard one-page terms. Zero fee unless you hire",
                       ]}
                       button="Send me the full profiles"
                       ids={inBand.map((r) => r.c.id)}
                       role={role.slug}
                       city={city.slug}
-                      review="brett-zimmerman"
+                      reviewSlug="brett-zimmerman"
                     />
                   </div>
                 </div>
               ) : (
                 <div>
-                  <h3 className="mini-h">
-                    {moreJobs.length > 0 ? `${moreJobs.length} ${city.name} role${moreJobs.length === 1 ? "" : "s"} paying more than ${fmt.k(currentK)}` : `${city.name} roles near your base`}
-                  </h3>
-                  <div className="cards">
+                  <div style={{ textAlign: "center", marginBottom: 28 }}>
+                    <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>HIGHER PAYING OPENINGS</span>
+                    <h3 style={{ fontFamily: "var(--display)", fontSize: 26, color: "#08142A", margin: "6px 0 0" }}>
+                      {moreJobs.length > 0 ? `${moreJobs.length} ${city.name} Positions Paying Above ${fmt.k(currentK)}` : `${city.name} Openings Near Your Current Base`}
+                    </h3>
+                  </div>
+                  <div className="cards" style={{ display: "grid", gap: 20 }}>
                     {moreJobs.slice(0, 3).map((j) => (
                       <JobCard key={j.id} job={j} />
                     ))}
                   </div>
-                  <p className="sec-foot">
-                    <Link className="btn btn-primary" href={`/jobs/${role.slug}/${city.slug}`}>See every {city.name} role</Link>
-                    <Link className="link-arrow" href={`/salary-check#role=${role.slug}&city=${city.slug}&base=${Math.round(currentK * 1000)}`}>Full salary check with bonus</Link>
-                  </p>
+                  <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 32, flexWrap: "wrap" }}>
+                    <Link className="btn-emp-primary" href={`/jobs/${role.slug}/${city.slug}`}>
+                      <span>Explore all {city.name} {role.short} seats</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                    <Link className="btn-emp-ghost" href="/salary-check" style={{ color: "#08142A !important", borderColor: "#CBD5E1" }}>
+                      <span>Run full salary check with bonus</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -281,159 +389,176 @@ export default function SalaryLeafClient({
         </div>
       </section>
 
-      {/* 3. What moves pay */}
-      <section className="block">
+      {/* 3. THREE THINGS THAT MOVE AN OFFER */}
+      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "96px 0 108px" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">What moves pay</span>
-            <h2>Three things that move an offer</h2>
-            <p>Each one is worth asking about in the first interview.</p>
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 48px" }}>
+            <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>COMPENSATION LEVERS</span>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "10px 0 14px" }}>
+              Three factors that move legal offers in {city.name}
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16 }}>
+              Key negotiation levers verified across lateral placements at Texas boutique and mid-size law firms.
+            </p>
           </div>
-          <div className="levers">
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
             {levers.map((d, i) => (
-              <div key={i} className="lever">
-                <span className="tt-k">{d.k}</span>
-                <b><Mark>{d.fig}</Mark></b>
-                <p>{d.v}</p>
+              <div key={i} style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
+                <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", display: "block", marginBottom: 8 }}>
+                  {d.k}
+                </span>
+                <div style={{ fontFamily: "var(--display)", fontSize: 28, fontWeight: 500, color: "#08142A", marginBottom: 12 }}>
+                  {d.fig}
+                </div>
+                <p style={{ fontSize: 14, color: "#475569", lineHeight: 1.6, margin: 0 }}>
+                  {d.v}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. Salary guide email offer */}
-      <section className="block alt">
+      {/* 4. SALARY GUIDE PDF GATE SECTION */}
+      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "96px 0 108px", borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #EAE7DC" }}>
         <div className="wrap split">
           <div>
             <div className="sec-head">
-              <span className="eyebrow">Free PDF</span>
-              <h2>The {city.name} legal salary guide</h2>
-              <p>Every role we place in {city.name}, on one page you can share with a partner or keep for your next review.</p>
+              <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>OFFICIAL MARKET GUIDE</span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: "10px 0 14px" }}>
+                The {city.name} Legal Salary Guide (PDF)
+              </h2>
+              <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6 }}>
+                Every practice area we benchmark in {city.name}, consolidated into an executive one-page reference to evaluate partner draws, lateral offers, or your upcoming annual review.
+              </p>
             </div>
-            <ul className="ticks">
-              <li>Base pay for ten roles by years of practice</li>
-              <li>Bonus norms and the on-site premium</li>
-              <li>Updated each quarter</li>
-            </ul>
+            <div style={{ display: "grid", gap: 14, marginTop: 28 }}>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: 14, color: "#334155" }}>
+                  <strong>Practice Area Pay Bands:</strong> Full base salary curves for 10 legal specializations.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: 14, color: "#334155" }}>
+                  <strong>Bonus &amp; Arrangement Norms:</strong> Typical origination splits, collection incentives, and hybrid premiums.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: 14, color: "#334155" }}>
+                  <strong>Quarterly Updates:</strong> Fresh benchmark data delivered directly to your inbox every quarter.
+                </span>
+              </div>
+            </div>
           </div>
+
           <div id="guide-gate">
             <GateForm
-              eyebrow="Free PDF"
-              title={`Email me the ${city.name} salary guide`}
-              button="Send me the guide"
+              eyebrow="FREE PDF REPORT"
+              title={`Email me the ${city.name} Legal Salary Guide`}
+              button="Send me the complete guide"
               preset="guide"
               city={city.slug}
               audience={door === "candidate" ? "candidate" : "employer"}
-              review={door === "candidate" ? "n-brown" : "daffner-law"}
-              fine="One email with the PDF, then the update each quarter. Unsubscribe in one click."
+              reviewSlug={door === "candidate" ? "n-brown" : "daffner-law"}
+              fine="Delivered instantly as a PDF. One email per quarter with updated benchmark figures. Unsubscribe anytime."
             />
           </div>
         </div>
       </section>
 
-      {/* 5. Neighbours */}
-      <section className="block">
+      {/* 5. METHODOLOGY STATBAND */}
+      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "96px 0 108px" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Compare</span>
-            <h2>Other roles and other cities</h2>
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 48px" }}>
+            <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>DATA METHODOLOGY</span>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "10px 0 14px" }}>
+              How Orion calculates legal compensation
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16 }}>
+              Bands represent base salaries from verified offers and completed placements for {role.name.toLowerCase()}s in the {city.name} metro area.
+            </p>
           </div>
-          <Neighbours roleSlug={role.slug} citySlug={city.slug} />
-          <p className="sec-foot">
-            <Link className="link-arrow" href={`/roles/${role.slug}`}>{role.name} hub</Link>
-            <Link className="link-arrow" href={`/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}`}>Legal recruiters in {city.name}</Link>
-          </p>
-        </div>
-      </section>
 
-      {/* 6. How we measure */}
-      <section className="block alt" id="method">
-        <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Method</span>
-            <h2>How we measure</h2>
-            <p>Bands come from base salaries in offers made and roles posted through Orion for {role.name.toLowerCase()}s in the {city.name} metro, grouped by years since bar admission.</p>
-          </div>
-          <div className="statband">
-            <div><b><Mark>20+</Mark></b><span>data points behind every band we publish</span></div>
-            <div><b>25–75</b><span>the bar shows the middle half, 25th to 75th percentile</span></div>
-            <div><b><Mark>Quarterly</Mark></b><span>refresh, with the date on every page</span></div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Reviews */}
-      <section className="block">
-        <div className="wrap">
-          <div className="sec-head row">
-            <div>
-              <span className="eyebrow">Reviews</span>
-              <h2>Why people use Orion</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 24, textAlign: "center" }}>
+            <div style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "32px 24px" }}>
+              <div style={{ fontFamily: "var(--display)", fontSize: 44, color: "#1D4ED8", fontWeight: 500, marginBottom: 8 }}>
+                20+
+              </div>
+              <div style={{ fontWeight: 600, color: "#08142A", fontSize: 15, marginBottom: 4 }}>
+                Data Points Per Band
+              </div>
+              <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
+                Every published tier is backed by verified legal offers and lateral contracts.
+              </p>
             </div>
-            <RatingBadge link={true} />
+
+            <div style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "32px 24px" }}>
+              <div style={{ fontFamily: "var(--display)", fontSize: 44, color: "#1D4ED8", fontWeight: 500, marginBottom: 8 }}>
+                25–75th
+              </div>
+              <div style={{ fontWeight: 600, color: "#08142A", fontSize: 15, marginBottom: 4 }}>
+                Interquartile Distribution
+              </div>
+              <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
+                Visual track reflects the competitive middle 50% of prevailing market offers.
+              </p>
+            </div>
+
+            <div style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "32px 24px" }}>
+              <div style={{ fontFamily: "var(--display)", fontSize: 44, color: "#1D4ED8", fontWeight: 500, marginBottom: 8 }}>
+                Q1 2026
+              </div>
+              <div style={{ fontWeight: 600, color: "#08142A", fontSize: 15, marginBottom: 4 }}>
+                Quarterly Refresh
+              </div>
+              <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
+                Continuously recalibrated to reflect current macroeconomic and legal talent shifts.
+              </p>
+            </div>
           </div>
-          <div className="reviews-3">
+        </div>
+      </section>
+
+      {/* 6. BOTTOM MIDNIGHT NAVY CTA */}
+      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "100px 0 108px", textAlign: "center" }}>
+        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto" }}>
+          <div className="badge-capsule" style={{ marginBottom: 18 }}>
+            <span className="badge-dot" />
+            <span>CONFIDENTIAL LATERAL INTELLIGENCE</span>
+          </div>
+          <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4.2vw, 48px)", color: "#FFFFFF", margin: "0 0 16px" }}>
+            {door === "employer"
+              ? `Hire experienced ${role.short}s in ${city.name}`
+              : `Explore confidential ${role.short} openings in ${city.name}`}
+          </h2>
+          <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 32 }}>
+            {door === "employer"
+              ? "Access pre-screened attorney dossiers. Pay 23% only if you decide to hire."
+              : "Direct lateral seats with verified base compensation and partner track opportunities."}
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             {door === "employer" ? (
-              <>
-                <ReviewCard review={DATA.reviews[0]} />
-                <ReviewCard review={DATA.reviews[1]} />
-                <ReviewCard review={DATA.reviews[3]} />
-              </>
+              <Link href={`/find-candidates#role=${role.slug}&city=${city.slug}`} className="btn-emp-primary" style={{ padding: "14px 34px", fontSize: 16 }}>
+                <span>View candidates in this band</span>
+                <span aria-hidden="true">→</span>
+              </Link>
             ) : (
-              <>
-                <ReviewCard review={DATA.reviews[2]} />
-                <ReviewCard review={DATA.reviews[5]} />
-              </>
+              <Link href={`/jobs/${role.slug}/${city.slug}`} className="btn-emp-primary" style={{ padding: "14px 34px", fontSize: 16 }}>
+                <span>See {city.name} openings</span>
+                <span aria-hidden="true">→</span>
+              </Link>
             )}
+            <a href="#check" className="btn-emp-ghost" style={{ padding: "14px 34px", fontSize: 16 }}>
+              <span>Recalculate pay</span>
+              <span aria-hidden="true">↑</span>
+            </a>
           </div>
         </div>
       </section>
-
-      {/* 8. FAQ */}
-      <section className="block alt">
-        <div className="wrap split">
-          <div className="sec-head">
-            <span className="eyebrow">Questions</span>
-            <h2>Estate planning pay in {city.name}</h2>
-          </div>
-          <div className="faq">
-            <details>
-              <summary>What does an estate planning attorney earn in {city.name}?</summary>
-              <p>The median base is <span className="mark">${bandData.median}k</span>. Attorneys with 1 to 3 years usually earn <span className="mark">${bandData.b1[0]}k to ${bandData.b1[1]}k</span>, 4 to 7 years <span className="mark">${bandData.b2[0]}k to ${bandData.b2[1]}k</span>, and 8 years or more <span className="mark">${bandData.b3[0]}k to ${bandData.b3[1]}k</span>.</p>
-            </details>
-            <details>
-              <summary>Does a portable book change the offer?</summary>
-              <p>Yes. A small book of existing estate clients is the biggest single lever, often worth <span className="mark">$15k to $30k</span> on base, and can be paired with an origination bonus.</p>
-            </details>
-            <details>
-              <summary>Do small firms pay less than large firms?</summary>
-              <p>At small and mid-size firms, base is close to the bands above. Many add a bonus on collections or a fee split that larger firms do not offer.</p>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. CTA band */}
-      {door === "employer" ? (
-        <CtaBand
-          title={`See estate planning candidates in ${city.name}`}
-          button="See candidates in this band"
-          href={`/find-candidates#role=${role.slug}&city=${city.slug}`}
-        />
-      ) : (
-        <CtaBand
-          kind="candidate"
-          title={`${city.name} roles that pay more`}
-          button={`See ${city.name} roles`}
-          href={`/jobs/${role.slug}/${city.slug}`}
-        />
-      )}
-
-      <div className="mbar">
-        <a className="btn btn-primary" href="#check">
-          {door === "employer" ? "Check my offer" : "Check my pay"}
-        </a>
-      </div>
-    </>
+    </div>
   );
 }

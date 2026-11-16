@@ -33,8 +33,8 @@
 | **10** | `/candidate/[slug]` | `src/app/candidate/[slug]/page.tsx` | Dynamic | Law Firms & Candidates (Profile Dossier) | ✅ **Redesigned & Live** |
 | **11** | `/jobs/[role]/[city]` | `src/app/jobs/[role]/[city]/page.tsx` | Dynamic | Targeted Practice Area Job Seekers | ✅ **Redesigned & Live** |
 | **12** | `/salary-check` | `src/app/salary-check/page.tsx` | Static | Market Compensation Check Tool | ✅ **Redesigned & Live** |
-| **13** | `/salaries/[role]/[city]` | `src/app/salaries/[role]/[city]/page.tsx` | Dynamic | Compensation Benchmarks by Role & City | 📋 Needs Review |
-| **14** | `/locations/[state]/[city]` | `src/app/locations/[state]/[city]/page.tsx` | Dynamic | Regional Legal Market Directory | 📋 Needs Review |
+| **13** | `/salaries/[role]/[city]` | `src/app/salaries/[role]/[city]/page.tsx` | Dynamic | Compensation Benchmarks by Role & City | ✅ **Redesigned & Live** |
+| **14** | `/locations/[state]/[city]` | `src/app/locations/[state]/[city]/page.tsx` | Dynamic | Regional Legal Market Directory | ✅ **Redesigned & Live** |
 | **15** | `/roles/[role]` | `src/app/roles/[role]/page.tsx` | Dynamic | Practice Area Career Directory | 📋 Needs Review |
 | **16** | `/best-law-firms/[city]` | `src/app/best-law-firms/[city]/page.tsx` | Dynamic | Editorial Guide (Top Boutique Firms) | 📋 Needs Review |
 | **17** | `/where-to-hire/[city]` | `src/app/where-to-hire/[city]/page.tsx` | Dynamic | Talent Source Guide (Law Schools/Bar) | 📋 Needs Review |
