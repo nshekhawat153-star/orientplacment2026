@@ -9,14 +9,13 @@ import { Mark } from "@/components/Mark";
 import { TrustLine } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
 import { GateForm } from "@/components/GateForm";
-import { CtaBand } from "@/components/CtaBand";
 
 export function WhereToHireClient({
-  cityParam
+  cityParam,
 }: {
   cityParam: string;
 }) {
-  const city = DATA.cities.find(c => c.slug === cityParam);
+  const city = DATA.cities.find((c) => c.slug === cityParam);
 
   const [kindFilter, setKindFilter] = useState<string>("all");
 
@@ -28,308 +27,375 @@ export function WhereToHireClient({
   const lateralSources = DATA.lateralSources[city.slug] || [];
 
   const candidateIds = ["EP-TX-0476", "EP-TX-0388", "PL-TX-0640"];
-  const candidates = candidateIds.map(id => DATA.candidates.find(c => c.id === id)).filter(Boolean);
+  const candidates = candidateIds.map((id) => DATA.candidates.find((c) => c.id === id)).filter(Boolean);
 
-  const screenedCount = matchCandidates({ city: city.slug }).filter(r => r.inCity).length;
+  const screenedCount = matchCandidates({ city: city.slug }).filter((r) => r.inCity).length;
 
-  const nLawSchools = places.filter(p => p.kind === "Law school").length;
-  const nParalegal = places.filter(p => p.kind === "Paralegal programme").length;
-  const nAssoc = places.filter(p => /association/i.test(p.kind)).length;
+  const nLawSchools = places.filter((p) => p.kind === "Law school").length;
+  const nParalegal = places.filter((p) => p.kind === "Paralegal programme").length;
+  const nAssoc = places.filter((p) => /association/i.test(p.kind)).length;
 
-  const filteredPlaces = places.filter(p => {
+  const filteredPlaces = places.filter((p) => {
     if (kindFilter === "all") return true;
     if (kindFilter === "assoc") return /association/i.test(p.kind);
     return p.kind === kindFilter;
   });
 
   return (
-    <>
-      <Breadcrumb
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: city.name, href: `/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}` },
-          { label: "Where to hire", current: true }
-        ]}
-      />
+    <div className="where-to-hire-page">
+      {/* 1. LUXURY HERO WITH VIDEO & SNAPSHOT */}
+      <section className="emp-luxury-hero-sec wth-luxury-hero" aria-labelledby="wth-hero-h1">
+        <div className="emp-hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="emp-hero-video"
+          >
+            <source src="/media/splash.mp4" type="video/mp4" />
+          </video>
+          <div className="emp-hero-overlay" />
+          <div className="emp-hero-glow" />
+        </div>
 
-      {/* 1. Hero */}
-      <section className="phero wth-hero">
-        <div className="wrap">
-          <div>
-            <span className="eyebrow">Hiring guide · {city.name}, {city.state}</span>
-            <h1>Where to hire attorneys and paralegals in {city.name}</h1>
-            <p className="lede">The law schools, paralegal programmes and bar groups {city.name} firms hire from, who to contact and when. Or meet experienced people open to a move now.</p>
-            <div className="hero-act">
-              <Link className="btn btn-primary btn-lg" href={`/find-candidates#city=${city.slug}`}>See {city.name} candidates</Link>
-              <a className="text-link" href="#kit">Email me the hiring kit</a>
+        <div className="wrap emp-hero-content" style={{ maxWidth: 900 }}>
+          <div className="emp-hero-badge-wrap">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              <span>REGIONAL HIRING DIRECTORY · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
             </div>
-            <TrustLine />
           </div>
 
-          <div className="snapshot" id="glance">
-            <div className="snap-h">
-              <span className="eyebrow">{city.name} at a glance</span>
-              <span className="small muted"><Mark>{DATA.asOf}</Mark></span>
+          <h1 id="wth-hero-h1" className="emp-hero-h1">
+            Where to hire attorneys and paralegals in <span className="serif-accent">{city.name}</span>
+          </h1>
+
+          <p className="emp-hero-lead">
+            The accredited law schools, certified paralegal programmes, and local bar associations that {city.name} firms recruit from. Direct career office contacts, graduation hiring cycles, and pre-screened lateral candidates.
+          </p>
+
+          <div className="emp-reassurance-row" style={{ marginBottom: 32 }}>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>Verified career office contacts</span>
             </div>
-            <div className="snap-grid">
-              <div>
-                <b>{nLawSchools}</b>
-                <span>law schools with career offices</span>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>Active lateral attorney &amp; paralegal pool</span>
+            </div>
+            <div className="emp-reassurance-item">
+              <span className="check" aria-hidden="true">✓</span>
+              <span>23% contingency fee due only if you hire</span>
+            </div>
+          </div>
+
+          <div className="emp-hero-actions" style={{ marginBottom: 32 }}>
+            <Link className="btn-emp-primary" href={`/find-candidates#city=${city.slug}`}>
+              <span>See {city.name} candidates ({screenedCount})</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <a className="btn-emp-ghost" href="#sources">
+              <span>View institutional directory</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          {/* Elevated Statistics Snapshot Card */}
+          <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px", boxShadow: "0 20px 48px -12px rgba(0, 0, 0, 0.45)", color: "#08142A", textAlign: "left" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1px solid #E2E8F0", paddingBottom: 12, marginBottom: 18 }}>
+              <span style={{ fontFamily: "var(--display)", fontSize: 18, color: "#08142A", fontWeight: 500 }}>
+                {city.name} Talent Pipeline Snapshot
+              </span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                UPDATED {DATA.asOf}
+              </span>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+              <div style={{ background: "#F8FAFC", border: "1px solid #E2E8F0", borderRadius: 10, padding: "14px 16px" }}>
+                <div style={{ fontFamily: "var(--display)", fontSize: 28, color: "#08142A", fontWeight: 500 }}>
+                  {nLawSchools}
+                </div>
+                <div style={{ fontSize: 12.5, color: "#64748B", marginTop: 2 }}>
+                  Law schools with career offices
+                </div>
               </div>
-              <div>
-                <b>{nParalegal}</b>
-                <span>paralegal programmes</span>
+
+              <div style={{ background: "#F8FAFC", border: "1px solid #E2E8F0", borderRadius: 10, padding: "14px 16px" }}>
+                <div style={{ fontFamily: "var(--display)", fontSize: 28, color: "#08142A", fontWeight: 500 }}>
+                  {nParalegal}
+                </div>
+                <div style={{ fontSize: 12.5, color: "#64748B", marginTop: 2 }}>
+                  Paralegal degree programmes
+                </div>
               </div>
-              <div>
-                <b>{nAssoc}</b>
-                <span>bar and professional groups</span>
+
+              <div style={{ background: "#F8FAFC", border: "1px solid #E2E8F0", borderRadius: 10, padding: "14px 16px" }}>
+                <div style={{ fontFamily: "var(--display)", fontSize: 28, color: "#08142A", fontWeight: 500 }}>
+                  {nAssoc}
+                </div>
+                <div style={{ fontSize: 12.5, color: "#64748B", marginTop: 2 }}>
+                  Bar &amp; professional associations
+                </div>
               </div>
-              <div>
-                <b><Mark>{screenedCount}</Mark></b>
-                <span>candidates open to a move now</span>
+
+              <div style={{ background: "#F8FAFC", border: "1px solid #E2E8F0", borderRadius: 10, padding: "14px 16px" }}>
+                <div style={{ fontFamily: "var(--display)", fontSize: 28, color: "#1D4ED8", fontWeight: 500 }}>
+                  {screenedCount}
+                </div>
+                <div style={{ fontSize: 12.5, color: "#64748B", marginTop: 2 }}>
+                  Candidates open to moves now
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Source table */}
-      <section className="block alt" id="sources">
+      {/* 2. INSTITUTIONAL SOURCES TABLE */}
+      <section className="emp-process-sec" id="sources" style={{ background: "#FAF9F5", padding: "96px 0 108px", borderBottom: "1px solid #EAE7DC" }}>
         <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Sources</span>
-            <h2>Who to contact, and when they hire</h2>
-            <p>Filter by type. Every row says who to reach and the months that matter.</p>
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 40px" }}>
+            <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>TALENT CHANNELS</span>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "10px 0 14px" }}>
+              Who to contact, and when they recruit
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16 }}>
+              Filter by institution type. Direct career service office contacts and critical hiring calendar cycles for {city.name}.
+            </p>
           </div>
 
-          <div className="filter-row" role="group" aria-label="Show">
-            <span className="door-label">Show</span>
-            <div className="chips" id="kind">
-              <button
-                type="button"
-                className={`chip${kindFilter === "all" ? " active" : ""}`}
-                aria-pressed={kindFilter === "all"}
-                onClick={() => setKindFilter("all")}
-              >
-                All sources
-              </button>
-              <button
-                type="button"
-                className={`chip${kindFilter === "Law school" ? " active" : ""}`}
-                aria-pressed={kindFilter === "Law school"}
-                onClick={() => setKindFilter("Law school")}
-              >
-                Law schools
-              </button>
-              <button
-                type="button"
-                className={`chip${kindFilter === "Paralegal programme" ? " active" : ""}`}
-                aria-pressed={kindFilter === "Paralegal programme"}
-                onClick={() => setKindFilter("Paralegal programme")}
-              >
-                Paralegal programmes
-              </button>
-              <button
-                type="button"
-                className={`chip${kindFilter === "assoc" ? " active" : ""}`}
-                aria-pressed={kindFilter === "assoc"}
-                onClick={() => setKindFilter("assoc")}
-              >
-                Bar and associations
-              </button>
-            </div>
+          {/* Filter Chips */}
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 8, marginBottom: 32 }}>
+            <button
+              type="button"
+              onClick={() => setKindFilter("all")}
+              style={{
+                padding: "8px 18px",
+                borderRadius: 999,
+                fontSize: 13.5,
+                fontWeight: 600,
+                cursor: "pointer",
+                background: kindFilter === "all" ? "#1D4ED8" : "#FFFFFF",
+                color: kindFilter === "all" ? "#FFFFFF" : "#334155",
+                border: `1.5px solid ${kindFilter === "all" ? "#1D4ED8" : "#E2E8F0"}`,
+              }}
+            >
+              All sources
+            </button>
+            <button
+              type="button"
+              onClick={() => setKindFilter("Law school")}
+              style={{
+                padding: "8px 18px",
+                borderRadius: 999,
+                fontSize: 13.5,
+                fontWeight: 600,
+                cursor: "pointer",
+                background: kindFilter === "Law school" ? "#1D4ED8" : "#FFFFFF",
+                color: kindFilter === "Law school" ? "#FFFFFF" : "#334155",
+                border: `1.5px solid ${kindFilter === "Law school" ? "#1D4ED8" : "#E2E8F0"}`,
+              }}
+            >
+              Law schools
+            </button>
+            <button
+              type="button"
+              onClick={() => setKindFilter("Paralegal programme")}
+              style={{
+                padding: "8px 18px",
+                borderRadius: 999,
+                fontSize: 13.5,
+                fontWeight: 600,
+                cursor: "pointer",
+                background: kindFilter === "Paralegal programme" ? "#1D4ED8" : "#FFFFFF",
+                color: kindFilter === "Paralegal programme" ? "#FFFFFF" : "#334155",
+                border: `1.5px solid ${kindFilter === "Paralegal programme" ? "#1D4ED8" : "#E2E8F0"}`,
+              }}
+            >
+              Paralegal programmes
+            </button>
+            <button
+              type="button"
+              onClick={() => setKindFilter("assoc")}
+              style={{
+                padding: "8px 18px",
+                borderRadius: 999,
+                fontSize: 13.5,
+                fontWeight: 600,
+                cursor: "pointer",
+                background: kindFilter === "assoc" ? "#1D4ED8" : "#FFFFFF",
+                color: kindFilter === "assoc" ? "#FFFFFF" : "#334155",
+                border: `1.5px solid ${kindFilter === "assoc" ? "#1D4ED8" : "#E2E8F0"}`,
+              }}
+            >
+              Bar &amp; associations
+            </button>
           </div>
 
-          <div className="table-wrap">
-            <table className="data stack-sm">
-              <caption className="sr">Where {city.name} firms hire attorneys and paralegals</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Source</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Who to contact</th>
-                  <th scope="col">When they hire</th>
-                </tr>
-              </thead>
-              <tbody id="hire-rows">
-                {filteredPlaces.map((p, i) => (
-                  <tr key={i} data-kind={p.kind}>
-                    <td data-label="Source"><b>{p.name}</b></td>
-                    <td data-label="Type">{p.kind}</td>
-                    <td data-label="Who to contact"><Mark>{p.contact}</Mark></td>
-                    <td data-label="When they hire"><Mark>{p.cycle}</Mark></td>
+          {/* Directory Listings Table */}
+          <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, overflow: "hidden", boxShadow: "0 4px 16px rgba(15, 23, 42, 0.04)" }}>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontSize: 14 }}>
+                <thead>
+                  <tr style={{ background: "#F8FAFC", borderBottom: "1.5px solid #E2E8F0", color: "#64748B", fontFamily: "var(--mono)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                    <th style={{ padding: "16px 20px" }}>Institution / Source</th>
+                    <th style={{ padding: "16px 20px" }}>Type</th>
+                    <th style={{ padding: "16px 20px" }}>Direct Contact</th>
+                    <th style={{ padding: "16px 20px" }}>Active Recruitment Windows</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="source">Contacts and timing: <Mark>{DATA.source}</Mark>, <Mark>{DATA.asOf}</Mark>. Confirm dates with each office.</p>
-        </div>
-      </section>
-
-      {/* 3. When to reach out */}
-      <section className="block" id="when">
-        <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Timing</span>
-            <h2>When to reach out</h2>
-            <p>Schools and programmes hire on a calendar. Experienced attorneys move all year.</p>
-          </div>
-          <ol className="steps-line">
-            <li>
-              <span className="when"><span className="mark">January to February</span></span>
-              <h3>Clerk postings</h3>
-              <p>Law schools post spring and summer clerk roles. Get your posting in early.</p>
-            </li>
-            <li>
-              <span className="when"><span className="mark">May and December</span></span>
-              <h3>Paralegal graduates</h3>
-              <p>Programmes graduate. Contact coordinators a month before.</p>
-            </li>
-            <li>
-              <span className="when"><span className="mark">August</span></span>
-              <h3>On-campus interviews</h3>
-              <p>For next year&apos;s associates at the three {city.name} law schools.</p>
-            </li>
-            <li>
-              <span className="when">Any time</span>
-              <h3>Experienced attorneys</h3>
-              <p>They move all year. Most give <span className="mark">2 to 6 weeks&apos;</span> notice.</p>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      {/* 4. Where lateral hires come from */}
-      <section className="block alt" id="lateral">
-        <div className="wrap">
-          <div className="sec-head">
-            <span className="eyebrow">Lateral hires</span>
-            <h2>Where lateral hires come from</h2>
-            <p>Where the attorneys we place at small and mid-size {city.name} firms were working before. Share of placements.</p>
-          </div>
-          <div className="lat-split">
-            <div>
-              <ul className="hbars" id="lat">
-                {lateralSources.map((s: [string, number], idx: number) => (
-                  <li key={idx}>
-                    <span>{s[0]}</span>
-                    <span className="bar" aria-hidden="true">
-                      <i style={{ width: `${s[1]}%` }} />
-                    </span>
-                    <span className="v"><Mark>{s[1]}%</Mark></span>
-                  </li>
-                ))}
-              </ul>
-              <p className="source">Source: <Mark>{DATA.source}</Mark>, <Mark>{DATA.asOf}</Mark>.</p>
+                </thead>
+                <tbody>
+                  {filteredPlaces.map((p, i) => (
+                    <tr key={i} style={{ borderBottom: "1px solid #F1F5F9" }}>
+                      <td style={{ padding: "18px 20px", fontWeight: 600, color: "#08142A" }}>
+                        {p.name}
+                      </td>
+                      <td style={{ padding: "18px 20px", color: "#1D4ED8", fontWeight: 500 }}>
+                        {p.kind}
+                      </td>
+                      <td style={{ padding: "18px 20px", color: "#334155", fontFamily: "var(--mono)", fontSize: 13 }}>
+                        {p.contact}
+                      </td>
+                      <td style={{ padding: "18px 20px", color: "#059669", fontWeight: 600 }}>
+                        {p.cycle}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            {lateralSources.length > 0 && (
-              <div className="lat-fig">
-                <span className="mini-h">Most come from</span>
-                <div className="big-num"><Mark>{lateralSources[0][1]}%</Mark></div>
-                <p className="big-num-l">of lateral hires came from {lateralSources[0][0].toLowerCase()}.</p>
-                <p className="sec-foot">
-                  <Link className="link-arrow" href={`/find-candidates#city=${city.slug}`}>See who is open to a move</Link>
-                </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. LATERAL TALENT SOURCE MATRIX */}
+      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "96px 0 108px" }}>
+        <div className="wrap">
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 48px" }}>
+            <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>MARKET INTELLIGENCE</span>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "10px 0 14px" }}>
+              Where lateral hires come from in {city.name}
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16 }}>
+              Distribution of prior employer backgrounds for attorneys and paralegals successfully placed by Orion into {city.name} boutique law firms.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+            {lateralSources.map((s: [string, number], idx: number) => (
+              <div key={idx} style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "26px 22px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
+                  <span style={{ fontWeight: 600, color: "#08142A", fontSize: 16 }}>{s[0]}</span>
+                  <span style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 500, color: "#1D4ED8" }}>{s[1]}%</span>
+                </div>
+                <div style={{ background: "#E2E8F0", height: 8, borderRadius: 999, overflow: "hidden" }}>
+                  <div style={{ width: `${s[1]}%`, height: "100%", background: "#1D4ED8", borderRadius: 999 }} />
+                </div>
               </div>
-            )}
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 5. Candidates band */}
-      <section className="block" id="candidates">
+      {/* 4. ACTIVE CANDIDATES READY NOW */}
+      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "96px 0 108px", borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #EAE7DC" }}>
         <div className="wrap">
-          <div className="sec-head row">
+          <div className="sec-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 36, flexWrap: "wrap", gap: 14 }}>
             <div>
-              <span className="eyebrow">Available now</span>
-              <h2>{city.name} candidates open to a move</h2>
-              <p>Experienced hires screened by Jon. Names and firms stay hidden until you ask for the profile.</p>
+              <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>AVAILABLE CANDIDATES</span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "8px 0 0" }}>
+                Skip the recruiting calendar: {city.name} talent ready now
+              </h2>
             </div>
-            <Link className="more link-arrow hide-sm" href="/submit-job">Or paste your posting</Link>
+            <Link
+              className="more link-arrow hide-sm"
+              href={`/find-candidates#city=${city.slug}`}
+              style={{ fontSize: 14, fontWeight: 600, color: "#1D4ED8", textDecoration: "none" }}
+            >
+              <span>Explore all {city.name} dossiers</span>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
-          <div className="cand-grid">
-            {candidates.map(candidate => candidate && (
+
+          <div className="cards" style={{ display: "grid", gap: 20 }}>
+            {candidates.map((candidate) => candidate && (
               <CandidateCard key={candidate.id} candidate={candidate} />
             ))}
           </div>
-          <div className="sec-foot">
-            <Link className="btn btn-primary" href={`/find-candidates#city=${city.slug}`}>See {city.name} candidates</Link>
-            <span className="small muted">No retainer, and no fee unless you hire.</span>
-          </div>
         </div>
       </section>
 
-      {/* 6. Hiring kit gate */}
-      <section className="block alt" id="kit">
-        <div className="wrap kit-split">
+      {/* 5. TURNKEY HIRING KIT GATE FORM */}
+      <section className="emp-process-sec" id="kit" style={{ background: "#FFFFFF", padding: "96px 0 108px" }}>
+        <div className="wrap split">
           <div>
             <div className="sec-head">
-              <span className="eyebrow">Free PDF and Word</span>
-              <h2>Hiring on your own? Take the kit</h2>
-              <p>Send the same posting to every school and bar group, and score every interview the same way.</p>
+              <span className="eyebrow" style={{ color: "#1D4ED8", fontWeight: 700 }}>FIRM HIRING KIT</span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: "10px 0 14px" }}>
+                Hiring on your own in {city.name}? Take the kit
+              </h2>
+              <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6 }}>
+                Standardize your recruitment process across local law schools and bar associations with our turnkey templates.
+              </p>
             </div>
-            <ul className="ticks">
-              <li>Job posting template you can edit</li>
-              <li>Interview questions with good answers</li>
-              <li>Weighted scorecard and offer-letter outline</li>
-            </ul>
-            <p className="sec-foot">
-              <Link className="link-arrow" href={`/where-to-post/${city.slug}`}>Compare places to post in {city.name}</Link>
-            </p>
+            <div style={{ display: "grid", gap: 14, marginTop: 24 }}>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: 14, color: "#334155" }}>
+                  <strong>Job Posting Template:</strong> Pre-formatted for law school and bar association job boards.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
+                <span style={{ fontSize: 14, color: "#334155" }}>
+                  <strong>Interview Questions:</strong> Behavioral and technical diagnostic questions with evaluation rubrics.
+                </span>
+              </div>
+            </div>
           </div>
+
           <div id="kit-gate">
             <GateForm
-              eyebrow="Free kit"
-              title="Email me the hiring kit"
-              button="Email me the kit"
+              eyebrow="FREE DOWNLOAD"
+              title="Email me the complete hiring kit"
+              button="Download the turnkey kit"
               preset="kit"
               role="estate-planning-attorney"
               city={city.slug}
-              review="brett-zimmerman"
-              fine="One email with the kit. No list, and no call unless you ask for one."
+              reviewSlug="brett-zimmerman"
+              fine="Delivered immediately as an editable Word document and PDF. Zero spam."
             />
           </div>
         </div>
       </section>
 
-      {/* 7. FAQ */}
-      <section className="block">
-        <div className="wrap split">
-          <div className="sec-head">
-            <span className="eyebrow">Questions</span>
-            <h2>Hiring in {city.name}</h2>
-            <p>Ready to post? Compare <Link href={`/where-to-post/${city.slug}`}>places to post in {city.name}</Link>.</p>
+      {/* 6. BOTTOM MIDNIGHT NAVY CTA */}
+      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "100px 0 108px", textAlign: "center" }}>
+        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto" }}>
+          <div className="badge-capsule" style={{ marginBottom: 18 }}>
+            <span className="badge-dot" />
+            <span>EXECUTIVE LEGAL PLACEMENT</span>
           </div>
-          <div className="faq">
-            <details>
-              <summary>Which law schools are in {city.name}?</summary>
-              <p>Three: the University of Houston Law Center, South Texas College of Law Houston and Thurgood Marshall School of Law at Texas Southern University. Each has a career office that takes postings from firms.</p>
-            </details>
-            <details>
-              <summary>Can a small firm recruit at {city.name} law schools?</summary>
-              <p>Yes. Career offices take postings from firms of any size, for clerks, summer associates and graduates.</p>
-            </details>
-            <details>
-              <summary>Where do experienced estate planning attorneys come from?</summary>
-              <p>Mostly from other small firms. In our sample, <span className="mark">46%</span> of lateral hires came from other small firms.</p>
-            </details>
+          <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4.2vw, 48px)", color: "#FFFFFF", margin: "0 0 16px" }}>
+            Meet pre-screened {city.name} legal talent <span className="serif-accent" style={{ color: "#60A5FA" }}>without the wait.</span>
+          </h2>
+          <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 32 }}>
+            Access confidential lateral attorney and paralegal dossiers. Pay 23% only if you decide to hire.
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+            <Link href={`/find-candidates#city=${city.slug}`} className="btn-emp-primary" style={{ padding: "14px 34px", fontSize: 16 }}>
+              <span>View {city.name} candidates</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link href="/submit-job" className="btn-emp-ghost" style={{ padding: "14px 34px", fontSize: 16 }}>
+              <span>Submit your open seat</span>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>
-
-      {/* 8. CTA band */}
-      <CtaBand
-        title="Skip the hiring calendar"
-        text={`Experienced ${city.name} attorneys and paralegals open to a move now. No retainer, and no fee unless you hire.`}
-        button={`See ${city.name} candidates`}
-        href={`/find-candidates#city=${city.slug}`}
-      />
-
-      <div className="mbar">
-        <Link className="btn btn-primary" href={`/find-candidates#city=${city.slug}`}>See {city.name} candidates</Link>
-      </div>
-    </>
+    </div>
   );
 }
-

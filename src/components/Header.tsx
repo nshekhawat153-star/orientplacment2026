@@ -36,7 +36,9 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
     pathname.startsWith("/salaries/") ||
     pathname.startsWith("/locations/") ||
     pathname.startsWith("/roles/") ||
-    pathname.startsWith("/best-law-firms/");
+    pathname.startsWith("/best-law-firms/") ||
+    pathname.startsWith("/where-to-hire/") ||
+    pathname.startsWith("/where-to-post/");
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
