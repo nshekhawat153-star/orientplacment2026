@@ -8648,3 +8648,629 @@ table.data.compare td.us{background:#F5F8FC}
   margin: 0 auto;
   box-shadow: 0 8px 20px rgba(47, 98, 184, 0.3);
 }
+
+/* ==========================================================================
+   26. EMPLOYER PAGE LUXURY REDESIGN (/employers)
+   ========================================================================== */
+
+/* 1. Hero: Dark Midnight Navy with Radial Glow */
+.emp-hero-sec {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  background: #08142A !important;
+  color: #FFFFFF !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 80px 0 100px !important;
+}
+
+.emp-hero-sec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 85% 25%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0) 65%),
+    radial-gradient(circle at 15% 75%, rgba(14, 165, 233, 0.16) 0%, rgba(8, 20, 42, 0) 55%);
+}
+
+.emp-hero-sec > .wrap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(380px, 460px);
+  gap: 56px;
+  align-items: center;
+}
+
+.emp-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.emp-hero-sec .badge-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #93C5FD;
+  width: fit-content;
+}
+
+.emp-hero-sec .badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #60A5FA;
+  box-shadow: 0 0 8px rgba(96, 165, 250, 0.8);
+}
+
+.emp-hero-title {
+  font-family: var(--display);
+  font-size: clamp(38px, 4.4vw, 54px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.emp-hero-title .serif-accent {
+  font-family: var(--display);
+  font-style: italic;
+  color: #60A5FA;
+}
+
+.emp-hero-lede {
+  font-size: 17.5px;
+  line-height: 1.65;
+  color: #94A3B8;
+  max-width: 540px;
+  margin: 0;
+}
+
+.emp-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.btn-emp-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #1D4ED8;
+  color: #FFFFFF !important;
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: 7px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-emp-primary:hover {
+  background: #2563EB;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.45);
+}
+
+.btn-emp-cal {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 7px;
+  padding: 12px 20px;
+  color: #E2E8F0 !important;
+  font-size: 14.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-emp-cal:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+}
+
+.emp-hero-perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin-top: 8px;
+  font-size: 13.5px;
+  color: #94A3B8;
+}
+
+.emp-hero-perk-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.emp-hero-perk-item .perk-check {
+  color: #38BDF8;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.emp-hero-accountability {
+  font-size: 13px;
+  color: #64748B;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
+  margin-top: 4px;
+}
+
+/* Right side preview dossier */
+.emp-dossier-preview {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 24px 26px;
+  color: #08142A;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.45);
+}
+
+.emp-dossier-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #E2E8F0;
+  margin-bottom: 16px;
+}
+
+.emp-dossier-badge {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1D4ED8;
+}
+
+.emp-dossier-notice {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.emp-dossier-role {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 400;
+  color: #08142A;
+  margin: 0 0 4px;
+}
+
+.emp-dossier-sub {
+  font-size: 13px;
+  color: #64748B;
+  margin: 0 0 16px;
+}
+
+.emp-dossier-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.emp-dossier-stat-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748B;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.emp-dossier-stat-val {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #08142A;
+}
+
+.emp-dossier-stat-val.salary {
+  color: #1D4ED8;
+}
+
+.emp-dossier-vetting {
+  background: rgba(29, 78, 216, 0.04);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.emp-dossier-vetting b {
+  color: #1D4ED8;
+  font-weight: 600;
+}
+
+.btn-emp-dossier-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: #08142A;
+  color: #FFFFFF !important;
+  font-family: var(--body);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 11px 18px;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-emp-dossier-cta:hover {
+  background: #1D4ED8;
+}
+
+/* 2. Three Ways to Engage (.emp-ways-sec) */
+.emp-ways-sec {
+  background: #FAF9F5 !important;
+  padding: 96px 0 104px !important;
+  border-bottom: 1px solid #EAE7DC !important;
+}
+
+.emp-ways-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  margin-top: 48px !important;
+}
+
+.emp-way-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 16px !important;
+  padding: 32px 28px !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.emp-way-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: #1D4ED8 !important;
+  box-shadow: 0 16px 36px -8px rgba(29, 78, 216, 0.12) !important;
+}
+
+.emp-way-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.emp-way-pill {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1D4ED8;
+  background: rgba(29, 78, 216, 0.08);
+  border: 1px solid rgba(29, 78, 216, 0.18);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.emp-way-mock {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
+  font-size: 12.5px;
+}
+
+.emp-way-title {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 400;
+  color: #08142A;
+  margin: 0 0 10px;
+}
+
+.emp-way-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0 0 24px;
+  flex-grow: 1;
+}
+
+.btn-emp-way-act {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1D4ED8 !important;
+  text-decoration: none;
+  background: rgba(29, 78, 216, 0.06);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+  border-radius: 7px;
+  padding: 10px 16px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.btn-emp-way-act:hover {
+  background: #1D4ED8;
+  color: #FFFFFF !important;
+}
+
+@media (max-width: 960px) {
+  .emp-hero-sec > .wrap {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .emp-ways-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* Subpage breadcrumbs on dark header */
+.subpage-breadcrumb-wrap .crumbs {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+.subpage-breadcrumb-wrap .crumbs a {
+  color: #94A3B8 !important;
+}
+.subpage-breadcrumb-wrap .crumbs a:hover {
+  color: #60A5FA !important;
+}
+.subpage-breadcrumb-wrap .crumbs [aria-current] {
+  color: #E2E8F0 !important;
+}
+.subpage-breadcrumb-wrap .crumbs li + li::before {
+  color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* ==========================================================================
+   27. EMPLOYER PAGE - PROCESS & DARK TERMS SECTION
+   ========================================================================== */
+
+/* Process Section: From open seat to shortlist in days */
+.emp-process-sec {
+  background: #FAF9F5 !important;
+  padding: 104px 0 112px !important;
+  border-bottom: 1px solid #EAE7DC !important;
+}
+
+.emp-process-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  margin-top: 48px !important;
+}
+
+.emp-pcard {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 16px !important;
+  padding: 32px 28px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative !important;
+}
+
+.emp-pcard:hover {
+  transform: translateY(-4px) !important;
+  border-color: #1D4ED8 !important;
+  box-shadow: 0 16px 36px -8px rgba(29, 78, 216, 0.12) !important;
+}
+
+.emp-pcard-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 18px !important;
+}
+
+.emp-pcard-step-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #1D4ED8 !important;
+  background: rgba(29, 78, 216, 0.08) !important;
+  border: 1px solid rgba(29, 78, 216, 0.18) !important;
+  border-radius: 999px !important;
+  padding: 4px 12px !important;
+}
+
+.emp-pcard-when {
+  font-family: var(--mono) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  color: #64748B !important;
+}
+
+.emp-pcard-title {
+  font-family: var(--display) !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  color: #08142A !important;
+  margin: 0 0 12px !important;
+  line-height: 1.25 !important;
+}
+
+.emp-pcard-desc {
+  font-size: 14.5px !important;
+  line-height: 1.6 !important;
+  color: #475569 !important;
+  margin: 0 0 24px !important;
+}
+
+.emp-pcard-ill {
+  margin-top: auto !important;
+}
+
+/* Dark Terms Section: One fee, and only if you hire */
+.emp-terms-dark-sec {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  background: #08142A !important;
+  color: #FFFFFF !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 104px 0 120px !important;
+}
+
+.emp-terms-dark-sec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 82% 20%, rgba(29, 78, 216, 0.24) 0%, rgba(8, 20, 42, 0) 60%),
+    radial-gradient(circle at 12% 80%, rgba(14, 165, 233, 0.15) 0%, rgba(8, 20, 42, 0) 55%);
+}
+
+.emp-terms-dark-sec > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.emp-terms-dark-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  margin-top: 52px !important;
+}
+
+.emp-dark-tile {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  padding: 32px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.emp-dark-tile:hover {
+  transform: translateY(-4px) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(96, 165, 250, 0.35) !important;
+  box-shadow: 0 20px 48px -10px rgba(29, 78, 216, 0.25) !important;
+}
+
+.emp-dark-tile-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(29, 78, 216, 0.2);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60A5FA;
+  margin-bottom: 20px;
+}
+
+.emp-dark-tile-label {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #93C5FD !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+
+.emp-dark-tile-val {
+  font-family: var(--display) !important;
+  font-size: clamp(34px, 3.2vw, 42px) !important;
+  font-weight: 400 !important;
+  color: #FFFFFF !important;
+  line-height: 1.1 !important;
+  margin-bottom: 14px !important;
+  display: block !important;
+}
+
+.emp-dark-tile-val .mark {
+  background: none !important;
+  color: #60A5FA !important;
+  padding: 0 !important;
+}
+
+.emp-dark-tile-desc {
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  color: #94A3B8 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 1024px) {
+  .emp-terms-dark-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .emp-process-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .emp-terms-dark-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
