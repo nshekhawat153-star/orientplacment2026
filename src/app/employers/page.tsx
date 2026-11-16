@@ -1,14 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Breadcrumb } from "@/components/Breadcrumb";
-import { TrustBar, RatingBadge, CalendlyLink } from "@/components/Rating";
+import { TrustBar, RatingBadge } from "@/components/Rating";
 import { ResourceCards } from "@/components/ResourceCards";
 import { ReviewsSection } from "@/components/ReviewCard";
 import { CtaBand } from "@/components/CtaBand";
 import { Mark } from "@/components/Mark";
 import { Icon } from "@/components/icons";
-import { findCandidate, fmt, trust, terms } from "@/data";
+import { trust, terms } from "@/data";
 
 export const metadata: Metadata = {
   title: "Hire attorneys and paralegals for your firm | Orion",
@@ -20,8 +19,6 @@ export const metadata: Metadata = {
 };
 
 export default function EmployersPage() {
-  const c1 = findCandidate("EP-TX-0412");
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -48,8 +45,8 @@ export default function EmployersPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 1. Ultra-Premium Employer Hero with Water Splash Background Video */}
-      <section className="hero-cinematic emp-hero-sec" aria-labelledby="emp-hero-h1">
+      {/* 1. CINEMATIC WATER SPLASH HERO */}
+      <section className="hero-cinematic" aria-labelledby="emp-hero-h1">
         {/* Background Water Splash Video */}
         <div className="hero-video-wrap" aria-hidden="true">
           <video
@@ -65,127 +62,70 @@ export default function EmployersPage() {
           <div className="hero-video-radial-aura" />
         </div>
 
-        <div className="wrap hero-content-wrap" style={{ position: "relative", zIndex: 3 }}>
-          {/* Subtle in-hero breadcrumbs */}
-          <div style={{ marginBottom: "24px" }}>
-            <Breadcrumb
-              items={[
-                { name: "Home", href: "/" },
-                { name: "Employers" },
-              ]}
-            />
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.25fr) minmax(380px, 460px)", gap: "56px", alignItems: "center" }}>
-            <div className="emp-hero-content">
-              <div className="badge-capsule">
-                <span className="badge-dot" />
-                EMPLOYER PORTAL · 23% DUE ONLY IF YOU HIRE
-              </div>
-
-              <h1 id="emp-hero-h1" className="emp-hero-title">
-                Hire attorneys and paralegals,{" "}
-                <span className="serif-accent">pay only when you hire.</span>
-              </h1>
-
-              <p className="emp-hero-lede">
-                Direct-hire lateral attorney and legal support placements sent straight to your inbox.
-                Zero upfront fees, non-exclusive agreement, and a full 90-day replacement guarantee.
-                You only pay 15 days after your hire starts.
-              </p>
-
-              <div className="emp-hero-actions">
-                <Link className="btn-emp-primary" href="/find-candidates">
-                  <span>Find candidates for my seat</span>
-                  <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                    <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-                  </svg>
-                </Link>
-                <a
-                  href={trust.calendly}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-emp-cal"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="15"
-                    height="15"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                  </svg>
-                  <span>Book 15 min with Justin</span>
-                </a>
-              </div>
-
-              <div className="emp-hero-perks">
-                <div className="emp-hero-perk-item">
-                  <span className="perk-check" aria-hidden="true">✓</span>
-                  <span>Zero upfront retainer</span>
-                </div>
-                <div className="emp-hero-perk-item">
-                  <span className="perk-check" aria-hidden="true">✓</span>
-                  <span>Non-exclusive agreement</span>
-                </div>
-                <div className="emp-hero-perk-item">
-                  <span className="perk-check" aria-hidden="true">✓</span>
-                  <span>90-day replacement warranty</span>
-                </div>
-              </div>
-
-              <div className="emp-hero-accountability">
-                Justin Missirlian directly manages every law firm search with partner-level accountability.
-              </div>
+        <div className="wrap hero-content-wrap">
+          <div className="hero-content-center">
+            <div className="hero-eyebrow-capsule">
+              <span className="hero-eyebrow-dot" aria-hidden="true" />
+              <span>EMPLOYER PORTAL · 23% DUE ONLY IF YOU HIRE</span>
             </div>
 
-            {/* Right Column: Live Candidate Dossier Preview Card */}
-            <div className="emp-dossier-preview">
-              <div className="emp-dossier-header">
-                <span className="emp-dossier-badge">CONFIDENTIAL DOSSIER · {c1?.id || "EP-TX-0412"}</span>
-                <span className="emp-dossier-notice">● {c1?.availability || "4 weeks' notice"}</span>
-              </div>
+            <h1 id="emp-hero-h1" className="hero-display-h1">
+              Hire attorneys and paralegals,{" "}
+              <span className="hero-accent-serif">pay only when you hire.</span>
+            </h1>
 
-              <h3 className="emp-dossier-role">{c1?.role || "Estate Planning Associate"}</h3>
-              <p className="emp-dossier-sub">{c1?.headline || "Drafts and runs trust administrations autonomously without partner oversight"}</p>
+            <p className="hero-lead-p">
+              Direct-hire lateral attorney and legal support placements sent straight to your inbox.
+              Zero upfront fees, non-exclusive agreement, and a full 90-day replacement guarantee.
+              You only pay 15 days after your hire starts.
+            </p>
 
-              <div className="emp-dossier-grid">
-                <div>
-                  <span className="emp-dossier-stat-label">Experience</span>
-                  <span className="emp-dossier-stat-val">{c1?.years || 5} Years Lateral</span>
-                </div>
-                <div>
-                  <span className="emp-dossier-stat-label">Bar Standing</span>
-                  <span className="emp-dossier-stat-val">{c1?.bars.join(", ") || "Texas Bar"} (Active)</span>
-                </div>
-                <div>
-                  <span className="emp-dossier-stat-label">Current Firm</span>
-                  <span className="emp-dossier-stat-val">{c1?.firmType || "Estate planning boutique"}</span>
-                </div>
-                <div>
-                  <span className="emp-dossier-stat-label">Target Base</span>
-                  <span className="emp-dossier-stat-val salary">{c1 ? fmt.range(c1.pay) : "$125k–$140k"}</span>
-                </div>
-              </div>
-
-              <div className="emp-dossier-vetting">
-                <b>✓ Screened by Jon Missirlian:</b> &ldquo;Five years at firms your size, runs administrations without a partner in the room.&rdquo;
-              </div>
-
-              <Link href="/find-candidates" className="btn-emp-dossier-cta">
-                <span>Request Full Redacted Dossier</span>
-                <svg aria-hidden="true" viewBox="0 0 20 20" width="14" height="14" fill="currentColor">
+            <div className="hero-actions-group">
+              <Link className="btn-hero-primary" href="/find-candidates">
+                <span>Find candidates for my seat</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
                   <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
                 </svg>
               </Link>
+              <a
+                href={trust.calendly}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-hero-secondary"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="15"
+                  height="15"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <span>Book 15 min with Justin</span>
+              </a>
+            </div>
+
+            <div className="emp-hero-perks">
+              <div className="emp-hero-perk-item">
+                <span className="perk-check" aria-hidden="true">✓</span>
+                <span>Zero upfront retainer</span>
+              </div>
+              <div className="emp-hero-perk-item">
+                <span className="perk-check" aria-hidden="true">✓</span>
+                <span>Non-exclusive agreement</span>
+              </div>
+              <div className="emp-hero-perk-item">
+                <span className="perk-check" aria-hidden="true">✓</span>
+                <span>90-day replacement warranty</span>
+              </div>
             </div>
           </div>
         </div>
@@ -320,7 +260,7 @@ export default function EmployersPage() {
         </div>
       </section>
 
-      {/* 4. How it works: From open seat to shortlist in days (Redesigned with luxury cards) */}
+      {/* 4. How it works: From open seat to shortlist in days */}
       <section className="block emp-process-sec" id="how-it-works">
         <div className="wrap">
           <div className="sec-head-premium">
