@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { GateForm } from "@/components/GateForm";
 import { terms, recruiterQuestions, fmt } from "@/data";
 
@@ -81,15 +80,17 @@ export default function FeesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 1. LUXURY 2-COLUMN HERO SECTION WITH SPLASH VIDEO */}
+      {/* 1. LUXURY CENTERED HERO SECTION (NO BREADCRUMBS, NO CARD CLUTTER) */}
       <section
         className="emp-luxury-hero-sec fee-luxury-hero-sec"
         style={{
           position: "relative",
           background: "#08142A",
           color: "#FFFFFF",
-          padding: "124px 0 76px",
+          padding: "128px 0 84px",
           overflow: "hidden",
+          textAlign: "center",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
         }}
       >
         <div className="emp-hero-video-wrap" aria-hidden="true">
@@ -124,254 +125,268 @@ export default function FeesPage() {
           />
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
+        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 840, margin: "0 auto", padding: "0 24px" }}>
+          {/* Eyebrow Capsule */}
           <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Employers", href: "/employers" },
-                { label: "Fees & Terms", current: true },
-              ]}
-            />
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 40, alignItems: "center" }}>
-            {/* Left Column: Heading & Value Proposition */}
-            <div>
-              <div className="emp-hero-badge-wrap" style={{ marginBottom: 16 }}>
-                <div
-                  className="badge-capsule"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.08)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    borderRadius: 999,
-                    padding: "6px 14px",
-                    fontFamily: "var(--mono)",
-                    fontSize: 11,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#93C5FD",
-                  }}
-                >
-                  <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                  <span>TRANSPARENT PRICING · 100% CONTINGENCY</span>
-                </div>
-              </div>
-
-              <h1
-                style={{
-                  fontFamily: "var(--display)",
-                  fontSize: "clamp(36px, 4.5vw, 56px)",
-                  lineHeight: 1.12,
-                  fontWeight: 500,
-                  color: "#FFFFFF",
-                  margin: "0 0 20px",
-                }}
-              >
-                One fee, only if you <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>hire</span>
-              </h1>
-
-              <p
-                style={{
-                  fontSize: "clamp(16px, 1.8vw, 18px)",
-                  lineHeight: 1.6,
-                  color: "#CBD5E1",
-                  margin: "0 0 32px",
-                  maxWidth: 580,
-                }}
-              >
-                Zero upfront retainer, zero exclusivity, and zero hidden costs. You pay one invoice (23%)
-                only when the introduced attorney starts, protected by a 90-day replacement warranty.
-              </p>
-
-              <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
-                <a
-                  href="#calc"
-                  className="btn-emp-primary"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#1D4ED8",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 26px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>Calculate your fee</span>
-                  <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                    <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-                  </svg>
-                </a>
-                <Link
-                  href="/find-candidates"
-                  className="btn-emp-ghost"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 26px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>Find candidates</span>
-                  <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                    <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-                  </svg>
-                </Link>
-              </div>
-
-              {/* Micro Reassurances */}
-              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14, fontSize: 13, color: "#94A3B8" }}>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-                  </svg>
-                  <span>23% flat contingency</span>
-                </div>
-                <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-                  </svg>
-                  <span>Net 15 on start date</span>
-                </div>
-                <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-                  </svg>
-                  <span>90-day replacement warranty</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Luxury Terms Summary Terminal */}
             <div
+              className="badge-capsule"
               style={{
-                background: "rgba(15, 23, 42, 0.75)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
-                borderRadius: 14,
-                padding: "28px 24px",
-                boxShadow: "0 20px 50px rgba(0, 0, 0, 0.35)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                borderRadius: 999,
+                padding: "6px 16px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#93C5FD",
               }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-                <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#93C5FD" }}>
-                  STANDARD ENGAGEMENT SCHEDULE
-                </span>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(34, 197, 94, 0.15)", border: "1px solid rgba(34, 197, 94, 0.3)", borderRadius: 999, padding: "3px 10px", fontSize: 11, color: "#4ADE80", fontWeight: 600 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ADE80" }} />
-                  ACTIVE POLICY
-                </span>
-              </div>
+              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span>TRANSPARENT PRICING · 100% CONTINGENCY</span>
+            </div>
+          </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 20 }}>
-                <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: "0.06em", color: "#94A3B8", textTransform: "uppercase", marginBottom: 4 }}>
-                    Contingency Fee
-                  </div>
-                  <div style={{ fontSize: 24, fontWeight: 700, color: "#60A5FA" }}>23%</div>
-                  <div style={{ fontSize: 11.5, color: "#CBD5E1", marginTop: 2 }}>Of 1st-year base salary</div>
-                </div>
+          {/* Main Title */}
+          <h1
+            style={{
+              fontFamily: "var(--display)",
+              fontSize: "clamp(36px, 4.8vw, 56px)",
+              lineHeight: 1.15,
+              fontWeight: 400,
+              color: "#FFFFFF",
+              margin: "0 auto 20px",
+              maxWidth: 780,
+            }}
+          >
+            One fee, only if you{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              hire.
+            </span>
+          </h1>
 
-                <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: "0.06em", color: "#94A3B8", textTransform: "uppercase", marginBottom: 4 }}>
-                    Upfront Retainer
-                  </div>
-                  <div style={{ fontSize: 24, fontWeight: 700, color: "#FFFFFF" }}>$0</div>
-                  <div style={{ fontSize: 11.5, color: "#CBD5E1", marginTop: 2 }}>Zero upfront commitment</div>
-                </div>
+          {/* Clean Subtext */}
+          <p
+            style={{
+              fontSize: "clamp(16px, 1.8vw, 18px)",
+              lineHeight: 1.6,
+              color: "#CBD5E1",
+              maxWidth: 640,
+              margin: "0 auto 34px",
+            }}
+          >
+            Zero upfront retainer, zero exclusivity, and zero hidden costs. You pay one invoice (23%)
+            only when your introduced attorney starts, protected by our 90-day replacement warranty.
+          </p>
 
-                <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: "0.06em", color: "#94A3B8", textTransform: "uppercase", marginBottom: 4 }}>
-                    Replacement Guarantee
-                  </div>
-                  <div style={{ fontSize: 24, fontWeight: 700, color: "#FFFFFF" }}>90 Days</div>
-                  <div style={{ fontSize: 11.5, color: "#CBD5E1", marginTop: 2 }}>Calendar-day coverage</div>
-                </div>
+          {/* Action CTAs */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
+            <a
+              href="#calc"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 28px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+              }}
+            >
+              <span>Calculate your fee</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <Link
+              href="/find-candidates"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 26px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Browse candidate dossiers</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
 
-                <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: "0.06em", color: "#94A3B8", textTransform: "uppercase", marginBottom: 4 }}>
-                    Payment Schedule
-                  </div>
-                  <div style={{ fontSize: 24, fontWeight: 700, color: "#FFFFFF" }}>Net 15</div>
-                  <div style={{ fontSize: 11.5, color: "#CBD5E1", marginTop: 2 }}>Invoiced on physical start</div>
-                </div>
-              </div>
-
-              <div style={{ background: "rgba(29, 78, 216, 0.15)", border: "1px solid rgba(96, 165, 250, 0.3)", borderRadius: 8, padding: "12px 14px", fontSize: 12.5, color: "#BFDBFE", lineHeight: 1.5 }}>
-                <span style={{ fontWeight: 600, color: "#FFFFFF" }}>Zero Risk Guarantee:</span> If you interview candidates we present and decide not to hire, you owe nothing. No cancellation fees, no hourly bills.
-              </div>
+          {/* Micro Reassurances */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 16,
+              fontSize: 13,
+              color: "#94A3B8",
+            }}
+          >
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Zero upfront retainer</span>
+            </div>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>23% flat contingency</span>
+            </div>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Net 15 on start date</span>
+            </div>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>90-day replacement warranty</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* 2. THE 4 PILLARS OF OUR TERMS */}
-      <section className="block" style={{ padding: "80px 0 56px", background: "#FAF9F5" }}>
+      <section style={{ padding: "88px 0 96px", background: "#FAF9F5", borderBottom: "1px solid #E2E8F0" }}>
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+          {/* Header */}
+          <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto 48px" }}>
+            <div
+              className="badge-capsule"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 12,
+              }}
+            >
+              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>THE PROTOCOL · 4 CORE COMMITMENTS</span>
+            </div>
+            <h2
+              style={{
+                fontSize: "clamp(28px, 3.4vw, 40px)",
+                fontWeight: 400,
+                color: "#08142A",
+                margin: "0 0 10px",
+                fontFamily: "var(--display)",
+              }}
+            >
+              The pillars of our <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>agreement</span>
+            </h2>
+            <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem", lineHeight: 1.6 }}>
+              Simple, transparent commercial terms designed to protect small and mid-size Texas law firms.
+            </p>
+          </div>
+
           <div className="terms-pillars-grid">
-            <div className="terms-pillar">
-              <div className="pillar-kicker">01 · CONTINGENCY FEE</div>
-              <div className="pillar-val">23%</div>
-              <div className="pillar-label">Of first-year base</div>
-              <p className="pillar-desc">
-                Calculated strictly on base salary. Discretionary bonuses and benefits are never included.
+            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "30px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
+              <div className="pillar-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+                01 · CONTINGENCY FEE
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 34, fontWeight: 400, color: "#08142A", marginBottom: 4 }}>
+                23%
+              </div>
+              <div className="pillar-label" style={{ fontSize: 14, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                Of first-year base salary
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 16px" }}>
+                Calculated strictly on base salary. Discretionary bonuses, health benefits, and sign-ons are never included.
               </p>
-              <div className="pillar-badge">
-                <span>Contingency Only</span>
+              <div style={{ marginTop: "auto" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.2)", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, color: "#1D4ED8" }}>
+                  Contingency Only
+                </span>
               </div>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">02 · REPLACEMENT WARRANTY</div>
-              <div className="pillar-val">90 Days</div>
-              <div className="pillar-label">Calendar day guarantee</div>
-              <p className="pillar-desc">
-                If the hire leaves or is let go within 90 days, we conduct a replacement search at zero extra fee.
+            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "30px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
+              <div className="pillar-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+                02 · REPLACEMENT WARRANTY
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 34, fontWeight: 400, color: "#08142A", marginBottom: 4 }}>
+                90 Days
+              </div>
+              <div className="pillar-label" style={{ fontSize: 14, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                Calendar day guarantee
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 16px" }}>
+                If the hire leaves or is let go within 90 days, we conduct a prioritized replacement search at zero extra fee.
               </p>
-              <div className="pillar-badge">
-                <span>Free Replacement</span>
+              <div style={{ marginTop: "auto" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.2)", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, color: "#1D4ED8" }}>
+                  Free Replacement
+                </span>
               </div>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">03 · CLIENT FREEDOM</div>
-              <div className="pillar-val">Zero</div>
-              <div className="pillar-label">Upfront retainer or lock-in</div>
-              <p className="pillar-desc">
-                No retainer and no exclusivity. Keep your internal pipeline and other recruiters active.
+            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "30px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
+              <div className="pillar-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+                03 · CLIENT FREEDOM
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 34, fontWeight: 400, color: "#08142A", marginBottom: 4 }}>
+                Zero
+              </div>
+              <div className="pillar-label" style={{ fontSize: 14, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                Upfront retainer or lock-in
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 16px" }}>
+                No upfront cash and no exclusivity. Keep your internal referrals and other recruiting channels fully active.
               </p>
-              <div className="pillar-badge">
-                <span>Non-Exclusive</span>
+              <div style={{ marginTop: "auto" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.2)", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, color: "#1D4ED8" }}>
+                  Non-Exclusive
+                </span>
               </div>
             </div>
 
-            <div className="terms-pillar">
-              <div className="pillar-kicker">04 · PAYMENT SCHEDULE</div>
-              <div className="pillar-val">Net 15</div>
-              <div className="pillar-label">Invoice on start date</div>
-              <p className="pillar-desc">
+            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "30px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
+              <div className="pillar-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+                04 · PAYMENT SCHEDULE
+              </div>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 34, fontWeight: 400, color: "#08142A", marginBottom: 4 }}>
+                Net 15
+              </div>
+              <div className="pillar-label" style={{ fontSize: 14, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                Invoice on physical start date
+              </div>
+              <p className="pillar-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 16px" }}>
                 We issue the invoice only when the candidate physically begins work, payable within 15 calendar days.
               </p>
-              <div className="pillar-badge">
-                <span>Start Date Invoice</span>
+              <div style={{ marginTop: "auto" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.2)", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, color: "#1D4ED8" }}>
+                  Start Date Invoice
+                </span>
               </div>
             </div>
           </div>
@@ -379,14 +394,14 @@ export default function FeesPage() {
       </section>
 
       {/* 3. INTERACTIVE FEE CALCULATOR */}
-      <section className="block alt" id="calc" style={{ padding: "88px 0", background: "#FFFFFF", borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0" }}>
+      <section className="block alt" id="calc" style={{ padding: "88px 0 96px", background: "#FFFFFF", borderBottom: "1px solid #E2E8F0" }}>
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div className="sec-head-premium" style={{ textAlign: "center", marginBottom: 48 }}>
-            <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 999, padding: "5px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
+            <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 999, padding: "6px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
               <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
               <span>INSTANT FEE ESTIMATE · ZERO COMMITMENT</span>
             </div>
-            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
+            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 400 }}>
               Your fee in ten <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>seconds</span>
             </h2>
             <p className="who-lede" style={{ fontSize: 16, color: "#64748B", maxWidth: 640, margin: "0 auto", lineHeight: 1.6 }}>
@@ -405,7 +420,7 @@ export default function FeesPage() {
               style={{
                 background: "#FAF9F5",
                 borderRadius: 14,
-                border: "1.5px solid #E2E8F0",
+                border: "1.5px solid #EAE7DC",
                 padding: "32px 28px",
                 display: "flex",
                 flexDirection: "column",
@@ -476,7 +491,7 @@ export default function FeesPage() {
               style={{
                 background: "#FAF9F5",
                 borderRadius: 14,
-                border: "1.5px solid #E2E8F0",
+                border: "1.5px solid #EAE7DC",
                 padding: "32px 28px",
                 display: "flex",
                 flexDirection: "column",
@@ -493,7 +508,7 @@ export default function FeesPage() {
                 </div>
 
                 <div className="fee-primary-stat" style={{ marginBottom: 24 }}>
-                  <div className="fee-stat-number" style={{ fontFamily: "var(--display)", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 700, color: "#08142A", lineHeight: 1.1 }}>
+                  <div className="fee-stat-number" style={{ fontFamily: "var(--display)", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 400, color: "#08142A", lineHeight: 1.1 }}>
                     {fmt.money(fee)}
                   </div>
                   <div className="fee-stat-sub" style={{ fontSize: 13.5, color: "#64748B", marginTop: 4 }}>
@@ -502,15 +517,15 @@ export default function FeesPage() {
                 </div>
 
                 <div className="fee-milestones-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 24 }}>
-                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
+                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
                     <span className="fee-milestone-label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#64748B", marginBottom: 4 }}>Invoice Date</span>
                     <span className="fee-milestone-val" style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#08142A" }}>{okDate ? fmt.date(startDate) : "–"}</span>
                   </div>
-                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
+                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
                     <span className="fee-milestone-label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#64748B", marginBottom: 4 }}>Payment Due (Net 15)</span>
                     <span className="fee-milestone-val" style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#08142A" }}>{okDate ? fmt.date(dueDate) : "–"}</span>
                   </div>
-                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
+                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
                     <span className="fee-milestone-label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#64748B", marginBottom: 4 }}>Guarantee Until</span>
                     <span className="fee-milestone-val" style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#08142A" }}>{okDate ? fmt.date(guaranteeDate) : "–"}</span>
                   </div>
@@ -559,14 +574,14 @@ export default function FeesPage() {
       </section>
 
       {/* 4. THE 90-DAY REPLACEMENT GUARANTEE */}
-      <section className="block" style={{ padding: "88px 0", background: "#FAF9F5" }}>
+      <section className="block" style={{ padding: "88px 0 96px", background: "#FAF9F5", borderBottom: "1px solid #E2E8F0" }}>
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div className="sec-head-premium" style={{ textAlign: "center", marginBottom: 48 }}>
-            <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 999, padding: "5px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
+            <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 999, padding: "6px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
               <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
               <span>RISK REVERSAL · IN WRITING</span>
             </div>
-            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
+            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 400 }}>
               The 90-day replacement <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>guarantee</span>
             </h2>
             <p className="who-lede" style={{ fontSize: 16, color: "#64748B", maxWidth: 640, margin: "0 auto", lineHeight: 1.6 }}>
@@ -575,34 +590,50 @@ export default function FeesPage() {
           </div>
 
           <div className="fee-guarantee-grid">
-            <div className="fee-guarantee-card">
-              <div className="fee-guarantee-kicker">01 · DURATION</div>
-              <h3 className="fee-guarantee-title">90 Calendar Days</h3>
-              <p className="fee-guarantee-desc">
+            <div className="fee-guarantee-card" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
+              <div className="fee-guarantee-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
+                01 · DURATION
+              </div>
+              <h3 className="fee-guarantee-title" style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", margin: "0 0 8px" }}>
+                90 Calendar Days
+              </h3>
+              <p className="fee-guarantee-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: 0 }}>
                 Full 90 calendar days from their first day in your office. Not business days — complete calendar protection.
               </p>
             </div>
 
-            <div className="fee-guarantee-card">
-              <div className="fee-guarantee-kicker">02 · REMEDY</div>
-              <h3 className="fee-guarantee-title">Priority Re-Search</h3>
-              <p className="fee-guarantee-desc">
+            <div className="fee-guarantee-card" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
+              <div className="fee-guarantee-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
+                02 · REMEDY
+              </div>
+              <h3 className="fee-guarantee-title" style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", margin: "0 0 8px" }}>
+                Priority Re-Search
+              </h3>
+              <p className="fee-guarantee-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: 0 }}>
                 We reopen the search, prioritize it above other mandates, and send screened replacements until the seat is filled. No additional fee.
               </p>
             </div>
 
-            <div className="fee-guarantee-card">
-              <div className="fee-guarantee-kicker">03 · BROAD COVERAGE</div>
-              <h3 className="fee-guarantee-title">Comprehensive Protection</h3>
-              <p className="fee-guarantee-desc">
+            <div className="fee-guarantee-card" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
+              <div className="fee-guarantee-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
+                03 · BROAD COVERAGE
+              </div>
+              <h3 className="fee-guarantee-title" style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", margin: "0 0 8px" }}>
+                Comprehensive Protection
+              </h3>
+              <p className="fee-guarantee-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: 0 }}>
                 Covers the hire resigning or being let go for any operational reason other than firm redundancy or practice group closure.
               </p>
             </div>
 
-            <div className="fee-guarantee-card">
-              <div className="fee-guarantee-kicker">04 · PAYMENT REQUIREMENT</div>
-              <h3 className="fee-guarantee-title">Prompt Invoice Clause</h3>
-              <p className="fee-guarantee-desc">
+            <div className="fee-guarantee-card" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
+              <div className="fee-guarantee-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
+                04 · PAYMENT REQUIREMENT
+              </div>
+              <h3 className="fee-guarantee-title" style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", margin: "0 0 8px" }}>
+                Prompt Invoice Clause
+              </h3>
+              <p className="fee-guarantee-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: 0 }}>
                 The guarantee is fully active whenever the original placement invoice is paid within our standard Net 15 terms.
               </p>
             </div>
@@ -611,15 +642,15 @@ export default function FeesPage() {
       </section>
 
       {/* 5. QUESTIONS TO ASK ANY RECRUITER */}
-      <section className="block alt" id="questions" style={{ padding: "88px 0", background: "#FFFFFF", borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0" }}>
+      <section className="block alt" id="questions" style={{ padding: "88px 0 96px", background: "#FFFFFF", borderBottom: "1px solid #E2E8F0" }}>
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div className="sec-head-premium" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16 }}>
             <div>
-              <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 999, padding: "5px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
+              <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 999, padding: "6px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
                 <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
                 <span>DUE DILIGENCE · MARKET COMPARISON</span>
               </div>
-              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "8px 0 0", fontWeight: 500 }}>
+              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "8px 0 0", fontWeight: 400 }}>
                 Questions to ask any <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>recruiter</span>
               </h2>
               <p className="who-lede" style={{ fontSize: 16, color: "#64748B", maxWidth: 640, margin: "10px 0 0", lineHeight: 1.6 }}>
@@ -650,7 +681,7 @@ export default function FeesPage() {
           <div className="table-wrap" style={{ marginTop: 32, background: "#FFFFFF", borderRadius: 14, border: "1.5px solid #E2E8F0", overflow: "hidden", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
             <table className="data" style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
-                <tr style={{ background: "#F8FAFC", borderBottom: "1.5px solid #E2E8F0" }}>
+                <tr style={{ background: "#FAF9F5", borderBottom: "1.5px solid #E2E8F0" }}>
                   <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748B" }}>Ask</th>
                   <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748B" }}>Why it matters</th>
                   <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8" }}>Orion&apos;s answer</th>
@@ -679,15 +710,15 @@ export default function FeesPage() {
       </section>
 
       {/* 6. TERMS IN WRITING & GATE FORM */}
-      <section className="block" id="terms-writing" style={{ padding: "88px 0", background: "#FAF9F5" }}>
+      <section className="block" id="terms-writing" style={{ padding: "88px 0 96px", background: "#FAF9F5", borderBottom: "1px solid #E2E8F0" }}>
         <div className="wrap split" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div>
             <div className="sec-head-premium sec-head-left">
-              <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 999, padding: "5px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
+              <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 999, padding: "6px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
                 <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
                 <span>IN WRITING · ZERO PRESSURE</span>
               </div>
-              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
+              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 400 }}>
                 Our terms on one <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>page</span>
               </h2>
               <p className="who-lede" style={{ fontSize: 16, color: "#64748B", lineHeight: 1.6 }}>
@@ -696,13 +727,13 @@ export default function FeesPage() {
             </div>
 
             <div className="faq" style={{ marginTop: 28 }}>
-              <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 20px", marginBottom: 12 }}>
+              <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "18px 22px", marginBottom: 12 }}>
                 <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>Do we sign an agreement before we see candidates?</summary>
                 <p style={{ marginTop: 12, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
                   No. You sign nothing until you want to interview someone we introduced. Looking at candidate profiles and dossiers commits you to nothing.
                 </p>
               </details>
-              <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "16px 20px" }}>
+              <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "18px 22px" }}>
                 <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>Do you offer a refund instead of replacement?</summary>
                 <p style={{ marginTop: 12, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
                   Our standard contract term is a priority replacement search. Cash-refund terms can be structured for multi-hire retainers or enterprise mandates; discuss with Justin prior to engagement.
@@ -744,7 +775,7 @@ export default function FeesPage() {
       </section>
 
       {/* 7. BOTTOM DARK SECTION */}
-      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "96px 0 108px", textAlign: "center" }}>
+      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "96px 0 108px", textAlign: "center", borderTop: "1px solid rgba(255, 255, 255, 0.12)" }}>
         <div className="wrap" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
           <div className="emp-terms-head">
             <div
@@ -754,9 +785,9 @@ export default function FeesPage() {
                 alignItems: "center",
                 gap: 8,
                 background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.15)",
+                border: "1px solid rgba(255,255,255,0.18)",
                 borderRadius: 999,
-                padding: "6px 14px",
+                padding: "6px 16px",
                 fontFamily: "var(--mono)",
                 fontSize: 11,
                 letterSpacing: "0.08em",
@@ -775,7 +806,7 @@ export default function FeesPage() {
                 fontSize: "clamp(32px, 4.2vw, 48px)",
                 color: "#FFFFFF",
                 margin: "0 0 16px",
-                fontWeight: 500,
+                fontWeight: 400,
                 lineHeight: 1.15,
               }}
             >
@@ -800,12 +831,11 @@ export default function FeesPage() {
                   padding: "14px 34px",
                   borderRadius: 7,
                   textDecoration: "none",
+                  boxShadow: "0 4px 16px rgba(29, 78, 216, 0.4)",
                 }}
               >
                 <span>Find candidates</span>
-                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                  <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-                </svg>
+                <span aria-hidden="true">→</span>
               </Link>
               <Link
                 href="/hire-attorneys"
@@ -815,7 +845,7 @@ export default function FeesPage() {
                   alignItems: "center",
                   gap: 8,
                   background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.18)",
+                  border: "1px solid rgba(255,255,255,0.22)",
                   color: "#FFFFFF",
                   fontWeight: 600,
                   fontSize: 16,
