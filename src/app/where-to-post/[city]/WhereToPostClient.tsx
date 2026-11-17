@@ -3,12 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DATA, fmt, matchCandidates, trust } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
-import { Mark } from "@/components/Mark";
+import { DATA, matchCandidates } from "@/data";
 import { TrustLine } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
 import { GateForm } from "@/components/GateForm";
+import { Icon } from "@/components/icons";
 
 export function WhereToPostClient({
   cityParam,
@@ -32,11 +31,11 @@ export function WhereToPostClient({
   const screenedCount = matchCandidates({ city: city.slug }).filter((r) => r.inCity).length;
 
   return (
-    <div style={{ background: "#FAF9F5", minHeight: "100vh", color: "#08142A" }}>
+    <div style={{ background: "#FFFFFF", minHeight: "100vh", color: "#08142A" }}>
       <style>{`
         .wtp-table-wrap {
           background: #FFFFFF;
-          border: 1px solid #E2E8F0;
+          border: 1.5px solid #E2E8F0;
           border-radius: 14px;
           overflow: hidden;
           box-shadow: 0 4px 20px rgba(8, 20, 42, 0.04);
@@ -84,15 +83,17 @@ export function WhereToPostClient({
         }
       `}</style>
 
-      {/* 1. LUXURY HERO WITH VIDEO & EXECUTIVE SNAPSHOT */}
+      {/* =========================================================================
+          HERO SECTION: Centered Luxury Showcase (No Card, High-Contrast Typography)
+          ========================================================================= */}
       <section
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
           color: "#FFFFFF",
-          padding: "124px 0 76px",
+          padding: "112px 0 84px",
           overflow: "hidden",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
         }}
       >
         <video
@@ -115,320 +116,180 @@ export function WhereToPostClient({
           <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
         </video>
 
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              crumbs={[
-                { label: "Home", href: "/" },
-                { label: "Locations", href: "/jobs" },
-                { label: city.name, href: `/locations/texas/${city.slug.replace("-tx", "")}` },
-                { label: "Where to Post", current: true },
-              ]}
-            />
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "48px", alignItems: "center" }}>
-            <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(29, 78, 216, 0.15)",
-                  border: "1px solid rgba(96, 165, 250, 0.3)",
-                  borderRadius: "100px",
-                  padding: "6px 14px",
-                  fontSize: "0.78rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  color: "#93C5FD",
-                  marginBottom: "18px",
-                }}
-              >
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                Legal Recruitment Benchmark · {city.name.toUpperCase()}, {city.state.toUpperCase()}
-              </div>
-
-              <h1
-                style={{
-                  fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
-                  fontFamily: "var(--font-serif, 'Playfair Display', Georgia, serif)",
-                  fontWeight: 700,
-                  lineHeight: 1.15,
-                  color: "#FFFFFF",
-                  letterSpacing: "-0.02em",
-                  margin: "0 0 16px",
-                }}
-              >
-                Where to post a legal job in <br />
-                <span style={{ color: "#93C5FD", fontStyle: "italic" }}>{city.name}</span>
-              </h1>
-
-              <p
-                style={{
-                  fontSize: "1.12rem",
-                  lineHeight: 1.6,
-                  color: "rgba(255, 255, 255, 0.82)",
-                  maxWidth: "580px",
-                  margin: "0 0 28px",
-                }}
-              >
-                An objective breakdown of six legal recruitment channels across {city.name} — comparing upfront posting costs, candidate reach, and time to first applicant. Or review pre-screened {city.name} legal talent before committing $500+ to public boards.
-              </p>
-
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", marginBottom: "32px" }}>
-                <Link
-                  href={`/find-candidates#city=${city.slug}`}
-                  style={{
-                    background: "#1D4ED8",
-                    color: "#FFFFFF",
-                    padding: "13px 26px",
-                    borderRadius: 7,
-                    fontWeight: 600,
-                    fontSize: "0.95rem",
-                    textDecoration: "none",
-                    boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  See {city.name} Candidates ({screenedCount}) →
-                </Link>
-                <a
-                  href="#compare"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.08)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    color: "#FFFFFF",
-                    padding: "13px 22px",
-                    borderRadius: 7,
-                    fontWeight: 600,
-                    fontSize: "0.95rem",
-                    textDecoration: "none",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  Compare All 6 Job Boards ↓
-                </a>
-              </div>
-
-              <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 18 }}>
-                <TrustLine />
-              </div>
-            </div>
-
-            {/* Elevated Pipeline Metrics Banner Card */}
-            <div
-              style={{
-                background: "rgba(15, 23, 42, 0.75)",
-                backdropFilter: "blur(14px)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                borderRadius: 14,
-                padding: "28px 24px",
-                boxShadow: "0 20px 48px rgba(0, 0, 0, 0.45)",
-                color: "#FFFFFF",
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1px solid rgba(255, 255, 255, 0.1)", paddingBottom: 12, marginBottom: 18 }}>
-                <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#60A5FA", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                  {city.name} Recruitment Benchmark
-                </span>
-                <span style={{ fontSize: "0.75rem", background: "rgba(37, 99, 235, 0.3)", color: "#93C5FD", padding: "3px 8px", borderRadius: 4, fontWeight: 600 }}>
-                  v2026 Edition
-                </span>
-              </div>
-
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>
-                <div style={{ background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#FFFFFF", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                    6
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                    Major channels evaluated
-                  </div>
-                </div>
-
-                <div style={{ background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#60A5FA", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                    $250–$500
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                    Average board ad fee
-                  </div>
-                </div>
-
-                <div style={{ background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#34D399", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                    {screenedCount}
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                    Pre-screened {city.name} talent
-                  </div>
-                </div>
-
-                <div style={{ background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#93C5FD", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                    $0
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                    Orion upfront retainer
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ fontSize: "0.82rem", color: "rgba(255, 255, 255, 0.7)", lineHeight: 1.5, borderTop: "1px solid rgba(255, 255, 255, 0.08)", paddingTop: 12 }}>
-                Skip the high upfront listing fees and unqualified inbox spam. Orion delivers redacted candidate dossiers today with zero cost until you hire.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. HEAD-TO-HEAD MATRIX */}
-      <section id="compare" style={{ maxWidth: "1200px", margin: "80px auto 0", padding: "0 24px" }}>
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 36px" }}>
+        <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1, textAlign: "center" }}>
+          {/* Eyebrow Badge */}
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
-              background: "rgba(29, 78, 216, 0.08)",
-              border: "1px solid rgba(29, 78, 216, 0.2)",
+              background: "rgba(29, 78, 216, 0.2)",
+              border: "1px solid rgba(96, 165, 250, 0.35)",
               borderRadius: "100px",
-              padding: "4px 12px",
+              padding: "6px 16px",
               fontSize: "0.78rem",
               fontWeight: 600,
-              color: "#1D4ED8",
-              marginBottom: "10px",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              color: "#93C5FD",
+              marginBottom: "20px",
             }}
           >
-            Side-by-Side Analysis
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+            Legal Recruitment Benchmark · {city.name.toUpperCase()}, {city.state.toUpperCase()}
           </div>
-          <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: "0 0 10px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-            Six Places to Post Legal Jobs, Side by Side
-          </h2>
-          <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem" }}>
-            Filter by target role to highlight the highest-converting recruitment channels in {city.name}.
-          </p>
-        </div>
 
-        {/* Filter Pills */}
-        <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10, marginBottom: 28 }}>
-          {[
-            { id: "all", label: "All Target Roles" },
-            { id: "attorney", label: "Lateral Attorneys" },
-            { id: "paralegal", label: "Senior Paralegals" },
-            { id: "staff", label: "Legal Assistants & Staff" },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setSeatFilter(tab.id)}
+          {/* Heading */}
+          <h1
+            style={{
+              fontSize: "clamp(2.4rem, 4.6vw, 3.8rem)",
+              fontFamily: "var(--font-serif, 'Playfair Display', Georgia, serif)",
+              fontWeight: 700,
+              lineHeight: 1.15,
+              color: "#FFFFFF",
+              letterSpacing: "-0.02em",
+              margin: "0 auto 20px",
+              maxWidth: "880px",
+            }}
+          >
+            Where to post a legal job in{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              {city.name}
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p
+            style={{
+              fontSize: "1.12rem",
+              lineHeight: 1.65,
+              color: "#CBD5E1",
+              maxWidth: "740px",
+              margin: "0 auto 34px",
+            }}
+          >
+            An objective breakdown of six major legal recruitment channels across {city.name} — comparing upfront posting costs, verified audience reach, and time to first applicant. Or meet pre-screened lateral legal talent today with zero public listing spend.
+          </p>
+
+          {/* Action CTAs */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", justifyContent: "center", alignItems: "center", marginBottom: "40px" }}>
+            <Link
+              href={`/find-candidates#city=${city.slug}`}
               style={{
-                padding: "9px 20px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                padding: "13px 26px",
                 borderRadius: 7,
-                fontSize: "0.9rem",
                 fontWeight: 600,
-                cursor: "pointer",
-                background: seatFilter === tab.id ? "#08142A" : "#FFFFFF",
-                color: seatFilter === tab.id ? "#FFFFFF" : "#475569",
-                border: `1.5px solid ${seatFilter === tab.id ? "#08142A" : "#E2E8F0"}`,
-                boxShadow: seatFilter === tab.id ? "0 2px 8px rgba(8, 20, 42, 0.2)" : "none",
-                transition: "all 0.15s ease",
+                fontSize: "0.95rem",
+                textDecoration: "none",
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+                transition: "all 0.2s ease",
               }}
             >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+              <span>See {city.name} Candidates ({screenedCount})</span>
+              <span>→</span>
+            </Link>
 
-        {/* Matrix Table */}
-        <div className="wtp-table-wrap">
-          <div style={{ overflowX: "auto" }}>
-            <table className="wtp-table">
-              <thead>
-                <tr>
-                  <th>Platform / Board</th>
-                  <th>Standard Cost</th>
-                  <th>Audience &amp; Reach</th>
-                  <th>Speed to 1st Applicant</th>
-                  <th>Optimal Strategic Fit</th>
-                </tr>
-              </thead>
-              <tbody>
-                {places.map((p, i) => {
-                  const fit = fitMap[i] || [];
-                  const isHit = seatFilter !== "all" && fit.includes(seatFilter);
-                  const isDim = seatFilter !== "all" && !isHit;
+            <a
+              href="#compare"
+              style={{
+                background: "rgba(255, 255, 255, 0.08)",
+                border: "1px solid rgba(255, 255, 255, 0.22)",
+                color: "#FFFFFF",
+                padding: "13px 22px",
+                borderRadius: 7,
+                fontWeight: 600,
+                fontSize: "0.95rem",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                transition: "all 0.2s ease",
+              }}
+            >
+              Compare All 6 Job Boards ↓
+            </a>
+          </div>
 
-                  return (
-                    <tr
-                      key={i}
-                      style={{
-                        background: isHit ? "#F0FDF4" : "transparent",
-                        opacity: isDim ? 0.35 : 1,
-                        transition: "all 0.15s ease",
-                      }}
-                    >
-                      <td style={{ fontWeight: 700, color: isHit ? "#15803D" : "#08142A" }}>
-                        {p.name}
-                      </td>
-                      <td style={{ color: "#475569", fontWeight: 600 }}>
-                        {p.cost}
-                      </td>
-                      <td style={{ color: "#334155" }}>
-                        {p.reach}
-                      </td>
-                      <td style={{ color: "#059669", fontWeight: 700 }}>
-                        {p.firstApplicant}
-                      </td>
-                      <td style={{ color: "#475569" }}>
-                        {p.bestFor}
-                      </td>
-                    </tr>
-                  );
-                })}
+          {/* Sleek Horizontal Benchmark Intelligence Strip (Replaces Clunky Right Card) */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+              gap: 16,
+              background: "rgba(255, 255, 255, 0.04)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+              borderRadius: 14,
+              padding: "20px 24px",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+              maxWidth: "920px",
+              margin: "0 auto 36px",
+              textAlign: "left",
+            }}
+            className="hero-intel-strip"
+          >
+            <div style={{ padding: "0 8px" }}>
+              <div style={{ fontSize: "1.7rem", fontWeight: 800, color: "#FFFFFF", fontFamily: "var(--font-serif, Georgia, serif)" }}>
+                6
+              </div>
+              <div style={{ fontSize: "0.78rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4, fontWeight: 600 }}>
+                Channels Benchmarked
+              </div>
+            </div>
 
-                {/* Orion Placement Row */}
-                <tr style={{ background: "#EFF6FF", borderTop: "2px solid #1D4ED8" }}>
-                  <td style={{ fontWeight: 800, color: "#1D4ED8", fontSize: "1rem" }}>
-                    Orion Placement
-                  </td>
-                  <td style={{ fontWeight: 700, color: "#059669" }}>
-                    $0 Upfront · 23% Fee Due Only If You Hire
-                  </td>
-                  <td style={{ color: "#08142A", fontWeight: 600 }}>
-                    {screenedCount} Screened {city.name} Legal Professionals
-                  </td>
-                  <td style={{ color: "#1D4ED8", fontWeight: 800 }}>
-                    Dossiers Within 1 Hour
-                  </td>
-                  <td>
-                    <Link
-                      href={`/find-candidates#city=${city.slug}`}
-                      style={{
-                        color: "#1D4ED8",
-                        fontWeight: 700,
-                        textDecoration: "none",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 4,
-                      }}
-                    >
-                      Browse {city.name} Candidates →
-                    </Link>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div style={{ padding: "0 8px", borderLeft: "1px solid rgba(255, 255, 255, 0.1)" }}>
+              <div style={{ fontSize: "1.7rem", fontWeight: 800, color: "#60A5FA", fontFamily: "var(--font-serif, Georgia, serif)" }}>
+                $250–$500
+              </div>
+              <div style={{ fontSize: "0.78rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4, fontWeight: 600 }}>
+                Avg Upfront Board Fee
+              </div>
+            </div>
+
+            <div style={{ padding: "0 8px", borderLeft: "1px solid rgba(255, 255, 255, 0.1)" }}>
+              <div style={{ fontSize: "1.7rem", fontWeight: 800, color: "#34D399", fontFamily: "var(--font-serif, Georgia, serif)" }}>
+                {screenedCount}
+              </div>
+              <div style={{ fontSize: "0.78rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4, fontWeight: 600 }}>
+                Pre-Screened Lateral Candidates
+              </div>
+            </div>
+
+            <div style={{ padding: "0 8px", borderLeft: "1px solid rgba(255, 255, 255, 0.1)" }}>
+              <div style={{ fontSize: "1.7rem", fontWeight: 800, color: "#93C5FD", fontFamily: "var(--font-serif, Georgia, serif)" }}>
+                $0
+              </div>
+              <div style={{ fontSize: "0.78rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4, fontWeight: 600 }}>
+                Orion Upfront Retainer
+              </div>
+            </div>
+          </div>
+
+          <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 20 }}>
+            <TrustLine />
           </div>
         </div>
       </section>
 
-      {/* 3. ACTIVE CANDIDATES READY NOW */}
-      <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }} id="candidates">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32, flexWrap: "wrap", gap: 14 }}>
-          <div>
+      {/* =========================================================================
+          SECTION 1: Side-by-Side Platform Analysis
+          ========================================================================= */}
+      <section
+        id="compare"
+        style={{
+          background: "#FFFFFF",
+          padding: "84px 0 96px",
+          borderBottom: "1px solid #E2E8F0",
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 36px" }}>
             <div
               style={{
                 display: "inline-flex",
@@ -437,65 +298,178 @@ export function WhereToPostClient({
                 background: "rgba(29, 78, 216, 0.08)",
                 border: "1px solid rgba(29, 78, 216, 0.2)",
                 borderRadius: "100px",
-                padding: "4px 12px",
+                padding: "5px 14px",
                 fontSize: "0.78rem",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: "#1D4ED8",
-                marginBottom: "10px",
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                marginBottom: "14px",
               }}
             >
-              Active {city.name.toUpperCase()} Talent Pool
+              STEP 01 · SIDE-BY-SIDE PLATFORM BENCHMARK
             </div>
-            <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: 0, fontFamily: "var(--font-serif, Georgia, serif)" }}>
-              Before You Pay to Post: {city.name} Candidates Looking Now
+            <h2
+              style={{
+                fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+                fontWeight: 700,
+                color: "#08142A",
+                margin: "0 0 12px",
+                fontFamily: "var(--font-serif, Georgia, serif)",
+                lineHeight: 1.2,
+              }}
+            >
+              Six Places to Post Legal Jobs,{" "}
+              <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                Side by Side
+              </span>
             </h2>
+            <p style={{ margin: 0, color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6 }}>
+              Filter by target role to highlight the highest-converting recruitment channels in {city.name}.
+            </p>
           </div>
-          <Link
-            href="/submit-job"
+
+          {/* Filter Pills */}
+          <div
             style={{
-              fontSize: "0.95rem",
-              fontWeight: 600,
-              color: "#1D4ED8",
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: 8,
+              background: "#FAF9F5",
+              border: "1.5px solid #EAE7DC",
+              borderRadius: 12,
+              padding: "6px",
+              maxWidth: "680px",
+              margin: "0 auto 32px",
             }}
           >
-            <span>Or paste your posting text</span>
-            <span aria-hidden="true">→</span>
-          </Link>
-        </div>
+            {[
+              { id: "all", label: "All Target Roles" },
+              { id: "attorney", label: "Lateral Attorneys" },
+              { id: "paralegal", label: "Senior Paralegals" },
+              { id: "staff", label: "Legal Assistants & Staff" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setSeatFilter(tab.id)}
+                style={{
+                  padding: "10px 18px",
+                  borderRadius: 7,
+                  fontSize: "0.9rem",
+                  fontWeight: seatFilter === tab.id ? 700 : 500,
+                  cursor: "pointer",
+                  background: seatFilter === tab.id ? "#08142A" : "transparent",
+                  color: seatFilter === tab.id ? "#FFFFFF" : "#475569",
+                  border: "none",
+                  boxShadow: seatFilter === tab.id ? "0 2px 8px rgba(8, 20, 42, 0.2)" : "none",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
 
-        <div style={{ display: "grid", gap: 20 }}>
-          {candidates.map((candidate) => candidate && (
-            <CandidateCard key={candidate.id} candidate={candidate} />
-          ))}
-        </div>
+          {/* Matrix Table */}
+          <div className="wtp-table-wrap">
+            <div style={{ overflowX: "auto" }}>
+              <table className="wtp-table">
+                <thead>
+                  <tr>
+                    <th>Platform / Board</th>
+                    <th>Standard Cost</th>
+                    <th>Audience &amp; Reach</th>
+                    <th>Speed to 1st Applicant</th>
+                    <th>Optimal Strategic Fit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {places.map((p, i) => {
+                    const fit = fitMap[i] || [];
+                    const isHit = seatFilter !== "all" && fit.includes(seatFilter);
+                    const isDim = seatFilter !== "all" && !isHit;
 
-        <div style={{ marginTop: 24, padding: "18px 24px", background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 10, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <span style={{ fontSize: "0.92rem", color: "#475569" }}>
-            Looking for a specific practice area or seniority in {city.name}?
-          </span>
-          <Link
-            href={`/find-candidates#city=${city.slug}`}
-            style={{
-              color: "#1D4ED8",
-              fontWeight: 700,
-              fontSize: "0.92rem",
-              textDecoration: "none",
-            }}
-          >
-            View All {screenedCount} {city.name} Candidates →
-          </Link>
+                    return (
+                      <tr
+                        key={i}
+                        style={{
+                          background: isHit ? "rgba(240, 253, 244, 0.8)" : "transparent",
+                          opacity: isDim ? 0.35 : 1,
+                          transition: "all 0.15s ease",
+                        }}
+                      >
+                        <td style={{ fontWeight: 700, color: isHit ? "#15803D" : "#08142A" }}>
+                          {p.name}
+                        </td>
+                        <td style={{ color: "#475569", fontWeight: 600 }}>
+                          {p.cost}
+                        </td>
+                        <td style={{ color: "#334155" }}>
+                          {p.reach}
+                        </td>
+                        <td style={{ color: "#059669", fontWeight: 700 }}>
+                          {p.firstApplicant}
+                        </td>
+                        <td style={{ color: "#475569" }}>
+                          {p.bestFor}
+                        </td>
+                      </tr>
+                    );
+                  })}
+
+                  {/* Orion Placement Row */}
+                  <tr style={{ background: "#EFF6FF", borderTop: "2px solid #1D4ED8" }}>
+                    <td style={{ fontWeight: 800, color: "#1D4ED8", fontSize: "1rem" }}>
+                      Orion Placement
+                    </td>
+                    <td style={{ fontWeight: 700, color: "#059669" }}>
+                      $0 Upfront · 23% Fee Due Only If You Hire
+                    </td>
+                    <td style={{ color: "#08142A", fontWeight: 600 }}>
+                      {screenedCount} Screened {city.name} Legal Professionals
+                    </td>
+                    <td style={{ color: "#1D4ED8", fontWeight: 800 }}>
+                      Dossiers Within 1 Hour
+                    </td>
+                    <td>
+                      <Link
+                        href={`/find-candidates#city=${city.slug}`}
+                        style={{
+                          color: "#1D4ED8",
+                          fontWeight: 700,
+                          textDecoration: "none",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
+                        }}
+                      >
+                        Browse {city.name} Candidates →
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 4. THE 6 ESSENTIAL ELEMENTS OF A HIGH-CONVERTING POSTING */}
-      <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }} id="checklist">
-        <div className="wtp-split-grid">
-          <div>
-            <div style={{ marginBottom: 28 }}>
+      {/* =========================================================================
+          SECTION 2: Active Candidates Ready Now
+          ========================================================================= */}
+      <section
+        id="candidates"
+        style={{
+          background: "#FAF9F5",
+          padding: "88px 0 96px",
+          borderBottom: "1px solid #E2E8F0",
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 36, flexWrap: "wrap", gap: 16 }}>
+            <div>
               <div
                 style={{
                   display: "inline-flex",
@@ -504,168 +478,342 @@ export function WhereToPostClient({
                   background: "rgba(29, 78, 216, 0.08)",
                   border: "1px solid rgba(29, 78, 216, 0.2)",
                   borderRadius: "100px",
-                  padding: "4px 12px",
+                  padding: "5px 14px",
                   fontSize: "0.78rem",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: "#1D4ED8",
-                  marginBottom: "10px",
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  marginBottom: "12px",
                 }}
               >
-                Posting Architecture
+                STEP 02 · ORION LATERAL TALENT PIPELINE
               </div>
-              <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: "0 0 12px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                Six Elements Every High-Converting Legal Posting Requires
+              <h2 style={{ fontSize: "clamp(1.9rem, 3vw, 2.4rem)", fontWeight: 700, color: "#08142A", margin: "0 0 8px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
+                Before You Pay to Post:{" "}
+                <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                  {city.name} Candidates
+                </span>{" "}
+                Looking Now
               </h2>
-              <p style={{ color: "#64748B", fontSize: "1.02rem", lineHeight: 1.6, margin: 0 }}>
-                Law firm postings with transparent compensation and clear practice distribution receive 3.4x more qualified lateral associate and senior paralegal applicants.
+              <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem" }}>
+                Redacted candidate dossiers already active in {city.name}. Available to interview today without public listing fees.
               </p>
             </div>
 
-            <div className="wtp-checklist-grid">
-              {[
-                {
-                  num: "01",
-                  title: "Transparent Base Pay Band",
-                  desc: "Publishing verified salary ranges immediately filters unqualified applicants and signals firm credibility.",
-                },
-                {
-                  num: "02",
-                  title: "Exact Work Model",
-                  desc: "Disclose required in-office vs hybrid days and office submarket location (e.g. Downtown vs Galleria).",
-                },
-                {
-                  num: "03",
-                  title: "Practice Breakdown",
-                  desc: "Itemize substantive work split (e.g. 60% high-net-worth estate planning, 40% probate administration).",
-                },
-                {
-                  num: "04",
-                  title: "State Bar Licensure",
-                  desc: "Explicitly state Texas Bar admission in good standing or specific reciprocal eligibility expectations.",
-                },
-                {
-                  num: "05",
-                  title: "Billable Hour Target",
-                  desc: "State realistic annual billable expectations (e.g. 1,400 to 1,750 hrs) to attract lateral attorneys seeking balance.",
-                },
-                {
-                  num: "06",
-                  title: "Confidentiality Guarantee",
-                  desc: "Assure candidates that resumes are reviewed by named hiring partners and never circulated publicly.",
-                },
-              ].map((item, idx) => (
+            <Link
+              href="/submit-job"
+              style={{
+                fontSize: "0.95rem",
+                fontWeight: 600,
+                color: "#1D4ED8",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <span>Or paste your posting text</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <div style={{ display: "grid", gap: 20 }}>
+            {candidates.map((candidate) => candidate && (
+              <CandidateCard key={candidate.id} candidate={candidate} />
+            ))}
+          </div>
+
+          <div
+            style={{
+              marginTop: 28,
+              padding: "20px 24px",
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 12,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 14,
+              boxShadow: "0 4px 16px rgba(8, 20, 42, 0.03)",
+            }}
+          >
+            <div>
+              <b style={{ color: "#08142A", fontSize: "0.95rem" }}>
+                Need candidates in a different practice area or seniority in {city.name}?
+              </b>
+              <p style={{ margin: "4px 0 0", fontSize: "0.88rem", color: "#64748B" }}>
+                Justin maintains confidential relationships with off-market lateral attorneys across the state.
+              </p>
+            </div>
+            <Link
+              href={`/find-candidates#city=${city.slug}`}
+              style={{
+                color: "#1D4ED8",
+                fontWeight: 700,
+                fontSize: "0.92rem",
+                textDecoration: "none",
+              }}
+            >
+              View All {screenedCount} {city.name} Candidates →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 3: The 6 Essential Elements of a High-Converting Posting
+          ========================================================================= */}
+      <section
+        id="checklist"
+        style={{
+          background: "#FFFFFF",
+          padding: "88px 0 96px",
+          borderBottom: "1px solid #E2E8F0",
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+          <div className="wtp-split-grid">
+            <div>
+              <div style={{ marginBottom: 32 }}>
                 <div
-                  key={idx}
                   style={{
-                    background: "#FFFFFF",
-                    border: "1px solid #E2E8F0",
-                    borderRadius: 10,
-                    padding: "20px 18px",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    background: "rgba(29, 78, 216, 0.08)",
+                    border: "1px solid rgba(29, 78, 216, 0.2)",
+                    borderRadius: "100px",
+                    padding: "5px 14px",
+                    fontSize: "0.78rem",
+                    fontWeight: 700,
+                    color: "#1D4ED8",
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    marginBottom: "12px",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 8 }}>
-                    <span style={{ fontFamily: "monospace", fontSize: "0.85rem", fontWeight: 800, color: "#1D4ED8" }}>
-                      {item.num}
-                    </span>
-                    <h4 style={{ fontSize: "1rem", fontWeight: 700, color: "#08142A", margin: 0 }}>
-                      {item.title}
-                    </h4>
-                  </div>
-                  <p style={{ fontSize: "0.85rem", color: "#64748B", lineHeight: 1.5, margin: 0 }}>
-                    {item.desc}
-                  </p>
+                  STEP 03 · POSTING ARCHITECTURE
                 </div>
-              ))}
-            </div>
-          </div>
+                <h2
+                  style={{
+                    fontSize: "clamp(1.9rem, 3vw, 2.5rem)",
+                    fontWeight: 700,
+                    color: "#08142A",
+                    margin: "0 0 12px",
+                    fontFamily: "var(--font-serif, Georgia, serif)",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  Six Elements Every{" "}
+                  <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                    High-Converting Legal Posting
+                  </span>{" "}
+                  Requires
+                </h2>
+                <p style={{ color: "#64748B", fontSize: "1.02rem", lineHeight: 1.6, margin: 0 }}>
+                  Law firm postings with transparent compensation and clear practice distribution receive 3.4x more qualified lateral associate and senior paralegal applicants.
+                </p>
+              </div>
 
-          {/* Right Column: GateForm for Legal Posting Kit */}
-          <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 14, padding: "32px 28px", boxShadow: "0 4px 20px rgba(8, 20, 42, 0.04)" }}>
-            <GateForm
-              eyebrow="COMPLIMENTARY TEMPLATES"
-              title="Download Pre-Formatted Legal Job Posting Package"
-              intro={`Customized Word (.docx) & PDF templates for ${city.name} boutique law firms.`}
-              button="Email Me the Posting Kit"
-              preset="kit"
-              role="estate-planning-attorney"
-              city={city.slug}
-              reviewSlug="daffner-law"
-              fine="Delivered as editable Word and PDF files. Zero spam or unwanted calls."
-            />
+              <div className="wtp-checklist-grid">
+                {[
+                  {
+                    num: "01",
+                    title: "Transparent Base Pay Band",
+                    desc: "Publishing verified salary ranges immediately filters unqualified applicants and signals firm credibility.",
+                  },
+                  {
+                    num: "02",
+                    title: "Exact Work Model",
+                    desc: "Disclose required in-office vs hybrid days and office submarket location (e.g. Downtown vs Galleria).",
+                  },
+                  {
+                    num: "03",
+                    title: "Practice Breakdown",
+                    desc: "Itemize substantive work split (e.g. 60% high-net-worth estate planning, 40% probate administration).",
+                  },
+                  {
+                    num: "04",
+                    title: "State Bar Licensure",
+                    desc: "Explicitly state Texas Bar admission in good standing or specific reciprocal eligibility expectations.",
+                  },
+                  {
+                    num: "05",
+                    title: "Billable Hour Target",
+                    desc: "State realistic annual billable expectations (e.g. 1,400 to 1,750 hrs) to attract lateral attorneys seeking balance.",
+                  },
+                  {
+                    num: "06",
+                    title: "Confidentiality Guarantee",
+                    desc: "Assure candidates that resumes are reviewed by named hiring partners and never circulated publicly.",
+                  },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: "#FAF9F5",
+                      border: "1.5px solid #EAE7DC",
+                      borderRadius: 12,
+                      padding: "22px 20px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 8 }}>
+                      <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.85rem", fontWeight: 800, color: "#1D4ED8" }}>
+                        {item.num}
+                      </span>
+                      <h4 style={{ fontSize: "1rem", fontWeight: 700, color: "#08142A", margin: 0 }}>
+                        {item.title}
+                      </h4>
+                    </div>
+                    <p style={{ fontSize: "0.88rem", color: "#64748B", lineHeight: 1.55, margin: 0 }}>
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column: GateForm for Legal Posting Kit */}
+            <div
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #E2E8F0",
+                borderRadius: 14,
+                padding: "32px 28px",
+                boxShadow: "0 8px 30px rgba(15, 23, 42, 0.05)",
+                position: "sticky",
+                top: 100,
+              }}
+            >
+              <GateForm
+                eyebrow="COMPLIMENTARY TEMPLATES"
+                title="Download Pre-Formatted Legal Job Posting Package"
+                intro={`Customized Word (.docx) & PDF templates for ${city.name} boutique law firms.`}
+                button="Email Me the Posting Kit"
+                preset="kit"
+                role="estate-planning-attorney"
+                city={city.slug}
+                review="daffner-law"
+                fine="Delivered as editable Word and PDF files. Zero spam or unwanted calls."
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 5. LAW FIRM RECRUITING ROI COMPARISON */}
-      <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }}>
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 36px" }}>
-          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-            Economics &amp; Efficiency
-          </span>
-          <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: "8px 0 10px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-            Why Top Texas Firms Choose Orion Over Public Boards
-          </h2>
-          <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem" }}>
-            The hidden cost of job boards vs. dedicated contingency lateral legal recruiting.
-          </p>
-        </div>
-
-        <div className="wtp-roi-grid">
-          <div style={{ background: "#FFFFFF", border: "1.5px solid #FECDD3", borderRadius: 12, padding: "28px 24px" }}>
-            <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#E11D48", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-              Public Job Boards
-            </span>
-            <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#9F1239", margin: "10px 0 6px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-              $500–$1,500+
+      {/* =========================================================================
+          SECTION 4: Law Firm Recruiting Economics & ROI Comparison
+          ========================================================================= */}
+      <section
+        id="roi"
+        style={{
+          background: "#FAF9F5",
+          padding: "88px 0 96px",
+          borderBottom: "1px solid #E2E8F0",
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 40px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                background: "rgba(29, 78, 216, 0.08)",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
+                borderRadius: "100px",
+                padding: "5px 14px",
+                fontSize: "0.78rem",
+                fontWeight: 700,
+                color: "#1D4ED8",
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                marginBottom: "12px",
+              }}
+            >
+              STEP 04 · ECONOMICS &amp; EFFICIENCY
             </div>
-            <div style={{ fontWeight: 700, color: "#08142A", fontSize: "1rem", marginBottom: 8 }}>
-              Upfront Ad Spend + Lost Billables
-            </div>
-            <p style={{ fontSize: "0.88rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
-              Partners spend 15–20 billable hours ($5,000+ opportunity cost) reviewing hundreds of unqualified resumes, out-of-state candidates, and recruiters pitching unauthorized profiles.
+            <h2
+              style={{
+                fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+                fontWeight: 700,
+                color: "#08142A",
+                margin: "0 0 12px",
+                fontFamily: "var(--font-serif, Georgia, serif)",
+                lineHeight: 1.2,
+              }}
+            >
+              Why Top Texas Firms Choose Orion Over{" "}
+              <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                Public Job Boards
+              </span>
+            </h2>
+            <p style={{ margin: 0, color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6 }}>
+              The hidden billable cost of job boards vs. dedicated contingency lateral legal recruiting.
             </p>
           </div>
 
-          <div style={{ background: "#FFFFFF", border: "1.5px solid #CBD5E1", borderRadius: 12, padding: "28px 24px" }}>
-            <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-              Average Time to Hire
-            </span>
-            <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#08142A", margin: "10px 0 6px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-              60–90 Days
+          <div className="wtp-roi-grid">
+            <div style={{ background: "#FFFFFF", border: "1.5px solid #FECDD3", borderRadius: 14, padding: "30px 26px", boxShadow: "0 4px 20px rgba(8, 20, 42, 0.03)" }}>
+              <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#E11D48", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                Public Job Boards
+              </span>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "#9F1239", margin: "10px 0 6px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
+                $500–$1,500+
+              </div>
+              <div style={{ fontWeight: 700, color: "#08142A", fontSize: "1.05rem", marginBottom: 8 }}>
+                Upfront Ad Spend + Lost Billables
+              </div>
+              <p style={{ fontSize: "0.9rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
+                Partners spend 15–20 billable hours ($5,000+ opportunity cost) reviewing hundreds of unqualified resumes, out-of-state candidates, and recruiters pitching unauthorized profiles.
+              </p>
             </div>
-            <div style={{ fontWeight: 700, color: "#08142A", fontSize: "1rem", marginBottom: 8 }}>
-              Open Seat Production Void
-            </div>
-            <p style={{ fontSize: "0.88rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
-              Prolonged vacancies burden remaining partners, delay client filings, and result in substantial lost firm fee revenue while waiting for viable applicants.
-            </p>
-          </div>
 
-          <div style={{ background: "#F0FDF4", border: "1.5px solid #86EFAC", borderRadius: 12, padding: "28px 24px" }}>
-            <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#15803D", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-              Orion Contingency Model
-            </span>
-            <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#166534", margin: "10px 0 6px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-              $0 Upfront
+            <div style={{ background: "#FFFFFF", border: "1.5px solid #CBD5E1", borderRadius: 14, padding: "30px 26px", boxShadow: "0 4px 20px rgba(8, 20, 42, 0.03)" }}>
+              <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                Average Time to Hire
+              </span>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "#08142A", margin: "10px 0 6px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
+                60–90 Days
+              </div>
+              <div style={{ fontWeight: 700, color: "#08142A", fontSize: "1.05rem", marginBottom: 8 }}>
+                Open Seat Production Void
+              </div>
+              <p style={{ fontSize: "0.9rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
+                Prolonged vacancies burden remaining partners, delay client filings, and result in substantial lost firm fee revenue while waiting for viable applicants.
+              </p>
             </div>
-            <div style={{ fontWeight: 700, color: "#14532D", fontSize: "1rem", marginBottom: 8 }}>
-              23% Fee Only If You Hire
+
+            <div style={{ background: "#F0FDF4", border: "1.5px solid #86EFAC", borderRadius: 14, padding: "30px 26px", boxShadow: "0 4px 20px rgba(8, 20, 42, 0.03)" }}>
+              <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#15803D", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                Orion Contingency Model
+              </span>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "#166534", margin: "10px 0 6px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
+                $0 Upfront
+              </div>
+              <div style={{ fontWeight: 700, color: "#14532D", fontSize: "1.05rem", marginBottom: 8 }}>
+                23% Fee Only If You Hire
+              </div>
+              <p style={{ fontSize: "0.9rem", color: "#166534", lineHeight: 1.6, margin: 0 }}>
+                Curated, pre-screened candidate dossiers delivered in days. No upfront cost, non-exclusive agreement, and backed by a 90-day replacement warranty.
+              </p>
             </div>
-            <p style={{ fontSize: "0.88rem", color: "#166534", lineHeight: 1.6, margin: 0 }}>
-              Curated, pre-screened candidate dossiers delivered in days. No upfront cost, non-exclusive agreement, and backed by a 90-day replacement warranty.
-            </p>
           </div>
         </div>
       </section>
 
-      {/* 6. BOTTOM MIDNIGHT NAVY CTA */}
+      {/* =========================================================================
+          SECTION 5: Closing Midnight Navy Executive CTA
+          ========================================================================= */}
       <section
         style={{
           position: "relative",
           background: "#08142A",
           color: "#FFFFFF",
-          padding: "88px 0",
-          marginTop: "90px",
+          padding: "96px 0 108px",
+          borderTop: "1px solid rgba(255, 255, 255, 0.12)",
           overflow: "hidden",
         }}
       >
@@ -676,52 +824,63 @@ export function WhereToPostClient({
               alignItems: "center",
               gap: "8px",
               background: "rgba(29, 78, 216, 0.2)",
-              border: "1px solid rgba(96, 165, 250, 0.3)",
+              border: "1px solid rgba(96, 165, 250, 0.35)",
               borderRadius: "100px",
-              padding: "4px 12px",
+              padding: "5px 14px",
               fontSize: "0.78rem",
               fontWeight: 600,
               color: "#93C5FD",
-              marginBottom: "16px",
+              marginBottom: "18px",
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
             }}
           >
             Executive Talent Sourcing · {city.name.toUpperCase()}
           </div>
 
+          {/* Explicit color: #FFFFFF so it never inherits dark ink */}
           <h2
             style={{
-              fontSize: "2.4rem",
+              fontSize: "clamp(2rem, 3.4vw, 2.75rem)",
               fontWeight: 700,
-              margin: "0 0 16px",
+              color: "#FFFFFF",
+              margin: "0 0 18px",
               fontFamily: "var(--font-serif, Georgia, serif)",
+              lineHeight: 1.18,
             }}
           >
-            See {city.name} legal talent <span style={{ color: "#93C5FD", fontStyle: "italic" }}>before you pay to post.</span>
+            See {city.name} legal talent{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              before you pay to post.
+            </span>
           </h2>
 
           <p
             style={{
-              color: "rgba(255, 255, 255, 0.8)",
+              color: "#CBD5E1",
               fontSize: "1.08rem",
               lineHeight: 1.6,
-              margin: "0 0 32px",
+              margin: "0 0 34px",
             }}
           >
             Access confidential lateral attorney and paralegal dossiers today. Zero retainer, non-exclusive terms, and our 23% fee is payable only if you decide to hire.
           </p>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: "36px" }}>
             <Link
               href={`/find-candidates#city=${city.slug}`}
               style={{
                 background: "#1D4ED8",
                 color: "#FFFFFF",
-                padding: "14px 32px",
+                padding: "13px 28px",
                 borderRadius: 7,
                 fontWeight: 600,
-                fontSize: "0.98rem",
+                fontSize: "0.95rem",
                 textDecoration: "none",
-                boxShadow: "0 4px 16px rgba(29, 78, 216, 0.4)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
               }}
             >
               Browse {city.name} Candidates ({screenedCount}) →
@@ -730,17 +889,24 @@ export function WhereToPostClient({
               href="/submit-job"
               style={{
                 background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
+                border: "1px solid rgba(255, 255, 255, 0.22)",
                 color: "#FFFFFF",
-                padding: "14px 24px",
+                padding: "13px 24px",
                 borderRadius: 7,
                 fontWeight: 600,
-                fontSize: "0.98rem",
+                fontSize: "0.95rem",
                 textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
               }}
             >
-              Paste Your Job Mandate
+              Send Mandate to Justin →
             </Link>
+          </div>
+
+          <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: "20px", fontSize: "0.85rem", color: "#94A3B8" }}>
+            Zero upfront retainer · 23% contingency fee only upon hire · 90-day replacement guarantee
           </div>
         </div>
       </section>
