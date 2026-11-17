@@ -3636,7 +3636,7 @@ a.id:hover{color:var(--accent)}
 .rget {
   background: #F8FAFC !important;
   border: 1px solid #E2E8F0 !important;
-  border-radius: 8px !important;
+  border-radius: 7px !important;
   padding: 12px 14px !important;
   margin-top: auto !important;
   margin-bottom: 20px !important;
@@ -8003,7 +8003,7 @@ table.data.compare td.us{background:#F5F8FC}
   font-weight: 600 !important;
   font-size: 16px !important;
   padding: 15px 32px !important;
-  border-radius: 8px !important;
+  border-radius: 7px !important;
   text-decoration: none !important;
   box-shadow: 0 10px 24px rgba(47, 98, 184, 0.25) !important;
   transition: all var(--t-fast) var(--ease) !important;
@@ -8579,7 +8579,7 @@ table.data.compare td.us{background:#F5F8FC}
   color: var(--ink-3);
   background: none;
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: 7px;
   padding: 6px 12px;
   cursor: pointer;
   transition: all var(--t-fast) var(--ease);
@@ -9593,7 +9593,7 @@ table.data.compare td.us{background:#F5F8FC}
 
 .jobs-luxury-header-sec .indeed-submit-btn {
   background: #1D4ED8 !important;
-  border-radius: 8px !important;
+  border-radius: 7px !important;
   font-weight: 600 !important;
   font-size: 15px !important;
   padding: 13px 32px !important;
@@ -10066,7 +10066,7 @@ table.data.compare td.us{background:#F5F8FC}
 .ur-paste-textarea {
   width: 100% !important;
   border: 1.5px solid #CBD5E1 !important;
-  border-radius: 8px !important;
+  border-radius: 7px !important;
   padding: 12px 14px !important;
   font-family: var(--mono) !important;
   font-size: 13px !important;
@@ -10180,7 +10180,7 @@ table.data.compare td.us{background:#F5F8FC}
 .ur-security-icon {
   width: 36px !important;
   height: 36px !important;
-  border-radius: 8px !important;
+  border-radius: 7px !important;
   background: rgba(5, 150, 105, 0.1) !important;
   color: #059669 !important;
   display: grid !important;

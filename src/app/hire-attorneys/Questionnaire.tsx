@@ -237,7 +237,14 @@ export function Questionnaire() {
   if (viewState === "notFit") {
     return (
       <div ref={cardRef} className="q-card-box step-in text-center">
-        <div className="q-icon-disc">🤝</div>
+        <div className="q-icon-disc" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#1D4ED8" }}>
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        </div>
         <h3 className="q-title mt-4">Thanks for being upfront.</h3>
         <p className="q-sub-text">
           Our service works on a one-time 23% contingency fee that is due <b>only if you hire</b> a candidate we introduce, backed by a 90-day replacement guarantee. If that doesn&apos;t align with your firm&apos;s current model, we might not be the right partner right now, and that is completely okay.
@@ -427,7 +434,14 @@ export function Questionnaire() {
 
         {/* DIRECT CONTACT REMINDER */}
         <div className="rounded-xl bg-[#fff8d9] border border-[#d9a400]/40 p-4 text-xs text-[#6b4e00] flex items-center gap-3">
-          <span className="text-xl">📅</span>
+          <span className="flex-shrink-0 text-[#1D4ED8]" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </span>
           <div>
             <b>Need candidates faster?</b> You can book directly with Justin via{" "}
             <a href="https://calendly.com/orionplacement/call-with-justin" target="_blank" rel="noopener noreferrer" className="underline font-bold text-[#0a1a33]">
@@ -761,8 +775,12 @@ export function Questionnaire() {
             >
               See candidate availability &amp; book call →
             </button>
-            <p className="text-xs text-center text-[#546359] mt-3">
-              🔒 100% confidential · Never shared with other recruiters or external portals
+            <p className="text-xs text-center text-[#546359] mt-3" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span>100% confidential · Never shared with other recruiters or external portals</span>
             </p>
           </div>
         </form>
