@@ -1417,15 +1417,15 @@ export default function SubmitJobPage() {
               alignItems: "center",
               gap: 8,
               background: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.15)",
+              border: "1px solid rgba(255,255,255,0.18)",
               borderRadius: 999,
-              padding: "6px 14px",
+              padding: "6px 16px",
               fontFamily: "var(--mono)",
               fontSize: 11,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
               color: "#93C5FD",
-              marginBottom: 16,
+              marginBottom: 18,
             }}
           >
             <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
@@ -1434,25 +1434,28 @@ export default function SubmitJobPage() {
           <h2
             style={{
               fontSize: "clamp(30px, 3.8vw, 44px)",
-              fontWeight: 500,
+              fontWeight: 400,
+              color: "#FFFFFF",
               margin: "0 0 16px",
               fontFamily: "var(--display)",
+              lineHeight: 1.15,
             }}
           >
             Submit your job and meet the <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>matches.</span>
           </h2>
           <p
             style={{
-              color: "rgba(255, 255, 255, 0.8)",
-              fontSize: "1.08rem",
+              color: "#CBD5E1",
+              fontSize: "1.06rem",
               lineHeight: 1.6,
-              margin: "0 0 32px",
+              margin: "0 auto 34px",
+              maxWidth: 620,
             }}
           >
             Curated lateral attorney dossiers delivered directly to your inbox within the hour. Zero upfront retainer, non-exclusive agreement, and no fee unless you hire.
           </p>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             <a
               href="#gate"
               style={{
@@ -1461,10 +1464,10 @@ export default function SubmitJobPage() {
                 gap: 8,
                 background: "#1D4ED8",
                 color: "#FFFFFF",
-                padding: "14px 32px",
+                padding: "14px 34px",
                 borderRadius: 7,
                 fontWeight: 600,
-                fontSize: 15,
+                fontSize: 15.5,
                 textDecoration: "none",
                 boxShadow: "0 4px 16px rgba(29, 78, 216, 0.4)",
               }}
@@ -1481,12 +1484,12 @@ export default function SubmitJobPage() {
                 alignItems: "center",
                 gap: 8,
                 background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
+                border: "1px solid rgba(255, 255, 255, 0.22)",
                 color: "#FFFFFF",
-                padding: "14px 26px",
+                padding: "14px 30px",
                 borderRadius: 7,
                 fontWeight: 600,
-                fontSize: 15,
+                fontSize: 15.5,
                 textDecoration: "none",
               }}
             >
