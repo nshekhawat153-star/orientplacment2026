@@ -96,6 +96,36 @@ export default function UploadResumePage() {
 
   return (
     <div className="ur-page" style={{ background: "#FAF9F5", color: "#08142A" }}>
+      <style>{`
+        .ur-pillar-card {
+          background: #FFFFFF;
+          border: 1px solid #E2E8F0;
+          border-radius: 14px;
+          padding: 26px 22px;
+          box-shadow: 0 2px 10px rgba(8, 20, 42, 0.03);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .ur-pillar-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(8, 20, 42, 0.06);
+        }
+        .ur-dossier-grid {
+          display: grid;
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 48px;
+          align-items: center;
+        }
+        .ur-faq-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 48px;
+          align-items: start;
+        }
+        @media (max-width: 960px) {
+          .ur-dossier-grid { grid-template-columns: 1fr !important; }
+          .ur-faq-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       {/* 1. LUXURY HERO WITH VIDEO & 2-COLUMN DROPZONE */}
       <section
         className="emp-luxury-hero-sec ur-luxury-hero-sec"
@@ -893,216 +923,423 @@ export default function UploadResumePage() {
       <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 44px" }}>
-            <span
-              className="eyebrow"
+            <div
               style={{
-                fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.08)",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
+                borderRadius: 100,
+                padding: "5px 14px",
+                fontSize: "0.78rem",
                 fontWeight: 700,
-                letterSpacing: "0.08em",
+                color: "#1D4ED8",
+                letterSpacing: "0.06em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                marginBottom: 12,
               }}
             >
-              THE CANDIDATE GUARANTEE
-            </span>
+              THE CANDIDATE GUARANTEE · 4 PRIVACY PILLARS
+            </div>
             <h2
               style={{
-                fontFamily: "var(--display)",
-                fontSize: "clamp(28px, 3.6vw, 42px)",
+                fontFamily: "var(--font-serif, Georgia, serif)",
+                fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
                 color: "#08142A",
                 margin: "0 0 14px",
-                fontWeight: 500,
+                fontWeight: 700,
+                lineHeight: 1.2,
               }}
             >
-              What happens to your resume at <span className="serif-accent" style={{ fontStyle: "italic" }}>Orion</span>
+              What happens to your resume at{" "}
+              <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                Orion
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
-              Legal recruiting is built on discretion. We hold our candidate privacy protocols to bar-admitted attorney standards.
+            <p style={{ color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6, margin: 0 }}>
+              Legal recruiting is built on discretion. We hold our candidate privacy protocols to bar-admitted attorney standards. Zero current firm contact, zero blind submissions.
             </p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20, marginBottom: 52 }}>
-            <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
-              <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
+            <div className="ur-pillar-card">
+              <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#1D4ED8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
                 PILLAR 01 · IDENTITY
               </div>
-              <div style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", fontWeight: 600, marginBottom: 8 }}>
+              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 700, margin: "0 0 8px" }}>
                 Anonymous ID Only
-              </div>
-              <p style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+              </h3>
+              <p style={{ fontSize: "0.88rem", lineHeight: 1.6, color: "#475569", margin: 0 }}>
                 Your resume is cataloged under a redacted identifier (e.g. C-TX-0412). Your actual name, current law firm, and graduation years remain shielded.
               </p>
             </div>
 
-            <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
-              <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
+            <div className="ur-pillar-card">
+              <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#1D4ED8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
                 PILLAR 02 · PERMISSION
               </div>
-              <div style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", fontWeight: 600, marginBottom: 8 }}>
+              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 700, margin: "0 0 8px" }}>
                 Zero Blind Submissions
-              </div>
-              <p style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+              </h3>
+              <p style={{ fontSize: "0.88rem", lineHeight: 1.6, color: "#475569", margin: 0 }}>
                 We never submit your credentials to any law firm without your explicit affirmative consent. You will know the exact firm, partners, and pay beforehand.
               </p>
             </div>
 
-            <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
-              <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
+            <div className="ur-pillar-card">
+              <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#1D4ED8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
                 PILLAR 03 · DISCRETION
               </div>
-              <div style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", fontWeight: 600, marginBottom: 8 }}>
+              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 700, margin: "0 0 8px" }}>
                 Zero Current Firm Contact
-              </div>
-              <p style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+              </h3>
+              <p style={{ fontSize: "0.88rem", lineHeight: 1.6, color: "#475569", margin: 0 }}>
                 We never contact your current employer or request references from colleagues at your firm. Your job search is kept 100% confidential.
               </p>
             </div>
 
-            <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
-              <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
+            <div className="ur-pillar-card">
+              <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#1D4ED8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
                 PILLAR 04 · CONTROL
               </div>
-              <div style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", fontWeight: 600, marginBottom: 8 }}>
+              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 700, margin: "0 0 8px" }}>
                 Same-Day Purge Guarantee
-              </div>
-              <p style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+              </h3>
+              <p style={{ fontSize: "0.88rem", lineHeight: 1.6, color: "#475569", margin: 0 }}>
                 Request deletion at any time via a single email. Your resume and candidate dossier are permanently expunged from our database the same day.
               </p>
             </div>
           </div>
 
-          {/* Dossier Preview Visualizer */}
-          <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 16, padding: "36px 32px" }}>
-            <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center", marginBottom: 28 }}>
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#1D4ED8", display: "block", marginBottom: 6 }}>
-                TRANSPARENCY PREVIEW
-              </span>
-              <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "0 0 8px", fontWeight: 600 }}>
-                What a law firm sees before your written approval
-              </h3>
-              <p style={{ fontSize: 14, color: "#64748B", margin: 0 }}>
-                This redacted dossier is the only information a managing partner sees until you grant explicit approval.
-              </p>
-            </div>
-            <div style={{ maxWidth: 540, margin: "0 auto" }}>
-              <ResumeSheet candidateId="EP-TX-0412" />
+          {/* Dossier Preview Visualizer: Full-Width Executive Card */}
+          <div
+            style={{
+              background: "#FFFFFF",
+              border: "1px solid #E2E8F0",
+              borderRadius: 16,
+              padding: "40px",
+              boxShadow: "0 4px 24px rgba(8, 20, 42, 0.04)",
+            }}
+          >
+            <div className="ur-dossier-grid">
+              {/* Left Column: Explanatory Breakdown */}
+              <div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    background: "rgba(29, 78, 216, 0.08)",
+                    border: "1px solid rgba(29, 78, 216, 0.2)",
+                    borderRadius: 100,
+                    padding: "5px 14px",
+                    fontSize: "0.78rem",
+                    fontWeight: 700,
+                    color: "#1D4ED8",
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    marginBottom: 12,
+                  }}
+                >
+                  TRANSPARENCY PREVIEW · ZERO BLIND SUBMISSIONS
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-serif, Georgia, serif)",
+                    fontSize: "clamp(1.8rem, 2.8vw, 2.3rem)",
+                    color: "#08142A",
+                    margin: "0 0 12px",
+                    fontWeight: 700,
+                    lineHeight: 1.25,
+                  }}
+                >
+                  What a law firm sees{" "}
+                  <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                    before your written approval
+                  </span>
+                </h3>
+                <p style={{ fontSize: "1rem", color: "#475569", lineHeight: 1.65, margin: "0 0 24px" }}>
+                  This redacted dossier is the only document an interested managing partner or recruiting chair evaluates until you review the opportunity and grant prior written authorization.
+                </p>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 24 }}>
+                  <div style={{ background: "#FEF2F2", border: "1px solid #FECACA", borderRadius: 10, padding: "16px 18px" }}>
+                    <div style={{ fontSize: "0.78rem", fontWeight: 700, color: "#DC2626", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+                      <span>✕</span> Shielded Until Consent
+                    </div>
+                    <ul style={{ margin: 0, paddingLeft: 16, fontSize: "0.85rem", color: "#7F1D1D", lineHeight: 1.6 }}>
+                      <li>Full candidate legal name</li>
+                      <li>Current law firm &amp; employers</li>
+                      <li>Law school &amp; graduation dates</li>
+                      <li>Contact details &amp; bar number</li>
+                    </ul>
+                  </div>
+
+                  <div style={{ background: "#F0FDF4", border: "1px solid #BBF7D0", borderRadius: 10, padding: "16px 18px" }}>
+                    <div style={{ fontSize: "0.78rem", fontWeight: 700, color: "#16A34A", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+                      <span>✓</span> Visible to Partner
+                    </div>
+                    <ul style={{ margin: 0, paddingLeft: 16, fontSize: "0.85rem", color: "#14532D", lineHeight: 1.6 }}>
+                      <li>Anonymous Orion ID (e.g. EP-TX-0412)</li>
+                      <li>Substantive case &amp; drafting mix</li>
+                      <li>Years in practice &amp; seniority</li>
+                      <li>Published base compensation range</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.88rem", color: "#059669", background: "rgba(5, 150, 105, 0.08)", border: "1px solid rgba(5, 150, 105, 0.2)", borderRadius: 8, padding: "10px 14px" }}>
+                  <span style={{ fontWeight: 700 }}>●</span>
+                  <span>Active Blind Submission Protection: Zero firm ever discovers your identity prematurely.</span>
+                </div>
+              </div>
+
+              {/* Right Column: Redacted Dossier Visualizer */}
+              <div style={{ width: "100%", maxWidth: "560px", margin: "0 auto" }}>
+                <div style={{ background: "#FAF9F5", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "20px", boxShadow: "0 8px 30px rgba(8, 20, 42, 0.06)" }}>
+                  <ResumeSheet candidateId="EP-TX-0412" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. CROSS-FUNNEL VALUE BAND */}
-      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "64px 0", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 24 }}>
-          <div>
-            <span
-              className="eyebrow"
+      {/* 5. CROSS-FUNNEL VALUE BAND (DARK SECTION) */}
+      <section
+        style={{
+          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          color: "#FFFFFF",
+          padding: "72px 0",
+          borderTop: "1px solid rgba(255, 255, 255, 0.12)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1240,
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 24,
+          }}
+        >
+          <div style={{ maxWidth: 720 }}>
+            <div
               style={{
-                fontFamily: "var(--mono)",
-                fontSize: 11.5,
-                color: "#1D4ED8",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.25)",
+                border: "1px solid rgba(96, 165, 250, 0.35)",
+                borderRadius: 100,
+                padding: "5px 14px",
+                fontSize: "0.78rem",
                 fontWeight: 700,
-                letterSpacing: "0.08em",
+                color: "#93C5FD",
+                letterSpacing: "0.06em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 6,
+                marginBottom: 10,
               }}
             >
               PREFER TO BENCHMARK ANONYMOUSLY?
-            </span>
-            <h3 style={{ fontFamily: "var(--display)", fontSize: 26, color: "#08142A", margin: "0 0 6px", fontWeight: 600 }}>
-              Check your current legal salary first
+            </div>
+            <h3
+              style={{
+                fontFamily: "var(--font-serif, Georgia, serif)",
+                fontSize: "clamp(24px, 3vw, 32px)",
+                color: "#FFFFFF",
+                margin: "0 0 10px",
+                fontWeight: 700,
+                lineHeight: 1.25,
+              }}
+            >
+              Check your current legal salary{" "}
+              <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+                first
+              </span>
             </h3>
-            <p style={{ color: "#64748B", fontSize: 15, margin: 0 }}>
-              Compare your base compensation against 25th, 50th, and 75th percentiles in your city. 100% private in your browser.
+            <p style={{ color: "#CBD5E1", fontSize: "1.02rem", lineHeight: 1.6, margin: 0 }}>
+              Compare your base compensation against 25th, 50th, and 75th percentiles in your Texas market. Runs 100% private in your client browser.
             </p>
           </div>
-          <Link
-            className="btn btn-outline"
-            href="/salary-check"
-            style={{
-              borderRadius: 7,
-              fontWeight: 600,
-              padding: "12px 24px",
-              border: "1.5px solid #CBD5E1",
-              color: "#08142A",
-              textDecoration: "none",
-              fontSize: 14,
-              background: "#FFFFFF",
-            }}
-          >
-            <span>Run salary check →</span>
-          </Link>
+          <div>
+            <Link
+              href="/salary-check"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                borderRadius: 7,
+                fontWeight: 600,
+                padding: "14px 28px",
+                color: "#FFFFFF",
+                textDecoration: "none",
+                fontSize: "0.95rem",
+                background: "#1D4ED8",
+                boxShadow: "0 4px 16px rgba(29, 78, 216, 0.4)",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <span>Run Free Salary Check</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* 6. CANDIDATE FAQ ACCORDION */}
-      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "88px 0 96px" }}>
-        <div className="wrap split" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "start" }}>
-          <div className="sec-head">
-            <span
-              className="eyebrow"
+      <section style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
+        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }} className="ur-faq-grid">
+          <div>
+            <div
               style={{
-                fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.08)",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
+                borderRadius: 100,
+                padding: "5px 14px",
+                fontSize: "0.78rem",
                 fontWeight: 700,
-                letterSpacing: "0.08em",
+                color: "#1D4ED8",
+                letterSpacing: "0.06em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                marginBottom: 12,
               }}
             >
-              CANDIDATE PRIVACY FAQ
-            </span>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
-              Questions before <span className="serif-accent" style={{ fontStyle: "italic" }}>uploading</span>
+              CANDIDATE PRIVACY FAQ · 100% DISCREET
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-serif, Georgia, serif)",
+                fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+                color: "#08142A",
+                margin: "0 0 14px",
+                fontWeight: 700,
+                lineHeight: 1.2,
+              }}
+            >
+              Questions before{" "}
+              <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                uploading
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 15, lineHeight: 1.6 }}>
-              Prefer to speak directly with founder Justin before submitting?{" "}
-              <Link href="/about" style={{ color: "#1D4ED8", textDecoration: "underline", fontWeight: 600 }}>
-                Schedule a confidential introductory call
-              </Link>.
+            <p style={{ color: "#475569", fontSize: "1.05rem", lineHeight: 1.65, margin: "0 0 16px" }}>
+              Every attorney resume received by Orion is treated under strict attorney-client style confidentiality. We work exclusively with verified candidates seeking strategic career advancement without risking their current position.
             </p>
+            <p style={{ color: "#64748B", fontSize: "0.95rem", lineHeight: 1.6, margin: "0 0 24px" }}>
+              Have specific questions about our non-exclusive representation, partner compensation benchmarks, or our same-day data purge guarantee? Justin reviews every submission personally.
+            </p>
+
+            <div style={{ display: "grid", gap: 12, marginBottom: 28 }}>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700, marginTop: 1 }}>✓</span>
+                <span style={{ fontSize: "0.92rem", color: "#334155" }}>
+                  <strong>Zero Automated Rejections:</strong> Every profile is reviewed by founder Justin personally.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700, marginTop: 1 }}>✓</span>
+                <span style={{ fontSize: "0.92rem", color: "#334155" }}>
+                  <strong>100% Free for Candidates:</strong> Hiring law firms pay all placement fees without docking your salary.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700, marginTop: 1 }}>✓</span>
+                <span style={{ fontSize: "0.92rem", color: "#334155" }}>
+                  <strong>Zero Employer Contact:</strong> Your managing partners or firm colleagues will never know you reached out.
+                </span>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+              <a
+                href="https://calendly.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#1D4ED8",
+                  color: "#FFFFFF",
+                  padding: "12px 22px",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  fontSize: "0.92rem",
+                  textDecoration: "none",
+                  boxShadow: "0 4px 14px rgba(29, 78, 216, 0.35)",
+                }}
+              >
+                <span>Book 15 Min Call with Justin</span>
+                <span aria-hidden="true">→</span>
+              </a>
+              <Link
+                href="/about"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  background: "#FFFFFF",
+                  border: "1.5px solid #CBD5E1",
+                  color: "#08142A",
+                  padding: "11px 18px",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  fontSize: "0.92rem",
+                  textDecoration: "none",
+                }}
+              >
+                <span>Learn About Orion</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
 
-          <div className="faq" style={{ display: "grid", gap: 14 }}>
-            <details style={{ background: "#FAF9F5", border: "1px solid #EAE7DC", borderRadius: 10, padding: "18px 22px" }}>
-              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>
-                Who reviews my uploaded resume?
+          <div style={{ display: "grid", gap: 14 }}>
+            <details style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, padding: "20px 22px", boxShadow: "0 2px 10px rgba(8, 20, 42, 0.02)" }} open>
+              <summary style={{ fontWeight: 700, color: "#08142A", cursor: "pointer", fontSize: "0.98rem", display: "flex", justifyContent: "space-between", alignItems: "center", listStyle: "none" }}>
+                <span>Who reviews my uploaded resume?</span>
+                <span style={{ color: "#1D4ED8", fontSize: "1.2rem", fontWeight: 700 }}>+</span>
               </summary>
-              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.6, fontSize: 14, margin: "12px 0 0" }}>
-                Your resume is evaluated exclusively by Orion founder Justin. It is never parsed into third-party databases, never indexed on search engines, and never accessed by automated bot scrapers.
+              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.65, fontSize: "0.92rem", margin: "12px 0 0" }}>
+                Your resume is evaluated exclusively by Orion founder Justin. It is never parsed into public third-party databases, never indexed on search engines, and never accessed by automated bot scrapers.
               </p>
             </details>
 
-            <details style={{ background: "#FAF9F5", border: "1px solid #EAE7DC", borderRadius: 10, padding: "18px 22px" }}>
-              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>
-                Can my current law firm find out I uploaded a resume?
+            <details style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, padding: "20px 22px", boxShadow: "0 2px 10px rgba(8, 20, 42, 0.02)" }}>
+              <summary style={{ fontWeight: 700, color: "#08142A", cursor: "pointer", fontSize: "0.98rem", display: "flex", justifyContent: "space-between", alignItems: "center", listStyle: "none" }}>
+                <span>Can my current law firm find out I uploaded a resume?</span>
+                <span style={{ color: "#1D4ED8", fontSize: "1.2rem", fontWeight: 700 }}>+</span>
               </summary>
-              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.6, fontSize: 14, margin: "12px 0 0" }}>
-                Under no circumstances. We do not publish candidate directories, and we never contact your current firm for references or background checks. All outreach takes place via your personal email or cell.
+              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.65, fontSize: "0.92rem", margin: "12px 0 0" }}>
+                Under no circumstances. We do not publish candidate directories, and we never contact your current firm for references or background checks. All communication takes place discreetly via your personal email or cell.
               </p>
             </details>
 
-            <details style={{ background: "#FAF9F5", border: "1px solid #EAE7DC", borderRadius: 10, padding: "18px 22px" }}>
-              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>
-                Does using Orion cost the candidate anything?
+            <details style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, padding: "20px 22px", boxShadow: "0 2px 10px rgba(8, 20, 42, 0.02)" }}>
+              <summary style={{ fontWeight: 700, color: "#08142A", cursor: "pointer", fontSize: "0.98rem", display: "flex", justifyContent: "space-between", alignItems: "center", listStyle: "none" }}>
+                <span>Does using Orion cost the candidate anything?</span>
+                <span style={{ color: "#1D4ED8", fontSize: "1.2rem", fontWeight: 700 }}>+</span>
               </summary>
-              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.6, fontSize: 14, margin: "12px 0 0" }}>
-                No. Our representation is 100% free for candidates. Orion is compensated solely by the hiring law firm on a 23% contingency basis upon placement. Your job offer compensation is never docked to pay our placement fee.
+              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.65, fontSize: "0.92rem", margin: "12px 0 0" }}>
+                No. Our candidate representation is 100% free. Orion is compensated solely by the hiring law firm on a contingency basis upon placement. Your negotiated salary and bonus are never docked to pay our fee.
               </p>
             </details>
 
-            <details style={{ background: "#FAF9F5", border: "1px solid #EAE7DC", borderRadius: 10, padding: "18px 22px" }}>
-              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>
-                What happens when I express interest in an open seat?
+            <details style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, padding: "20px 22px", boxShadow: "0 2px 10px rgba(8, 20, 42, 0.02)" }}>
+              <summary style={{ fontWeight: 700, color: "#08142A", cursor: "pointer", fontSize: "0.98rem", display: "flex", justifyContent: "space-between", alignItems: "center", listStyle: "none" }}>
+                <span>What happens when I express interest in an open seat?</span>
+                <span style={{ color: "#1D4ED8", fontSize: "1.2rem", fontWeight: 700 }}>+</span>
               </summary>
-              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.6, fontSize: 14, margin: "12px 0 0" }}>
-                Justin will contact you personally to share the firm name, managing partner background, culture notes, and full compensation structure. Only if you agree will we send your redacted or complete profile to that firm.
+              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.65, fontSize: "0.92rem", margin: "12px 0 0" }}>
+                Justin will contact you personally to share the law firm name, managing partner background, culture dynamics, billable expectations, and full compensation structure. Only if you agree will we send your redacted or complete profile to that firm.
               </p>
             </details>
           </div>
