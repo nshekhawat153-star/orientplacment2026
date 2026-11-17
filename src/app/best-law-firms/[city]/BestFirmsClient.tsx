@@ -42,22 +42,21 @@ export function BestFirmsClient({
   return (
     <div style={{ background: "#FAF9F5", minHeight: "100vh", color: "#08142A" }}>
       <style>{`
-        .bf-hero-grid {
-          display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
-          gap: 48px;
-          align-items: center;
-        }
         .bf-tests-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 16px;
+        }
+        .bf-jobs-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 20px;
         }
         .bf-test-card {
           background: #FFFFFF;
-          border: 1px solid #E2E8F0;
+          border: 1.5px solid #E2E8F0;
           border-radius: 12px;
-          padding: 26px 22px;
+          padding: 22px 18px;
           display: flex;
           flex-direction: column;
           box-shadow: 0 2px 10px rgba(8, 20, 42, 0.03);
@@ -100,21 +99,25 @@ export function BestFirmsClient({
           gap: 48px;
           align-items: start;
         }
+        @media (max-width: 1024px) {
+          .bf-tests-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+          .bf-jobs-grid { grid-template-columns: 1fr; }
+        }
         @media (max-width: 960px) {
-          .bf-hero-grid { grid-template-columns: 1fr; }
           .bf-split-grid { grid-template-columns: 1fr; }
         }
       `}</style>
 
-      {/* 1. LUXURY DARK HERO WITH VIDEO & EDITORIAL SNAPSHOT */}
+      {/* 1. LUXURY CENTERED HERO (NO CARD CLUTTER) */}
       <section
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
           color: "#FFFFFF",
-          padding: "124px 0 76px",
+          padding: "128px 0 84px",
           overflow: "hidden",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+          textAlign: "center",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
         }}
       >
         <video
@@ -128,211 +131,205 @@ export function BestFirmsClient({
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            opacity: 0.16,
+            opacity: 0.2,
             pointerEvents: "none",
             zIndex: 0,
           }}
         >
           <source src="/media/splash.mp4" type="video/mp4" />
-          <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
         </video>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(180deg, rgba(8,20,42,0.85) 0%, rgba(8,20,42,0.96) 100%)",
+            zIndex: 0,
+          }}
+        />
 
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
-          <div className="bf-hero-grid">
-            <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(29, 78, 216, 0.15)",
-                  border: "1px solid rgba(96, 165, 250, 0.3)",
-                  borderRadius: "100px",
-                  padding: "6px 14px",
-                  fontSize: "0.78rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  color: "#93C5FD",
-                  marginBottom: "18px",
-                }}
-              >
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                Editorial Guide · {city.name.toUpperCase()}, {city.state.toUpperCase()}
-              </div>
+        <div style={{ maxWidth: "860px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              background: "rgba(29, 78, 216, 0.15)",
+              border: "1px solid rgba(96, 165, 250, 0.3)",
+              borderRadius: "100px",
+              padding: "6px 16px",
+              fontSize: "0.78rem",
+              fontWeight: 600,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              color: "#93C5FD",
+              marginBottom: "18px",
+            }}
+          >
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+            EDITORIAL RETENTION BENCHMARK · {city.name.toUpperCase()}, {city.state.toUpperCase()}
+          </div>
 
-              <h1
-                style={{
-                  fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
-                  fontFamily: "var(--display)",
-                  fontWeight: 500,
-                  lineHeight: 1.15,
-                  color: "#FFFFFF",
-                  letterSpacing: "-0.02em",
-                  margin: "0 0 16px",
-                }}
-              >
-                Best small law firms to work for in <br />
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>{city.name}</span>
-              </h1>
+          <h1
+            style={{
+              fontSize: "clamp(34px, 4.4vw, 52px)",
+              fontFamily: "var(--display)",
+              fontWeight: 500,
+              lineHeight: 1.15,
+              color: "#FFFFFF",
+              letterSpacing: "-0.02em",
+              margin: "0 0 18px",
+            }}
+          >
+            Best small law firms to work for in{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              {city.name}
+            </span>
+          </h1>
 
-              <p
-                style={{
-                  fontSize: "1.12rem",
-                  lineHeight: 1.6,
-                  color: "rgba(255, 255, 255, 0.82)",
-                  maxWidth: "580px",
-                  margin: "0 0 28px",
-                }}
-              >
-                Boutique and mid-size law firms in {city.name} that pass all five rigorous retention and compensation standards. Completely independent editorial rankings: zero firms can sponsor placement or pay to be listed.
-              </p>
+          <p
+            style={{
+              fontSize: "1.1rem",
+              lineHeight: 1.6,
+              color: "#CBD5E1",
+              maxWidth: "680px",
+              margin: "0 auto 28px",
+            }}
+          >
+            Boutique and mid-size law firms in {city.name} that pass all five rigorous retention and compensation standards. Completely independent editorial rankings: zero firms can sponsor placement or pay to be listed.
+          </p>
 
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", marginBottom: "32px" }}>
-                <Link
-                  href={`/upload-resume#city=${city.slug}`}
-                  style={{
-                    background: "#1D4ED8",
-                    color: "#FFFFFF",
-                    padding: "13px 26px",
-                    borderRadius: 7,
-                    fontWeight: 600,
-                    fontSize: "0.95rem",
-                    textDecoration: "none",
-                    boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  Upload Resume for Confidential Matching →
-                </Link>
-                <a
-                  href="#firms"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.08)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    color: "#FFFFFF",
-                    padding: "13px 22px",
-                    borderRadius: 7,
-                    fontWeight: 600,
-                    fontSize: "0.95rem",
-                    textDecoration: "none",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  View Qualifying Firms ↓
-                </a>
-              </div>
-
-              <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 18 }}>
-                <TrustLine />
-              </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 20,
+              flexWrap: "wrap",
+              marginBottom: 32,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.92rem", color: "#E2E8F0" }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Zero sponsored listings or paid placements</span>
             </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.92rem", color: "#E2E8F0" }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>5 objective associate retention benchmarks</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.92rem", color: "#E2E8F0" }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Confidential matching with zero current firm contact</span>
+            </div>
+          </div>
 
-            {/* Elevated City Editorial Snapshot Card */}
-            <div
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: 14,
+              marginBottom: 32,
+            }}
+          >
+            <Link
+              href={`/upload-resume#city=${city.slug}`}
               style={{
-                background: "rgba(15, 23, 42, 0.75)",
-                backdropFilter: "blur(14px)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                borderRadius: 14,
-                padding: "28px 24px",
-                boxShadow: "0 20px 48px rgba(0, 0, 0, 0.45)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
                 color: "#FFFFFF",
+                padding: "13px 28px",
+                borderRadius: 7,
+                fontWeight: 600,
+                fontSize: "0.95rem",
+                textDecoration: "none",
+                boxShadow: "0 4px 16px rgba(29, 78, 216, 0.4)",
+                transition: "all 0.2s ease",
               }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1px solid rgba(255, 255, 255, 0.1)", paddingBottom: 12, marginBottom: 18 }}>
-                <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#60A5FA", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                  {city.name} Editorial Index
-                </span>
-                <span style={{ fontSize: "0.75rem", background: "rgba(37, 99, 235, 0.3)", color: "#93C5FD", padding: "3px 8px", borderRadius: 4, fontWeight: 600 }}>
-                  Updated {DATA.asOf}
-                </span>
-              </div>
+              <span>Upload Resume for Confidential Matching</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <a
+              href="#firms"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255, 255, 255, 0.08)",
+                border: "1px solid rgba(255, 255, 255, 0.22)",
+                color: "#FFFFFF",
+                padding: "13px 24px",
+                borderRadius: 7,
+                fontWeight: 600,
+                fontSize: "0.95rem",
+                textDecoration: "none",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <span>View Qualifying Firms</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>
-                <div style={{ background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#FFFFFF", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                    {firms.length}
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                    Firms pass all 5 standards
-                  </div>
-                </div>
-
-                <div style={{ background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#60A5FA", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                    {practices.length - 1}
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                    Practice areas represented
-                  </div>
-                </div>
-
-                <div style={{ background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#34D399", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                    4.5+
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                    Min. verified review score
-                  </div>
-                </div>
-
-                <div style={{ background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ fontSize: "1.8rem", fontWeight: 800, color: "#93C5FD", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                    $0
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                    Sponsored listing fee
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ fontSize: "0.82rem", color: "rgba(255, 255, 255, 0.7)", lineHeight: 1.5, borderTop: "1px solid rgba(255, 255, 255, 0.08)", paddingTop: 12 }}>
-                Every firm is evaluated strictly on verified associate retention, market base salary transparency, and client peer standing. Zero advertising accepted.
-              </div>
-            </div>
+          <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 20, maxWidth: 640, margin: "0 auto" }}>
+            <TrustLine />
           </div>
         </div>
       </section>
 
       {/* 2. THE FIVE EVALUATION TESTS */}
       <section style={{ maxWidth: "1200px", margin: "80px auto 0", padding: "0 24px" }}>
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 40px" }}>
+        <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 40px" }}>
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "8px",
+              gap: 8,
               background: "rgba(29, 78, 216, 0.08)",
               border: "1px solid rgba(29, 78, 216, 0.2)",
-              borderRadius: "100px",
-              padding: "4px 12px",
+              borderRadius: 100,
+              padding: "5px 14px",
               fontSize: "0.78rem",
-              fontWeight: 600,
+              fontWeight: 700,
               color: "#1D4ED8",
-              marginBottom: "10px",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              marginBottom: 12,
             }}
           >
-            Editorial Methodology
+            EDITORIAL METHODOLOGY · 5 RETENTION PILLARS
           </div>
-          <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: "0 0 10px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-            The Five Tests Every Listed Firm Must Pass
+          <h2
+            style={{
+              fontFamily: "var(--font-serif, Georgia, serif)",
+              fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+              color: "#08142A",
+              margin: "0 0 12px",
+              fontWeight: 700,
+              lineHeight: 1.2,
+            }}
+          >
+            The Five Tests Every Listed Firm{" "}
+            <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+              Must Pass
+            </span>
           </h2>
-          <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem" }}>
-            We evaluate small and mid-size law firms through the lens of lateral associate and partner career longevity.
+          <p style={{ margin: 0, color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6 }}>
+            We evaluate small and mid-size law firms through the lens of lateral associate and partner career longevity. Zero sponsored listings or paid placements.
           </p>
         </div>
 
         <div className="bf-tests-grid">
           {criteria.map(([title, desc]: [string, string], i: number) => (
             <div key={i} className="bf-test-card">
-              <span style={{ fontFamily: "monospace", fontSize: "0.85rem", fontWeight: 800, color: "#1D4ED8", marginBottom: 10 }}>
+              <span style={{ fontFamily: "monospace", fontSize: "0.82rem", fontWeight: 800, color: "#1D4ED8", marginBottom: 10 }}>
                 TEST 0{i + 1}
               </span>
-              <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px" }}>
+              <h3 style={{ fontSize: "1.08rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px", lineHeight: 1.3 }}>
                 {title}
               </h3>
-              <p style={{ fontSize: "0.88rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
+              <p style={{ fontSize: "0.85rem", color: "#64748B", lineHeight: 1.5, margin: 0 }}>
                 {desc}
               </p>
             </div>
@@ -342,28 +339,42 @@ export function BestFirmsClient({
 
       {/* 3. PRACTICE FILTER & FIRM DIRECTORY */}
       <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }} id="firms">
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 36px" }}>
+        <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 36px" }}>
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "8px",
+              gap: 8,
               background: "rgba(29, 78, 216, 0.08)",
               border: "1px solid rgba(29, 78, 216, 0.2)",
-              borderRadius: "100px",
-              padding: "4px 12px",
+              borderRadius: 100,
+              padding: "5px 14px",
               fontSize: "0.78rem",
-              fontWeight: 600,
+              fontWeight: 700,
               color: "#1D4ED8",
-              marginBottom: "10px",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              marginBottom: 12,
             }}
           >
-            Verified Boutique Directory
+            VERIFIED BOUTIQUE DIRECTORY
           </div>
-          <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: "0 0 10px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-            {city.name} Boutique Firms Meeting All 5 Standards
+          <h2
+            style={{
+              fontFamily: "var(--font-serif, Georgia, serif)",
+              fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+              color: "#08142A",
+              margin: "0 0 12px",
+              fontWeight: 700,
+              lineHeight: 1.2,
+            }}
+          >
+            {city.name} Boutique Firms{" "}
+            <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+              Meeting All 5 Standards
+            </span>
           </h2>
-          <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem" }}>
+          <p style={{ margin: 0, color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6 }}>
             Firm descriptors and practice parameters shown. Firm identities are revealed upon mutual candidate authorization.
           </p>
         </div>
@@ -442,47 +453,64 @@ export function BestFirmsClient({
 
       {/* 4. CURRENT ACTIVE ROLES IN CITY */}
       <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32, flexWrap: "wrap", gap: 14 }}>
-          <div>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                background: "rgba(29, 78, 216, 0.08)",
-                border: "1px solid rgba(29, 78, 216, 0.2)",
-                borderRadius: "100px",
-                padding: "4px 12px",
-                fontSize: "0.78rem",
-                fontWeight: 600,
-                color: "#1D4ED8",
-                marginBottom: "10px",
-              }}
-            >
-              Verified Openings
-            </div>
-            <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: 0, fontFamily: "var(--font-serif, Georgia, serif)" }}>
-              Active Lateral Seats at Top {city.name} Firms
-            </h2>
-          </div>
-          <Link
-            href={`/jobs/estate-planning-attorney/${city.slug}`}
+        <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 36px" }}>
+          <div
             style={{
-              fontSize: "0.95rem",
-              fontWeight: 600,
-              color: "#1D4ED8",
-              textDecoration: "none",
               display: "inline-flex",
               alignItems: "center",
-              gap: 4,
+              gap: 8,
+              background: "rgba(29, 78, 216, 0.08)",
+              border: "1px solid rgba(29, 78, 216, 0.2)",
+              borderRadius: 100,
+              padding: "5px 14px",
+              fontSize: "0.78rem",
+              fontWeight: 700,
+              color: "#1D4ED8",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              marginBottom: 12,
             }}
           >
-            <span>Explore All {city.name} Openings</span>
-            <span aria-hidden="true">→</span>
-          </Link>
+            VERIFIED OPENINGS · {city.name.toUpperCase()}
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif, Georgia, serif)",
+              fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+              color: "#08142A",
+              margin: "0 0 12px",
+              fontWeight: 700,
+              lineHeight: 1.2,
+            }}
+          >
+            Active Lateral Seats at Top{" "}
+            <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+              {city.name} Firms
+            </span>
+          </h2>
+          <p style={{ color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6, margin: "0 0 16px" }}>
+            Live, confirmed opportunities at boutique and mid-size firms passing our retention benchmark.
+          </p>
+          <div>
+            <Link
+              href={`/jobs/estate-planning-attorney/${city.slug}`}
+              style={{
+                fontSize: "0.95rem",
+                fontWeight: 600,
+                color: "#1D4ED8",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              <span>Explore All {city.name} Openings</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
 
-        <div style={{ display: "grid", gap: 20 }}>
+        <div className="bf-jobs-grid">
           {cityJobs.map((job) => (
             <JobCard key={job.id} job={job} />
           ))}
@@ -498,23 +526,37 @@ export function BestFirmsClient({
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "8px",
+                  gap: 8,
                   background: "rgba(29, 78, 216, 0.08)",
                   border: "1px solid rgba(29, 78, 216, 0.2)",
-                  borderRadius: "100px",
-                  padding: "4px 12px",
+                  borderRadius: 100,
+                  padding: "5px 14px",
                   fontSize: "0.78rem",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: "#1D4ED8",
-                  marginBottom: "10px",
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  marginBottom: 12,
                 }}
               >
-                Confidential Placement
+                CONFIDENTIAL PLACEMENT
               </div>
-              <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: "0 0 12px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                Target Specific {city.name} Boutique Firms
+              <h2
+                style={{
+                  fontFamily: "var(--font-serif, Georgia, serif)",
+                  fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+                  color: "#08142A",
+                  margin: "0 0 12px",
+                  fontWeight: 700,
+                  lineHeight: 1.2,
+                }}
+              >
+                Target Specific{" "}
+                <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                  {city.name} Boutique Firms
+                </span>
               </h2>
-              <p style={{ color: "#64748B", fontSize: "1.02rem", lineHeight: 1.6, margin: 0 }}>
+              <p style={{ color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6, margin: 0 }}>
                 Interested in discreetly exploring opportunities with one of our indexed firms? Orion founder Justin connects senior associates and partners off-market without public exposure.
               </p>
             </div>
