@@ -144,8 +144,30 @@ export default function SubmitJobPage() {
         .sj-two-col {
           display: grid;
           grid-template-columns: 1.25fr 0.75fr;
-          gap: 36px;
+          gap: 32px;
           align-items: start;
+        }
+        .sj-benchmark-grid {
+          display: grid;
+          grid-template-columns: 1.1fr 1.4fr 1.2fr;
+          gap: 24px;
+          align-items: center;
+        }
+        @media (max-width: 960px) {
+          .sj-benchmark-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          .sj-benchmark-grid > div {
+            border-right: none !important;
+            border-bottom: 1px solid #E2E8F0 !important;
+            padding-right: 0 !important;
+            padding-bottom: 16px;
+          }
+          .sj-benchmark-grid > div:last-child {
+            border-bottom: none !important;
+            padding-bottom: 0;
+          }
         }
         .sj-chip {
           padding: 7px 14px;
@@ -893,80 +915,94 @@ export default function SubmitJobPage() {
           </p>
         </div>
 
-        <div className="sj-two-col">
-          {/* Left Column: Compensation Check & Candidate Dossiers */}
-          <div>
-            {/* Pay Check Card */}
-            <div
-              style={{
-                background: "#FFFFFF",
-                border: "1.5px solid #E2E8F0",
-                borderRadius: 14,
-                padding: "26px 28px",
-                boxShadow: "0 4px 20px rgba(8, 20, 42, 0.04)",
-                marginBottom: 32,
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                <div>
-                  <span style={{ fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#1D4ED8" }}>
-                    Compensation Benchmark
-                  </span>
-                  <h3 style={{ fontSize: "1.2rem", fontWeight: 600, color: "#08142A", margin: "2px 0 0", fontFamily: "var(--display)" }}>
-                    {roleObj.name} in {cityObj.name}
-                  </h3>
-                </div>
-                <span style={{ fontSize: 11.5, background: "#EFF6FF", color: "#1D4ED8", padding: "4px 10px", borderRadius: 100, fontWeight: 700, fontFamily: "var(--mono)" }}>
-                  Texas Market Data
+        {/* COMPACT HORIZONTAL COMPENSATION INTELLIGENCE BAR */}
+        <div
+          style={{
+            background: "#FFFFFF",
+            border: "1.5px solid #E2E8F0",
+            borderRadius: 14,
+            padding: "22px 28px",
+            boxShadow: "0 4px 20px rgba(8, 20, 42, 0.04)",
+            marginBottom: 32,
+          }}
+        >
+          <div className="sj-benchmark-grid">
+            {/* COLUMN 1: ROLE, MARKET & EXPERIENCED SENIORITY */}
+            <div style={{ borderRight: "1px solid #E2E8F0", paddingRight: 20 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                <span style={{ fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#1D4ED8" }}>
+                  Market Benchmark
+                </span>
+                <span style={{ fontSize: 10.5, background: "#EFF6FF", color: "#1D4ED8", padding: "2px 7px", borderRadius: 4, fontWeight: 700, fontFamily: "var(--mono)" }}>
+                  Texas Percentiles
                 </span>
               </div>
+              <h3 style={{ fontSize: 17, fontWeight: 600, color: "#08142A", margin: "0 0 3px", fontFamily: "var(--display)" }}>
+                {roleObj.name}
+              </h3>
+              <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
+                {cityObj.name}, TX · {expBandObj?.label || "Any Experience"}
+              </p>
+            </div>
 
+            {/* COLUMN 2: SALARY BAND BAR & PERCENTILES */}
+            <div style={{ borderRight: "1px solid #E2E8F0", paddingRight: 20 }}>
               {!lo && !hi ? (
-                <div style={{ padding: "20px", background: "#F8FAFC", borderRadius: 8, textAlign: "center", color: "#64748B", fontSize: "0.92rem" }}>
-                  Enter your target base salary above to benchmark your mandate against current Texas law firm placements.
+                <div style={{ fontSize: 13, color: "#64748B", lineHeight: 1.5 }}>
+                  Set your base salary range in the console above to check Texas market percentiles.
                 </div>
               ) : !band ? (
-                <div style={{ padding: "20px", background: "#F8FAFC", borderRadius: 8, color: "#475569", fontSize: "0.92rem" }}>
-                  <b>Pay check for {roleObj.short} in {cityObj.name}</b><br />
-                  Justin will include customized pay data for this specific market with your matches.
+                <div style={{ fontSize: 13, color: "#64748B" }}>
+                  Customized market data will be provided with your dossiers.
                 </div>
               ) : (
-                <>
-                  <p style={{ fontSize: 13, color: "#64748B", margin: "0 0 16px" }}>
-                    Base salary ranges across 25th, median (50th), and 75th percentiles:
-                  </p>
+                <div>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5, fontFamily: "var(--mono)", color: "#64748B", marginBottom: 6 }}>
+                    <span>25th: {fmt.k(expRange![0])}</span>
+                    <span style={{ color: "#08142A", fontWeight: 700 }}>Median: {fmt.k(Math.round((expRange![0] + expRange![1]) / 2))}</span>
+                    <span>75th: {fmt.k(expRange![1])}</span>
+                  </div>
                   <SalaryBandBar
                     citySlug={selectedCity}
                     roleSlug={selectedRole}
                     highlight={expBandKey}
                     marker={lo && hi ? (lo + hi) / 2 : lo || hi || undefined}
                   />
-
-                  {payVerdict && (
-                    <div
-                      style={{
-                        marginTop: 20,
-                        padding: "16px 20px",
-                        borderRadius: 10,
-                        background: payVerdict.where === "in" ? "#ECFDF5" : payVerdict.where === "above" ? "#EFF6FF" : "#FFFBEB",
-                        border: `1.5px solid ${payVerdict.where === "in" ? "#A7F3D0" : payVerdict.where === "above" ? "#BFDBFE" : "#FDE68A"}`,
-                        color: payVerdict.where === "in" ? "#065F46" : payVerdict.where === "above" ? "#1E40AF" : "#92400E",
-                      }}
-                    >
-                      <div style={{ fontWeight: 700, fontSize: "0.95rem", marginBottom: 4 }}>
-                        Your posted range ({payVerdict.rangeText}) is {payVerdict.where === "in" ? "in line with" : payVerdict.where} the Texas median.
-                      </div>
-                      <div style={{ fontSize: "0.88rem", lineHeight: 1.5 }}>
-                        The market range for {expBandObj?.label} in {cityObj.name} is {fmt.range(expRange!)}. {payVerdict.advice}
-                      </div>
-                    </div>
-                  )}
-                </>
+                </div>
               )}
             </div>
 
-            {/* Matched Candidate Dossiers */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 20 }}>
+            {/* COLUMN 3: COMPETITIVENESS VERDICT & ADVICE */}
+            <div>
+              {payVerdict ? (
+                <div
+                  style={{
+                    background: payVerdict.where === "in" ? "#ECFDF5" : payVerdict.where === "above" ? "#EFF6FF" : "#FFFBEB",
+                    border: `1.5px solid ${payVerdict.where === "in" ? "#A7F3D0" : payVerdict.where === "above" ? "#BFDBFE" : "#FDE68A"}`,
+                    borderRadius: 8,
+                    padding: "10px 14px",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontWeight: 700, fontSize: 12.5, color: payVerdict.where === "in" ? "#065F46" : payVerdict.where === "above" ? "#1E40AF" : "#92400E", marginBottom: 3 }}>
+                    <span>{payVerdict.where === "in" ? "✓ In Line with Market Median" : payVerdict.where === "above" ? "★ Premium Range" : "⚠ Below Market Median"}</span>
+                  </div>
+                  <p style={{ fontSize: 12, lineHeight: 1.45, color: payVerdict.where === "in" ? "#047857" : payVerdict.where === "above" ? "#1D4ED8" : "#B45309", margin: 0 }}>
+                    {payVerdict.advice}
+                  </p>
+                </div>
+              ) : (
+                <div style={{ fontSize: 12.5, color: "#64748B", lineHeight: 1.5 }}>
+                  Enter base salary to preview candidate response expectations.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="sj-two-col">
+          {/* Left Column: Matched Candidate Dossiers */}
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 18, borderBottom: "1.5px solid #E2E8F0", paddingBottom: 12 }}>
               <div>
                 <h3 style={{ fontSize: "1.35rem", fontWeight: 600, color: "#08142A", margin: 0, fontFamily: "var(--display)" }}>
                   {matches.length ? (
@@ -977,12 +1013,30 @@ export default function SubmitJobPage() {
                     "No Exact Matches in Current Immediate Pool"
                   )}
                 </h3>
-                <span style={{ fontSize: "0.88rem", color: "#64748B", display: "block", marginTop: 4 }}>
+                <span style={{ fontSize: "0.85rem", color: "#64748B", display: "block", marginTop: 4 }}>
                   {matches.length
-                    ? "Verified lateral attorney dossiers meeting your seat specifications"
+                    ? "Click any candidate card below to select for confidential resume delivery"
                     : "We actively search our 100,000+ attorney network for specific requirements."}
                 </span>
               </div>
+              {requestedId && (
+                <button
+                  type="button"
+                  onClick={() => setRequestedId(null)}
+                  style={{
+                    background: "#F1F5F9",
+                    border: "1px solid #CBD5E1",
+                    borderRadius: 6,
+                    padding: "4px 10px",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: "#475569",
+                    cursor: "pointer",
+                  }}
+                >
+                  Clear Selection (Request All)
+                </button>
+              )}
             </div>
 
             {!matches.length ? (
@@ -996,12 +1050,12 @@ export default function SubmitJobPage() {
                 <a
                   href="#gate"
                   style={{
-                    background: "#08142A",
+                    background: "#1D4ED8",
                     color: "#FFFFFF",
-                    padding: "10px 20px",
+                    padding: "11px 22px",
                     borderRadius: 7,
                     fontWeight: 600,
-                    fontSize: "0.88rem",
+                    fontSize: 14,
                     textDecoration: "none",
                     display: "inline-block",
                   }}
@@ -1010,16 +1064,19 @@ export default function SubmitJobPage() {
                 </a>
               </div>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 {matches.map((r) => (
                   <CandidateCard
                     key={r.c.id}
                     candidate={r.c}
                     result={r}
-                    onRequest={(cid) => {
-                      setRequestedId(cid);
+                    selected={requestedId === r.c.id}
+                    onSelect={(cand) => {
+                      setRequestedId(requestedId === cand.id ? null : cand.id);
                       const gateEl = document.getElementById("gate");
-                      if (gateEl) gateEl.scrollIntoView({ behavior: "smooth" });
+                      if (gateEl) {
+                        gateEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                      }
                     }}
                   />
                 ))}
@@ -1034,24 +1091,65 @@ export default function SubmitJobPage() {
                 background: "#FFFFFF",
                 border: "1.5px solid #E2E8F0",
                 borderRadius: 14,
-                padding: "32px 28px",
+                padding: "28px 26px",
                 boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
               }}
             >
+              {requestedId && (
+                <div
+                  style={{
+                    background: "#EFF6FF",
+                    border: "1px solid #BFDBFE",
+                    borderRadius: 8,
+                    padding: "8px 12px",
+                    marginBottom: 16,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <span style={{ fontSize: 12, fontFamily: "var(--mono)", color: "#1D4ED8", fontWeight: 700 }}>
+                    Target Candidate: {requestedId}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setRequestedId(null)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#1D4ED8",
+                      fontSize: 12,
+                      cursor: "pointer",
+                      textDecoration: "underline",
+                      padding: 0,
+                      fontWeight: 600,
+                    }}
+                  >
+                    Reset
+                  </button>
+                </div>
+              )}
+
               <GateForm
                 id="submit-job-gate"
-                eyebrow={matches.length ? `Review All ${matches.length} Matches` : "Submit Mandate"}
+                eyebrow={requestedId ? `Candidate ${requestedId} Selected` : matches.length ? `Review All ${matches.length} Matches` : "Submit Mandate"}
                 title={
                   requestedId
                     ? `Request Confidential Dossier for ${requestedId}`
-                    : "Send Mandate to Justin Sofman"
+                    : `Request All ${matches.length} Candidate Profiles`
                 }
                 bullets={[
-                  `Full redacted resumes for ${matches.length ? "every matching candidate" : "candidates in our active network"}`,
+                  requestedId
+                    ? `Complete redacted resume and verified compensation history for ${requestedId}`
+                    : `Full redacted resumes for all ${matches.length} matching candidates`,
                   "Verified compensation expectations, notice periods, and bar admission standing",
                   "One-page contingency terms (23% fee due only if you hire). Zero upfront cost.",
                 ]}
-                button="Deliver Candidate Dossiers"
+                button={
+                  requestedId
+                    ? `Deliver Dossier (${requestedId})`
+                    : `Deliver All ${matches.length} Candidate Profiles`
+                }
                 ids={candidateIds}
                 role={selectedRole}
                 city={selectedCity}
