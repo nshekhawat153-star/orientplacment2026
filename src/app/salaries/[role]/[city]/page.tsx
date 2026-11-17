@@ -1,5 +1,5 @@
 import { bands } from "@/data";
-import SalaryLeafClient from "./client";
+import SalaryLeafClient from "./SalaryLeafClient";
 
 export async function generateStaticParams() {
   const params: { role: string; city: string }[] = [];

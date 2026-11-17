@@ -54,16 +54,17 @@ export default async function CityLocationPage({ params }: PageProps) {
 
   return (
     <div className="city-location-page" style={{ background: "#FAF9F5", color: "#08142A" }}>
-      {/* 1. LUXURY HERO WITH VIDEO & 2-COLUMN REGIONAL SNAPSHOT */}
+      {/* 1. LUXURY DARK HERO (CENTERED, NO CARD) */}
       <section
         className="emp-luxury-hero-sec city-location-hero"
         aria-labelledby="city-hero-h1"
         style={{
           position: "relative",
-          background: "#08142A",
+          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
           color: "#FFFFFF",
           padding: "124px 0 76px",
           overflow: "hidden",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
         <div className="emp-hero-video-wrap" aria-hidden="true">
@@ -80,167 +81,193 @@ export default async function CityLocationPage({ params }: PageProps) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              opacity: 0.22,
+              opacity: 0.18,
             }}
           >
             <source src="/media/splash.mp4" type="video/mp4" />
           </video>
-          <div
-            className="emp-hero-overlay"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: "linear-gradient(180deg, rgba(8,20,42,0.85) 0%, rgba(8,20,42,0.96) 100%)",
-            }}
-          />
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Regional Markets", href: "/find-candidates" },
-                { label: `${city.name}, ${city.state}`, current: true },
-              ]}
-            />
+        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 960, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+          {/* Badge Capsule */}
+          <div className="emp-hero-badge-wrap" style={{ marginBottom: 18 }}>
+            <div
+              className="badge-capsule"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.15)",
+                border: "1px solid rgba(96, 165, 250, 0.3)",
+                borderRadius: 999,
+                padding: "6px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#93C5FD",
+              }}
+            >
+              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span>REGIONAL LEGAL SEARCH · {city.name.toUpperCase()}, {city.stateName.toUpperCase()}</span>
+            </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 40, alignItems: "center" }}>
-            {/* Left Column: Heading & Executive Value */}
-            <div>
-              <div className="emp-hero-badge-wrap" style={{ marginBottom: 16 }}>
-                <div
-                  className="badge-capsule"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.08)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    borderRadius: 999,
-                    padding: "6px 14px",
-                    fontFamily: "var(--mono)",
-                    fontSize: 11,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#93C5FD",
-                  }}
-                >
-                  <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                  <span>REGIONAL LEGAL SEARCH · {city.name.toUpperCase()}, {city.stateName.toUpperCase()}</span>
-                </div>
-              </div>
+          <h1
+            id="city-hero-h1"
+            className="emp-hero-h1"
+            style={{
+              fontFamily: "var(--display)",
+              fontSize: "clamp(34px, 4.4vw, 54px)",
+              lineHeight: 1.15,
+              fontWeight: 500,
+              color: "#FFFFFF",
+              letterSpacing: "-0.02em",
+              margin: "0 0 18px",
+            }}
+          >
+            Legal recruiters in{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              {city.name}
+            </span>
+          </h1>
 
-              <h1
-                id="city-hero-h1"
-                className="emp-hero-h1"
-                style={{
-                  fontFamily: "var(--display)",
-                  fontSize: "clamp(34px, 4.4vw, 52px)",
-                  lineHeight: 1.12,
-                  fontWeight: 500,
-                  color: "#FFFFFF",
-                  margin: "0 0 18px",
-                }}
-              >
-                Legal recruiters in{" "}
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  {city.name}
-                </span>
-              </h1>
+          <p
+            className="emp-hero-lead"
+            style={{
+              fontSize: 16.5,
+              lineHeight: 1.6,
+              color: "#CBD5E1",
+              maxWidth: 680,
+              margin: "0 auto 30px",
+            }}
+          >
+            Screened {city.name} attorneys and paralegals available for confidential interviews. Verified local law firm compensation data, and one fee only if you hire.
+          </p>
 
-              <p
-                className="emp-hero-lead"
-                style={{
-                  fontSize: 17,
-                  lineHeight: 1.6,
-                  color: "#CBD5E1",
-                  maxWidth: 580,
-                  margin: "0 0 28px",
-                }}
-              >
-                Screened {city.name} attorneys and paralegals available for confidential interviews. Verified local law firm compensation data, and one fee only if you hire.
-              </p>
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 30 }}>
+            <Link
+              className="btn-emp-primary"
+              href={`/find-candidates#city=${city.slug}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 28px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+              }}
+            >
+              <span>See {city.name} candidates</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link
+              className="btn-emp-ghost"
+              href={`/jobs/estate-planning-attorney/${city.slug}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 24px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Browse {city.name} legal jobs ({cityJobsCount})</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <a
+              className="btn-emp-ghost"
+              href="#snapshot"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 24px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Market snapshot</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
 
-              <div style={{ display: "grid", gap: 10, marginBottom: 30 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Pre-screened {city.name} lateral attorney &amp; paralegal pool</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>100% contingency: 23% fee due only if you hire</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>90-day replacement warranty with zero upfront retainers</span>
-                </div>
-              </div>
-
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-                <Link
-                  className="btn-emp-primary"
-                  href={`/find-candidates#city=${city.slug}`}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#1D4ED8",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 26px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>See {city.name} candidates</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-                <Link
-                  className="btn-emp-ghost"
-                  href={`/jobs/estate-planning-attorney/${city.slug}`}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 24px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>Browse {city.name} legal jobs ({cityJobsCount})</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </div>
+          {/* Micro Reassurances */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "16px 24px", color: "rgba(255, 255, 255, 0.75)", fontSize: "0.85rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA" }}>✓</span> Pre-screened {city.name} lateral attorney &amp; paralegal pool
             </div>
-
-            {/* Right Column: Elevated City Snapshot Terminal */}
-            <div>
-              <div
-                style={{
-                  background: "#FFFFFF",
-                  border: "1.5px solid #E2E8F0",
-                  borderRadius: 14,
-                  padding: "24px",
-                  boxShadow: "0 24px 60px -12px rgba(0, 0, 0, 0.55)",
-                  color: "#08142A",
-                  textAlign: "left",
-                }}
-              >
-                <CitySnapshot citySlug={city.slug} />
-              </div>
+            <span>•</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA" }}>✓</span> 100% contingency: 23% fee due only if you hire
             </div>
+            <span>•</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA" }}>✓</span> 90-day replacement warranty with zero upfront retainers
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 1.5. LOCAL MARKET SNAPSHOT (ELEVATED VISUALIZER SECTION) */}
+      <section id="snapshot" style={{ background: "#FFFFFF", padding: "76px 0 88px", borderBottom: "1px solid #E2E8F0" }}>
+        <div style={{ maxWidth: 1080, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 36px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.08)",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
+                borderRadius: 100,
+                padding: "5px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 12,
+              }}
+            >
+              MARKET OVERVIEW
+            </div>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "0 0 12px", fontWeight: 500 }}>
+              {city.name} Legal Market <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Snapshot</span>
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+              Active talent pool density, open lateral search mandates, and market compensation indicators across {city.name}.
+            </p>
+          </div>
+
+          <div
+            style={{
+              background: "#FAF9F5",
+              border: "1.5px solid #EAE7DC",
+              borderRadius: 16,
+              padding: "32px",
+              boxShadow: "0 8px 30px rgba(8, 20, 42, 0.04)",
+              color: "#08142A",
+            }}
+          >
+            <CitySnapshot citySlug={city.slug} />
           </div>
         </div>
       </section>
@@ -248,41 +275,61 @@ export default async function CityLocationPage({ params }: PageProps) {
       {/* 2. AVAILABLE CANDIDATES IN METRO */}
       <section className="emp-process-sec" id="candidates" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 36, flexWrap: "wrap", gap: 14 }}>
-            <div>
-              <span
-                className="eyebrow"
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 12,
-                  color: "#1D4ED8",
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  display: "block",
-                  marginBottom: 8,
-                }}
-              >
-                ACTIVE {city.name.toUpperCase()} TALENT
-              </span>
-              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: 0, fontWeight: 500 }}>
-                Pre-screened candidates open to <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>{city.name}</span> seats
-              </h2>
-            </div>
-            <Link
-              className="more link-arrow hide-sm"
-              href={`/find-candidates#city=${city.slug}`}
-              style={{ fontSize: 14, fontWeight: 600, color: "#1D4ED8", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 36px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.08)",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
+                borderRadius: 100,
+                padding: "5px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 10,
+              }}
             >
-              <span>View all {city.name} candidates</span>
-              <span aria-hidden="true">→</span>
-            </Link>
+              ACTIVE {city.name.toUpperCase()} TALENT
+            </div>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "0 0 10px", fontWeight: 500 }}>
+              Pre-screened candidates open to <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>{city.name}</span> seats
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+              Screened attorneys and paralegals currently open to discreet lateral conversations in {city.name}.
+            </p>
           </div>
 
-          <div className="cards" style={{ display: "grid", gap: 20 }}>
+          <div className="cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
             {cityCandidates.map((r) => (
               <CandidateCard key={r.c.id} candidate={r.c} result={r} />
             ))}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <Link
+              href={`/find-candidates#city=${city.slug}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "12px 26px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.3)",
+              }}
+            >
+              <span>View all pre-screened {city.name} candidates</span>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>

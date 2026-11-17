@@ -79,16 +79,17 @@ export default async function RolePage({ params }: PageProps) {
 
   return (
     <div className="role-hub-page" style={{ background: "#FAF9F5", color: "#08142A" }}>
-      {/* 1. LUXURY HERO WITH VIDEO & 2-COLUMN NATIONAL COMPENSATION TERMINAL */}
+      {/* 1. LUXURY DARK HERO (CENTERED, NO CARD) */}
       <section
         className="emp-luxury-hero-sec role-hub-hero"
         aria-labelledby="role-hero-h1"
         style={{
           position: "relative",
-          background: "#08142A",
+          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
           color: "#FFFFFF",
           padding: "124px 0 76px",
           overflow: "hidden",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
         <div className="emp-hero-video-wrap" aria-hidden="true">
@@ -105,275 +106,319 @@ export default async function RolePage({ params }: PageProps) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              opacity: 0.22,
+              opacity: 0.18,
             }}
           >
             <source src="/media/splash.mp4" type="video/mp4" />
           </video>
-          <div
-            className="emp-hero-overlay"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: "linear-gradient(180deg, rgba(8,20,42,0.85) 0%, rgba(8,20,42,0.96) 100%)",
-            }}
-          />
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Practice Specializations", href: "/find-candidates" },
-                { label: role.name, current: true },
-              ]}
-            />
+        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 960, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+          {/* Badge Capsule */}
+          <div className="emp-hero-badge-wrap" style={{ marginBottom: 18 }}>
+            <div
+              className="badge-capsule"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.15)",
+                border: "1px solid rgba(96, 165, 250, 0.3)",
+                borderRadius: 999,
+                padding: "6px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#93C5FD",
+              }}
+            >
+              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span>PRACTICE SPECIALIZATION · NATIONAL DIRECTORY</span>
+            </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 40, alignItems: "center" }}>
-            {/* Left Column: Heading & Executive Metrics */}
-            <div>
-              <div className="emp-hero-badge-wrap" style={{ marginBottom: 16 }}>
-                <div
-                  className="badge-capsule"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.08)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    borderRadius: 999,
-                    padding: "6px 14px",
-                    fontFamily: "var(--mono)",
-                    fontSize: 11,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#93C5FD",
-                  }}
-                >
-                  <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                  <span>PRACTICE SPECIALIZATION · NATIONAL DIRECTORY</span>
-                </div>
-              </div>
+          <h1
+            id="role-hero-h1"
+            className="emp-hero-h1"
+            style={{
+              fontFamily: "var(--display)",
+              fontSize: "clamp(34px, 4.4vw, 54px)",
+              lineHeight: 1.15,
+              fontWeight: 500,
+              color: "#FFFFFF",
+              letterSpacing: "-0.02em",
+              margin: "0 0 18px",
+            }}
+          >
+            {role.name}:{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              Salary, Hiring &amp; Jobs
+            </span>
+          </h1>
 
-              <h1
-                id="role-hero-h1"
-                className="emp-hero-h1"
-                style={{
-                  fontFamily: "var(--display)",
-                  fontSize: "clamp(34px, 4.4vw, 52px)",
-                  lineHeight: 1.12,
-                  fontWeight: 500,
-                  color: "#FFFFFF",
-                  margin: "0 0 18px",
-                }}
-              >
-                {role.name}:{" "}
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  Salary, Hiring &amp; Jobs
+          <div style={{ display: "inline-flex", alignItems: "baseline", justifyContent: "center", gap: 14, marginBottom: 18, background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: 12, padding: "12px 24px" }}>
+            <span style={{ fontFamily: "var(--display)", fontSize: "clamp(38px, 4.5vw, 52px)", fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>
+              {fmt.k(natMedian)}
+            </span>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 12.5, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>
+              National Median Base Salary across US legal markets
+            </span>
+          </div>
+
+          <p
+            className="emp-hero-lead"
+            style={{
+              fontSize: 16.5,
+              lineHeight: 1.6,
+              color: "#CBD5E1",
+              maxWidth: 680,
+              margin: "0 auto 30px",
+            }}
+          >
+            National compensation intelligence, turnkey law firm hiring templates, and active pre-screened lateral attorney candidates across all major regional legal markets.
+          </p>
+
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 30 }}>
+            <Link
+              className="btn-emp-primary"
+              href={`/find-candidates#role=${role.slug}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 28px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+              }}
+            >
+              <span>See {role.short} candidates</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <a
+              className="btn-emp-ghost"
+              href="#band"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 24px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>National pay band</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              className="btn-emp-ghost"
+              href="#kit"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 24px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Get hiring kit</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          {/* Micro Reassurances */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "16px 24px", color: "rgba(255, 255, 255, 0.75)", fontSize: "0.85rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA" }}>✓</span> {cityBands.length} US metro legal markets benchmarked
+            </div>
+            <span>•</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA" }}>✓</span> Verified prevailing offers updated quarterly ({asOf})
+            </div>
+            <span>•</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA" }}>✓</span> Turnkey partner interview kits &amp; scorecards
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 1.5. NATIONAL COMPENSATION BAND (ELEVATED VISUALIZER SECTION) */}
+      <section id="band" style={{ background: "#FFFFFF", padding: "76px 0 88px", borderBottom: "1px solid #E2E8F0" }}>
+        <div style={{ maxWidth: 1080, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 36px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.08)",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
+                borderRadius: 100,
+                padding: "5px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 12,
+              }}
+            >
+              BENCHMARK INTELLIGENCE
+            </div>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "0 0 12px", fontWeight: 500 }}>
+              National Compensation <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Band</span>
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+              Prevailing interquartile base salary by experience level across covered US metropolitan legal markets.
+            </p>
+          </div>
+
+          <div
+            style={{
+              background: "#FAF9F5",
+              border: "1.5px solid #EAE7DC",
+              borderRadius: 16,
+              padding: "36px 32px",
+              boxShadow: "0 8px 30px rgba(8, 20, 42, 0.04)",
+              color: "#08142A",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
+                borderBottom: "1.5px solid #E2E8F0",
+                paddingBottom: 16,
+                marginBottom: 24,
+                flexWrap: "wrap",
+                gap: 12,
+              }}
+            >
+              <div>
+                <span style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", fontWeight: 600, display: "block" }}>
+                  {role.name} National Interquartile Spread
                 </span>
-              </h1>
-
-              <p
-                className="emp-hero-lead"
+                <span style={{ fontSize: 13.5, color: "#64748B" }}>
+                  25th to 75th percentile base compensation by years post-bar
+                </span>
+              </div>
+              <span
                 style={{
-                  fontSize: 17,
-                  lineHeight: 1.6,
-                  color: "#CBD5E1",
-                  maxWidth: 580,
-                  margin: "0 0 28px",
+                  fontFamily: "var(--mono)",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "#1D4ED8",
+                  background: "#EFF6FF",
+                  padding: "5px 10px",
+                  borderRadius: 6,
+                  border: "1px solid #DBEAFE",
                 }}
               >
-                National compensation intelligence, turnkey law firm hiring templates, and active pre-screened lateral attorney candidates across all major regional legal markets.
-              </p>
-
-              <div style={{ display: "grid", gap: 10, marginBottom: 30 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>{cityBands.length} US metro legal markets quarterly benchmarked</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Verified prevailing offers updated quarterly ({asOf})</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Turnkey partner interview kits &amp; weighted scorecards</span>
-                </div>
-              </div>
-
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-                <Link
-                  className="btn-emp-primary"
-                  href={`/find-candidates#role=${role.slug}`}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#1D4ED8",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 26px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>See {role.short} candidates</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-                <a
-                  className="btn-emp-ghost"
-                  href="#kit"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 24px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>Get turnkey hiring kit</span>
-                  <span aria-hidden="true">↓</span>
-                </a>
-              </div>
+                INTERQUARTILE RANGE
+              </span>
             </div>
 
-            {/* Right Column: Elevated National Band Terminal */}
-            <div>
+            <div id="nat-band" className="band-wrap" style={{ marginBottom: 20 }}>
               <div
-                style={{
-                  background: "#FFFFFF",
-                  border: "1.5px solid #E2E8F0",
-                  borderRadius: 14,
-                  padding: "28px 24px",
-                  boxShadow: "0 24px 60px -12px rgba(0, 0, 0, 0.55)",
-                  color: "#08142A",
-                  textAlign: "left",
-                }}
+                className="band"
+                role="img"
+                aria-label={`${role.name} national base salary by experience`}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "baseline",
-                    borderBottom: "1.5px solid #E2E8F0",
-                    paddingBottom: 14,
-                    marginBottom: 20,
-                  }}
-                >
-                  <div>
-                    <span style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", fontWeight: 600, display: "block" }}>
-                      National Compensation Band
-                    </span>
-                    <span style={{ fontSize: 13, color: "#64748B" }}>
-                      Prevailing base pay by experience level
-                    </span>
-                  </div>
-                  <span
-                    style={{
-                      fontFamily: "var(--mono)",
-                      fontSize: 10.5,
-                      fontWeight: 700,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      color: "#1D4ED8",
-                      background: "#EFF6FF",
-                      padding: "4px 8px",
-                      borderRadius: 4,
-                      border: "1px solid #DBEAFE",
-                    }}
-                  >
-                    INTERQUARTILE RANGE
-                  </span>
-                </div>
-
-                <div id="nat-band" className="band-wrap" style={{ marginBottom: 16 }}>
-                  <div
-                    className="band"
-                    role="img"
-                    aria-label={`${role.name} national base salary by experience`}
-                  >
-                    {expBands.map((e) => {
-                      const r = natBands[e.key] || [0, 0];
-                      const leftPos = x(r[0]);
-                      const widthPos = x(r[1]) - x(r[0]);
-                      return (
-                        <div
-                          key={e.key}
-                          className={`band-row ${e.key === "b2" ? "active" : ""}`}
-                          data-key={e.key}
-                        >
-                          <span className="lab" style={{ fontSize: 13, fontWeight: 600 }}>
-                            {e.label.replace(" years", "")}
-                            <span className="lab-long"> years</span>
-                            <span className="lab-short"> yrs</span>
-                          </span>
-                          <div className="track">
-                            {[0, 25, 50, 75, 100].map((p) => (
-                              <i key={p} className="gl" style={{ left: `${p}%` }} />
-                            ))}
-                            <span
-                              className="range"
-                              style={{ left: `${leftPos}%`, width: `${widthPos}%`, background: "#1D4ED8" }}
-                            />
-                          </div>
-                          <span className="val" style={{ fontFamily: "var(--mono)", fontSize: 13, fontWeight: 700 }}>
-                            <Mark>{fmt.range(r)}</Mark>
-                          </span>
-                        </div>
-                      );
-                    })}
-                    <div className="band-axis">
-                      <span />
-                      <div className="ticks">
+                {expBands.map((e) => {
+                  const r = natBands[e.key] || [0, 0];
+                  const leftPos = x(r[0]);
+                  const widthPos = x(r[1]) - x(r[0]);
+                  return (
+                    <div
+                      key={e.key}
+                      className={`band-row ${e.key === "b2" ? "active" : ""}`}
+                      data-key={e.key}
+                    >
+                      <span className="lab" style={{ fontSize: 13, fontWeight: 600 }}>
+                        {e.label.replace(" years", "")}
+                        <span className="lab-long"> years</span>
+                        <span className="lab-short"> yrs</span>
+                      </span>
+                      <div className="track">
                         {[0, 25, 50, 75, 100].map((p) => (
-                          <span key={p} className={`t${p}`} style={{ left: `${p}%`, fontFamily: "var(--mono)", fontSize: 11 }}>
-                            {fmt.k(lo + (span * p) / 100)}
-                          </span>
+                          <i key={p} className="gl" style={{ left: `${p}%` }} />
                         ))}
+                        <span
+                          className="range"
+                          style={{ left: `${leftPos}%`, width: `${widthPos}%`, background: "#1D4ED8" }}
+                        />
                       </div>
-                      <span />
+                      <span className="val" style={{ fontFamily: "var(--mono)", fontSize: 13, fontWeight: 700 }}>
+                        <Mark>{fmt.range(r)}</Mark>
+                      </span>
                     </div>
+                  );
+                })}
+                <div className="band-axis">
+                  <span />
+                  <div className="ticks">
+                    {[0, 25, 50, 75, 100].map((p) => (
+                      <span key={p} className={`t${p}`} style={{ left: `${p}%`, fontFamily: "var(--mono)", fontSize: 11 }}>
+                        {fmt.k(lo + (span * p) / 100)}
+                      </span>
+                    ))}
                   </div>
+                  <span />
                 </div>
-
-                <div
-                  style={{
-                    background: "#FAF9F5",
-                    border: "1px solid #EAE7DC",
-                    borderRadius: 8,
-                    padding: "12px 16px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: 14,
-                  }}
-                >
-                  <span style={{ fontSize: 13, color: "#64748B" }}>
-                    National Median Midpoint:
-                  </span>
-                  <span style={{ fontFamily: "var(--display)", fontSize: 24, fontWeight: 600, color: "#1D4ED8" }}>
-                    {fmt.k(natMedian)}
-                  </span>
-                </div>
-
-                <p style={{ fontSize: 12, color: "#64748B", margin: 0, lineHeight: 1.5 }}>
-                  Composite median calculated across all covered US metros. Source: {source}, updated {asOf}. Base salary only before discretionary bonuses.
-                </p>
               </div>
             </div>
+
+            <div
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid #E2E8F0",
+                borderRadius: 10,
+                padding: "16px 20px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: 12,
+                marginBottom: 16,
+              }}
+            >
+              <div>
+                <span style={{ fontSize: 13, color: "#64748B", display: "block" }}>
+                  Composite National Median Midpoint
+                </span>
+                <span style={{ fontSize: 12, color: "#94A3B8" }}>
+                  Across all covered US metro legal markets
+                </span>
+              </div>
+              <span style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#1D4ED8" }}>
+                {fmt.k(natMedian)}
+              </span>
+            </div>
+
+            <p style={{ fontSize: 12.5, color: "#64748B", margin: 0, lineHeight: 1.5 }}>
+              Composite median calculated across all covered US metros. Source: {source}, updated {asOf}. Base salary only before discretionary bonuses.
+            </p>
           </div>
         </div>
       </section>
@@ -425,41 +470,61 @@ export default async function RolePage({ params }: PageProps) {
       {/* 3. CANDIDATES AVAILABLE NOW */}
       <section className="emp-process-sec" id="candidates" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 36, flexWrap: "wrap", gap: 14 }}>
-            <div>
-              <span
-                className="eyebrow"
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 12,
-                  color: "#1D4ED8",
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  display: "block",
-                  marginBottom: 8,
-                }}
-              >
-                PRE-SCREENED TALENT
-              </span>
-              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: 0, fontWeight: 500 }}>
-                {role.name}s open to confidential moves
-              </h2>
-            </div>
-            <Link
-              className="more link-arrow hide-sm"
-              href={`/find-candidates#role=${role.slug}`}
-              style={{ fontSize: 14, fontWeight: 600, color: "#1D4ED8", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}
+          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 36px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.08)",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
+                borderRadius: 100,
+                padding: "5px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 10,
+              }}
             >
-              <span>Match candidates to your open seat</span>
-              <span aria-hidden="true">→</span>
-            </Link>
+              PRE-SCREENED TALENT
+            </div>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "0 0 10px", fontWeight: 500 }}>
+              {role.name}s open to <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>confidential moves</span>
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+              Pre-vetted candidates actively exploring boutique and mid-size opportunities.
+            </p>
           </div>
 
-          <div className="cards" style={{ display: "grid", gap: 20 }}>
+          <div className="cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
             {roleCandidates.map((r) => (
               <CandidateCard key={r.c.id} candidate={r.c} result={r} />
             ))}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <Link
+              href={`/find-candidates#role=${role.slug}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "12px 26px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.3)",
+              }}
+            >
+              <span>Match all {role.name} candidates to your open seat</span>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>
