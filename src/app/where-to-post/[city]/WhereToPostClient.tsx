@@ -71,6 +71,12 @@ export function WhereToPostClient({
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 16px;
         }
+        .wtp-candidates-row {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 22px;
+          align-items: stretch;
+        }
         .wtp-roi-grid {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -79,6 +85,7 @@ export function WhereToPostClient({
         @media (max-width: 960px) {
           .wtp-split-grid { grid-template-columns: 1fr; }
           .wtp-checklist-grid { grid-template-columns: 1fr; }
+          .wtp-candidates-row { grid-template-columns: 1fr; }
           .wtp-roi-grid { grid-template-columns: 1fr; }
         }
       `}</style>
@@ -213,62 +220,6 @@ export function WhereToPostClient({
             >
               Compare All 6 Job Boards ↓
             </a>
-          </div>
-
-          {/* Sleek Horizontal Benchmark Intelligence Strip (Replaces Clunky Right Card) */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-              gap: 16,
-              background: "rgba(255, 255, 255, 0.04)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-              borderRadius: 14,
-              padding: "20px 24px",
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-              maxWidth: "920px",
-              margin: "0 auto 36px",
-              textAlign: "left",
-            }}
-            className="hero-intel-strip"
-          >
-            <div style={{ padding: "0 8px" }}>
-              <div style={{ fontSize: "1.7rem", fontWeight: 800, color: "#FFFFFF", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                6
-              </div>
-              <div style={{ fontSize: "0.78rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4, fontWeight: 600 }}>
-                Channels Benchmarked
-              </div>
-            </div>
-
-            <div style={{ padding: "0 8px", borderLeft: "1px solid rgba(255, 255, 255, 0.1)" }}>
-              <div style={{ fontSize: "1.7rem", fontWeight: 800, color: "#60A5FA", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                $250–$500
-              </div>
-              <div style={{ fontSize: "0.78rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4, fontWeight: 600 }}>
-                Avg Upfront Board Fee
-              </div>
-            </div>
-
-            <div style={{ padding: "0 8px", borderLeft: "1px solid rgba(255, 255, 255, 0.1)" }}>
-              <div style={{ fontSize: "1.7rem", fontWeight: 800, color: "#34D399", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                {screenedCount}
-              </div>
-              <div style={{ fontSize: "0.78rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4, fontWeight: 600 }}>
-                Pre-Screened Lateral Candidates
-              </div>
-            </div>
-
-            <div style={{ padding: "0 8px", borderLeft: "1px solid rgba(255, 255, 255, 0.1)" }}>
-              <div style={{ fontSize: "1.7rem", fontWeight: 800, color: "#93C5FD", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                $0
-              </div>
-              <div style={{ fontSize: "0.78rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4, fontWeight: 600 }}>
-                Orion Upfront Retainer
-              </div>
-            </div>
           </div>
 
           <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 20 }}>
@@ -518,7 +469,7 @@ export function WhereToPostClient({
             </Link>
           </div>
 
-          <div style={{ display: "grid", gap: 20 }}>
+          <div className="wtp-candidates-row">
             {candidates.map((candidate) => candidate && (
               <CandidateCard key={candidate.id} candidate={candidate} />
             ))}
