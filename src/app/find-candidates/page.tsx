@@ -77,8 +77,7 @@ export default function FindCandidatesPage() {
     must: selectedMust,
   });
 
-  const openCards = unlocked ? results : results.slice(0, 3);
-  const lockedCards = unlocked ? [] : results.slice(3);
+  const openCards = results;
 
   const handleRequestProfile = (id: string) => {
     setSelectedIds([id]);
@@ -660,13 +659,7 @@ export default function FindCandidatesPage() {
               letterSpacing: "0.06em",
             }}
           >
-            {results.length
-              ? unlocked
-                ? "ALL DOSSIERS UNLOCKED"
-                : results.length > 3
-                ? `TOP 3 OPEN · ${results.length - 3} MORE BY EMAIL`
-                : "VERIFIED DOSSIERS"
-              : ""}
+            {results.length ? "PRE-SCREENED TALENT · 100% CONFIDENTIAL" : ""}
           </span>
         </div>
 
@@ -816,15 +809,11 @@ export default function FindCandidatesPage() {
             <div id="gate" style={{ marginTop: 52 }}>
               <GateForm
                 id="finder-gate"
-                eyebrow={
-                  results.length > 3
-                    ? `See all ${results.length} candidates`
-                    : "Full candidate profiles"
-                }
+                eyebrow="Direct Candidate Dossiers"
                 title={
                   selectedIds.length
                     ? `Send me the complete profile for ${selectedIds.join(", ")}`
-                    : `Get all ${results.length} candidate profiles`
+                    : `Request full candidate profiles (${results.length} available)`
                 }
                 bullets={[
                   `Redacted resumes for ${
@@ -847,44 +836,6 @@ export default function FindCandidatesPage() {
                 city={city}
                 gateNote={selectedIds.join(", ")}
               />
-            </div>
-
-            {/* LOCKED CANDIDATES SECTION */}
-            <div id="r-locked" style={{ marginTop: 36 }}>
-              {lockedCards.length > 0 && (
-                <>
-                  <p
-                    className="mini-h locked-h"
-                    style={{
-                      fontFamily: "var(--mono)",
-                      fontSize: 12,
-                      fontWeight: 700,
-                      color: "#64748B",
-                      textTransform: "uppercase",
-                      marginBottom: 16,
-                    }}
-                  >
-                    <Mark>{lockedCards.length} more {plural(lockedCards.length, "candidate")}</Mark> with full dossiers
-                  </p>
-                  <div
-                    className="cards"
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-                      gap: 16,
-                    }}
-                  >
-                    {lockedCards.map((r) => (
-                      <CandidateCard
-                        key={r.c.id}
-                        candidate={r.c}
-                        result={r}
-                        locked
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
             </div>
           </>
         )}
@@ -923,8 +874,8 @@ export default function FindCandidatesPage() {
               <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
               <span>THE PROCESS · 4 EASY STEPS</span>
             </div>
-            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
-              From your request to a first <span className="serif-accent" style={{ fontStyle: "italic" }}>interview</span>
+            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.2vw, 38px)", color: "#08142A", margin: "0 0 14px", fontWeight: 400 }}>
+              From your request to a first <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>interview</span>
             </h2>
             <p className="who-lede" style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
               Transparent, discreet candidate introductions with zero obligation and zero upfront retainers.
@@ -933,13 +884,13 @@ export default function FindCandidatesPage() {
 
           <div className="terms-pillars-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
             <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px" }}>
-              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                 STEP 01 · REQUEST
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 22, fontWeight: 400, color: "#08142A", marginBottom: 4, lineHeight: 1.25 }}>
                 One Email
               </div>
-              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#64748B", marginBottom: 12 }}>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 500, color: "#64748B", marginBottom: 12 }}>
                 Select candidate IDs
               </div>
               <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
@@ -948,13 +899,13 @@ export default function FindCandidatesPage() {
             </div>
 
             <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px" }}>
-              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                 STEP 02 · 1 HOUR
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 22, fontWeight: 400, color: "#08142A", marginBottom: 4, lineHeight: 1.25 }}>
                 Full Profiles
               </div>
-              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#64748B", marginBottom: 12 }}>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 500, color: "#64748B", marginBottom: 12 }}>
                 Dossiers delivered
               </div>
               <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
@@ -963,13 +914,13 @@ export default function FindCandidatesPage() {
             </div>
 
             <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px" }}>
-              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                 STEP 03 · 1 DAY
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 22, fontWeight: 400, color: "#08142A", marginBottom: 4, lineHeight: 1.25 }}>
                 Interviews
               </div>
-              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#64748B", marginBottom: 12 }}>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 500, color: "#64748B", marginBottom: 12 }}>
                 Justin coordinates calls
               </div>
               <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
@@ -978,13 +929,13 @@ export default function FindCandidatesPage() {
             </div>
 
             <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px" }}>
-              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                 STEP 04 · WHEN HIRED
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 22, fontWeight: 400, color: "#08142A", marginBottom: 4, lineHeight: 1.25 }}>
                 Pay on Start
               </div>
-              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#64748B", marginBottom: 12 }}>
+              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 500, color: "#64748B", marginBottom: 12 }}>
                 Net 15 Invoice
               </div>
               <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
@@ -1021,8 +972,8 @@ export default function FindCandidatesPage() {
                 <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
                 <span>TERMS TRANSPARENCY</span>
               </div>
-              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: 0, fontWeight: 500 }}>
-                One fee, and only if you <span className="serif-accent" style={{ fontStyle: "italic" }}>hire</span>
+              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.2vw, 38px)", color: "#08142A", margin: 0, fontWeight: 400 }}>
+                One fee, and only if you <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>hire</span>
               </h2>
             </div>
             <Link
@@ -1045,13 +996,13 @@ export default function FindCandidatesPage() {
 
           <div className="terms-pillars-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
             <div className="terms-pillar" style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
-              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "#64748B", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                 01 · CONTINGENCY FEE
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 36, fontWeight: 600, color: "#1D4ED8", marginBottom: 4 }}>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 400, color: "#1D4ED8", marginBottom: 4, lineHeight: 1.1 }}>
                 23%
               </div>
-              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+              <div className="pillar-label" style={{ fontSize: 13.5, fontWeight: 500, color: "#08142A", marginBottom: 10 }}>
                 Of first-year base pay
               </div>
               <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
@@ -1060,13 +1011,13 @@ export default function FindCandidatesPage() {
             </div>
 
             <div className="terms-pillar" style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
-              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "#64748B", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                 02 · REPLACEMENT WARRANTY
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 36, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 400, color: "#08142A", marginBottom: 4, lineHeight: 1.1 }}>
                 90 Days
               </div>
-              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+              <div className="pillar-label" style={{ fontSize: 13.5, fontWeight: 500, color: "#08142A", marginBottom: 10 }}>
                 Calendar day guarantee
               </div>
               <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
@@ -1075,13 +1026,13 @@ export default function FindCandidatesPage() {
             </div>
 
             <div className="terms-pillar" style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
-              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "#64748B", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                 03 · CLIENT FREEDOM
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 36, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 400, color: "#08142A", marginBottom: 4, lineHeight: 1.1 }}>
                 Zero
               </div>
-              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+              <div className="pillar-label" style={{ fontSize: 13.5, fontWeight: 500, color: "#08142A", marginBottom: 10 }}>
                 Upfront retainer or lock-in
               </div>
               <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
@@ -1090,13 +1041,13 @@ export default function FindCandidatesPage() {
             </div>
 
             <div className="terms-pillar" style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 12, padding: "26px 22px" }}>
-              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              <div className="pillar-kicker" style={{ fontFamily: "var(--mono)", fontSize: 10.5, color: "#64748B", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
                 04 · PAYMENT SCHEDULE
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 36, fontWeight: 600, color: "#08142A", marginBottom: 4 }}>
+              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 400, color: "#08142A", marginBottom: 4, lineHeight: 1.1 }}>
                 Net 15
               </div>
-              <div className="pillar-label" style={{ fontSize: 13, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+              <div className="pillar-label" style={{ fontSize: 13.5, fontWeight: 500, color: "#08142A", marginBottom: 10 }}>
                 Invoice on physical start date
               </div>
               <p className="pillar-desc" style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>

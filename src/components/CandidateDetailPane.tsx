@@ -122,7 +122,7 @@ export function CandidateDetailPane({
       <hr className="detail-clean-hr" />
 
       {/* CANDIDATE DETAILS BODY */}
-      <div className="clean-detail-body">
+      <div className="clean-detail-body" style={{ overflowY: "visible", maxHeight: "none" }}>
         {/* STRUCTURED SPECS LIST */}
         <section className="clean-job-details-block">
           <h3 className="clean-subhead">Candidate details</h3>
@@ -251,7 +251,7 @@ export function CandidateDetailPane({
                 &ldquo;<Mark>{c.why}</Mark>&rdquo;
               </p>
               <span className="dossier-why-note">
-                Verified during screening call with Jon Missirlian.
+                Verified during screening call with Justin Sofman.
               </span>
             </div>
           </section>
@@ -261,13 +261,65 @@ export function CandidateDetailPane({
         {c.timeline && c.timeline.length > 0 && (
           <section className="detail-section">
             <h3 className="detail-sec-h">Career Progression</h3>
-            <ol className="dossier-timeline">
+            <ol
+              className="dossier-timeline"
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: "14px 0 0",
+                borderLeft: "2px solid #E2E8F0",
+                paddingLeft: 18,
+                display: "flex",
+                flexDirection: "column",
+                gap: 16,
+              }}
+            >
               {c.timeline.map(([yearsSpan, titleRole, firmSummary], idx) => (
-                <li key={idx} className="timeline-node">
-                  <span className="timeline-year">{yearsSpan}</span>
-                  <div className="timeline-info">
-                    <b className="timeline-title">{titleRole}</b>
-                    <span className="timeline-firm">{firmSummary}</span>
+                <li
+                  key={idx}
+                  className="dossier-timeline-item"
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    maxWidth: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 3,
+                  }}
+                >
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: -23,
+                      top: 5,
+                      width: 8,
+                      height: 8,
+                      borderRadius: "50%",
+                      background: "#1D4ED8",
+                      border: "2px solid #FFFFFF",
+                      boxShadow: "0 0 0 2px #E2E8F0",
+                    }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    style={{
+                      fontFamily: "var(--mono)",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: "#1D4ED8",
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {yearsSpan}
+                  </span>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <b style={{ fontSize: 14.5, fontWeight: 600, color: "#08142A" }}>
+                      {titleRole}
+                    </b>
+                    <span style={{ fontSize: 13, color: "#475569", lineHeight: 1.5 }}>
+                      {firmSummary}
+                    </span>
                   </div>
                 </li>
               ))}
