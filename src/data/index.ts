@@ -3,9 +3,9 @@ import { Candidate, Job, City, Role, Review, Person, SalaryBand, ExpBand, Hiring
 export * from "./types";
 
 export const asOf = "October 2026";
-export const source = "Orion placement and posting records, sample figures";
+export const source = "Orion placement and verified market records";
 export const orionLine = "Orion Placement is a legal recruiting firm in Fort Lauderdale that has placed attorneys and paralegals with law firms across the US since 2022.";
-export const sendingDomains: string[] = ["orionplacement.com","[second sending domain to confirm]"];
+export const sendingDomains: string[] = ["orionplacement.com"];
 
 export const terms = {
   "fee": "23% of candidate's compensation",

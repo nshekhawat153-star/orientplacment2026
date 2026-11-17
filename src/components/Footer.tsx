@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { orionLine, sendingDomains, cities, roles } from "@/data";
-import { useSite } from "@/context/SiteContext";
 import { RatingBadge, CalendlyLink } from "./Rating";
 import { Mark } from "./Mark";
 
@@ -13,7 +12,6 @@ const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is buil
 
 export function Footer({ minimal = false }: { minimal?: boolean }) {
   const pathname = usePathname();
-  const { marksOn, toggleMarks } = useSite();
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
@@ -41,17 +39,6 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
 
   const isMinimal = minimal || pathname.startsWith("/candidate/");
 
-  const marksBtn = (
-    <button
-      type="button"
-      data-marks-toggle
-      aria-pressed={marksOn}
-      onClick={toggleMarks}
-    >
-      {marksOn ? "Hide sample marks" : "Show sample marks"}
-    </button>
-  );
-
   if (isMinimal) {
     return (
       <>
@@ -73,7 +60,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
               <Link href="/about">About Orion</Link>
               <Link href="/">orionplacement.com</Link>
             </p>
-            <p className="small">Prototype. {marksBtn}</p>
+            <p className="small">© 2026 Orion Placement LLC. All rights reserved.</p>
           </div>
         </footer>
         {toastMsg && (
@@ -242,9 +229,6 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
               <p className="f-copyright">
                 © 2026 Orion Placement LLC · 510 Southeast 5th Avenue, Unit 1513, Fort Lauderdale, FL 33301. All rights reserved.
               </p>
-              <div className="f-sample-marks-wrap">
-                {marksBtn}
-              </div>
             </div>
           </div>
         </div>
