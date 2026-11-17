@@ -192,8 +192,8 @@ export default function SubmitJobPage() {
           gap: 20px;
         }
         .sj-step-card {
-          background: #FFFFFF;
-          border: 1.5px solid #E2E8F0;
+          background: #FAF9F5;
+          border: 1.5px solid #EAE7DC;
           border-radius: 12px;
           padding: 26px 22px;
           display: flex;
@@ -239,9 +239,10 @@ export default function SubmitJobPage() {
           position: "relative",
           background: "#08142A",
           color: "#FFFFFF",
-          padding: "128px 0 76px",
+          padding: "128px 0 84px",
           overflow: "hidden",
           textAlign: "center",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
         }}
       >
         <div className="emp-hero-video-wrap" aria-hidden="true">
@@ -423,11 +424,18 @@ export default function SubmitJobPage() {
       <section
         id="intake"
         style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "72px 24px 0",
+          background: "#FFFFFF",
+          padding: "84px 0 96px",
+          borderBottom: "1px solid #E2E8F0",
         }}
       >
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "0 24px",
+          }}
+        >
         <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 36px" }}>
           <div
             className="badge-capsule"
@@ -873,11 +881,20 @@ export default function SubmitJobPage() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* 3. PAY CHECK & MATCHED CANDIDATES (2-COLUMN ARCHITECTURE) */}
-      <section style={{ maxWidth: "1200px", margin: "72px auto 0", padding: "0 24px" }} id="results">
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 40px" }}>
+      <section
+        id="results"
+        style={{
+          background: "#FAF9F5",
+          padding: "88px 0 96px",
+          borderBottom: "1px solid #E2E8F0",
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 40px" }}>
           <div
             className="badge-capsule"
             style={{
@@ -1158,11 +1175,19 @@ export default function SubmitJobPage() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* 4. WORKFLOW: 4 EASY STEPS */}
-      <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }}>
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 40px" }}>
+      <section
+        style={{
+          background: "#FFFFFF",
+          padding: "88px 0 96px",
+          borderBottom: "1px solid #E2E8F0",
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 40px" }}>
           <div
             className="badge-capsule"
             style={{
@@ -1261,11 +1286,19 @@ export default function SubmitJobPage() {
             </p>
           </div>
         </div>
+        </div>
       </section>
 
       {/* 5. FAQ SECTION */}
-      <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "48px", alignItems: "start" }} className="sj-two-col">
+      <section
+        style={{
+          background: "#FAF9F5",
+          padding: "88px 0 96px",
+          borderBottom: "1px solid #E2E8F0",
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "48px", alignItems: "start" }} className="sj-two-col">
           <div>
             <div
               className="badge-capsule"
@@ -1362,6 +1395,7 @@ export default function SubmitJobPage() {
             </details>
           </div>
         </div>
+        </div>
       </section>
 
       {/* 6. BOTTOM LUXURY DARK CTA SECTION */}
@@ -1370,9 +1404,9 @@ export default function SubmitJobPage() {
           position: "relative",
           background: "#08142A",
           color: "#FFFFFF",
-          padding: "96px 0",
-          marginTop: "90px",
+          padding: "96px 0 108px",
           overflow: "hidden",
+          borderTop: "1px solid rgba(255, 255, 255, 0.12)",
         }}
       >
         <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 24px", textAlign: "center", position: "relative", zIndex: 1 }}>
