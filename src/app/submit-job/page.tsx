@@ -1322,7 +1322,7 @@ export default function SubmitJobPage() {
               <span>PARTNER INQUIRIES</span>
             </div>
             <h2 style={{ fontSize: "clamp(26px, 3.2vw, 38px)", fontWeight: 400, color: "#08142A", margin: "0 0 14px", fontFamily: "var(--display)" }}>
-              Mandate Intake FAQ
+              Mandate <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>Intake FAQ</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: "1rem", lineHeight: 1.6, margin: "0 0 24px" }}>
               Don&apos;t have a formal job posting drafted yet? Start with our{" "}

@@ -266,16 +266,17 @@ export function HiringKitClient({
               </div>
             </div>
 
-            {/* Right Column: Sleek Executive Playbook Artifact Card */}
+            {/* Right Column: Sleek Executive Playbook Artifact Card (Transparent Glassmorphic Style) */}
             <div>
               <div
                 style={{
-                  background: "rgba(15, 23, 42, 0.8)",
-                  backdropFilter: "blur(16px)",
-                  border: "1.5px solid rgba(255, 255, 255, 0.15)",
-                  borderRadius: "14px",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  backdropFilter: "blur(24px)",
+                  WebkitBackdropFilter: "blur(24px)",
+                  border: "1px solid rgba(255, 255, 255, 0.22)",
+                  borderRadius: "16px",
                   padding: "26px",
-                  boxShadow: "0 24px 48px rgba(0, 0, 0, 0.45)"
+                  boxShadow: "0 24px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25)"
                 }}
               >
                 <div
@@ -284,7 +285,7 @@ export function HiringKitClient({
                     justifyContent: "space-between",
                     alignItems: "center",
                     marginBottom: "18px",
-                    borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                    borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
                     paddingBottom: "14px"
                   }}
                 >
@@ -299,8 +300,8 @@ export function HiringKitClient({
                   <span
                     style={{
                       fontSize: "0.75rem",
-                      background: "rgba(37, 99, 235, 0.25)",
-                      border: "1px solid rgba(96, 165, 250, 0.35)",
+                      background: "rgba(255, 255, 255, 0.08)",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
                       color: "#93C5FD",
                       padding: "4px 10px",
                       borderRadius: "100px",
@@ -328,9 +329,12 @@ export function HiringKitClient({
                         alignItems: "center",
                         gap: "12px",
                         padding: "11px 14px",
-                        background: activeTab === item.key ? "rgba(29, 78, 216, 0.25)" : "rgba(255, 255, 255, 0.04)",
-                        border: activeTab === item.key ? "1px solid #60A5FA" : "1px solid rgba(255, 255, 255, 0.08)",
-                        borderRadius: "8px",
+                        background: activeTab === item.key ? "rgba(29, 78, 216, 0.3)" : "rgba(255, 255, 255, 0.04)",
+                        border: activeTab === item.key ? "1px solid #60A5FA" : "1px solid rgba(255, 255, 255, 0.1)",
+                        borderRadius: "10px",
+                        backdropFilter: "blur(10px)",
+                        WebkitBackdropFilter: "blur(10px)",
+                        boxShadow: activeTab === item.key ? "0 4px 16px rgba(29, 78, 216, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)" : "none",
                         textAlign: "left",
                         cursor: "pointer",
                         width: "100%",
@@ -349,7 +353,7 @@ export function HiringKitClient({
                       </span>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ fontSize: "0.88rem", fontWeight: 600, color: "#FFFFFF" }}>{item.name}</div>
-                        <div style={{ fontSize: "0.75rem", color: "#94A3B8", marginTop: "2px" }}>{item.desc}</div>
+                        <div style={{ fontSize: "0.75rem", color: "rgba(255, 255, 255, 0.65)", marginTop: "2px" }}>{item.desc}</div>
                       </div>
                       <span style={{ color: "#60A5FA", fontSize: "0.88rem", fontWeight: 600 }}>→</span>
                     </button>
@@ -360,12 +364,12 @@ export function HiringKitClient({
                   style={{
                     marginTop: "18px",
                     paddingTop: "14px",
-                    borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+                    borderTop: "1px solid rgba(255, 255, 255, 0.12)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
                     fontSize: "0.78rem",
-                    color: "#94A3B8"
+                    color: "rgba(255, 255, 255, 0.7)"
                   }}
                 >
                   <span>Click any module to configure</span>
@@ -422,7 +426,10 @@ export function HiringKitClient({
                 lineHeight: 1.2
               }}
             >
-              Customizable Hiring Architecture for {role.name}
+              Customizable Hiring Architecture for{" "}
+              <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                {role.name}
+              </span>
             </h2>
             <p style={{ margin: 0, color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6 }}>
               Configure your law firm parameters below to instantly generate a tailored job posting, structured interview script, and candidate evaluation rubric.
@@ -494,7 +501,7 @@ export function HiringKitClient({
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px", borderBottom: "1px solid #F1F5F9", paddingBottom: "16px" }}>
                   <div>
                     <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em" }}>Live Preview</span>
-                    <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "4px 0 0" }}>Customized Job Description</h3>
+                    <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "4px 0 0" }}>Customized <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Job Description</span></h3>
                   </div>
                   <button
                     type="button"
@@ -569,7 +576,7 @@ export function HiringKitClient({
               >
                 <div style={{ marginBottom: "22px" }}>
                   <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em" }}>Customization Console</span>
-                  <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "4px 0 0" }}>Your Firm&apos;s Specifics</h3>
+                  <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "4px 0 0" }}>Your Firm&apos;s <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Specifics</span></h3>
                   <p style={{ fontSize: "0.85rem", color: "#64748B", margin: "4px 0 0" }}>Adjust parameters to regenerate the template dynamically.</p>
                 </div>
 
@@ -751,7 +758,7 @@ export function HiringKitClient({
                 }}
               >
                 <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em" }}>Hiring Best Practice</span>
-                <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "6px 0 12px" }}>Structured Interviewing</h3>
+                <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "6px 0 12px" }}>Structured <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Interviewing</span></h3>
                 <p style={{ fontSize: "0.92rem", lineHeight: 1.6, color: "#475569", margin: "0 0 20px" }}>
                   Ask every candidate the identical sequence of substantive questions without deviating. Record specific matter examples immediately, then transfer scores to your weighted evaluation rubric.
                 </p>
@@ -792,7 +799,7 @@ export function HiringKitClient({
                   boxShadow: "0 4px 20px rgba(8, 20, 42, 0.04)"
                 }}
               >
-                <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px" }}>Weighted Evaluation Rubric</h3>
+                <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px" }}>Weighted <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Evaluation Rubric</span></h3>
                 <p style={{ fontSize: "0.9rem", color: "#64748B", margin: "0 0 24px" }}>Assign ratings from 1 (unsatisfactory) to 5 (exceptional) per competency criteria.</p>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -922,7 +929,7 @@ export function HiringKitClient({
                 }}
               >
                 <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em" }}>Offer Checklist</span>
-                <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "6px 0 12px" }}>Mandatory Offer Safeguards</h3>
+                <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "6px 0 12px" }}>Mandatory <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Offer Safeguards</span></h3>
                 <p style={{ fontSize: "0.92rem", lineHeight: 1.6, color: "#475569", margin: "0 0 18px" }}>
                   Ensure all offer letters explicitly condition employment on active state bar licensure in good standing, satisfactory reference checks, and non-disclosure compliance.
                 </p>
@@ -944,7 +951,7 @@ export function HiringKitClient({
                 boxShadow: "0 4px 20px rgba(8, 20, 42, 0.04)"
               }}
             >
-              <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px" }}>Boutique &amp; Mid-Size Law Firm Pay Architectures</h3>
+              <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px" }}>Boutique &amp; Mid-Size Law Firm <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Pay Architectures</span></h3>
               <p style={{ fontSize: "0.92rem", color: "#64748B", margin: "0 0 24px" }}>Common compensation structures utilized by lateral hiring committees for {role.name}s.</p>
 
               <div style={{ overflowX: "auto" }}>
@@ -1015,7 +1022,11 @@ export function HiringKitClient({
                 STEP 02 · ORION LATERAL TALENT PIPELINE
               </div>
               <h2 style={{ fontSize: "clamp(1.9rem, 3vw, 2.4rem)", fontWeight: 700, color: "#08142A", margin: "0 0 8px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                Pre-Screened {role.name} Candidates Available Now
+                Pre-Screened{" "}
+                <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                  {role.name} Candidates
+                </span>{" "}
+                Available Now
               </h2>
               <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem" }}>
                 <span style={{ fontWeight: 700, color: "#1D4ED8" }}>{matched.length} screened candidates</span> match your practice area, seniority level, and compensation target in {currentCity.name}.
@@ -1109,7 +1120,10 @@ export function HiringKitClient({
                 STEP 03 · VERIFIED TRACK RECORD
               </div>
               <h2 style={{ fontSize: "clamp(1.9rem, 3vw, 2.4rem)", fontWeight: 700, color: "#08142A", margin: 0, fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                What Law Firm Partners Say About Orion
+                What Law Firm Partners{" "}
+                <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                  Say About Orion
+                </span>
               </h2>
             </div>
             <RatingBadge link={true} />
@@ -1170,10 +1184,11 @@ export function HiringKitClient({
                   lineHeight: 1.18
                 }}
               >
-                Receive the Complete Kit via{" "}
+                Receive the Complete{" "}
                 <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  Email
-                </span>
+                  Hiring Package
+                </span>{" "}
+                via Email
               </h2>
 
               <p style={{ color: "#CBD5E1", fontSize: "1.06rem", lineHeight: 1.6, margin: "0 0 28px" }}>
