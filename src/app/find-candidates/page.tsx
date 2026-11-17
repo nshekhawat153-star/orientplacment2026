@@ -28,7 +28,6 @@ export default function FindCandidatesPage() {
   const [pay, setPay] = useState<number | null>(null);
   const [selectedMust, setSelectedMust] = useState<string[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [folded, setFolded] = useState(false);
   const [selectedCandidateId, setSelectedCandidateId] = useState<string | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
@@ -81,16 +80,6 @@ export default function FindCandidatesPage() {
   const openCards = unlocked ? results : results.slice(0, 3);
   const lockedCards = unlocked ? [] : results.slice(3);
 
-  const expBandObj = expBands.find((e) => e.key === years);
-  const summaryBits = [
-    rObj ? rObj.name : role,
-    cObj ? cObj.name : city,
-    expBandObj ? expBandObj.label : "any experience",
-  ];
-  if (mode !== "any") summaryBits.push(mode);
-  if (selectedMust.length)
-    summaryBits.push(`${selectedMust.length} ${plural(selectedMust.length, "must-have")}`);
-
   const handleRequestProfile = (id: string) => {
     setSelectedIds([id]);
     const el = document.getElementById("gate");
@@ -118,6 +107,24 @@ export default function FindCandidatesPage() {
     }
   };
 
+  const hasActiveFilters =
+    years !== "any" || mode !== "any" || pay !== null || selectedMust.length > 0;
+
+  const handleResetFilters = () => {
+    setYears("any");
+    setMode("any");
+    setPay(null);
+    setSelectedMust([]);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const el = document.getElementById("results");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -133,7 +140,7 @@ export default function FindCandidatesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 1. LUXURY HERO (CENTERED, CLEAN, NO CARDS, NO BREADCRUMBS) */}
+      {/* 1. LUXURY HERO WITH UNIFIED TOP SEARCH CONSOLE */}
       <section
         className="emp-luxury-hero-sec fc-luxury-hero-sec"
         style={{
@@ -177,7 +184,7 @@ export default function FindCandidatesPage() {
           />
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 840, margin: "0 auto", padding: "0 24px" }}>
+        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 960, margin: "0 auto", padding: "0 24px" }}>
           {/* Eyebrow Badge Capsule */}
           <div style={{ marginBottom: 20 }}>
             <div
@@ -229,55 +236,133 @@ export default function FindCandidatesPage() {
               lineHeight: 1.6,
               color: "#CBD5E1",
               maxWidth: 620,
-              margin: "0 auto 32px",
+              margin: "0 auto 36px",
             }}
           >
-            Filter by practice area, market, experience, and must-haves.
+            Filter by practice area, Texas market, experience, and must-haves.
             Screened lateral attorney dossiers update dynamically with verified compensation.
           </p>
 
-          {/* Action CTAs */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 34 }}>
-            <a
-              href="#brief"
-              className="btn-emp-primary"
+          {/* UNIFIED SEARCH CONSOLE */}
+          <div style={{ maxWidth: 900, margin: "0 auto 32px", width: "100%" }}>
+            <form
+              onSubmit={handleSearchSubmit}
+              role="search"
+              aria-label="Candidate search console"
               style={{
-                display: "inline-flex",
+                background: "#FFFFFF",
+                border: "1.5px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: 12,
+                boxShadow: "0 20px 50px -10px rgba(0, 0, 0, 0.55)",
+                padding: "7px 8px 7px 18px",
+                display: "flex",
                 alignItems: "center",
-                gap: 8,
-                background: "#1D4ED8",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 15,
-                padding: "13px 28px",
-                borderRadius: 7,
-                textDecoration: "none",
-                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+                gap: 12,
+                minHeight: 60,
+                flexWrap: "wrap",
               }}
             >
-              <span>Filter candidate pool</span>
-              <span aria-hidden="true">↓</span>
-            </a>
-            <Link
-              href="/submit-job"
-              className="btn-emp-ghost"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 15,
-                padding: "13px 26px",
-                borderRadius: 7,
-                textDecoration: "none",
-              }}
-            >
-              <span>Submit open mandate</span>
-              <span aria-hidden="true">→</span>
-            </Link>
+              {/* PRACTICE AREA / ROLE */}
+              <div style={{ display: "flex", alignItems: "center", flex: "1 1 260px", gap: 10 }}>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", textAlign: "left" }}>
+                  <span style={{ fontSize: 10.5, fontFamily: "var(--mono)", fontWeight: 700, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    Practice Area / Role
+                  </span>
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    aria-label="Practice Area / Role"
+                    style={{
+                      border: 0,
+                      background: "transparent",
+                      fontSize: 14.5,
+                      fontWeight: 600,
+                      color: "#08142A",
+                      outline: "none",
+                      cursor: "pointer",
+                      width: "100%",
+                      padding: "2px 0 0",
+                    }}
+                  >
+                    {roles.map((r) => (
+                      <option key={r.slug} value={r.slug}>
+                        {r.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* VERTICAL DIVIDER */}
+              <div
+                style={{ width: 1, height: 34, background: "#E2E8F0" }}
+                className="hidden-mobile"
+                aria-hidden="true"
+              />
+
+              {/* TEXAS MARKET / LOCATION */}
+              <div style={{ display: "flex", alignItems: "center", flex: "1 1 220px", gap: 10 }}>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", textAlign: "left" }}>
+                  <span style={{ fontSize: 10.5, fontFamily: "var(--mono)", fontWeight: 700, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    Texas Market
+                  </span>
+                  <select
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    aria-label="Texas Market"
+                    style={{
+                      border: 0,
+                      background: "transparent",
+                      fontSize: 14.5,
+                      fontWeight: 600,
+                      color: "#08142A",
+                      outline: "none",
+                      cursor: "pointer",
+                      width: "100%",
+                      padding: "2px 0 0",
+                    }}
+                  >
+                    {cities.map((c) => (
+                      <option key={c.slug} value={c.slug}>
+                        {c.name}, {c.state}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* SUBMIT BUTTON */}
+              <button
+                type="submit"
+                style={{
+                  background: "#1D4ED8",
+                  color: "#FFFFFF",
+                  border: 0,
+                  borderRadius: 7,
+                  padding: "13px 26px",
+                  fontSize: 14.5,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                }}
+              >
+                <span>Find Candidates</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </form>
           </div>
 
           {/* Micro Reassurances */}
@@ -323,389 +408,498 @@ export default function FindCandidatesPage() {
         </div>
       </section>
 
-      {/* 2. MAIN TOOL WORKSPACE */}
-      <section className="wrap tool-sec" style={{ maxWidth: 1240, margin: "0 auto", padding: "64px 24px 88px" }}>
-        <div className="tool">
-          {/* FILTER BRIEF FORM */}
-          <form
-            className={`tool-form${folded ? " folded editing" : ""}`}
-            id="brief"
-            aria-label="Your seat"
+      {/* 2. HORIZONTAL FILTER CHIPS BAR (STICKY, CLEAN, SPACIOUS) */}
+      <section
+        id="filters"
+        style={{
+          background: "#FFFFFF",
+          borderBottom: "1.5px solid #E2E8F0",
+          padding: "14px 0",
+          position: "sticky",
+          top: 68,
+          zIndex: 20,
+          boxShadow: "0 2px 10px rgba(15, 23, 42, 0.04)",
+        }}
+      >
+        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+          <div
             style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 24px",
-              boxShadow: "0 4px 16px rgba(15,23,42,0.04)",
-              position: "sticky",
-              top: 96,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 16,
+              flexWrap: "wrap",
             }}
           >
-            <div className="brief-sum" id="brief-sum" style={{ borderBottom: "1px solid #E2E8F0", paddingBottom: 14, marginBottom: 14 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div>
-                  <span style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 3 }}>
-                    Active Filters
-                  </span>
-                  <div id="brief-sum-t" style={{ fontFamily: "var(--display)", fontSize: 16, color: "#08142A", fontWeight: 600 }}>
-                    {summaryBits.join(" · ")}
-                  </div>
-                </div>
+            {/* LEFT: FILTER PILLS */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                flexWrap: "wrap",
+              }}
+            >
+              {/* Experience Band Group */}
+              <div
+                style={{
+                  display: "inline-flex",
+                  background: "#F1F5F9",
+                  borderRadius: 8,
+                  padding: 3,
+                  gap: 2,
+                }}
+              >
                 <button
                   type="button"
-                  className="btn btn-ghost btn-sm"
-                  id="brief-edit"
-                  aria-expanded={!folded}
-                  onClick={() => setFolded(!folded)}
-                  style={{ borderRadius: 6, fontWeight: 600, padding: "5px 12px", border: "1px solid #CBD5E1", fontSize: 12.5 }}
-                >
-                  {folded ? "Change" : "Hide"}
-                </button>
-              </div>
-            </div>
-
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 16 }}>
-              <h2 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: 0, fontWeight: 600 }}>
-                Seat Specifications
-              </h2>
-              {(selectedMust.length > 0 || years !== "any" || mode !== "any" || pay !== null) && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setYears("any");
-                    setMode("any");
-                    setPay(null);
-                    setSelectedMust([]);
-                  }}
+                  onClick={() => setYears("any")}
                   style={{
-                    background: "none",
-                    border: "none",
-                    color: "#1D4ED8",
+                    border: 0,
+                    background: years === "any" ? "#08142A" : "transparent",
+                    color: years === "any" ? "#FFFFFF" : "#475569",
+                    padding: "5px 12px",
+                    borderRadius: 6,
+                    fontSize: 12.5,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  All Exp
+                </button>
+                {expBands.map((eb) => (
+                  <button
+                    key={eb.key}
+                    type="button"
+                    onClick={() => setYears(years === eb.key ? "any" : eb.key)}
+                    style={{
+                      border: 0,
+                      background: years === eb.key ? "#08142A" : "transparent",
+                      color: years === eb.key ? "#FFFFFF" : "#475569",
+                      padding: "5px 12px",
+                      borderRadius: 6,
+                      fontSize: 12.5,
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    {eb.label}
+                  </button>
+                ))}
+              </div>
+
+              <span style={{ width: 1, height: 22, background: "#E2E8F0" }} aria-hidden="true" />
+
+              {/* Work Arrangement Pills */}
+              <button
+                type="button"
+                onClick={() => setMode(mode === "hybrid" ? "any" : "hybrid")}
+                className="flat-chip"
+                style={{
+                  background: mode === "hybrid" ? "#08142A" : "#FFFFFF",
+                  color: mode === "hybrid" ? "#FFFFFF" : "#475569",
+                  borderColor: mode === "hybrid" ? "#08142A" : "#E2E8F0",
+                }}
+              >
+                <span>Hybrid</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setMode(mode === "on-site" ? "any" : "on-site")}
+                className="flat-chip"
+                style={{
+                  background: mode === "on-site" ? "#08142A" : "#FFFFFF",
+                  color: mode === "on-site" ? "#FFFFFF" : "#475569",
+                  borderColor: mode === "on-site" ? "#08142A" : "#E2E8F0",
+                }}
+              >
+                <span>On-site</span>
+              </button>
+
+              <span style={{ width: 1, height: 22, background: "#E2E8F0" }} aria-hidden="true" />
+
+              {/* Target Compensation Pills */}
+              {[110000, 130000, 150000].map((p) => {
+                const isAct = pay === p;
+                return (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => setPay(isAct ? null : p)}
+                    className="flat-chip"
+                    style={{
+                      background: isAct ? "#08142A" : "#FFFFFF",
+                      color: isAct ? "#FFFFFF" : "#475569",
+                      borderColor: isAct ? "#08142A" : "#E2E8F0",
+                    }}
+                  >
+                    <span>${p / 1000}k+</span>
+                  </button>
+                );
+              })}
+
+              {/* Dynamic Role Must-Haves */}
+              {availableMustHaves.length > 0 && (
+                <>
+                  <span style={{ width: 1, height: 22, background: "#E2E8F0" }} aria-hidden="true" />
+                  {availableMustHaves.slice(0, 4).map((tag) => {
+                    const isSelected = selectedMust.includes(tag);
+                    return (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => toggleMustHave(tag)}
+                        className="flat-chip"
+                        style={{
+                          background: isSelected ? "#1D4ED8" : "#FFFFFF",
+                          color: isSelected ? "#FFFFFF" : "#334155",
+                          borderColor: isSelected ? "#1D4ED8" : "#CBD5E1",
+                          fontSize: 12.5,
+                        }}
+                      >
+                        <span style={{ opacity: isSelected ? 1 : 0.6 }}>{isSelected ? "✓ " : "+ "}</span>
+                        <span>{tag}</span>
+                      </button>
+                    );
+                  })}
+                </>
+              )}
+
+              {/* Reset All Filters Button */}
+              {hasActiveFilters && (
+                <button
+                  type="button"
+                  onClick={handleResetFilters}
+                  style={{
+                    background: "#FFF5F5",
+                    color: "#DC2626",
+                    border: "1px dashed #FCA5A5",
+                    borderRadius: 6,
+                    padding: "5px 12px",
                     fontSize: 12,
                     fontWeight: 600,
                     cursor: "pointer",
-                    padding: 0,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
                   }}
                 >
-                  Reset all
+                  <span>Reset filters</span>
                 </button>
               )}
             </div>
 
-            <div className="field" style={{ marginBottom: 14 }}>
-              <label htmlFor="b-role" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
-                Practice Area / Role
-              </label>
-              <select
-                id="b-role"
-                name="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
-              >
-                {roles.map((r) => (
-                  <option key={r.slug} value={r.slug}>
-                    {r.name}
-                  </option>
-                ))}
-              </select>
+            {/* RIGHT: LIVE CANDIDATE COUNT */}
+            <div
+              style={{
+                fontFamily: "var(--mono)",
+                fontSize: 12,
+                color: "#64748B",
+                fontWeight: 600,
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span style={{ color: "#1D4ED8", fontWeight: 700 }}>{results.length}</span>{" "}
+              {results.length === 1 ? "candidate" : "candidates"} available
             </div>
-
-            <div className="field" style={{ marginBottom: 14 }}>
-              <label htmlFor="b-city" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
-                Location
-              </label>
-              <select
-                id="b-city"
-                name="city"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
-              >
-                {cities.map((c) => (
-                  <option key={c.slug} value={c.slug}>
-                    {c.name}, {c.state}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="field" style={{ marginBottom: 14 }}>
-              <label htmlFor="b-years" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
-                Experience Band
-              </label>
-              <select
-                id="b-years"
-                name="years"
-                value={years}
-                onChange={(e) => setYears(e.target.value)}
-                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
-              >
-                <option value="any">Any experience</option>
-                {expBands.map((eb) => (
-                  <option key={eb.key} value={eb.key}>
-                    {eb.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="field" style={{ marginBottom: 14 }}>
-              <label htmlFor="b-mode" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
-                Arrangement
-              </label>
-              <select
-                id="b-mode"
-                name="mode"
-                value={mode}
-                onChange={(e) => setMode(e.target.value as "any" | "on-site" | "hybrid")}
-                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
-              >
-                <option value="any">Either on-site or hybrid</option>
-                <option value="on-site">On-site only</option>
-                <option value="hybrid">Hybrid only</option>
-              </select>
-            </div>
-
-            <div className="field" style={{ marginBottom: 16 }}>
-              <label htmlFor="b-pay" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 5 }}>
-                Target Base Compensation ($/yr)
-              </label>
-              <input
-                id="b-pay"
-                name="pay"
-                type="number"
-                inputMode="numeric"
-                min="30000"
-                step="5000"
-                placeholder="145000"
-                value={pay || ""}
-                onChange={(e) =>
-                  setPay(e.target.value ? Number(e.target.value) : null)
-                }
-                style={{ width: "100%", padding: "9px 12px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 13.5, color: "#08142A", background: "#FFFFFF" }}
-              />
-            </div>
-
-            <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
-              <legend className="label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 8 }}>
-                Must-haves <span className="hint" style={{ color: "#64748B", fontWeight: 400 }}>(tap to toggle)</span>
-              </legend>
-              <div className="chips" id="b-must" style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                {availableMustHaves.map((tag) => {
-                  const isPressed = selectedMust.includes(tag);
-                  return (
-                    <button
-                      key={tag}
-                      type="button"
-                      className="chip"
-                      aria-pressed={isPressed}
-                      data-tag={tag}
-                      onClick={() => toggleMustHave(tag)}
-                      style={{
-                        padding: "6px 12px",
-                        borderRadius: 6,
-                        fontSize: 12,
-                        fontWeight: 600,
-                        cursor: "pointer",
-                        transition: "all 0.15s ease",
-                        background: isPressed ? "#1D4ED8" : "#F1F5F9",
-                        color: isPressed ? "#FFFFFF" : "#334155",
-                        border: `1px solid ${isPressed ? "#1D4ED8" : "#E2E8F0"}`,
-                      }}
-                    >
-                      {tag}
-                    </button>
-                  );
-                })}
-              </div>
-            </fieldset>
-          </form>
-
-          {/* RESULTS DISPLAY */}
-          <div className="tool-results">
-            <div className="results-head" aria-live="polite" style={{ marginBottom: 18, borderBottom: "1.5px solid #E2E8F0", paddingBottom: 14 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 10 }}>
-                <b id="r-count" style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", fontWeight: 600 }}>
-                  {results.length ? (
-                    <>
-                      <Mark>{results.length}</Mark>{" "}
-                      {results.length === 1 ? "candidate" : "candidates"} for{" "}
-                      {rObj ? rObj.short : role}, {cObj ? cObj.name : city}
-                    </>
-                  ) : (
-                    "No exact matches yet"
-                  )}
-                </b>
-                <span className="small muted" id="r-sub" style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                  {results.length
-                    ? unlocked
-                      ? "ALL DOSSIERS UNLOCKED"
-                      : results.length > 3
-                      ? `TOP 3 OPEN · ${results.length - 3} MORE BY EMAIL`
-                      : "ALL OPEN"
-                    : ""}
-                </span>
-              </div>
-            </div>
-
-            {!results.length ? (
-              <div className="empty-state" id="r-list" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "40px 32px", textAlign: "center" }}>
-                <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 10px" }}>
-                  No candidate in our active pool fits this exact combination.
-                </h3>
-                <p style={{ fontSize: 15, color: "#64748B", maxWidth: 560, margin: "0 auto 24px", lineHeight: 1.6 }}>
-                  We continually source across our network of 100,000+ legal professionals. Submit your exact criteria and Justin will review our off-market candidate radar within one business day.
-                </p>
-                <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-                  <Link
-                    className="btn-emp-primary"
-                    href="/submit-job"
-                    style={{
-                      background: "#1D4ED8",
-                      color: "#FFFFFF",
-                      borderRadius: 7,
-                      fontWeight: 600,
-                      padding: "12px 24px",
-                      fontSize: 14,
-                      textDecoration: "none",
-                    }}
-                  >
-                    Submit this seat to Justin →
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedMust([]);
-                      setYears("any");
-                    }}
-                    style={{
-                      background: "#F8FAFC",
-                      color: "#08142A",
-                      border: "1.5px solid #CBD5E1",
-                      borderRadius: 7,
-                      fontWeight: 600,
-                      padding: "12px 20px",
-                      fontSize: 14,
-                      cursor: "pointer",
-                    }}
-                  >
-                    Clear must-haves
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="indeed-split-grid" style={{ marginTop: 14 }}>
-                  <div className="indeed-feed-column">
-                    <div id="r-list">
-                      <div className="indeed-card-stack">
-                        {openCards.map((r) => (
-                          <CandidateCard
-                            key={r.c.id}
-                            candidate={r.c}
-                            result={r}
-                            selected={activeCandidate?.id === r.c.id}
-                            onSelect={handleSelectCandidate}
-                            onRequestProfile={handleRequestProfile}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="indeed-detail-column">
-                    <CandidateDetailPane
-                      candidate={activeCandidate}
-                      onRequestProfile={handleRequestProfile}
-                    />
-                  </div>
-                </div>
-
-                {mobileDrawerOpen && activeCandidate && (
-                  <div
-                    className="mobile-detail-overlay"
-                    onClick={() => setMobileDrawerOpen(false)}
-                  >
-                    <div
-                      className="mobile-detail-modal"
-                      onClick={(e) => e.stopPropagation()}
-                      role="dialog"
-                      aria-modal="true"
-                    >
-                      <CandidateDetailPane
-                        candidate={activeCandidate}
-                        onRequestProfile={handleRequestProfile}
-                        onCloseMobile={() => setMobileDrawerOpen(false)}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div id="gate" style={{ marginTop: 48 }}>
-                  <GateForm
-                    id="finder-gate"
-                    eyebrow={
-                      results.length > 3
-                        ? `See all ${results.length} candidates`
-                        : "Full candidate profiles"
-                    }
-                    title={
-                      selectedIds.length
-                        ? `Send me the complete profile for ${selectedIds.join(", ")}`
-                        : `Get all ${results.length} candidate profiles`
-                    }
-                    bullets={[
-                      `Redacted resumes for ${
-                        selectedIds.length
-                          ? selectedIds.join(", ")
-                          : results.length === 1
-                          ? "this candidate"
-                          : `all ${results.length} candidates`
-                      }`,
-                      "Compensation expectation, Texas bar admission status, and notice period",
-                      "Our standard one-page contingency terms, delivered within one business hour",
-                    ]}
-                    button={
-                      selectedIds.length
-                        ? "Send me the full profile"
-                        : "Send me all candidate profiles"
-                    }
-                    ids={selectedIds.length ? selectedIds : results.map((r) => r.c.id)}
-                    role={role}
-                    city={city}
-                    gateNote={selectedIds.join(", ")}
-                  />
-                </div>
-
-                <div id="r-locked" style={{ marginTop: 32 }}>
-                  {lockedCards.length > 0 && (
-                    <>
-                      <p className="mini-h locked-h" style={{ fontFamily: "var(--mono)", fontSize: 12, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginBottom: 16 }}>
-                        <Mark>{lockedCards.length} more {plural(lockedCards.length, "candidate")}</Mark>{" "}
-                        with full dossiers
-                      </p>
-                      <div className="cards">
-                        {lockedCards.map((r) => (
-                          <CandidateCard
-                            key={r.c.id}
-                            candidate={r.c}
-                            result={r}
-                            locked
-                          />
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-              </>
-            )}
           </div>
         </div>
       </section>
 
-      {/* 3. 4-STEP WORKFLOW */}
-      <section className="block alt" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderTop: "1px solid #EAE7DC", borderBottom: "1px solid #EAE7DC" }}>
+      {/* 3. MAIN CANDIDATE STREAM: PURE 2-COLUMN MASTER-DETAIL WORKSPACE */}
+      <main
+        className="wrap"
+        id="results"
+        style={{
+          maxWidth: 1240,
+          margin: "0 auto",
+          padding: "36px 24px 80px",
+        }}
+      >
+        {/* Results Stream Subhead */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            flexWrap: "wrap",
+            gap: 12,
+            marginBottom: 22,
+            paddingBottom: 14,
+            borderBottom: "1.5px solid #E2E8F0",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "var(--display)",
+              fontSize: "clamp(20px, 2.4vw, 26px)",
+              color: "#08142A",
+              margin: 0,
+              fontWeight: 600,
+            }}
+          >
+            {results.length ? (
+              <>
+                <Mark>{results.length}</Mark> {results.length === 1 ? "candidate" : "candidates"} for{" "}
+                <span style={{ color: "#1D4ED8" }}>{rObj ? rObj.short : role}</span> in {cObj ? cObj.name : city}, Texas
+              </>
+            ) : (
+              "No matching candidates found"
+            )}
+          </h2>
+
+          <span
+            style={{
+              fontFamily: "var(--mono)",
+              fontSize: 11.5,
+              color: "#1D4ED8",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
+            }}
+          >
+            {results.length
+              ? unlocked
+                ? "ALL DOSSIERS UNLOCKED"
+                : results.length > 3
+                ? `TOP 3 OPEN · ${results.length - 3} MORE BY EMAIL`
+                : "VERIFIED DOSSIERS"
+              : ""}
+          </span>
+        </div>
+
+        {/* RESULTS SPLIT OR EMPTY STATE */}
+        {!results.length ? (
+          <div
+            className="empty-state"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "48px 32px",
+              textAlign: "center",
+            }}
+          >
+            <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "0 0 10px" }}>
+              No candidate in our active public pool fits this exact combination.
+            </h3>
+            <p style={{ fontSize: 15, color: "#64748B", maxWidth: 580, margin: "0 auto 28px", lineHeight: 1.6 }}>
+              We continually source across our network of 100,000+ legal professionals. Submit your exact criteria and Justin will review our off-market candidate radar within one business day.
+            </p>
+            <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
+              <Link
+                className="btn-emp-primary"
+                href="/submit-job"
+                style={{
+                  background: "#1D4ED8",
+                  color: "#FFFFFF",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  padding: "12px 24px",
+                  fontSize: 14,
+                  textDecoration: "none",
+                }}
+              >
+                Submit this seat to Justin →
+              </Link>
+              <button
+                type="button"
+                onClick={handleResetFilters}
+                style={{
+                  background: "#F8FAFC",
+                  color: "#08142A",
+                  border: "1.5px solid #CBD5E1",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  padding: "12px 20px",
+                  fontSize: 14,
+                  cursor: "pointer",
+                }}
+              >
+                Reset all filters
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div
+              className="indeed-split-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "minmax(380px, 42%) minmax(0, 58%)",
+                gap: 24,
+                alignItems: "start",
+              }}
+            >
+              {/* LEFT FEED COLUMN */}
+              <div className="indeed-feed-column">
+                <div className="indeed-card-stack">
+                  {openCards.map((r) => (
+                    <CandidateCard
+                      key={r.c.id}
+                      candidate={r.c}
+                      result={r}
+                      selected={activeCandidate?.id === r.c.id}
+                      onSelect={handleSelectCandidate}
+                      onRequestProfile={handleRequestProfile}
+                    />
+                  ))}
+                </div>
+
+                {/* HELPER CARD IN FEED */}
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    border: "1.5px dashed #CBD5E1",
+                    borderRadius: 12,
+                    padding: "22px 24px",
+                    textAlign: "center",
+                    marginTop: 10,
+                  }}
+                >
+                  <p style={{ fontSize: 13.5, color: "#475569", margin: "0 0 12px", lineHeight: 1.55 }}>
+                    <b>Need an attorney with niche experience or specific book of business?</b>
+                    <br />
+                    Justin maintains confidential relationships with off-market lateral candidates across Texas.
+                  </p>
+                  <Link
+                    href="/submit-job"
+                    className="btn btn-line btn-sm"
+                    style={{ borderRadius: 7, fontWeight: 600, fontSize: 13 }}
+                  >
+                    Submit confidential seat mandate →
+                  </Link>
+                </div>
+              </div>
+
+              {/* RIGHT STICKY CANDIDATE DOSSIER PANE */}
+              <div
+                className="indeed-detail-column"
+                style={{
+                  position: "sticky",
+                  top: 136,
+                  maxHeight: "calc(100vh - 152px)",
+                  overflowY: "auto",
+                }}
+              >
+                <CandidateDetailPane
+                  candidate={activeCandidate}
+                  onRequestProfile={handleRequestProfile}
+                />
+              </div>
+            </div>
+
+            {/* MOBILE DETAIL DRAWER MODAL */}
+            {mobileDrawerOpen && activeCandidate && (
+              <div
+                className="mobile-detail-overlay"
+                onClick={() => setMobileDrawerOpen(false)}
+              >
+                <div
+                  className="mobile-detail-modal"
+                  onClick={(e) => e.stopPropagation()}
+                  role="dialog"
+                  aria-modal="true"
+                >
+                  <CandidateDetailPane
+                    candidate={activeCandidate}
+                    onRequestProfile={handleRequestProfile}
+                    onCloseMobile={() => setMobileDrawerOpen(false)}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* CANDIDATE DOSSIER GATE FORM */}
+            <div id="gate" style={{ marginTop: 52 }}>
+              <GateForm
+                id="finder-gate"
+                eyebrow={
+                  results.length > 3
+                    ? `See all ${results.length} candidates`
+                    : "Full candidate profiles"
+                }
+                title={
+                  selectedIds.length
+                    ? `Send me the complete profile for ${selectedIds.join(", ")}`
+                    : `Get all ${results.length} candidate profiles`
+                }
+                bullets={[
+                  `Redacted resumes for ${
+                    selectedIds.length
+                      ? selectedIds.join(", ")
+                      : results.length === 1
+                      ? "this candidate"
+                      : `all ${results.length} candidates`
+                  }`,
+                  "Compensation expectation, Texas bar admission status, and notice period",
+                  "Our standard one-page contingency terms, delivered within one business hour",
+                ]}
+                button={
+                  selectedIds.length
+                    ? "Send me the full profile"
+                    : "Send me all candidate profiles"
+                }
+                ids={selectedIds.length ? selectedIds : results.map((r) => r.c.id)}
+                role={role}
+                city={city}
+                gateNote={selectedIds.join(", ")}
+              />
+            </div>
+
+            {/* LOCKED CANDIDATES SECTION */}
+            <div id="r-locked" style={{ marginTop: 36 }}>
+              {lockedCards.length > 0 && (
+                <>
+                  <p
+                    className="mini-h locked-h"
+                    style={{
+                      fontFamily: "var(--mono)",
+                      fontSize: 12,
+                      fontWeight: 700,
+                      color: "#64748B",
+                      textTransform: "uppercase",
+                      marginBottom: 16,
+                    }}
+                  >
+                    <Mark>{lockedCards.length} more {plural(lockedCards.length, "candidate")}</Mark> with full dossiers
+                  </p>
+                  <div
+                    className="cards"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                      gap: 16,
+                    }}
+                  >
+                    {lockedCards.map((r) => (
+                      <CandidateCard
+                        key={r.c.id}
+                        candidate={r.c}
+                        result={r}
+                        locked
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </>
+        )}
+      </main>
+
+      {/* 4. 4-STEP WORKFLOW */}
+      <section
+        className="block alt"
+        style={{
+          background: "#FAF9F5",
+          padding: "88px 0 96px",
+          borderTop: "1px solid #EAE7DC",
+          borderBottom: "1px solid #EAE7DC",
+        }}
+      >
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div className="sec-head-premium" style={{ textAlign: "center", maxWidth: 740, margin: "0 auto 44px" }}>
             <div
@@ -801,7 +995,7 @@ export default function FindCandidatesPage() {
         </div>
       </section>
 
-      {/* 4. THE 4 TERMS PILLARS */}
+      {/* 5. THE 4 TERMS PILLARS */}
       <section className="block" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div className="sec-head-premium" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16, marginBottom: 40 }}>
@@ -913,7 +1107,7 @@ export default function FindCandidatesPage() {
         </div>
       </section>
 
-      {/* 5. BOTTOM DARK CTA SECTION */}
+      {/* 6. BOTTOM DARK CTA SECTION */}
       <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "96px 0 108px", textAlign: "center" }}>
         <div className="wrap" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
           <div
