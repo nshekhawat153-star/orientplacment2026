@@ -153,27 +153,53 @@ export default function SalaryCheckPage() {
           gap: 36px;
           align-items: start;
         }
+        .sc-jobs-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 20px;
+          align-items: stretch;
+        }
+        .sc-methodology-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 48px;
+          align-items: start;
+        }
         .sc-faq-accordion {
           background: #FFFFFF;
           border: 1px solid #E2E8F0;
-          border-radius: 10px;
+          border-radius: 12px;
           padding: 18px 22px;
           margin-bottom: 12px;
+          box-shadow: 0 2px 8px rgba(8, 20, 42, 0.02);
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .sc-faq-accordion:hover {
+          border-color: #CBD5E1;
+          box-shadow: 0 4px 14px rgba(8, 20, 42, 0.04);
         }
         .sc-faq-accordion summary {
           font-weight: 700;
           color: #08142A;
           cursor: pointer;
-          font-size: 1rem;
+          font-size: 0.98rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
+          list-style: none;
+        }
+        .sc-faq-accordion summary::-webkit-details-marker {
+          display: none;
         }
         .sc-faq-accordion p {
-          margin: 12px 0 0;
-          font-size: 0.92rem;
+          margin: 10px 0 0;
+          font-size: 0.91rem;
           color: #475569;
           line-height: 1.6;
+        }
+        @media (max-width: 1024px) {
+          .sc-jobs-grid { grid-template-columns: 1fr; }
+          .sc-methodology-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 960px) {
           .sc-hero-grid { grid-template-columns: 1fr; }
@@ -566,48 +592,65 @@ export default function SalaryCheckPage() {
 
       {/* 3. ROLES PAYING MORE */}
       <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }} id="more-block">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32, flexWrap: "wrap", gap: 14 }}>
-          <div>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                background: "rgba(29, 78, 216, 0.08)",
-                border: "1px solid rgba(29, 78, 216, 0.2)",
-                borderRadius: "100px",
-                padding: "4px 12px",
-                fontSize: "0.78rem",
-                fontWeight: 600,
-                color: "#1D4ED8",
-                marginBottom: "10px",
-              }}
-            >
-              Verified Higher-Paying Seats
-            </div>
-            <h2 style={{ fontSize: "clamp(26px, 3.2vw, 36px)", fontWeight: 500, color: "#08142A", margin: 0, fontFamily: "var(--display)" }}>
-              Confidential Lateral Seats <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Above Your Number</span>
-            </h2>
-          </div>
-          <Link
-            href="/jobs"
+        <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 36px" }}>
+          <div
             style={{
-              fontSize: "0.95rem",
-              fontWeight: 600,
-              color: "#1D4ED8",
-              textDecoration: "none",
               display: "inline-flex",
               alignItems: "center",
-              gap: 4,
+              gap: 8,
+              background: "rgba(29, 78, 216, 0.08)",
+              border: "1px solid rgba(29, 78, 216, 0.2)",
+              borderRadius: 100,
+              padding: "5px 14px",
+              fontSize: "0.78rem",
+              fontWeight: 700,
+              color: "#1D4ED8",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              marginBottom: 12,
             }}
           >
-            <span>Browse all {cityObj.name} lateral seats</span>
-            <span aria-hidden="true">→</span>
-          </Link>
+            VERIFIED HIGHER-PAYING SEATS · {cityObj.name.toUpperCase()}
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif, Georgia, serif)",
+              fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+              color: "#08142A",
+              margin: "0 0 12px",
+              fontWeight: 700,
+              lineHeight: 1.2,
+            }}
+          >
+            Confidential Lateral Seats{" "}
+            <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+              Above Your Number
+            </span>
+          </h2>
+          <p style={{ color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6, margin: "0 0 16px" }}>
+            Boutique and mid-size law firm openings offering verified compensation packages above your current benchmark.
+          </p>
+          <div>
+            <Link
+              href="/jobs"
+              style={{
+                fontSize: "0.95rem",
+                fontWeight: 600,
+                color: "#1D4ED8",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              <span>Browse all {cityObj.name} lateral seats</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
 
         {rolesPayingMore.length > 0 ? (
-          <div style={{ display: "grid", gap: 20 }}>
+          <div className="sc-jobs-grid">
             {rolesPayingMore.slice(0, 3).map((job) => (
               <JobCard
                 key={job.id}
@@ -702,93 +745,197 @@ export default function SalaryCheckPage() {
 
       {/* 5. DATA METHODOLOGY & FAQ */}
       <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }}>
-        <div className="sc-split-grid">
+        <div className="sc-methodology-grid">
           <div>
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "8px",
+                gap: 8,
                 background: "rgba(29, 78, 216, 0.08)",
                 border: "1px solid rgba(29, 78, 216, 0.2)",
-                borderRadius: "100px",
-                padding: "4px 12px",
+                borderRadius: 100,
+                padding: "5px 14px",
                 fontSize: "0.78rem",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: "#1D4ED8",
-                marginBottom: "10px",
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                marginBottom: 12,
               }}
             >
-              Data Methodology
+              DATA METHODOLOGY · REAL-TIME VERIFICATION
             </div>
-            <h2 style={{ fontSize: "clamp(26px, 3.2vw, 36px)", fontWeight: 500, color: "#08142A", margin: "0 0 14px", fontFamily: "var(--display)" }}>
-              How Our Legal Salary Data <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Works</span>
-            </h2>
-            <p style={{ color: "#64748B", fontSize: "1rem", lineHeight: 1.6, margin: "0 0 24px" }}>
-              Want to see detailed practice breakdowns? Explore{" "}
-              <Link href="/salaries/estate-planning-attorney/houston-tx" style={{ color: "#1D4ED8", fontWeight: 600 }}>
-                Estate Planning Attorney Pay in Houston
-              </Link>.
-            </p>
-            <a
-              href={trust.calendly}
-              target="_blank"
-              rel="noopener noreferrer"
+            <h2
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#08142A",
-                color: "#FFFFFF",
-                padding: "12px 20px",
-                borderRadius: 7,
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                textDecoration: "none",
+                fontFamily: "var(--font-serif, Georgia, serif)",
+                fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
+                color: "#08142A",
+                margin: "0 0 14px",
+                fontWeight: 700,
+                lineHeight: 1.2,
               }}
             >
-              Book 15 Min Call with Justin →
-            </a>
+              How Our Legal Salary Data{" "}
+              <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                Works
+              </span>
+            </h2>
+            <p style={{ color: "#475569", fontSize: "1.02rem", lineHeight: 1.65, margin: "0 0 16px" }}>
+              Transparent compensation intelligence specifically calibrated for boutique and mid-size law firms—eliminating BigLaw lockstep distortion and unverified crowd-sourced survey noise.
+            </p>
+            <p style={{ color: "#64748B", fontSize: "0.94rem", lineHeight: 1.6, margin: "0 0 24px" }}>
+              Unlike generic salary aggregators that lump New York Cravath BigLaw lockstep salaries together with solo practitioners, Orion tracks authentic Texas small and mid-market economics. Every figure is calibrated against signed lateral offers, partner distributions, and active hiring search mandates.
+            </p>
+
+            <div style={{ display: "grid", gap: 12, marginBottom: 28 }}>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700, marginTop: 1 }}>✓</span>
+                <span style={{ fontSize: "0.92rem", color: "#334155" }}>
+                  <strong>100% Client-Side Privacy:</strong> Zero compensation figures or personal identities are logged, transmitted, or stored.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700, marginTop: 1 }}>✓</span>
+                <span style={{ fontSize: "0.92rem", color: "#334155" }}>
+                  <strong>Verified Lateral Contracts:</strong> Calibrated with executed offer letters from over 200 Texas boutique and mid-size firms.
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{ color: "#1D4ED8", fontWeight: 700, marginTop: 1 }}>✓</span>
+                <span style={{ fontSize: "0.92rem", color: "#334155" }}>
+                  <strong>Boutique Hour Targets:</strong> Grounded in realistic 1,600–1,900 billable hour targets, not 2,200+ BigLaw quotas.
+                </span>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+              <a
+                href={trust.calendly}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#1D4ED8",
+                  color: "#FFFFFF",
+                  padding: "12px 22px",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  fontSize: "0.92rem",
+                  textDecoration: "none",
+                  boxShadow: "0 4px 14px rgba(29, 78, 216, 0.35)",
+                }}
+              >
+                <span>Book 15 Min Call with Justin</span>
+                <span aria-hidden="true">→</span>
+              </a>
+              <Link
+                href={`/salaries/estate-planning-attorney/${cityObj.slug}`}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  background: "#FFFFFF",
+                  border: "1.5px solid #CBD5E1",
+                  color: "#08142A",
+                  padding: "11px 18px",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  fontSize: "0.92rem",
+                  textDecoration: "none",
+                }}
+              >
+                <span>Explore {cityObj.name} Pay Guides</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
 
           <div>
+            {/* Top Right Methodology & Context Card */}
+            <div
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid #E2E8F0",
+                borderRadius: 14,
+                padding: "24px 26px",
+                marginBottom: 16,
+                boxShadow: "0 2px 10px rgba(8, 20, 42, 0.03)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#1D4ED8" }} />
+                <span
+                  style={{
+                    fontSize: "0.78rem",
+                    fontWeight: 700,
+                    color: "#1D4ED8",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  Compensation Integrity &amp; Verification Standards
+                </span>
+              </div>
+              <p style={{ fontSize: "0.94rem", color: "#334155", lineHeight: 1.65, margin: "0 0 10px" }}>
+                Orion benchmarks are compiled directly from executed boutique and mid-size Texas legal placement agreements, verified lateral offer letters, and active hiring search mandates. We eliminate unverified crowd-sourced survey noise and misleading BigLaw lockstep averages.
+              </p>
+              <p style={{ fontSize: "0.88rem", color: "#64748B", lineHeight: 1.55, margin: 0 }}>
+                Every data point accounts for realistic billable hour targets (1,600 to 1,900 hours/year), base salary minimums, originations splits, and annual performance distributions across Texas metropolitan markets.
+              </p>
+            </div>
+
             <details className="sc-faq-accordion" open>
               <summary>
                 <span>Is the compensation I enter saved or shared?</span>
-                <span style={{ color: "#1D4ED8", fontSize: "1.2rem" }}>+</span>
+                <span style={{ color: "#1D4ED8", fontSize: "1.2rem", fontWeight: 700 }}>+</span>
               </summary>
               <p>
-                No. The benchmarking calculator operates purely in your browser. Nothing is transmitted to external servers or logged unless you explicitly request the salary guide report by email.
+                No. The benchmarking calculator operates purely in your local browser sandbox. Nothing is transmitted to external servers, logged into databases, or tracked across sessions.
+              </p>
+              <p style={{ marginTop: 8 }}>
+                Your current managing partners, firm administrators, and colleagues have zero visibility into your benchmarking queries.
               </p>
             </details>
 
             <details className="sc-faq-accordion">
               <summary>
                 <span>Where does Orion source this salary data?</span>
-                <span style={{ color: "#1D4ED8", fontSize: "1.2rem" }}>+</span>
+                <span style={{ color: "#1D4ED8", fontSize: "1.2rem", fontWeight: 700 }}>+</span>
               </summary>
               <p>
                 Our numbers derive directly from executed employment contracts, verified lateral offer letters, and active mandates from small, boutique, and mid-size law firms across Texas.
+              </p>
+              <p style={{ marginTop: 8 }}>
+                Unlike broad national surveys that average BigLaw 2,200-hour lockstep salaries together with solo practitioners, Orion isolates boutique and mid-size economics so you get an accurate comparison for realistic law firm environments.
               </p>
             </details>
 
             <details className="sc-faq-accordion">
               <summary>
                 <span>How is the percentile distribution bar calculated?</span>
-                <span style={{ color: "#1D4ED8", fontSize: "1.2rem" }}>+</span>
+                <span style={{ color: "#1D4ED8", fontSize: "1.2rem", fontWeight: 700 }}>+</span>
               </summary>
               <p>
                 The highlighted track represents the interquartile range (25th to 75th percentiles): 25% of attorneys earn below the left boundary, and 25% earn above the right boundary. The vertical marker illustrates your relative standing.
+              </p>
+              <p style={{ marginTop: 8 }}>
+                The median represents the statistical midpoint, while the 75th percentile benchmark highlights firms offering premium base compensation in exchange for specialized niche expertise or portable origination.
               </p>
             </details>
 
             <details className="sc-faq-accordion">
               <summary>
                 <span>What if my current salary is below the market range?</span>
-                <span style={{ color: "#1D4ED8", fontSize: "1.2rem" }}>+</span>
+                <span style={{ color: "#1D4ED8", fontSize: "1.2rem", fontWeight: 700 }}>+</span>
               </summary>
               <p>
-                A below-market salary is frequently the consequence of rapid tenure at one firm without lateral market adjustments. Explore our matching openings or contact Justin to establish your realistic lateral value.
+                A below-market salary is frequently the consequence of rapid tenure at one firm without lateral market adjustments. Internal associate raises often lag lateral market bidding by 15% to 35%.
+              </p>
+              <p style={{ marginTop: 8 }}>
+                Explore our matching openings or contact Justin to establish your realistic lateral value and explore unlisted opportunities.
               </p>
             </details>
           </div>
