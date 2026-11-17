@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustBar, RatingBadge } from "@/components/Rating";
 import { ResourceCards } from "@/components/ResourceCards";
 import { ReviewsSection } from "@/components/ReviewCard";
@@ -65,16 +64,6 @@ export default function EmployersPage() {
         </div>
 
         <div className="wrap hero-content-wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              crumbs={[
-                { label: "Home", href: "/" },
-                { label: "Employers", current: true },
-              ]}
-            />
-          </div>
-
           <div className="hero-content-center">
             <div className="hero-eyebrow-capsule">
               <span className="hero-eyebrow-dot" aria-hidden="true" />
