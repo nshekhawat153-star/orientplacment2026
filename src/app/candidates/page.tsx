@@ -5,7 +5,6 @@ import Link from "next/link";
 import { TrustBar, RatingBadge, TrustLine } from "@/components/Rating";
 import { ReviewsSection } from "@/components/ReviewCard";
 import { ResumeSheet } from "@/components/ResumeSheet";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import { jobs, fmt, trust } from "@/data";
 
@@ -162,15 +161,6 @@ export default function CandidatesPage() {
         </video>
 
         <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", marginBottom: 20 }}>
-            <Breadcrumb
-              crumbs={[
-                { label: "Home", href: "/" },
-                { label: "For Candidates", current: true },
-              ]}
-            />
-          </div>
-
           <div>
             <div
               style={{
@@ -196,8 +186,8 @@ export default function CandidatesPage() {
             <h1
               style={{
                 fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
-                fontFamily: "var(--font-serif, 'Playfair Display', Georgia, serif)",
-                fontWeight: 700,
+                fontFamily: "var(--display)",
+                fontWeight: 500,
                 lineHeight: 1.15,
                 color: "#FFFFFF",
                 letterSpacing: "-0.02em",
@@ -205,7 +195,7 @@ export default function CandidatesPage() {
               }}
             >
               Confidential legal jobs, <br />
-              <span style={{ color: "#93C5FD", fontStyle: "italic" }}>with the pay shown.</span>
+              <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>with the pay shown.</span>
             </h1>
 
             <p
@@ -785,13 +775,18 @@ export default function CandidatesPage() {
 
           <h2
             style={{
-              fontSize: "2.4rem",
-              fontWeight: 700,
+              fontSize: "clamp(28px, 3.8vw, 42px)",
+              fontWeight: 500,
+              color: "#FFFFFF",
               margin: "0 0 16px",
-              fontFamily: "var(--font-serif, Georgia, serif)",
+              fontFamily: "var(--display)",
+              lineHeight: 1.15,
             }}
           >
-            See the roles that fit you, <span style={{ color: "#93C5FD", fontStyle: "italic" }}>with the pay.</span>
+            See the roles that fit you,{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              with the pay.
+            </span>
           </h2>
 
           <p

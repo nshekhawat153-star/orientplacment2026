@@ -18,7 +18,6 @@ import {
   trust,
 } from "@/data";
 import { TrustLine } from "@/components/Rating";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { SalaryBandBar } from "@/components/SalaryBand";
 import { JobCard } from "@/components/JobCard";
 import { GateForm } from "@/components/GateForm";
@@ -215,16 +214,6 @@ export default function SalaryCheckPage() {
         </video>
 
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              crumbs={[
-                { label: "Home", href: "/" },
-                { label: "Salary Guides", href: "/salaries/estate-planning-attorney/houston-tx" },
-                { label: "Compensation Check", current: true },
-              ]}
-            />
-          </div>
-
           <div className="sc-hero-grid">
             {/* Left Column: Heading & Value Props */}
             <div>
@@ -252,8 +241,8 @@ export default function SalaryCheckPage() {
               <h1
                 style={{
                   fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
-                  fontFamily: "var(--font-serif, 'Playfair Display', Georgia, serif)",
-                  fontWeight: 700,
+                  fontFamily: "var(--display)",
+                  fontWeight: 500,
                   lineHeight: 1.15,
                   color: "#FFFFFF",
                   letterSpacing: "-0.02em",
@@ -261,7 +250,7 @@ export default function SalaryCheckPage() {
                 }}
               >
                 Is your legal salary <br />
-                <span style={{ color: "#93C5FD", fontStyle: "italic" }}>in line with the market?</span>
+                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>in line with the market?</span>
               </h1>
 
               <p
@@ -596,8 +585,8 @@ export default function SalaryCheckPage() {
             >
               Verified Higher-Paying Seats
             </div>
-            <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: 0, fontFamily: "var(--font-serif, Georgia, serif)" }}>
-              Confidential Lateral Seats Above Your Number
+            <h2 style={{ fontSize: "clamp(26px, 3.2vw, 36px)", fontWeight: 500, color: "#08142A", margin: 0, fontFamily: "var(--display)" }}>
+              Confidential Lateral Seats <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Above Your Number</span>
             </h2>
           </div>
           <Link
@@ -732,8 +721,8 @@ export default function SalaryCheckPage() {
             >
               Data Methodology
             </div>
-            <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: "0 0 14px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-              How Our Legal Salary Data Works
+            <h2 style={{ fontSize: "clamp(26px, 3.2vw, 36px)", fontWeight: 500, color: "#08142A", margin: "0 0 14px", fontFamily: "var(--display)" }}>
+              How Our Legal Salary Data <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Works</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: "1rem", lineHeight: 1.6, margin: "0 0 24px" }}>
               Want to see detailed practice breakdowns? Explore{" "}
@@ -838,13 +827,18 @@ export default function SalaryCheckPage() {
 
           <h2
             style={{
-              fontSize: "2.4rem",
-              fontWeight: 700,
+              fontSize: "clamp(28px, 3.8vw, 42px)",
+              fontWeight: 500,
+              color: "#FFFFFF",
               margin: "0 0 16px",
-              fontFamily: "var(--font-serif, Georgia, serif)",
+              fontFamily: "var(--display)",
+              lineHeight: 1.15,
             }}
           >
-            Ready to explore roles that pay <span style={{ color: "#93C5FD", fontStyle: "italic" }}>what you are worth?</span>
+            Ready to explore roles that pay{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              what you are worth?
+            </span>
           </h2>
 
           <p

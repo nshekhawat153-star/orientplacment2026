@@ -16,7 +16,6 @@ import {
   ParsedResume,
   MatchedJobResult,
 } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { JobCard } from "@/components/JobCard";
 import { ResumeSheet } from "@/components/ResumeSheet";
 import { GateForm } from "@/components/GateForm";
@@ -141,94 +140,268 @@ export default function UploadResumePage() {
           />
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Candidates", href: "/candidates" },
-                { label: "Upload Resume", current: true },
-              ]}
-            />
+        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 880, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+          <div className="emp-hero-badge-wrap" style={{ marginBottom: 16 }}>
+            <div
+              className="badge-capsule"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                borderRadius: 999,
+                padding: "6px 16px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#93C5FD",
+              }}
+            >
+              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span>CANDIDATE PRIVACY PROTOCOL · 100% CONFIDENTIAL &amp; FREE</span>
+            </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 40, alignItems: "center" }}>
-            {/* Left Column: Heading & Executive Value */}
-            <div>
-              <div className="emp-hero-badge-wrap" style={{ marginBottom: 16 }}>
-                <div
-                  className="badge-capsule"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.08)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    borderRadius: 999,
-                    padding: "6px 14px",
-                    fontFamily: "var(--mono)",
-                    fontSize: 11,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#93C5FD",
-                  }}
+          <h1
+            id="ur-hero-title"
+            className="emp-hero-h1"
+            style={{
+              fontFamily: "var(--display)",
+              fontSize: "clamp(34px, 4.4vw, 52px)",
+              lineHeight: 1.12,
+              fontWeight: 500,
+              color: "#FFFFFF",
+              margin: "0 0 18px",
+            }}
+          >
+            Upload your resume, see{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              the roles that fit.
+            </span>
+          </h1>
+
+          <p
+            className="emp-hero-lead"
+            style={{
+              fontSize: 17,
+              lineHeight: 1.6,
+              color: "#CBD5E1",
+              maxWidth: 680,
+              margin: "0 auto 28px",
+            }}
+          >
+            We parse your credentials into an anonymous candidate profile you control, then instantly match you against active Texas lateral openings with verified compensation. No firm ever sees your identity without your express written consent.
+          </p>
+
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap", marginBottom: 32 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>No law firm sees your name until you say yes</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Zero contact with your current firm or colleagues</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Always 100% free for candidates</span>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 28 }}>
+            <a
+              href="#upload"
+              className="btn-emp-primary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 28px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 4px 16px rgba(29, 78, 216, 0.4)",
+              }}
+            >
+              <span>Upload Resume Below</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <Link
+              href="/salary-check"
+              className="btn-emp-ghost"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 24px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Check your pay first</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 18, maxWidth: 640, margin: "0 auto" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, fontSize: 12.5, color: "#94A3B8" }}>
+              <span style={{ color: "#FBBF24" }}>★★★★★</span>
+              <span style={{ fontWeight: 600, color: "#FFFFFF" }}>4.9/5 Candidate Trust</span>
+              <span>·</span>
+              <span>Texas Bar Discretion Standard</span>
+              <span>·</span>
+              <span>Zero Public Indexing</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. CONFIDENTIAL RESUME INTAKE SECTION */}
+      <section
+        id="upload"
+        style={{
+          background: "#FAF9F5",
+          padding: "76px 0 88px",
+          borderBottom: "1px solid #EAE7DC",
+        }}
+      >
+        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", marginBottom: 32 }}>
+            <div
+              className="badge-capsule"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.08)",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
+                borderRadius: 999,
+                padding: "5px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 12,
+              }}
+            >
+              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>STEP 01 · CONFIDENTIAL PARSER</span>
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--display)",
+                fontSize: "clamp(26px, 3.2vw, 36px)",
+                color: "#08142A",
+                margin: "0 0 10px",
+                fontWeight: 500,
+              }}
+            >
+              Drop your resume, see matching <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Texas roles.</span>
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 15, margin: 0, lineHeight: 1.5 }}>
+              Your file is processed in memory. No firm ever sees your identity until you explicitly authorize an interview.
+            </p>
+          </div>
+
+          <div
+            className="ur-drop-card"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "32px 28px",
+              boxShadow: "0 12px 36px -8px rgba(0, 0, 0, 0.08)",
+              color: "#08142A",
+              textAlign: "center",
+            }}
+          >
+            <div
+              className="ur-drop-zone"
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.currentTarget.classList.add("over");
+              }}
+              onDragLeave={(e) => {
+                e.preventDefault();
+                e.currentTarget.classList.remove("over");
+              }}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.currentTarget.classList.remove("over");
+                if (e.dataTransfer.files?.[0]) {
+                  handleFileUpload(e.dataTransfer.files[0]);
+                }
+              }}
+              style={{
+                border: "2px dashed #93C5FD",
+                borderRadius: 12,
+                padding: "36px 20px",
+                background: "#F8FAFC",
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              <div
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: "50%",
+                  background: "#EFF6FF",
+                  color: "#1D4ED8",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 auto 16px",
+                  border: "1px solid #BFDBFE",
+                }}
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="26"
+                  height="26"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                  <span>CANDIDATE PRIVACY PROTOCOL · 100% CONFIDENTIAL &amp; FREE</span>
-                </div>
+                  <path d="M12 16V5M7.5 9.5L12 5l4.5 4.5" />
+                  <path d="M5 15v4h14v-4" />
+                </svg>
               </div>
 
-              <h1
-                id="ur-hero-title"
-                className="emp-hero-h1"
-                style={{
-                  fontFamily: "var(--display)",
-                  fontSize: "clamp(34px, 4.4vw, 52px)",
-                  lineHeight: 1.12,
-                  fontWeight: 500,
-                  color: "#FFFFFF",
-                  margin: "0 0 18px",
-                }}
-              >
-                Upload your resume, see{" "}
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  the roles that fit
-                </span>
-              </h1>
-
-              <p
-                className="emp-hero-lead"
-                style={{
-                  fontSize: 17,
-                  lineHeight: 1.6,
-                  color: "#CBD5E1",
-                  maxWidth: 580,
-                  margin: "0 0 28px",
-                }}
-              >
-                We parse your credentials into an anonymous candidate profile you control, then instantly match you against active Texas lateral openings with verified compensation. No firm ever sees your identity without your express written consent.
+              <div style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", fontWeight: 600, marginBottom: 6 }}>
+                Drag &amp; drop your resume here
+              </div>
+              <p style={{ fontSize: 13, color: "#64748B", maxWidth: 360, margin: "0 auto 20px", lineHeight: 1.5 }}>
+                PDF, Word (.docx), or plain text. Your resume is never uploaded to public boards or shared without prior written consent.
               </p>
 
-              <div style={{ display: "grid", gap: 10, marginBottom: 28 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>No law firm sees your name or firm until you say yes</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Zero contact with your current firm, partners, or colleagues</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Always 100% free for candidate attorneys and paralegals</span>
-                </div>
-              </div>
+              <input
+                type="file"
+                id="file"
+                accept=".pdf,.doc,.docx,.txt,.rtf"
+                onChange={(e) => {
+                  if (e.target.files?.[0]) handleFileUpload(e.target.files[0]);
+                }}
+                style={{ display: "none" }}
+              />
 
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-                <a
-                  href="#upload"
-                  className="btn-emp-primary"
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, alignItems: "center" }}>
+                <label
+                  htmlFor="file"
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -236,230 +409,98 @@ export default function UploadResumePage() {
                     background: "#1D4ED8",
                     color: "#FFFFFF",
                     fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 26px",
+                    fontSize: 14,
+                    padding: "12px 24px",
                     borderRadius: 7,
-                    textDecoration: "none",
+                    cursor: "pointer",
                   }}
                 >
-                  <span>Drop your resume below</span>
-                  <span aria-hidden="true">↓</span>
-                </a>
-                <Link
-                  href="/salary-check"
-                  className="btn-emp-ghost"
+                  <span>Select file to upload</span>
+                  <span aria-hidden="true">→</span>
+                </label>
+                <button
+                  type="button"
+                  onClick={() => handleProcessText(sampleResume, "sample")}
                   style={{
+                    background: "none",
+                    border: "none",
+                    color: "#1D4ED8",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    padding: "4px 8px",
+                  }}
+                >
+                  Or load sample resume (Texas Estate Planning)
+                </button>
+              </div>
+
+              {fileName && (
+                <div
+                  style={{
+                    marginTop: 18,
+                    background: "#ECFDF5",
+                    border: "1px solid #A7F3D0",
+                    borderRadius: 6,
+                    padding: "8px 14px",
+                    color: "#059669",
+                    fontSize: 13,
+                    fontWeight: 600,
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 24px",
-                    borderRadius: 7,
-                    textDecoration: "none",
+                    gap: 6,
                   }}
                 >
-                  <span>Check your pay first</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Column: Elevated Luxury Upload Drop Card */}
-            <div>
-              <div
-                className="ur-drop-card"
-                id="upload"
-                style={{
-                  background: "#FFFFFF",
-                  border: "1.5px solid #E2E8F0",
-                  borderRadius: 14,
-                  padding: "28px 24px",
-                  boxShadow: "0 24px 60px -12px rgba(0, 0, 0, 0.55)",
-                  color: "#08142A",
-                  textAlign: "center",
-                }}
-              >
-                <div
-                  className="ur-drop-zone"
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    e.currentTarget.classList.add("over");
-                  }}
-                  onDragLeave={(e) => {
-                    e.preventDefault();
-                    e.currentTarget.classList.remove("over");
-                  }}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    e.currentTarget.classList.remove("over");
-                    if (e.dataTransfer.files?.[0]) {
-                      handleFileUpload(e.dataTransfer.files[0]);
-                    }
-                  }}
-                  style={{
-                    border: "2px dashed #93C5FD",
-                    borderRadius: 12,
-                    padding: "36px 20px",
-                    background: "#F8FAFC",
-                    cursor: "pointer",
-                    transition: "all 0.15s ease",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: "50%",
-                      background: "#EFF6FF",
-                      color: "#1D4ED8",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      margin: "0 auto 16px",
-                      border: "1px solid #BFDBFE",
-                    }}
-                    aria-hidden="true"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="26"
-                      height="26"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M12 16V5M7.5 9.5L12 5l4.5 4.5" />
-                      <path d="M5 15v4h14v-4" />
-                    </svg>
-                  </div>
-
-                  <div style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", fontWeight: 600, marginBottom: 6 }}>
-                    Drag &amp; drop your resume here
-                  </div>
-                  <p style={{ fontSize: 13, color: "#64748B", maxWidth: 360, margin: "0 auto 20px", lineHeight: 1.5 }}>
-                    PDF, Word (.docx), or plain text. Your resume is never uploaded to public boards or shared without prior written consent.
-                  </p>
-
-                  <input
-                    type="file"
-                    id="file"
-                    accept=".pdf,.doc,.docx,.txt,.rtf"
-                    onChange={(e) => {
-                      if (e.target.files?.[0]) handleFileUpload(e.target.files[0]);
-                    }}
-                    style={{ display: "none" }}
-                  />
-
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10, alignItems: "center" }}>
-                    <label
-                      htmlFor="file"
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 8,
-                        background: "#1D4ED8",
-                        color: "#FFFFFF",
-                        fontWeight: 600,
-                        fontSize: 14,
-                        padding: "12px 24px",
-                        borderRadius: 7,
-                        cursor: "pointer",
-                      }}
-                    >
-                      <span>Select file to upload</span>
-                      <span aria-hidden="true">→</span>
-                    </label>
-                    <button
-                      type="button"
-                      onClick={() => handleProcessText(sampleResume, "sample")}
-                      style={{
-                        background: "none",
-                        border: "none",
-                        color: "#1D4ED8",
-                        fontSize: 13,
-                        fontWeight: 600,
-                        cursor: "pointer",
-                        textDecoration: "underline",
-                        padding: "4px 8px",
-                      }}
-                    >
-                      Or load sample resume (Texas Estate Planning)
-                    </button>
-                  </div>
-
-                  {fileName && (
-                    <div
-                      style={{
-                        marginTop: 18,
-                        background: "#ECFDF5",
-                        border: "1px solid #A7F3D0",
-                        borderRadius: 6,
-                        padding: "8px 14px",
-                        color: "#059669",
-                        fontSize: 13,
-                        fontWeight: 600,
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 6,
-                      }}
-                    >
-                      <span aria-hidden="true">✓</span>
-                      <span>{fileName}</span>
-                    </div>
-                  )}
+                  <span aria-hidden="true">✓</span>
+                  <span>{fileName}</span>
                 </div>
-
-                <details style={{ marginTop: 18, textAlign: "left" }}>
-                  <summary style={{ fontWeight: 600, color: "#1D4ED8", cursor: "pointer", fontSize: 13.5 }}>
-                    Prefer to paste resume text directly?
-                  </summary>
-                  <div style={{ marginTop: 12 }}>
-                    <textarea
-                      aria-label="Resume text"
-                      placeholder="Paste your legal CV or resume text here (experience, bar admission, practice highlights)..."
-                      value={pasteText}
-                      onChange={(e) => setPasteText(e.target.value)}
-                      rows={4}
-                      style={{
-                        width: "100%",
-                        padding: "10px 12px",
-                        borderRadius: 8,
-                        border: "1.5px solid #CBD5E1",
-                        fontSize: 13,
-                        fontFamily: "inherit",
-                        resize: "vertical",
-                      }}
-                    />
-                    <div style={{ marginTop: 8, textAlign: "right" }}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (pasteText.trim()) handleProcessText(pasteText, "text");
-                        }}
-                        style={{
-                          background: "#1D4ED8",
-                          color: "#FFFFFF",
-                          border: "none",
-                          borderRadius: 7,
-                          padding: "8px 18px",
-                          fontSize: 13,
-                          fontWeight: 600,
-                          cursor: "pointer",
-                        }}
-                      >
-                        Parse pasted text
-                      </button>
-                    </div>
-                  </div>
-                </details>
-              </div>
+              )}
             </div>
+
+            <details style={{ marginTop: 18, textAlign: "left" }}>
+              <summary style={{ fontWeight: 600, color: "#1D4ED8", cursor: "pointer", fontSize: 13.5 }}>
+                Prefer to paste resume text directly?
+              </summary>
+              <div style={{ marginTop: 12 }}>
+                <textarea
+                  aria-label="Resume text"
+                  placeholder="Paste your legal CV or resume text here (experience, bar admission, practice highlights)..."
+                  value={pasteText}
+                  onChange={(e) => setPasteText(e.target.value)}
+                  rows={4}
+                  style={{
+                    width: "100%",
+                    padding: "10px 12px",
+                    borderRadius: 8,
+                    border: "1.5px solid #CBD5E1",
+                    fontSize: 13,
+                    fontFamily: "inherit",
+                    resize: "vertical",
+                  }}
+                />
+                <div style={{ marginTop: 8, textAlign: "right" }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (pasteText.trim()) handleProcessText(pasteText, "text");
+                    }}
+                    style={{
+                      background: "#1D4ED8",
+                      color: "#FFFFFF",
+                      border: "none",
+                      borderRadius: 7,
+                      padding: "8px 18px",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Parse pasted text
+                  </button>
+                </div>
+              </div>
+            </details>
           </div>
         </div>
       </section>

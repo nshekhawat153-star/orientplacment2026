@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DATA } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
+
 import { Mark } from "@/components/Mark";
 import { TrustLine } from "@/components/Rating";
 import { JobCard } from "@/components/JobCard";
@@ -40,13 +40,6 @@ export default function BestLawFirmsClient({ cityParam }: { cityParam: string })
 
   return (
     <>
-      <Breadcrumb
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: city.name, href: `/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}` },
-          { label: "Best law firms to work for", current: true },
-        ]}
-      />
 
       {/* 1. Hero */}
       <section className="phero bf-hero">

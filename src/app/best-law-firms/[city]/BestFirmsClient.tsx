@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DATA } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import { TrustLine } from "@/components/Rating";
 import { JobCard } from "@/components/JobCard";
@@ -139,16 +138,6 @@ export function BestFirmsClient({
         </video>
 
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              crumbs={[
-                { label: "Home", href: "/" },
-                { label: "Best Law Firms", href: "/best-law-firms/houston-tx" },
-                { label: city.name, current: true },
-              ]}
-            />
-          </div>
-
           <div className="bf-hero-grid">
             <div>
               <div
@@ -175,8 +164,8 @@ export function BestFirmsClient({
               <h1
                 style={{
                   fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
-                  fontFamily: "var(--font-serif, 'Playfair Display', Georgia, serif)",
-                  fontWeight: 700,
+                  fontFamily: "var(--display)",
+                  fontWeight: 500,
                   lineHeight: 1.15,
                   color: "#FFFFFF",
                   letterSpacing: "-0.02em",
@@ -184,7 +173,7 @@ export function BestFirmsClient({
                 }}
               >
                 Best small law firms to work for in <br />
-                <span style={{ color: "#93C5FD", fontStyle: "italic" }}>{city.name}</span>
+                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>{city.name}</span>
               </h1>
 
               <p
@@ -597,13 +586,18 @@ export function BestFirmsClient({
 
           <h2
             style={{
-              fontSize: "2.4rem",
-              fontWeight: 700,
+              fontSize: "clamp(28px, 3.8vw, 42px)",
+              fontWeight: 500,
+              color: "#FFFFFF",
               margin: "0 0 16px",
-              fontFamily: "var(--font-serif, Georgia, serif)",
+              fontFamily: "var(--display)",
+              lineHeight: 1.15,
             }}
           >
-            Ready to evaluate top law firms in <span style={{ color: "#93C5FD", fontStyle: "italic" }}>{city.name}?</span>
+            Ready to evaluate top law firms in{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              {city.name}?
+            </span>
           </h2>
 
           <p
