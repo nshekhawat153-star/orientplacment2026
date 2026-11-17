@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { CandidateCard } from "@/components/CandidateCard";
 import { CandidateDetailPane } from "@/components/CandidateDetailPane";
 import { GateForm } from "@/components/GateForm";
@@ -121,27 +120,10 @@ export default function FindCandidatesPage() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.orionplacement.com/",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Employers",
-        item: "https://www.orionplacement.com/employers/",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Find Candidates",
-        item: "https://www.orionplacement.com/find-candidates/",
-      },
-    ],
+    "@type": "WebPage",
+    name: "Find Candidates | Orion Placement",
+    url: "https://www.orionplacement.com/find-candidates/",
+    description: "Search pre-screened lateral attorney and paralegal dossiers with verified compensation and strict confidentiality.",
   };
 
   return (
@@ -151,15 +133,16 @@ export default function FindCandidatesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 1. LUXURY HERO WITH VIDEO & BREADCRUMB */}
+      {/* 1. LUXURY HERO (CENTERED, CLEAN, NO CARDS, NO BREADCRUMBS) */}
       <section
         className="emp-luxury-hero-sec fc-luxury-hero-sec"
         style={{
           position: "relative",
           background: "#08142A",
           color: "#FFFFFF",
-          padding: "124px 0 76px",
+          padding: "128px 0 72px",
           overflow: "hidden",
+          textAlign: "center",
         }}
       >
         <div className="emp-hero-video-wrap" aria-hidden="true">
@@ -194,188 +177,147 @@ export default function FindCandidatesPage() {
           />
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
+        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 840, margin: "0 auto", padding: "0 24px" }}>
+          {/* Eyebrow Badge Capsule */}
           <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Employers", href: "/employers" },
-                { label: "Find Candidates", current: true },
-              ]}
-            />
+            <div
+              className="badge-capsule"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                borderRadius: 999,
+                padding: "6px 16px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#93C5FD",
+              }}
+            >
+              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span>PRE-SCREENED TALENT · 100% CONTINGENCY</span>
+            </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 36, alignItems: "center" }}>
-            <div>
-              <div className="emp-hero-badge-wrap" style={{ marginBottom: 16 }}>
-                <div
-                  className="badge-capsule"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.08)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    borderRadius: 999,
-                    padding: "6px 14px",
-                    fontFamily: "var(--mono)",
-                    fontSize: 11,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#93C5FD",
-                  }}
-                >
-                  <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                  <span>PRE-SCREENED LATERAL TALENT · 100% CONTINGENCY</span>
-                </div>
-              </div>
+          {/* Main Title */}
+          <h1
+            className="emp-hero-h1"
+            style={{
+              fontFamily: "var(--display)",
+              fontSize: "clamp(36px, 4.8vw, 54px)",
+              lineHeight: 1.15,
+              fontWeight: 500,
+              color: "#FFFFFF",
+              margin: "0 auto 20px",
+              maxWidth: 780,
+            }}
+          >
+            Find candidates for your{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              open seat
+            </span>
+          </h1>
 
-              <h1
-                className="emp-hero-h1"
-                style={{
-                  fontFamily: "var(--display)",
-                  fontSize: "clamp(34px, 4.4vw, 52px)",
-                  lineHeight: 1.12,
-                  fontWeight: 500,
-                  color: "#FFFFFF",
-                  margin: "0 0 18px",
-                }}
-              >
-                Find candidates for your{" "}
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  open seat
-                </span>
-              </h1>
+          {/* Clean Subtext */}
+          <p
+            className="emp-hero-lead"
+            style={{
+              fontSize: "clamp(16px, 1.8vw, 18px)",
+              lineHeight: 1.6,
+              color: "#CBD5E1",
+              maxWidth: 620,
+              margin: "0 auto 32px",
+            }}
+          >
+            Filter by practice area, market, experience, and must-haves.
+            Screened lateral attorney dossiers update dynamically with verified compensation.
+          </p>
 
-              <p
-                className="emp-hero-lead"
-                style={{
-                  fontSize: 17,
-                  lineHeight: 1.6,
-                  color: "#CBD5E1",
-                  maxWidth: 580,
-                  margin: "0 0 28px",
-                }}
-              >
-                Select your practice area, location, experience requirements, and notice window.
-                Pre-screened lateral attorney and paralegal dossiers update dynamically in real time.
-              </p>
+          {/* Action CTAs */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 34 }}>
+            <a
+              href="#brief"
+              className="btn-emp-primary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 28px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+              }}
+            >
+              <span>Filter candidate pool</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <Link
+              href="/submit-job"
+              className="btn-emp-ghost"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "13px 26px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Submit open mandate</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
 
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
-                <a
-                  href="#brief"
-                  className="btn-emp-primary"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#1D4ED8",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 26px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>Filter candidate pool</span>
-                  <span aria-hidden="true">↓</span>
-                </a>
-                <Link
-                  href="/submit-job"
-                  className="btn-emp-ghost"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "13px 24px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>Submit open mandate instead</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </div>
-
-              {/* Micro Reassurances */}
-              <div style={{ display: "grid", gap: 8 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Active verified candidates available for lateral interviews this week</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Strict confidentiality: candidate and firm identities protected prior to mutual approval</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Zero fee unless you hire (23% contingency Net 15, 90-day replacement warranty)</span>
-                </div>
-              </div>
+          {/* Micro Reassurances */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 16,
+              fontSize: 13,
+              color: "#94A3B8",
+            }}
+          >
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>Zero upfront retainer</span>
             </div>
-
-            {/* Quick Live Snapshot Badge Card */}
-            <div>
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  borderRadius: 14,
-                  padding: "26px 24px",
-                  backdropFilter: "blur(12px)",
-                  boxShadow: "0 20px 48px rgba(0,0,0,0.45)",
-                }}
-              >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1px solid rgba(255,255,255,0.12)", paddingBottom: 12, marginBottom: 18 }}>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                    LIVE TALENT RADAR
-                  </span>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#60A5FA", fontWeight: 700 }}>
-                    ACTIVE {cObj ? cObj.name.toUpperCase() : "TEXAS"}
-                  </span>
-                </div>
-
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(255,255,255,0.08)" }}>
-                    <div style={{ fontSize: 11.5, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 3 }}>
-                      Role Target
-                    </div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: "#FFFFFF" }}>
-                      {rObj ? rObj.short : role}
-                    </div>
-                  </div>
-
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(255,255,255,0.08)" }}>
-                    <div style={{ fontSize: 11.5, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 3 }}>
-                      Regional Hub
-                    </div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: "#FFFFFF" }}>
-                      {cObj ? `${cObj.name}, TX` : city}
-                    </div>
-                  </div>
-                </div>
-
-                <div style={{ background: "rgba(29, 78, 216, 0.2)", border: "1px solid rgba(96, 165, 250, 0.3)", borderRadius: 8, padding: "14px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <div>
-                    <div style={{ fontSize: 11, fontFamily: "var(--mono)", color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                      Matching Candidates
-                    </div>
-                    <div style={{ fontSize: 13, color: "#E2E8F0", marginTop: 2 }}>
-                      Pre-screened &amp; interview ready
-                    </div>
-                  </div>
-                  <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#60A5FA" }}>
-                    {results.length}
-                  </div>
-                </div>
-              </div>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>23% flat contingency</span>
+            </div>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>90-day replacement warranty</span>
+            </div>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+              </svg>
+              <span>100% confidential</span>
             </div>
           </div>
         </div>
