@@ -90,6 +90,21 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
     setMobileOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.documentElement.classList.add("mnav-open");
+      document.body.classList.add("mnav-open");
+    } else {
+      document.documentElement.classList.remove("mnav-open");
+      document.body.classList.remove("mnav-open");
+    }
+    return () => {
+      document.documentElement.classList.remove("mnav-open");
+      document.body.classList.remove("mnav-open");
+    };
+  }, [mobileOpen]);
+
   if (minimal || pathname.startsWith("/candidate/")) {
     return (
       <header className="site-header header-minimal">
@@ -123,7 +138,14 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
   ) => {
     if (built) {
       return (
-        <Link href={href} className={className}>
+        <Link
+          href={href}
+          className={className}
+          onClick={() => {
+            setActiveGroup(null);
+            setMobileOpen(false);
+          }}
+        >
           <b>{title}</b>
           <span>{desc}</span>
         </Link>
@@ -471,9 +493,24 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
             className="menu-btn"
             aria-expanded={mobileOpen}
             aria-controls="mnav"
+            aria-label="Open navigation menu"
             onClick={() => setMobileOpen(true)}
           >
-            Menu
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="3.5" y1="6" x2="20.5" y2="6" />
+              <line x1="3.5" y1="12" x2="20.5" y2="12" />
+              <line x1="3.5" y1="18" x2="20.5" y2="18" />
+            </svg>
           </button>
         </div>
       </header>
@@ -488,13 +525,18 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
         hidden={!mobileOpen}
       >
         <div className="mnav-top">
-          <Link className="logo" href="/" aria-label="Orion Placement">
+          <Link
+            className="logo"
+            href="/"
+            aria-label="Orion Placement"
+            onClick={() => setMobileOpen(false)}
+          >
             <Image
               src="/images/orion-logo.png"
               alt="Orion Placement"
               className="logo-img"
-              width={48}
-              height={48}
+              width={40}
+              height={40}
             />
           </Link>
           <button
@@ -503,7 +545,20 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
           >
-            Close
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
           </button>
         </div>
 
