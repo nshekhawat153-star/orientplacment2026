@@ -51,11 +51,25 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
             color: #60A5FA !important;
           }
         `}</style>
+        {/* LUXURY FADED GLOW DIVIDER ABOVE FOOTER */}
+        <div
+          role="separator"
+          aria-hidden="true"
+          style={{
+            width: "100%",
+            height: "2px",
+            background:
+              "linear-gradient(90deg, rgba(8, 20, 42, 0) 0%, rgba(96, 165, 250, 0.35) 20%, #60A5FA 50%, rgba(96, 165, 250, 0.35) 80%, rgba(8, 20, 42, 0) 100%)",
+            boxShadow: "0 -2px 20px rgba(96, 165, 250, 0.6), 0 0 4px #60A5FA",
+            position: "relative",
+            zIndex: 10,
+          }}
+        />
         <footer
           className="site-footer ha-ads-footer"
           style={{
             background: "#08142A",
-            borderTop: "1px solid rgba(255, 255, 255, 0.10)",
+            borderTop: "none",
             color: "#FFFFFF",
             padding: "54px 0 38px",
             textAlign: "center",
@@ -170,6 +184,18 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
 
   return (
     <>
+      <div
+        role="separator"
+        aria-hidden="true"
+        style={{
+          width: "100%",
+          height: "1.5px",
+          background:
+            "linear-gradient(90deg, rgba(8, 20, 42, 0) 0%, rgba(96, 165, 250, 0.25) 25%, #60A5FA 50%, rgba(96, 165, 250, 0.25) 75%, rgba(8, 20, 42, 0) 100%)",
+          position: "relative",
+          zIndex: 10,
+        }}
+      />
       <footer className="site-footer">
         <div className="wrap">
           <div className="f-top">
