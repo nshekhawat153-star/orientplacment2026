@@ -62,9 +62,9 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
           }}
         >
           <div className="wrap" style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px" }}>
-            {/* 1. LARGER LOGO & BRAND */}
+            {/* 1. LARGER LOGO & BRAND (Unlinked on PPC ad landing page to prevent exit leaks) */}
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 20 }}>
-              <Link href="/" aria-label="Orion Placement" style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", textDecoration: "none" }}>
+              <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", textDecoration: "none" }}>
                 <Image
                   src="/images/orion-logo.png"
                   alt="Orion Placement"
@@ -88,7 +88,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                 >
                   Orion Placement
                 </span>
-              </Link>
+              </div>
               <p style={{ color: "#94A3B8", fontSize: 13.5, margin: "6px 0 0", maxWidth: 460, lineHeight: 1.55 }}>
                 Direct intake legal recruiters for Texas law firms. Screened lateral attorneys and paralegals on 100% contingency.
               </p>
@@ -120,75 +120,12 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
               </div>
             </div>
 
-            {/* 3. ESSENTIAL MAIN LINKS ONLY (job, candidate, about, book call) */}
-            <nav
-              aria-label="Footer Navigation"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "clamp(16px, 3.2vw, 32px)",
-                flexWrap: "wrap",
-                padding: "16px 0",
-                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
-                marginBottom: 22,
-              }}
-            >
-              <Link
-                href="/jobs"
-                style={{ color: "#CBD5E1", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
-                className="ha-footer-link"
-              >
-                Open Jobs
-              </Link>
-              <Link
-                href="/find-candidates"
-                style={{ color: "#CBD5E1", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
-                className="ha-footer-link"
-              >
-                Find Candidates
-              </Link>
-              <Link
-                href="/candidates"
-                style={{ color: "#CBD5E1", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
-                className="ha-footer-link"
-              >
-                For Candidates
-              </Link>
-              <Link
-                href="/about"
-                style={{ color: "#CBD5E1", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
-                className="ha-footer-link"
-              >
-                About Orion
-              </Link>
-              <a
-                href="https://calendly.com/orionplacement/call-with-justin"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "#60A5FA",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  textDecoration: "none",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 4,
-                }}
-                className="ha-footer-link"
-              >
-                <span>Book a Call</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            </nav>
-
-            {/* 4. COPYRIGHT & TERMS NOTICE */}
-            <div style={{ fontSize: 12, color: "#64748B", lineHeight: 1.6 }}>
-              <p style={{ margin: "0 0 6px" }}>
+            {/* 3. COPYRIGHT & TERMS NOTICE (Distraction-free, zero outward navigation) */}
+            <div style={{ fontSize: 12.5, color: "#94A3B8", lineHeight: 1.6, paddingTop: 16, borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+              <p style={{ margin: "0 0 6px", color: "#CBD5E1" }}>
                 23% flat contingency fee · 90-day replacement warranty · Payable Net 15 only if you hire
               </p>
-              <p style={{ margin: 0 }}>
+              <p style={{ margin: 0, color: "#64748B" }}>
                 © 2026 Orion Placement LLC · Texas Legal Recruiting. All rights reserved.
               </p>
             </div>

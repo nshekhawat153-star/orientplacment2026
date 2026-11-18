@@ -176,16 +176,43 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
         } ${pathname.startsWith("/hire-attorneys") ? "header-hire-attorneys" : ""}`}
       >
         <div className="wrap">
-          <Link className="logo" href="/" aria-label="Orion Placement">
-            <Image
-              src="/images/orion-logo.png"
-              alt="Orion Placement"
-              className="logo-img"
-              width={48}
-              height={48}
-              priority
-            />
-          </Link>
+          {/* Logo: On /hire-attorneys ad page, keep unlinked to prevent ad traffic leaks */}
+          {isHireAttorneys ? (
+            <div className="logo" style={{ display: "inline-flex", alignItems: "center", gap: 10, textDecoration: "none", cursor: "default" }}>
+              <Image
+                src="/images/orion-logo.png"
+                alt="Orion Placement"
+                className="logo-img"
+                width={48}
+                height={48}
+                priority
+              />
+              <span style={{ color: "#FFFFFF", fontFamily: "var(--display)", fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em" }}>
+                Orion Placement
+              </span>
+            </div>
+          ) : (
+            <Link className="logo" href="/" aria-label="Orion Placement">
+              <Image
+                src="/images/orion-logo.png"
+                alt="Orion Placement"
+                className="logo-img"
+                width={48}
+                height={48}
+                priority
+              />
+            </Link>
+          )}
+
+          {/* Ad Landing Page Confidential Header Indicator */}
+          {isHireAttorneys && (
+            <div style={{ marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "rgba(255, 255, 255, 0.9)" }}>
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#10B981", boxShadow: "0 0 8px #10B981" }} />
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#E2E8F0" }}>
+                Texas Attorney Placement
+              </span>
+            </div>
+          )}
 
           {/* Desktop Nav - Hidden on /hire-attorneys ads page */}
           {!isHireAttorneys && (

@@ -1,8 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Questionnaire } from "./Questionnaire";
 import { HeroLeadForm } from "./HeroLeadForm";
 import { Stars, GMark } from "@/components/icons";
 import { reviews } from "@/data";
@@ -20,8 +19,11 @@ export default function HireAttorneysLandingPage() {
   const clientReviews = reviews.filter((r) => r.kind === "employer").slice(0, 3);
 
   return (
-    <div className="ha-page" style={{ background: "#FAF9F5", color: "#08142A" }}>
+    <div className="ha-page" style={{ background: "#FFFFFF", color: "#08142A" }}>
       <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
         .ha-terms-grid {
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -84,12 +86,18 @@ export default function HireAttorneysLandingPage() {
           .ha-recruiter-split {
             grid-template-columns: 1fr;
           }
-          .ha-hero-form-col {
-            display: none !important;
-          }
           .ha-hero-split-grid {
-            display: block !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
             text-align: center !important;
+            gap: 36px !important;
+          }
+          .ha-hero-form-col {
+            display: block !important;
+            width: 100% !important;
+            max-width: 520px !important;
+            margin: 0 auto !important;
           }
           .ha-hero-left-col {
             display: flex !important;
@@ -117,12 +125,18 @@ export default function HireAttorneysLandingPage() {
           }
         }
         @media (max-width: 640px) {
-          .ha-hero-form-col {
-            display: none !important;
-          }
           .ha-hero-split-grid {
-            display: block !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
             text-align: center !important;
+            gap: 20px !important;
+          }
+          .ha-hero-form-col {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
           }
           .ha-hero-left-col {
             display: flex !important;
@@ -149,9 +163,9 @@ export default function HireAttorneysLandingPage() {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 0 !important;
             background: #FFFFFF !important;
-            border: 1.5px solid #E2E8F0 !important;
+            border: 1.5px solid #BFDBFE !important;
             border-radius: 14px !important;
-            box-shadow: 0 8px 24px rgba(8, 20, 42, 0.06) !important;
+            box-shadow: 0 8px 24px rgba(29, 78, 216, 0.08) !important;
             overflow: hidden !important;
           }
           .ha-term-card {
@@ -165,14 +179,14 @@ export default function HireAttorneysLandingPage() {
             justify-content: flex-start !important;
           }
           .ha-term-card:nth-child(1) {
-            border-right: 1px solid #F1F5F9 !important;
-            border-bottom: 1px solid #F1F5F9 !important;
+            border-right: 1px solid #DBEAFE !important;
+            border-bottom: 1px solid #DBEAFE !important;
           }
           .ha-term-card:nth-child(2) {
-            border-bottom: 1px solid #F1F5F9 !important;
+            border-bottom: 1px solid #DBEAFE !important;
           }
           .ha-term-card:nth-child(3) {
-            border-right: 1px solid #F1F5F9 !important;
+            border-right: 1px solid #DBEAFE !important;
           }
           .ha-term-card:nth-child(4) {
             border: 0 !important;
@@ -424,78 +438,6 @@ export default function HireAttorneysLandingPage() {
             white-space: nowrap !important;
             text-align: center !important;
           }
-          .ha-bottom-btn-secondary {
-            width: 100% !important;
-            justify-content: center !important;
-            padding: 11px 18px !important;
-            font-size: 13.5px !important;
-            border-radius: 7px !important;
-            box-sizing: border-box !important;
-            white-space: nowrap !important;
-            text-align: center !important;
-          }
-          .ha-questionnaire-sec {
-            padding: 38px 0 46px !important;
-          }
-          .ha-questionnaire-wrap {
-            padding: 0 14px !important;
-          }
-          .ha-questionnaire-header {
-            margin-bottom: 20px !important;
-          }
-          .ha-bottom-cta-sec {
-            padding: 52px 0 60px !important;
-            background-color: #08142A !important;
-            background-image: radial-gradient(ellipse 120% 70% at 50% 0%, #0D1E3A 0%, #08142A 70%) !important;
-          }
-          .ha-bottom-cta-wrap {
-            padding: 0 16px !important;
-          }
-          .ha-bottom-eyebrow {
-            padding: 5px 13px !important;
-            font-size: 9.5px !important;
-            letter-spacing: 0.08em !important;
-            margin-bottom: 14px !important;
-            white-space: nowrap !important;
-          }
-          .ha-bottom-h2 {
-            font-size: 27px !important;
-            line-height: 1.2 !important;
-            margin-bottom: 12px !important;
-          }
-          .ha-bottom-sub {
-            font-size: 13.5px !important;
-            line-height: 1.55 !important;
-            margin: 0 auto 22px !important;
-          }
-          .ha-bottom-cta-group {
-            flex-direction: column !important;
-            align-items: stretch !important;
-            width: 100% !important;
-            max-width: 320px !important;
-            margin: 0 auto !important;
-            gap: 10px !important;
-          }
-          .ha-bottom-btn-primary {
-            width: 100% !important;
-            justify-content: center !important;
-            padding: 12px 18px !important;
-            font-size: 14px !important;
-            border-radius: 7px !important;
-            box-sizing: border-box !important;
-            white-space: nowrap !important;
-            text-align: center !important;
-          }
-          .ha-bottom-btn-secondary {
-            width: 100% !important;
-            justify-content: center !important;
-            padding: 11px 18px !important;
-            font-size: 13.5px !important;
-            border-radius: 7px !important;
-            box-sizing: border-box !important;
-            white-space: nowrap !important;
-            text-align: center !important;
-          }
         }
       `}</style>
 
@@ -573,9 +515,9 @@ export default function HireAttorneysLandingPage() {
                   textShadow: "0 2px 20px rgba(0, 0, 0, 0.6)",
                 }}
               >
-                Get qualified attorney candidates sent straight to{" "}
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic", textShadow: "0 0 28px rgba(96, 165, 250, 0.4)" }}>
-                  your firm.
+                Get qualified attorney candidates{" "}
+                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+                  sent straight to your firm.
                 </span>
               </h1>
 
@@ -595,33 +537,6 @@ export default function HireAttorneysLandingPage() {
                 Sign one simple agreement. Pre-screened lateral attorneys matched to your exact
                 practice mix, local Texas bar admissions, and compensation band. You only pay if you hire.
               </p>
-
-              {/* MOBILE ONLY: ACTION CTA (Since form is hidden on mobile screens) */}
-              <div className="ha-hero-mobile-cta only-mobile" style={{ width: "100%", maxWidth: 340, margin: "0 auto 22px" }}>
-                <div className="ha-hero-cta-group" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <a
-                    href="#questionnaire"
-                    className="ha-hero-btn-primary"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 8,
-                      background: "#1D4ED8",
-                      color: "#FFFFFF",
-                      fontWeight: 600,
-                      fontSize: 15,
-                      padding: "13px 24px",
-                      borderRadius: 7,
-                      textDecoration: "none",
-                      boxShadow: "0 6px 18px rgba(29, 78, 216, 0.4)",
-                    }}
-                  >
-                    <span>Launch 2-Minute Candidate Search</span>
-                    <span aria-hidden="true">↓</span>
-                  </a>
-                </div>
-              </div>
 
               {/* Value Checkmarks List (Desktop / Web) */}
               <div
@@ -706,8 +621,8 @@ export default function HireAttorneysLandingPage() {
               </div>
             </div>
 
-            {/* RIGHT COLUMN: HIGH-CONVERTING HERO LEAD CAPTURE FORM (DESKTOP/WEB ONLY, HIDDEN ON MOBILE) */}
-            <div className="ha-hero-form-col hidden-mobile">
+            {/* RIGHT COLUMN: HIGH-CONVERTING HERO LEAD CAPTURE FORM (VISIBLE ON WEB & MOBILE) */}
+            <div className="ha-hero-form-col">
               <HeroLeadForm />
             </div>
           </div>
@@ -715,94 +630,122 @@ export default function HireAttorneysLandingPage() {
       </section>
 
       {/* 2. DEDICATED ELEVATED TERMS STRIP (4 CARDS IN 1 BALANCED ROW) */}
-      <section className="ha-terms-strip-sec" style={{ maxWidth: 1200, margin: "-32px auto 0", padding: "0 24px", position: "relative", zIndex: 10 }}>
-        <div className="ha-terms-grid">
-          {/* Card 1: Placement Fee */}
-          <div
-            className="ha-hover-lift ha-term-card"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Placement Fee
+      <section
+        className="ha-terms-strip-sec"
+        style={{
+          background: "#FFFFFF",
+          position: "relative",
+          zIndex: 10,
+          padding: "0 0 24px",
+        }}
+      >
+        <div style={{ maxWidth: 1200, margin: "-36px auto 0", padding: "0 24px" }}>
+          <div className="ha-terms-grid">
+            {/* Card 1: Placement Fee */}
+            <div
+              className="ha-hover-lift ha-term-card"
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #BFDBFE",
+                borderRadius: 14,
+                padding: "24px 22px",
+                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.06)",
+              }}
+            >
+              <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                Placement Fee
+              </div>
+              <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
+                23%
+              </div>
+              <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+                Net 15 upon candidate start date. Due only if you hire.
+              </div>
             </div>
-            <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
-              23%
+
+            {/* Card 2: Warranty Period */}
+            <div
+              className="ha-hover-lift ha-term-card"
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #BFDBFE",
+                borderRadius: 14,
+                padding: "24px 22px",
+                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.06)",
+              }}
+            >
+              <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                Warranty Period
+              </div>
+              <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
+                90 Days
+              </div>
+              <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+                100% replacement guarantee backed by contract credit.
+              </div>
             </div>
-            <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Net 15 upon candidate start date. Due only if you hire.
+
+            {/* Card 3: Upfront Cost */}
+            <div
+              className="ha-hover-lift ha-term-card"
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #BFDBFE",
+                borderRadius: 14,
+                padding: "24px 22px",
+                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.06)",
+              }}
+            >
+              <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                Upfront Retainer
+              </div>
+              <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
+                $0
+              </div>
+              <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+                Zero upfront fees, retainers, or exclusivity lock-in.
+              </div>
+            </div>
+
+            {/* Card 4: Turnaround */}
+            <div
+              className="ha-hover-lift ha-term-card"
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #BFDBFE",
+                borderRadius: 14,
+                padding: "24px 22px",
+                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.06)",
+              }}
+            >
+              <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+                Candidate Turnaround
+              </div>
+              <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
+                48–72h
+              </div>
+              <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+                Pre-screened lateral attorney dossiers delivered directly.
+              </div>
             </div>
           </div>
 
-          {/* Card 2: Warranty Period */}
+          {/* ELEGANT SECTION DIVIDER */}
           <div
-            className="ha-hover-lift ha-term-card"
+            className="ha-terms-divider-wrap"
             style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+              maxWidth: 1200,
+              margin: "56px auto 0",
+              padding: "0 12px",
             }}
           >
-            <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Warranty Period
-            </div>
-            <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
-              90 Days
-            </div>
-            <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              100% replacement guarantee backed by contract credit.
-            </div>
-          </div>
-
-          {/* Card 3: Upfront Cost */}
-          <div
-            className="ha-hover-lift ha-term-card"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Upfront Retainer
-            </div>
-            <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
-              $0
-            </div>
-            <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Zero upfront fees, retainers, or exclusivity lock-in.
-            </div>
-          </div>
-
-          {/* Card 4: Turnaround */}
-          <div
-            className="ha-hover-lift ha-term-card"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Candidate Turnaround
-            </div>
-            <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
-              48–72h
-            </div>
-            <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Pre-screened lateral attorney dossiers delivered directly.
-            </div>
+            <div
+              style={{
+                height: 1.5,
+                background: "linear-gradient(90deg, rgba(219, 234, 254, 0.15) 0%, #BFDBFE 25%, #60A5FA 50%, #BFDBFE 75%, rgba(219, 234, 254, 0.15) 100%)",
+                borderRadius: 999,
+              }}
+            />
           </div>
         </div>
       </section>
@@ -814,8 +757,7 @@ export default function HireAttorneysLandingPage() {
           position: "relative",
           background: "#FFFFFF",
           color: "#08142A",
-          padding: "104px 0 112px",
-          borderTop: "1px solid #EAE7DC",
+          padding: "68px 0 108px",
           borderBottom: "1px solid #EAE7DC",
         }}
       >
@@ -1403,7 +1345,7 @@ export default function HireAttorneysLandingPage() {
 
             <div className="ha-banner-btn-group" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               <a
-                href="#questionnaire"
+                href="#intake-form"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -1412,35 +1354,14 @@ export default function HireAttorneysLandingPage() {
                   color: "#FFFFFF",
                   fontWeight: 600,
                   fontSize: 14.5,
-                  padding: "13px 24px",
+                  padding: "13px 26px",
                   borderRadius: 7,
                   textDecoration: "none",
                   boxShadow: "0 6px 18px rgba(29, 78, 216, 0.45)",
                 }}
               >
-                <span>Start hiring intake (2 min)</span>
-                <span aria-hidden="true">↓</span>
-              </a>
-              <a
-                href="https://calendly.com/orionplacement/call-with-justin"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "rgba(255, 255, 255, 0.08)",
-                  border: "1px solid rgba(255, 255, 255, 0.20)",
-                  color: "#FFFFFF",
-                  fontWeight: 600,
-                  fontSize: 14.5,
-                  padding: "13px 22px",
-                  borderRadius: 7,
-                  textDecoration: "none",
-                }}
-              >
-                <span>Book 15 min with Justin</span>
-                <span aria-hidden="true">→</span>
+                <span>Request Candidate Dossiers</span>
+                <span aria-hidden="true">↑</span>
               </a>
             </div>
           </div>
@@ -1596,36 +1517,23 @@ export default function HireAttorneysLandingPage() {
 
               <div className="ha-founder-btn-group" style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
                 <a
-                  href="https://calendly.com/orionplacement/call-with-justin"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#intake-form"
                   style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
                     background: "#1D4ED8",
                     color: "#FFFFFF",
                     borderRadius: 7,
                     fontWeight: 600,
-                    padding: "12px 24px",
+                    padding: "13px 26px",
                     fontSize: 14.5,
                     textDecoration: "none",
-                    boxShadow: "0 4px 14px rgba(29, 78, 216, 0.25)",
+                    boxShadow: "0 6px 18px rgba(29, 78, 216, 0.35)",
                   }}
                 >
-                  Book 15 min with Justin →
-                </a>
-                <a
-                  href="#questionnaire"
-                  style={{
-                    background: "#FFFFFF",
-                    border: "1.5px solid #CBD5E1",
-                    color: "#08142A",
-                    borderRadius: 7,
-                    fontWeight: 600,
-                    padding: "12px 22px",
-                    fontSize: 14.5,
-                    textDecoration: "none",
-                  }}
-                >
-                  Check candidate availability
+                  <span>Request Candidates for Your Firm</span>
+                  <span aria-hidden="true">↑</span>
                 </a>
               </div>
             </div>
@@ -1633,49 +1541,7 @@ export default function HireAttorneysLandingPage() {
         </div>
       </section>
 
-      {/* 6. INTERACTIVE QUESTIONNAIRE */}
-      <section id="questionnaire" className="ha-questionnaire-sec" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="ha-questionnaire-wrap" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-          <div className="ha-questionnaire-header" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 40px" }}>
-            <div
-              className="ha-section-eyebrow"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#EFF6FF",
-                border: "1px solid #DBEAFE",
-                borderRadius: 999,
-                padding: "6px 14px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#1D4ED8",
-                marginBottom: 14,
-              }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8", flexShrink: 0 }} />
-              <span className="hidden-mobile">START YOUR SEARCH · 3 SIMPLE STEPS</span>
-              <span className="only-mobile">START YOUR SEARCH</span>
-            </div>
-            <h2 className="ha-section-h2" style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
-              Tell us who you&apos;re looking <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>for</span>
-            </h2>
-            <p className="ha-section-sub" style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
-              3 quick steps. Takes under 45 seconds. Zero upfront retainer — you only pay if you hire.
-            </p>
-          </div>
-
-          <div style={{ maxWidth: 860, margin: "0 auto" }}>
-            <Suspense fallback={<div className="q-card-box text-center py-12 text-[#5b6577]">Loading questionnaire...</div>}>
-              <Questionnaire />
-            </Suspense>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. BOTTOM MIDNIGHT NAVY CTA SECTION */}
+      {/* 6. BOTTOM ACTION CLOSING SECTION */}
       <section
         className="ha-bottom-cta-sec"
         style={{
@@ -1707,7 +1573,7 @@ export default function HireAttorneysLandingPage() {
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA", flexShrink: 0 }} />
-            <span>100% CONTINGENCY · ZERO RISK</span>
+            <span>100% CONTINGENCY · 90-DAY REPLACEMENT GUARANTEE</span>
           </div>
 
           <h2
@@ -1721,17 +1587,45 @@ export default function HireAttorneysLandingPage() {
               lineHeight: 1.15,
             }}
           >
-            Ready to see who&apos;s <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>available?</span>
+            Ready to receive qualified attorney <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>candidates?</span>
           </h2>
 
-          <p className="ha-bottom-sub" style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 34, maxWidth: 640, margin: "0 auto 34px" }}>
-            One simple agreement. Pre-screened attorney dossiers sent to your inbox within days.
-            No upfront cost, and you <b>only pay if you hire</b>.
+          <p className="ha-bottom-sub" style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 28, maxWidth: 640, margin: "0 auto 28px" }}>
+            Sign one simple agreement. Pre-screened attorney dossiers delivered straight to your inbox within 48–72 hours.
+            Zero upfront cost — you <b>only pay if you hire</b>.
           </p>
 
-          <div className="ha-bottom-cta-group" style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+          {/* Quick trust checklist */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "clamp(12px, 2.5vw, 24px)",
+              flexWrap: "wrap",
+              fontSize: 13.5,
+              color: "#E2E8F0",
+              marginBottom: 32,
+            }}
+          >
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span> Zero Upfront Retainer
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span> 23% Fee Only If You Hire
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span> 90-Day Replacement Warranty
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span> 48–72h Turnaround
+            </span>
+          </div>
+
+          {/* SINGLE PRIMARY CTA BUTTON (GLIDES DIRECTLY TO HERO FORM) */}
+          <div className="ha-bottom-cta-group" style={{ display: "flex", justifyContent: "center" }}>
             <a
-              href="#questionnaire"
+              href="#intake-form"
               className="ha-bottom-btn-primary"
               style={{
                 display: "inline-flex",
@@ -1741,37 +1635,14 @@ export default function HireAttorneysLandingPage() {
                 color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 16,
-                padding: "14px 34px",
-                borderRadius: 7,
+                padding: "15px 36px",
+                borderRadius: 8,
                 textDecoration: "none",
-                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.35)",
+                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.45)",
               }}
             >
-              <span className="hidden-mobile">Launch 2-Minute Candidate Search</span>
-              <span className="only-mobile">Launch 2-Minute Search</span>
-              <span aria-hidden="true">↓</span>
-            </a>
-            <a
-              href="https://calendly.com/orionplacement/call-with-justin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ha-bottom-btn-secondary"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 16,
-                padding: "14px 34px",
-                borderRadius: 7,
-                textDecoration: "none",
-              }}
-            >
-              <span>Book 15 min with Justin</span>
-              <span aria-hidden="true">→</span>
+              <span>Submit Brief &amp; Receive Candidate Dossiers</span>
+              <span aria-hidden="true">↑</span>
             </a>
           </div>
         </div>
