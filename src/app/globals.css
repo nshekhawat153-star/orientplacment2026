@@ -4511,7 +4511,8 @@ a.id:hover{color:var(--accent)}
 .btn-faq-fees {
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: space-between !important;
+  justify-content: center !important;
+  gap: 8px !important;
   background: #08142A !important;
   color: #FFFFFF !important;
   border-radius: 7px !important;
