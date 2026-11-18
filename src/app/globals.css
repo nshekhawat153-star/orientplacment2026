@@ -1469,6 +1469,43 @@ a.rating:hover {
   font-weight: 500
 }
 
+/* TrustLine on Dark Backgrounds */
+.trust-line.on-dark,
+.sc-hero-grid .trust-line,
+.emp-luxury-hero-sec .trust-line,
+.hero-cinematic .trust-line,
+.salary-leaf-hero .trust-line,
+.bf-hero-sec .trust-line,
+.wth-hero-sec .trust-line,
+.wtp-hero-sec .trust-line,
+.hk-hero-sec .trust-line {
+  color: #CBD5E1 !important;
+}
+
+.trust-line.on-dark b,
+.sc-hero-grid .trust-line b,
+.emp-luxury-hero-sec .trust-line b,
+.hero-cinematic .trust-line b,
+.salary-leaf-hero .trust-line b,
+.bf-hero-sec .trust-line b,
+.wth-hero-sec .trust-line b,
+.wtp-hero-sec .trust-line b,
+.hk-hero-sec .trust-line b {
+  color: #FFFFFF !important;
+}
+
+.trust-line.on-dark .stars,
+.sc-hero-grid .trust-line .stars,
+.emp-luxury-hero-sec .trust-line .stars,
+.hero-cinematic .trust-line .stars,
+.salary-leaf-hero .trust-line .stars,
+.bf-hero-sec .trust-line .stars,
+.wth-hero-sec .trust-line .stars,
+.wtp-hero-sec .trust-line .stars,
+.hk-hero-sec .trust-line .stars {
+  color: #FBBF24 !important;
+}
+
 /* ---------- 8. sections: shared shell ---------- */
 .block {
   padding: var(--sec) 0;
@@ -10312,7 +10349,7 @@ table.data.compare td.us {
   }
 
   .hero-cinematic {
-    padding: 56px 0 28px !important;
+    padding: 92px 0 32px !important;
     min-height: auto !important;
   }
 
