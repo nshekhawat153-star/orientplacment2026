@@ -822,19 +822,19 @@ a.rating:hover{border-color:var(--accent);color:var(--ink)}
   object-fit: cover;
   object-position: center;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0.65;
 }
 
-/* Authentic Orion Midnight Sapphire Overlay - not muddy black */
+/* Authentic Orion Midnight Sapphire Overlay - rich deep contrast like homepage */
 .hero-video-gradient {
   position: absolute;
   inset: 0;
   z-index: 2;
   background: linear-gradient(
     180deg,
-    rgba(8, 20, 42, 0.45) 0%,
-    rgba(8, 20, 42, 0.30) 45%,
-    rgba(8, 20, 42, 0.82) 100%
+    rgba(8, 20, 42, 0.70) 0%,
+    rgba(8, 20, 42, 0.55) 45%,
+    rgba(8, 20, 42, 0.92) 100%
   );
 }
 .hero-video-radial-aura {
@@ -844,8 +844,8 @@ a.rating:hover{border-color:var(--accent);color:var(--ink)}
   pointer-events: none;
   background: radial-gradient(
     circle at 50% 48%,
-    rgba(10, 26, 54, 0.10) 0%,
-    rgba(6, 16, 34, 0.60) 100%
+    rgba(8, 20, 42, 0.45) 0%,
+    rgba(6, 16, 34, 0.85) 100%
   );
 }
 
@@ -9806,9 +9806,9 @@ table.data.compare td.us{background:#F5F8FC}
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(8, 20, 42, 0.45) 0%,
-    rgba(8, 20, 42, 0.30) 45%,
-    rgba(8, 20, 42, 0.82) 100%
+    rgba(8, 20, 42, 0.70) 0%,
+    rgba(8, 20, 42, 0.55) 45%,
+    rgba(8, 20, 42, 0.92) 100%
   ) !important;
 }
 
@@ -9820,8 +9820,8 @@ table.data.compare td.us{background:#F5F8FC}
   pointer-events: none;
   background: radial-gradient(
     circle at 50% 48%,
-    rgba(10, 26, 54, 0.10) 0%,
-    rgba(6, 16, 34, 0.60) 100%
+    rgba(8, 20, 42, 0.45) 0%,
+    rgba(6, 16, 34, 0.85) 100%
   ) !important;
 }
 
@@ -9831,7 +9831,7 @@ table.data.compare td.us{background:#F5F8FC}
   object-fit: cover !important;
   object-position: center !important;
   pointer-events: none !important;
-  opacity: 0.85 !important;
+  opacity: 0.65 !important;
 }
 
 .emp-hero-overlay {
