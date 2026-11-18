@@ -1,139 +1,71 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { people } from "@/data";
 
-export interface QuestionDef {
-  id: string;
-  label: string;
-  kind: "text" | "choice" | "textarea" | "fee" | "contact";
-  question: string;
-  placeholder?: string;
-  inputType?: string;
-  skipLabel?: string;
-  intro?: string;
-  options?: string[];
-  otherOption?: string;
+export interface IntakeData {
+  // Step 1: Position & Location
+  practiceArea: string;
+  customPracticeArea?: string;
+  level: string;
+  location: string;
+  customLocation?: string;
+
+  // Step 2: Timeline & Firm Profile
+  timing: string;
+  firmSize: string;
+  feeConfirmed: boolean;
+
+  // Step 3: Contact & Delivery
+  firmName: string;
+  firmWebsite: string;
+  contactName: string;
+  email: string;
+  phone: string;
 }
 
-const QUESTIONS: QuestionDef[] = [
-  {
-    id: "location",
-    label: "Hiring location",
-    kind: "text",
-    question: "Which city or state are you hiring in?",
-    placeholder: "e.g. Austin, TX · Houston, TX · Dallas, TX · or Remote",
-  },
-  {
-    id: "firmSize",
-    label: "Firm size",
-    kind: "choice",
-    question: "What is the size of your firm?",
-    options: ["Solo", "2–5 attorneys", "6–20 attorneys", "21–50 attorneys", "51–100 attorneys", "100+ attorneys"],
-  },
-  {
-    id: "hires",
-    label: "Hires in next 12 months",
-    kind: "choice",
-    question: "How many attorneys do you plan to hire in the next 12 months?",
-    options: ["1", "2–3", "4–10", "10+", "Not sure yet"],
-  },
-  {
-    id: "practiceArea",
-    label: "Practice area",
-    kind: "choice",
-    question: "Which practice area are you hiring for first?",
-    options: [
-      "Estate Planning / Trusts & Estates",
-      "Commercial Litigation",
-      "Real Estate Law",
-      "Corporate / M&A",
-      "Labor & Employment",
-      "Family Law",
-      "Personal Injury",
-      "Tax Law",
-      "Criminal Defense",
-    ],
-    otherOption: "Something else",
-  },
-  {
-    id: "level",
-    label: "Level",
-    kind: "choice",
-    question: "What level attorney do you need?",
-    options: [
-      "Junior associate (1–3 yrs)",
-      "Mid-level associate (4–7 yrs)",
-      "Senior associate (8+ yrs)",
-      "Partner track / Of counsel",
-    ],
-  },
-  {
-    id: "timing",
-    label: "Start timing",
-    kind: "choice",
-    question: "How soon do you want this person to start?",
-    options: ["Right away", "Within 30 days", "1–3 months", "3+ months", "Just exploring"],
-  },
-  {
-    id: "recruiterBefore",
-    label: "Used a recruiter before",
-    kind: "choice",
-    question: "Have you worked with a legal recruiter before?",
-    options: ["Currently working with one", "In the past", "Never before"],
-  },
-  {
-    id: "firmName",
-    label: "Firm name",
-    kind: "text",
-    question: "What is your firm's name?",
-    placeholder: "Your firm's legal name",
-  },
-  {
-    id: "firmWebsite",
-    label: "Firm website",
-    kind: "text",
-    inputType: "url",
-    question: "What is your firm's website?",
-    placeholder: "yourfirm.com",
-    skipLabel: "We don't have a website yet",
-  },
-  {
-    id: "source",
-    label: "Heard about us from",
-    kind: "choice",
-    question: "Where did you hear about Orion Placement?",
-    options: [
-      "Google search",
-      "LinkedIn",
-      "Referral from a colleague / attorney",
-      "Direct email",
-      "Bar association event",
-    ],
-    otherOption: "Somewhere else",
-  },
-  {
-    id: "pitch",
-    label: "Why join your firm",
-    kind: "textarea",
-    intro: "Quick reminder: there's no upfront cost. You only pay if you hire.",
-    question: "What makes your firm a great place for an attorney to join?",
-    placeholder: "Firm culture, mentorship, caseload quality, growth trajectory, compensation, flexibility…",
-  },
-  {
-    id: "fee",
-    label: "Placement fee OK",
-    kind: "fee",
-    intro: "Last question: there's no upfront cost, and nothing to pay unless you hire.",
-    question: "If you hire a qualified candidate we send, would a contingency placement fee work for your firm?",
-  },
-  {
-    id: "contact",
-    label: "Contact details",
-    kind: "contact",
-    question: "Where should we send qualified candidate profiles?",
-  },
+const PRACTICE_AREAS = [
+  "Estate Planning / Probate",
+  "Commercial Litigation",
+  "Real Estate Law",
+  "Corporate / M&A",
+  "Labor & Employment",
+  "Family Law",
+  "Personal Injury",
+  "Tax Law",
+  "Other Practice Area",
+];
+
+const EXPERIENCE_LEVELS = [
+  { id: "junior", label: "Junior Associate", sub: "1–3 years post-bar" },
+  { id: "mid", label: "Mid-Level Associate", sub: "4–7 years post-bar" },
+  { id: "senior", label: "Senior Associate", sub: "8+ years post-bar" },
+  { id: "partner", label: "Partner Track / Counsel", sub: "Portable book or leadership" },
+];
+
+const QUICK_LOCATIONS = [
+  "Houston, TX",
+  "Austin, TX",
+  "Dallas-Fort Worth, TX",
+  "San Antonio, TX",
+  "Statewide / Remote TX",
+  "Other Location",
+];
+
+const START_TIMELINES = [
+  { id: "immediate", label: "Immediately", sub: "Ready to interview this week" },
+  { id: "30days", label: "Within 30–60 Days", sub: "Active lateral transition" },
+  { id: "quarter", label: "1–3 Months", sub: "Upcoming strategic expansion" },
+  { id: "exploring", label: "Confidential Inquiry", sub: "Reviewing qualified talent" },
+];
+
+const FIRM_SIZES = [
+  "Solo Practice",
+  "2–5 Attorneys",
+  "6–20 Attorneys",
+  "21–50 Attorneys",
+  "50+ Attorneys",
 ];
 
 const TIME_SLOTS = [
@@ -146,14 +78,26 @@ const TIME_SLOTS = [
 ];
 
 export function Questionnaire() {
-  const [viewState, setViewState] = useState<"questions" | "notFit" | "booking" | "done">("questions");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [customText, setCustomText] = useState("");
-  const [isOtherSelected, setIsOtherSelected] = useState(false);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [viewState, setViewState] = useState<"form" | "booking" | "done">("form");
 
-  // Contact form state
-  const [contact, setContact] = useState({ name: "", email: "", phone: "" });
+  // Form State
+  const [data, setData] = useState<IntakeData>({
+    practiceArea: "Estate Planning / Probate",
+    customPracticeArea: "",
+    level: "Mid-Level Associate",
+    location: "Houston, TX",
+    customLocation: "",
+    timing: "Immediately",
+    firmSize: "6–20 Attorneys",
+    feeConfirmed: true,
+    firmName: "",
+    firmWebsite: "",
+    contactName: "",
+    email: "",
+    phone: "",
+  });
+
   const [contactSubmitted, setContactSubmitted] = useState(false);
 
   // Calendar booking state
@@ -163,12 +107,8 @@ export function Questionnaire() {
   const cardRef = useRef<HTMLDivElement>(null);
   const justin = people.find((p) => p.id === "justin") || people[0];
 
-  const currentQ = QUESTIONS[currentIndex];
-  const progressPercent = Math.round(((currentIndex + 1) / QUESTIONS.length) * 100);
-
-  // Generate next 10 business days on client mount to support Next.js 16 prerendering
+  // Generate next 10 business days for instant booking
   const [businessDays, setBusinessDays] = useState<Date[]>([]);
-
   useEffect(() => {
     const list: Date[] = [];
     const d = new Date();
@@ -183,7 +123,6 @@ export function Questionnaire() {
     setBusinessDays(list);
   }, []);
 
-  // Scroll to questionnaire on step change
   const scrollToCard = () => {
     if (cardRef.current) {
       const section = document.getElementById("questionnaire");
@@ -193,137 +132,113 @@ export function Questionnaire() {
     }
   };
 
-  const handleNext = (nextIndex: number) => {
-    const target = Math.max(0, Math.min(QUESTIONS.length - 1, nextIndex));
-    const nextQ = QUESTIONS[target];
-    const existing = answers[nextQ.id] || "";
-    const isOther = nextQ.kind === "choice" && existing !== "" && !(nextQ.options || []).includes(existing);
-
-    setIsOtherSelected(isOther);
-    setCustomText(nextQ.kind !== "choice" || isOther ? existing : "");
-    setCurrentIndex(target);
+  const handleStepChange = (newStep: 1 | 2 | 3) => {
+    setStep(newStep);
     scrollToCard();
   };
 
-  const handleAnswer = (val: string) => {
-    setAnswers((prev) => ({ ...prev, [currentQ.id]: val }));
-  };
+  // Step 1 Validation
+  const isStep1Valid = Boolean(
+    data.practiceArea &&
+      (data.practiceArea !== "Other Practice Area" || data.customPracticeArea?.trim()) &&
+      data.level &&
+      data.location &&
+      (data.location !== "Other Location" || data.customLocation?.trim())
+  );
 
-  const submitTextAnswer = (val: string = customText) => {
-    const trimmed = val.trim();
-    if (trimmed) {
-      handleAnswer(trimmed);
-      handleNext(currentIndex + 1);
-    }
-  };
+  // Step 2 Validation
+  const isStep2Valid = Boolean(data.timing && data.firmSize && data.feeConfirmed);
 
-  // Validation for contact info
+  // Step 3 Validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  const isNameValid = contact.name.trim().length >= 2;
-  const isEmailValid = emailRegex.test(contact.email.trim());
-  const isPhoneValid = contact.phone.replace(/\D/g, "").length >= 7;
-  const isContactValid = isNameValid && isEmailValid && isPhoneValid;
+  const isNameValid = data.contactName.trim().length >= 2;
+  const isEmailValid = emailRegex.test(data.email.trim());
+  const isPhoneValid = data.phone.replace(/\D/g, "").length >= 7;
+  const isFirmValid = data.firmName.trim().length >= 2;
+  const isStep3Valid = isNameValid && isEmailValid && isPhoneValid && isFirmValid;
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleFinalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setContactSubmitted(true);
-    if (isContactValid) {
+    if (isStep3Valid) {
       setViewState("booking");
       scrollToCard();
     }
   };
 
-  // NOT FIT SCREEN
-  if (viewState === "notFit") {
-    return (
-      <div ref={cardRef} className="q-card-box step-in text-center">
-        <div className="q-icon-disc" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#1D4ED8" }}>
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-        </div>
-        <h3 className="q-title mt-4">Thanks for being upfront.</h3>
-        <p className="q-sub-text">
-          Our service works on a one-time 23% contingency fee that is due <b>only if you hire</b> a candidate we introduce, backed by a 90-day replacement guarantee. If that doesn&apos;t align with your firm&apos;s current model, we might not be the right partner right now, and that is completely okay.
-        </p>
-        <div className="mt-8 space-y-3 max-w-sm mx-auto">
-          <button
-            type="button"
-            className="q-btn-primary"
-            onClick={() => {
-              setAnswers((prev) => ({ ...prev, fee: "" }));
-              setViewState("questions");
-              handleNext(QUESTIONS.findIndex((q) => q.kind === "fee"));
-            }}
-          >
-            Go back and adjust answer
-          </button>
-          <a href="#top" className="block text-sm text-[#5b6577] hover:underline pt-2">
-            Back to top of page
-          </a>
-        </div>
-      </div>
-    );
-  }
-
-  // BOOKING SCREEN
+  // BOOKING / CONFIRMATION SCREENS
   if (viewState === "booking") {
     return (
-      <div ref={cardRef} className="q-card-box step-in">
-        <div className="q-progress-wrap">
-          <div className="q-progress-meta">
-            <span className="q-step-badge">Final Step</span>
-            <span className="q-pct-badge">100% complete</span>
+      <div ref={cardRef} className="q-card-box step-in" style={{ background: "#FFFFFF", borderRadius: 16, border: "1.5px solid #E2E8F0", padding: "40px 32px", boxShadow: "0 20px 50px -15px rgba(8, 20, 42, 0.08)" }}>
+        <div style={{ textAlign: "center", marginBottom: 28 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 56, height: 56, borderRadius: "50%", background: "#EFF6FF", color: "#1D4ED8", margin: "0 auto 16px" }}>
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
           </div>
-          <div className="q-progress-track">
-            <div className="q-progress-fill" style={{ width: "100%" }} />
+          <div style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 700, marginBottom: 8 }}>
+            BRIEF RECEIVED · MATCHING IN PROGRESS
           </div>
+          <h3 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.2vw, 34px)", color: "#08142A", fontWeight: 500, margin: "0 0 10px", lineHeight: 1.2 }}>
+            Your candidate search is now active!
+          </h3>
+          <p style={{ color: "#475569", fontSize: 15.5, lineHeight: 1.6, maxWidth: 640, margin: "0 auto" }}>
+            We are curating pre-screened lateral attorney dossiers for <b>{data.firmName}</b>. Pick an optional 15-minute slot to confirm your seat parameters with Justin Sofman:
+          </p>
         </div>
 
-        <p className="q-eyebrow-accent">YOU&apos;RE ALMOST DONE</p>
-        <h3 className="q-title mt-2">Book your free intake call with Justin</h3>
-        <p className="q-sub-text">
-          Pick a 15-minute slot so Justin Sofman can confirm your seat brief and review matching candidate profiles.
-        </p>
-
         {/* STEP 1: CHOOSE A DAY */}
-        <p className="mt-6 mb-3 text-sm font-semibold text-[#0a1a33]">1. Choose a day</p>
-        <div className="q-days-scroll">
-          {businessDays.map((d) => {
-            const isSelected = selectedDate?.toDateString() === d.toDateString();
-            return (
-              <button
-                key={d.toISOString()}
-                type="button"
-                onClick={() => {
-                  setSelectedDate(d);
-                  setSelectedTime(null);
-                }}
-                className={`q-day-pill ${isSelected ? "selected" : ""}`}
-                aria-pressed={isSelected}
-              >
-                <span className={`block text-xs font-semibold ${isSelected ? "text-[#ecd496]" : "text-[#5b6577]"}`}>
-                  {d.toLocaleDateString("en-US", { weekday: "short" })}
-                </span>
-                <span className="block text-lg font-bold my-0.5">{d.getDate()}</span>
-                <span className={`block text-xs ${isSelected ? "text-white/80" : "text-[#5b6577]"}`}>
-                  {d.toLocaleDateString("en-US", { month: "short" })}
-                </span>
-              </button>
-            );
-          })}
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+            <b style={{ fontSize: 14, color: "#08142A" }}>1. Select a date for your 15-min call:</b>
+            <span style={{ fontSize: 12, color: "#64748B", fontFamily: "var(--mono)" }}>Next 10 business days</span>
+          </div>
+          <div className="q-days-scroll">
+            {businessDays.map((d) => {
+              const isSelected = selectedDate?.toDateString() === d.toDateString();
+              return (
+                <button
+                  key={d.toISOString()}
+                  type="button"
+                  onClick={() => {
+                    setSelectedDate(d);
+                    setSelectedTime(null);
+                  }}
+                  className={`q-day-pill ${isSelected ? "selected" : ""}`}
+                  aria-pressed={isSelected}
+                  style={{
+                    borderRadius: 10,
+                    padding: "12px 10px",
+                    textAlign: "center",
+                    border: isSelected ? "2px solid #1D4ED8" : "1.5px solid #E2E8F0",
+                    background: isSelected ? "#1D4ED8" : "#FFFFFF",
+                    color: isSelected ? "#FFFFFF" : "#08142A",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  <span style={{ display: "block", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: isSelected ? "#93C5FD" : "#64748B" }}>
+                    {d.toLocaleDateString("en-US", { weekday: "short" })}
+                  </span>
+                  <span style={{ display: "block", fontSize: 20, fontWeight: 700, margin: "2px 0" }}>
+                    {d.getDate()}
+                  </span>
+                  <span style={{ display: "block", fontSize: 11, color: isSelected ? "rgba(255,255,255,0.85)" : "#64748B" }}>
+                    {d.toLocaleDateString("en-US", { month: "short" })}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* STEP 2: CHOOSE A TIME */}
         {selectedDate && (
-          <div className="step-in mt-6">
-            <p className="mb-3 text-sm font-semibold text-[#0a1a33]">
-              2. Choose a time on {selectedDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+          <div style={{ marginBottom: 28 }} className="step-in">
+            <b style={{ display: "block", fontSize: 14, color: "#08142A", marginBottom: 12 }}>
+              2. Select time slot on {selectedDate.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })}:
+            </b>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))", gap: 10 }}>
               {TIME_SLOTS.map((t) => {
                 const isSelected = selectedTime === t;
                 return (
@@ -331,20 +246,29 @@ export function Questionnaire() {
                     key={t}
                     type="button"
                     onClick={() => setSelectedTime(t)}
-                    className={`q-time-pill ${isSelected ? "selected" : ""}`}
-                    aria-pressed={isSelected}
+                    style={{
+                      padding: "12px 14px",
+                      borderRadius: 8,
+                      border: isSelected ? "2px solid #1D4ED8" : "1.5px solid #E2E8F0",
+                      background: isSelected ? "#1D4ED8" : "#FAF9F5",
+                      color: isSelected ? "#FFFFFF" : "#08142A",
+                      fontSize: 14,
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      transition: "all 0.15s ease",
+                    }}
                   >
                     {t}
                   </button>
                 );
               })}
             </div>
-            <p className="mt-2 text-xs text-[#5b6577]">Times shown in Eastern Standard Time (EST).</p>
+            <p style={{ marginTop: 8, fontSize: 12, color: "#64748B" }}>Central Time (CT) / US Eastern</p>
           </div>
         )}
 
-        {/* CONFIRM BUTTON */}
-        <div className="mt-8 space-y-3">
+        {/* CTA BUTTONS */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <button
             type="button"
             disabled={!selectedDate || !selectedTime}
@@ -352,111 +276,98 @@ export function Questionnaire() {
               setViewState("done");
               scrollToCard();
             }}
-            className="q-btn-primary"
+            style={{
+              width: "100%",
+              padding: "16px 28px",
+              borderRadius: 7,
+              background: selectedDate && selectedTime ? "#1D4ED8" : "#E2E8F0",
+              color: selectedDate && selectedTime ? "#FFFFFF" : "#94A3B8",
+              fontSize: 16,
+              fontWeight: 600,
+              border: "none",
+              cursor: selectedDate && selectedTime ? "pointer" : "not-allowed",
+              boxShadow: selectedDate && selectedTime ? "0 8px 20px rgba(29, 78, 216, 0.3)" : "none",
+              transition: "all 0.2s ease",
+            }}
           >
             {selectedDate && selectedTime
               ? `Confirm Call: ${selectedDate.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} at ${selectedTime}`
-              : "Select a day and time"}
+              : "Select a date and time above"}
           </button>
 
-          <div className="text-center pt-2">
-            <span className="text-xs text-[#5b6577]">Prefer Calendly directly? </span>
-            <a
-              href={justin.calendly || "https://calendly.com/orionplacement/call-with-justin"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-[#1b3a6b] font-semibold underline underline-offset-2"
+          <div style={{ textAlign: "center", paddingTop: 8 }}>
+            <span style={{ fontSize: 13, color: "#64748B" }}>Prefer to skip the call? </span>
+            <button
+              type="button"
+              onClick={() => {
+                setViewState("done");
+                scrollToCard();
+              }}
+              style={{ background: "none", border: "none", color: "#1D4ED8", fontSize: 13, fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}
             >
-              Open Justin&apos;s Calendly link
-            </a>
+              Skip call and just email me dossiers →
+            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={() => {
-              setViewState("questions");
-              handleNext(QUESTIONS.length - 1);
-            }}
-            className="w-full text-center py-2 text-sm text-[#5b6577] hover:text-[#0a1a33]"
-          >
-            ← Back to contact details
-          </button>
         </div>
       </div>
     );
   }
 
-  // DONE SCREEN
-  if (viewState === "done" && selectedDate && selectedTime) {
-    const formattedDate = `${selectedDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })} at ${selectedTime}`;
-
+  if (viewState === "done") {
     return (
-      <div ref={cardRef} className="q-card-box step-in">
-        <div className="text-center mb-6">
-          <div className="q-check-disc">
-            <svg viewBox="0 0 20 20" className="size-8" fill="currentColor">
-              <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" />
+      <div ref={cardRef} className="q-card-box step-in" style={{ background: "#FFFFFF", borderRadius: 16, border: "1.5px solid #E2E8F0", padding: "44px 34px", boxShadow: "0 20px 50px -15px rgba(8, 20, 42, 0.08)" }}>
+        <div style={{ textAlign: "center", marginBottom: 28 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 60, height: 60, borderRadius: "50%", background: "#DCFCE7", color: "#166534", margin: "0 auto 16px" }}>
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 6L9 17l-5-5" />
             </svg>
           </div>
-          <p className="q-eyebrow-accent mt-4">SEARCH INITIATED</p>
-          <h3 className="q-title mt-2">Intake call confirmed!</h3>
-          <p className="q-sub-text">
-            Justin Sofman will speak with you on <b>{formattedDate}</b>. A calendar invite has been queued for <b>{contact.email}</b>.
+          <div style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#166534", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 700, marginBottom: 8 }}>
+            SEARCH ACTIVE · 48H DOSSIER DELIVERY
+          </div>
+          <h3 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 36px)", color: "#08142A", fontWeight: 500, margin: "0 0 12px" }}>
+            Your seat brief is officially registered!
+          </h3>
+          <p style={{ color: "#475569", fontSize: 16, lineHeight: 1.6, maxWidth: 640, margin: "0 auto" }}>
+            We have begun screening lateral candidates for <b>{data.firmName || "your firm"}</b>. An executive confirmation and initial matching dossiers will be delivered to <b>{data.email}</b>.
           </p>
         </div>
 
         {/* SUMMARY CARD */}
-        <div className="rounded-2xl border border-[#e6ebf3] bg-[#faf8f3] p-5 text-sm space-y-2.5 mb-6">
-          <div className="font-semibold text-[#0a1a33] pb-2 border-b border-[#e4e2da]">
-            Your Seat Brief Summary
+        <div style={{ background: "#FAF9F5", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "24px 22px", marginBottom: 24 }}>
+          <div style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#1D4ED8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>
+            SEAT BRIEF SUMMARY
           </div>
-          <div className="flex justify-between">
-            <span className="text-[#5b6577]">Location:</span>
-            <span className="font-medium text-[#0a1a33]">{answers.location || "Not specified"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-[#5b6577]">Practice area:</span>
-            <span className="font-medium text-[#0a1a33]">{answers.practiceArea || "General"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-[#5b6577]">Experience level:</span>
-            <span className="font-medium text-[#0a1a33]">{answers.level || "Any"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-[#5b6577]">Firm name:</span>
-            <span className="font-medium text-[#0a1a33]">{answers.firmName || "Confidential firm"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-[#5b6577]">Timeline:</span>
-            <span className="font-medium text-[#0a1a33]">{answers.timing || "Immediate"}</span>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 14, fontSize: 14 }}>
+            <div>
+              <span style={{ color: "#64748B", display: "block", fontSize: 12 }}>Practice Area</span>
+              <b style={{ color: "#08142A" }}>{data.practiceArea === "Other Practice Area" ? data.customPracticeArea : data.practiceArea}</b>
+            </div>
+            <div>
+              <span style={{ color: "#64748B", display: "block", fontSize: 12 }}>Experience Level</span>
+              <b style={{ color: "#08142A" }}>{data.level}</b>
+            </div>
+            <div>
+              <span style={{ color: "#64748B", display: "block", fontSize: 12 }}>Location</span>
+              <b style={{ color: "#08142A" }}>{data.location === "Other Location" ? data.customLocation : data.location}</b>
+            </div>
+            <div>
+              <span style={{ color: "#64748B", display: "block", fontSize: 12 }}>Target Timeline</span>
+              <b style={{ color: "#08142A" }}>{data.timing}</b>
+            </div>
           </div>
         </div>
 
-        {/* DIRECT CONTACT REMINDER */}
-        <div className="rounded-xl bg-[#fff8d9] border border-[#d9a400]/40 p-4 text-xs text-[#6b4e00] flex items-center gap-3">
-          <span className="flex-shrink-0 text-[#1D4ED8]" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-          </span>
+        {/* DIRECT CONTACT NOTIFICATION */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 10, padding: "14px 18px", color: "#1E40AF", fontSize: 14 }}>
+          <span style={{ fontSize: 18, flexShrink: 0 }}>✓</span>
           <div>
-            <b>Need candidates faster?</b> You can book directly with Justin via{" "}
-            <a href="https://calendly.com/orionplacement/call-with-justin" target="_blank" rel="noopener noreferrer" className="underline font-bold text-[#0a1a33]">
-              Calendly
-            </a>{" "}
-            or email{" "}
-            <a href="mailto:justin@orionplacement.com" className="underline font-bold text-[#0a1a33]">
-              justin@orionplacement.com
-            </a>
-            .
+            <b>100% Contingency Guarantee:</b> Zero upfront cost. 23% fee is due only 15 days after your hire starts, backed by our 90-day replacement warranty.
           </div>
         </div>
 
-        <div className="mt-8 text-center">
-          <Link href="/" className="inline-block text-sm text-[#1b3a6b] font-semibold hover:underline">
+        <div style={{ textAlign: "center", marginTop: 28 }}>
+          <Link href="/" style={{ color: "#1D4ED8", fontSize: 14, fontWeight: 600, textDecoration: "underline" }}>
             ← Return to Orion Placement home
           </Link>
         </div>
@@ -464,328 +375,565 @@ export function Questionnaire() {
     );
   }
 
-  // ACTIVE QUESTIONS VIEW
+  // 3-STEP INTAKE FLOW
   return (
-    <div ref={cardRef} className="q-card-box step-in">
-      {/* TOP PROGRESS BAR */}
-      <div className="q-progress-wrap">
-        <div className="q-progress-meta">
-          <span className="q-step-badge">
-            Step {currentIndex + 1} of {QUESTIONS.length}
+    <div
+      ref={cardRef}
+      className="q-card-box step-in"
+      style={{
+        background: "#FFFFFF",
+        borderRadius: 16,
+        padding: "36px 30px",
+        border: "1.5px solid #E2E8F0",
+        boxShadow: "0 20px 50px -15px rgba(8, 20, 42, 0.08)",
+      }}
+    >
+      {/* 3-STEP PROGRESS HEADER */}
+      <div style={{ marginBottom: 30 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span
+              style={{
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                fontWeight: 700,
+                color: "#1D4ED8",
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 6,
+                padding: "4px 10px",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+              }}
+            >
+              Step {step} of 3
+            </span>
+            <span style={{ fontSize: 13, color: "#64748B", fontWeight: 500 }}>
+              {step === 1 && "Role & Practice Area"}
+              {step === 2 && "Timeline & Firm Parameters"}
+              {step === 3 && "Contact & Dossier Delivery"}
+            </span>
+          </div>
+          <span style={{ fontFamily: "var(--mono)", fontSize: 12, fontWeight: 700, color: "#1D4ED8" }}>
+            {step === 1 && "33% Complete"}
+            {step === 2 && "66% Complete"}
+            {step === 3 && "100% Final Step"}
           </span>
-          <span className="q-pct-badge">{progressPercent}% complete</span>
         </div>
 
-        <div className="q-progress-track" role="progressbar" aria-valuenow={progressPercent} aria-valuemin={0} aria-valuemax={100}>
-          <div className="q-progress-fill" style={{ width: `${progressPercent}%` }} />
+        {/* Stepper bar */}
+        <div style={{ width: "100%", height: 6, background: "#F1F5F9", borderRadius: 999, overflow: "hidden" }}>
+          <div
+            style={{
+              height: "100%",
+              width: step === 1 ? "33%" : step === 2 ? "66%" : "100%",
+              background: "linear-gradient(90deg, #1D4ED8 0%, #3B82F6 100%)",
+              borderRadius: 999,
+              transition: "width 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          />
         </div>
       </div>
 
-      {/* CALLOUT INTRO IF PRESENT */}
-      {currentQ.intro && (
-        <div className="q-intro-banner">
-          <p>{currentQ.intro}</p>
-        </div>
-      )}
-
-      {/* QUESTION HEADING */}
-      <h3 className="q-title">{currentQ.question}</h3>
-
-      {/* 1. TEXT INPUT TYPE */}
-      {currentQ.kind === "text" && (
-        <form
-          className="mt-6"
-          onSubmit={(e) => {
-            e.preventDefault();
-            submitTextAnswer();
-          }}
-        >
-          <input
-            type={currentQ.inputType || "text"}
-            autoFocus
-            className="q-input"
-            placeholder={currentQ.placeholder}
-            value={customText}
-            onChange={(e) => setCustomText(e.target.value)}
-          />
-
-          {currentQ.id === "location" && (
-            <div className="q-quick-chips-wrap">
-              {["Austin, TX", "Houston, TX", "Dallas, TX", "San Antonio, TX", "Remote / Anywhere in TX"].map((city) => (
-                <button
-                  key={city}
-                  type="button"
-                  onClick={() => {
-                    setCustomText(city);
-                    submitTextAnswer(city);
-                  }}
-                  className="q-quick-chip"
-                >
-                  {city}
-                </button>
-              ))}
-            </div>
-          )}
-
-          <div className="mt-6 flex items-center justify-between gap-4">
-            {currentIndex > 0 ? (
-              <button
-                type="button"
-                onClick={() => handleNext(currentIndex - 1)}
-                className="q-btn-back"
-              >
-                ← Back
-              </button>
-            ) : <span />}
-
-            <div className="flex items-center gap-3">
-              {currentQ.skipLabel && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleAnswer(currentQ.skipLabel || "Skipped");
-                    handleNext(currentIndex + 1);
-                  }}
-                  className="q-btn-skip"
-                >
-                  {currentQ.skipLabel}
-                </button>
-              )}
-              <button
-                type="submit"
-                disabled={!customText.trim() && !currentQ.skipLabel}
-                className="q-btn-continue"
-              >
-                Continue →
-              </button>
-            </div>
+      {/* STEP 1: ROLE & PRACTICE AREA */}
+      {step === 1 && (
+        <div className="step-in">
+          <div style={{ marginBottom: 24 }}>
+            <h3 style={{ fontFamily: "var(--display)", fontSize: "clamp(24px, 2.6vw, 30px)", color: "#08142A", fontWeight: 500, margin: "0 0 8px", lineHeight: 1.25 }}>
+              Who are you looking to hire?
+            </h3>
+            <p style={{ color: "#64748B", fontSize: 15, margin: 0 }}>
+              Select the practice area, seniority level, and target Texas market for your open seat.
+            </p>
           </div>
-        </form>
-      )}
 
-      {/* 2. CHOICE TYPE */}
-      {currentQ.kind === "choice" && (
-        <div className="mt-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            {(currentQ.options || []).map((opt) => {
-              const isSelected = answers[currentQ.id] === opt && !isOtherSelected;
-              return (
-                <button
-                  key={opt}
-                  type="button"
-                  onClick={() => {
-                    setIsOtherSelected(false);
-                    handleAnswer(opt);
-                    handleNext(currentIndex + 1);
-                  }}
-                  className={`q-choice-btn ${isSelected ? "selected" : ""}`}
-                >
-                  <span className="q-choice-label">{opt}</span>
-                  <span className="q-choice-indicator" aria-hidden="true">
-                    {isSelected ? "✓" : ""}
-                  </span>
-                </button>
-              );
-            })}
+          {/* 1. Practice Area */}
+          <div style={{ marginBottom: 26 }}>
+            <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 10 }}>
+              1. Primary Practice Area
+            </label>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
+              {PRACTICE_AREAS.map((pa) => {
+                const isSelected = data.practiceArea === pa;
+                return (
+                  <button
+                    key={pa}
+                    type="button"
+                    onClick={() => setData((prev) => ({ ...prev, practiceArea: pa }))}
+                    style={{
+                      padding: "12px 14px",
+                      borderRadius: 8,
+                      border: isSelected ? "1.5px solid #1D4ED8" : "1.5px solid #E2E8F0",
+                      background: isSelected ? "#EFF6FF" : "#FFFFFF",
+                      color: isSelected ? "#1D4ED8" : "#08142A",
+                      fontSize: 13.5,
+                      fontWeight: isSelected ? 600 : 500,
+                      textAlign: "left",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    <span>{pa}</span>
+                    <span
+                      style={{
+                        width: 16,
+                        height: 16,
+                        borderRadius: "50%",
+                        border: isSelected ? "4px solid #1D4ED8" : "1.5px solid #CBD5E1",
+                        background: "#FFFFFF",
+                        flexShrink: 0,
+                      }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
 
-            {currentQ.otherOption && (
-              <button
-                type="button"
-                onClick={() => setIsOtherSelected(true)}
-                className={`q-choice-btn ${isOtherSelected ? "selected" : ""}`}
-              >
-                <span className="q-choice-label">{currentQ.otherOption}</span>
-                <span className="q-choice-indicator" aria-hidden="true">
-                  {isOtherSelected ? "✓" : ""}
-                </span>
-              </button>
+            {data.practiceArea === "Other Practice Area" && (
+              <div style={{ marginTop: 10 }}>
+                <input
+                  type="text"
+                  placeholder="Specify practice area (e.g. Healthcare Regulatory, Immigration, IP)"
+                  value={data.customPracticeArea}
+                  onChange={(e) => setData((prev) => ({ ...prev, customPracticeArea: e.target.value }))}
+                  className="q-input"
+                  style={{ width: "100%", padding: "12px 16px", borderRadius: 8, border: "1.5px solid #1D4ED8", fontSize: 14 }}
+                  autoFocus
+                />
+              </div>
             )}
           </div>
 
-          {/* IF OTHER SELECTED */}
-          {isOtherSelected && (
-            <div className="mt-4 step-in">
+          {/* 2. Experience Level */}
+          <div style={{ marginBottom: 26 }}>
+            <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 10 }}>
+              2. Attorney Seniority Level
+            </label>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
+              {EXPERIENCE_LEVELS.map((lvl) => {
+                const isSelected = data.level === lvl.label;
+                return (
+                  <button
+                    key={lvl.id}
+                    type="button"
+                    onClick={() => setData((prev) => ({ ...prev, level: lvl.label }))}
+                    style={{
+                      padding: "12px 14px",
+                      borderRadius: 8,
+                      border: isSelected ? "1.5px solid #1D4ED8" : "1.5px solid #E2E8F0",
+                      background: isSelected ? "#EFF6FF" : "#FFFFFF",
+                      textAlign: "left",
+                      cursor: "pointer",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    <b style={{ display: "block", fontSize: 14, color: isSelected ? "#1D4ED8" : "#08142A" }}>
+                      {lvl.label}
+                    </b>
+                    <span style={{ fontSize: 12, color: "#64748B" }}>{lvl.sub}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 3. Hiring Location */}
+          <div style={{ marginBottom: 30 }}>
+            <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 10 }}>
+              3. Target Market / City
+            </label>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {QUICK_LOCATIONS.map((loc) => {
+                const isSelected = data.location === loc;
+                return (
+                  <button
+                    key={loc}
+                    type="button"
+                    onClick={() => setData((prev) => ({ ...prev, location: loc }))}
+                    style={{
+                      padding: "9px 18px",
+                      borderRadius: 999,
+                      border: isSelected ? "1.5px solid #1D4ED8" : "1.5px solid #E2E8F0",
+                      background: isSelected ? "#1D4ED8" : "#FAF9F5",
+                      color: isSelected ? "#FFFFFF" : "#08142A",
+                      fontSize: 13.5,
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    {loc}
+                  </button>
+                );
+              })}
+            </div>
+
+            {data.location === "Other Location" && (
+              <div style={{ marginTop: 10 }}>
+                <input
+                  type="text"
+                  placeholder="Specify city or state (e.g. Plano, TX or Remote across Texas)"
+                  value={data.customLocation}
+                  onChange={(e) => setData((prev) => ({ ...prev, customLocation: e.target.value }))}
+                  className="q-input"
+                  style={{ width: "100%", padding: "12px 16px", borderRadius: 8, border: "1.5px solid #1D4ED8", fontSize: 14 }}
+                  autoFocus
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Continue Action */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1.5px solid #F1F5F9", paddingTop: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#64748B", fontSize: 13 }}>
+              <span style={{ color: "#166534", fontWeight: 700 }}>✓</span>
+              <span>100% Contingency · Zero upfront retainer</span>
+            </div>
+            <button
+              type="button"
+              disabled={!isStep1Valid}
+              onClick={() => handleStepChange(2)}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: isStep1Valid ? "#1D4ED8" : "#E2E8F0",
+                color: isStep1Valid ? "#FFFFFF" : "#94A3B8",
+                padding: "14px 28px",
+                borderRadius: 7,
+                fontSize: 15.5,
+                fontWeight: 600,
+                border: "none",
+                cursor: isStep1Valid ? "pointer" : "not-allowed",
+                boxShadow: isStep1Valid ? "0 6px 16px rgba(29, 78, 216, 0.3)" : "none",
+                transition: "all 0.15s ease",
+              }}
+            >
+              <span>Continue to Timeline</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 2: TIMELINE & FIRM PARAMETERS */}
+      {step === 2 && (
+        <div className="step-in">
+          <div style={{ marginBottom: 24 }}>
+            <h3 style={{ fontFamily: "var(--display)", fontSize: "clamp(24px, 2.6vw, 30px)", color: "#08142A", fontWeight: 500, margin: "0 0 8px", lineHeight: 1.25 }}>
+              When do you need this person to start?
+            </h3>
+            <p style={{ color: "#64748B", fontSize: 15, margin: 0 }}>
+              Help us align candidate availability and match your firm&apos;s hiring schedule.
+            </p>
+          </div>
+
+          {/* 1. Target Start Timing */}
+          <div style={{ marginBottom: 26 }}>
+            <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 10 }}>
+              1. Desired Start Date
+            </label>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 10 }}>
+              {START_TIMELINES.map((tm) => {
+                const isSelected = data.timing === tm.label;
+                return (
+                  <button
+                    key={tm.id}
+                    type="button"
+                    onClick={() => setData((prev) => ({ ...prev, timing: tm.label }))}
+                    style={{
+                      padding: "14px 16px",
+                      borderRadius: 8,
+                      border: isSelected ? "1.5px solid #1D4ED8" : "1.5px solid #E2E8F0",
+                      background: isSelected ? "#EFF6FF" : "#FFFFFF",
+                      textAlign: "left",
+                      cursor: "pointer",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    <b style={{ display: "block", fontSize: 14.5, color: isSelected ? "#1D4ED8" : "#08142A" }}>
+                      {tm.label}
+                    </b>
+                    <span style={{ fontSize: 12, color: "#64748B" }}>{tm.sub}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 2. Firm Size */}
+          <div style={{ marginBottom: 26 }}>
+            <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 10 }}>
+              2. Total Attorneys in Your Firm
+            </label>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {FIRM_SIZES.map((fs) => {
+                const isSelected = data.firmSize === fs;
+                return (
+                  <button
+                    key={fs}
+                    type="button"
+                    onClick={() => setData((prev) => ({ ...prev, firmSize: fs }))}
+                    style={{
+                      padding: "9px 18px",
+                      borderRadius: 999,
+                      border: isSelected ? "1.5px solid #1D4ED8" : "1.5px solid #E2E8F0",
+                      background: isSelected ? "#1D4ED8" : "#FAF9F5",
+                      color: isSelected ? "#FFFFFF" : "#08142A",
+                      fontSize: 13.5,
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    {fs}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 3. Transparent Contingency Terms Box */}
+          <div style={{ background: "#FAF9F5", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "20px 22px", marginBottom: 30 }}>
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+              <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#EFF6FF", border: "1px solid #DBEAFE", color: "#1D4ED8", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <div style={{ flex: 1 }}>
+                <b style={{ display: "block", fontSize: 15, color: "#08142A", marginBottom: 4 }}>
+                  Zero Upfront Cost · Standard 23% Contingency
+                </b>
+                <p style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 10px" }}>
+                  Orion works on 100% contingency. There are no retainers or exclusivity requirements. A placement fee is payable only when a candidate you interview starts at your firm, backed by our 90-day replacement warranty.
+                </p>
+                <label style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13.5, fontWeight: 600, color: "#08142A", cursor: "pointer" }}>
+                  <input
+                    type="checkbox"
+                    checked={data.feeConfirmed}
+                    onChange={(e) => setData((prev) => ({ ...prev, feeConfirmed: e.target.checked }))}
+                    style={{ width: 17, height: 17, accentColor: "#1D4ED8", cursor: "pointer" }}
+                  />
+                  <span>I agree to Orion&apos;s contingency placement model</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {/* Continue / Back Actions */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1.5px solid #F1F5F9", paddingTop: 20 }}>
+            <button
+              type="button"
+              onClick={() => handleStepChange(1)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#64748B",
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: "pointer",
+                padding: "8px 12px",
+              }}
+            >
+              ← Back
+            </button>
+            <button
+              type="button"
+              disabled={!isStep2Valid}
+              onClick={() => handleStepChange(3)}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: isStep2Valid ? "#1D4ED8" : "#E2E8F0",
+                color: isStep2Valid ? "#FFFFFF" : "#94A3B8",
+                padding: "14px 28px",
+                borderRadius: 7,
+                fontSize: 15.5,
+                fontWeight: 600,
+                border: "none",
+                cursor: isStep2Valid ? "pointer" : "not-allowed",
+                boxShadow: isStep2Valid ? "0 6px 16px rgba(29, 78, 216, 0.3)" : "none",
+                transition: "all 0.15s ease",
+              }}
+            >
+              <span>Continue to Contact</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 3: CONTACT & DOSSIER DELIVERY */}
+      {step === 3 && (
+        <form onSubmit={handleFinalSubmit} className="step-in">
+          <div style={{ marginBottom: 24 }}>
+            <h3 style={{ fontFamily: "var(--display)", fontSize: "clamp(24px, 2.6vw, 30px)", color: "#08142A", fontWeight: 500, margin: "0 0 8px", lineHeight: 1.25 }}>
+              Where should we send candidate profiles?
+            </h3>
+            <p style={{ color: "#64748B", fontSize: 15, margin: 0 }}>
+              Screened attorney dossiers matched to your brief will be delivered straight to your inbox within 48–72 hours.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, marginBottom: 20 }}>
+            <div>
+              <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 6 }}>
+                Firm Legal Name *
+              </label>
               <input
                 type="text"
-                autoFocus
-                className="q-input"
-                placeholder="Please specify…"
-                value={customText}
-                onChange={(e) => setCustomText(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    submitTextAnswer();
-                  }
+                placeholder="e.g. Apex Legal Group, PLLC"
+                value={data.firmName}
+                onChange={(e) => setData((prev) => ({ ...prev, firmName: e.target.value }))}
+                style={{
+                  width: "100%",
+                  padding: "12px 16px",
+                  borderRadius: 8,
+                  border: contactSubmitted && !isFirmValid ? "1.5px solid #EF4444" : "1.5px solid #CBD5E1",
+                  fontSize: 14.5,
+                  outline: "none",
+                }}
+                required
+              />
+            </div>
+
+            <div>
+              <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 6 }}>
+                Firm Website <span style={{ color: "#94A3B8", fontWeight: 400 }}>(Optional)</span>
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. apexlegal.com"
+                value={data.firmWebsite}
+                onChange={(e) => setData((prev) => ({ ...prev, firmWebsite: e.target.value }))}
+                style={{
+                  width: "100%",
+                  padding: "12px 16px",
+                  borderRadius: 8,
+                  border: "1.5px solid #CBD5E1",
+                  fontSize: 14.5,
+                  outline: "none",
                 }}
               />
-              <button
-                type="button"
-                disabled={!customText.trim()}
-                onClick={() => submitTextAnswer()}
-                className="q-btn-continue mt-3"
-              >
-                Continue →
-              </button>
             </div>
-          )}
 
-          {currentIndex > 0 && (
-            <div className="mt-6">
-              <button
-                type="button"
-                onClick={() => handleNext(currentIndex - 1)}
-                className="q-btn-back"
-              >
-                ← Back
-              </button>
+            <div>
+              <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 6 }}>
+                Your Name &amp; Role *
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. Jane Doe · Managing Partner"
+                value={data.contactName}
+                onChange={(e) => setData((prev) => ({ ...prev, contactName: e.target.value }))}
+                style={{
+                  width: "100%",
+                  padding: "12px 16px",
+                  borderRadius: 8,
+                  border: contactSubmitted && !isNameValid ? "1.5px solid #EF4444" : "1.5px solid #CBD5E1",
+                  fontSize: 14.5,
+                  outline: "none",
+                }}
+                required
+              />
             </div>
-          )}
-        </div>
-      )}
 
-      {/* 3. TEXTAREA TYPE */}
-      {currentQ.kind === "textarea" && (
-        <form
-          className="mt-6"
-          onSubmit={(e) => {
-            e.preventDefault();
-            submitTextAnswer();
-          }}
-        >
-          <textarea
-            autoFocus
-            rows={4}
-            className="q-input"
-            placeholder={currentQ.placeholder}
-            value={customText}
-            onChange={(e) => setCustomText(e.target.value)}
-          />
-          <div className="mt-6 flex items-center justify-between">
+            <div>
+              <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 6 }}>
+                Work Email Address *
+              </label>
+              <input
+                type="email"
+                placeholder="e.g. jdoe@apexlegal.com"
+                value={data.email}
+                onChange={(e) => setData((prev) => ({ ...prev, email: e.target.value }))}
+                style={{
+                  width: "100%",
+                  padding: "12px 16px",
+                  borderRadius: 8,
+                  border: contactSubmitted && !isEmailValid ? "1.5px solid #EF4444" : "1.5px solid #CBD5E1",
+                  fontSize: 14.5,
+                  outline: "none",
+                }}
+                required
+              />
+            </div>
+
+            <div style={{ gridColumn: "1 / -1" }}>
+              <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 6 }}>
+                Direct Phone Number *
+              </label>
+              <input
+                type="tel"
+                placeholder="e.g. (512) 555-0199"
+                value={data.phone}
+                onChange={(e) => setData((prev) => ({ ...prev, phone: e.target.value }))}
+                style={{
+                  width: "100%",
+                  padding: "12px 16px",
+                  borderRadius: 8,
+                  border: contactSubmitted && !isPhoneValid ? "1.5px solid #EF4444" : "1.5px solid #CBD5E1",
+                  fontSize: 14.5,
+                  outline: "none",
+                }}
+                required
+              />
+            </div>
+          </div>
+
+          {/* Privacy & Assurance Banner */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, background: "#FAF9F5", border: "1px solid #E2E8F0", borderRadius: 8, padding: "12px 16px", color: "#475569", fontSize: 13, marginBottom: 28 }}>
+            <span style={{ color: "#166534", fontWeight: 700 }}>🔒</span>
+            <span>100% Confidential. No public job posting. No candidate or unsolicited sales spam.</span>
+          </div>
+
+          {/* Final Submit / Back Actions */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1.5px solid #F1F5F9", paddingTop: 20 }}>
             <button
               type="button"
-              onClick={() => handleNext(currentIndex - 1)}
-              className="q-btn-back"
+              onClick={() => handleStepChange(2)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#64748B",
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: "pointer",
+                padding: "8px 12px",
+              }}
             >
               ← Back
             </button>
             <button
               type="submit"
-              disabled={!customText.trim()}
-              className="q-btn-continue"
-            >
-              Continue →
-            </button>
-          </div>
-        </form>
-      )}
-
-      {/* 4. FEE STEP */}
-      {currentQ.kind === "fee" && (
-        <div className="mt-6">
-          <div className="grid grid-cols-2 gap-4">
-            <button
-              type="button"
-              onClick={() => {
-                handleAnswer("Yes");
-                handleNext(currentIndex + 1);
+              disabled={contactSubmitted && !isStep3Valid}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                padding: "15px 32px",
+                borderRadius: 7,
+                fontSize: 16,
+                fontWeight: 600,
+                border: "none",
+                cursor: "pointer",
+                boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
+                transition: "all 0.15s ease",
               }}
-              className="q-fee-btn yes"
             >
-              <span className="block text-xl font-bold text-[#1A1917]">Yes</span>
-              <span className="block text-xs text-[#546359] mt-1">23% fee only upon hire</span>
+              <span>Submit Brief &amp; Receive Candidate Dossiers</span>
+              <span aria-hidden="true">→</span>
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                handleAnswer("No");
-                setViewState("notFit");
-              }}
-              className="q-fee-btn no"
-            >
-              <span className="block text-xl font-bold text-[#546359]">No</span>
-              <span className="block text-xs text-[#546359] mt-1">We don&apos;t pay fees</span>
-            </button>
-          </div>
-
-          <div className="mt-6">
-            <button
-              type="button"
-              onClick={() => handleNext(currentIndex - 1)}
-              className="q-btn-back"
-            >
-              ← Back
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* 5. CONTACT STEP */}
-      {currentQ.kind === "contact" && (
-        <form className="mt-6 space-y-4" onSubmit={handleContactSubmit}>
-          <div>
-            <label className="q-label">Your Name</label>
-            <input
-              type="text"
-              required
-              className="q-input"
-              placeholder="e.g. Jane Smith, Managing Partner"
-              value={contact.name}
-              onChange={(e) => setContact({ ...contact, name: e.target.value })}
-            />
-            {contactSubmitted && !isNameValid && (
-              <p className="q-field-err">Please enter your full name.</p>
-            )}
-          </div>
-
-          <div>
-            <label className="q-label">Work Email</label>
-            <input
-              type="email"
-              required
-              className="q-input"
-              placeholder="jane@yourfirm.com"
-              value={contact.email}
-              onChange={(e) => setContact({ ...contact, email: e.target.value })}
-            />
-            {contactSubmitted && !isEmailValid && (
-              <p className="q-field-err">Please enter a valid work email.</p>
-            )}
-          </div>
-
-          <div>
-            <label className="q-label">Direct Phone</label>
-            <input
-              type="tel"
-              required
-              className="q-input"
-              placeholder="(555) 000-0000"
-              value={contact.phone}
-              onChange={(e) => setContact({ ...contact, phone: e.target.value })}
-            />
-            {contactSubmitted && !isPhoneValid && (
-              <p className="q-field-err">Please enter a direct phone number.</p>
-            )}
-          </div>
-
-          <div className="pt-2">
-            <button
-              type="submit"
-              className="q-btn-primary"
-            >
-              See candidate availability &amp; book call →
-            </button>
-            <p className="text-xs text-center text-[#546359] mt-3" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
-              <span>100% confidential · Never shared with other recruiters or external portals</span>
-            </p>
           </div>
         </form>
       )}
     </div>
   );
 }
-

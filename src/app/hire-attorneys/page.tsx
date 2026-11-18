@@ -1114,17 +1114,17 @@ export default function HireAttorneysLandingPage() {
               }}
             >
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
-              <span>START YOUR SEARCH · 2 MINUTES</span>
+              <span>START YOUR SEARCH · 3 SIMPLE STEPS</span>
             </div>
             <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
               Tell us who you&apos;re looking <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>for</span>
             </h2>
             <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
-              A few quick questions. Takes 2 minutes. You only pay if you hire.
+              3 quick steps. Takes under 45 seconds. Zero upfront retainer — you only pay if you hire.
             </p>
           </div>
 
-          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <Suspense fallback={<div className="q-card-box text-center py-12 text-[#5b6577]">Loading questionnaire...</div>}>
               <Questionnaire />
             </Suspense>
