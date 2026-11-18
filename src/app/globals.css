@@ -5950,18 +5950,24 @@ table.data.compare td.us{background:#F5F8FC}
   .header-cta{min-height:40px;padding:8px 14px;font-size:13.5px}
   .menu-btn{width:40px;height:40px;min-height:40px;min-width:40px;padding:0;display:inline-flex;align-items:center;justify-content:center}
   
-  /* Mobile Hero Eyebrow Capsule (single line, never wrap) */
+  /* Mobile Hero Eyebrow Capsule (single line, full text visible, never cut off) */
   .hero-eyebrow-capsule {
+    font-family: var(--body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-weight: 600 !important;
     white-space: nowrap !important;
-    font-size: clamp(8.5px, 2.5vw, 10.5px) !important;
-    letter-spacing: 0.04em !important;
-    padding: 5px 12px !important;
-    gap: 6px !important;
-    max-width: calc(100vw - 32px) !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    font-size: clamp(8px, 2.25vw, 9.6px) !important;
+    letter-spacing: 0.02em !important;
+    padding: 5px 11px !important;
+    gap: 5px !important;
+    max-width: calc(100vw - 24px) !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
     margin: 0 auto 16px !important;
     display: inline-flex !important;
+    align-items: center !important;
+  }
+  .hero-eyebrow-capsule span {
+    white-space: nowrap !important;
   }
   .hero-eyebrow-dot {
     width: 5px !important;
@@ -5977,17 +5983,17 @@ table.data.compare td.us{background:#F5F8FC}
     text-overflow: ellipsis !important;
   }
 
-  /* Mobile Hero Heading: slightly smaller and balanced for phones */
+  /* Mobile Hero Heading: prominent, executive scale (larger on mobile) */
   .hero-display-h1,
   .emp-hero-h1,
   #city-hero-h1,
   .hero-cinematic h1,
   .hero3 h1,
   .phero h1 {
-    font-size: clamp(28px, 7.5vw, 34px) !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.02em !important;
-    margin: 0 auto 14px !important;
+    font-size: clamp(34px, 8.8vw, 42px) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.025em !important;
+    margin: 0 auto 16px !important;
   }
 
   /* Mobile Hero Lead Paragraph: slightly smaller and balanced */
