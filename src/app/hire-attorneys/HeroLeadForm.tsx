@@ -29,7 +29,13 @@ const LEVELS = [
   "Partner Track / Counsel",
 ];
 
-export function HeroLeadForm() {
+export function HeroLeadForm({
+  isModal = false,
+  onClose,
+}: {
+  isModal?: boolean;
+  onClose?: () => void;
+} = {}) {
   const [email, setEmail] = useState("");
   const [firmName, setFirmName] = useState("");
   const [contactName, setContactName] = useState("");
@@ -75,7 +81,7 @@ export function HeroLeadForm() {
   };
 
   return (
-    <div id="intake-form">
+    <div id={isModal ? undefined : "intake-form"}>
       <style>{`
         .ha-hero-form-card {
           position: relative;
@@ -89,6 +95,15 @@ export function HeroLeadForm() {
           text-align: left;
           width: 100%;
           box-sizing: border-box;
+        }
+        .ha-hero-form-card.is-modal {
+          box-shadow: none !important;
+          border: none !important;
+          padding: 4px 0 0 !important;
+          margin-top: 0 !important;
+        }
+        .ha-hero-form-card.is-modal::before {
+          display: none !important;
         }
         .ha-hero-form-card::before {
           content: "";
@@ -204,7 +219,7 @@ export function HeroLeadForm() {
       `}</style>
 
       {isSubmitted ? (
-        <div className="ha-hero-form-card" style={{ textAlign: "center", padding: "34px 24px" }}>
+        <div className={`ha-hero-form-card ${isModal ? "is-modal" : ""}`} style={{ textAlign: "center", padding: isModal ? "18px 4px 10px" : "34px 24px" }}>
           <div
             style={{
               width: 56,
@@ -300,6 +315,22 @@ export function HeroLeadForm() {
             </span>
           </div>
 
+          {isModal && onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="ha-form-submit-btn"
+              style={{
+                width: "100%",
+                marginTop: 14,
+                marginBottom: 8,
+                background: "#08142A",
+              }}
+            >
+              Done / Close
+            </button>
+          )}
+
           <button
             type="button"
             onClick={() => {
@@ -320,54 +351,56 @@ export function HeroLeadForm() {
           </button>
         </div>
       ) : (
-        <div className="ha-hero-form-card">
-          {/* CARD HEADER */}
-          <div style={{ marginBottom: 14 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-              <span
+        <div className={`ha-hero-form-card ${isModal ? "is-modal" : ""}`}>
+          {/* CARD HEADER (Only when rendered inline on web) */}
+          {!isModal && (
+            <div style={{ marginBottom: 14 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                <span
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 10.5,
+                    fontWeight: 700,
+                    color: "#1D4ED8",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    background: "#EFF6FF",
+                    border: "1px solid #DBEAFE",
+                    padding: "3px 8px",
+                    borderRadius: 6,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 5,
+                  }}
+                >
+                  DIRECT INTAKE · 48H DOSSIERS
+                </span>
+
+                <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "#059669", fontWeight: 600 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", boxShadow: "0 0 6px #10B981" }} />
+                  100% Confidential
+                </div>
+              </div>
+
+              <h3
                 style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 10.5,
-                  fontWeight: 700,
-                  color: "#1D4ED8",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  background: "#EFF6FF",
-                  border: "1px solid #DBEAFE",
-                  padding: "3px 8px",
-                  borderRadius: 6,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 5,
+                  fontFamily: "var(--display)",
+                  fontSize: 22,
+                  fontWeight: 500,
+                  color: "#08142A",
+                  margin: "0 0 4px",
+                  lineHeight: 1.25,
+                  letterSpacing: "-0.015em",
                 }}
               >
-                DIRECT INTAKE · 48H DOSSIERS
-              </span>
+                Where should we send candidate profiles?
+              </h3>
 
-              <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "#059669", fontWeight: 600 }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", boxShadow: "0 0 6px #10B981" }} />
-                100% Confidential
-              </div>
+              <p style={{ fontSize: 12.5, color: "#64748B", margin: 0, lineHeight: 1.4 }}>
+                Screened attorney dossiers matched to your brief delivered straight to your inbox.
+              </p>
             </div>
-
-            <h3
-              style={{
-                fontFamily: "var(--display)",
-                fontSize: 22,
-                fontWeight: 500,
-                color: "#08142A",
-                margin: "0 0 4px",
-                lineHeight: 1.25,
-                letterSpacing: "-0.015em",
-              }}
-            >
-              Where should we send candidate profiles?
-            </h3>
-
-            <p style={{ fontSize: 12.5, color: "#64748B", margin: 0, lineHeight: 1.4 }}>
-              Screened attorney dossiers matched to your brief delivered straight to your inbox.
-            </p>
-          </div>
+          )}
 
           <form onSubmit={handleSubmit}>
             {/* ROW 1: WORK EMAIL ADDRESS (EMAIL FIRST!) */}

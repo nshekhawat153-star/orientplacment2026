@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroLeadForm } from "./HeroLeadForm";
 import { ReviewSpotlight } from "./ReviewSpotlight";
+import { HireAttorneysIntakeModal } from "./HireAttorneysIntakeModal";
 import { Stars, GMark } from "@/components/icons";
 import { reviews } from "@/data";
 
@@ -134,10 +135,7 @@ export default function HireAttorneysLandingPage() {
             gap: 20px !important;
           }
           .ha-hero-form-col {
-            display: block !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 auto !important;
+            display: none !important;
           }
           .ha-hero-left-col {
             display: flex !important;
@@ -624,6 +622,31 @@ export default function HireAttorneysLandingPage() {
                   </span>
                 </div>
               </div>
+
+              {/* MOBILE ONLY HERO CTA BUTTON (Opens modal popup on tap) */}
+              <div className="ha-hero-mobile-cta only-mobile" style={{ width: "100%", maxWidth: 360, margin: "20px auto 0" }}>
+                <a
+                  href="#intake-form"
+                  className="ha-hero-btn-primary ha-trigger-intake-modal"
+                  data-open-intake-modal="true"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "#1D4ED8",
+                    color: "#FFFFFF",
+                    fontWeight: 600,
+                    fontSize: 15.5,
+                    padding: "14px 28px",
+                    borderRadius: 8,
+                    textDecoration: "none",
+                    boxShadow: "0 8px 24px rgba(29, 78, 216, 0.4)",
+                    width: "100%",
+                  }}
+                >
+                  <span>Submit Brief &amp; Receive Candidates</span>
+                </a>
+              </div>
             </div>
 
             {/* RIGHT COLUMN: HIGH-CONVERTING HERO LEAD CAPTURE FORM (VISIBLE ON WEB & MOBILE) */}
@@ -638,7 +661,7 @@ export default function HireAttorneysLandingPage() {
       <section
         className="ha-terms-strip-sec"
         style={{
-          background: "#FFFFFF",
+          background: "transparent",
           position: "relative",
           zIndex: 10,
           padding: "0 0 24px",
@@ -1157,7 +1180,7 @@ export default function HireAttorneysLandingPage() {
                 }}
               >
                 <span>Request Candidate Dossiers</span>
-                <span aria-hidden="true">↑</span>
+                <span className="hidden-mobile" aria-hidden="true">↑</span>
               </a>
             </div>
           </div>
@@ -1329,7 +1352,7 @@ export default function HireAttorneysLandingPage() {
                   }}
                 >
                   <span>Request Candidates for Your Firm</span>
-                  <span aria-hidden="true">↑</span>
+                  <span className="hidden-mobile" aria-hidden="true">↑</span>
                 </a>
               </div>
             </div>
@@ -1438,11 +1461,14 @@ export default function HireAttorneysLandingPage() {
               }}
             >
               <span>Submit Brief &amp; Receive Candidate Dossiers</span>
-              <span aria-hidden="true">↑</span>
+              <span className="hidden-mobile" aria-hidden="true">↑</span>
             </a>
           </div>
         </div>
       </section>
+
+      {/* MOBILE POPUP INTAKE MODAL (Opens on tap of any CTA on mobile, web remains untouched) */}
+      <HireAttorneysIntakeModal />
     </div>
   );
 }
