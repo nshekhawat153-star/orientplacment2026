@@ -225,7 +225,6 @@ export function CandidateCard({
           background: "#FFFFFF",
           border: selected ? "2px solid #1D4ED8" : "1.5px solid #E2E8F0",
           borderRadius: 12,
-          padding: "20px 22px 18px",
           boxShadow: selected
             ? "0 10px 28px -4px rgba(29, 78, 216, 0.16), 0 2px 8px rgba(15, 23, 42, 0.04)"
             : "0 2px 8px rgba(15, 23, 42, 0.03)",
@@ -235,7 +234,7 @@ export function CandidateCard({
         }}
       >
         {/* TOP STATUS BADGES & ID */}
-        <div className="feed-card-badge-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+        <div className="feed-card-badge-row">
           <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
             <span
               style={{
@@ -314,8 +313,6 @@ export function CandidateCard({
           style={{
             fontSize: 13,
             color: "#475569",
-            display: "flex",
-            alignItems: "center",
             gap: 8,
             marginBottom: 6,
           }}
@@ -416,9 +413,6 @@ export function CandidateCard({
         <div
           className="feed-card-footer"
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
             borderTop: "1px solid #F1F5F9",
             paddingTop: 8,
             fontSize: 12,

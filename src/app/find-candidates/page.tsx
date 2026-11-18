@@ -243,11 +243,12 @@ export default function FindCandidatesPage() {
           </p>
 
           {/* UNIFIED SEARCH CONSOLE */}
-          <div style={{ maxWidth: 900, margin: "0 auto 32px", width: "100%" }}>
+          <div className="candidate-search-wrap" style={{ maxWidth: 900, margin: "0 auto 32px", width: "100%" }}>
             <form
               onSubmit={handleSearchSubmit}
               role="search"
               aria-label="Candidate search console"
+              className="candidate-search-form"
               style={{
                 background: "#FFFFFF",
                 border: "1.5px solid rgba(255, 255, 255, 0.2)",
@@ -262,7 +263,7 @@ export default function FindCandidatesPage() {
               }}
             >
               {/* PRACTICE AREA / ROLE */}
-              <div style={{ display: "flex", alignItems: "center", flex: "1 1 260px", gap: 10 }}>
+              <div className="candidate-search-field candidate-search-field-role" style={{ display: "flex", alignItems: "center", flex: "1 1 260px", gap: 10 }}>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="11" cy="11" r="8" />
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -296,15 +297,18 @@ export default function FindCandidatesPage() {
                 </div>
               </div>
 
-              {/* VERTICAL DIVIDER */}
+              {/* VERTICAL DIVIDER (DESKTOP) */}
               <div
                 style={{ width: 1, height: 34, background: "#E2E8F0" }}
                 className="hidden-mobile"
                 aria-hidden="true"
               />
 
+              {/* HORIZONTAL DIVIDER (MOBILE ONLY) */}
+              <div className="candidate-search-divider-mobile" aria-hidden="true" />
+
               {/* TEXAS MARKET / LOCATION */}
-              <div style={{ display: "flex", alignItems: "center", flex: "1 1 220px", gap: 10 }}>
+              <div className="candidate-search-field candidate-search-field-city" style={{ display: "flex", alignItems: "center", flex: "1 1 220px", gap: 10 }}>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
@@ -341,6 +345,7 @@ export default function FindCandidatesPage() {
               {/* SUBMIT BUTTON */}
               <button
                 type="submit"
+                className="candidate-search-submit-btn"
                 style={{
                   background: "#1D4ED8",
                   color: "#FFFFFF",
@@ -410,6 +415,7 @@ export default function FindCandidatesPage() {
       {/* 2. HORIZONTAL FILTER CHIPS BAR (STICKY, CLEAN, SPACIOUS) */}
       <section
         id="filters"
+        className="candidate-filters-section"
         style={{
           background: "#FFFFFF",
           borderBottom: "1.5px solid #E2E8F0",
@@ -422,6 +428,7 @@ export default function FindCandidatesPage() {
       >
         <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div
+            className="candidate-filters-bar"
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -432,6 +439,7 @@ export default function FindCandidatesPage() {
           >
             {/* LEFT: FILTER PILLS */}
             <div
+              className="candidate-filter-chips-rail"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -592,6 +600,7 @@ export default function FindCandidatesPage() {
 
             {/* RIGHT: LIVE CANDIDATE COUNT */}
             <div
+              className="candidate-filter-count"
               style={{
                 fontFamily: "var(--mono)",
                 fontSize: 12,
@@ -609,7 +618,7 @@ export default function FindCandidatesPage() {
 
       {/* 3. MAIN CANDIDATE STREAM: PURE 2-COLUMN MASTER-DETAIL WORKSPACE */}
       <main
-        className="wrap"
+        className="wrap candidate-results-main"
         id="results"
         style={{
           maxWidth: 1240,
@@ -720,9 +729,6 @@ export default function FindCandidatesPage() {
             <div
               className="indeed-split-grid"
               style={{
-                display: "grid",
-                gridTemplateColumns: "minmax(380px, 42%) minmax(0, 58%)",
-                gap: 24,
                 alignItems: "start",
               }}
             >

@@ -218,7 +218,12 @@ body.clean .mark{background:none;border:0;padding:0}
 .chev{width:10px;height:10px;opacity:.7;transition:transform var(--t) var(--ease)}
 .nav-top[aria-expanded=true] .chev{transform:rotate(180deg)}
 .header-cta{flex-shrink:0}
-.menu-btn{display:none}
+.menu-btn{display:none !important}
+@media (min-width: 1081px) {
+  .menu-btn {
+    display: none !important;
+  }
+}
 
 /* ---------- 5. mega menu: luxury desktop dropdown drawer ---------- */
 .mega {
@@ -747,7 +752,8 @@ body.clean .mark{background:none;border:0;padding:0}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .mnav-top{display:flex;justify-content:space-between;align-items:center;padding:0 20px;min-height:64px;border-bottom:1px solid var(--rule)}
 .mnav-top .logo-img{width:40px;height:40px}
-.mnav-close,.menu-btn{background:none;border:1px solid color-mix(in srgb,var(--ink) 22%,transparent);border-radius:7px;width:40px;height:40px;min-height:40px;min-width:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:all .2s ease}
+.mnav-close{background:none;border:1px solid color-mix(in srgb,var(--ink) 22%,transparent);border-radius:7px;width:40px;height:40px;min-height:40px;min-width:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:all .2s ease}
+.menu-btn{background:none;border:1px solid color-mix(in srgb,var(--ink) 22%,transparent);border-radius:7px;width:40px;height:40px;min-height:40px;min-width:40px;padding:0;display:none;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:all .2s ease}
 .mnav-close:hover,.menu-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(37,99,235,.04)}
 .site-header.header-on-dark .menu-btn{border-color:rgba(255,255,255,0.26);color:#FFFFFF}
 .site-header.header-on-dark .menu-btn:hover{border-color:rgba(255,255,255,0.6);color:#FFFFFF;background:rgba(255,255,255,0.12)}
@@ -6149,7 +6155,7 @@ table.data.compare td.us{background:#F5F8FC}
 /* nav collapses at 1080px: matches site.js, which closes the phone menu above 1081px */
 @media (max-width:1080px){
   .nav{display:none}
-  .menu-btn{display:inline-flex;align-items:center}
+  .menu-btn{display:inline-flex !important;align-items:center;justify-content:center}
   .header-cta{margin-left:auto}
   .hero3>.wrap{gap:56px}
   .rcards{grid-template-columns:1fr 1fr}
@@ -8068,16 +8074,171 @@ table.data.compare td.us{background:#F5F8FC}
   border-radius: 6px;
 }
 
+/* Mobile Divider for Candidate Search Console */
+.candidate-search-divider-mobile {
+  display: none;
+}
+
 /* Responsive Media Queries */
 @media (max-width: 1023px) {
   .indeed-split-grid {
-    grid-template-columns: 1fr;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   .indeed-detail-column {
-    display: none;
+    display: none !important;
+  }
+  .indeed-feed-column {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .indeed-card-stack {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 @media (max-width: 768px) {
+  /* Candidate page hero search console */
+  .candidate-search-wrap {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .candidate-search-form {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 14px 14px 12px !important;
+    gap: 10px !important;
+    min-height: auto !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .candidate-search-field {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .candidate-search-divider-mobile {
+    display: block !important;
+    width: 100% !important;
+    height: 1px !important;
+    background: #E2E8F0 !important;
+    margin: 2px 0 !important;
+  }
+  .candidate-search-submit-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 12px 20px !important;
+    margin-top: 4px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Indeed / Jobs Search Form */
+  .indeed-top-search-form {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .indeed-search-box-unified {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 12px 14px 12px !important;
+    gap: 10px !important;
+    min-height: auto !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .jobs-luxury-header-sec .indeed-search-box-unified {
+    padding: 14px 14px 12px !important;
+    gap: 10px !important;
+    min-height: auto !important;
+  }
+  .indeed-input-wrap {
+    width: 100% !important;
+    padding: 4px 0 !important;
+    box-sizing: border-box !important;
+  }
+  .indeed-search-divider {
+    width: 100% !important;
+    height: 1px !important;
+    margin: 2px 0 !important;
+    background: #E2E8F0 !important;
+  }
+  .indeed-submit-btn,
+  .jobs-luxury-header-sec .indeed-submit-btn {
+    width: 100% !important;
+    height: 44px !important;
+    justify-content: center !important;
+    border-radius: 7px !important;
+    font-size: 14px !important;
+    margin-top: 4px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Filter Rails: Horizontal Touch Scrolling */
+  .candidate-filters-section {
+    padding: 8px 0 !important;
+  }
+  .candidate-filters-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+  }
+  .candidate-filter-chips-rail {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 8px !important;
+    padding: 2px 0 4px !important;
+    width: 100% !important;
+  }
+  .candidate-filter-chips-rail::-webkit-scrollbar {
+    display: none !important;
+  }
+  .candidate-filter-chips-rail > * {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+  .candidate-filter-count {
+    font-size: 11.5px !important;
+  }
+
+  .indeed-filter-pills-section {
+    padding: 8px 0 6px !important;
+  }
+  .indeed-flat-filters-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    margin-bottom: 12px !important;
+  }
+  .indeed-flat-chips {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 8px !important;
+    padding: 2px 0 4px !important;
+    width: 100% !important;
+  }
+  .indeed-flat-chips::-webkit-scrollbar {
+    display: none !important;
+  }
+  .indeed-flat-chips .flat-chip {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+  .indeed-results-stat {
+    font-size: 11.5px !important;
+  }
+
   .search-dual-bar {
     flex-direction: column;
     padding: 10px;
@@ -8100,6 +8261,76 @@ table.data.compare td.us{background:#F5F8FC}
   }
   .directory-sub-grid {
     grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .indeed-results-head-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 14px !important;
+    padding-bottom: 10px !important;
+  }
+  .indeed-head-title {
+    font-size: 1.15rem !important;
+  }
+  .candidate-results-main,
+  .indeed-results-section > .wrap,
+  .candidate-filters-section > .wrap,
+  .indeed-filter-pills-section > .wrap {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  .candidate-results-main {
+    padding-top: 18px !important;
+    padding-bottom: 48px !important;
+  }
+  .indeed-results-section {
+    padding: 16px 0 48px !important;
+  }
+  .indeed-feed-card {
+    padding: 16px 14px 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    border-radius: 10px !important;
+  }
+  .feed-card-badge-row {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .feed-card-title {
+    font-size: 1.05rem !important;
+    line-height: 1.3 !important;
+    word-break: break-word !important;
+  }
+  .feed-card-firm {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    font-size: 12.5px !important;
+  }
+  .feed-card-location {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    word-break: break-word !important;
+  }
+  .feed-card-tags {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .feed-tag,
+  .feed-tag-pill,
+  .feed-tag-salary-pill {
+    font-size: 11.5px !important;
+    padding: 3px 7px !important;
+  }
+  .feed-card-footer {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    font-size: 11.5px !important;
   }
 }
 
