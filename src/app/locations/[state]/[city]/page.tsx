@@ -8,17 +8,17 @@ import {
   asOf,
   source,
   jobs,
+  bands,
+  trust,
+  fmt,
 } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
-import { CitySnapshot } from "@/components/CitySnapshot";
 import { CandidateCard } from "@/components/CandidateCard";
 import { CityPayTable } from "@/components/PayTables";
 import { GateForm } from "@/components/GateForm";
-import { ProcessSteps } from "@/components/ProcessSteps";
 import { TermsTiles } from "@/components/TermsTiles";
-import { ResourceCards } from "@/components/ResourceCards";
 import { ReviewsSection } from "@/components/ReviewCard";
 import { RatingBadge } from "@/components/Rating";
+import { Icon } from "@/components/icons";
 
 interface PageProps {
   params: Promise<{ state: string; city: string }>;
@@ -52,9 +52,96 @@ export default async function CityLocationPage({ params }: PageProps) {
 
   const cityJobsCount = jobs.filter((j) => j.city === city.slug).length;
 
+  // City Salary Bands for Top 4 Cards
+  const cityBands = bands[city.slug] || {};
+  const preferredSalaryRoles = [
+    { slug: "estate-planning-attorney", name: "Estate Planning Attorney" },
+    { slug: "commercial-litigation-attorney", name: "Commercial Litigation" },
+    { slug: "litigation-attorney", name: "Litigation Attorney" },
+    { slug: "real-estate-attorney", name: "Real Estate Attorney" },
+  ];
+  const topSalaryCards = preferredSalaryRoles
+    .filter((r) => cityBands[r.slug])
+    .map((r) => ({
+      ...r,
+      band: cityBands[r.slug],
+    }));
+
   return (
     <div className="city-location-page" style={{ background: "#FAF9F5", color: "#08142A" }}>
-      {/* 1. LUXURY DARK HERO (CENTERED, NO CARD) */}
+      <style>{`
+        .city-terms-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 18px;
+        }
+        .city-candidates-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 24px;
+        }
+        .city-salary-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 18px;
+        }
+        .city-salary-split-grid {
+          display: grid;
+          grid-template-columns: 1.35fr 1fr;
+          gap: 36px;
+          align-items: start;
+        }
+        .city-steps-dark-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 24px;
+        }
+        .city-resources-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 24px;
+        }
+        .city-hover-lift {
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .city-hover-lift:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 30px rgba(8, 20, 42, 0.08);
+          border-color: #1D4ED8;
+        }
+        @media (max-width: 1024px) {
+          .city-terms-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+          .city-salary-cards-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+          .city-salary-split-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 960px) {
+          .city-candidates-grid {
+            grid-template-columns: 1fr;
+          }
+          .city-steps-dark-grid {
+            grid-template-columns: 1fr;
+          }
+          .city-resources-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 640px) {
+          .city-terms-grid {
+            grid-template-columns: 1fr;
+          }
+          .city-salary-cards-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+
+      {/* 1. LUXURY CENTERED DARK HERO WITH VIDEO BACKGROUND */}
       <section
         className="emp-luxury-hero-sec city-location-hero"
         aria-labelledby="city-hero-h1"
@@ -62,9 +149,10 @@ export default async function CityLocationPage({ params }: PageProps) {
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
           color: "#FFFFFF",
-          padding: "124px 0 76px",
+          padding: "124px 0 88px",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+          textAlign: "center",
         }}
       >
         <div className="emp-hero-video-wrap" aria-hidden="true">
@@ -82,17 +170,18 @@ export default async function CityLocationPage({ params }: PageProps) {
               height: "100%",
               objectFit: "cover",
               opacity: 0.18,
+              pointerEvents: "none",
             }}
           >
             <source src="/media/splash.mp4" type="video/mp4" />
+            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
           </video>
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 960, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
-          {/* Badge Capsule */}
-          <div className="emp-hero-badge-wrap" style={{ marginBottom: 18 }}>
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 980, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Capsule Badge */}
+          <div style={{ marginBottom: 20 }}>
             <div
-              className="badge-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -100,7 +189,7 @@ export default async function CityLocationPage({ params }: PageProps) {
                 background: "rgba(29, 78, 216, 0.15)",
                 border: "1px solid rgba(96, 165, 250, 0.3)",
                 borderRadius: 999,
-                padding: "6px 14px",
+                padding: "6px 16px",
                 fontFamily: "var(--mono)",
                 fontSize: 11,
                 letterSpacing: "0.08em",
@@ -108,14 +197,14 @@ export default async function CityLocationPage({ params }: PageProps) {
                 color: "#93C5FD",
               }}
             >
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
               <span>REGIONAL LEGAL SEARCH · {city.name.toUpperCase()}, {city.stateName.toUpperCase()}</span>
             </div>
           </div>
 
+          {/* Centered Display Heading */}
           <h1
             id="city-hero-h1"
-            className="emp-hero-h1"
             style={{
               fontFamily: "var(--display)",
               fontSize: "clamp(34px, 4.4vw, 54px)",
@@ -132,22 +221,251 @@ export default async function CityLocationPage({ params }: PageProps) {
             </span>
           </h1>
 
+          {/* Centered Subtitle */}
           <p
-            className="emp-hero-lead"
             style={{
-              fontSize: 16.5,
+              fontSize: 17,
               lineHeight: 1.6,
               color: "#CBD5E1",
-              maxWidth: 680,
-              margin: "0 auto 30px",
+              maxWidth: 720,
+              margin: "0 auto 32px",
             }}
           >
-            Screened {city.name} attorneys and paralegals available for confidential interviews. Verified local law firm compensation data, and one fee only if you hire.
+            Direct lateral placements at boutique and mid-size law firms across {city.name}. Screened attorney and paralegal dossiers delivered in 48 hours. 100% contingency, zero upfront retainer.
           </p>
 
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 30 }}>
+          {/* Centered Action Buttons */}
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
+            <a
+              href="#candidates"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "14px 28px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
+              }}
+            >
+              <span>See {city.name} candidates</span>
+              <span aria-hidden="true">↓</span>
+            </a>
             <Link
-              className="btn-emp-primary"
+              href={`/jobs/estate-planning-attorney/${city.slug}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "14px 26px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Browse {city.name} legal jobs ({cityJobsCount})</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <a
+              href="https://calendly.com/orionplacement/call-with-justin"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "14px 24px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Book 15 min with Justin</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          {/* Centered Micro-reassurances Row */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "12px 24px", color: "#CBD5E1", fontSize: "0.88rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Pre-screened {city.name} lateral pool</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>23% contingency fee — only pay if you hire</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>90-day replacement warranty</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 1.5. DEDICATED ELEVATED MARKET BENCHMARK STRIP (4 CARDS IN 1 ROW) */}
+      <section style={{ maxWidth: 1200, margin: "-32px auto 0", padding: "0 24px", position: "relative", zIndex: 10 }}>
+        <div className="city-terms-grid">
+          {/* Card 1: Associate Band */}
+          <div
+            className="city-hover-lift"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 22px",
+              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+            }}
+          >
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              Associate Base Band
+            </div>
+            <div style={{ fontFamily: "var(--display)", fontSize: 30, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
+              $130k–$210k
+            </div>
+            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+              Typical lateral tier across {city.name} boutiques.
+            </div>
+          </div>
+
+          {/* Card 2: Active Candidates */}
+          <div
+            className="city-hover-lift"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 22px",
+              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+            }}
+          >
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              Local Talent Pool
+            </div>
+            <div style={{ fontFamily: "var(--display)", fontSize: 30, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
+              30+ Pre-Screened
+            </div>
+            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+              Attorneys and paralegals currently open in {city.name}.
+            </div>
+          </div>
+
+          {/* Card 3: Contingency Fee */}
+          <div
+            className="city-hover-lift"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 22px",
+              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+            }}
+          >
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              Placement Fee
+            </div>
+            <div style={{ fontFamily: "var(--display)", fontSize: 30, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
+              23%
+            </div>
+            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+              Net 15 upon start date. Zero upfront retainer.
+            </div>
+          </div>
+
+          {/* Card 4: Warranty */}
+          <div
+            className="city-hover-lift"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 22px",
+              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+            }}
+          >
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              Warranty Period
+            </div>
+            <div style={{ fontFamily: "var(--display)", fontSize: 30, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
+              90 Days
+            </div>
+            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+              100% replacement guarantee backed by contract.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. PRE-SCREENED CANDIDATES OPEN TO HOUSTON SEATS (PROPERLY CENTERED) */}
+      <section id="candidates" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header (no .sec-head constraint) */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 44px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 14,
+              }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>ACTIVE {city.name.toUpperCase()} TALENT</span>
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--display)",
+                fontSize: "clamp(28px, 3.6vw, 42px)",
+                color: "#08142A",
+                margin: "0 auto 14px",
+                fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
+              }}
+            >
+              Pre-screened candidates open to{" "}
+              <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>
+                {city.name}
+              </span>{" "}
+              seats
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
+              Screened attorneys and paralegals currently open to discreet lateral conversations in {city.name}.
+            </p>
+          </div>
+
+          {/* 3 Candidate Cards in a Balanced Single Row */}
+          <div className="city-candidates-grid">
+            {cityCandidates.map((r) => (
+              <div key={r.c.id} className="city-hover-lift" style={{ borderRadius: 14 }}>
+                <CandidateCard candidate={r.c} result={r} />
+              </div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: 36 }}>
+            <Link
               href={`/find-candidates#city=${city.slug}`}
               style={{
                 display: "inline-flex",
@@ -160,170 +478,6 @@ export default async function CityLocationPage({ params }: PageProps) {
                 padding: "13px 28px",
                 borderRadius: 7,
                 textDecoration: "none",
-                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
-              }}
-            >
-              <span>See {city.name} candidates</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-            <Link
-              className="btn-emp-ghost"
-              href={`/jobs/estate-planning-attorney/${city.slug}`}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 15,
-                padding: "13px 24px",
-                borderRadius: 7,
-                textDecoration: "none",
-              }}
-            >
-              <span>Browse {city.name} legal jobs ({cityJobsCount})</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-            <a
-              className="btn-emp-ghost"
-              href="#snapshot"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 15,
-                padding: "13px 24px",
-                borderRadius: 7,
-                textDecoration: "none",
-              }}
-            >
-              <span>Market snapshot</span>
-              <span aria-hidden="true">↓</span>
-            </a>
-          </div>
-
-          {/* Micro Reassurances */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "16px 24px", color: "rgba(255, 255, 255, 0.75)", fontSize: "0.85rem" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> Pre-screened {city.name} lateral attorney &amp; paralegal pool
-            </div>
-            <span>•</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> 100% contingency: 23% fee due only if you hire
-            </div>
-            <span>•</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> 90-day replacement warranty with zero upfront retainers
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 1.5. LOCAL MARKET SNAPSHOT (ELEVATED VISUALIZER SECTION) */}
-      <section id="snapshot" style={{ background: "#FFFFFF", padding: "76px 0 88px", borderBottom: "1px solid #E2E8F0" }}>
-        <div style={{ maxWidth: 1080, margin: "0 auto", padding: "0 24px" }}>
-          <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 36px" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(29, 78, 216, 0.08)",
-                border: "1px solid rgba(29, 78, 216, 0.2)",
-                borderRadius: 100,
-                padding: "5px 14px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#1D4ED8",
-                marginBottom: 12,
-              }}
-            >
-              MARKET OVERVIEW
-            </div>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "0 0 12px", fontWeight: 500 }}>
-              {city.name} Legal Market <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Snapshot</span>
-            </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
-              Active talent pool density, open lateral search mandates, and market compensation indicators across {city.name}.
-            </p>
-          </div>
-
-          <div
-            style={{
-              background: "#FAF9F5",
-              border: "1.5px solid #EAE7DC",
-              borderRadius: 16,
-              padding: "32px",
-              boxShadow: "0 8px 30px rgba(8, 20, 42, 0.04)",
-              color: "#08142A",
-            }}
-          >
-            <CitySnapshot citySlug={city.slug} />
-          </div>
-        </div>
-      </section>
-
-      {/* 2. AVAILABLE CANDIDATES IN METRO */}
-      <section className="emp-process-sec" id="candidates" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 36px" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(29, 78, 216, 0.08)",
-                border: "1px solid rgba(29, 78, 216, 0.2)",
-                borderRadius: 100,
-                padding: "5px 14px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#1D4ED8",
-                marginBottom: 10,
-              }}
-            >
-              ACTIVE {city.name.toUpperCase()} TALENT
-            </div>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "0 0 10px", fontWeight: 500 }}>
-              Pre-screened candidates open to <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>{city.name}</span> seats
-            </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
-              Screened attorneys and paralegals currently open to discreet lateral conversations in {city.name}.
-            </p>
-          </div>
-
-          <div className="cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
-            {cityCandidates.map((r) => (
-              <CandidateCard key={r.c.id} candidate={r.c} result={r} />
-            ))}
-          </div>
-
-          <div style={{ textAlign: "center", marginTop: 32 }}>
-            <Link
-              href={`/find-candidates#city=${city.slug}`}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#1D4ED8",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 15,
-                padding: "12px 26px",
-                borderRadius: 7,
-                textDecoration: "none",
                 boxShadow: "0 4px 14px rgba(29, 78, 216, 0.3)",
               }}
             >
@@ -334,43 +488,126 @@ export default async function CityLocationPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 3. WHAT CITY FIRMS PAY + SALARY GUIDE */}
-      <section className="emp-process-sec" id="pay" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 40px" }}>
-            <span
-              className="eyebrow"
+      {/* 3. WHAT LAW FIRMS PAY IN HOUSTON (REDESIGNED LAYOUT WITH SALARY CARDS) */}
+      <section id="pay" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 40px" }}>
+            <div
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
+                fontSize: 11,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                color: "#1D4ED8",
+                marginBottom: 14,
               }}
             >
-              COMPENSATION INTELLIGENCE
-            </span>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>COMPENSATION INTELLIGENCE</span>
+            </div>
             <h2
               style={{
                 fontFamily: "var(--display)",
                 fontSize: "clamp(28px, 3.6vw, 42px)",
                 color: "#08142A",
-                margin: "0 0 14px",
+                margin: "0 auto 14px",
                 fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
               }}
             >
-              What law firms pay in <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>{city.name}</span>
+              What law firms pay in{" "}
+              <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>
+                {city.name}
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               Base compensation by practice area. Select any role to view detailed experience tiers and matching candidate expectations.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 36, alignItems: "start" }}>
-            <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 14, padding: "28px", boxShadow: "0 4px 16px rgba(15,23,42,0.03)" }}>
+          {/* Top 4 Practice Area Salary Cards Row */}
+          {topSalaryCards.length > 0 && (
+            <div className="city-salary-cards-grid" style={{ marginBottom: 40 }}>
+              {topSalaryCards.map((rc) => (
+                <Link
+                  key={rc.slug}
+                  href={`/salaries/${rc.slug}/${city.slug}`}
+                  className="city-hover-lift"
+                  style={{
+                    background: "#FAF9F5",
+                    border: "1.5px solid #EAE7DC",
+                    borderRadius: 14,
+                    padding: "24px 20px",
+                    textDecoration: "none",
+                    color: "inherit",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div>
+                    <span
+                      style={{
+                        fontFamily: "var(--mono)",
+                        fontSize: 10.5,
+                        fontWeight: 700,
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        color: "#1D4ED8",
+                        display: "block",
+                        marginBottom: 6,
+                      }}
+                    >
+                      PRACTICE BENCHMARK
+                    </span>
+                    <h3 style={{ fontFamily: "var(--display)", fontSize: 18, color: "#08142A", fontWeight: 600, margin: "0 0 12px", lineHeight: 1.25 }}>
+                      {rc.name}
+                    </h3>
+                    <div style={{ fontFamily: "var(--display)", fontSize: 28, fontWeight: 700, color: "#08142A", lineHeight: 1 }}>
+                      {fmt.k(rc.band.median)}
+                      <span style={{ fontSize: 13, fontWeight: 400, color: "#64748B", marginLeft: 4 }}>median base</span>
+                    </div>
+                    <div style={{ fontSize: 13, color: "#64748B", marginTop: 8 }}>
+                      Range: <b>${rc.band.b1[0]}k–${rc.band.b3[1]}k</b>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 16, paddingTop: 12, borderTop: "1px solid #E2E8F0", fontSize: 12, color: "#1D4ED8", fontWeight: 600 }}>
+                    <span>{rc.band.typical}</span>
+                    <span>View guide →</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Full Table & PDF Salary Guide Gate */}
+          <div className="city-salary-split-grid">
+            <div
+              style={{
+                background: "#FAF9F5",
+                border: "1.5px solid #EAE7DC",
+                borderRadius: 14,
+                padding: "28px",
+                boxShadow: "0 4px 16px rgba(15,23,42,0.03)",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, paddingBottom: 12, borderBottom: "1.5px solid #E2E8F0" }}>
+                <div>
+                  <h3 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: 0, fontWeight: 600 }}>
+                    {city.name} Legal Compensation Matrix
+                  </h3>
+                  <span style={{ fontSize: 12.5, color: "#64748B" }}>Updated {asOf} from verified boutique offers</span>
+                </div>
+              </div>
               <CityPayTable citySlug={city.slug} />
               <p style={{ fontSize: 12.5, color: "#64748B", marginTop: 20, paddingTop: 14, borderTop: "1px solid #EAE7DC", margin: "20px 0 0" }}>
                 Source: {source}, updated {asOf}. Base salary only before discretionary bonuses.
@@ -397,75 +634,297 @@ export default async function CityLocationPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 4. PROCESS: FROM OPEN SEAT TO SHORTLIST IN DAYS */}
-      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 44px" }}>
-            <span
-              className="eyebrow"
+      {/* 4. FROM OPEN SEAT TO SHORTLIST IN DAYS (DARK LUXURY SECTION AS REQUESTED) */}
+      <section
+        style={{
+          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.22) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          padding: "96px 0 108px",
+          color: "#FFFFFF",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+        }}
+      >
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 48px" }}>
+            <div
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.2)",
+                border: "1px solid rgba(96, 165, 250, 0.3)",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
+                fontSize: 11,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                color: "#93C5FD",
+                marginBottom: 14,
               }}
             >
-              SEARCH WORKFLOW
-            </span>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span>SEARCH WORKFLOW · ZERO FRICTION</span>
+            </div>
             <h2
               style={{
                 fontFamily: "var(--display)",
                 fontSize: "clamp(28px, 3.6vw, 42px)",
-                color: "#08142A",
-                margin: "0 0 14px",
+                color: "#FFFFFF",
+                margin: "0 auto 14px",
                 fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
               }}
             >
-              From open seat to shortlist in <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>days</span>
+              From open seat to shortlist in{" "}
+              <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+                days
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: "#CBD5E1", fontSize: 16.5, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               The proven 3-step intake workflow for every {city.name} opening, from senior litigation associate to boutique paralegal.
             </p>
           </div>
-          <ProcessSteps />
+
+          {/* 3 Dark Step Cards */}
+          <div className="city-steps-dark-grid">
+            {/* Step 1 */}
+            <div
+              className="city-hover-lift"
+              style={{
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: 14,
+                padding: "32px 26px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <span
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "#93C5FD",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    display: "inline-block",
+                    background: "rgba(29, 78, 216, 0.25)",
+                    border: "1px solid rgba(96, 165, 250, 0.3)",
+                    padding: "4px 10px",
+                    borderRadius: 4,
+                    marginBottom: 14,
+                  }}
+                >
+                  STEP 01 · DAY 0
+                </span>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px" }}>
+                  Tell us the seat
+                </h3>
+                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.6, margin: 0 }}>
+                  Role, city, years of experience, pay band, and must-haves. Two minutes on our direct intake or a 15-minute call with Justin.
+                </p>
+              </div>
+
+              {/* Dark Mockup */}
+              <div
+                style={{
+                  background: "rgba(15, 23, 42, 0.7)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  borderRadius: 10,
+                  padding: "16px 18px",
+                  marginTop: 24,
+                  fontSize: 13,
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "var(--mono)", fontSize: 11, textTransform: "uppercase", color: "#94A3B8", marginBottom: 10 }}>
+                  <span>Target Role</span>
+                  <span style={{ color: "#60A5FA" }}>Houston, TX</span>
+                </div>
+                <div style={{ color: "#FFFFFF", fontWeight: 600, marginBottom: 8 }}>Estate Planning Attorney</div>
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                  <span style={{ background: "rgba(29, 78, 216, 0.3)", color: "#93C5FD", padding: "2px 8px", borderRadius: 4, fontSize: 11 }}>Texas Bar</span>
+                  <span style={{ background: "rgba(29, 78, 216, 0.3)", color: "#93C5FD", padding: "2px 8px", borderRadius: 4, fontSize: 11 }}>Probate</span>
+                  <span style={{ background: "rgba(255, 255, 255, 0.08)", color: "#94A3B8", padding: "2px 8px", borderRadius: 4, fontSize: 11 }}>Spanish (Plus)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div
+              className="city-hover-lift"
+              style={{
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: 14,
+                padding: "32px 26px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <span
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "#93C5FD",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    display: "inline-block",
+                    background: "rgba(29, 78, 216, 0.25)",
+                    border: "1px solid rgba(96, 165, 250, 0.3)",
+                    padding: "4px 10px",
+                    borderRadius: 4,
+                    marginBottom: 14,
+                  }}
+                >
+                  STEP 02 · DAYS 1–5
+                </span>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px" }}>
+                  See the shortlist
+                </h3>
+                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.6, margin: 0 }}>
+                  Pre-screened candidates with verified bar admissions, notice periods, and compensation expectations. You pick who to meet.
+                </p>
+              </div>
+
+              {/* Dark Mockup */}
+              <div
+                style={{
+                  background: "rgba(15, 23, 42, 0.7)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  borderRadius: 10,
+                  padding: "16px 18px",
+                  marginTop: 24,
+                  fontSize: 13,
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "var(--mono)", fontSize: 11, textTransform: "uppercase", color: "#94A3B8", marginBottom: 10 }}>
+                  <span>Shortlist Ready</span>
+                  <span style={{ color: "#60A5FA" }}>3 Vetted</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                  <span style={{ color: "#FFFFFF" }}>Candidate EP-TX-0412</span>
+                  <span style={{ color: "#4ADE80", fontSize: 11, fontWeight: 700 }}>5 of 5 Match</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ color: "#FFFFFF" }}>Candidate LIT-TX-0390</span>
+                  <span style={{ color: "#4ADE80", fontSize: 11, fontWeight: 700 }}>4 of 5 Match</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div
+              className="city-hover-lift"
+              style={{
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: 14,
+                padding: "32px 26px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <span
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "#93C5FD",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    display: "inline-block",
+                    background: "rgba(29, 78, 216, 0.25)",
+                    border: "1px solid rgba(96, 165, 250, 0.3)",
+                    padding: "4px 10px",
+                    borderRadius: 4,
+                    marginBottom: 14,
+                  }}
+                >
+                  STEP 03 · START DATE
+                </span>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px" }}>
+                  Interview, hire, then pay
+                </h3>
+                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.6, margin: 0 }}>
+                  Invoice sent on the hire&apos;s start date, due net 15. Backed by our 100% 90-day replacement warranty if things don&apos;t work out.
+                </p>
+              </div>
+
+              {/* Dark Mockup */}
+              <div
+                style={{
+                  background: "rgba(15, 23, 42, 0.7)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  borderRadius: 10,
+                  padding: "16px 18px",
+                  marginTop: 24,
+                  fontSize: 13,
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "var(--mono)", fontSize: 11, textTransform: "uppercase", color: "#94A3B8", marginBottom: 10 }}>
+                  <span>Placement Protection</span>
+                  <span style={{ color: "#4ADE80" }}>Active</span>
+                </div>
+                <div style={{ color: "#FFFFFF", fontWeight: 600, marginBottom: 4 }}>90-Day Replacement Warranty</div>
+                <div style={{ color: "#94A3B8", fontSize: 12 }}>Zero retainer · Due only upon completed hire</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 5. TERMS TILES & RISK-FREE WARRANTY */}
-      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 44px" }}>
-            <span
-              className="eyebrow"
+      <section style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 44px" }}>
+            <div
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
+                fontSize: 11,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                color: "#1D4ED8",
+                marginBottom: 14,
               }}
             >
-              ORION PLACEMENT TERMS
-            </span>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>ORION PLACEMENT TERMS</span>
+            </div>
             <h2
               style={{
                 fontFamily: "var(--display)",
                 fontSize: "clamp(28px, 3.6vw, 42px)",
                 color: "#08142A",
-                margin: "0 0 14px",
+                margin: "0 auto 14px",
                 fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
               }}
             >
-              One fee, and only if you <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>hire</span>
+              One fee, and only if you{" "}
+              <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>
+                hire
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               {city.name} firms pay the standard 23% contingency fee. Zero upfront retainer.
             </p>
           </div>
@@ -473,80 +932,278 @@ export default async function CityLocationPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 6. HIRING TOOLS FOR CITY */}
-      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 44px" }}>
-            <span
-              className="eyebrow"
+      {/* 6. HIRING IN HOUSTON ON YOUR OWN (COMPLETELY REDESIGNED) */}
+      <section style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 44px" }}>
+            <div
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
+                fontSize: 11,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                color: "#1D4ED8",
+                marginBottom: 14,
               }}
             >
-              FREE FIRM RESOURCES
-            </span>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>FREE FIRM RESOURCES · DIY PLAYBOOK</span>
+            </div>
             <h2
               style={{
                 fontFamily: "var(--display)",
                 fontSize: "clamp(28px, 3.6vw, 42px)",
                 color: "#08142A",
-                margin: "0 0 14px",
+                margin: "0 auto 14px",
                 fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
               }}
             >
-              Hiring in {city.name} on your <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>own</span>
+              Hiring in {city.name} on your{" "}
+              <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>
+                own
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               Where to post job listings, law school talent pipelines, and customizable job description templates.
             </p>
           </div>
-          <ResourceCards setType="city" />
+
+          {/* 3 Redesigned Elevated Resource Cards */}
+          <div className="city-resources-grid">
+            {/* Resource 1: Where to Post */}
+            <div
+              className="city-hover-lift"
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #E2E8F0",
+                borderRadius: 14,
+                padding: "32px 26px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                boxShadow: "0 4px 16px rgba(8, 20, 42, 0.03)",
+              }}
+            >
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                  <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#EFF6FF", color: "#1D4ED8", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Icon name="post" />
+                  </div>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", background: "#EFF6FF", padding: "4px 8px", borderRadius: 4 }}>
+                    JOB BOARDS
+                  </span>
+                </div>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 21, color: "#08142A", fontWeight: 600, margin: "0 0 10px" }}>
+                  Where to post in {city.name}
+                </h3>
+                <p style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.6, margin: "0 0 20px" }}>
+                  Legal job boards compared on candidate quality, cost-per-applicant, and fill speed for Texas law practices.
+                </p>
+                <div style={{ background: "#FAF9F5", border: "1px solid #EAE7DC", borderRadius: 8, padding: "12px 14px", marginBottom: 20 }}>
+                  <b style={{ display: "block", fontSize: 11, fontFamily: "var(--mono)", color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>
+                    YOU GET
+                  </b>
+                  <span style={{ fontSize: 13, color: "#334155" }}>
+                    Board cost comparisons &amp; time-to-first-applicant analysis.
+                  </span>
+                </div>
+              </div>
+              <Link
+                href={`/where-to-post/${city.slug}`}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  background: "#1D4ED8",
+                  color: "#FFFFFF",
+                  padding: "12px 18px",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  fontSize: 14,
+                  textDecoration: "none",
+                }}
+              >
+                <span>Read posting guide</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Resource 2: Where Hires Come From */}
+            <div
+              className="city-hover-lift"
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #E2E8F0",
+                borderRadius: 14,
+                padding: "32px 26px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                boxShadow: "0 4px 16px rgba(8, 20, 42, 0.03)",
+              }}
+            >
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                  <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#EFF6FF", color: "#1D4ED8", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Icon name="school" />
+                  </div>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", background: "#EFF6FF", padding: "4px 8px", borderRadius: 4 }}>
+                    TALENT PIPELINES
+                  </span>
+                </div>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 21, color: "#08142A", fontWeight: 600, margin: "0 0 10px" }}>
+                  Where {city.name} hires come from
+                </h3>
+                <p style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.6, margin: "0 0 20px" }}>
+                  Accredited law schools, clerkship programmes, and regional legal bar associations across Texas.
+                </p>
+                <div style={{ background: "#FAF9F5", border: "1px solid #EAE7DC", borderRadius: 8, padding: "12px 14px", marginBottom: 20 }}>
+                  <b style={{ display: "block", fontSize: 11, fontFamily: "var(--mono)", color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>
+                    YOU GET
+                  </b>
+                  <span style={{ fontSize: 13, color: "#334155" }}>
+                    Direct placement contacts &amp; recruitment calendar.
+                  </span>
+                </div>
+              </div>
+              <Link
+                href={`/where-to-hire/${city.slug}`}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  background: "#1D4ED8",
+                  color: "#FFFFFF",
+                  padding: "12px 18px",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  fontSize: 14,
+                  textDecoration: "none",
+                }}
+              >
+                <span>Read talent guide</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Resource 3: Interview Kits */}
+            <div
+              className="city-hover-lift"
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #E2E8F0",
+                borderRadius: 14,
+                padding: "32px 26px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                boxShadow: "0 4px 16px rgba(8, 20, 42, 0.03)",
+              }}
+            >
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                  <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#EFF6FF", color: "#1D4ED8", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Icon name="doc" />
+                  </div>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", background: "#EFF6FF", padding: "4px 8px", borderRadius: 4 }}>
+                    INTERVIEW KITS
+                  </span>
+                </div>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 21, color: "#08142A", fontWeight: 600, margin: "0 0 10px" }}>
+                  Hiring kits &amp; rubrics
+                </h3>
+                <p style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.6, margin: "0 0 20px" }}>
+                  Complete attorney and paralegal interview kits, scoring rubrics, and customizable job descriptions.
+                </p>
+                <div style={{ background: "#FAF9F5", border: "1px solid #EAE7DC", borderRadius: 8, padding: "12px 14px", marginBottom: 20 }}>
+                  <b style={{ display: "block", fontSize: 11, fontFamily: "var(--mono)", color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>
+                    YOU GET
+                  </b>
+                  <span style={{ fontSize: 13, color: "#334155" }}>
+                    Job posting template, screening questions, scoring rubric.
+                  </span>
+                </div>
+              </div>
+              <Link
+                href="/hiring-kit/estate-planning-attorney"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  background: "#1D4ED8",
+                  color: "#FFFFFF",
+                  padding: "12px 18px",
+                  borderRadius: 7,
+                  fontWeight: 600,
+                  fontSize: 14,
+                  textDecoration: "none",
+                }}
+              >
+                <span>Access hiring kit</span>
+                <span>→</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 7. REVIEWS & TESTIMONIALS */}
-      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head row" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 40, flexWrap: "wrap", gap: 14 }}>
-            <div>
-              <span
-                className="eyebrow"
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 12,
-                  color: "#1D4ED8",
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  display: "block",
-                  marginBottom: 8,
-                }}
-              >
-                CLIENT REVIEWS
-              </span>
-              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: 0, fontWeight: 500 }}>
-                What law firms say about Orion
-              </h2>
+      {/* 7. REVIEWS & TESTIMONIALS (HOMEPAGE-STYLE MIDNIGHT NAVY DARK SECTION AS REQUESTED) */}
+      <section className="block reviews-sec" id="reviews">
+        <div className="wrap">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              GOOGLE REVIEWS · VERIFIED CLIENTS &amp; CANDIDATES
             </div>
-            <RatingBadge link={true} />
+            <h2 className="sec-title-lg">
+              What firms and candidates{" "}
+              <span className="serif-accent">say</span>
+            </h2>
+            <div className="reviews-rating-pill">
+              <RatingBadge link />
+            </div>
           </div>
-          <ReviewsSection kind="mixed" limit={3} />
+
+          <ReviewsSection kind="mixed" />
+
+          {/* Bottom Reassurance & All Reviews Link */}
+          <div className="reviews-bottom-bar">
+            <div className="reviews-bottom-trust">
+              <span className="reviews-bottom-dot" />
+              <span>
+                100% verified public Google reviews · Jon is named in <strong>{trust.jonNamed} of {trust.reviews}</strong> reviews
+              </span>
+            </div>
+            <a
+              href={trust.google}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-reviews-google"
+            >
+              <span>Read all {trust.reviews} reviews on Google</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* 8. CANDIDATE CROSS-FUNNEL VALUE BAND */}
-      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "64px 0", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 24 }}>
+      <section style={{ background: "#FAF9F5", padding: "64px 0", borderBottom: "1px solid #EAE7DC" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 24 }}>
           <div>
             <span
-              className="eyebrow"
               style={{
                 fontFamily: "var(--mono)",
                 fontSize: 11.5,
@@ -569,7 +1226,6 @@ export default async function CityLocationPage({ params }: PageProps) {
           </div>
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
             <Link
-              className="btn-emp-primary"
               href={`/jobs/estate-planning-attorney/${city.slug}`}
               style={{
                 display: "inline-flex",
@@ -588,7 +1244,6 @@ export default async function CityLocationPage({ params }: PageProps) {
               <span aria-hidden="true">→</span>
             </Link>
             <Link
-              className="btn btn-outline"
               href="/upload-resume"
               style={{
                 borderRadius: 7,
@@ -608,10 +1263,18 @@ export default async function CityLocationPage({ params }: PageProps) {
       </section>
 
       {/* 9. BOTTOM MIDNIGHT NAVY CTA BAND */}
-      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "96px 0 108px", textAlign: "center" }}>
-        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+      <section
+        style={{
+          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          padding: "96px 0 108px",
+          textAlign: "center",
+          color: "#FFFFFF",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
           <div
-            className="badge-capsule"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -628,7 +1291,7 @@ export default async function CityLocationPage({ params }: PageProps) {
               marginBottom: 18,
             }}
           >
-            <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
             <span>EXECUTIVE LEGAL PLACEMENT</span>
           </div>
 
@@ -655,7 +1318,6 @@ export default async function CityLocationPage({ params }: PageProps) {
           <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             <Link
               href={`/find-candidates#city=${city.slug}`}
-              className="btn-emp-primary"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -667,6 +1329,7 @@ export default async function CityLocationPage({ params }: PageProps) {
                 padding: "14px 34px",
                 borderRadius: 7,
                 textDecoration: "none",
+                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.35)",
               }}
             >
               <span>Find {city.name} candidates</span>
@@ -674,7 +1337,6 @@ export default async function CityLocationPage({ params }: PageProps) {
             </Link>
             <Link
               href="/submit-job"
-              className="btn-emp-ghost"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
