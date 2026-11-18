@@ -1598,6 +1598,28 @@ a.rating:hover{border-color:var(--accent);color:var(--ink)}
   .terms-sec {
     padding: 68px 0 76px;
   }
+  .terms-head {
+    text-align: left !important;
+    margin: 0 0 36px 0 !important;
+    max-width: 100% !important;
+  }
+  .terms-eyebrow {
+    margin: 0 0 16px 0 !important;
+    align-self: flex-start !important;
+  }
+  .terms-h2 {
+    text-align: left !important;
+    font-size: clamp(30px, 8vw, 38px) !important;
+    line-height: 1.15 !important;
+    margin: 0 0 16px 0 !important;
+  }
+  .terms-lede {
+    text-align: left !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    line-height: 1.62 !important;
+    max-width: 100% !important;
+  }
   .terms-pillars-grid {
     grid-template-columns: 1fr;
     gap: 16px;
