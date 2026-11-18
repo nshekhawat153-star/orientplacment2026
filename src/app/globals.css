@@ -291,6 +291,35 @@ table,
   color: var(--accent)
 }
 
+/* Universal Responsive Display Helpers */
+.only-mobile,
+.hero-eyebrow-mobile {
+  display: none !important;
+}
+.hidden-mobile,
+.hero-eyebrow-desktop {
+  display: block;
+}
+span.hidden-mobile,
+span.hero-eyebrow-desktop {
+  display: inline !important;
+}
+
+@media (max-width: 640px) {
+  .hidden-mobile,
+  .hero-eyebrow-desktop {
+    display: none !important;
+  }
+  .only-mobile,
+  .hero-eyebrow-mobile {
+    display: block !important;
+  }
+  span.only-mobile,
+  span.hero-eyebrow-mobile {
+    display: inline !important;
+  }
+}
+
 /* sample-data marks: off by default (body.clean), a quiet dashed underline when switched on */
 .mark {
   background: var(--ice);
@@ -10354,9 +10383,9 @@ table.data.compare td.us {
   }
 
   .hero-eyebrow-capsule {
-    font-size: 10.5px !important;
-    letter-spacing: 0.08em !important;
-    padding: 5px 14px !important;
+    font-size: clamp(9px, 2.5vw, 10px) !important;
+    letter-spacing: 0.04em !important;
+    padding: 5px 12px !important;
     margin-bottom: 14px !important;
     max-width: calc(100vw - 32px) !important;
     box-sizing: border-box !important;

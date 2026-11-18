@@ -36,13 +36,26 @@ export function RatingBadge({ size, dark, link }: RatingBadgeProps) {
   return <span className={cls}>{content}</span>;
 }
 
-export function TrustLine({ kind = "employer" }: { kind?: "employer" | "candidate" }) {
+export function TrustLine({
+  kind = "employer",
+  dark = false,
+  className = "",
+  style,
+}: {
+  kind?: "employer" | "candidate";
+  dark?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
   const tail =
     kind === "candidate"
       ? "free for candidates, always confidential"
       : "no fee unless you hire";
   return (
-    <p className="trust-line">
+    <p
+      className={`trust-line${dark ? " on-dark" : ""}${className ? ` ${className}` : ""}`}
+      style={style}
+    >
       <Stars />
       <span>
         <b>{trust.rating} on Google</b> · {tail}

@@ -305,7 +305,7 @@ export default function SalaryCheckPage() {
               </div>
 
               <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 18 }}>
-                <TrustLine />
+                <TrustLine dark />
               </div>
             </div>
 
