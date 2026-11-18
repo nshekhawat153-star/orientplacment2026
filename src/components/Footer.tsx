@@ -51,20 +51,30 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
             color: #60A5FA !important;
           }
         `}</style>
-        {/* LUXURY FADED GLOW DIVIDER ABOVE FOOTER */}
+        {/* LUXURY ULTRA-THIN DEEPLY FADED DIVIDER ABOVE FOOTER */}
         <div
           role="separator"
           aria-hidden="true"
           style={{
             width: "100%",
-            height: "2px",
-            background:
-              "linear-gradient(90deg, rgba(8, 20, 42, 0) 0%, rgba(96, 165, 250, 0.35) 20%, #60A5FA 50%, rgba(96, 165, 250, 0.35) 80%, rgba(8, 20, 42, 0) 100%)",
-            boxShadow: "0 -2px 20px rgba(96, 165, 250, 0.6), 0 0 4px #60A5FA",
+            display: "flex",
+            justifyContent: "center",
             position: "relative",
             zIndex: 10,
+            background: "#08142A",
           }}
-        />
+        >
+          <div
+            style={{
+              width: "100%",
+              maxWidth: 1140,
+              height: "1px",
+              background:
+                "linear-gradient(90deg, transparent 0%, transparent 20%, rgba(96, 165, 250, 0.12) 32%, rgba(147, 197, 253, 0.60) 50%, rgba(96, 165, 250, 0.12) 68%, transparent 80%, transparent 100%)",
+              boxShadow: "0 0 10px rgba(96, 165, 250, 0.28)",
+            }}
+          />
+        </div>
         <footer
           className="site-footer ha-ads-footer"
           style={{
@@ -75,9 +85,20 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
             textAlign: "center",
           }}
         >
-          <div className="wrap" style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            className="wrap"
+            style={{
+              maxWidth: 860,
+              margin: "0 auto",
+              padding: "0 24px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
             {/* 1. LARGER LOGO & BRAND (Unlinked on PPC ad landing page to prevent exit leaks) */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 20 }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 20, textAlign: "center" }}>
               <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", textDecoration: "none" }}>
                 <Image
                   src="/images/orion-logo.png"
@@ -103,13 +124,13 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                   Orion Placement
                 </span>
               </div>
-              <p style={{ color: "#94A3B8", fontSize: 13.5, margin: "6px 0 0", maxWidth: 460, lineHeight: 1.55 }}>
+              <p style={{ color: "#94A3B8", fontSize: 13.5, margin: "6px auto 0", maxWidth: 480, lineHeight: 1.55, textAlign: "center" }}>
                 Direct intake legal recruiters for Texas law firms. Screened lateral attorneys and paralegals on 100% contingency.
               </p>
             </div>
 
             {/* 2. RATING & REVIEWS TRUST BADGE */}
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: 24 }}>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 24, width: "100%" }}>
               <div
                 style={{
                   display: "inline-flex",
@@ -135,11 +156,24 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
             </div>
 
             {/* 3. COPYRIGHT & TERMS NOTICE (Distraction-free, zero outward navigation) */}
-            <div style={{ fontSize: 12.5, color: "#94A3B8", lineHeight: 1.6, paddingTop: 16, borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
-              <p style={{ margin: "0 0 6px", color: "#CBD5E1" }}>
+            <div
+              style={{
+                width: "100%",
+                fontSize: 12.5,
+                color: "#94A3B8",
+                lineHeight: 1.6,
+                paddingTop: 18,
+                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <p style={{ margin: "0 auto 6px", color: "#CBD5E1", maxWidth: "100%", textAlign: "center", width: "100%" }}>
                 23% flat contingency fee · 90-day replacement warranty · Payable Net 15 only if you hire
               </p>
-              <p style={{ margin: 0, color: "#64748B" }}>
+              <p style={{ margin: "0 auto", color: "#64748B", maxWidth: "100%", textAlign: "center", width: "100%" }}>
                 © 2026 Orion Placement LLC · Texas Legal Recruiting. All rights reserved.
               </p>
             </div>
@@ -189,13 +223,23 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
         aria-hidden="true"
         style={{
           width: "100%",
-          height: "1.5px",
-          background:
-            "linear-gradient(90deg, rgba(8, 20, 42, 0) 0%, rgba(96, 165, 250, 0.25) 25%, #60A5FA 50%, rgba(96, 165, 250, 0.25) 75%, rgba(8, 20, 42, 0) 100%)",
+          display: "flex",
+          justifyContent: "center",
           position: "relative",
           zIndex: 10,
+          background: "#08142A",
         }}
-      />
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 1140,
+            height: "1px",
+            background:
+              "linear-gradient(90deg, transparent 0%, transparent 20%, rgba(96, 165, 250, 0.12) 32%, rgba(147, 197, 253, 0.50) 50%, rgba(96, 165, 250, 0.12) 68%, transparent 80%, transparent 100%)",
+          }}
+        />
+      </div>
       <footer className="site-footer">
         <div className="wrap">
           <div className="f-top">
