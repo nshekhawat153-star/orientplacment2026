@@ -19,7 +19,7 @@ import { CandidateCard } from "@/components/CandidateCard";
 import { JobCard } from "@/components/JobCard";
 import { GateForm } from "@/components/GateForm";
 import { ReviewsSection } from "@/components/ReviewCard";
-import { RatingBadge } from "@/components/Rating";
+import { RatingBadge, TrustBar } from "@/components/Rating";
 
 export default function SalaryLeafClient({
   roleParam,
@@ -177,10 +177,10 @@ export default function SalaryLeafClient({
 
       {/* 1. LUXURY CENTERED DARK HERO WITH VIDEO BACKGROUND */}
       <section
-        className="emp-luxury-hero-sec leaf-hero"
+        className="hero-cinematic salary-leaf-hero"
         style={{
           position: "relative",
-          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          background: "#08142A",
           color: "#FFFFFF",
           padding: "124px 0 88px",
           overflow: "hidden",
@@ -188,83 +188,84 @@ export default function SalaryLeafClient({
           textAlign: "center",
         }}
       >
-        <div className="emp-hero-video-wrap" aria-hidden="true">
+        <div className="hero-video-wrap" aria-hidden="true">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="emp-hero-video"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              opacity: 0.18,
-              pointerEvents: "none",
-            }}
+            className="hero-video-el"
           >
-            <source src="/media/splash.mp4" type="video/mp4" />
             <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+            <source src="/media/splash.mp4" type="video/mp4" />
           </video>
+          <div className="hero-video-gradient" />
+          <div className="hero-video-radial-aura" />
         </div>
 
-        <div style={{ position: "relative", zIndex: 2, maxWidth: 980, margin: "0 auto", padding: "0 24px" }}>
-          {/* Centered Capsule Badge */}
-          <div style={{ marginBottom: 20 }}>
-            <div
+        <div className="wrap hero-content-wrap" style={{ display: "block", position: "relative", zIndex: 3, maxWidth: 980, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+          <div className="hero-content-center" style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }}>
+            {/* Centered Capsule Badge */}
+            <div style={{ marginBottom: 20 }}>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "rgba(255, 255, 255, 0.08)",
+                  border: "1px solid rgba(255, 255, 255, 0.20)",
+                  borderRadius: 999,
+                  padding: "6px 16px",
+                  fontFamily: "var(--mono)",
+                  fontSize: 11,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "#E2E8F0",
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
+                }}
+              >
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+                <span>COMPENSATION GUIDE · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
+              </div>
+            </div>
+
+            {/* Centered Display Heading */}
+            <h1
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(29, 78, 216, 0.15)",
-                border: "1px solid rgba(96, 165, 250, 0.3)",
-                borderRadius: 999,
-                padding: "6px 16px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#93C5FD",
+                fontFamily: "var(--display)",
+                fontSize: "clamp(34px, 4.4vw, 54px)",
+                lineHeight: 1.15,
+                fontWeight: 500,
+                color: "#FFFFFF",
+                letterSpacing: "-0.02em",
+                margin: "0 auto 18px",
+                textAlign: "center",
+                maxWidth: 820,
+                textWrap: "balance",
+                textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
               }}
             >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span>COMPENSATION GUIDE · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
-            </div>
-          </div>
+              {role.name} salary in{" "}
+              <span className="serif-accent" style={{ color: "#93C5FD", fontStyle: "italic" }}>
+                {city.name}, {city.state}
+              </span>
+            </h1>
 
-          {/* Centered Display Heading */}
-          <h1
-            style={{
-              fontFamily: "var(--display)",
-              fontSize: "clamp(34px, 4.4vw, 54px)",
-              lineHeight: 1.15,
-              fontWeight: 500,
-              color: "#FFFFFF",
-              letterSpacing: "-0.02em",
-              margin: "0 0 18px",
-            }}
-          >
-            {role.name} salary in <br />
-            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-              {city.name}, {city.state}
-            </span>
-          </h1>
-
-          {/* Centered Subtitle */}
-          <p
-            style={{
-              fontSize: 17,
-              lineHeight: 1.6,
-              color: "#CBD5E1",
-              maxWidth: 720,
-              margin: "0 auto 28px",
-            }}
-          >
-            Prevailing market base salaries from accepted lateral offers and active boutique mandates in {city.name}. Excludes discretionary collections bonuses.
-          </p>
+            {/* Centered Subtitle */}
+            <p
+              style={{
+                fontSize: 17,
+                lineHeight: 1.6,
+                color: "#CBD5E1",
+                maxWidth: 720,
+                margin: "0 auto 28px",
+                textAlign: "center",
+                textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
+              }}
+            >
+              Prevailing market base salaries from accepted lateral offers and active boutique mandates in {city.name}. Excludes discretionary collections bonuses.
+            </p>
 
           {/* Perspective Toggle: Employer vs Candidate */}
           <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8, padding: "5px 6px", marginBottom: 32 }}>
@@ -386,98 +387,13 @@ export default function SalaryLeafClient({
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* 1.5. DEDICATED ELEVATED 4-STAT BENCHMARK STRIP */}
-      <section style={{ maxWidth: 1200, margin: "-32px auto 0", padding: "0 24px", position: "relative", zIndex: 10 }}>
-        <div className="leaf-terms-grid">
-          {/* Card 1: Median Base */}
-          <div
-            className="leaf-hover-lift"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Median Base Salary
-            </div>
-            <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
-              {fmt.k(bandData.median)}
-            </div>
-            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Across all experience levels in {city.name}.
-            </div>
-          </div>
-
-          {/* Card 2: Interquartile Band */}
-          <div
-            className="leaf-hover-lift"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              25th–75th Band
-            </div>
-            <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
-              ${bandData.b1[0]}k–${bandData.b3[1]}k
-            </div>
-            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Middle 50% interquartile market spread.
-            </div>
-          </div>
-
-          {/* Card 3: Typical Experience */}
-          <div
-            className="leaf-hover-lift"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Typical Experience
-            </div>
-            <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
-              {bandData.typical}
-            </div>
-            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Primary lateral demand tier for Texas firms.
-            </div>
-          </div>
-
-          {/* Card 4: Placement Guarantee */}
-          <div
-            className="leaf-hover-lift"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Contingency Terms
-            </div>
-            <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
-              23% / $0
-            </div>
-            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              $0 upfront retainer. 90-day guarantee.
-            </div>
-          </div>
+      {/* 2. TRUST BAR STRIP */}
+      <section className="trust-strip" aria-label="Orion in numbers" style={{ background: "#FFFFFF", borderBottom: "1px solid #E2E8F0" }}>
+        <div className="wrap">
+          <TrustBar kind={door === "candidate" ? "candidate" : "employer"} />
         </div>
       </section>
 

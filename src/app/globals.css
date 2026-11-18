@@ -5412,9 +5412,6 @@ table.data.compare td.us{background:#F5F8FC}
 
 /* ---------- 40. hubs and resource pages: pay split, mock bits, misc ---------- */
 .pay-split{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:48px}
-.leaf-hero>.wrap{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start}
-.leaf-hero h1{max-width:16ch}
-.leaf-hero .band-card{margin-top:40px}
 .pay-split .gate-row{grid-template-columns:1fr}
 .cand-band .ticks{margin-top:16px}
 .cand-band .ticks a{font-weight:500;text-decoration:none}
@@ -9799,6 +9796,33 @@ table.data.compare td.us{background:#F5F8FC}
   height: 100% !important;
   overflow: hidden !important;
   z-index: 1 !important;
+}
+
+.emp-hero-video-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 20, 42, 0.45) 0%,
+    rgba(8, 20, 42, 0.30) 45%,
+    rgba(8, 20, 42, 0.82) 100%
+  ) !important;
+}
+
+.emp-hero-video-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 48%,
+    rgba(10, 26, 54, 0.10) 0%,
+    rgba(6, 16, 34, 0.60) 100%
+  ) !important;
 }
 
 .emp-hero-video {

@@ -17,7 +17,7 @@ import { CityPayTable } from "@/components/PayTables";
 import { GateForm } from "@/components/GateForm";
 import { TermsTiles } from "@/components/TermsTiles";
 import { ReviewsSection } from "@/components/ReviewCard";
-import { RatingBadge } from "@/components/Rating";
+import { RatingBadge, TrustBar } from "@/components/Rating";
 import { Icon } from "@/components/icons";
 
 interface PageProps {
@@ -143,11 +143,11 @@ export default async function CityLocationPage({ params }: PageProps) {
 
       {/* 1. LUXURY CENTERED DARK HERO WITH VIDEO BACKGROUND */}
       <section
-        className="emp-luxury-hero-sec city-location-hero"
+        className="hero-cinematic city-location-hero"
         aria-labelledby="city-hero-h1"
         style={{
           position: "relative",
-          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          background: "#08142A",
           color: "#FFFFFF",
           padding: "124px 0 88px",
           overflow: "hidden",
@@ -155,30 +155,22 @@ export default async function CityLocationPage({ params }: PageProps) {
           textAlign: "center",
         }}
       >
-        <div className="emp-hero-video-wrap" aria-hidden="true">
+        <div className="hero-video-wrap" aria-hidden="true">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="emp-hero-video"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              opacity: 0.18,
-              pointerEvents: "none",
-            }}
+            className="hero-video-el"
           >
-            <source src="/media/splash.mp4" type="video/mp4" />
             <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+            <source src="/media/splash.mp4" type="video/mp4" />
           </video>
+          <div className="hero-video-gradient" />
+          <div className="hero-video-radial-aura" />
         </div>
 
-        <div style={{ position: "relative", zIndex: 2, maxWidth: 980, margin: "0 auto", padding: "0 24px" }}>
+        <div className="wrap hero-content-wrap" style={{ position: "relative", zIndex: 3, maxWidth: 980, margin: "0 auto", padding: "0 24px" }}>
           {/* Centered Capsule Badge */}
           <div style={{ marginBottom: 20 }}>
             <div
@@ -186,15 +178,17 @@ export default async function CityLocationPage({ params }: PageProps) {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-                background: "rgba(29, 78, 216, 0.15)",
-                border: "1px solid rgba(96, 165, 250, 0.3)",
+                background: "rgba(255, 255, 255, 0.08)",
+                border: "1px solid rgba(255, 255, 255, 0.20)",
                 borderRadius: 999,
                 padding: "6px 16px",
                 fontFamily: "var(--mono)",
                 fontSize: 11,
-                letterSpacing: "0.08em",
+                letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                color: "#93C5FD",
+                color: "#E2E8F0",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
               }}
             >
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
@@ -212,11 +206,15 @@ export default async function CityLocationPage({ params }: PageProps) {
               fontWeight: 500,
               color: "#FFFFFF",
               letterSpacing: "-0.02em",
-              margin: "0 0 18px",
+              margin: "0 auto 18px",
+              textAlign: "center",
+              maxWidth: 820,
+              textWrap: "balance",
+              textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
             }}
           >
             Legal recruiters in{" "}
-            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+            <span className="serif-accent" style={{ color: "#93C5FD", fontStyle: "italic" }}>
               {city.name}
             </span>
           </h1>
@@ -229,6 +227,7 @@ export default async function CityLocationPage({ params }: PageProps) {
               color: "#CBD5E1",
               maxWidth: 720,
               margin: "0 auto 32px",
+              textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
             Direct lateral placements at boutique and mid-size law firms across {city.name}. Screened attorney and paralegal dossiers delivered in 48 hours. 100% contingency, zero upfront retainer.
@@ -315,96 +314,10 @@ export default async function CityLocationPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 1.5. DEDICATED ELEVATED MARKET BENCHMARK STRIP (4 CARDS IN 1 ROW) */}
-      <section style={{ maxWidth: 1200, margin: "-32px auto 0", padding: "0 24px", position: "relative", zIndex: 10 }}>
-        <div className="city-terms-grid">
-          {/* Card 1: Associate Band */}
-          <div
-            className="city-hover-lift"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Associate Base Band
-            </div>
-            <div style={{ fontFamily: "var(--display)", fontSize: 30, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
-              $130k–$210k
-            </div>
-            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Typical lateral tier across {city.name} boutiques.
-            </div>
-          </div>
-
-          {/* Card 2: Active Candidates */}
-          <div
-            className="city-hover-lift"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Local Talent Pool
-            </div>
-            <div style={{ fontFamily: "var(--display)", fontSize: 30, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
-              30+ Pre-Screened
-            </div>
-            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Attorneys and paralegals currently open in {city.name}.
-            </div>
-          </div>
-
-          {/* Card 3: Contingency Fee */}
-          <div
-            className="city-hover-lift"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Placement Fee
-            </div>
-            <div style={{ fontFamily: "var(--display)", fontSize: 30, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
-              23%
-            </div>
-            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              Net 15 upon start date. Zero upfront retainer.
-            </div>
-          </div>
-
-          {/* Card 4: Warranty */}
-          <div
-            className="city-hover-lift"
-            style={{
-              background: "#FFFFFF",
-              border: "1.5px solid #E2E8F0",
-              borderRadius: 14,
-              padding: "24px 22px",
-              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
-            }}
-          >
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-              Warranty Period
-            </div>
-            <div style={{ fontFamily: "var(--display)", fontSize: 30, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
-              90 Days
-            </div>
-            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-              100% replacement guarantee backed by contract.
-            </div>
-          </div>
+      {/* 2. TRUST BAR STRIP */}
+      <section className="trust-strip" aria-label="Orion in numbers" style={{ background: "#FFFFFF", borderBottom: "1px solid #E2E8F0" }}>
+        <div className="wrap">
+          <TrustBar />
         </div>
       </section>
 
