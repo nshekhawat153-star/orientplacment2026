@@ -88,6 +88,48 @@ export function WhereToPostClient({
           .wtp-candidates-row { grid-template-columns: 1fr; }
           .wtp-roi-grid { grid-template-columns: 1fr; }
         }
+        @media (max-width: 640px) {
+          .wtp-filter-pills {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            justify-content: flex-start !important;
+            padding: 5px !important;
+            gap: 6px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            border-radius: 10px !important;
+            scrollbar-width: none !important;
+            margin: 0 auto 20px !important;
+          }
+          .wtp-filter-pills::-webkit-scrollbar {
+            display: none !important;
+          }
+          .wtp-filter-btn {
+            flex: 0 0 auto !important;
+            white-space: nowrap !important;
+            padding: 8px 14px !important;
+            font-size: 0.82rem !important;
+            border-radius: 7px !important;
+          }
+          .wtp-table-scroll {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+          }
+          .wtp-table {
+            min-width: 720px !important;
+            font-size: 0.85rem !important;
+          }
+          .wtp-table th {
+            padding: 12px 14px !important;
+            font-size: 0.74rem !important;
+            white-space: nowrap !important;
+          }
+          .wtp-table td {
+            padding: 13px 14px !important;
+          }
+        }
       `}</style>
 
       {/* =========================================================================
@@ -282,6 +324,7 @@ export function WhereToPostClient({
 
           {/* Filter Pills */}
           <div
+            className="wtp-filter-pills"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -304,6 +347,7 @@ export function WhereToPostClient({
               <button
                 key={tab.id}
                 type="button"
+                className="wtp-filter-btn"
                 onClick={() => setSeatFilter(tab.id)}
                 style={{
                   padding: "10px 18px",
@@ -325,7 +369,7 @@ export function WhereToPostClient({
 
           {/* Matrix Table */}
           <div className="wtp-table-wrap">
-            <div style={{ overflowX: "auto" }}>
+            <div className="wtp-table-scroll" style={{ overflowX: "auto" }}>
               <table className="wtp-table">
                 <thead>
                   <tr>
