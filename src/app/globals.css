@@ -2333,6 +2333,12 @@ a.id:hover{color:var(--accent)}
   #available-now.candidates-sec {
     padding: 68px 0 76px;
   }
+  .showcase-bottom-banner {
+    border-left: 1px solid #E2E8F0 !important;
+  }
+  .showcase-banner-icon-box {
+    display: none !important;
+  }
   .showcase-dossier-panel {
     padding: 24px 20px 20px;
   }
