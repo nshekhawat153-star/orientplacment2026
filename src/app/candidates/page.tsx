@@ -170,28 +170,34 @@ export default function CandidatesPage() {
                 background: "rgba(29, 78, 216, 0.15)",
                 border: "1px solid rgba(96, 165, 250, 0.3)",
                 borderRadius: "100px",
-                padding: "6px 14px",
-                fontSize: "0.78rem",
+                padding: "7px 18px",
+                fontFamily: "var(--mono)",
+                fontSize: "12px",
                 fontWeight: 600,
-                letterSpacing: "0.06em",
+                letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 color: "#93C5FD",
-                marginBottom: "18px",
+                marginBottom: "24px",
               }}
             >
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
               Candidate Portal · 100% Confidential &amp; Free
             </div>
 
+            {/* Centered Display Heading - Prominent Executive Scale */}
             <h1
               style={{
-                fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
+                fontSize: "clamp(40px, 5.2vw, 64px)",
                 fontFamily: "var(--display)",
                 fontWeight: 500,
-                lineHeight: 1.15,
+                lineHeight: 1.10,
                 color: "#FFFFFF",
-                letterSpacing: "-0.02em",
-                margin: "0 0 16px",
+                letterSpacing: "-0.025em",
+                margin: "0 auto 22px",
+                maxWidth: "920px",
+                textAlign: "center",
+                textWrap: "balance",
+                textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
               }}
             >
               Confidential legal jobs, <br />
@@ -200,28 +206,29 @@ export default function CandidatesPage() {
 
             <p
               style={{
-                fontSize: "1.12rem",
-                lineHeight: 1.6,
-                color: "rgba(255, 255, 255, 0.82)",
-                maxWidth: "700px",
-                margin: "0 auto 32px",
+                fontSize: "clamp(18px, 1.8vw, 21px)",
+                lineHeight: 1.65,
+                color: "rgba(255, 255, 255, 0.88)",
+                maxWidth: "760px",
+                margin: "0 auto 34px",
+                textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
               }}
             >
               Direct lateral opportunities at leading boutique and mid-size law firms across Texas. Always 100% free for candidates. No firm ever sees your name until you specifically say yes.
             </p>
 
-            <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 32 }}>
+            <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 34 }}>
               <Link
                 href="/upload-resume"
                 style={{
                   background: "#1D4ED8",
                   color: "#FFFFFF",
-                  padding: "14px 30px",
+                  padding: "15px 32px",
                   borderRadius: 7,
                   fontWeight: 600,
-                  fontSize: "0.95rem",
+                  fontSize: "16px",
                   textDecoration: "none",
-                  boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+                  boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
                   transition: "all 0.2s ease",
                 }}
               >
@@ -233,10 +240,10 @@ export default function CandidatesPage() {
                   background: "rgba(255, 255, 255, 0.08)",
                   border: "1px solid rgba(255, 255, 255, 0.2)",
                   color: "#FFFFFF",
-                  padding: "14px 26px",
+                  padding: "15px 28px",
                   borderRadius: 7,
                   fontWeight: 600,
-                  fontSize: "0.95rem",
+                  fontSize: "16px",
                   textDecoration: "none",
                   transition: "all 0.2s ease",
                 }}
@@ -246,7 +253,7 @@ export default function CandidatesPage() {
             </div>
 
             {/* Micro Reassurances */}
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "16px 24px", color: "rgba(255, 255, 255, 0.75)", fontSize: "0.85rem" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "16px 28px", color: "#CBD5E1", fontSize: "14.5px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                 <span style={{ color: "#60A5FA" }}>✓</span> 100% confidential representation
               </div>

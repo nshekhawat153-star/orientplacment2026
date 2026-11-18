@@ -125,10 +125,10 @@ export default async function RolePage({ params }: PageProps) {
                 background: "rgba(29, 78, 216, 0.15)",
                 border: "1px solid rgba(96, 165, 250, 0.3)",
                 borderRadius: 999,
-                padding: "6px 14px",
+                padding: "7px 18px",
                 fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: "0.08em",
+                fontSize: 12,
+                letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 color: "#93C5FD",
               }}
@@ -138,17 +138,22 @@ export default async function RolePage({ params }: PageProps) {
             </div>
           </div>
 
+          {/* Centered Display Heading - Prominent Executive Scale */}
           <h1
             id="role-hero-h1"
             className="emp-hero-h1"
             style={{
               fontFamily: "var(--display)",
-              fontSize: "clamp(34px, 4.4vw, 54px)",
-              lineHeight: 1.15,
+              fontSize: "clamp(40px, 5.2vw, 64px)",
+              lineHeight: 1.10,
               fontWeight: 500,
               color: "#FFFFFF",
-              letterSpacing: "-0.02em",
-              margin: "0 0 18px",
+              letterSpacing: "-0.025em",
+              margin: "0 auto 22px",
+              maxWidth: 920,
+              textAlign: "center",
+              textWrap: "balance",
+              textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
             }}
           >
             {role.name}:{" "}
@@ -157,11 +162,11 @@ export default async function RolePage({ params }: PageProps) {
             </span>
           </h1>
 
-          <div style={{ display: "inline-flex", alignItems: "baseline", justifyContent: "center", gap: 14, marginBottom: 18, background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: 12, padding: "12px 24px" }}>
-            <span style={{ fontFamily: "var(--display)", fontSize: "clamp(38px, 4.5vw, 52px)", fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>
+          <div style={{ display: "inline-flex", alignItems: "baseline", justifyContent: "center", gap: 14, marginBottom: 22, background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: 12, padding: "14px 28px" }}>
+            <span style={{ fontFamily: "var(--display)", fontSize: "clamp(42px, 5.2vw, 58px)", fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>
               {fmt.k(natMedian)}
             </span>
-            <span style={{ fontFamily: "var(--mono)", fontSize: 12.5, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>
               National Median Base Salary across US legal markets
             </span>
           </div>
@@ -169,17 +174,19 @@ export default async function RolePage({ params }: PageProps) {
           <p
             className="emp-hero-lead"
             style={{
-              fontSize: 16.5,
-              lineHeight: 1.6,
+              fontSize: "clamp(18px, 1.8vw, 21px)",
+              lineHeight: 1.65,
               color: "#CBD5E1",
-              maxWidth: 680,
-              margin: "0 auto 30px",
+              maxWidth: 780,
+              margin: "0 auto 34px",
+              textAlign: "center",
+              textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
             National compensation intelligence, turnkey law firm hiring templates, and active pre-screened lateral attorney candidates across all major regional legal markets.
           </p>
 
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 30 }}>
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}>
             <Link
               className="btn-emp-primary"
               href={`/find-candidates#role=${role.slug}`}
@@ -190,8 +197,8 @@ export default async function RolePage({ params }: PageProps) {
                 background: "#1D4ED8",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "13px 28px",
+                fontSize: 16,
+                padding: "15px 32px",
                 borderRadius: 7,
                 textDecoration: "none",
                 boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",

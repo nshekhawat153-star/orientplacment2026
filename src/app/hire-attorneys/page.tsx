@@ -109,13 +109,14 @@ export default function HireAttorneysLandingPage() {
               background: "rgba(255, 255, 255, 0.08)",
               border: "1px solid rgba(255, 255, 255, 0.20)",
               borderRadius: 999,
-              padding: "6px 16px",
-              fontSize: "0.78rem",
+              padding: "7px 18px",
+              fontFamily: "var(--mono)",
+              fontSize: 12,
               fontWeight: 600,
-              letterSpacing: "0.06em",
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
               color: "#E2E8F0",
-              marginBottom: 20,
+              marginBottom: 24,
               backdropFilter: "blur(8px)",
               WebkitBackdropFilter: "blur(8px)",
             }}
@@ -124,19 +125,20 @@ export default function HireAttorneysLandingPage() {
             Direct Intake · Zero Retainer
           </div>
 
-          {/* Centered Display Heading */}
+          {/* Centered Display Heading - Prominent Executive Scale */}
           <h1
             style={{
-              fontSize: "clamp(2.4rem, 4.4vw, 3.8rem)",
+              fontSize: "clamp(40px, 5.2vw, 64px)",
               fontFamily: "var(--display)",
               fontWeight: 500,
-              lineHeight: 1.15,
+              lineHeight: 1.10,
               color: "#FFFFFF",
-              letterSpacing: "-0.02em",
-              margin: "0 auto 18px",
+              letterSpacing: "-0.025em",
+              margin: "0 auto 22px",
               textAlign: "center",
-              maxWidth: 880,
+              maxWidth: 940,
               textWrap: "balance",
+              textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
             }}
           >
             Get qualified attorney candidates sent straight to <br />
@@ -145,14 +147,15 @@ export default function HireAttorneysLandingPage() {
             </span>
           </h1>
 
-          {/* Centered Subtitle */}
+          {/* Centered Subtitle - Readable Executive Scale */}
           <p
             style={{
-              fontSize: "1.12rem",
-              lineHeight: 1.6,
-              color: "rgba(255, 255, 255, 0.82)",
-              maxWidth: 720,
-              margin: "0 auto 32px",
+              fontSize: "clamp(18px, 1.8vw, 21px)",
+              lineHeight: 1.65,
+              color: "rgba(255, 255, 255, 0.88)",
+              maxWidth: 780,
+              margin: "0 auto 34px",
+              textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
             Sign one simple agreement. Pre-screened lateral attorneys matched to your exact
@@ -160,7 +163,7 @@ export default function HireAttorneysLandingPage() {
           </p>
 
           {/* Centered CTA Buttons */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 32 }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 34 }}>
             <a
               href="#questionnaire"
               style={{
@@ -170,8 +173,8 @@ export default function HireAttorneysLandingPage() {
                 background: "#1D4ED8",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "14px 28px",
+                fontSize: 16,
+                padding: "15px 32px",
                 borderRadius: 7,
                 textDecoration: "none",
                 boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
@@ -192,8 +195,8 @@ export default function HireAttorneysLandingPage() {
                 border: "1px solid rgba(255, 255, 255, 0.2)",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "14px 26px",
+                fontSize: 16,
+                padding: "15px 28px",
                 borderRadius: 7,
                 textDecoration: "none",
               }}
@@ -204,7 +207,7 @@ export default function HireAttorneysLandingPage() {
           </div>
 
           {/* Centered Micro-reassurances */}
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 24, fontSize: 13.5, color: "#CBD5E1" }}>
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 28, fontSize: 14.5, color: "#CBD5E1" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
               <span>23% contingency fee — only pay if you hire</span>

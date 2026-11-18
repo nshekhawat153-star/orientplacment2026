@@ -147,7 +147,7 @@ export function BestFirmsClient({
           }}
         />
 
-        <div style={{ maxWidth: "860px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
+        <div style={{ maxWidth: "960px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1, textAlign: "center" }}>
           <div
             style={{
               display: "inline-flex",
@@ -156,28 +156,34 @@ export function BestFirmsClient({
               background: "rgba(29, 78, 216, 0.15)",
               border: "1px solid rgba(96, 165, 250, 0.3)",
               borderRadius: "100px",
-              padding: "6px 16px",
-              fontSize: "0.78rem",
+              padding: "7px 18px",
+              fontFamily: "var(--mono)",
+              fontSize: "12px",
               fontWeight: 600,
-              letterSpacing: "0.06em",
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
               color: "#93C5FD",
-              marginBottom: "18px",
+              marginBottom: "24px",
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
             EDITORIAL RETENTION BENCHMARK · {city.name.toUpperCase()}, {city.state.toUpperCase()}
           </div>
 
+          {/* Centered Display Heading - Prominent Executive Scale */}
           <h1
             style={{
-              fontSize: "clamp(34px, 4.4vw, 52px)",
+              fontSize: "clamp(40px, 5.2vw, 64px)",
               fontFamily: "var(--display)",
               fontWeight: 500,
-              lineHeight: 1.15,
+              lineHeight: 1.10,
               color: "#FFFFFF",
-              letterSpacing: "-0.02em",
-              margin: "0 0 18px",
+              letterSpacing: "-0.025em",
+              margin: "0 auto 22px",
+              maxWidth: "920px",
+              textAlign: "center",
+              textWrap: "balance",
+              textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
             }}
           >
             Best small law firms to work for in{" "}
@@ -188,11 +194,13 @@ export function BestFirmsClient({
 
           <p
             style={{
-              fontSize: "1.1rem",
-              lineHeight: 1.6,
+              fontSize: "clamp(18px, 1.8vw, 21px)",
+              lineHeight: 1.65,
               color: "#CBD5E1",
-              maxWidth: "680px",
-              margin: "0 auto 28px",
+              maxWidth: "780px",
+              margin: "0 auto 34px",
+              textAlign: "center",
+              textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
             Boutique and mid-size law firms in {city.name} that pass all five rigorous retention and compensation standards. Completely independent editorial rankings: zero firms can sponsor placement or pay to be listed.
@@ -202,20 +210,20 @@ export function BestFirmsClient({
             style={{
               display: "flex",
               justifyContent: "center",
-              gap: 20,
+              gap: 24,
               flexWrap: "wrap",
-              marginBottom: 32,
+              marginBottom: 34,
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.92rem", color: "#E2E8F0" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "14.5px", color: "#E2E8F0" }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
               <span>Zero sponsored listings or paid placements</span>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.92rem", color: "#E2E8F0" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "14.5px", color: "#E2E8F0" }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
               <span>5 objective associate retention benchmarks</span>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.92rem", color: "#E2E8F0" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "14.5px", color: "#E2E8F0" }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
               <span>Confidential matching with zero current firm contact</span>
             </div>
@@ -227,7 +235,7 @@ export function BestFirmsClient({
               justifyContent: "center",
               flexWrap: "wrap",
               gap: 14,
-              marginBottom: 32,
+              marginBottom: 36,
             }}
           >
             <Link
@@ -238,12 +246,12 @@ export function BestFirmsClient({
                 gap: 8,
                 background: "#1D4ED8",
                 color: "#FFFFFF",
-                padding: "13px 28px",
+                padding: "15px 32px",
                 borderRadius: 7,
                 fontWeight: 600,
-                fontSize: "0.95rem",
+                fontSize: "16px",
                 textDecoration: "none",
-                boxShadow: "0 4px 16px rgba(29, 78, 216, 0.4)",
+                boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
                 transition: "all 0.2s ease",
               }}
             >
@@ -259,10 +267,10 @@ export function BestFirmsClient({
                 background: "rgba(255, 255, 255, 0.08)",
                 border: "1px solid rgba(255, 255, 255, 0.22)",
                 color: "#FFFFFF",
-                padding: "13px 24px",
-                borderRadius: 7,
                 fontWeight: 600,
-                fontSize: "0.95rem",
+                fontSize: "16px",
+                padding: "15px 28px",
+                borderRadius: 7,
                 textDecoration: "none",
                 transition: "all 0.2s ease",
               }}

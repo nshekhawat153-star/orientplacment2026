@@ -215,9 +215,9 @@ export default function SalaryLeafClient({
                   background: "rgba(255, 255, 255, 0.08)",
                   border: "1px solid rgba(255, 255, 255, 0.20)",
                   borderRadius: 999,
-                  padding: "6px 16px",
+                  padding: "7px 18px",
                   fontFamily: "var(--mono)",
-                  fontSize: 11,
+                  fontSize: 12,
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
                   color: "#E2E8F0",
@@ -230,18 +230,18 @@ export default function SalaryLeafClient({
               </div>
             </div>
 
-            {/* Centered Display Heading */}
+            {/* Centered Display Heading - Prominent Executive Scale */}
             <h1
               style={{
                 fontFamily: "var(--display)",
-                fontSize: "clamp(34px, 4.4vw, 54px)",
-                lineHeight: 1.15,
+                fontSize: "clamp(40px, 5.2vw, 64px)",
+                lineHeight: 1.10,
                 fontWeight: 500,
                 color: "#FFFFFF",
-                letterSpacing: "-0.02em",
-                margin: "0 auto 18px",
+                letterSpacing: "-0.025em",
+                margin: "0 auto 22px",
                 textAlign: "center",
-                maxWidth: 820,
+                maxWidth: 920,
                 textWrap: "balance",
                 textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
               }}
@@ -252,14 +252,14 @@ export default function SalaryLeafClient({
               </span>
             </h1>
 
-            {/* Centered Subtitle */}
+            {/* Centered Subtitle - Readable Executive Scale */}
             <p
               style={{
-                fontSize: 17,
-                lineHeight: 1.6,
+                fontSize: "clamp(18px, 1.8vw, 21px)",
+                lineHeight: 1.65,
                 color: "#CBD5E1",
-                maxWidth: 720,
-                margin: "0 auto 28px",
+                maxWidth: 780,
+                margin: "0 auto 30px",
                 textAlign: "center",
                 textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
               }}
@@ -268,17 +268,17 @@ export default function SalaryLeafClient({
             </p>
 
           {/* Perspective Toggle: Employer vs Candidate */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8, padding: "5px 6px", marginBottom: 32 }}>
-            <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", padding: "0 8px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8, padding: "6px 8px", marginBottom: 34 }}>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", padding: "0 10px" }}>
               I am:
             </span>
             <button
               type="button"
               onClick={() => setDoor("employer")}
               style={{
-                padding: "8px 18px",
+                padding: "9px 20px",
                 borderRadius: 6,
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: 600,
                 cursor: "pointer",
                 border: "none",
@@ -293,9 +293,9 @@ export default function SalaryLeafClient({
               type="button"
               onClick={() => setDoor("candidate")}
               style={{
-                padding: "8px 18px",
+                padding: "9px 20px",
                 borderRadius: 6,
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: 600,
                 cursor: "pointer",
                 border: "none",
@@ -309,7 +309,7 @@ export default function SalaryLeafClient({
           </div>
 
           {/* Centered Action Buttons */}
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}>
             <a
               href="#check"
               style={{
@@ -319,8 +319,8 @@ export default function SalaryLeafClient({
                 background: "#1D4ED8",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "14px 28px",
+                fontSize: 16,
+                padding: "15px 32px",
                 borderRadius: 7,
                 textDecoration: "none",
                 boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
@@ -339,8 +339,8 @@ export default function SalaryLeafClient({
                 border: "1px solid rgba(255,255,255,0.2)",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "14px 26px",
+                fontSize: 16,
+                padding: "15px 28px",
                 borderRadius: 7,
                 textDecoration: "none",
               }}
@@ -360,8 +360,8 @@ export default function SalaryLeafClient({
                 border: "1px solid rgba(255,255,255,0.2)",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "14px 24px",
+                fontSize: 16,
+                padding: "15px 26px",
                 borderRadius: 7,
                 textDecoration: "none",
               }}
@@ -372,7 +372,7 @@ export default function SalaryLeafClient({
           </div>
 
           {/* Centered Micro-reassurances Row */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "12px 24px", color: "#CBD5E1", fontSize: "0.88rem" }}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "14px 28px", color: "#CBD5E1", fontSize: 14.5 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
               <span>Verified {city.name} lateral market offers</span>

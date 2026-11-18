@@ -150,13 +150,14 @@ export default function AboutPage() {
                 background: "rgba(29, 78, 216, 0.15)",
                 border: "1px solid rgba(96, 165, 250, 0.3)",
                 borderRadius: "100px",
-                padding: "6px 14px",
+                padding: "7px 18px",
                 fontFamily: "var(--mono)",
-                fontSize: "11px",
+                fontSize: "12px",
                 fontWeight: 700,
-                letterSpacing: "0.08em",
+                letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 color: "#93C5FD",
+                marginBottom: "24px",
               }}
             >
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
@@ -164,15 +165,20 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* Centered Display Heading - Prominent Executive Scale */}
           <h1
             style={{
-              fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
+              fontSize: "clamp(40px, 5.2vw, 64px)",
               fontFamily: "var(--display)",
               fontWeight: 500,
-              lineHeight: 1.15,
+              lineHeight: 1.10,
               color: "#FFFFFF",
-              letterSpacing: "-0.02em",
-              margin: "0 0 18px",
+              letterSpacing: "-0.025em",
+              margin: "0 auto 22px",
+              maxWidth: "920px",
+              textAlign: "center",
+              textWrap: "balance",
+              textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
             }}
           >
             A small, dedicated legal recruiting team <br />
@@ -181,17 +187,18 @@ export default function AboutPage() {
 
           <p
             style={{
-              fontSize: "1.12rem",
-              lineHeight: 1.6,
-              color: "rgba(255, 255, 255, 0.82)",
-              maxWidth: "680px",
-              margin: "0 auto 30px",
+              fontSize: "clamp(18px, 1.8vw, 21px)",
+              lineHeight: 1.65,
+              color: "rgba(255, 255, 255, 0.88)",
+              maxWidth: "760px",
+              margin: "0 auto 34px",
+              textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
             {orionLine}
           </p>
 
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "14px", marginBottom: "30px" }}>
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "14px", marginBottom: "34px" }}>
             <a
               href={trust.calendly}
               target="_blank"
@@ -199,12 +206,12 @@ export default function AboutPage() {
               style={{
                 background: "#1D4ED8",
                 color: "#FFFFFF",
-                padding: "13px 28px",
+                padding: "15px 32px",
                 borderRadius: "7px",
                 fontWeight: 600,
-                fontSize: "0.95rem",
+                fontSize: "16px",
                 textDecoration: "none",
-                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+                boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
                 transition: "all 0.2s ease",
               }}
             >
@@ -216,10 +223,10 @@ export default function AboutPage() {
                 background: "rgba(255, 255, 255, 0.08)",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
                 color: "#FFFFFF",
-                padding: "13px 24px",
+                padding: "15px 28px",
                 borderRadius: "7px",
                 fontWeight: 600,
-                fontSize: "0.95rem",
+                fontSize: "16px",
                 textDecoration: "none",
                 transition: "all 0.2s ease",
               }}

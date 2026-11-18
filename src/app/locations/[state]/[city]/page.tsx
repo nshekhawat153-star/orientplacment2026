@@ -170,9 +170,9 @@ export default async function CityLocationPage({ params }: PageProps) {
           <div className="hero-video-radial-aura" />
         </div>
 
-        <div className="wrap hero-content-wrap" style={{ position: "relative", zIndex: 3, maxWidth: 980, margin: "0 auto", padding: "0 24px" }}>
+        <div className="wrap hero-content-wrap" style={{ position: "relative", zIndex: 3, maxWidth: 1040, margin: "0 auto", padding: "0 24px" }}>
           {/* Centered Capsule Badge */}
-          <div style={{ marginBottom: 20 }}>
+          <div style={{ marginBottom: 22 }}>
             <div
               style={{
                 display: "inline-flex",
@@ -181,9 +181,9 @@ export default async function CityLocationPage({ params }: PageProps) {
                 background: "rgba(255, 255, 255, 0.08)",
                 border: "1px solid rgba(255, 255, 255, 0.20)",
                 borderRadius: 999,
-                padding: "6px 16px",
+                padding: "7px 18px",
                 fontFamily: "var(--mono)",
-                fontSize: 11,
+                fontSize: 12,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 color: "#E2E8F0",
@@ -196,19 +196,19 @@ export default async function CityLocationPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Centered Display Heading */}
+          {/* Centered Display Heading - Prominent Executive Scale */}
           <h1
             id="city-hero-h1"
             style={{
               fontFamily: "var(--display)",
-              fontSize: "clamp(34px, 4.4vw, 54px)",
-              lineHeight: 1.15,
+              fontSize: "clamp(40px, 5.2vw, 64px)",
+              lineHeight: 1.10,
               fontWeight: 500,
               color: "#FFFFFF",
-              letterSpacing: "-0.02em",
-              margin: "0 auto 18px",
+              letterSpacing: "-0.025em",
+              margin: "0 auto 22px",
               textAlign: "center",
-              maxWidth: 820,
+              maxWidth: 920,
               textWrap: "balance",
               textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
             }}
@@ -219,14 +219,14 @@ export default async function CityLocationPage({ params }: PageProps) {
             </span>
           </h1>
 
-          {/* Centered Subtitle */}
+          {/* Centered Subtitle - Readable Executive Scale */}
           <p
             style={{
-              fontSize: 17,
-              lineHeight: 1.6,
+              fontSize: "clamp(18px, 1.8vw, 21px)",
+              lineHeight: 1.65,
               color: "#CBD5E1",
-              maxWidth: 720,
-              margin: "0 auto 32px",
+              maxWidth: 780,
+              margin: "0 auto 34px",
               textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
@@ -234,7 +234,7 @@ export default async function CityLocationPage({ params }: PageProps) {
           </p>
 
           {/* Centered Action Buttons */}
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}>
             <a
               href="#candidates"
               style={{
@@ -244,8 +244,8 @@ export default async function CityLocationPage({ params }: PageProps) {
                 background: "#1D4ED8",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "14px 28px",
+                fontSize: 16,
+                padding: "15px 32px",
                 borderRadius: 7,
                 textDecoration: "none",
                 boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
@@ -264,8 +264,8 @@ export default async function CityLocationPage({ params }: PageProps) {
                 border: "1px solid rgba(255,255,255,0.2)",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "14px 26px",
+                fontSize: 16,
+                padding: "15px 28px",
                 borderRadius: 7,
                 textDecoration: "none",
               }}
@@ -285,8 +285,8 @@ export default async function CityLocationPage({ params }: PageProps) {
                 border: "1px solid rgba(255,255,255,0.2)",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: 15,
-                padding: "14px 24px",
+                fontSize: 16,
+                padding: "15px 26px",
                 borderRadius: 7,
                 textDecoration: "none",
               }}
@@ -297,7 +297,7 @@ export default async function CityLocationPage({ params }: PageProps) {
           </div>
 
           {/* Centered Micro-reassurances Row */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "12px 24px", color: "#CBD5E1", fontSize: "0.88rem" }}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "14px 28px", color: "#CBD5E1", fontSize: 14.5 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
               <span>Pre-screened {city.name} lateral pool</span>

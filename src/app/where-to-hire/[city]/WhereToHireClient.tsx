@@ -175,30 +175,33 @@ export function WhereToHireClient({
               background: "rgba(29, 78, 216, 0.2)",
               border: "1px solid rgba(96, 165, 250, 0.35)",
               borderRadius: 100,
-              padding: "6px 16px",
+              padding: "7px 18px",
               fontFamily: "var(--font-mono, monospace)",
-              fontSize: 11,
-              letterSpacing: "0.08em",
+              fontSize: 12,
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
               color: "#93C5FD",
-              marginBottom: 20,
+              marginBottom: 24,
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
             <span>REGIONAL HIRING DIRECTORY · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
           </div>
 
-          {/* Centered Heading */}
+          {/* Centered Display Heading - Prominent Executive Scale */}
           <h1
             style={{
               fontFamily: "var(--font-serif, 'Playfair Display', Georgia, serif)",
-              fontSize: "clamp(34px, 4.6vw, 54px)",
-              lineHeight: 1.14,
+              fontSize: "clamp(40px, 5.2vw, 64px)",
+              lineHeight: 1.10,
               fontWeight: 700,
               color: "#FFFFFF",
-              letterSpacing: "-0.02em",
-              margin: "0 auto 20px",
-              maxWidth: 880,
+              letterSpacing: "-0.025em",
+              margin: "0 auto 22px",
+              maxWidth: 920,
+              textAlign: "center",
+              textWrap: "balance",
+              textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
             }}
           >
             Where to hire attorneys and paralegals in{" "}
@@ -207,21 +210,23 @@ export function WhereToHireClient({
             </span>
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle - Readable Executive Scale */}
           <p
             style={{
-              fontSize: 17,
+              fontSize: "clamp(18px, 1.8vw, 21px)",
               lineHeight: 1.65,
               color: "#CBD5E1",
-              maxWidth: 760,
-              margin: "0 auto 32px",
+              maxWidth: 780,
+              margin: "0 auto 34px",
+              textAlign: "center",
+              textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
             Accredited Texas law schools, ABA-approved paralegal programmes, and active bar associations that {city.name} boutique firms recruit from. Direct career office contacts, seasonal recruitment cycles, and confidential lateral talent pools.
           </p>
 
           {/* Value Props Strip */}
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 20, marginBottom: 34, fontSize: 14, color: "#E2E8F0" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 24, marginBottom: 34, fontSize: 14.5, color: "#E2E8F0" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
               <span>Direct career office liaison &amp; OCI schedules</span>
@@ -247,11 +252,11 @@ export function WhereToHireClient({
                 background: "#1D4ED8",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: "0.95rem",
-                padding: "13px 28px",
+                fontSize: "16px",
+                padding: "15px 32px",
                 borderRadius: 7,
                 textDecoration: "none",
-                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+                boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
                 transition: "all 0.2s ease",
               }}
             >
@@ -268,8 +273,8 @@ export function WhereToHireClient({
                 border: "1px solid rgba(255, 255, 255, 0.22)",
                 color: "#FFFFFF",
                 fontWeight: 600,
-                fontSize: "0.95rem",
-                padding: "13px 24px",
+                fontSize: "16px",
+                padding: "15px 28px",
                 borderRadius: 7,
                 textDecoration: "none",
                 transition: "all 0.2s ease",
