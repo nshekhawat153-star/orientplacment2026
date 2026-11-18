@@ -1684,6 +1684,29 @@ a.id:hover{color:var(--accent)}
   margin: 0 auto 52px;
 }
 
+#available-now .badge-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(27, 54, 93, 0.05);
+  border: 1px solid rgba(27, 54, 93, 0.15);
+  color: #1B365D;
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+#available-now .badge-dot {
+  display: inline-block !important;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1D4ED8;
+}
+
 #available-now .sec-title-lg .serif-accent {
   color: #1D4ED8 !important;
   font-style: italic;
@@ -1703,6 +1726,22 @@ a.id:hover{color:var(--accent)}
   grid-template-columns: 350px minmax(0, 1fr);
   gap: 28px;
   align-items: stretch;
+}
+
+/* Candidate Showcase Pill Wrapper (for desktop flex compatibility) */
+.showcase-pill-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase-pill-wrapper .showcase-pill {
+  width: 100%;
+  height: 100%;
+}
+
+.showcase-pill-mobile-expansion {
+  display: none;
 }
 
 /* LEFT: Selectable Candidate Pills Rail */
@@ -2306,6 +2345,48 @@ a.id:hover{color:var(--accent)}
 }
 
 @media (max-width: 860px) {
+  .showcase-split-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .showcase-pill-wrapper {
+    flex: initial;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 9px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .showcase-pill-wrapper.is-selected {
+    border-color: #1D4ED8;
+    box-shadow: 0 8px 24px -4px rgba(29, 78, 216, 0.16), 0 2px 6px rgba(15, 23, 42, 0.04);
+  }
+  .showcase-pill-wrapper .showcase-pill {
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    transform: none !important;
+    padding: 16px 18px;
+  }
+  .showcase-pill-wrapper.is-selected .showcase-pill {
+    border-bottom: 1px solid #E2E8F0 !important;
+    background: #F8FAFC !important;
+  }
+  .showcase-pill-wrapper.is-selected .pill-indicator svg {
+    transform: rotate(90deg);
+  }
+  .showcase-pill-mobile-expansion {
+    display: block;
+    padding: 22px 18px 24px;
+    background: #FFFFFF;
+    animation: fadeIn 0.25s var(--ease) both;
+  }
+  .desktop-dossier {
+    display: none !important;
+  }
   .showcase-bottom-banner {
     flex-direction: column;
     align-items: stretch;
@@ -2333,20 +2414,44 @@ a.id:hover{color:var(--accent)}
   #available-now.candidates-sec {
     padding: 68px 0 76px;
   }
+  #available-now .sec-head-premium {
+    text-align: left !important;
+    margin: 0 0 32px 0 !important;
+    max-width: 100% !important;
+  }
+  #available-now .badge-capsule {
+    margin: 0 0 16px 0 !important;
+    align-self: flex-start !important;
+    display: inline-flex !important;
+    font-size: clamp(8.5px, 2.4vw, 10.5px) !important;
+    letter-spacing: 0.05em !important;
+    padding: 5px 12px !important;
+  }
+  #available-now .sec-title-lg {
+    text-align: left !important;
+    font-size: clamp(30px, 8vw, 38px) !important;
+    line-height: 1.15 !important;
+    margin: 0 0 14px 0 !important;
+  }
+  #available-now .who-lede {
+    text-align: left !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    line-height: 1.62 !important;
+    max-width: 100% !important;
+  }
   .showcase-bottom-banner {
     border-left: 1px solid #E2E8F0 !important;
   }
   .showcase-banner-icon-box {
     display: none !important;
   }
-  .showcase-dossier-panel {
-    padding: 24px 20px 20px;
-  }
   .showcase-display-title {
     font-size: 24px;
   }
   .showcase-stats-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
   .showcase-action-footer {
     flex-direction: column;

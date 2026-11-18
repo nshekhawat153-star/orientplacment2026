@@ -42,30 +42,137 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4 }: InteractiveCand
     },
   };
 
-  const handleRequest = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!activeCandidate) return;
-    if (activeCandidate.id === "EP-TX-0412") {
-      router.push(`/candidate/${activeCandidate.id.toLowerCase()}#request`);
-    } else {
-      router.push(`/find-candidates#ids=${activeCandidate.id}`);
-    }
+  if (!candidates.length) return null;
+
+  const renderDossierContent = (candidate: Candidate) => {
+    const meta = titleMap[candidate.id] || {
+      kicker: `${(findRole(candidate.role)?.name || "LEGAL TALENT").toUpperCase()} · ${candidate.years} YRS EXP`,
+      title: findRole(candidate.role)?.name || "Direct-Hire Attorney",
+      scope: candidate.headline,
+    };
+    const bars = candidate.bars.length ? candidate.bars.join(", ") : "Not required";
+    const isBuilt = candidate.id === "EP-TX-0412";
+    const mixItems = candidate.mix.slice(0, 3);
+    const mixColors = ["#1D4ED8", "#475569", "#94A3B8"];
+
+    const handleRequest = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (candidate.id === "EP-TX-0412") {
+        router.push(`/candidate/${candidate.id.toLowerCase()}#request`);
+      } else {
+        router.push(`/find-candidates#ids=${candidate.id}`);
+      }
+    };
+
+    return (
+      <>
+        {/* Top Header */}
+        <div className="showcase-dossier-top">
+          <div className="showcase-dossier-identity">
+            <span className="dossier-crest-label">CONFIDENTIAL DOSSIER</span>
+            <span className="dossier-crest-sep">/</span>
+            {isBuilt ? (
+              <Link
+                href={`/candidate/${candidate.id.toLowerCase()}`}
+                className="dossier-id-link"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {candidate.id}
+              </Link>
+            ) : (
+              <span className="dossier-id-code">{candidate.id}</span>
+            )}
+          </div>
+
+          <div className="showcase-avail-badge">
+            <span className="avail-pulse-dot" />
+            <span>{candidate.availability}</span>
+          </div>
+        </div>
+
+        {/* Title & Scope */}
+        <div className="showcase-role-block">
+          <span className="showcase-kicker">{meta.kicker}</span>
+          <h3 className="showcase-display-title">{meta.title}</h3>
+          <p className="showcase-scope-text">{meta.scope}</p>
+        </div>
+
+        {/* 4-Stat Pillar Grid */}
+        <div className="showcase-stats-grid">
+          <div className="showcase-stat-box">
+            <span className="stat-label">EXPERIENCE</span>
+            <span className="stat-val">{candidate.years} Years Lateral</span>
+          </div>
+          <div className="showcase-stat-box">
+            <span className="stat-label">BAR STANDING</span>
+            <span className="stat-val">{bars} Bar (Active)</span>
+          </div>
+          <div className="showcase-stat-box">
+            <span className="stat-label">CURRENT FIRM</span>
+            <span className="stat-val">{candidate.firmType}</span>
+          </div>
+          <div className="showcase-stat-box highlight-stat">
+            <span className="stat-label">TARGET BASE</span>
+            <span className="stat-val-pay">{fmt.range(candidate.pay)}</span>
+          </div>
+        </div>
+
+        {/* Practice Allocation Meter */}
+        <div className="showcase-mix-wrap">
+          <div className="mix-header">
+            <span className="mix-title">Practice Distribution</span>
+            <span className="mix-legend-summary">
+              {mixItems.map((x) => `${x[0]} ${x[1]}%`).join(" · ")}
+            </span>
+          </div>
+          <div className="mix-bar" aria-hidden="true">
+            {mixItems.map((item, idx) => (
+              <div
+                key={idx}
+                className="mix-segment"
+                style={{
+                  width: `${item[1]}%`,
+                  backgroundColor: mixColors[idx % mixColors.length],
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Jon Missirlian's Verified Endorsement */}
+        <div className="showcase-vetting-card">
+          <div className="vetting-badge-row">
+            <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="#1D4ED8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+            </svg>
+            <span className="vetting-author">Screened by Jon Missirlian</span>
+          </div>
+          <p className="vetting-quote">
+            &ldquo;{candidate.why}&rdquo;
+          </p>
+        </div>
+
+        {/* Action Footer */}
+        <div className="showcase-action-footer">
+          <div className="showcase-action-reassurance">
+            <span className="reassurance-dot" />
+            <span>Direct partner interview · Zero upfront retainer · 90-day guarantee</span>
+          </div>
+
+          <button
+            type="button"
+            className="btn-showcase-request"
+            onClick={handleRequest}
+          >
+            <span>Request Profile Dossier</span>
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </button>
+        </div>
+      </>
+    );
   };
-
-  if (!activeCandidate) return null;
-
-  const activeMeta = titleMap[activeCandidate.id] || {
-    kicker: `${(findRole(activeCandidate.role)?.name || "LEGAL TALENT").toUpperCase()} · ${activeCandidate.years} YRS EXP`,
-    title: findRole(activeCandidate.role)?.name || "Direct-Hire Attorney",
-    scope: activeCandidate.headline,
-  };
-
-  const activeBars = activeCandidate.bars.length ? activeCandidate.bars.join(", ") : "Not required";
-  const isBuilt = activeCandidate.id === "EP-TX-0412";
-
-  // Practice mix segments for active candidate
-  const mixItems = activeCandidate.mix.slice(0, 3);
-  const mixColors = ["#1D4ED8", "#475569", "#94A3B8"];
 
   return (
     <div className="showcase-outer-wrap">
@@ -81,150 +188,62 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4 }: InteractiveCand
             const num = String(idx + 1).padStart(2, "0");
 
             return (
-              <button
+              <div
                 key={c.id}
-                type="button"
-                role="tab"
-                aria-selected={isSelected}
-                className={`showcase-pill ${isSelected ? "active" : ""}`}
-                onClick={() => setActiveId(c.id)}
+                className={`showcase-pill-wrapper ${isSelected ? "is-selected" : ""}`}
               >
-                <div className="pill-top">
-                  <span className="pill-index">{num}</span>
-                  <span className="pill-id">{c.id}</span>
-                  <span className="pill-avail">
-                    <span className="pill-avail-dot" />
-                    <span>{c.availability}</span>
-                  </span>
-                </div>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  aria-expanded={isSelected}
+                  className={`showcase-pill ${isSelected ? "active" : ""}`}
+                  onClick={() => setActiveId(activeId === c.id ? "" : c.id)}
+                >
+                  <div className="pill-top">
+                    <span className="pill-index">{num}</span>
+                    <span className="pill-id">{c.id}</span>
+                    <span className="pill-avail">
+                      <span className="pill-avail-dot" />
+                      <span>{c.availability}</span>
+                    </span>
+                  </div>
 
-                <div className="pill-body">
-                  <h4 className="pill-title">{meta.title}</h4>
-                  <p className="pill-specs">
-                    <span>{c.years} Yrs Exp</span>
-                    <span className="pill-sep">·</span>
-                    <span>{c.bars.join(", ")} Bar</span>
-                    <span className="pill-sep">·</span>
-                    <span className="pill-pay">{fmt.range(c.pay)}</span>
-                  </p>
-                </div>
+                  <div className="pill-body">
+                    <h4 className="pill-title">{meta.title}</h4>
+                    <p className="pill-specs">
+                      <span>{c.years} Yrs Exp</span>
+                      <span className="pill-sep">·</span>
+                      <span>{c.bars.join(", ")} Bar</span>
+                      <span className="pill-sep">·</span>
+                      <span className="pill-pay">{fmt.range(c.pay)}</span>
+                    </p>
+                  </div>
 
-                <div className="pill-indicator" aria-hidden="true">
-                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M6 12l4-4-4-4" />
-                  </svg>
-                </div>
-              </button>
+                  <div className="pill-indicator" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 12l4-4-4-4" />
+                    </svg>
+                  </div>
+                </button>
+
+                {/* Mobile Inline Expansion (Only visible on mobile when this card is selected) */}
+                {isSelected && (
+                  <div className="showcase-pill-mobile-expansion">
+                    {renderDossierContent(c)}
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
 
-        {/* RIGHT: Active Executive Confidential Dossier Display */}
-        <div className="showcase-dossier-panel" key={activeCandidate.id}>
-          {/* Top Header */}
-          <div className="showcase-dossier-top">
-            <div className="showcase-dossier-identity">
-              <span className="dossier-crest-label">CONFIDENTIAL DOSSIER</span>
-              <span className="dossier-crest-sep">/</span>
-              {isBuilt ? (
-                <Link
-                  href={`/candidate/${activeCandidate.id.toLowerCase()}`}
-                  className="dossier-id-link"
-                >
-                  {activeCandidate.id}
-                </Link>
-              ) : (
-                <span className="dossier-id-code">{activeCandidate.id}</span>
-              )}
-            </div>
-
-            <div className="showcase-avail-badge">
-              <span className="avail-pulse-dot" />
-              <span>{activeCandidate.availability}</span>
-            </div>
+        {/* RIGHT: Active Executive Confidential Dossier Display (Desktop Only) */}
+        {activeCandidate && (
+          <div className="showcase-dossier-panel desktop-dossier" key={activeCandidate.id}>
+            {renderDossierContent(activeCandidate)}
           </div>
-
-          {/* Title & Scope */}
-          <div className="showcase-role-block">
-            <span className="showcase-kicker">{activeMeta.kicker}</span>
-            <h3 className="showcase-display-title">{activeMeta.title}</h3>
-            <p className="showcase-scope-text">{activeMeta.scope}</p>
-          </div>
-
-          {/* 4-Stat Pillar Grid */}
-          <div className="showcase-stats-grid">
-            <div className="showcase-stat-box">
-              <span className="stat-label">EXPERIENCE</span>
-              <span className="stat-val">{activeCandidate.years} Years Lateral</span>
-            </div>
-            <div className="showcase-stat-box">
-              <span className="stat-label">BAR STANDING</span>
-              <span className="stat-val">{activeBars} Bar (Active)</span>
-            </div>
-            <div className="showcase-stat-box">
-              <span className="stat-label">CURRENT FIRM</span>
-              <span className="stat-val">{activeCandidate.firmType}</span>
-            </div>
-            <div className="showcase-stat-box highlight-stat">
-              <span className="stat-label">TARGET BASE</span>
-              <span className="stat-val-pay">{fmt.range(activeCandidate.pay)}</span>
-            </div>
-          </div>
-
-          {/* Practice Allocation Meter */}
-          <div className="showcase-mix-wrap">
-            <div className="mix-header">
-              <span className="mix-title">Practice Distribution</span>
-              <span className="mix-legend-summary">
-                {mixItems.map((x) => `${x[0]} ${x[1]}%`).join(" · ")}
-              </span>
-            </div>
-            <div className="mix-bar" aria-hidden="true">
-              {mixItems.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="mix-segment"
-                  style={{
-                    width: `${item[1]}%`,
-                    backgroundColor: mixColors[idx % mixColors.length],
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Jon Missirlian's Verified Endorsement */}
-          <div className="showcase-vetting-card">
-            <div className="vetting-badge-row">
-              <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="#1D4ED8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-              </svg>
-              <span className="vetting-author">Screened by Jon Missirlian</span>
-            </div>
-            <p className="vetting-quote">
-              &ldquo;{activeCandidate.why}&rdquo;
-            </p>
-          </div>
-
-          {/* Action Footer */}
-          <div className="showcase-action-footer">
-            <div className="showcase-action-reassurance">
-              <span className="reassurance-dot" />
-              <span>Direct partner interview · Zero upfront retainer · 90-day guarantee</span>
-            </div>
-
-            <button
-              type="button"
-              className="btn-showcase-request"
-              onClick={handleRequest}
-            >
-              <span>Request Profile Dossier</span>
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" />
-              </svg>
-            </button>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Sleek Executive Directory Discovery Strip */}
