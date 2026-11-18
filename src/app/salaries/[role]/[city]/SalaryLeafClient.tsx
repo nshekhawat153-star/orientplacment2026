@@ -3,16 +3,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DATA, fmt, salaryPosition, inBandCandidates, matchCandidates } from "@/data";
+import {
+  DATA,
+  fmt,
+  salaryPosition,
+  inBandCandidates,
+  matchCandidates,
+  Role,
+  City,
+} from "@/data";
 import { useSite } from "@/context/SiteContext";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import { SalaryBand } from "@/components/SalaryBand";
 import { CandidateCard } from "@/components/CandidateCard";
 import { JobCard } from "@/components/JobCard";
 import { GateForm } from "@/components/GateForm";
-import { Neighbours } from "@/components/PayTables";
-import { ReviewCard } from "@/components/ReviewCard";
+import { ReviewsSection } from "@/components/ReviewCard";
 import { RatingBadge } from "@/components/Rating";
 
 export default function SalaryLeafClient({
@@ -98,18 +104,88 @@ export default function SalaryLeafClient({
     inBand = matchCandidates({ role: role.slug, city: city.slug }).slice(0, 3);
   }
 
+  // Other roles in this city
+  const otherRolesInCity = DATA.roles
+    .filter((r) => r.slug !== role.slug && DATA.bands[city.slug]?.[r.slug])
+    .map((r) => ({
+      ...r,
+      band: DATA.bands[city.slug][r.slug],
+    }));
+
+  // Same role in other cities
+  const sameRoleInOtherCities = DATA.cities
+    .filter((c) => c.slug !== city.slug && DATA.bands[c.slug]?.[role.slug])
+    .map((c) => ({
+      ...c,
+      band: DATA.bands[c.slug][role.slug],
+    }));
+
   return (
     <div style={{ background: "#FAF9F5", color: "#08142A" }}>
-      {/* 1. LUXURY DARK HERO (CENTERED, NO FLOATING CARD) */}
+      <style>{`
+        .leaf-terms-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 18px;
+        }
+        .leaf-cards-3 {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 24px;
+        }
+        .leaf-split-2 {
+          display: grid;
+          grid-template-columns: 1.25fr 1fr;
+          gap: 40px;
+          align-items: start;
+        }
+        .leaf-compare-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 32px;
+        }
+        .leaf-hover-lift {
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .leaf-hover-lift:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 30px rgba(8, 20, 42, 0.08);
+          border-color: #1D4ED8;
+        }
+        @media (max-width: 1024px) {
+          .leaf-terms-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+          .leaf-split-2 {
+            grid-template-columns: 1fr;
+          }
+          .leaf-compare-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 960px) {
+          .leaf-cards-3 {
+            grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 640px) {
+          .leaf-terms-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+
+      {/* 1. LUXURY CENTERED DARK HERO WITH VIDEO BACKGROUND */}
       <section
         className="emp-luxury-hero-sec leaf-hero"
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
           color: "#FFFFFF",
-          padding: "124px 0 76px",
+          padding: "124px 0 88px",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+          textAlign: "center",
         }}
       >
         <div className="emp-hero-video-wrap" aria-hidden="true">
@@ -127,17 +203,18 @@ export default function SalaryLeafClient({
               height: "100%",
               objectFit: "cover",
               opacity: 0.18,
+              pointerEvents: "none",
             }}
           >
             <source src="/media/splash.mp4" type="video/mp4" />
+            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
           </video>
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 960, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
-          {/* Badge Capsule */}
-          <div className="emp-hero-badge-wrap" style={{ marginBottom: 18 }}>
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 980, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Capsule Badge */}
+          <div style={{ marginBottom: 20 }}>
             <div
-              className="badge-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -145,7 +222,7 @@ export default function SalaryLeafClient({
                 background: "rgba(29, 78, 216, 0.15)",
                 border: "1px solid rgba(96, 165, 250, 0.3)",
                 borderRadius: 999,
-                padding: "6px 14px",
+                padding: "6px 16px",
                 fontFamily: "var(--mono)",
                 fontSize: 11,
                 letterSpacing: "0.08em",
@@ -153,13 +230,13 @@ export default function SalaryLeafClient({
                 color: "#93C5FD",
               }}
             >
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
               <span>COMPENSATION GUIDE · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
             </div>
           </div>
 
+          {/* Centered Display Heading */}
           <h1
-            className="emp-hero-h1"
             style={{
               fontFamily: "var(--display)",
               fontSize: "clamp(34px, 4.4vw, 54px)",
@@ -170,36 +247,27 @@ export default function SalaryLeafClient({
               margin: "0 0 18px",
             }}
           >
-            {role.name} salary in{" "}
+            {role.name} salary in <br />
             <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-              {city.name}
+              {city.name}, {city.state}
             </span>
           </h1>
 
-          <div style={{ display: "inline-flex", alignItems: "baseline", justifyContent: "center", gap: 14, marginBottom: 18, background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: 12, padding: "12px 24px" }}>
-            <span style={{ fontFamily: "var(--display)", fontSize: "clamp(38px, 4.5vw, 52px)", fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>
-              {fmt.k(bandData.median)}
-            </span>
-            <span style={{ fontFamily: "var(--mono)", fontSize: 12.5, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>
-              Median Base Salary across all seniority levels
-            </span>
-          </div>
-
+          {/* Centered Subtitle */}
           <p
-            className="emp-hero-lead"
             style={{
-              fontSize: 16.5,
+              fontSize: 17,
               lineHeight: 1.6,
               color: "#CBD5E1",
-              maxWidth: 680,
-              margin: "0 auto 26px",
+              maxWidth: 720,
+              margin: "0 auto 28px",
             }}
           >
             Prevailing market base salaries from accepted lateral offers and active boutique mandates in {city.name}. Excludes discretionary collections bonuses.
           </p>
 
           {/* Perspective Toggle: Employer vs Candidate */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8, padding: "5px 6px", marginBottom: 30 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8, padding: "5px 6px", marginBottom: 32 }}>
             <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", padding: "0 8px" }}>
               I am:
             </span>
@@ -239,9 +307,9 @@ export default function SalaryLeafClient({
             </button>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 28 }}>
+          {/* Centered Action Buttons */}
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
             <a
-              className="btn-emp-primary"
               href="#check"
               style={{
                 display: "inline-flex",
@@ -251,82 +319,210 @@ export default function SalaryLeafClient({
                 color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 15,
-                padding: "13px 28px",
+                padding: "14px 28px",
                 borderRadius: 7,
                 textDecoration: "none",
-                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
+                boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
               }}
             >
               <span>{door === "employer" ? "Evaluate your offer" : "Benchmark your salary"}</span>
               <span aria-hidden="true">↓</span>
             </a>
             <Link
-              className="btn-emp-ghost"
-              href={`/find-candidates#role=${role.slug}&city=${city.slug}`}
+              href={`/jobs/${role.slug}/${city.slug}`}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.18)",
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.2)",
                 color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 15,
-                padding: "13px 24px",
+                padding: "14px 26px",
                 borderRadius: 7,
                 textDecoration: "none",
               }}
             >
-              <span>See {city.name} talent pool</span>
+              <span>Browse {city.name} {role.short} jobs ({moreJobs.length})</span>
               <span aria-hidden="true">→</span>
             </Link>
+            <a
+              href="https://calendly.com/orionplacement/call-with-justin"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 15,
+                padding: "14px 24px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Book 15 min with Justin</span>
+              <span aria-hidden="true">→</span>
+            </a>
           </div>
 
-          {/* Micro Reassurances */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "16px 24px", color: "rgba(255, 255, 255, 0.75)", fontSize: "0.85rem" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> Verified lateral market offers
+          {/* Centered Micro-reassurances Row */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "12px 24px", color: "#CBD5E1", fontSize: "0.88rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Verified {city.name} lateral market offers</span>
             </div>
-            <span>•</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> Base compensation disclosed upfront
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Base compensation disclosed upfront</span>
             </div>
-            <span>•</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> Updated quarterly ({DATA.asOf})
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Updated quarterly ({DATA.asOf})</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 1.5. DEDICATED ELEVATED 4-STAT BENCHMARK STRIP */}
+      <section style={{ maxWidth: 1200, margin: "-32px auto 0", padding: "0 24px", position: "relative", zIndex: 10 }}>
+        <div className="leaf-terms-grid">
+          {/* Card 1: Median Base */}
+          <div
+            className="leaf-hover-lift"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 22px",
+              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+            }}
+          >
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              Median Base Salary
+            </div>
+            <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
+              {fmt.k(bandData.median)}
+            </div>
+            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+              Across all experience levels in {city.name}.
+            </div>
+          </div>
+
+          {/* Card 2: Interquartile Band */}
+          <div
+            className="leaf-hover-lift"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 22px",
+              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+            }}
+          >
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              25th–75th Band
+            </div>
+            <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
+              ${bandData.b1[0]}k–${bandData.b3[1]}k
+            </div>
+            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+              Middle 50% interquartile market spread.
+            </div>
+          </div>
+
+          {/* Card 3: Typical Experience */}
+          <div
+            className="leaf-hover-lift"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 22px",
+              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+            }}
+          >
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              Typical Experience
+            </div>
+            <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
+              {bandData.typical}
+            </div>
+            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+              Primary lateral demand tier for Texas firms.
+            </div>
+          </div>
+
+          {/* Card 4: Placement Guarantee */}
+          <div
+            className="leaf-hover-lift"
+            style={{
+              background: "#FFFFFF",
+              border: "1.5px solid #E2E8F0",
+              borderRadius: 14,
+              padding: "24px 22px",
+              boxShadow: "0 10px 30px rgba(8, 20, 42, 0.08)",
+            }}
+          >
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
+              Contingency Terms
+            </div>
+            <div style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
+              23% / $0
+            </div>
+            <div style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
+              $0 upfront retainer. 90-day guarantee.
             </div>
           </div>
         </div>
       </section>
 
       {/* 2. BASE SALARY BY EXPERIENCE TIER (ELEVATED FULL-WIDTH VISUALIZER SECTION) */}
-      <section style={{ background: "#FFFFFF", padding: "76px 0 88px", borderBottom: "1px solid #E2E8F0" }}>
-        <div style={{ maxWidth: 1080, margin: "0 auto", padding: "0 24px" }}>
-          <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 36px" }}>
+      <section style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 44px" }}>
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-                background: "rgba(29, 78, 216, 0.08)",
-                border: "1px solid rgba(29, 78, 216, 0.2)",
-                borderRadius: 100,
-                padding: "5px 14px",
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
                 fontSize: 11,
-                fontWeight: 700,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 color: "#1D4ED8",
-                marginBottom: 12,
+                marginBottom: 14,
               }}
             >
-              EXPERIENCE TIERS &amp; PERCENTILES
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>EXPERIENCE TIERS &amp; PERCENTILES</span>
             </div>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: "0 0 12px", fontWeight: 500 }}>
-              Base Salary by <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Experience Tier</span>
+            <h2
+              style={{
+                fontFamily: "var(--display)",
+                fontSize: "clamp(28px, 3.6vw, 42px)",
+                color: "#08142A",
+                margin: "0 auto 14px",
+                fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
+              }}
+            >
+              Base salary by{" "}
+              <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
+                experience tier
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               Prevailing 25th to 75th percentile base compensation for {role.short.toLowerCase()}s in {city.name}.
             </p>
           </div>
@@ -395,7 +591,7 @@ export default function SalaryLeafClient({
               <a
                 href="#check"
                 style={{
-                  fontSize: 13,
+                  fontSize: 13.5,
                   fontWeight: 600,
                   color: "#1D4ED8",
                   textDecoration: "none",
@@ -408,37 +604,45 @@ export default function SalaryLeafClient({
         </div>
       </section>
 
-      {/* 2. REAL-TIME EVALUATION TERMINAL */}
-      <section className="emp-process-sec" id="check" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 40px" }}>
-            <span
-              className="eyebrow"
+      {/* 2.5. REAL-TIME EVALUATION TERMINAL */}
+      <section id="check" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 40px" }}>
+            <div
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
+                fontSize: 11,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                color: "#1D4ED8",
+                marginBottom: 14,
               }}
             >
-              REAL-TIME BENCHMARK TERMINAL
-            </span>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>REAL-TIME BENCHMARK TERMINAL</span>
+            </div>
             <h2
               style={{
                 fontFamily: "var(--display)",
                 fontSize: "clamp(28px, 3.6vw, 42px)",
                 color: "#08142A",
-                margin: "0 0 14px",
+                margin: "0 auto 14px",
                 fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
               }}
             >
               {door === "employer" ? "Check your planned offer" : "Check where your salary sits"}
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               {door === "employer"
                 ? "Enter your target base compensation. The benchmark marker updates instantly, and candidate matches in that tier appear below."
                 : "Enter your current base salary to see your percentile positioning and explore active higher-paying lateral seats in Texas."}
@@ -528,6 +732,7 @@ export default function SalaryLeafClient({
                 padding: "11px 22px",
                 cursor: "pointer",
                 whiteSpace: "nowrap",
+                boxShadow: "0 4px 14px rgba(29, 78, 216, 0.3)",
               }}
             >
               {door === "employer" ? "Check offer" : "Benchmark pay"}
@@ -560,20 +765,20 @@ export default function SalaryLeafClient({
             <div id="offer-next" style={{ marginTop: 36 }}>
               {door === "employer" ? (
                 <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
-                    <div>
-                      <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                        MATCHING LATERAL TALENT
-                      </span>
-                      <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "4px 0 0", fontWeight: 600 }}>
-                        {inBand.length > 0 ? `${inBand.length} candidate${inBand.length === 1 ? "" : "s"} open in this compensation tier` : "Candidates near this compensation band"}
-                      </h3>
-                    </div>
+                  <div style={{ textAlign: "center", marginBottom: 28 }}>
+                    <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                      MATCHING LATERAL TALENT
+                    </span>
+                    <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "6px 0 0", fontWeight: 600 }}>
+                      {inBand.length > 0 ? `${inBand.length} candidate${inBand.length === 1 ? "" : "s"} open in this compensation tier` : "Candidates near this compensation band"}
+                    </h3>
                   </div>
 
-                  <div className="cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
+                  <div className="leaf-cards-3">
                     {inBand.map((r) => (
-                      <CandidateCard key={r.c.id} candidate={r.c} />
+                      <div key={r.c.id} className="leaf-hover-lift" style={{ borderRadius: 14 }}>
+                        <CandidateCard candidate={r.c} />
+                      </div>
                     ))}
                   </div>
 
@@ -595,26 +800,25 @@ export default function SalaryLeafClient({
                 </div>
               ) : (
                 <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
-                    <div>
-                      <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                        LATERAL OPPORTUNITIES
-                      </span>
-                      <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "4px 0 0", fontWeight: 600 }}>
-                        {moreJobs.length > 0 ? `${moreJobs.length} ${city.name} role${moreJobs.length === 1 ? "" : "s"} paying more than ${fmt.k(currentK)}` : `${city.name} roles near your base`}
-                      </h3>
-                    </div>
+                  <div style={{ textAlign: "center", marginBottom: 28 }}>
+                    <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                      LATERAL OPPORTUNITIES
+                    </span>
+                    <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "6px 0 0", fontWeight: 600 }}>
+                      {moreJobs.length > 0 ? `${moreJobs.length} ${city.name} role${moreJobs.length === 1 ? "" : "s"} paying more than ${fmt.k(currentK)}` : `${city.name} roles near your base`}
+                    </h3>
                   </div>
 
-                  <div className="cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
+                  <div className="leaf-cards-3">
                     {moreJobs.slice(0, 3).map((j) => (
-                      <JobCard key={j.id} job={j} />
+                      <div key={j.id} className="leaf-hover-lift" style={{ borderRadius: 14 }}>
+                        <JobCard job={j} />
+                      </div>
                     ))}
                   </div>
 
                   <div style={{ display: "flex", justifyContent: "center", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
                     <Link
-                      className="btn-emp-primary"
                       href={`/jobs/${role.slug}/${city.slug}`}
                       style={{
                         background: "#1D4ED8",
@@ -622,8 +826,9 @@ export default function SalaryLeafClient({
                         padding: "12px 24px",
                         borderRadius: 7,
                         fontWeight: 600,
-                        fontSize: 14,
+                        fontSize: 14.5,
                         textDecoration: "none",
+                        boxShadow: "0 4px 14px rgba(29, 78, 216, 0.3)",
                       }}
                     >
                       <span>Explore all {city.name} roles</span>
@@ -638,7 +843,7 @@ export default function SalaryLeafClient({
                         padding: "12px 24px",
                         borderRadius: 7,
                         fontWeight: 600,
-                        fontSize: 14,
+                        fontSize: 14.5,
                         textDecoration: "none",
                       }}
                     >
@@ -653,62 +858,74 @@ export default function SalaryLeafClient({
       </section>
 
       {/* 3. WHAT MOVES PAY (3 COMPENSATION LEVERS) */}
-      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 44px" }}>
-            <span
-              className="eyebrow"
+      <section style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 44px" }}>
+            <div
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
+                fontSize: 11,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                color: "#1D4ED8",
+                marginBottom: 14,
               }}
             >
-              COMPENSATION LEVERS
-            </span>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>COMPENSATION LEVERS</span>
+            </div>
             <h2
               style={{
                 fontFamily: "var(--display)",
                 fontSize: "clamp(28px, 3.6vw, 42px)",
                 color: "#08142A",
-                margin: "0 0 14px",
+                margin: "0 auto 14px",
                 fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
               }}
             >
-              Three factors that move a lateral <span className="serif-accent" style={{ fontStyle: "italic" }}>offer</span>
+              Three factors that move a lateral{" "}
+              <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>
+                offer
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               Specific credentials and client assets that command higher base premiums in {city.name} law firms.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+          <div className="leaf-cards-3">
             {levers.map((d, i) => (
               <div
                 key={i}
+                className="leaf-hover-lift"
                 style={{
                   background: "#FAF9F5",
                   border: "1.5px solid #EAE7DC",
-                  borderRadius: 12,
-                  padding: "26px 22px",
+                  borderRadius: 14,
+                  padding: "32px 26px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                 }}
               >
                 <div>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", display: "block", marginBottom: 6 }}>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", display: "inline-block", background: "#EFF6FF", padding: "4px 10px", borderRadius: 4, marginBottom: 14 }}>
                     {d.k}
                   </span>
-                  <div style={{ fontFamily: "var(--display)", fontSize: 26, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+                  <div style={{ fontFamily: "var(--display)", fontSize: 28, fontWeight: 700, color: "#08142A", marginBottom: 12 }}>
                     <Mark>{d.fig}</Mark>
                   </div>
-                  <p style={{ fontSize: 13.5, lineHeight: 1.55, color: "#475569", margin: 0 }}>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.6, color: "#475569", margin: 0 }}>
                     {d.v}
                   </p>
                 </div>
@@ -718,256 +935,510 @@ export default function SalaryLeafClient({
         </div>
       </section>
 
-      {/* 4. SALARY GUIDE EMAIL OFFER */}
-      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap split" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "start" }}>
-          <div>
-            <div className="sec-head">
-              <span
-                className="eyebrow"
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 12,
-                  color: "#1D4ED8",
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  display: "block",
-                  marginBottom: 8,
-                }}
-              >
-                FREE REGIONAL INTELLIGENCE
+      {/* 4. THE COMPLETE HOUSTON LEGAL SALARY GUIDE (DARK SECTION AS REQUESTED) */}
+      <section
+        style={{
+          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.22) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          padding: "96px 0 108px",
+          color: "#FFFFFF",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+        }}
+      >
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 48px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.2)",
+                border: "1px solid rgba(96, 165, 250, 0.3)",
+                borderRadius: 999,
+                padding: "6px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#93C5FD",
+                marginBottom: 14,
+              }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span>FREE REGIONAL INTELLIGENCE · EXECUTIVE PDF</span>
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--display)",
+                fontSize: "clamp(28px, 3.6vw, 42px)",
+                color: "#FFFFFF",
+                margin: "0 auto 14px",
+                fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
+              }}
+            >
+              The complete {city.name} legal salary{" "}
+              <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+                guide
               </span>
-              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
-                The complete {city.name} legal salary <span className="serif-accent" style={{ fontStyle: "italic" }}>guide</span>
-              </h2>
-              <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 0 24px" }}>
-                Every practice area we recruit in {city.name}, published on an executive one-page PDF you can reference for partner compensation reviews.
-              </p>
-            </div>
-
-            <div style={{ display: "grid", gap: 12 }}>
-              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
-                <span style={{ fontSize: 14, color: "#334155" }}>Base salary percentiles for 10 legal roles by years post-bar</span>
-              </div>
-              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
-                <span style={{ fontSize: 14, color: "#334155" }}>Discretionary bonus norms and hybrid arrangement premiums</span>
-              </div>
-              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span>
-                <span style={{ fontSize: 14, color: "#334155" }}>Updated quarterly from real boutique firm offers</span>
-              </div>
-            </div>
+            </h2>
+            <p style={{ color: "#CBD5E1", fontSize: 16.5, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
+              Every practice area we recruit in {city.name}, published on an executive one-page PDF you can reference for partner compensation reviews.
+            </p>
           </div>
 
-          <div id="guide-gate">
-            <GateForm
-              eyebrow="FREE PDF REPORT"
-              title={`Email me the ${city.name} salary guide`}
-              button="Send me the guide"
-              preset="guide"
-              city={city.slug}
-              audience={door === "candidate" ? "candidate" : "employer"}
-              reviewSlug={door === "candidate" ? "n-brown" : "daffner-law"}
-              fine="Delivered immediately as a PDF. Zero sales calls unless requested."
-            />
+          <div className="leaf-split-2">
+            {/* Left Column: Dark Value Checklist */}
+            <div
+              style={{
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: 16,
+                padding: "36px 32px",
+              }}
+            >
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 8 }}>
+                WHAT IS INCLUDED
+              </span>
+              <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#FFFFFF", margin: "0 0 16px", fontWeight: 600 }}>
+                Quarterly Market Intelligence
+              </h3>
+              <p style={{ color: "#CBD5E1", fontSize: 15, lineHeight: 1.6, marginBottom: 24 }}>
+                Prepared directly by Orion Placement&apos;s managing recruiters, covering prevailing compensation patterns across Texas and national legal markets.
+              </p>
+
+              <div style={{ display: "grid", gap: 16 }}>
+                <div style={{ display: "flex", gap: 12, alignItems: "start" }}>
+                  <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: 16 }}>✓</span>
+                  <div>
+                    <strong style={{ color: "#FFFFFF", display: "block", fontSize: 14.5 }}>Base Salary Percentiles for 10 Legal Roles</strong>
+                    <span style={{ fontSize: 13.5, color: "#94A3B8" }}>Categorized strictly by years post-bar admission (1–3, 4–7, 8+ years).</span>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", gap: 12, alignItems: "start" }}>
+                  <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: 16 }}>✓</span>
+                  <div>
+                    <strong style={{ color: "#FFFFFF", display: "block", fontSize: 14.5 }}>Discretionary Bonus &amp; Origination Norms</strong>
+                    <span style={{ fontSize: 13.5, color: "#94A3B8" }}>Collection incentives, hours thresholds, and hybrid arrangement premiums.</span>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", gap: 12, alignItems: "start" }}>
+                  <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: 16 }}>✓</span>
+                  <div>
+                    <strong style={{ color: "#FFFFFF", display: "block", fontSize: 14.5 }}>Updated Quarterly ({DATA.asOf})</strong>
+                    <span style={{ fontSize: 13.5, color: "#94A3B8" }}>Drawn from accepted lateral placements and confidential boutique firm mandates.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Gate Form */}
+            <div id="guide-gate">
+              <GateForm
+                eyebrow="FREE PDF REPORT"
+                title={`Email me the ${city.name} salary guide`}
+                button="Send me the guide"
+                preset="guide"
+                city={city.slug}
+                audience={door === "candidate" ? "candidate" : "employer"}
+                reviewSlug={door === "candidate" ? "n-brown" : "daffner-law"}
+                fine="Delivered immediately as a PDF. Zero sales calls unless requested."
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 5. METRO & ROLE COMPARISONS */}
-      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 40px" }}>
-            <span
-              className="eyebrow"
+      {/* 5. COMPARE OTHER PRACTICE AREAS AND CITIES (REDESIGNED PROPERLY) */}
+      <section style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 44px" }}>
+            <div
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
+                fontSize: 11,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                color: "#1D4ED8",
+                marginBottom: 14,
               }}
             >
-              CROSS-MARKET INTELLIGENCE
-            </span>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>CROSS-MARKET INTELLIGENCE</span>
+            </div>
             <h2
               style={{
                 fontFamily: "var(--display)",
                 fontSize: "clamp(28px, 3.6vw, 42px)",
                 color: "#08142A",
-                margin: "0 0 14px",
+                margin: "0 auto 14px",
                 fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
               }}
             >
-              Compare other practice areas and cities
+              Compare other practice areas and{" "}
+              <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>
+                cities
+              </span>
             </h2>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
+              Cross-discipline benchmarks in {city.name} and regional salary comparisons across Texas and national legal hubs.
+            </p>
           </div>
 
-          <div style={{ background: "#FAF9F5", border: "1.5px solid #EAE7DC", borderRadius: 14, padding: "28px" }}>
-            <Neighbours roleSlug={role.slug} citySlug={city.slug} />
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 20, paddingTop: 14, borderTop: "1px solid #EAE7DC", flexWrap: "wrap", gap: 10 }}>
-              <Link href={`/roles/${role.slug}`} style={{ fontSize: 13.5, color: "#1D4ED8", fontWeight: 600, textDecoration: "none" }}>
-                <span>{role.name} national hub →</span>
-              </Link>
-              <Link href={`/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}`} style={{ fontSize: 13.5, color: "#1D4ED8", fontWeight: 600, textDecoration: "none" }}>
-                <span>Legal recruiters in {city.name} →</span>
-              </Link>
+          <div className="leaf-compare-grid">
+            {/* Panel 1: Other Roles in This City */}
+            <div
+              style={{
+                background: "#FAF9F5",
+                border: "1.5px solid #EAE7DC",
+                borderRadius: 16,
+                padding: "32px 28px",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 20, paddingBottom: 12, borderBottom: "1.5px solid #E2E8F0" }}>
+                <div>
+                  <h3 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: 0, fontWeight: 600 }}>
+                    Other roles in {city.name}
+                  </h3>
+                  <span style={{ fontSize: 13, color: "#64748B" }}>Prevailing base compensation by specialization</span>
+                </div>
+                <Link href={`/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}`} style={{ fontSize: 12.5, color: "#1D4ED8", fontWeight: 600, textDecoration: "none" }}>
+                  All {city.name} →
+                </Link>
+              </div>
+
+              <div style={{ display: "grid", gap: 10 }}>
+                {otherRolesInCity.slice(0, 6).map((r) => (
+                  <Link
+                    key={r.slug}
+                    href={`/salaries/${r.slug}/${city.slug}`}
+                    className="leaf-hover-lift"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: "#FFFFFF",
+                      border: "1px solid #E2E8F0",
+                      borderRadius: 10,
+                      padding: "12px 16px",
+                      textDecoration: "none",
+                      color: "inherit",
+                    }}
+                  >
+                    <div>
+                      <b style={{ display: "block", fontSize: 14.5, color: "#08142A" }}>{r.name}</b>
+                      <span style={{ fontSize: 12, color: "#64748B" }}>Range: ${r.band.b1[0]}k–${r.band.b3[1]}k</span>
+                    </div>
+                    <div style={{ textAlign: "right" }}>
+                      <span style={{ fontFamily: "var(--display)", fontSize: 16, fontWeight: 700, color: "#1D4ED8" }}>
+                        {fmt.k(r.band.median)}
+                      </span>
+                      <span style={{ display: "block", fontSize: 11, color: "#64748B" }}>median</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Panel 2: Same Role in Other Cities */}
+            <div
+              style={{
+                background: "#FAF9F5",
+                border: "1.5px solid #EAE7DC",
+                borderRadius: 16,
+                padding: "32px 28px",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 20, paddingBottom: 12, borderBottom: "1.5px solid #E2E8F0" }}>
+                <div>
+                  <h3 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: 0, fontWeight: 600 }}>
+                    {role.short} pay in other cities
+                  </h3>
+                  <span style={{ fontSize: 13, color: "#64748B" }}>Regional differentials across top legal markets</span>
+                </div>
+                <Link href={`/roles/${role.slug}`} style={{ fontSize: 12.5, color: "#1D4ED8", fontWeight: 600, textDecoration: "none" }}>
+                  Role hub →
+                </Link>
+              </div>
+
+              <div style={{ display: "grid", gap: 10 }}>
+                {sameRoleInOtherCities.slice(0, 6).map((c) => (
+                  <Link
+                    key={c.slug}
+                    href={`/salaries/${role.slug}/${c.slug}`}
+                    className="leaf-hover-lift"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: "#FFFFFF",
+                      border: "1px solid #E2E8F0",
+                      borderRadius: 10,
+                      padding: "12px 16px",
+                      textDecoration: "none",
+                      color: "inherit",
+                    }}
+                  >
+                    <div>
+                      <b style={{ display: "block", fontSize: 14.5, color: "#08142A" }}>{c.name}, {c.state}</b>
+                      <span style={{ fontSize: 12, color: "#64748B" }}>Range: ${c.band.b1[0]}k–${c.band.b3[1]}k</span>
+                    </div>
+                    <div style={{ textAlign: "right" }}>
+                      <span style={{ fontFamily: "var(--display)", fontSize: 16, fontWeight: 700, color: "#1D4ED8" }}>
+                        {fmt.k(c.band.median)}
+                      </span>
+                      <span style={{ display: "block", fontSize: 11, color: "#64748B" }}>median</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6. METHODOLOGY & STATS */}
-      <section className="emp-process-sec" id="method" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head" style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 44px" }}>
-            <span
-              className="eyebrow"
+      {/* 6. HOW WE MEASURE LEGAL COMPENSATION (DARK SECTION AS REQUESTED) */}
+      <section
+        id="method"
+        style={{
+          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.22) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          padding: "96px 0 108px",
+          color: "#FFFFFF",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+        }}
+      >
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 48px" }}>
+            <div
               style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(29, 78, 216, 0.2)",
+                border: "1px solid rgba(96, 165, 250, 0.3)",
+                borderRadius: 999,
+                padding: "6px 14px",
                 fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
+                fontSize: 11,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                color: "#93C5FD",
+                marginBottom: 14,
               }}
             >
-              DATA INTEGRITY
-            </span>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
-              How we measure legal compensation
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span>DATA INTEGRITY · STATISTICAL METHODOLOGY</span>
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--display)",
+                fontSize: "clamp(28px, 3.6vw, 42px)",
+                color: "#FFFFFF",
+                margin: "0 auto 14px",
+                fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
+              }}
+            >
+              How we measure legal{" "}
+              <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+                compensation
+              </span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: "#CBD5E1", fontSize: 16.5, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               Bands originate from accepted offers and verified mandates placed through Orion for {role.name.toLowerCase()}s in the {city.name} metro, categorized strictly by years post-bar admission.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
-            <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px", textAlign: "center" }}>
-              <div style={{ fontFamily: "var(--display)", fontSize: 36, color: "#1D4ED8", fontWeight: 600, marginBottom: 4 }}>
-                20+
-              </div>
-              <div style={{ fontSize: 13, color: "#64748B" }}>Verified data points behind every published band</div>
-            </div>
-            <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px", textAlign: "center" }}>
-              <div style={{ fontFamily: "var(--display)", fontSize: 36, color: "#08142A", fontWeight: 600, marginBottom: 4 }}>
-                25th–75th
-              </div>
-              <div style={{ fontSize: 13, color: "#64748B" }}>The range reflects the middle 50% interquartile spread</div>
-            </div>
-            <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "26px 22px", textAlign: "center" }}>
-              <div style={{ fontFamily: "var(--display)", fontSize: 36, color: "#059669", fontWeight: 600, marginBottom: 4 }}>
-                Quarterly
-              </div>
-              <div style={{ fontSize: 13, color: "#64748B" }}>Systematic review cycle with published effective date</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. REVIEWS */}
-      <section className="emp-process-sec" style={{ background: "#FFFFFF", padding: "88px 0 96px", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head row" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 40, flexWrap: "wrap", gap: 14 }}>
-            <div>
-              <span
-                className="eyebrow"
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 12,
-                  color: "#1D4ED8",
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  display: "block",
-                  marginBottom: 8,
-                }}
-              >
-                VERIFIED TESTIMONIALS
-              </span>
-              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3.4vw, 38px)", color: "#08142A", margin: 0, fontWeight: 500 }}>
-                Why law firms &amp; candidates partner with Orion
-              </h2>
-            </div>
-            <RatingBadge link={true} />
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
-            {door === "employer" ? (
-              <>
-                <ReviewCard review={DATA.reviews[0]} />
-                <ReviewCard review={DATA.reviews[1]} />
-                <ReviewCard review={DATA.reviews[3]} />
-              </>
-            ) : (
-              <>
-                <ReviewCard review={DATA.reviews[2]} />
-                <ReviewCard review={DATA.reviews[5]} />
-              </>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. REGIONAL FAQ ACCORDION */}
-      <section className="emp-process-sec" style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
-        <div className="wrap split" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "start" }}>
-          <div className="sec-head">
-            <span
-              className="eyebrow"
+          <div className="leaf-cards-3">
+            <div
+              className="leaf-hover-lift"
               style={{
-                fontFamily: "var(--mono)",
-                fontSize: 12,
-                color: "#1D4ED8",
-                fontWeight: 700,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                display: "block",
-                marginBottom: 8,
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: 14,
+                padding: "32px 26px",
+                textAlign: "center",
               }}
             >
-              COMPENSATION QUESTIONS
-            </span>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 40px)", color: "#08142A", margin: "0 0 14px", fontWeight: 500 }}>
-              {role.short} pay in <span className="serif-accent" style={{ fontStyle: "italic" }}>{city.name}</span>
+              <div style={{ fontFamily: "var(--display)", fontSize: 40, color: "#60A5FA", fontWeight: 600, marginBottom: 8 }}>
+                20+
+              </div>
+              <b style={{ display: "block", color: "#FFFFFF", fontSize: 16, marginBottom: 6 }}>Verified Data Points</b>
+              <div style={{ fontSize: 14, color: "#94A3B8", lineHeight: 1.55 }}>
+                Behind every published practice band, cross-referenced against boutique lateral placements.
+              </div>
+            </div>
+
+            <div
+              className="leaf-hover-lift"
+              style={{
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: 14,
+                padding: "32px 26px",
+                textAlign: "center",
+              }}
+            >
+              <div style={{ fontFamily: "var(--display)", fontSize: 40, color: "#FFFFFF", fontWeight: 600, marginBottom: 8 }}>
+                25th–75th
+              </div>
+              <b style={{ display: "block", color: "#FFFFFF", fontSize: 16, marginBottom: 6 }}>Interquartile Spread</b>
+              <div style={{ fontSize: 14, color: "#94A3B8", lineHeight: 1.55 }}>
+                The range reflects the middle 50% spread, eliminating distorting single-firm anomalies.
+              </div>
+            </div>
+
+            <div
+              className="leaf-hover-lift"
+              style={{
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: 14,
+                padding: "32px 26px",
+                textAlign: "center",
+              }}
+            >
+              <div style={{ fontFamily: "var(--display)", fontSize: 40, color: "#4ADE80", fontWeight: 600, marginBottom: 8 }}>
+                Quarterly
+              </div>
+              <b style={{ display: "block", color: "#FFFFFF", fontSize: 16, marginBottom: 6 }}>Systematic Updates</b>
+              <div style={{ fontSize: 14, color: "#94A3B8", lineHeight: 1.55 }}>
+                Effective dates continuously audited to ensure data matches active recruiting quarters.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. REVIEWS (HOMEPAGE-STYLE MIDNIGHT NAVY DARK SECTION AS REQUESTED) */}
+      <section className="block reviews-sec" id="reviews">
+        <div className="wrap">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              GOOGLE REVIEWS · VERIFIED CLIENTS &amp; CANDIDATES
+            </div>
+            <h2 className="sec-title-lg">
+              Why law firms &amp; candidates partner with{" "}
+              <span className="serif-accent">Orion</span>
             </h2>
-            <p style={{ color: "#64748B", fontSize: 15, lineHeight: 1.6 }}>
+            <div className="reviews-rating-pill">
+              <RatingBadge link />
+            </div>
+          </div>
+
+          <ReviewsSection kind="mixed" />
+
+          {/* Bottom Reassurance & All Reviews Link */}
+          <div className="reviews-bottom-bar">
+            <div className="reviews-bottom-trust">
+              <span className="reviews-bottom-dot" />
+              <span>
+                100% verified public Google reviews · Jon is named in <strong>{DATA.trust.jonNamed} of {DATA.trust.reviews}</strong> reviews
+              </span>
+            </div>
+            <a
+              href={DATA.trust.google}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-reviews-google"
+            >
+              <span>Read all {DATA.trust.reviews} reviews on Google</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. REGIONAL FAQ ACCORDION (CENTERED & PROPERLY ALIGNED) */}
+      <section style={{ background: "#FAF9F5", padding: "88px 0 96px", borderBottom: "1px solid #EAE7DC" }}>
+        <div style={{ maxWidth: 840, margin: "0 auto", padding: "0 24px" }}>
+          {/* Centered Section Header */}
+          <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 44px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#EFF6FF",
+                border: "1px solid #DBEAFE",
+                borderRadius: 999,
+                padding: "6px 14px",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#1D4ED8",
+                marginBottom: 14,
+              }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+              <span>COMPENSATION QUESTIONS</span>
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--display)",
+                fontSize: "clamp(28px, 3.6vw, 42px)",
+                color: "#08142A",
+                margin: "0 auto 14px",
+                fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: "100%",
+              }}
+            >
+              {role.short} pay in{" "}
+              <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>
+                {city.name}
+              </span>
+            </h2>
+            <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
               Common market factors that influence lateral offer structures in {city.name}.
             </p>
           </div>
 
-          <div className="faq" style={{ display: "grid", gap: 14 }}>
-            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "18px 22px" }}>
-              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>
+          <div style={{ display: "grid", gap: 14 }}>
+            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "20px 24px" }}>
+              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 16 }}>
                 What does {/^[aeiou]/i.test(role.name) ? "an" : "a"} {role.name.toLowerCase()} earn in {city.name}?
               </summary>
-              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.6, fontSize: 14, margin: "12px 0 0" }}>
+              <p style={{ marginTop: 14, color: "#475569", lineHeight: 1.6, fontSize: 14.5, margin: "14px 0 0" }}>
                 The prevailing median base salary is <strong style={{ color: "#08142A" }}>${bandData.median}k</strong>. Associates with 1 to 3 years experience generally earn ${bandData.b1[0]}k–${bandData.b1[1]}k, mid-levels (4 to 7 years) command ${bandData.b2[0]}k–${bandData.b2[1]}k, and senior attorneys with 8+ years earn ${bandData.b3[0]}k–${bandData.b3[1]}k base before origination or bonus splits.
               </p>
             </details>
 
-            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "18px 22px" }}>
-              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>
+            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "20px 24px" }}>
+              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 16 }}>
                 Does a portable book of business change the base offer?
               </summary>
-              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.6, fontSize: 14, margin: "12px 0 0" }}>
+              <p style={{ marginTop: 14, color: "#475569", lineHeight: 1.6, fontSize: 14.5, margin: "14px 0 0" }}>
                 Yes. Even a modest book of existing clients ($75k–$150k) is the single strongest compensation lever in Texas, typically commanding a $15k to $30k immediate premium on base, alongside an aggressive origination split (often 20% to 35% of collected fees).
               </p>
             </details>
 
-            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "18px 22px" }}>
-              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>
+            <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "20px 24px" }}>
+              <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 16 }}>
                 Do small boutique firms pay less than large AmLaw firms?
               </summary>
-              <p style={{ marginTop: 12, color: "#475569", lineHeight: 1.6, fontSize: 14, margin: "12px 0 0" }}>
+              <p style={{ marginTop: 14, color: "#475569", lineHeight: 1.6, fontSize: 14.5, margin: "14px 0 0" }}>
                 In base salary, Texas boutiques sit slightly below AmLaw locksteps. However, boutiques feature substantially lower billable hour requirements (e.g. 1,500 vs. 2,100 hours) and direct fee-collection incentives that frequently yield equal or superior net earnings with better quality of life.
               </p>
             </details>
@@ -976,10 +1447,18 @@ export default function SalaryLeafClient({
       </section>
 
       {/* 9. BOTTOM MIDNIGHT NAVY CTA BAND */}
-      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "96px 0 108px", textAlign: "center" }}>
-        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+      <section
+        style={{
+          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          padding: "96px 0 108px",
+          textAlign: "center",
+          color: "#FFFFFF",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
           <div
-            className="badge-capsule"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -996,7 +1475,7 @@ export default function SalaryLeafClient({
               marginBottom: 18,
             }}
           >
-            <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
             <span>EXECUTIVE LEGAL PLACEMENT</span>
           </div>
 
@@ -1010,115 +1489,55 @@ export default function SalaryLeafClient({
               lineHeight: 1.15,
             }}
           >
-            {door === "employer" ? (
-              <>
-                Hire qualified {role.short} talent in{" "}
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  {city.name}
-                </span>
-              </>
-            ) : (
-              <>
-                Explore higher-paying {city.name} seats{" "}
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  with pay disclosed
-                </span>
-              </>
-            )}
+            Hire or explore lateral {role.name.toLowerCase()} roles in{" "}
+            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
+              {city.name}
+            </span>
           </h2>
 
           <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 34, maxWidth: 640, margin: "0 auto 34px" }}>
-            {door === "employer"
-              ? "Access pre-screened lateral dossiers ready for partner interview. Standard 23% fee due only if you hire."
-              : "Review confidential Texas lateral openings with verified compensation. No firm sees your name until you say yes."}
+            Access vetted candidate dossiers or schedule a confidential 15-minute compensation and search consultation with Justin.
           </p>
 
           <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
-            {door === "employer" ? (
-              <>
-                <Link
-                  href={`/find-candidates#role=${role.slug}&city=${city.slug}`}
-                  className="btn-emp-primary"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#1D4ED8",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 16,
-                    padding: "14px 34px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>See {city.name} candidates</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-                <Link
-                  href="/submit-job"
-                  className="btn-emp-ghost"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 16,
-                    padding: "14px 34px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>Submit your mandate</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  href={`/jobs/${role.slug}/${city.slug}`}
-                  className="btn-emp-primary"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#1D4ED8",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 16,
-                    padding: "14px 34px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>See {city.name} roles</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-                <Link
-                  href="/upload-resume"
-                  className="btn-emp-ghost"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "#FFFFFF",
-                    fontWeight: 600,
-                    fontSize: 16,
-                    padding: "14px 34px",
-                    borderRadius: 7,
-                    textDecoration: "none",
-                  }}
-                >
-                  <span>Upload resume</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </>
-            )}
+            <Link
+              href={`/find-candidates#role=${role.slug}&city=${city.slug}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#1D4ED8",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 16,
+                padding: "14px 34px",
+                borderRadius: 7,
+                textDecoration: "none",
+                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.35)",
+              }}
+            >
+              <span>See {city.name} candidates</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link
+              href={`/jobs/${role.slug}/${city.slug}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 16,
+                padding: "14px 34px",
+                borderRadius: 7,
+                textDecoration: "none",
+              }}
+            >
+              <span>Browse open roles</span>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>
