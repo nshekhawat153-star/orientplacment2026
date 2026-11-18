@@ -156,9 +156,13 @@ export default function HireAttorneysLandingPage() {
             display: none !important;
           }
           .ha-terms-strip-sec {
-            margin-top: -24px !important;
-            margin-bottom: 32px !important;
+            margin-top: 0 !important;
+            margin-bottom: 24px !important;
             padding: 0 14px !important;
+          }
+          .ha-terms-inner-wrap {
+            margin-top: -46px !important;
+            padding: 0 !important;
           }
           .ha-terms-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -449,7 +453,7 @@ export default function HireAttorneysLandingPage() {
           position: "relative",
           background: "#08142A",
           color: "#FFFFFF",
-          padding: "128px 0 88px",
+          padding: "128px 0 108px",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
@@ -640,7 +644,7 @@ export default function HireAttorneysLandingPage() {
           padding: "0 0 24px",
         }}
       >
-        <div style={{ maxWidth: 1200, margin: "-36px auto 0", padding: "0 24px" }}>
+        <div className="ha-terms-inner-wrap" style={{ maxWidth: 1200, margin: "-76px auto 0", padding: "0 24px" }}>
           <div className="ha-terms-grid">
             {/* Card 1: Placement Fee */}
             <div
@@ -736,7 +740,7 @@ export default function HireAttorneysLandingPage() {
             className="ha-terms-divider-wrap"
             style={{
               maxWidth: 1200,
-              margin: "56px auto 0",
+              margin: "48px auto 0",
               padding: "0 12px",
             }}
           >
