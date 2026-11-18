@@ -100,7 +100,7 @@ export default function HomePage() {
             <div className="hero-content-center">
               <div className="hero-eyebrow-capsule">
                 <span className="hero-eyebrow-dot" aria-hidden="true" />
-                <span>NATIONWIDE CONTINGENCY LEGAL RECRUITING · 23% DUE ONLY IF YOU HIRE</span>
+                <span>NATIONWIDE CONTINGENCY · PAY ONLY IF YOU HIRE</span>
               </div>
 
               <h1 id="h1" className="hero-display-h1">

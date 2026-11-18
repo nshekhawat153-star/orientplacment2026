@@ -195,58 +195,19 @@ export default function SalaryLeafClient({
             line-height: 1.55 !important;
             margin-bottom: 22px !important;
           }
-          .salary-door-wrap {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            gap: 8px !important;
-            background: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-            margin-bottom: 24px !important;
-            width: 100% !important;
-          }
-          .salary-door-label {
-            padding: 0 !important;
-            font-size: 11px !important;
-            letter-spacing: 0.12em !important;
-            color: #94A3B8 !important;
-            font-weight: 600 !important;
-          }
-          .salary-door-toggle {
-            display: flex !important;
-            width: 100% !important;
-            max-width: 340px !important;
-            background: rgba(255, 255, 255, 0.08) !important;
-            border: 1px solid rgba(255, 255, 255, 0.18) !important;
-            border-radius: 10px !important;
-            padding: 4px !important;
-            gap: 4px !important;
-            box-sizing: border-box !important;
-          }
-          .salary-door-btn {
-            flex: 1 1 50% !important;
-            white-space: nowrap !important;
-            padding: 10px 8px !important;
-            font-size: 13.5px !important;
-            font-weight: 600 !important;
-            text-align: center !important;
-            border-radius: 7px !important;
-            box-sizing: border-box !important;
-          }
           .salary-hero-actions {
             display: flex !important;
             flex-direction: column !important;
             width: 100% !important;
             max-width: 340px !important;
-            margin: 0 auto 26px !important;
+            margin: 0 auto 18px !important;
             gap: 10px !important;
           }
           .salary-hero-btn {
             width: 100% !important;
             justify-content: center !important;
             padding: 13px 18px !important;
-            font-size: 14.5px !important;
+            font-size: 15px !important;
             box-sizing: border-box !important;
             text-align: center !important;
           }
@@ -355,77 +316,17 @@ export default function SalaryLeafClient({
               Prevailing market base salaries from accepted lateral offers and active boutique mandates in {city.name}. Excludes discretionary collections bonuses.
             </p>
 
-          {/* Perspective Toggle: Employer vs Candidate */}
-          <div
-            className="salary-door-wrap"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.15)",
-              borderRadius: 8,
-              padding: "6px 8px",
-              marginBottom: 34
-            }}
-          >
-            <span
-              className="salary-door-label"
-              style={{
-                fontFamily: "var(--mono)",
-                fontSize: 11.5,
-                color: "#94A3B8",
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-                padding: "0 10px"
-              }}
-            >
-              I am:
-            </span>
-            <div className="salary-door-toggle">
-              <button
-                type="button"
-                className={`salary-door-btn ${door === "employer" ? "active" : ""}`}
-                onClick={() => setDoor("employer")}
-                style={{
-                  padding: "9px 20px",
-                  borderRadius: 6,
-                  fontSize: 14,
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  border: "none",
-                  background: door === "employer" ? "#1D4ED8" : "transparent",
-                  color: door === "employer" ? "#FFFFFF" : "#CBD5E1",
-                  transition: "all 0.15s ease",
-                }}
-              >
-                Hiring firm
-              </button>
-              <button
-                type="button"
-                className={`salary-door-btn ${door === "candidate" ? "active" : ""}`}
-                onClick={() => setDoor("candidate")}
-                style={{
-                  padding: "9px 20px",
-                  borderRadius: 6,
-                  fontSize: 14,
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  border: "none",
-                  background: door === "candidate" ? "#1D4ED8" : "transparent",
-                  color: door === "candidate" ? "#FFFFFF" : "#CBD5E1",
-                  transition: "all 0.15s ease",
-                }}
-              >
-                Candidate exploring
-              </button>
-            </div>
-          </div>
-
-          {/* Centered Action Buttons */}
+          {/* Centered Action Buttons (Clean & Executive - Exactly 2 Buttons) */}
           <div
             className="salary-hero-actions"
-            style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 14,
+              marginBottom: 16,
+            }}
           >
             <a
               href="#check"
@@ -438,35 +339,15 @@ export default function SalaryLeafClient({
                 color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 16,
-                padding: "15px 32px",
+                padding: "14px 30px",
                 borderRadius: 7,
                 textDecoration: "none",
                 boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
               }}
             >
-              <span>{door === "employer" ? "Evaluate your offer" : "Benchmark your salary"}</span>
+              <span>Evaluate your offer</span>
               <span aria-hidden="true">↓</span>
             </a>
-            <Link
-              href={`/jobs/${role.slug}/${city.slug}`}
-              className="salary-hero-btn"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 16,
-                padding: "15px 28px",
-                borderRadius: 7,
-                textDecoration: "none",
-              }}
-            >
-              <span>Browse {city.name} {role.short} jobs ({moreJobs.length})</span>
-              <span aria-hidden="true">→</span>
-            </Link>
             <a
               href="https://calendly.com/orionplacement/call-with-justin"
               target="_blank"
@@ -477,11 +358,11 @@ export default function SalaryLeafClient({
                 alignItems: "center",
                 gap: 8,
                 background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.2)",
+                border: "1px solid rgba(255,255,255,0.22)",
                 color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 16,
-                padding: "15px 26px",
+                padding: "14px 26px",
                 borderRadius: 7,
                 textDecoration: "none",
               }}
@@ -489,6 +370,30 @@ export default function SalaryLeafClient({
               <span>Book 15 min with Justin</span>
               <span aria-hidden="true">→</span>
             </a>
+          </div>
+
+          {/* Clean Subline link for open roles */}
+          <div
+            className="hero-subline"
+            style={{
+              textAlign: "center",
+              marginBottom: 28,
+              fontSize: 14,
+              color: "#94A3B8",
+            }}
+          >
+            Looking for open roles?{" "}
+            <Link
+              href={`/jobs/${role.slug}/${city.slug}`}
+              style={{
+                color: "#93C5FD",
+                fontWeight: 500,
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(147, 197, 253, 0.35)",
+              }}
+            >
+              Browse {city.name} jobs ({moreJobs.length}) →
+            </Link>
           </div>
 
           {/* Centered Micro-reassurances Row */}

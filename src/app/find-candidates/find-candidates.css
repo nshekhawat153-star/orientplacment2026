@@ -792,3 +792,13 @@
   }
 }
 
+/* Mobile Hero Enhancements for /find-candidates */
+@media (max-width: 640px) {
+  .fc-luxury-hero-sec {
+    padding: 88px 0 44px !important;
+  }
+  .fc-hero-prompt-hint {
+    display: none !important;
+  }
+}
+

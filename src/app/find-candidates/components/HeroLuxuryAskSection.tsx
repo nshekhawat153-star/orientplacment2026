@@ -93,72 +93,30 @@ export function HeroLuxuryAskSection({
         }}
       >
         {/* Eyebrow Badge Capsule */}
-        <div style={{ marginBottom: 20 }}>
-          <div
-            className="badge-capsule"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              background: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.15)",
-              borderRadius: 999,
-              padding: "6px 16px",
-              fontFamily: "var(--mono)",
-              fontSize: 11,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "#93C5FD",
-            }}
-          >
-            <span
-              className="badge-dot"
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: "#60A5FA",
-              }}
-            />
+        <div style={{ marginBottom: 18 }}>
+          <div className="hero-eyebrow-capsule">
+            <span className="hero-eyebrow-dot" aria-hidden="true" />
             <span>PRE-SCREENED TALENT · 100% CONTINGENCY</span>
           </div>
         </div>
 
         {/* Main Title */}
-        <h1
-          className="emp-hero-h1"
-          style={{
-            fontFamily: "var(--display)",
-            fontSize: "clamp(36px, 4.8vw, 54px)",
-            lineHeight: 1.15,
-            fontWeight: 500,
-            color: "#FFFFFF",
-            margin: "0 auto 20px",
-            maxWidth: 780,
-          }}
-        >
+        <h1 id="fc-hero-h1" className="hero-display-h1">
           Find candidates for your{" "}
-          <span
-            className="serif-accent"
-            style={{ color: "#60A5FA", fontStyle: "italic" }}
-          >
+          <span className="hero-accent-serif">
             open seat
           </span>
         </h1>
 
         {/* Clean Subtext */}
         <p
-          className="emp-hero-lead"
+          className="hero-lead-p"
           style={{
-            fontSize: "clamp(16px, 1.8vw, 18px)",
-            lineHeight: 1.6,
-            color: "#CBD5E1",
             maxWidth: 640,
-            margin: "0 auto 36px",
+            margin: "0 auto 32px",
           }}
         >
-          Describe the seat in your own words, or paste the link to your job posting.
-          Screened lateral attorney dossiers update dynamically with verified compensation.
+          Describe your seat or paste a job link to view screened candidate dossiers.
         </p>
 
         {/* THE NEW SMART ASK BOX IN PLACE OF OLD SEARCH CONSOLE */}
@@ -203,6 +161,7 @@ export function HeroLuxuryAskSection({
               }}
             />
             <div
+              className="fc-hero-prompt-footer"
               style={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -213,7 +172,7 @@ export function HeroLuxuryAskSection({
                 paddingTop: 10,
               }}
             >
-              <span style={{ fontSize: 13, color: "#64748B" }}>
+              <span className="fc-hero-prompt-hint hide-sm" style={{ fontSize: 13, color: "#64748B" }}>
                 A sentence is enough. We detect role, Texas market, years, pay cap, and office mode.
               </span>
               <button
@@ -231,6 +190,7 @@ export function HeroLuxuryAskSection({
                   display: "grid",
                   placeItems: "center",
                   flexShrink: 0,
+                  marginLeft: "auto",
                   boxShadow: text.trim()
                     ? "0 4px 14px rgba(29, 78, 216, 0.4)"
                     : "none",

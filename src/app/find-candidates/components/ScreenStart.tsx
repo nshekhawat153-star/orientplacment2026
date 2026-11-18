@@ -82,16 +82,13 @@ export function ScreenStart({
 
         {/* Subhead */}
         <p
+          className="hero-lead-p"
           style={{
-            fontSize: "clamp(16px, 1.8vw, 18px)",
-            lineHeight: 1.6,
-            color: "#475569",
             maxWidth: 640,
             margin: "0 auto 32px",
           }}
         >
-          Describe the seat in your own words, or paste the link to your job posting.
-          You see screened, anonymous candidates straight away. No fee unless you hire.
+          Describe your seat or paste a job link to view screened candidate dossiers.
         </p>
 
         {/* THE ASK BOX */}
@@ -113,7 +110,7 @@ export function ScreenStart({
             placeholder="e.g. Estate planning attorney in Houston, 3–5 years, up to $145k, on-site"
           />
           <div className="fc-askbox-row">
-            <span className="fc-hint">
+            <span className="fc-hint fc-hero-prompt-hint hide-sm">
               A sentence is enough. We detect role, Texas market, years, pay cap, and office arrangement.
             </span>
             <button
@@ -121,6 +118,7 @@ export function ScreenStart({
               className="fc-send-btn"
               disabled={!text.trim() || isReading}
               aria-label="Find candidates"
+              style={{ marginLeft: "auto" }}
             >
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
