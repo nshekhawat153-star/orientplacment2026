@@ -76,8 +76,10 @@ export default function EmployersPage() {
             </h1>
 
             <p className="hero-lead-p">
-              Direct-hire lateral attorney and legal support placements sent straight to your inbox.
-              Zero upfront fees, non-exclusive agreement, and a full 90-day replacement guarantee.
+              Direct-hire lateral attorney and legal support placements sent straight to your inbox.{" "}
+              <span style={{ color: "#93C5FD", fontWeight: 500 }}>
+                Zero upfront fees, non-exclusive agreement, and a full 90-day replacement guarantee.
+              </span>{" "}
               You only pay 15 days after your hire starts.
             </p>
 
