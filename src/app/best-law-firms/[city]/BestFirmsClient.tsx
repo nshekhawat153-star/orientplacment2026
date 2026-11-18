@@ -113,7 +113,7 @@ export function BestFirmsClient({
         className="emp-luxury-hero-sec bf-luxury-hero-sec"
         style={{
           position: "relative",
-          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          background: "#08142A",
           color: "#FFFFFF",
           padding: "128px 0 84px",
           overflow: "hidden",
@@ -121,34 +121,22 @@ export function BestFirmsClient({
           borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
         }}
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 0.2,
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        >
-          <source src="/media/splash.mp4" type="video/mp4" />
-        </video>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(180deg, rgba(8,20,42,0.85) 0%, rgba(8,20,42,0.96) 100%)",
-            zIndex: 0,
-          }}
-        />
+        <div className="hero-video-wrap" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="hero-video-el"
+          >
+            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+            <source src="/media/splash.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-video-gradient" />
+          <div className="hero-video-radial-aura" />
+        </div>
 
-        <div style={{ maxWidth: "960px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1, textAlign: "center" }}>
+        <div style={{ maxWidth: "960px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 3, textAlign: "center" }}>
           <div
             className="hero-eyebrow-capsule"
             style={{
@@ -284,7 +272,7 @@ export function BestFirmsClient({
           </div>
 
           <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 20, maxWidth: 640, margin: "0 auto" }}>
-            <TrustLine />
+            <TrustLine dark />
           </div>
         </div>
       </section>

@@ -159,35 +159,29 @@ export default async function RolePage({ params }: PageProps) {
         aria-labelledby="role-hero-h1"
         style={{
           position: "relative",
-          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          background: "#08142A",
           color: "#FFFFFF",
           padding: "124px 0 76px",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
-        <div className="emp-hero-video-wrap" aria-hidden="true">
+        <div className="hero-video-wrap" aria-hidden="true">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="emp-hero-video"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              opacity: 0.18,
-            }}
+            className="hero-video-el"
           >
+            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
             <source src="/media/splash.mp4" type="video/mp4" />
           </video>
+          <div className="hero-video-gradient" />
+          <div className="hero-video-radial-aura" />
         </div>
 
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 960, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+        <div className="wrap" style={{ position: "relative", zIndex: 3, maxWidth: 960, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           {/* Badge Capsule */}
           <div className="emp-hero-badge-wrap" style={{ marginBottom: 18 }}>
             <div

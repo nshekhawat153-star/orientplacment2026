@@ -1519,9 +1519,17 @@ a.rating:hover {
 .hero-cinematic .trust-line,
 .salary-leaf-hero .trust-line,
 .bf-hero-sec .trust-line,
+.bf-luxury-hero-sec .trust-line,
 .wth-hero-sec .trust-line,
+.wth-luxury-hero .trust-line,
 .wtp-hero-sec .trust-line,
-.hk-hero-sec .trust-line {
+.wtp-luxury-hero-sec .trust-line,
+.hk-hero-sec .trust-line,
+.kit-hero-sec .trust-line,
+.kit-hero-trust .trust-line,
+.role-hub-hero .trust-line,
+.ur-luxury-hero-sec .trust-line,
+.sj-hero-sec .trust-line {
   color: #CBD5E1 !important;
 }
 
@@ -1531,9 +1539,17 @@ a.rating:hover {
 .hero-cinematic .trust-line b,
 .salary-leaf-hero .trust-line b,
 .bf-hero-sec .trust-line b,
+.bf-luxury-hero-sec .trust-line b,
 .wth-hero-sec .trust-line b,
+.wth-luxury-hero .trust-line b,
 .wtp-hero-sec .trust-line b,
-.hk-hero-sec .trust-line b {
+.wtp-luxury-hero-sec .trust-line b,
+.hk-hero-sec .trust-line b,
+.kit-hero-sec .trust-line b,
+.kit-hero-trust .trust-line b,
+.role-hub-hero .trust-line b,
+.ur-luxury-hero-sec .trust-line b,
+.sj-hero-sec .trust-line b {
   color: #FFFFFF !important;
 }
 
@@ -1543,10 +1559,48 @@ a.rating:hover {
 .hero-cinematic .trust-line .stars,
 .salary-leaf-hero .trust-line .stars,
 .bf-hero-sec .trust-line .stars,
+.bf-luxury-hero-sec .trust-line .stars,
 .wth-hero-sec .trust-line .stars,
+.wth-luxury-hero .trust-line .stars,
 .wtp-hero-sec .trust-line .stars,
-.hk-hero-sec .trust-line .stars {
+.wtp-luxury-hero-sec .trust-line .stars,
+.hk-hero-sec .trust-line .stars,
+.kit-hero-sec .trust-line .stars,
+.kit-hero-trust .trust-line .stars,
+.role-hub-hero .trust-line .stars,
+.ur-luxury-hero-sec .trust-line .stars,
+.sj-hero-sec .trust-line .stars {
   color: #FBBF24 !important;
+}
+
+.trust-line.on-dark .stars svg,
+.sc-hero-grid .trust-line .stars svg,
+.emp-luxury-hero-sec .trust-line .stars svg,
+.hero-cinematic .trust-line .stars svg,
+.salary-leaf-hero .trust-line .stars svg,
+.bf-hero-sec .trust-line .stars svg,
+.bf-luxury-hero-sec .trust-line .stars svg,
+.wth-hero-sec .trust-line .stars svg,
+.wth-luxury-hero .trust-line .stars svg,
+.wtp-hero-sec .trust-line .stars svg,
+.wtp-luxury-hero-sec .trust-line .stars svg,
+.hk-hero-sec .trust-line .stars svg,
+.kit-hero-sec .trust-line .stars svg,
+.kit-hero-trust .trust-line .stars svg,
+.role-hub-hero .trust-line .stars svg,
+.ur-luxury-hero-sec .trust-line .stars svg,
+.sj-hero-sec .trust-line .stars svg {
+  fill: #FBBF24 !important;
+  color: #FBBF24 !important;
+}
+
+.hero-content-center .trust-line,
+.bf-luxury-hero-sec .trust-line,
+.wth-luxury-hero .trust-line,
+.wtp-luxury-hero-sec .trust-line,
+.kit-hero-sec .trust-line,
+.kit-hero-trust .trust-line {
+  justify-content: center;
 }
 
 /* ---------- 8. sections: shared shell ---------- */

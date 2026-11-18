@@ -1229,77 +1229,77 @@ export default function SubmitJobPage() {
           {/* COMPACT HORIZONTAL COMPENSATION INTELLIGENCE BAR */}
           <div className="sj-benchmark-card">
             <div className="sj-benchmark-grid">
-            {/* COLUMN 1: ROLE, MARKET & EXPERIENCED SENIORITY */}
-            <div style={{ borderRight: "1px solid #E2E8F0", paddingRight: 20 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                <span style={{ fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#1D4ED8" }}>
-                  Market Benchmark
-                </span>
-                <span style={{ fontSize: 10.5, background: "#EFF6FF", color: "#1D4ED8", padding: "2px 7px", borderRadius: 4, fontWeight: 700, fontFamily: "var(--mono)" }}>
-                  Texas Percentiles
-                </span>
+              {/* COLUMN 1: ROLE, MARKET & EXPERIENCED SENIORITY */}
+              <div style={{ borderRight: "1px solid #E2E8F0", paddingRight: 20 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                  <span style={{ fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#1D4ED8" }}>
+                    Market Benchmark
+                  </span>
+                  <span style={{ fontSize: 10.5, background: "#EFF6FF", color: "#1D4ED8", padding: "2px 7px", borderRadius: 4, fontWeight: 700, fontFamily: "var(--mono)" }}>
+                    Texas Percentiles
+                  </span>
+                </div>
+                <h3 style={{ fontSize: 17, fontWeight: 600, color: "#08142A", margin: "0 0 3px", fontFamily: "var(--display)" }}>
+                  {roleObj.name}
+                </h3>
+                <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
+                  {cityObj.name}, TX · {expBandObj?.label || "Any Experience"}
+                </p>
               </div>
-              <h3 style={{ fontSize: 17, fontWeight: 600, color: "#08142A", margin: "0 0 3px", fontFamily: "var(--display)" }}>
-                {roleObj.name}
-              </h3>
-              <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
-                {cityObj.name}, TX · {expBandObj?.label || "Any Experience"}
-              </p>
-            </div>
 
-            {/* COLUMN 2: SALARY BAND BAR & PERCENTILES */}
-            <div style={{ borderRight: "1px solid #E2E8F0", paddingRight: 20 }}>
-              {!lo && !hi ? (
-                <div style={{ fontSize: 13, color: "#64748B", lineHeight: 1.5 }}>
-                  Set your base salary range in the console above to check Texas market percentiles.
-                </div>
-              ) : !band ? (
-                <div style={{ fontSize: 13, color: "#64748B" }}>
-                  Customized market data will be provided with your dossiers.
-                </div>
-              ) : (
-                <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5, fontFamily: "var(--mono)", color: "#64748B", marginBottom: 6 }}>
-                    <span>25th: {fmt.k(expRange![0])}</span>
-                    <span style={{ color: "#08142A", fontWeight: 700 }}>Median: {fmt.k(Math.round((expRange![0] + expRange![1]) / 2))}</span>
-                    <span>75th: {fmt.k(expRange![1])}</span>
+              {/* COLUMN 2: SALARY BAND BAR & PERCENTILES */}
+              <div style={{ borderRight: "1px solid #E2E8F0", paddingRight: 20 }}>
+                {!lo && !hi ? (
+                  <div style={{ fontSize: 13, color: "#64748B", lineHeight: 1.5 }}>
+                    Set your base salary range in the console above to check Texas market percentiles.
                   </div>
-                  <SalaryBandBar
-                    citySlug={selectedCity}
-                    roleSlug={selectedRole}
-                    highlight={expBandKey}
-                    marker={lo && hi ? (lo + hi) / 2 : lo || hi || undefined}
-                  />
-                </div>
-              )}
-            </div>
+                ) : !band ? (
+                  <div style={{ fontSize: 13, color: "#64748B" }}>
+                    Customized market data will be provided with your dossiers.
+                  </div>
+                ) : (
+                  <div>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5, fontFamily: "var(--mono)", color: "#64748B", marginBottom: 6 }}>
+                      <span>25th: {fmt.k(expRange![0])}</span>
+                      <span style={{ color: "#08142A", fontWeight: 700 }}>Median: {fmt.k(Math.round((expRange![0] + expRange![1]) / 2))}</span>
+                      <span>75th: {fmt.k(expRange![1])}</span>
+                    </div>
+                    <SalaryBandBar
+                      citySlug={selectedCity}
+                      roleSlug={selectedRole}
+                      highlight={expBandKey}
+                      marker={lo && hi ? (lo + hi) / 2 : lo || hi || undefined}
+                    />
+                  </div>
+                )}
+              </div>
 
-            {/* COLUMN 3: COMPETITIVENESS VERDICT & ADVICE */}
-            <div>
-              {payVerdict ? (
-                <div
-                  style={{
-                    background: payVerdict.where === "in" ? "#ECFDF5" : payVerdict.where === "above" ? "#EFF6FF" : "#FFFBEB",
-                    border: `1.5px solid ${payVerdict.where === "in" ? "#A7F3D0" : payVerdict.where === "above" ? "#BFDBFE" : "#FDE68A"}`,
-                    borderRadius: 8,
-                    padding: "10px 14px",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontWeight: 700, fontSize: 12.5, color: payVerdict.where === "in" ? "#065F46" : payVerdict.where === "above" ? "#1E40AF" : "#92400E", marginBottom: 3 }}>
-                    <span>{payVerdict.where === "in" ? "✓ In Line with Market Median" : payVerdict.where === "above" ? "★ Premium Range" : "⚠ Below Market Median"}</span>
+              {/* COLUMN 3: COMPETITIVENESS VERDICT & ADVICE */}
+              <div>
+                {payVerdict ? (
+                  <div
+                    style={{
+                      background: payVerdict.where === "in" ? "#ECFDF5" : payVerdict.where === "above" ? "#EFF6FF" : "#FFFBEB",
+                      border: `1.5px solid ${payVerdict.where === "in" ? "#A7F3D0" : payVerdict.where === "above" ? "#BFDBFE" : "#FDE68A"}`,
+                      borderRadius: 8,
+                      padding: "10px 14px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, fontWeight: 700, fontSize: 12.5, color: payVerdict.where === "in" ? "#065F46" : payVerdict.where === "above" ? "#1E40AF" : "#92400E", marginBottom: 3 }}>
+                      <span>{payVerdict.where === "in" ? "✓ In Line with Market Median" : payVerdict.where === "above" ? "★ Premium Range" : "⚠ Below Market Median"}</span>
+                    </div>
+                    <p style={{ fontSize: 12, lineHeight: 1.45, color: payVerdict.where === "in" ? "#047857" : payVerdict.where === "above" ? "#1D4ED8" : "#B45309", margin: 0 }}>
+                      {payVerdict.advice}
+                    </p>
                   </div>
-                  <p style={{ fontSize: 12, lineHeight: 1.45, color: payVerdict.where === "in" ? "#047857" : payVerdict.where === "above" ? "#1D4ED8" : "#B45309", margin: 0 }}>
-                    {payVerdict.advice}
-                  </p>
-                </div>
-              ) : (
-                <div style={{ fontSize: 12.5, color: "#64748B", lineHeight: 1.5 }}>
-                  Enter base salary to preview candidate response expectations.
-                </div>
-              )}
+                ) : (
+                  <div style={{ fontSize: 12.5, color: "#64748B", lineHeight: 1.5 }}>
+                    Enter base salary to preview candidate response expectations.
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
           <div className="sj-two-col">
             {/* Left Column: Matched Candidate Dossiers */}
@@ -1389,69 +1389,69 @@ export default function SubmitJobPage() {
             {/* Right Column: Sticky Mandate Submission GateForm */}
             <div id="gate" className="sj-gate-wrapper">
               <div className="sj-gate-card">
-              {requestedId && (
-                <div
-                  style={{
-                    background: "#EFF6FF",
-                    border: "1px solid #BFDBFE",
-                    borderRadius: 8,
-                    padding: "8px 12px",
-                    marginBottom: 16,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <span style={{ fontSize: 12, fontFamily: "var(--mono)", color: "#1D4ED8", fontWeight: 700 }}>
-                    Target Candidate: {requestedId}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setRequestedId(null)}
+                {requestedId && (
+                  <div
                     style={{
-                      background: "none",
-                      border: "none",
-                      color: "#1D4ED8",
-                      fontSize: 12,
-                      cursor: "pointer",
-                      textDecoration: "underline",
-                      padding: 0,
-                      fontWeight: 600,
+                      background: "#EFF6FF",
+                      border: "1px solid #BFDBFE",
+                      borderRadius: 8,
+                      padding: "8px 12px",
+                      marginBottom: 16,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    Reset
-                  </button>
-                </div>
-              )}
+                    <span style={{ fontSize: 12, fontFamily: "var(--mono)", color: "#1D4ED8", fontWeight: 700 }}>
+                      Target Candidate: {requestedId}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setRequestedId(null)}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        color: "#1D4ED8",
+                        fontSize: 12,
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                        padding: 0,
+                        fontWeight: 600,
+                      }}
+                    >
+                      Reset
+                    </button>
+                  </div>
+                )}
 
-              <GateForm
-                id="submit-job-gate"
-                eyebrow={requestedId ? `Candidate ${requestedId} Selected` : matches.length ? `Review All ${matches.length} Matches` : "Submit Mandate"}
-                title={
-                  requestedId
-                    ? `Request Confidential Dossier for ${requestedId}`
-                    : `Request All ${matches.length} Candidate Profiles`
-                }
-                bullets={[
-                  requestedId
-                    ? `Complete redacted resume and verified compensation history for ${requestedId}`
-                    : `Full redacted resumes for all ${matches.length} matching candidates`,
-                  "Verified compensation expectations, notice periods, and bar admission standing",
-                  "One-page contingency terms (23% fee due only if you hire). Zero upfront cost.",
-                ]}
-                button={
-                  requestedId
-                    ? `Deliver Dossier (${requestedId})`
-                    : `Deliver All ${matches.length} Candidate Profiles`
-                }
-                ids={candidateIds}
-                role={selectedRole}
-                city={selectedCity}
-                fine="Your mandate is strictly confidential and never published. Zero fee unless you extend an offer and hire."
-              />
+                <GateForm
+                  id="submit-job-gate"
+                  eyebrow={requestedId ? `Candidate ${requestedId} Selected` : matches.length ? `Review All ${matches.length} Matches` : "Submit Mandate"}
+                  title={
+                    requestedId
+                      ? `Request Confidential Dossier for ${requestedId}`
+                      : `Request All ${matches.length} Candidate Profiles`
+                  }
+                  bullets={[
+                    requestedId
+                      ? `Complete redacted resume and verified compensation history for ${requestedId}`
+                      : `Full redacted resumes for all ${matches.length} matching candidates`,
+                    "Verified compensation expectations, notice periods, and bar admission standing",
+                    "One-page contingency terms (23% fee due only if you hire). Zero upfront cost.",
+                  ]}
+                  button={
+                    requestedId
+                      ? `Deliver Dossier (${requestedId})`
+                      : `Deliver All ${matches.length} Candidate Profiles`
+                  }
+                  ids={candidateIds}
+                  role={selectedRole}
+                  city={selectedCity}
+                  fine="Your mandate is strictly confidential and never published. Zero fee unless you extend an offer and hire."
+                />
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
 
