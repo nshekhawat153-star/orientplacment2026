@@ -140,8 +140,7 @@ export default async function CandidateProfilePage({ params }: PageProps) {
                   }}
                 >
                   <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                  <span className="hero-eyebrow-desktop hidden-mobile">CONFIDENTIAL CANDIDATE DOSSIER · ID #{c.id}</span>
-                  <span className="hero-eyebrow-mobile only-mobile">DOSSIER · ID #{c.id}</span>
+                  <span>CONFIDENTIAL CANDIDATE DOSSIER<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />ID #{c.id}</span>
                 </div>
               </div>
 

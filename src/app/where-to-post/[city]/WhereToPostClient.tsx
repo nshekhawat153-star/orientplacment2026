@@ -187,8 +187,7 @@ export function WhereToPostClient({
             }}
           >
             <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-            <span className="hero-eyebrow-desktop hidden-mobile">Legal Recruitment Benchmark · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
-            <span className="hero-eyebrow-mobile only-mobile">RECRUITMENT BENCHMARK · {city.name.toUpperCase()}</span>
+            <span>LEGAL RECRUITMENT BENCHMARK<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />{city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
           </div>
 
           {/* Heading */}

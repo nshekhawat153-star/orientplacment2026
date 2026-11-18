@@ -100,8 +100,7 @@ export default function HomePage() {
             <div className="hero-content-center">
               <div className="hero-eyebrow-capsule">
                 <span className="hero-eyebrow-dot" aria-hidden="true" />
-                <span className="hero-eyebrow-desktop hidden-mobile">NATIONWIDE CONTINGENCY · PAY ONLY IF YOU HIRE</span>
-                <span className="hero-eyebrow-mobile only-mobile">CONTINGENCY · PAY ONLY IF YOU HIRE</span>
+                <span>NATIONWIDE CONTINGENCY<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />PAY ONLY IF YOU HIRE</span>
               </div>
 
               <h1 id="h1" className="hero-display-h1">

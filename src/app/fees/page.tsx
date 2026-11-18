@@ -339,8 +339,7 @@ export default function FeesPage() {
               }}
             >
               <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span className="hero-eyebrow-desktop hidden-mobile">TRANSPARENT PRICING · 100% CONTINGENCY</span>
-              <span className="hero-eyebrow-mobile only-mobile">PRICING · 100% CONTINGENCY</span>
+              <span>TRANSPARENT PRICING<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONTINGENCY</span>
             </div>
           </div>
 

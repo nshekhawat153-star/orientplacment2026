@@ -96,8 +96,7 @@ export function HeroLuxuryAskSection({
         <div style={{ marginBottom: 18 }}>
           <div className="hero-eyebrow-capsule">
             <span className="hero-eyebrow-dot" aria-hidden="true" />
-            <span className="hero-eyebrow-desktop hidden-mobile">PRE-SCREENED TALENT · 100% CONTINGENCY</span>
-            <span className="hero-eyebrow-mobile only-mobile">SCREENED TALENT · 100% CONTINGENCY</span>
+            <span>PRE-SCREENED TALENT<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONTINGENCY</span>
           </div>
         </div>
 

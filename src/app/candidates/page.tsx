@@ -183,8 +183,7 @@ export default function CandidatesPage() {
               }}
             >
               <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span className="hero-eyebrow-desktop hidden-mobile">Candidate Portal · 100% Confidential &amp; Free</span>
-              <span className="hero-eyebrow-mobile only-mobile">100% CONFIDENTIAL &amp; FREE</span>
+              <span>CANDIDATE PORTAL<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONFIDENTIAL &amp; FREE</span>
             </div>
 
             {/* Centered Display Heading - Prominent Executive Scale */}

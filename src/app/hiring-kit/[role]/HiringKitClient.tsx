@@ -376,8 +376,7 @@ export function HiringKitClient({
                 }}
               >
                 <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                <span className="hero-eyebrow-desktop hidden-mobile">Executive Law Firm Hiring Kit · {role.name}</span>
-                <span className="hero-eyebrow-mobile only-mobile">HIRING KIT · {role.name}</span>
+                <span>EXECUTIVE HIRING KIT<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />{role.name.toUpperCase()}</span>
               </div>
 
               <h1

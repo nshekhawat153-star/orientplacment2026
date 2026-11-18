@@ -193,8 +193,7 @@ export default async function CityLocationPage({ params }: PageProps) {
               }}
             >
               <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span className="hero-eyebrow-desktop hidden-mobile">REGIONAL LEGAL SEARCH · {city.name.toUpperCase()}, {city.stateName.toUpperCase()}</span>
-              <span className="hero-eyebrow-mobile only-mobile">LEGAL SEARCH · {city.name.toUpperCase()}</span>
+              <span>REGIONAL LEGAL SEARCH<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />{city.name.toUpperCase()}, {city.stateName.toUpperCase()}</span>
             </div>
           </div>
 

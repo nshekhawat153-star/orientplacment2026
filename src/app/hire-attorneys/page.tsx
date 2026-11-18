@@ -222,12 +222,13 @@ export default function HireAttorneysLandingPage() {
             padding: 0 16px !important;
           }
           .ha-hero-eyebrow {
-            font-size: 10px !important;
-            letter-spacing: 0.08em !important;
-            padding: 5px 12px !important;
+            font-size: 11px !important;
+            letter-spacing: 0.05em !important;
+            padding: 6px 16px !important;
             gap: 6px !important;
             margin-bottom: 14px !important;
-            white-space: nowrap !important;
+            white-space: normal !important;
+            text-align: center !important;
           }
           .ha-hero-h1 {
             font-size: clamp(26px, 7.2vw, 32px) !important;
@@ -498,7 +499,7 @@ export default function HireAttorneysLandingPage() {
                 }}
               >
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                Direct Intake · Zero Retainer · 100% Contingency
+                <span>DIRECT INTAKE · ZERO RETAINER<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONTINGENCY</span>
               </div>
 
               {/* Display Heading */}

@@ -263,8 +263,7 @@ export default function SalaryCheckPage() {
                 }}
               >
                 <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                <span className="hero-eyebrow-desktop hidden-mobile">Compensation Benchmark · 100% Private in Browser</span>
-                <span className="hero-eyebrow-mobile only-mobile">100% PRIVATE IN BROWSER</span>
+                <span>COMPENSATION BENCHMARK<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% PRIVATE IN BROWSER</span>
               </div>
 
               <h1

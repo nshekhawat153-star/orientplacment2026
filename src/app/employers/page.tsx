@@ -67,8 +67,7 @@ export default function EmployersPage() {
           <div className="hero-content-center">
             <div className="hero-eyebrow-capsule">
               <span className="hero-eyebrow-dot" aria-hidden="true" />
-              <span className="hero-eyebrow-desktop hidden-mobile">EMPLOYER PORTAL · 23% DUE ONLY IF YOU HIRE</span>
-              <span className="hero-eyebrow-mobile only-mobile">EMPLOYERS · 23% CONTINGENCY</span>
+              <span>EMPLOYER PORTAL<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />23% DUE ONLY IF YOU HIRE</span>
             </div>
 
             <h1 id="emp-hero-h1" className="hero-display-h1">

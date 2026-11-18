@@ -273,8 +273,7 @@ export default function SalaryLeafClient({
                 }}
               >
                 <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                <span className="hero-eyebrow-desktop hidden-mobile">COMPENSATION GUIDE · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
-                <span className="hero-eyebrow-mobile only-mobile">COMPENSATION · {city.name.toUpperCase()}</span>
+                <span>COMPENSATION GUIDE<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />{city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
               </div>
             </div>
 

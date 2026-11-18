@@ -673,8 +673,7 @@ export default function SubmitJobPage() {
               }}
             >
               <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span className="hero-eyebrow-desktop hidden-mobile">CONFIDENTIAL MANDATE INTAKE · ZERO RETAINER</span>
-              <span className="hero-eyebrow-mobile only-mobile">MANDATE INTAKE · ZERO RETAINER</span>
+              <span>CONFIDENTIAL MANDATE INTAKE<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />ZERO RETAINER</span>
             </div>
           </div>
 

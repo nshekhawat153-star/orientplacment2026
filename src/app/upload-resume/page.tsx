@@ -190,8 +190,7 @@ export default function UploadResumePage() {
               }}
             >
               <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span className="hero-eyebrow-desktop hidden-mobile">CANDIDATE PRIVACY PROTOCOL · 100% CONFIDENTIAL &amp; FREE</span>
-              <span className="hero-eyebrow-mobile only-mobile">100% CONFIDENTIAL &amp; FREE</span>
+              <span>CANDIDATE PRIVACY PROTOCOL<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONFIDENTIAL &amp; FREE</span>
             </div>
           </div>
 

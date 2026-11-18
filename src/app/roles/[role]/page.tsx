@@ -208,8 +208,7 @@ export default async function RolePage({ params }: PageProps) {
               }}
             >
               <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span className="hero-eyebrow-desktop hidden-mobile">PRACTICE SPECIALIZATION · NATIONAL DIRECTORY</span>
-              <span className="hero-eyebrow-mobile only-mobile">SPECIALIZATION · DIRECTORY</span>
+              <span>PRACTICE SPECIALIZATION<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />NATIONAL DIRECTORY</span>
             </div>
           </div>
 

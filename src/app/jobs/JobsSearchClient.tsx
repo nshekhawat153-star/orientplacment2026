@@ -174,8 +174,7 @@ export function JobsSearchClient() {
           <div className="jobs-header-intro" style={{ textAlign: "center", margin: "0 auto 32px", maxWidth: "840px" }}>
             <div className="hero-eyebrow-capsule badge-capsule" style={{ margin: "0 auto 16px", display: "inline-flex" }}>
               <span className="hero-eyebrow-dot badge-dot" />
-              <span className="hero-eyebrow-desktop hidden-mobile">CONFIDENTIAL LEGAL SEARCH · 100% SALARY TRANSPARENCY</span>
-              <span className="hero-eyebrow-mobile only-mobile">100% SALARY TRANSPARENCY</span>
+              <span>CONFIDENTIAL LEGAL SEARCH<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% SALARY TRANSPARENCY</span>
             </div>
             <h1 className="jobs-header-title" style={{ color: "#FFFFFF", textAlign: "center" }}>
               Legal jobs in <span className="serif-accent" style={{ color: "#60A5FA" }}>Texas</span>

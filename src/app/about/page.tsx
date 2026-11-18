@@ -162,8 +162,7 @@ export default function AboutPage() {
               }}
             >
               <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span className="hero-eyebrow-desktop hidden-mobile">BOUTIQUE LEGAL SEARCH · DIRECT ACCOUNTABILITY</span>
-              <span className="hero-eyebrow-mobile only-mobile">DIRECT ACCOUNTABILITY</span>
+              <span>BOUTIQUE LEGAL SEARCH<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />DIRECT ACCOUNTABILITY</span>
             </div>
           </div>
 
