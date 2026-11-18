@@ -10360,7 +10360,7 @@ table.data.compare td.us {
     margin-bottom: 14px !important;
     max-width: calc(100vw - 32px) !important;
     box-sizing: border-box !important;
-    white-space: normal !important;
+    white-space: nowrap !important;
     text-align: center !important;
   }
 
@@ -10460,7 +10460,7 @@ table.data.compare td.us {
   }
 
   .hero-eyebrow-capsule span {
-    white-space: normal !important;
+    white-space: nowrap !important;
   }
 
   .who-lede {
