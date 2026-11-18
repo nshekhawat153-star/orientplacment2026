@@ -10154,6 +10154,14 @@ table.data.compare td.us {
   display: none !important;
 }
 
+/* /hire-attorneys mobile navbar: show ONLY the logo icon; hide brand name and Texas Attorney Placement badge on mobile */
+@media (max-width: 768px) {
+  .site-header.header-hire-attorneys .ha-nav-brand-name,
+  .site-header.header-hire-attorneys .ha-nav-indicator {
+    display: none !important;
+  }
+}
+
 /* ---------- 43. responsive (home rules first, inner-page rules after) ---------- */
 /* nav collapses at 1080px: matches site.js, which closes the phone menu above 1081px */
 @media (max-width:1080px) {
