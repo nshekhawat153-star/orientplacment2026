@@ -861,9 +861,9 @@ export default function HireAttorneysLandingPage() {
         className="ha-protocol-sec"
         style={{
           position: "relative",
-          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.24) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          background: "radial-gradient(ellipse 90% 70% at 50% 0%, rgba(29, 78, 216, 0.16) 0%, #08142A 70%, #050B17 100%)",
           color: "#FFFFFF",
-          padding: "108px 0 120px",
+          padding: "100px 0 110px",
           borderTop: "1px solid rgba(255, 255, 255, 0.08)",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
           overflow: "hidden",
@@ -878,15 +878,15 @@ export default function HireAttorneysLandingPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-                background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.20)",
+                background: "rgba(29, 78, 216, 0.20)",
+                border: "1px solid rgba(96, 165, 250, 0.30)",
                 borderRadius: 999,
                 padding: "6px 16px",
                 fontFamily: "var(--mono)",
                 fontSize: 11,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                color: "#E2E8F0",
+                color: "#93C5FD",
                 marginBottom: 18,
                 backdropFilter: "blur(8px)",
                 WebkitBackdropFilter: "blur(8px)",
@@ -930,20 +930,20 @@ export default function HireAttorneysLandingPage() {
             </p>
           </div>
 
-          {/* 3 Elevated Dark Glass Protocol Cards */}
+          {/* 3 Elevated Executive Protocol Cards */}
           <div className="ha-steps-grid">
             {/* Step 1 */}
             <div
               className="ha-hover-lift ha-step-card"
               style={{
-                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%)",
-                border: "1px solid rgba(255, 255, 255, 0.14)",
+                background: "linear-gradient(180deg, rgba(15, 30, 58, 0.72) 0%, rgba(8, 20, 42, 0.88) 100%)",
+                border: "1px solid rgba(96, 165, 250, 0.18)",
                 borderRadius: 16,
                 padding: "36px 30px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                boxShadow: "0 12px 36px rgba(0, 0, 0, 0.35)",
+                boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
                 backdropFilter: "blur(12px)",
                 WebkitBackdropFilter: "blur(12px)",
                 position: "relative",
@@ -952,7 +952,7 @@ export default function HireAttorneysLandingPage() {
             >
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1D4ED8 0%, #60A5FA 100%)" }} />
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
                   <span
                     style={{
                       fontFamily: "var(--mono)",
@@ -969,11 +969,11 @@ export default function HireAttorneysLandingPage() {
                   >
                     STEP 01 · INTAKE
                   </span>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#94A3B8" }}>01 / 03</span>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#64748B" }}>01 / 03</span>
                 </div>
 
-                <div style={{ marginBottom: 16 }}>
-                  <div style={{ fontFamily: "var(--display)", fontSize: 48, fontWeight: 600, color: "#FFFFFF", lineHeight: 1 }}>
+                <div style={{ marginBottom: 18 }}>
+                  <div style={{ fontFamily: "var(--display)", fontSize: 46, fontWeight: 600, color: "#FFFFFF", lineHeight: 1 }}>
                     $0
                   </div>
                   <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, marginTop: 6 }}>
@@ -984,24 +984,9 @@ export default function HireAttorneysLandingPage() {
                 <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px", lineHeight: 1.3 }}>
                   Zero upfront cost or retainer
                 </h3>
-                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: "0 0 24px" }}>
+                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: 0 }}>
                   Nothing to pay to launch your search. We review your open seat, align on practice requirements, and begin sourcing immediately under a simple non-exclusive agreement.
                 </p>
-              </div>
-
-              <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.10)", paddingTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Zero upfront retainer or commitment</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Non-exclusive: Keep internal sourcing open</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>First vetted dossiers within 48–72 hours</span>
-                </div>
               </div>
             </div>
 
@@ -1009,14 +994,14 @@ export default function HireAttorneysLandingPage() {
             <div
               className="ha-hover-lift ha-step-card"
               style={{
-                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%)",
-                border: "1px solid rgba(255, 255, 255, 0.14)",
+                background: "linear-gradient(180deg, rgba(15, 30, 58, 0.72) 0%, rgba(8, 20, 42, 0.88) 100%)",
+                border: "1px solid rgba(96, 165, 250, 0.18)",
                 borderRadius: 16,
                 padding: "36px 30px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                boxShadow: "0 12px 36px rgba(0, 0, 0, 0.35)",
+                boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
                 backdropFilter: "blur(12px)",
                 WebkitBackdropFilter: "blur(12px)",
                 position: "relative",
@@ -1025,7 +1010,7 @@ export default function HireAttorneysLandingPage() {
             >
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1D4ED8 0%, #60A5FA 100%)" }} />
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
                   <span
                     style={{
                       fontFamily: "var(--mono)",
@@ -1042,14 +1027,14 @@ export default function HireAttorneysLandingPage() {
                   >
                     STEP 02 · SELECTION
                   </span>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#94A3B8" }}>02 / 03</span>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#64748B" }}>02 / 03</span>
                 </div>
 
-                <div style={{ marginBottom: 16 }}>
-                  <div style={{ fontFamily: "var(--display)", fontSize: 48, fontWeight: 600, color: "#60A5FA", lineHeight: 1 }}>
+                <div style={{ marginBottom: 18 }}>
+                  <div style={{ fontFamily: "var(--display)", fontSize: 46, fontWeight: 600, color: "#60A5FA", lineHeight: 1 }}>
                     3–5
                   </div>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, marginTop: 4 }}>
+                  <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, marginTop: 6 }}>
                     Screened finalists delivered per seat
                   </div>
                 </div>
@@ -1057,24 +1042,9 @@ export default function HireAttorneysLandingPage() {
                 <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px", lineHeight: 1.3 }}>
                   Candidates who truly fit
                 </h3>
-                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: "0 0 24px" }}>
+                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: 0 }}>
                   We pre-screen lateral attorneys for your exact practice mix, local state bar status, courtroom or deal experience, billable hour expectations, and compensation band.
                 </p>
-              </div>
-
-              <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.10)", paddingTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Active lateral talent open to a move</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Verified practice depth &amp; bar admissions</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Base &amp; bonus expectations confirmed upfront</span>
-                </div>
               </div>
             </div>
 
@@ -1082,14 +1052,14 @@ export default function HireAttorneysLandingPage() {
             <div
               className="ha-hover-lift ha-step-card"
               style={{
-                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%)",
-                border: "1px solid rgba(255, 255, 255, 0.14)",
+                background: "linear-gradient(180deg, rgba(15, 30, 58, 0.72) 0%, rgba(8, 20, 42, 0.88) 100%)",
+                border: "1px solid rgba(96, 165, 250, 0.18)",
                 borderRadius: 16,
                 padding: "36px 30px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                boxShadow: "0 12px 36px rgba(0, 0, 0, 0.35)",
+                boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
                 backdropFilter: "blur(12px)",
                 WebkitBackdropFilter: "blur(12px)",
                 position: "relative",
@@ -1098,7 +1068,7 @@ export default function HireAttorneysLandingPage() {
             >
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1D4ED8 0%, #60A5FA 100%)" }} />
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
                   <span
                     style={{
                       fontFamily: "var(--mono)",
@@ -1115,14 +1085,14 @@ export default function HireAttorneysLandingPage() {
                   >
                     STEP 03 · WARRANTY
                   </span>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#94A3B8" }}>03 / 03</span>
+                  <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#64748B" }}>03 / 03</span>
                 </div>
 
-                <div style={{ marginBottom: 16 }}>
-                  <div style={{ fontFamily: "var(--display)", fontSize: 48, fontWeight: 600, color: "#FFFFFF", lineHeight: 1 }}>
+                <div style={{ marginBottom: 18 }}>
+                  <div style={{ fontFamily: "var(--display)", fontSize: 46, fontWeight: 600, color: "#FFFFFF", lineHeight: 1 }}>
                     90 Days
                   </div>
-                  <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, marginTop: 4 }}>
+                  <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, marginTop: 6 }}>
                     100% replacement warranty in contract
                   </div>
                 </div>
@@ -1130,24 +1100,9 @@ export default function HireAttorneysLandingPage() {
                 <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px", lineHeight: 1.3 }}>
                   100% placement guarantee
                 </h3>
-                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: "0 0 24px" }}>
+                <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: 0 }}>
                   Our 23% contingency fee is due Net 15 only after your candidate starts. If they leave or don&apos;t work out within 90 days, we conduct a replacement search at $0 extra charge.
                 </p>
-              </div>
-
-              <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.10)", paddingTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>23% fee due Net 15 only after start date</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>90-day replacement guarantee backed by contract</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "#E2E8F0" }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>Zero fee ever owed if you don&apos;t hire</span>
-                </div>
               </div>
             </div>
           </div>
@@ -1157,8 +1112,8 @@ export default function HireAttorneysLandingPage() {
             className="ha-banner-card"
             style={{
               marginTop: 48,
-              background: "rgba(255, 255, 255, 0.05)",
-              border: "1px solid rgba(255, 255, 255, 0.14)",
+              background: "linear-gradient(180deg, rgba(15, 30, 58, 0.72) 0%, rgba(8, 20, 42, 0.88) 100%)",
+              border: "1px solid rgba(96, 165, 250, 0.18)",
               borderRadius: 16,
               padding: "36px 40px",
               color: "#FFFFFF",
@@ -1167,7 +1122,7 @@ export default function HireAttorneysLandingPage() {
               alignItems: "center",
               flexWrap: "wrap",
               gap: 24,
-              boxShadow: "0 16px 40px rgba(0, 0, 0, 0.25)",
+              boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
             }}
