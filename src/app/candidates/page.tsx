@@ -131,6 +131,7 @@ export default function CandidatesPage() {
 
       {/* 1. LUXURY DARK HERO WITH SPLASH VIDEO */}
       <section
+        className="emp-luxury-hero-sec cand-hero"
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
@@ -163,6 +164,7 @@ export default function CandidatesPage() {
         <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1, textAlign: "center" }}>
           <div>
             <div
+              className="hero-eyebrow-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -180,8 +182,9 @@ export default function CandidatesPage() {
                 marginBottom: "24px",
               }}
             >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              Candidate Portal · 100% Confidential &amp; Free
+              <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span className="hero-eyebrow-desktop hidden-mobile">Candidate Portal · 100% Confidential &amp; Free</span>
+              <span className="hero-eyebrow-mobile only-mobile">100% CONFIDENTIAL &amp; FREE</span>
             </div>
 
             {/* Centered Display Heading - Prominent Executive Scale */}
@@ -218,7 +221,7 @@ export default function CandidatesPage() {
               Direct lateral opportunities at leading boutique and mid-size law firms across Texas. Always 100% free for candidates. No firm ever sees your name until you specifically say yes.
             </p>
 
-            <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 34 }}>
+            <div className="cand-hero-actions hero-actions-group" style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 34 }}>
               <Link
                 href="/upload-resume"
                 style={{

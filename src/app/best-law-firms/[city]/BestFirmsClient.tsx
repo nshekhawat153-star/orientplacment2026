@@ -110,6 +110,7 @@ export function BestFirmsClient({
 
       {/* 1. LUXURY CENTERED HERO (NO CARD CLUTTER) */}
       <section
+        className="emp-luxury-hero-sec bf-luxury-hero-sec"
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
@@ -149,6 +150,7 @@ export function BestFirmsClient({
 
         <div style={{ maxWidth: "960px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1, textAlign: "center" }}>
           <div
+            className="hero-eyebrow-capsule"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -166,8 +168,9 @@ export function BestFirmsClient({
               marginBottom: "24px",
             }}
           >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-            EDITORIAL RETENTION BENCHMARK · {city.name.toUpperCase()}, {city.state.toUpperCase()}
+            <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+            <span className="hero-eyebrow-desktop hidden-mobile">EDITORIAL RETENTION BENCHMARK · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
+            <span className="hero-eyebrow-mobile only-mobile">RETENTION BENCHMARK · {city.name.toUpperCase()}</span>
           </div>
 
           {/* Centered Display Heading - Prominent Executive Scale */}

@@ -322,7 +322,7 @@ export default function FeesPage() {
           {/* Eyebrow Capsule */}
           <div style={{ marginBottom: 20 }}>
             <div
-              className="badge-capsule"
+              className="hero-eyebrow-capsule badge-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -339,7 +339,8 @@ export default function FeesPage() {
               }}
             >
               <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span>TRANSPARENT PRICING · 100% CONTINGENCY</span>
+              <span className="hero-eyebrow-desktop hidden-mobile">TRANSPARENT PRICING · 100% CONTINGENCY</span>
+              <span className="hero-eyebrow-mobile only-mobile">PRICING · 100% CONTINGENCY</span>
             </div>
           </div>
 
@@ -383,7 +384,7 @@ export default function FeesPage() {
           </p>
 
           {/* Action CTAs */}
-          <div className="fees-hero-actions" style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
+          <div className="fees-hero-actions hero-actions-group" style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
             <a
               href="#calc"
               style={{

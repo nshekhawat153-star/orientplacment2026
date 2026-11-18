@@ -109,6 +109,7 @@ export default function AboutPage() {
 
       {/* 1. LUXURY DARK HERO (CENTERED, NO CARDS, NO BREADCRUMBS) */}
       <section
+        className="emp-luxury-hero-sec about-hero-sec"
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
@@ -142,6 +143,7 @@ export default function AboutPage() {
           {/* Eyebrow Capsule */}
           <div style={{ marginBottom: "18px" }}>
             <div
+              className="hero-eyebrow-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -159,8 +161,9 @@ export default function AboutPage() {
                 marginBottom: "24px",
               }}
             >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              BOUTIQUE LEGAL SEARCH · DIRECT ACCOUNTABILITY
+              <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span className="hero-eyebrow-desktop hidden-mobile">BOUTIQUE LEGAL SEARCH · DIRECT ACCOUNTABILITY</span>
+              <span className="hero-eyebrow-mobile only-mobile">DIRECT ACCOUNTABILITY</span>
             </div>
           </div>
 
@@ -198,7 +201,7 @@ export default function AboutPage() {
             {orionLine}
           </p>
 
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "14px", marginBottom: "34px" }}>
+          <div className="about-hero-actions hero-actions-group" style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "14px", marginBottom: "34px" }}>
             <a
               href={trust.calendly}
               target="_blank"

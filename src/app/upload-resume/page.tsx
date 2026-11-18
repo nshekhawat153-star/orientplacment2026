@@ -173,7 +173,7 @@ export default function UploadResumePage() {
         <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 880, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           <div className="emp-hero-badge-wrap" style={{ marginBottom: 16 }}>
             <div
-              className="badge-capsule"
+              className="hero-eyebrow-capsule badge-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -189,8 +189,9 @@ export default function UploadResumePage() {
                 color: "#93C5FD",
               }}
             >
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span>CANDIDATE PRIVACY PROTOCOL · 100% CONFIDENTIAL &amp; FREE</span>
+              <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span className="hero-eyebrow-desktop hidden-mobile">CANDIDATE PRIVACY PROTOCOL · 100% CONFIDENTIAL &amp; FREE</span>
+              <span className="hero-eyebrow-mobile only-mobile">100% CONFIDENTIAL &amp; FREE</span>
             </div>
           </div>
 

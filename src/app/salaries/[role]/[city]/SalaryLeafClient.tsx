@@ -178,7 +178,7 @@ export default function SalaryLeafClient({
             grid-template-columns: 1fr;
           }
           .salary-leaf-hero {
-            padding: 96px 0 52px !important;
+            padding: 92px 0 36px !important;
           }
           .salary-badge {
             font-size: 11px !important;
@@ -254,7 +254,7 @@ export default function SalaryLeafClient({
             {/* Centered Capsule Badge */}
             <div style={{ marginBottom: 20 }}>
               <div
-                className="salary-badge"
+                className="salary-badge hero-eyebrow-capsule"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -272,8 +272,9 @@ export default function SalaryLeafClient({
                   WebkitBackdropFilter: "blur(8px)",
                 }}
               >
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                <span>COMPENSATION GUIDE · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
+                <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+                <span className="hero-eyebrow-desktop hidden-mobile">COMPENSATION GUIDE · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
+                <span className="hero-eyebrow-mobile only-mobile">COMPENSATION · {city.name.toUpperCase()}</span>
               </div>
             </div>
 

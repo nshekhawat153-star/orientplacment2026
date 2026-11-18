@@ -85,7 +85,7 @@ export default async function RolePage({ params }: PageProps) {
         }
         @media (max-width: 640px) {
           .role-hub-hero {
-            padding: 96px 0 54px !important;
+            padding: 92px 0 44px !important;
           }
           .emp-hero-h1 {
             font-size: clamp(28px, 7.8vw, 36px) !important;
@@ -191,7 +191,7 @@ export default async function RolePage({ params }: PageProps) {
           {/* Badge Capsule */}
           <div className="emp-hero-badge-wrap" style={{ marginBottom: 18 }}>
             <div
-              className="badge-capsule"
+              className="hero-eyebrow-capsule badge-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -207,8 +207,9 @@ export default async function RolePage({ params }: PageProps) {
                 color: "#93C5FD",
               }}
             >
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span>PRACTICE SPECIALIZATION · NATIONAL DIRECTORY</span>
+              <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span className="hero-eyebrow-desktop hidden-mobile">PRACTICE SPECIALIZATION · NATIONAL DIRECTORY</span>
+              <span className="hero-eyebrow-mobile only-mobile">SPECIALIZATION · DIRECTORY</span>
             </div>
           </div>
 

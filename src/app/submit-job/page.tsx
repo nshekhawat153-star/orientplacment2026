@@ -656,7 +656,7 @@ export default function SubmitJobPage() {
           {/* Eyebrow Badge Capsule */}
           <div style={{ marginBottom: 20 }}>
             <div
-              className="badge-capsule"
+              className="hero-eyebrow-capsule badge-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -672,8 +672,9 @@ export default function SubmitJobPage() {
                 color: "#93C5FD",
               }}
             >
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span>CONFIDENTIAL MANDATE INTAKE · ZERO RETAINER</span>
+              <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span className="hero-eyebrow-desktop hidden-mobile">CONFIDENTIAL MANDATE INTAKE · ZERO RETAINER</span>
+              <span className="hero-eyebrow-mobile only-mobile">MANDATE INTAKE · ZERO RETAINER</span>
             </div>
           </div>
 

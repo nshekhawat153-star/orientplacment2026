@@ -136,6 +136,7 @@ export function WhereToPostClient({
           HERO SECTION: Centered Luxury Showcase (No Card, High-Contrast Typography)
           ========================================================================= */}
       <section
+        className="emp-luxury-hero-sec wtp-luxury-hero-sec"
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
@@ -168,6 +169,7 @@ export function WhereToPostClient({
         <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1, textAlign: "center" }}>
           {/* Eyebrow Badge */}
           <div
+            className="hero-eyebrow-capsule"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -184,8 +186,9 @@ export function WhereToPostClient({
               marginBottom: "20px",
             }}
           >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-            Legal Recruitment Benchmark · {city.name.toUpperCase()}, {city.state.toUpperCase()}
+            <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+            <span className="hero-eyebrow-desktop hidden-mobile">Legal Recruitment Benchmark · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
+            <span className="hero-eyebrow-mobile only-mobile">RECRUITMENT BENCHMARK · {city.name.toUpperCase()}</span>
           </div>
 
           {/* Heading */}

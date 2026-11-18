@@ -174,6 +174,7 @@ export default async function CityLocationPage({ params }: PageProps) {
           {/* Centered Capsule Badge */}
           <div style={{ marginBottom: 22 }}>
             <div
+              className="hero-eyebrow-capsule badge-capsule"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -191,8 +192,9 @@ export default async function CityLocationPage({ params }: PageProps) {
                 WebkitBackdropFilter: "blur(8px)",
               }}
             >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span>REGIONAL LEGAL SEARCH · {city.name.toUpperCase()}, {city.stateName.toUpperCase()}</span>
+              <span className="hero-eyebrow-dot badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+              <span className="hero-eyebrow-desktop hidden-mobile">REGIONAL LEGAL SEARCH · {city.name.toUpperCase()}, {city.stateName.toUpperCase()}</span>
+              <span className="hero-eyebrow-mobile only-mobile">LEGAL SEARCH · {city.name.toUpperCase()}</span>
             </div>
           </div>
 
@@ -234,7 +236,7 @@ export default async function CityLocationPage({ params }: PageProps) {
           </p>
 
           {/* Centered Action Buttons */}
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}>
+          <div className="hero-actions-group" style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}>
             <a
               href="#candidates"
               style={{

@@ -132,7 +132,7 @@ export function WhereToHireClient({
           HERO SECTION: Centered Luxury Showcase (No Card, Unobstructed Video)
           ========================================================================= */}
       <section
-        className="wth-luxury-hero"
+        className="wth-luxury-hero emp-luxury-hero-sec"
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
@@ -168,6 +168,7 @@ export function WhereToHireClient({
         <div style={{ position: "relative", zIndex: 2, maxWidth: 1040, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           {/* Eyebrow Badge */}
           <div
+            className="hero-eyebrow-capsule"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -184,8 +185,9 @@ export function WhereToHireClient({
               marginBottom: 24,
             }}
           >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-            <span>REGIONAL HIRING DIRECTORY · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
+            <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+            <span className="hero-eyebrow-desktop hidden-mobile">REGIONAL HIRING DIRECTORY · {city.name.toUpperCase()}, {city.state.toUpperCase()}</span>
+            <span className="hero-eyebrow-mobile only-mobile">HIRING DIRECTORY · {city.name.toUpperCase()}</span>
           </div>
 
           {/* Centered Display Heading - Prominent Executive Scale */}

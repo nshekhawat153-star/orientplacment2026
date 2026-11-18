@@ -10335,62 +10335,166 @@ table.data.compare td.us {
     text-overflow: ellipsis !important;
   }
 
-  /* Mobile Hero Heading: prominent, executive scale (larger on mobile) */
+  /* Mobile Universal Hero Container: Navbar Clearance & Proportions */
+  .hero-cinematic,
+  .emp-luxury-hero-sec,
+  .ha-hero-sec,
+  .sc-luxury-hero-sec,
+  .fc-luxury-hero-sec,
+  .fee-luxury-hero-sec,
+  .cand-hero,
+  .jobs-hero,
+  .jobs-luxury-header,
+  .ur-luxury-hero-sec,
+  .about-hero-sec,
+  .bf-luxury-hero-sec,
+  .wth-luxury-hero,
+  .wtp-luxury-hero-sec,
+  .city-location-hero,
+  .role-hub-hero,
+  .salary-leaf-hero,
+  .kit-hero-sec,
+  .phero {
+    padding-top: 92px !important;
+    padding-bottom: 32px !important;
+    min-height: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Mobile Universal Hero Eyebrow Badges */
+  .hero-eyebrow-capsule,
+  .emp-hero-badge-wrap .badge-capsule,
+  .salary-badge,
+  .kit-hero-eyebrow,
+  .ha-hero-eyebrow {
+    font-size: clamp(9px, 2.5vw, 10px) !important;
+    letter-spacing: 0.04em !important;
+    padding: 5px 12px !important;
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: calc(100vw - 32px) !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .hero-eyebrow-capsule span,
+  .emp-hero-badge-wrap .badge-capsule span,
+  .salary-badge span,
+  .kit-hero-eyebrow span,
+  .ha-hero-eyebrow span {
+    white-space: nowrap !important;
+  }
+
+  /* Mobile Universal Hero Headings: Executive Scale & Proportions */
   .hero-display-h1,
   .emp-hero-h1,
+  .fees-hero-h1,
+  .cand-hero-h1,
+  .blf-hero-h1,
+  .about-hero-h1,
+  .jobs-header-title,
+  .sj-hero-h1,
+  .kit-hero-h1,
+  .salary-hero-title,
+  .ha-hero-h1,
+  .sc-hero-grid h1,
   #city-hero-h1,
+  #fc-hero-h1,
+  #emp-hero-h1,
+  #dossier-hero-title,
+  #ur-hero-title,
+  #role-hero-h1,
   .hero-cinematic h1,
   .hero3 h1,
   .phero h1 {
-    font-size: clamp(34px, 8.8vw, 42px) !important;
+    font-size: clamp(32px, 8.5vw, 40px) !important;
     line-height: 1.12 !important;
     letter-spacing: -0.025em !important;
-    margin: 0 auto 16px !important;
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+    text-wrap: balance !important;
+    text-align: center !important;
   }
 
-  /* Mobile Hero Lead Paragraph: slightly smaller and balanced */
+  /* Mobile Universal Hero Lead Paragraphs */
   .hero-lead-p,
   .emp-hero-lead,
-  #city-hero-lead,
+  .fees-hero-lead,
+  .ha-hero-lead,
+  .jobs-header-sub,
+  .sj-hero-lead,
+  .kit-hero-lead,
+  .salary-hero-subtitle,
+  .sc-hero-grid p,
   .hero3 .lede,
   .phero .lede {
     font-size: 15px !important;
     line-height: 1.55 !important;
-    margin: 0 auto 22px !important;
+    margin-top: 0 !important;
+    margin-bottom: 22px !important;
+    max-width: 92% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
   }
 
-  .hero-actions-group {
+  /* Mobile Universal Hero Actions Group & Buttons */
+  .hero-actions-group,
+  .emp-hero-actions,
+  .fees-hero-actions,
+  .cand-hero-actions,
+  .about-hero-actions,
+  .role-hero-actions,
+  .salary-hero-actions,
+  .kit-hero-actions,
+  .ha-hero-mobile-cta,
+  .phero .hero-act {
+    display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 10px !important;
     width: 100% !important;
     max-width: 360px !important;
-    margin: 0 auto 20px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 20px !important;
+    box-sizing: border-box !important;
   }
 
+  .hero-actions-group a,
+  .hero-actions-group button,
+  .emp-hero-actions a,
+  .emp-hero-actions button,
+  .fees-hero-actions a,
+  .fees-hero-actions button,
+  .cand-hero-actions a,
+  .cand-hero-actions button,
+  .about-hero-actions a,
+  .about-hero-actions button,
+  .role-hero-actions a,
+  .role-hero-actions button,
+  .salary-hero-actions a,
+  .salary-hero-actions button,
+  .kit-hero-actions a,
+  .kit-hero-actions button,
   .btn-hero-primary,
-  .btn-hero-secondary {
+  .btn-hero-secondary,
+  .btn-emp-primary,
+  .btn-emp-ghost,
+  .role-hero-btn,
+  .salary-hero-btn {
     width: 100% !important;
     justify-content: center !important;
     padding: 13px 20px !important;
     font-size: 15px !important;
     box-sizing: border-box !important;
-  }
-
-  .hero-cinematic {
-    padding: 92px 0 32px !important;
-    min-height: auto !important;
-  }
-
-  .hero-eyebrow-capsule {
-    font-size: clamp(9px, 2.5vw, 10px) !important;
-    letter-spacing: 0.04em !important;
-    padding: 5px 12px !important;
-    margin-bottom: 14px !important;
-    max-width: calc(100vw - 32px) !important;
-    box-sizing: border-box !important;
-    white-space: nowrap !important;
-    text-align: center !important;
+    border-radius: 999px !important;
   }
 
   .hero3 {

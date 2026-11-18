@@ -210,6 +210,7 @@ export default function SalaryCheckPage() {
 
       {/* 1. LUXURY HERO WITH VIDEO & 2-COLUMN TERMINAL CONSOLE */}
       <section
+        className="emp-luxury-hero-sec sc-luxury-hero-sec"
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
@@ -244,6 +245,7 @@ export default function SalaryCheckPage() {
             {/* Left Column: Heading & Value Props */}
             <div>
               <div
+                className="hero-eyebrow-capsule"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -260,8 +262,9 @@ export default function SalaryCheckPage() {
                   marginBottom: "18px",
                 }}
               >
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                Compensation Benchmark · 100% Private in Browser
+                <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+                <span className="hero-eyebrow-desktop hidden-mobile">Compensation Benchmark · 100% Private in Browser</span>
+                <span className="hero-eyebrow-mobile only-mobile">100% PRIVATE IN BROWSER</span>
               </div>
 
               <h1

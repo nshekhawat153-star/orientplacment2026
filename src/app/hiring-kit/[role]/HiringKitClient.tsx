@@ -139,7 +139,7 @@ export function HiringKitClient({
         }
         @media (max-width: 960px) {
           .kit-hero-sec {
-            padding: 88px 0 44px !important;
+            padding: 92px 0 36px !important;
           }
           .kit-hero-grid {
             grid-template-columns: 1fr !important;
@@ -358,7 +358,7 @@ export function HiringKitClient({
             {/* Left Column: Heading, Subtitle & Primary CTAs */}
             <div className="kit-hero-content">
               <div
-                className="kit-hero-eyebrow"
+                className="kit-hero-eyebrow hero-eyebrow-capsule"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -375,8 +375,9 @@ export function HiringKitClient({
                   marginBottom: "20px"
                 }}
               >
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                Executive Law Firm Hiring Kit · {role.name}
+                <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
+                <span className="hero-eyebrow-desktop hidden-mobile">Executive Law Firm Hiring Kit · {role.name}</span>
+                <span className="hero-eyebrow-mobile only-mobile">HIRING KIT · {role.name}</span>
               </div>
 
               <h1
