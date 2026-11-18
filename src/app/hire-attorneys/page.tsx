@@ -596,7 +596,7 @@ export default function HireAttorneysLandingPage() {
                 practice mix, local Texas bar admissions, and compensation band. You only pay if you hire.
               </p>
 
-              {/* MOBILE ONLY: ACTION CTAS (Since form is hidden on mobile screens) */}
+              {/* MOBILE ONLY: ACTION CTA (Since form is hidden on mobile screens) */}
               <div className="ha-hero-mobile-cta only-mobile" style={{ width: "100%", maxWidth: 340, margin: "0 auto 22px" }}>
                 <div className="ha-hero-cta-group" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   <a
@@ -612,36 +612,13 @@ export default function HireAttorneysLandingPage() {
                       fontWeight: 600,
                       fontSize: 15,
                       padding: "13px 24px",
-                      borderRadius: 8,
+                      borderRadius: 7,
                       textDecoration: "none",
                       boxShadow: "0 6px 18px rgba(29, 78, 216, 0.4)",
                     }}
                   >
                     <span>Launch 2-Minute Candidate Search</span>
                     <span aria-hidden="true">↓</span>
-                  </a>
-                  <a
-                    href="https://calendly.com/orionplacement/call-with-justin"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ha-hero-btn-secondary"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 8,
-                      background: "rgba(255, 255, 255, 0.08)",
-                      border: "1px solid rgba(255, 255, 255, 0.22)",
-                      color: "#FFFFFF",
-                      fontWeight: 600,
-                      fontSize: 14,
-                      padding: "12px 20px",
-                      borderRadius: 8,
-                      textDecoration: "none",
-                    }}
-                  >
-                    <span>Book 15-Min Call With Justin</span>
-                    <span aria-hidden="true">→</span>
                   </a>
                 </div>
               </div>
@@ -700,43 +677,32 @@ export default function HireAttorneysLandingPage() {
                 </div>
               </div>
 
-              {/* Social Proof Quote / Founder Rating Badge & Direct Call */}
+              {/* Social Proof Founder Rating Badge (Bright, crisp and high-contrast) */}
               <div className="ha-hero-trust-bar" style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
                 <div
+                  className="ha-hero-google-pill"
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
                     gap: 10,
-                    background: "rgba(255, 255, 255, 0.06)",
-                    border: "1px solid rgba(255, 255, 255, 0.14)",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.18)",
                     borderRadius: 10,
-                    padding: "9px 15px",
-                    fontSize: 13,
-                    color: "#E2E8F0",
+                    padding: "9px 16px",
+                    fontSize: 13.5,
+                    backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
                   }}
                 >
-                  <span style={{ color: "#60A5FA", fontSize: 12, letterSpacing: 1 }}>
+                  <span style={{ color: "#60A5FA", fontSize: 13, letterSpacing: 1.5 }}>
                     ★★★★★
                   </span>
-                  <span style={{ width: 1, height: 14, background: "rgba(255, 255, 255, 0.2)" }} />
-                  <span><b>5.0 Google Rating</b> · Texas Law Firms</span>
+                  <span style={{ width: 1, height: 14, background: "rgba(255, 255, 255, 0.25)" }} />
+                  <span style={{ color: "#FFFFFF" }}>
+                    <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>5.0 Google Rating</strong>
+                    <span style={{ color: "rgba(255, 255, 255, 0.8)", fontWeight: 400 }}> · Texas Law Firms</span>
+                  </span>
                 </div>
-
-                <a
-                  href="https://calendly.com/orionplacement/call-with-justin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hidden-mobile"
-                  style={{
-                    color: "#93C5FD",
-                    fontSize: 13.5,
-                    fontWeight: 600,
-                    textDecoration: "underline",
-                    textUnderlineOffset: 3,
-                  }}
-                >
-                  Or book 15 min with Justin →
-                </a>
               </div>
             </div>
 

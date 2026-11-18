@@ -67,6 +67,7 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
   };
 
   const isCandidatePage = CANDIDATE_PATHS.some((p) => pathname.startsWith(p));
+  const isHireAttorneys = pathname.startsWith("/hire-attorneys");
   const cta = isCandidatePage
     ? { label: "Upload resume", href: "/upload-resume" }
     : { label: "Find candidates", href: "/find-candidates" };
@@ -186,8 +187,9 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="nav" aria-label="Main">
+          {/* Desktop Nav - Hidden on /hire-attorneys ads page */}
+          {!isHireAttorneys && (
+            <nav className="nav" aria-label="Main">
             <ul className="nav-list">
               {/* 1. For employers */}
               <li
@@ -481,51 +483,57 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
               </li>
             </ul>
           </nav>
+          )}
 
-          {/* Header CTA */}
-          {!pathname.startsWith("/hire-attorneys") && (
+          {/* Header CTA for standard pages */}
+          {!isHireAttorneys && (
             <Link className="btn btn-primary btn-sm header-cta" href={cta.href}>
               {cta.label}
             </Link>
           )}
 
-          {/* Mobile hamburger button */}
-          <button
-            type="button"
-            className="menu-btn"
-            aria-expanded={mobileOpen}
-            aria-controls="mnav"
-            aria-label="Open navigation menu"
-            onClick={() => setMobileOpen(true)}
-          >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
+
+
+          {/* Mobile hamburger button - Hidden on /hire-attorneys */}
+          {!isHireAttorneys && (
+            <button
+              type="button"
+              className="menu-btn"
+              aria-expanded={mobileOpen}
+              aria-controls="mnav"
+              aria-label="Open navigation menu"
+              onClick={() => setMobileOpen(true)}
             >
-              <line x1="3.5" y1="6" x2="20.5" y2="6" />
-              <line x1="3.5" y1="12" x2="20.5" y2="12" />
-              <line x1="3.5" y1="18" x2="20.5" y2="18" />
-            </svg>
-          </button>
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="3.5" y1="6" x2="20.5" y2="6" />
+                <line x1="3.5" y1="12" x2="20.5" y2="12" />
+                <line x1="3.5" y1="18" x2="20.5" y2="18" />
+              </svg>
+            </button>
+          )}
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
-      <div
-        className="mnav"
-        id="mnav"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu"
-        hidden={!mobileOpen}
-      >
+      {/* Mobile Drawer Menu - Hidden on /hire-attorneys */}
+      {!isHireAttorneys && (
+        <div
+          className="mnav"
+          id="mnav"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          hidden={!mobileOpen}
+        >
         <div className="mnav-top">
           <Link
             className="logo"
@@ -774,6 +782,7 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
           <TrustLine kind={isCandidatePage ? "candidate" : "employer"} />
         </div>
       </div>
+      )}
 
       {/* Prototype Notice Toast */}
       {toastMsg && (

@@ -78,6 +78,81 @@ export default async function RolePage({ params }: PageProps) {
 
   return (
     <div className="role-hub-page" style={{ background: "#FAF9F5", color: "#08142A" }}>
+      <style>{`
+        .role-micro-dot {
+          display: inline-block;
+          color: rgba(255, 255, 255, 0.4);
+        }
+        @media (max-width: 640px) {
+          .role-hub-hero {
+            padding: 96px 0 54px !important;
+          }
+          .emp-hero-h1 {
+            font-size: clamp(28px, 7.8vw, 36px) !important;
+            line-height: 1.18 !important;
+            margin-bottom: 16px !important;
+          }
+          .emp-hero-lead {
+            font-size: 15px !important;
+            line-height: 1.55 !important;
+            margin-bottom: 24px !important;
+          }
+          .role-hero-stat {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            padding: 14px 20px !important;
+            gap: 6px !important;
+            max-width: 320px !important;
+            margin: 0 auto 22px !important;
+            border-radius: 12px !important;
+          }
+          .role-hero-stat-num {
+            font-size: 42px !important;
+            line-height: 1 !important;
+          }
+          .role-hero-stat-label {
+            font-size: 11px !important;
+            letter-spacing: 0.08em !important;
+            text-align: center !important;
+            line-height: 1.4 !important;
+          }
+          .role-hero-actions {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            max-width: 340px !important;
+            margin: 0 auto 26px !important;
+            gap: 10px !important;
+          }
+          .role-hero-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            padding: 13px 20px !important;
+            font-size: 14.5px !important;
+            box-sizing: border-box !important;
+            text-align: center !important;
+          }
+          .role-micro-reassurances {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 13px !important;
+            width: 100% !important;
+          }
+          .role-micro-dot {
+            display: none !important;
+          }
+          .role-micro-item {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            text-align: center !important;
+          }
+        }
+      `}</style>
       {/* 1. LUXURY DARK HERO (CENTERED, NO CARD) */}
       <section
         className="emp-luxury-hero-sec role-hub-hero"
@@ -161,11 +236,43 @@ export default async function RolePage({ params }: PageProps) {
             </span>
           </h1>
 
-          <div style={{ display: "inline-flex", alignItems: "baseline", justifyContent: "center", gap: 14, marginBottom: 22, background: "rgba(255, 255, 255, 0.04)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: 12, padding: "14px 28px" }}>
-            <span style={{ fontFamily: "var(--display)", fontSize: "clamp(42px, 5.2vw, 58px)", fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>
+          <div
+            className="role-hero-stat"
+            style={{
+              display: "inline-flex",
+              alignItems: "baseline",
+              justifyContent: "center",
+              gap: 14,
+              marginBottom: 22,
+              background: "rgba(255, 255, 255, 0.04)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: 12,
+              padding: "14px 28px",
+            }}
+          >
+            <span
+              className="role-hero-stat-num"
+              style={{
+                fontFamily: "var(--display)",
+                fontSize: "clamp(42px, 5.2vw, 58px)",
+                fontWeight: 500,
+                color: "#FFFFFF",
+                lineHeight: 1,
+              }}
+            >
               {fmt.k(natMedian)}
             </span>
-            <span style={{ fontFamily: "var(--mono)", fontSize: 13, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>
+            <span
+              className="role-hero-stat-label"
+              style={{
+                fontFamily: "var(--mono)",
+                fontSize: 13,
+                color: "#93C5FD",
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                fontWeight: 600,
+              }}
+            >
               National Median Base Salary across US legal markets
             </span>
           </div>
@@ -185,9 +292,12 @@ export default async function RolePage({ params }: PageProps) {
             National compensation intelligence, turnkey law firm hiring templates, and active pre-screened lateral attorney candidates across all major regional legal markets.
           </p>
 
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}>
+          <div
+            className="role-hero-actions"
+            style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}
+          >
             <Link
-              className="btn-emp-primary"
+              className="btn-emp-primary role-hero-btn"
               href={`/find-candidates#role=${role.slug}`}
               style={{
                 display: "inline-flex",
@@ -207,7 +317,7 @@ export default async function RolePage({ params }: PageProps) {
               <span aria-hidden="true">→</span>
             </Link>
             <a
-              className="btn-emp-ghost"
+              className="btn-emp-ghost role-hero-btn"
               href="#band"
               style={{
                 display: "inline-flex",
@@ -227,7 +337,7 @@ export default async function RolePage({ params }: PageProps) {
               <span aria-hidden="true">↓</span>
             </a>
             <a
-              className="btn-emp-ghost"
+              className="btn-emp-ghost role-hero-btn"
               href="#kit"
               style={{
                 display: "inline-flex",
@@ -249,17 +359,31 @@ export default async function RolePage({ params }: PageProps) {
           </div>
 
           {/* Micro Reassurances */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "16px 24px", color: "rgba(255, 255, 255, 0.75)", fontSize: "0.85rem" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> {cityBands.length} US metro legal markets benchmarked
+          <div
+            className="role-micro-reassurances"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "16px 24px",
+              color: "rgba(255, 255, 255, 0.75)",
+              fontSize: "0.85rem",
+            }}
+          >
+            <div className="role-micro-item" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>{cityBands.length} US metro legal markets benchmarked</span>
             </div>
-            <span>•</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> Verified prevailing offers updated quarterly ({asOf})
+            <span className="role-micro-dot">•</span>
+            <div className="role-micro-item" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Verified prevailing offers updated quarterly ({asOf})</span>
             </div>
-            <span>•</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA" }}>✓</span> Turnkey partner interview kits &amp; scorecards
+            <span className="role-micro-dot">•</span>
+            <div className="role-micro-item" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
+              <span>Turnkey partner interview kits &amp; scorecards</span>
             </div>
           </div>
         </div>

@@ -152,6 +152,11 @@ export default function SalaryLeafClient({
           box-shadow: 0 12px 30px rgba(8, 20, 42, 0.08);
           border-color: #1D4ED8;
         }
+        .salary-door-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
         @media (max-width: 1024px) {
           .leaf-terms-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -171,6 +176,86 @@ export default function SalaryLeafClient({
         @media (max-width: 640px) {
           .leaf-terms-grid {
             grid-template-columns: 1fr;
+          }
+          .salary-leaf-hero {
+            padding: 96px 0 52px !important;
+          }
+          .salary-badge {
+            font-size: 11px !important;
+            padding: 6px 14px !important;
+            letter-spacing: 0.08em !important;
+          }
+          .salary-hero-title {
+            font-size: clamp(28px, 7.8vw, 36px) !important;
+            line-height: 1.18 !important;
+            margin-bottom: 14px !important;
+          }
+          .salary-hero-subtitle {
+            font-size: 15px !important;
+            line-height: 1.55 !important;
+            margin-bottom: 22px !important;
+          }
+          .salary-door-wrap {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 8px !important;
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            margin-bottom: 24px !important;
+            width: 100% !important;
+          }
+          .salary-door-label {
+            padding: 0 !important;
+            font-size: 11px !important;
+            letter-spacing: 0.12em !important;
+            color: #94A3B8 !important;
+            font-weight: 600 !important;
+          }
+          .salary-door-toggle {
+            display: flex !important;
+            width: 100% !important;
+            max-width: 340px !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 10px !important;
+            padding: 4px !important;
+            gap: 4px !important;
+            box-sizing: border-box !important;
+          }
+          .salary-door-btn {
+            flex: 1 1 50% !important;
+            white-space: nowrap !important;
+            padding: 10px 8px !important;
+            font-size: 13.5px !important;
+            font-weight: 600 !important;
+            text-align: center !important;
+            border-radius: 7px !important;
+            box-sizing: border-box !important;
+          }
+          .salary-hero-actions {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            max-width: 340px !important;
+            margin: 0 auto 26px !important;
+            gap: 10px !important;
+          }
+          .salary-hero-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            padding: 13px 18px !important;
+            font-size: 14.5px !important;
+            box-sizing: border-box !important;
+            text-align: center !important;
+          }
+          .salary-micro-row {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 13px !important;
+            width: 100% !important;
           }
         }
       `}</style>
@@ -208,6 +293,7 @@ export default function SalaryLeafClient({
             {/* Centered Capsule Badge */}
             <div style={{ marginBottom: 20 }}>
               <div
+                className="salary-badge"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -232,6 +318,7 @@ export default function SalaryLeafClient({
 
             {/* Centered Display Heading - Prominent Executive Scale */}
             <h1
+              className="salary-hero-title"
               style={{
                 fontFamily: "var(--display)",
                 fontSize: "clamp(40px, 5.2vw, 64px)",
@@ -254,6 +341,7 @@ export default function SalaryLeafClient({
 
             {/* Centered Subtitle - Readable Executive Scale */}
             <p
+              className="salary-hero-subtitle"
               style={{
                 fontSize: "clamp(18px, 1.8vw, 21px)",
                 lineHeight: 1.65,
@@ -268,50 +356,80 @@ export default function SalaryLeafClient({
             </p>
 
           {/* Perspective Toggle: Employer vs Candidate */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8, padding: "6px 8px", marginBottom: 34 }}>
-            <span style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", padding: "0 10px" }}>
+          <div
+            className="salary-door-wrap"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              background: "rgba(255,255,255,0.06)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              borderRadius: 8,
+              padding: "6px 8px",
+              marginBottom: 34
+            }}
+          >
+            <span
+              className="salary-door-label"
+              style={{
+                fontFamily: "var(--mono)",
+                fontSize: 11.5,
+                color: "#94A3B8",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                padding: "0 10px"
+              }}
+            >
               I am:
             </span>
-            <button
-              type="button"
-              onClick={() => setDoor("employer")}
-              style={{
-                padding: "9px 20px",
-                borderRadius: 6,
-                fontSize: 14,
-                fontWeight: 600,
-                cursor: "pointer",
-                border: "none",
-                background: door === "employer" ? "#1D4ED8" : "transparent",
-                color: door === "employer" ? "#FFFFFF" : "#CBD5E1",
-                transition: "all 0.15s ease",
-              }}
-            >
-              Hiring firm
-            </button>
-            <button
-              type="button"
-              onClick={() => setDoor("candidate")}
-              style={{
-                padding: "9px 20px",
-                borderRadius: 6,
-                fontSize: 14,
-                fontWeight: 600,
-                cursor: "pointer",
-                border: "none",
-                background: door === "candidate" ? "#1D4ED8" : "transparent",
-                color: door === "candidate" ? "#FFFFFF" : "#CBD5E1",
-                transition: "all 0.15s ease",
-              }}
-            >
-              Candidate exploring
-            </button>
+            <div className="salary-door-toggle">
+              <button
+                type="button"
+                className={`salary-door-btn ${door === "employer" ? "active" : ""}`}
+                onClick={() => setDoor("employer")}
+                style={{
+                  padding: "9px 20px",
+                  borderRadius: 6,
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  border: "none",
+                  background: door === "employer" ? "#1D4ED8" : "transparent",
+                  color: door === "employer" ? "#FFFFFF" : "#CBD5E1",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                Hiring firm
+              </button>
+              <button
+                type="button"
+                className={`salary-door-btn ${door === "candidate" ? "active" : ""}`}
+                onClick={() => setDoor("candidate")}
+                style={{
+                  padding: "9px 20px",
+                  borderRadius: 6,
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  border: "none",
+                  background: door === "candidate" ? "#1D4ED8" : "transparent",
+                  color: door === "candidate" ? "#FFFFFF" : "#CBD5E1",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                Candidate exploring
+              </button>
+            </div>
           </div>
 
           {/* Centered Action Buttons */}
-          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}>
+          <div
+            className="salary-hero-actions"
+            style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginBottom: 34 }}
+          >
             <a
               href="#check"
+              className="salary-hero-btn"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -331,6 +449,7 @@ export default function SalaryLeafClient({
             </a>
             <Link
               href={`/jobs/${role.slug}/${city.slug}`}
+              className="salary-hero-btn"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -352,6 +471,7 @@ export default function SalaryLeafClient({
               href="https://calendly.com/orionplacement/call-with-justin"
               target="_blank"
               rel="noopener noreferrer"
+              className="salary-hero-btn"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -372,7 +492,10 @@ export default function SalaryLeafClient({
           </div>
 
           {/* Centered Micro-reassurances Row */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "14px 28px", color: "#CBD5E1", fontSize: 14.5 }}>
+          <div
+            className="salary-micro-row"
+            style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "14px 28px", color: "#CBD5E1", fontSize: 14.5 }}
+          >
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
               <span>Verified {city.name} lateral market offers</span>
