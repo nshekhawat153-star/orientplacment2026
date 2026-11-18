@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DATA, fmt } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import { JobCard } from "@/components/JobCard";
 import { SalaryBand } from "@/components/SalaryBand";
@@ -104,17 +103,6 @@ export function JobsClient({
         </div>
 
         <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: city.name, href: `/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}` },
-                { label: `${role.name} Jobs`, current: true },
-              ]}
-            />
-          </div>
-
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 40, alignItems: "center" }}>
             {/* Left Column: Heading & Value */}
             <div>

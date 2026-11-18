@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DATA, fmt, matchCandidates } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import { TrustLine, RatingBadge } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
@@ -123,14 +122,6 @@ export default function HiringKitClient({ roleParam }: { roleParam: string }) {
 
   return (
     <>
-      <Breadcrumb
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: role.name, href: `/roles/${role.slug}` },
-          { label: "Hiring kit", current: true },
-        ]}
-      />
-
       {/* 1. Hero */}
       <section className="phero hk-hero">
         <div className="wrap">

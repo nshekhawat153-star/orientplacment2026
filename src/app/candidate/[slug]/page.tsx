@@ -11,7 +11,6 @@ import {
   matchCandidates,
   asOf,
 } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { CalendlyLink } from "@/components/Rating";
 import { SenderCard } from "@/components/SenderCard";
 import { ResumeSheet } from "@/components/ResumeSheet";
@@ -119,17 +118,6 @@ export default async function CandidateProfilePage({ params }: PageProps) {
         </div>
 
         <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Candidates", href: "/candidates" },
-                { label: `Candidate #${c.id}`, current: true },
-              ]}
-            />
-          </div>
-
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 40, alignItems: "center" }}>
             {/* Left Column: Heading & Executive Value */}
             <div>

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DATA, matchCandidates } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import { TrustLine } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
@@ -40,14 +39,6 @@ export default function WhereToHireClient({ cityParam }: { cityParam: string }) 
 
   return (
     <>
-      <Breadcrumb
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: city.name, href: `/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}` },
-          { label: "Where to hire", current: true },
-        ]}
-      />
-
       {/* 1. Hero */}
       <section className="phero wth-hero">
         <div className="wrap">

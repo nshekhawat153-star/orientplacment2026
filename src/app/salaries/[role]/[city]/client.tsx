@@ -5,7 +5,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DATA, fmt, salaryPosition, inBandCandidates, matchCandidates } from "@/data";
 import { useSite } from "@/context/SiteContext";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import { TrustLine, RatingBadge } from "@/components/Rating";
 import { SalaryBand } from "@/components/SalaryBand";

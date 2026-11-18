@@ -186,6 +186,7 @@ export default function CandidatesPage() {
 
             {/* Centered Display Heading - Prominent Executive Scale */}
             <h1
+              className="cand-hero-h1"
               style={{
                 fontSize: "clamp(40px, 5.2vw, 64px)",
                 fontFamily: "var(--display)",

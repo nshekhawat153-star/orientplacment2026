@@ -15,7 +15,6 @@ import {
   source,
   fmt,
 } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { RolePayTable } from "@/components/PayTables";
 import { CandidateCard } from "@/components/CandidateCard";
 import { GateForm } from "@/components/GateForm";

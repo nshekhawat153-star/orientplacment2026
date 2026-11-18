@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DATA, fmt, matchCandidates } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import { TrustLine } from "@/components/Rating";
 import { ShortlistDeck } from "@/components/ShortlistDeck";
@@ -39,14 +38,6 @@ export default function WhereToPostClient({ cityParam }: { cityParam: string }) 
 
   return (
     <>
-      <Breadcrumb
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: city.name, href: `/locations/texas/${city.slug === "houston-tx" ? "houston" : city.slug}` },
-          { label: "Where to post", current: true },
-        ]}
-      />
-
       {/* 1. Hero */}
       <section className="phero wtp-hero">
         <div className="wrap">

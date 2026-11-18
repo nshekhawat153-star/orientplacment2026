@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustBar, TrustLine, RatingBadge } from "@/components/Rating";
 import { PeopleSection } from "@/components/PeopleSection";
 import { ReviewsSection } from "@/components/ReviewCard";
@@ -167,6 +166,7 @@ export default function AboutPage() {
 
           {/* Centered Display Heading - Prominent Executive Scale */}
           <h1
+            className="about-hero-h1"
             style={{
               fontSize: "clamp(40px, 5.2vw, 64px)",
               fontFamily: "var(--display)",

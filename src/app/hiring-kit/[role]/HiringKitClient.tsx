@@ -128,11 +128,202 @@ export function HiringKitClient({
   const weightedTotal = ratedCount && weightSum ? (scoreSum / weightSum).toFixed(1) : "–";
 
   return (
-    <div style={{ background: "#FFFFFF", minHeight: "100vh", color: "#08142A" }}>
+    <div style={{ background: "#FFFFFF", minHeight: "100vh", color: "#08142A", overflowX: "hidden" }}>
+      <style>{`
+        /* Hero Section Responsive */
+        .kit-hero-grid {
+          display: grid;
+          grid-template-columns: 1.15fr 0.85fr;
+          gap: 48px;
+          align-items: center;
+        }
+        @media (max-width: 960px) {
+          .kit-hero-sec {
+            padding: 88px 0 44px !important;
+          }
+          .kit-hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0 !important;
+          }
+          .kit-hero-card-col {
+            display: none !important;
+          }
+          .kit-hero-content {
+            text-align: center !important;
+            max-width: 760px !important;
+            margin: 0 auto !important;
+          }
+          .kit-hero-eyebrow {
+            margin: 0 auto 18px !important;
+            display: inline-flex !important;
+          }
+          .kit-hero-h1 {
+            font-size: clamp(28px, 6vw, 42px) !important;
+            line-height: 1.18 !important;
+            margin: 0 auto 18px !important;
+            text-align: center !important;
+          }
+          .kit-hero-lead {
+            font-size: 15px !important;
+            line-height: 1.6 !important;
+            margin: 0 auto 28px !important;
+            text-align: center !important;
+            max-width: 620px !important;
+          }
+          .kit-hero-actions {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            max-width: 330px !important;
+            margin: 0 auto 28px !important;
+            gap: 10px !important;
+          }
+          .kit-hero-actions button,
+          .kit-hero-actions a {
+            width: 100% !important;
+            justify-content: center !important;
+            box-sizing: border-box !important;
+          }
+          .kit-hero-trust {
+            display: flex !important;
+            justify-content: center !important;
+          }
+        }
+
+        /* 5-Part Interactive Playbook Navigation Tabs */
+        @media (max-width: 768px) {
+          .kit-modules-sec {
+            padding: 48px 0 56px !important;
+          }
+          .kit-tab-bar {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            padding: 6px !important;
+            scrollbar-width: none !important;
+          }
+          .kit-tab-bar::-webkit-scrollbar {
+            display: none !important;
+          }
+          .kit-tab-btn {
+            flex: 0 0 auto !important;
+            white-space: nowrap !important;
+            font-size: 13px !important;
+            padding: 10px 16px !important;
+          }
+        }
+
+        /* Module Split Grids (Section 1) */
+        .kit-split-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 32px;
+          align-items: start;
+        }
+        @media (max-width: 960px) {
+          .kit-split-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+          .kit-preview-card,
+          .kit-sidebar-card {
+            padding: 20px 16px !important;
+          }
+          .kit-card-head {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+          .kit-card-head button {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .kit-scorecard-item {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 10px !important;
+          }
+          .kit-scorecard-item select {
+            width: 100% !important;
+          }
+        }
+
+        /* Pre-Screened Candidates Grid (Section 2) */
+        .kit-cand-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 32px;
+          align-items: start;
+        }
+        @media (max-width: 960px) {
+          .kit-matches-sec {
+            padding: 48px 0 56px !important;
+          }
+          .kit-cand-grid {
+            grid-template-columns: 1fr !important;
+            gap: 28px !important;
+          }
+          .kit-gate-col {
+            position: static !important;
+            top: auto !important;
+          }
+          .kit-gate-col-card {
+            padding: 20px 16px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .kit-cand-head {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+          }
+        }
+
+        /* Reviews Section (Section 3) */
+        @media (max-width: 768px) {
+          .kit-reviews-sec {
+            padding: 48px 0 56px !important;
+          }
+        }
+
+        /* Full Package Email Download Grid (Section 4) */
+        .kit-dl-grid {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 52px;
+          align-items: center;
+        }
+        @media (max-width: 960px) {
+          .kit-dl-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .kit-dl-sec {
+            padding: 56px 0 64px !important;
+          }
+          .kit-dl-form-card {
+            padding: 22px 16px !important;
+          }
+          .kit-dl-cta-btns {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            max-width: 330px !important;
+          }
+          .kit-dl-cta-btns a {
+            width: 100% !important;
+            justify-content: center !important;
+            box-sizing: border-box !important;
+          }
+        }
+      `}</style>
+
       {/* =========================================================================
           HERO SECTION: Luxury Midnight Navy Showcase with Splash Video
           ========================================================================= */}
       <section
+        className="kit-hero-sec"
         style={{
           position: "relative",
           background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
@@ -163,10 +354,11 @@ export function HiringKitClient({
         </video>
 
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: "48px", alignItems: "center" }} className="kit-hero-grid">
+          <div className="kit-hero-grid">
             {/* Left Column: Heading, Subtitle & Primary CTAs */}
-            <div>
+            <div className="kit-hero-content">
               <div
+                className="kit-hero-eyebrow"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -188,6 +380,7 @@ export function HiringKitClient({
               </div>
 
               <h1
+                className="kit-hero-h1"
                 style={{
                   fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
                   fontFamily: "var(--font-serif, 'Playfair Display', Georgia, serif)",
@@ -205,6 +398,7 @@ export function HiringKitClient({
               </h1>
 
               <p
+                className="kit-hero-lead"
                 style={{
                   fontSize: "1.12rem",
                   lineHeight: 1.6,
@@ -216,7 +410,7 @@ export function HiringKitClient({
                 A battle-tested lateral posting template with live dynamic variables, targeted interview questions, candidate evaluation scorecard, and executive offer-letter architecture. 100% free with zero registration.
               </p>
 
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", marginBottom: "34px" }}>
+              <div className="kit-hero-actions" style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", marginBottom: "34px" }}>
                 <button
                   type="button"
                   onClick={handleCopyPosting}
@@ -261,13 +455,13 @@ export function HiringKitClient({
                 </a>
               </div>
 
-              <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: "20px" }}>
+              <div className="kit-hero-trust" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: "20px" }}>
                 <TrustLine />
               </div>
             </div>
 
             {/* Right Column: Sleek Executive Playbook Artifact Card (Transparent Glassmorphic Style) */}
-            <div>
+            <div className="kit-hero-card-col">
               <div
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
@@ -438,6 +632,7 @@ export function HiringKitClient({
 
           {/* Navigation Tabs Pill Bar */}
           <div
+            className="kit-tab-bar"
             style={{
               background: "#FAF9F5",
               border: "1.5px solid #EAE7DC",
@@ -463,6 +658,7 @@ export function HiringKitClient({
                 key={tab.id}
                 type="button"
                 role="tab"
+                className="kit-tab-btn"
                 aria-selected={activeTab === tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
                 style={{
@@ -487,9 +683,10 @@ export function HiringKitClient({
 
           {/* TAB 1: POSTING TEMPLATE WITH LIVE FACTS FORM */}
           {activeTab === "posting" && (
-            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "32px", alignItems: "start" }} className="kit-split-grid">
+            <div className="kit-split-grid">
               {/* Live Rendered Template */}
               <div
+                className="kit-preview-card"
                 style={{
                   background: "#FFFFFF",
                   border: "1.5px solid #E2E8F0",
@@ -498,7 +695,7 @@ export function HiringKitClient({
                   boxShadow: "0 6px 24px rgba(8, 20, 42, 0.04)"
                 }}
               >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px", borderBottom: "1px solid #F1F5F9", paddingBottom: "16px" }}>
+                <div className="kit-card-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px", borderBottom: "1px solid #F1F5F9", paddingBottom: "16px" }}>
                   <div>
                     <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em" }}>Live Preview</span>
                     <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "4px 0 0" }}>Customized <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Job Description</span></h3>
@@ -566,6 +763,7 @@ export function HiringKitClient({
 
               {/* Firm Facts Form Sidebar */}
               <div
+                className="kit-sidebar-card"
                 style={{
                   background: "#FAF9F5",
                   border: "1.5px solid #EAE7DC",
@@ -708,11 +906,12 @@ export function HiringKitClient({
 
           {/* TAB 2: INTERVIEW QUESTIONS */}
           {activeTab === "questions" && (
-            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "32px", alignItems: "start" }} className="kit-split-grid">
+            <div className="kit-split-grid">
               <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                 {kit?.questions.map((q: { q: string; good: string; flag: string }, idx: number) => (
                   <div
                     key={idx}
+                    className="kit-preview-card"
                     style={{
                       background: "#FFFFFF",
                       border: "1.5px solid #E2E8F0",
@@ -749,6 +948,7 @@ export function HiringKitClient({
 
               {/* Interview Best Practices Card */}
               <div
+                className="kit-sidebar-card"
                 style={{
                   background: "#FAF9F5",
                   border: "1.5px solid #EAE7DC",
@@ -789,8 +989,9 @@ export function HiringKitClient({
 
           {/* TAB 3: CANDIDATE SCORECARD */}
           {activeTab === "scorecard" && (
-            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "32px", alignItems: "start" }} className="kit-split-grid">
+            <div className="kit-split-grid">
               <div
+                className="kit-preview-card"
                 style={{
                   background: "#FFFFFF",
                   border: "1.5px solid #E2E8F0",
@@ -806,6 +1007,7 @@ export function HiringKitClient({
                   {kit?.scorecard.map((s: { k: string; hint: string; w: number }, i: number) => (
                     <div
                       key={i}
+                      className="kit-scorecard-item"
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -856,6 +1058,7 @@ export function HiringKitClient({
 
               {/* Scorecard Verdict Calculation */}
               <div
+                className="kit-sidebar-card"
                 style={{
                   background: "#FAF9F5",
                   border: "1.5px solid #EAE7DC",
@@ -895,11 +1098,12 @@ export function HiringKitClient({
 
           {/* TAB 4: OFFER LETTER OUTLINE */}
           {activeTab === "offer" && (
-            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "32px", alignItems: "start" }} className="kit-split-grid">
+            <div className="kit-split-grid">
               <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {kit?.offer.map(([heading, detail]: [string, string], i: number) => (
                   <div
                     key={i}
+                    className="kit-preview-card"
                     style={{
                       background: "#FFFFFF",
                       border: "1.5px solid #E2E8F0",
@@ -920,6 +1124,7 @@ export function HiringKitClient({
               </div>
 
               <div
+                className="kit-sidebar-card"
                 style={{
                   background: "#FAF9F5",
                   border: "1.5px solid #EAE7DC",
@@ -943,6 +1148,7 @@ export function HiringKitClient({
           {/* TAB 5: PAY MODELS */}
           {activeTab === "pay" && (
             <div
+              className="kit-preview-card"
               style={{
                 background: "#FFFFFF",
                 border: "1.5px solid #E2E8F0",
@@ -954,8 +1160,8 @@ export function HiringKitClient({
               <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px" }}>Boutique &amp; Mid-Size Law Firm <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Pay Architectures</span></h3>
               <p style={{ fontSize: "0.92rem", color: "#64748B", margin: "0 0 24px" }}>Common compensation structures utilized by lateral hiring committees for {role.name}s.</p>
 
-              <div style={{ overflowX: "auto" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+              <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+                <table style={{ width: "100%", minWidth: 620, borderCollapse: "collapse", textAlign: "left" }}>
                   <thead>
                     <tr style={{ borderBottom: "2px solid #E2E8F0", background: "#F8FAFC" }}>
                       <th style={{ padding: "14px 18px", fontSize: "0.85rem", fontWeight: 700, color: "#08142A" }}>Structure Model</th>
@@ -993,6 +1199,7 @@ export function HiringKitClient({
           ========================================================================= */}
       <section
         id="matches"
+        className="kit-matches-sec"
         style={{
           background: "#FAF9F5",
           padding: "88px 0 96px",
@@ -1000,7 +1207,7 @@ export function HiringKitClient({
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "36px", flexWrap: "wrap", gap: "16px" }}>
+          <div className="kit-cand-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "36px", flexWrap: "wrap", gap: "16px" }}>
             <div>
               <div
                 style={{
@@ -1049,38 +1256,39 @@ export function HiringKitClient({
             </Link>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "32px", alignItems: "start" }} className="kit-cand-grid">
+          <div className="kit-cand-grid">
             <div style={{ display: "grid", gap: "20px" }}>
               {topMatches.map(r => (
                 <CandidateCard key={r.c.id} candidate={r.c} />
               ))}
             </div>
 
-            <div
-              style={{
-                background: "#FFFFFF",
-                border: "1.5px solid #E2E8F0",
-                borderRadius: "14px",
-                padding: "32px",
-                boxShadow: "0 8px 30px rgba(15, 23, 42, 0.05)",
-                position: "sticky",
-                top: "100px"
-              }}
-            >
-              <GateForm
-                eyebrow="Direct Candidate Introductions"
-                title={topMatches.length === 1 ? "Request Complete Dossier" : `Request Dossiers for Top ${topMatches.length} Matches`}
-                bullets={[
-                  "Unredacted resumes delivered to your inbox within 60 minutes",
-                  "Explicit compensation requirements, bar status, and notice periods",
-                  "Strict 23% contingency success fee only if you extend an offer and hire"
-                ]}
-                button="Deliver Candidate Dossiers"
-                ids={topMatches.map(r => r.c.id)}
-                role={role.slug}
-                city={citySlug}
-                review="brett-zimmerman"
-              />
+            <div className="kit-gate-col" style={{ position: "sticky", top: "100px" }}>
+              <div
+                className="kit-gate-col-card"
+                style={{
+                  background: "#FFFFFF",
+                  border: "1.5px solid #E2E8F0",
+                  borderRadius: "14px",
+                  padding: "32px",
+                  boxShadow: "0 8px 30px rgba(15, 23, 42, 0.05)"
+                }}
+              >
+                <GateForm
+                  eyebrow="Direct Candidate Introductions"
+                  title={topMatches.length === 1 ? "Request Complete Dossier" : `Request Dossiers for Top ${topMatches.length} Matches`}
+                  bullets={[
+                    "Unredacted resumes delivered to your inbox within 60 minutes",
+                    "Explicit compensation requirements, bar status, and notice periods",
+                    "Strict 23% contingency success fee only if you extend an offer and hire"
+                  ]}
+                  button="Deliver Candidate Dossiers"
+                  ids={topMatches.map(r => r.c.id)}
+                  role={role.slug}
+                  city={citySlug}
+                  review="brett-zimmerman"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -1142,6 +1350,7 @@ export function HiringKitClient({
           ========================================================================= */}
       <section
         id="download"
+        className="kit-dl-sec"
         style={{
           background: "#08142A",
           color: "#FFFFFF",
@@ -1150,7 +1359,7 @@ export function HiringKitClient({
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "52px", alignItems: "center" }} className="kit-dl-grid">
+          <div className="kit-dl-grid">
             {/* Left: Pitch, Checklist & Headhunt CTAs */}
             <div>
               <div
@@ -1214,7 +1423,7 @@ export function HiringKitClient({
                 <div style={{ fontSize: "0.85rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600, marginBottom: "12px" }}>
                   Prefer Orion to headhunt this seat directly?
                 </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+                <div className="kit-dl-cta-btns" style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
                   <Link
                     href="/submit-job"
                     style={{
@@ -1259,6 +1468,7 @@ export function HiringKitClient({
 
             {/* Right: Instant Delivery Form Container */}
             <div
+              className="kit-dl-form-card"
               style={{
                 background: "#FFFFFF",
                 borderRadius: "14px",

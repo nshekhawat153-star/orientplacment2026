@@ -7,7 +7,6 @@ import { IndeedTopSearchBar } from "@/components/IndeedTopSearchBar";
 import { FilterChipsBar, FilterChipsState } from "@/components/FilterChipsBar";
 import { JobCard } from "@/components/JobCard";
 import { JobDetailPane } from "@/components/JobDetailPane";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Mark } from "@/components/Mark";
 import Link from "next/link";
 
@@ -37,10 +36,19 @@ export function JobsSearchClient() {
   }, [queryParam, locationParam]);
 
   const handleSearch = (q: string, l: string) => {
+    setSearchQuery(q);
+    setSearchLocation(l);
     const params = new URLSearchParams();
     if (q) params.set("q", q);
     if (l) params.set("l", l);
-    router.push(`/jobs?${params.toString()}`);
+    const qs = params.toString();
+    router.push(qs ? `/jobs?${qs}` : "/jobs", { scroll: false });
+  };
+
+  const handleClearAllSearch = () => {
+    setSearchQuery("");
+    setSearchLocation("");
+    router.push("/jobs", { scroll: false });
   };
 
   // 1. FILTER BY QUERY & LOCATION
@@ -163,16 +171,6 @@ export function JobsSearchClient() {
         </div>
 
         <div className="wrap" style={{ position: "relative", zIndex: 3, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Breadcrumb Navigation */}
-          <div style={{ marginBottom: 20 }}>
-            <Breadcrumb
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Legal Jobs", current: true },
-              ]}
-            />
-          </div>
-
           <div className="jobs-header-intro" style={{ textAlign: "center", margin: "0 auto 32px", maxWidth: "840px" }}>
             <div className="badge-capsule" style={{ margin: "0 auto 16px", display: "inline-flex" }}>
               <span className="badge-dot" />
@@ -213,13 +211,37 @@ export function JobsSearchClient() {
         <div className="wrap">
           {/* SUBHEAD LINE (EXACTLY MATCHING INDEED SCREENSHOT) */}
           <div className="indeed-results-head-row">
-            <div className="indeed-head-left">
+            <div className="indeed-head-left" style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
               <h1 className="indeed-head-title">
                 {titleText} {searchLocation && !searchQuery ? "" : searchLocation ? `in ${searchLocation}` : ""}
               </h1>
-              <span className="indeed-info-icon" title="Verified employer salaries" aria-label="Verified salaries">
-                ⓘ
-              </span>
+              {(searchQuery || searchLocation) && (
+                <button
+                  type="button"
+                  className="indeed-clear-search-pill"
+                  onClick={handleClearAllSearch}
+                  title="Clear search"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    padding: "4px 10px",
+                    background: "#EFF6FF",
+                    color: "#1D4ED8",
+                    border: "1px solid #BFDBFE",
+                    borderRadius: 999,
+                    fontSize: 12,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>Clear search</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              )}
             </div>
 
             <div className="indeed-sort-row">

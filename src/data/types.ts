@@ -69,6 +69,12 @@ export interface Candidate {
   tags: string[];
   timeline: [string, string, string][];
   why: string;
+  name?: string;
+  initials?: string;
+  school?: string;
+  leaving?: string;
+  office?: string;
+  spoke?: string;
 }
 
 export interface Job {

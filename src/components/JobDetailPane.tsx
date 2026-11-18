@@ -6,6 +6,7 @@ import { Job, findCity, findRole, fmt, trust } from "@/data";
 import { Mark } from "./Mark";
 import { Icon } from "./icons";
 import { SalaryBandBar } from "./SalaryBand";
+import { JobApplyModal } from "./JobApplyModal";
 
 interface JobDetailPaneProps {
   job: Job | null;
@@ -13,13 +14,8 @@ interface JobDetailPaneProps {
 }
 
 export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
-  const [applied, setApplied] = useState(false);
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [applicantName, setApplicantName] = useState("");
-  const [applicantEmail, setApplicantEmail] = useState("");
-  const [applicantPhone, setApplicantPhone] = useState("");
-  const [applicantNote, setApplicantNote] = useState("");
-  const [submitting, setSubmitting] = useState(false);
 
   if (!job) {
     return (
@@ -38,16 +34,6 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
 
   const cityObj = findCity(job.city);
   const roleObj = findRole(job.role);
-
-  const handleQuickApply = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!applicantEmail) return;
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setApplied(true);
-    }, 600);
-  };
 
   return (
     <article className="indeed-clean-detail-pane" aria-labelledby="detail-title">
@@ -93,12 +79,13 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
 
         {/* PRIMARY ACTION BAR MATCHING SCREENSHOT */}
         <div className="clean-action-bar">
-          <a
-            href="#quick-apply"
+          <button
+            type="button"
             className="btn btn-primary clean-apply-btn"
+            onClick={() => setIsApplyModalOpen(true)}
           >
             Apply now
-          </a>
+          </button>
 
           <button
             type="button"
@@ -299,106 +286,55 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
 
         <hr className="detail-clean-hr" />
 
-        {/* JON SCREENING TRUST CARD */}
+        {/* JUSTIN SCREENING TRUST CARD */}
         <section className="clean-trust-card">
-          <div className="trust-avatar">JM</div>
+          <div className="trust-avatar">JS</div>
           <div className="trust-text">
-            <h4>Screened by Jon Missirlian</h4>
+            <h4>Screened by Justin Sofman</h4>
             <p>
-              Head of Screening at Orion. Jon speaks with you privately before any profile
+              Managing Partner at Orion Placement. Justin speaks with you privately before any dossier
               is shared with a firm.
             </p>
             <div className="trust-links">
-              <span>⭐ 5.0 Google Rating (60 reviews)</span>
+              <span>★ 5.0 Rating (60 verified reviews)</span>
               <span>·</span>
               <a href={trust.calendly} target="_blank" rel="noopener noreferrer">
-                Book 15 mins with Jon
+                Book 15 mins with Justin
               </a>
             </div>
           </div>
         </section>
 
-        {/* QUICK APPLICATION BOX */}
-        <section className="clean-apply-box" id="quick-apply">
-          <h3 className="clean-subhead">Apply Confidentially</h3>
-          <p className="muted" style={{ fontSize: "13.5px", margin: "4px 0 16px" }}>
-            Submit your information directly to Jon. No one at your current firm will ever know.
+        {/* BOTTOM ACTION & CONFIDENTIAL INTAKE BANNER */}
+        <section className="clean-apply-box" style={{ textAlign: "center", padding: "32px 24px", background: "#FAF9F5", borderRadius: 10, border: "1px solid #E2E8F0" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 999, padding: "5px 14px", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "#1D4ED8", marginBottom: 12 }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
+            <span>DIRECT CANDIDATE INTAKE · ZERO FIRM DISCLOSURE</span>
+          </div>
+          <h3 className="clean-subhead" style={{ fontSize: 20, marginBottom: 8, color: "#08142A" }}>
+            Ready to explore this confidential seat?
+          </h3>
+          <p className="muted" style={{ fontSize: "14px", maxWidth: 520, margin: "0 auto 22px", lineHeight: 1.6, color: "#64748B" }}>
+            Submit your resume, Texas Bar status, and compensation expectations through Orion&apos;s 100% confidential application flow.
           </p>
 
-          {applied ? (
-            <div className="clean-success-alert">
-              <Icon name="check" className="alert-ico" />
-              <div>
-                <b>Application received confidentially.</b>
-                <p>Jon Missirlian will review your note and contact you at {applicantEmail}.</p>
-              </div>
-            </div>
-          ) : (
-            <form onSubmit={handleQuickApply} className="clean-apply-form">
-              <div className="form-row-2">
-                <div className="field">
-                  <label htmlFor="qa-name">Full name</label>
-                  <input
-                    id="qa-name"
-                    type="text"
-                    required
-                    placeholder="Your name"
-                    value={applicantName}
-                    onChange={(e) => setApplicantName(e.target.value)}
-                  />
-                </div>
-                <div className="field">
-                  <label htmlFor="qa-email">Personal email</label>
-                  <input
-                    id="qa-email"
-                    type="email"
-                    required
-                    placeholder="personal@gmail.com"
-                    value={applicantEmail}
-                    onChange={(e) => setApplicantEmail(e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div className="form-row-2">
-                <div className="field">
-                  <label htmlFor="qa-phone">Phone number</label>
-                  <input
-                    id="qa-phone"
-                    type="tel"
-                    placeholder="(555) 000-0000"
-                    value={applicantPhone}
-                    onChange={(e) => setApplicantPhone(e.target.value)}
-                  />
-                </div>
-                <div className="field">
-                  <label htmlFor="qa-note">State Bar / Experience</label>
-                  <input
-                    id="qa-note"
-                    type="text"
-                    placeholder="e.g. TX Bar 2021, 4 yrs exp"
-                    value={applicantNote}
-                    onChange={(e) => setApplicantNote(e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div className="form-actions-clean">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={submitting}
-                >
-                  {submitting ? "Submitting..." : "Submit Confidential Application"}
-                </button>
-                <span className="privacy-badge">
-                  <Icon name="lock" className="lock-ico-sm" /> 100% Confidential
-                </span>
-              </div>
-            </form>
-          )}
+          <button
+            type="button"
+            className="btn btn-primary clean-apply-btn"
+            style={{ minWidth: 260, margin: "0 auto", padding: "14px 28px", fontSize: 15 }}
+            onClick={() => setIsApplyModalOpen(true)}
+          >
+            Apply now for this seat →
+          </button>
         </section>
       </div>
+
+      {/* INDEED-STYLE MULTI-STEP APPLICATION MODAL */}
+      <JobApplyModal
+        job={job}
+        isOpen={isApplyModalOpen}
+        onClose={() => setIsApplyModalOpen(false)}
+      />
     </article>
   );
 }

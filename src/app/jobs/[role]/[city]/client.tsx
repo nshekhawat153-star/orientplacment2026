@@ -13,7 +13,6 @@ import {
   fmt,
   Job,
 } from "@/data";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrustLine } from "@/components/Rating";
 import { JobCard } from "@/components/JobCard";
 import { GateForm } from "@/components/GateForm";

@@ -172,7 +172,7 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
       <header
         className={`site-header ${isScrolled ? "scrolled" : "at-top"} ${
           isHome ? "header-on-dark" : ""
-        }`}
+        } ${pathname.startsWith("/hire-attorneys") ? "header-hire-attorneys" : ""}`}
       >
         <div className="wrap">
           <Link className="logo" href="/" aria-label="Orion Placement">
@@ -483,9 +483,11 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
           </nav>
 
           {/* Header CTA */}
-          <Link className="btn btn-primary btn-sm header-cta" href={cta.href}>
-            {cta.label}
-          </Link>
+          {!pathname.startsWith("/hire-attorneys") && (
+            <Link className="btn btn-primary btn-sm header-cta" href={cta.href}>
+              {cta.label}
+            </Link>
+          )}
 
           {/* Mobile hamburger button */}
           <button

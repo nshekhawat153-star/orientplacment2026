@@ -1,0 +1,301 @@
+"use client";
+
+import React, { useState, useMemo } from "react";
+import "./find-candidates.css";
+
+import {
+  EnrichedCandidate,
+  ParsedSeat,
+  allEnrichedCandidates,
+  parseSeatInput,
+  matchEnrichedCandidates,
+} from "./candidateData";
+
+import { HeroLuxuryAskSection } from "./components/HeroLuxuryAskSection";
+import { ScreenResults } from "./components/ScreenResults";
+import { ScreenProfile } from "./components/ScreenProfile";
+import { LowerSections } from "./components/LowerSections";
+import { WorkEmailGateModal } from "./components/WorkEmailGateModal";
+import { TermsSignatureModal } from "./components/TermsSignatureModal";
+import { ToastNotification } from "./components/ToastNotification";
+
+const STEPS = [
+  "Describe the seat",
+  "Candidates",
+  "Full resume",
+  "Terms",
+  "Interview",
+];
+
+export function FindCandidatesClient() {
+  // Current view mode: "stream" (browsing candidate list) | "profile" (inspecting one candidate dossier)
+  const [viewMode, setViewMode] = useState<"stream" | "profile">("stream");
+
+  // Prompt & seat criteria
+  const [promptText, setPromptText] = useState("");
+  const [isFromPosting, setIsFromPosting] = useState(false);
+  const [isReading, setIsReading] = useState(false);
+
+  // Default seat initialized to match original page
+  const [seat, setSeat] = useState<ParsedSeat>({
+    role: "estate-planning-attorney",
+    city: "houston-tx",
+    years: "any",
+    mode: "any",
+    pay: null,
+  });
+
+  // Unlocked candidate IDs & active profile ID
+  const [unlockedIds, setUnlockedIds] = useState<string[]>([]);
+  const [activeCandidateId, setActiveCandidateId] = useState<string | null>(null);
+  const [signedCandidateId, setSignedCandidateId] = useState<string | null>(null);
+
+  // Employer lead details
+  const [lead, setLead] = useState<{
+    name: string;
+    title: string;
+    firm: string;
+    email: string;
+  } | null>(null);
+
+  // Modals state
+  const [gateCandidate, setGateCandidate] = useState<EnrichedCandidate | null>(null);
+  const [termsModal, setTermsModal] = useState<{
+    open: boolean;
+    candidate: EnrichedCandidate | null;
+    readOnly?: boolean;
+  }>({
+    open: false,
+    candidate: null,
+    readOnly: false,
+  });
+
+  // Toast notification
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Handle prompt submit from Hero ask box
+  const handleSubmitPrompt = (text: string) => {
+    setPromptText(text);
+    const isUrl = /^https?:\/\//i.test(text.trim());
+    setIsFromPosting(isUrl);
+    setIsReading(true);
+
+    setTimeout(() => {
+      setIsReading(false);
+      if (isUrl) {
+        setSeat({
+          role: "estate-planning-attorney",
+          city: "houston-tx",
+          years: "3-6",
+          mode: "on-site",
+          pay: 145,
+        });
+      } else {
+        const parsed = parseSeatInput(text);
+        setSeat((prev) => ({
+          ...prev,
+          ...parsed,
+          // Keep role/city if not specified in prompt
+          role: parsed.role || prev.role,
+          city: parsed.city || prev.city,
+        }));
+      }
+      setViewMode("stream");
+
+      const resultsEl = document.getElementById("results");
+      if (resultsEl) {
+        resultsEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }, isUrl ? 1100 : 650);
+  };
+
+  // Match results
+  const matchResults = useMemo(() => {
+    return matchEnrichedCandidates(seat);
+  }, [seat]);
+
+  // Active candidate object
+  const activeCandidate = useMemo(() => {
+    if (!activeCandidateId) {
+      return matchResults[0]?.candidate || allEnrichedCandidates[0];
+    }
+    return (
+      allEnrichedCandidates.find((c) => c.id === activeCandidateId) ||
+      matchResults[0]?.candidate ||
+      allEnrichedCandidates[0]
+    );
+  }, [activeCandidateId, matchResults]);
+
+  // Open profile view
+  const handleOpenCandidateProfile = (c: EnrichedCandidate) => {
+    setActiveCandidateId(c.id);
+    setViewMode("profile");
+    const resultsEl = document.getElementById("results");
+    if (resultsEl) {
+      resultsEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Gate modal unlock
+  const handleGateSuccess = (info: { email: string; firm: string; guessName: string }) => {
+    if (gateCandidate) {
+      setUnlockedIds((prev) => Array.from(new Set([...prev, gateCandidate.id])));
+      setLead({
+        name: info.guessName,
+        title: "Partner",
+        firm: info.firm,
+        email: info.email,
+      });
+      setActiveCandidateId(gateCandidate.id);
+      setGateCandidate(null);
+      setViewMode("profile");
+      setToastMessage(`Full resume unlocked. A copy has been dispatched to ${info.email}`);
+      const resultsEl = document.getElementById("results");
+      if (resultsEl) {
+        resultsEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  // Terms sign success
+  const handleTermsSign = (signedInfo: { name: string; title: string; firm: string }) => {
+    if (termsModal.candidate) {
+      setSignedCandidateId(termsModal.candidate.id);
+      setUnlockedIds((prev) => Array.from(new Set([...prev, termsModal.candidate!.id])));
+      setLead((prev) => ({
+        name: signedInfo.name,
+        title: signedInfo.title,
+        firm: signedInfo.firm,
+        email: prev?.email || "counsel@firm.com",
+      }));
+      setTermsModal({ open: false, candidate: null });
+      setViewMode("profile");
+      setToastMessage(`Terms executed for ${signedInfo.firm}. Candidate identity unlocked.`);
+      const resultsEl = document.getElementById("results");
+      if (resultsEl) {
+        resultsEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  // Stepper active step calculation
+  const currentStepIndex = useMemo(() => {
+    if (termsModal.open) return 3; // "Terms"
+    if (viewMode === "profile") {
+      return signedCandidateId === activeCandidate?.id ? 4 : 2; // "Interview" or "Full resume"
+    }
+    return promptText.trim() ? 1 : 0; // "Candidates" or "Describe the seat"
+  }, [termsModal.open, viewMode, signedCandidateId, activeCandidate?.id, promptText]);
+
+  return (
+    <div style={{ background: "#FAF9F5", minHeight: "100vh", color: "#08142A" }}>
+      {/* 1. LUXURY HERO WITH VIDEO BACKGROUND & THE SMART ASK BOX */}
+      <HeroLuxuryAskSection
+        initialText={promptText}
+        isReading={isReading}
+        onSubmitPrompt={handleSubmitPrompt}
+      />
+
+      {/* 2. PROGRESS STEPPER RAIL */}
+      <div
+        className="fc-stepper-wrap"
+        style={{
+          background: "#FFFFFF",
+          borderBottom: "1.5px solid #E2E8F0",
+          position: "sticky",
+          top: 68,
+          zIndex: 25,
+          boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
+        }}
+      >
+        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+          <ol className="fc-steps" aria-label="Candidate Search Progress">
+            {STEPS.map((stepName, idx) => {
+              const isDone = idx < currentStepIndex;
+              const isOn = idx === currentStepIndex;
+              return (
+                <li
+                  key={stepName}
+                  className={`${isDone ? "done" : ""} ${isOn ? "on" : ""}`}
+                  aria-current={isOn ? "step" : undefined}
+                >
+                  <span style={{ opacity: isOn || isDone ? 1 : 0.6 }}>
+                    {idx + 1}. {stepName}
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </div>
+
+      {/* 3. MAIN CANDIDATES STREAM OR FULL PROFILE DOSSIER */}
+      <div id="results">
+        {viewMode === "stream" ? (
+          <ScreenResults
+            seat={seat}
+            promptText={promptText}
+            isFromPosting={isFromPosting}
+            results={matchResults}
+            unlockedIds={unlockedIds}
+            activeCandidateId={activeCandidateId}
+            onUpdateSeat={(updated) => setSeat((prev) => ({ ...prev, ...updated }))}
+            onSubmitPrompt={handleSubmitPrompt}
+            onSelectCandidate={handleOpenCandidateProfile}
+            onOpenGateModal={(cand) => setGateCandidate(cand)}
+            onOpenTermsModal={(cand, readOnly) =>
+              setTermsModal({ open: true, candidate: cand, readOnly })
+            }
+          />
+        ) : (
+          activeCandidate && (
+            <ScreenProfile
+              candidate={activeCandidate}
+              seat={seat}
+              isUnlocked={unlockedIds.includes(activeCandidate.id)}
+              isSigned={signedCandidateId === activeCandidate.id}
+              lead={lead}
+              onBackToResults={() => setViewMode("stream")}
+              onOpenGateModal={(cand) => setGateCandidate(cand)}
+              onOpenTermsModal={(cand) =>
+                setTermsModal({ open: true, candidate: cand, readOnly: false })
+              }
+              onSelectOtherCandidate={handleOpenCandidateProfile}
+            />
+          )
+        )}
+      </div>
+
+      {/* 4. ORIGINAL 4-STEP WORKFLOW, 4 TERMS PILLARS, AND BOTTOM DARK CTA SECTION */}
+      <LowerSections />
+
+      {/* 5. POPUP MODAL 1: WORK EMAIL GATE MODAL */}
+      {gateCandidate && (
+        <WorkEmailGateModal
+          candidate={gateCandidate}
+          onClose={() => setGateCandidate(null)}
+          onSuccess={handleGateSuccess}
+        />
+      )}
+
+      {/* 6. POPUP MODAL 2: ONE-PAGE TERMS & LIVE E-SIGNATURE MODAL */}
+      {termsModal.open && (
+        <TermsSignatureModal
+          candidate={termsModal.candidate || activeCandidate}
+          readOnly={termsModal.readOnly}
+          initialLead={lead}
+          onClose={() => setTermsModal({ open: false, candidate: null })}
+          onSign={handleTermsSign}
+        />
+      )}
+
+      {/* 7. FLOATING TOAST NOTIFICATION */}
+      {toastMessage && (
+        <ToastNotification
+          message={toastMessage}
+          onClear={() => setToastMessage(null)}
+        />
+      )}
+    </div>
+  );
+}

@@ -80,6 +80,199 @@ export default function FeesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      <style>{`
+        /* Hero Section Responsive */
+        @media (max-width: 768px) {
+          .fee-luxury-hero-sec {
+            padding: 88px 0 44px !important;
+          }
+          .fees-hero-h1 {
+            font-size: 32px !important;
+            line-height: 1.15 !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .fees-hero-actions {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            max-width: 330px !important;
+            margin: 0 auto 28px !important;
+          }
+          .fees-hero-actions a {
+            width: 100% !important;
+            justify-content: center !important;
+            box-sizing: border-box !important;
+          }
+          .fees-reassurances {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px 14px !important;
+            max-width: 330px !important;
+            margin: 0 auto !important;
+            text-align: left !important;
+            font-size: 12px !important;
+          }
+          .fees-reassurance-dot {
+            display: none !important;
+          }
+        }
+
+        /* 4 Pillars Responsive */
+        @media (max-width: 1024px) {
+          .terms-pillars-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 16px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .terms-pillars-grid {
+            grid-template-columns: 1fr !important;
+            gap: 14px !important;
+          }
+          .terms-pillar {
+            padding: 20px 18px !important;
+          }
+        }
+
+        /* Fee Calculator Responsive */
+        @media (max-width: 960px) {
+          .fee-calc-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .fee-calc-form-card,
+          .fee-calc-dash-card {
+            padding: 20px 16px !important;
+          }
+          .fee-calc-dash-top {
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+          }
+          .fee-calc-meta-pill {
+            font-size: 10.5px !important;
+            padding: 4px 8px !important;
+            white-space: nowrap !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            width: fit-content !important;
+          }
+          .fee-milestones-grid {
+            grid-template-columns: 1fr !important;
+            gap: 8px !important;
+            margin-bottom: 18px !important;
+          }
+        }
+
+        /* 90-Day Guarantee Responsive */
+        @media (max-width: 960px) {
+          .fee-guarantee-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 16px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .fee-guarantee-grid {
+            grid-template-columns: 1fr !important;
+            gap: 14px !important;
+          }
+          .fee-guarantee-card {
+            padding: 20px 18px !important;
+          }
+        }
+
+        /* Table & Horizontal Touch Scrolling */
+        .fee-table-wrap {
+          overflow-x: auto !important;
+          -webkit-overflow-scrolling: touch !important;
+        }
+        .fee-table-scroll-hint {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .fee-table-scroll-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1D4ED8;
+            background: #EFF6FF;
+            padding: 7px 12px;
+            border-radius: 6px;
+            margin-top: 14px;
+            border: 1px solid #DBEAFE;
+          }
+        }
+        @media (max-width: 640px) {
+          .sec-head-premium {
+            text-align: left !important;
+          }
+          .sec-head-premium .badge-capsule {
+            margin-bottom: 10px !important;
+          }
+          .sec-head-premium h2 {
+            font-size: 26px !important;
+            line-height: 1.2 !important;
+          }
+          .sec-head-premium .who-lede {
+            font-size: 14.5px !important;
+          }
+          #copy-q {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+        }
+
+        /* FAQ Clean Accordion Styling */
+        .fee-faq-clean details {
+          background: #FFFFFF !important;
+          border: 1.5px solid #E2E8F0 !important;
+          border-radius: 12px !important;
+          padding: 0 !important;
+          overflow: hidden !important;
+          box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+          transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          margin-bottom: 12px !important;
+        }
+        .fee-faq-clean details:hover {
+          border-color: #CBD5E1 !important;
+        }
+        .fee-faq-clean details[open] {
+          border-color: #1D4ED8 !important;
+          box-shadow: 0 8px 20px -4px rgba(29, 78, 216, 0.12) !important;
+        }
+        .fee-faq-clean summary {
+          display: flex !important;
+          justify-content: space-between !important;
+          align-items: center !important;
+          gap: 16px !important;
+          padding: 18px 20px !important;
+          cursor: pointer !important;
+          list-style: none !important;
+          font-size: 15.5px !important;
+          font-weight: 600 !important;
+          color: #08142A !important;
+        }
+        .fee-faq-clean summary::-webkit-details-marker {
+          display: none !important;
+        }
+        .fee-faq-clean summary::marker {
+          display: none !important;
+        }
+        .fee-faq-clean .faq-body {
+          padding: 0 20px 20px !important;
+        }
+        .fee-faq-clean .faq-body p {
+          margin: 0 !important;
+          font-size: 14.5px !important;
+          line-height: 1.6 !important;
+          color: #475569 !important;
+        }
+      `}</style>
+
       {/* 1. LUXURY CENTERED HERO SECTION (NO BREADCRUMBS, NO CARD CLUTTER) */}
       <section
         className="emp-luxury-hero-sec fee-luxury-hero-sec"
@@ -152,6 +345,7 @@ export default function FeesPage() {
 
           {/* Main Title - Prominent Executive Scale */}
           <h1
+            className="fees-hero-h1"
             style={{
               fontFamily: "var(--display)",
               fontSize: "clamp(40px, 5.2vw, 64px)",
@@ -189,7 +383,7 @@ export default function FeesPage() {
           </p>
 
           {/* Action CTAs */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
+          <div className="fees-hero-actions" style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
             <a
               href="#calc"
               style={{
@@ -232,6 +426,7 @@ export default function FeesPage() {
 
           {/* Micro Reassurances */}
           <div
+            className="fees-reassurances"
             style={{
               display: "flex",
               flexWrap: "wrap",
@@ -248,21 +443,21 @@ export default function FeesPage() {
               </svg>
               <span>Zero upfront retainer</span>
             </div>
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <span className="fees-reassurance-dot" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
               <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
               </svg>
               <span>23% flat contingency</span>
             </div>
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <span className="fees-reassurance-dot" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
               <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
               </svg>
               <span>Net 15 on start date</span>
             </div>
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+            <span className="fees-reassurance-dot" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
               <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
@@ -506,8 +701,8 @@ export default function FeesPage() {
               }}
             >
               <div>
-                <div className="fee-calc-dash-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
-                  <span className="fee-calc-meta-pill" style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", background: "rgba(29,78,216,0.08)", padding: "4px 10px", borderRadius: 6, border: "1px solid rgba(29,78,216,0.18)" }}>
+                <div className="fee-calc-dash-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, flexWrap: "wrap", gap: 10 }}>
+                  <span className="fee-calc-meta-pill" style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", background: "rgba(29,78,216,0.08)", padding: "4px 10px", borderRadius: 6, border: "1px solid rgba(29,78,216,0.18)", display: "inline-flex", alignItems: "center", whiteSpace: "nowrap", width: "fit-content", flexShrink: 0 }}>
                     CONFIRMED 23% CONTINGENCY
                   </span>
                   <span style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#64748B", fontWeight: 600 }}>Zero Upfront</span>
@@ -522,7 +717,7 @@ export default function FeesPage() {
                   </div>
                 </div>
 
-                <div className="fee-milestones-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 24 }}>
+                <div className="fee-milestones-grid" style={{ marginBottom: 24 }}>
                   <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
                     <span className="fee-milestone-label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#64748B", marginBottom: 4 }}>Invoice Date</span>
                     <span className="fee-milestone-val" style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#08142A" }}>{okDate ? fmt.date(startDate) : "–"}</span>
@@ -684,13 +879,13 @@ export default function FeesPage() {
             </button>
           </div>
 
-          <div className="table-wrap" style={{ marginTop: 32, background: "#FFFFFF", borderRadius: 14, border: "1.5px solid #E2E8F0", overflow: "hidden", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
-            <table className="data" style={{ width: "100%", borderCollapse: "collapse" }}>
+          <div className="table-wrap fee-table-wrap" style={{ marginTop: 32, background: "#FFFFFF", borderRadius: 14, border: "1.5px solid #E2E8F0", overflowX: "auto", WebkitOverflowScrolling: "touch", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
+            <table className="data" style={{ width: "100%", minWidth: 620, borderCollapse: "collapse" }}>
               <thead>
                 <tr style={{ background: "#FAF9F5", borderBottom: "1.5px solid #E2E8F0" }}>
-                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748B" }}>Ask</th>
-                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748B" }}>Why it matters</th>
-                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8" }}>Orion&apos;s answer</th>
+                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748B", minWidth: 180 }}>Ask</th>
+                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748B", minWidth: 220 }}>Why it matters</th>
+                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", minWidth: 200 }}>Orion&apos;s answer</th>
                 </tr>
               </thead>
               <tbody id="q-rows">
@@ -712,6 +907,9 @@ export default function FeesPage() {
               </tbody>
             </table>
           </div>
+          <div className="fee-table-scroll-hint" aria-hidden="true">
+            <span>← Swipe horizontally to view full comparison →</span>
+          </div>
         </div>
       </section>
 
@@ -732,18 +930,28 @@ export default function FeesPage() {
               </p>
             </div>
 
-            <div className="faq" style={{ marginTop: 28 }}>
-              <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "18px 22px", marginBottom: 12 }}>
-                <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>Do we sign an agreement before we see candidates?</summary>
-                <p style={{ marginTop: 12, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
-                  No. You sign nothing until you want to interview someone we introduced. Looking at candidate profiles and dossiers commits you to nothing.
-                </p>
+            <div className="faq fee-faq-clean" style={{ marginTop: 28 }}>
+              <details>
+                <summary>
+                  <span>Do we sign an agreement before we see candidates?</span>
+                  <span className="faq-toggle-icon" aria-hidden="true" />
+                </summary>
+                <div className="faq-body">
+                  <p>
+                    No. You sign nothing until you want to interview someone we introduced. Looking at candidate profiles and dossiers commits you to nothing.
+                  </p>
+                </div>
               </details>
-              <details style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 10, padding: "18px 22px" }}>
-                <summary style={{ fontWeight: 600, color: "#08142A", cursor: "pointer", fontSize: 15 }}>Do you offer a refund instead of replacement?</summary>
-                <p style={{ marginTop: 12, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
-                  Our standard contract term is a priority replacement search. Cash-refund terms can be structured for multi-hire retainers or enterprise mandates; discuss with Justin prior to engagement.
-                </p>
+              <details>
+                <summary>
+                  <span>Do you offer a refund instead of replacement?</span>
+                  <span className="faq-toggle-icon" aria-hidden="true" />
+                </summary>
+                <div className="faq-body">
+                  <p>
+                    Our standard contract term is a priority replacement search. Cash-refund terms can be structured for multi-hire retainers or enterprise mandates; discuss with Justin prior to engagement.
+                  </p>
+                </div>
               </details>
             </div>
           </div>

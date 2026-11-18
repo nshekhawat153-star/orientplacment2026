@@ -30,6 +30,20 @@ export function IndeedTopSearchBar({
     setLocation(initialLocation);
   }, [initialLocation]);
 
+  const handleClearQuery = () => {
+    setQuery("");
+    if (onSearch) {
+      onSearch("", location.trim());
+    }
+  };
+
+  const handleClearLocation = () => {
+    setLocation("");
+    if (onSearch) {
+      onSearch(query.trim(), "");
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (onSearch) {
@@ -56,12 +70,29 @@ export function IndeedTopSearchBar({
           <input
             type="text"
             className="indeed-search-input"
-            placeholder='Job title, keywords, or company'
+            placeholder="Job title, keywords, or company"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setQuery(val);
+            }}
             list="roles-datalist"
             aria-label="Job title, keywords, or company"
           />
+          {query && (
+            <button
+              type="button"
+              className="indeed-clear-btn"
+              onClick={handleClearQuery}
+              aria-label="Clear job search"
+              title="Clear"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          )}
           <datalist id="roles-datalist">
             {roles.map((r) => (
               <option key={r.slug} value={r.name} />
@@ -79,10 +110,27 @@ export function IndeedTopSearchBar({
             className="indeed-search-input"
             placeholder='City, state, or "remote"'
             value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setLocation(val);
+            }}
             list="cities-datalist"
             aria-label='City, state, or "remote"'
           />
+          {location && (
+            <button
+              type="button"
+              className="indeed-clear-btn"
+              onClick={handleClearLocation}
+              aria-label="Clear location search"
+              title="Clear"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          )}
           <datalist id="cities-datalist">
             {cities.map((c) => (
               <option key={c.slug} value={`${c.name}, ${c.state}`} />
