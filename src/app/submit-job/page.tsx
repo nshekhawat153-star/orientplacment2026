@@ -122,7 +122,7 @@ export default function SubmitJobPage() {
   const candidateIds = requestedId ? [requestedId] : matches.map((m) => m.c.id);
 
   return (
-    <div style={{ background: "#FAF9F5", minHeight: "100vh", color: "#08142A" }}>
+    <div style={{ background: "#08142A", minHeight: "100vh", color: "#08142A" }}>
       <style>{`
         /* 1. Hero Section */
         .sj-hero-sec {

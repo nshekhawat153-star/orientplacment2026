@@ -39,7 +39,7 @@ export default function CandidatesPage() {
   const featuredJobs = [ep[0], re, pl].filter(Boolean);
 
   return (
-    <div style={{ background: "#FAF9F5", minHeight: "100vh", color: "#08142A" }}>
+    <div style={{ background: "#08142A", minHeight: "100vh", color: "#08142A" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -268,6 +268,7 @@ export default function CandidatesPage() {
         </div>
       </section>
 
+      <div style={{ background: "#FAF9F5" }}>
       {/* 2. TRUST BAR STRIP */}
       <section style={{ background: "#FFFFFF", borderBottom: "1px solid #E2E8F0", padding: "28px 0" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
@@ -839,6 +840,7 @@ export default function CandidatesPage() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }

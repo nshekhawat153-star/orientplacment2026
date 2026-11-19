@@ -188,7 +188,7 @@ export function FindCandidatesClient() {
   }, [termsModal.open, viewMode, signedCandidateId, activeCandidate?.id, promptText]);
 
   return (
-    <div style={{ background: "#FAF9F5", minHeight: "100vh", color: "#08142A" }}>
+    <div style={{ background: "#08142A", minHeight: "100vh", color: "#08142A" }}>
       {/* 1. LUXURY HERO WITH VIDEO BACKGROUND & THE SMART ASK BOX */}
       <HeroLuxuryAskSection
         initialText={promptText}

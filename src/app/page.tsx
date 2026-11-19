@@ -11,7 +11,6 @@ import { InteractiveCandidateShowcase } from "@/components/InteractiveCandidateS
 import { ReviewsSection } from "@/components/ReviewCard";
 import { PeopleSection } from "@/components/PeopleSection";
 import { ResourceCards } from "@/components/ResourceCards";
-import { CityTiles, RoleTiles } from "@/components/DirectoryTiles";
 import { CtaBand } from "@/components/CtaBand";
 import { Mark } from "@/components/Mark";
 import { Icon, AwardIcon } from "@/components/icons";
@@ -535,78 +534,6 @@ export default function HomePage() {
                 <Link href="/salaries/estate-planning-attorney/houston-tx" className="btn-resources-action">
                   <span>Explore salary directory</span>
                   <span className="resources-btn-arrow" aria-hidden="true">→</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 10. Browse */}
-        <section className="block browse-sec" id="browse">
-          <div className="wrap">
-            <div className="sec-head-premium">
-              <div className="badge-capsule">
-                <span className="badge-dot" />
-                MARKET DIRECTORY · LOCAL INTELLIGENCE
-              </div>
-              <h2 className="sec-title-lg">
-                Pay and candidates near{" "}
-                <span className="serif-accent">you</span>
-              </h2>
-              <p className="who-lede">
-                Compensation intelligence, median salary baselines, and legal practice staffing directories across major US legal markets.
-              </p>
-            </div>
-
-            <div className="browse-panels-grid">
-              {/* Panel 1: Cities */}
-              <div className="browse-panel">
-                <div className="browse-panel-header">
-                  <div className="browse-panel-title-group">
-                    <div className="browse-panel-icon-wrap">
-                      <Icon name="pin" />
-                    </div>
-                    <div>
-                      <h3 className="browse-panel-title">Major Metro Markets</h3>
-                      <p className="browse-panel-subtitle">Legal staffing hubs &amp; verified compensation</p>
-                    </div>
-                  </div>
-                  <span className="browse-panel-badge">10 METRO HUBS</span>
-                </div>
-                <CityTiles />
-              </div>
-
-              {/* Panel 2: Practice Roles */}
-              <div className="browse-panel">
-                <div className="browse-panel-header">
-                  <div className="browse-panel-title-group">
-                    <div className="browse-panel-icon-wrap">
-                      <Icon name="scale" />
-                    </div>
-                    <div>
-                      <h3 className="browse-panel-title">Practice Specializations</h3>
-                      <p className="browse-panel-subtitle">Attorney, counsel &amp; paralegal roles</p>
-                    </div>
-                  </div>
-                  <span className="browse-panel-badge">11 PRACTICE ROLES</span>
-                </div>
-                <RoleTiles city="houston-tx" />
-              </div>
-            </div>
-
-            {/* Bottom Directory Reassurance Banner */}
-            <div className="browse-bottom-bar">
-              <div className="browse-bottom-left">
-                <span className="browse-bottom-tag">NATIONWIDE LEGAL SEARCH REACH</span>
-                <p className="browse-bottom-text">
-                  Need customized compensation benchmarking or a lateral search in a market not listed above?
-                  Justin and Jon run mandates across all 50 states.
-                </p>
-              </div>
-              <div className="browse-bottom-right">
-                <Link href="/hire-attorneys" className="btn-browse-action">
-                  <span>Inquire about your city</span>
-                  <span className="browse-btn-arrow" aria-hidden="true">→</span>
                 </Link>
               </div>
             </div>

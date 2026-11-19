@@ -115,7 +115,7 @@ export default function SalaryCheckPage() {
   const bonusNormText = bonusNorms[roleObj.kind] || bonusNorms.attorney;
 
   return (
-    <div style={{ background: "#FAF9F5", minHeight: "100vh", color: "#08142A" }}>
+    <div style={{ background: "#08142A", minHeight: "100vh", color: "#08142A" }}>
       <style>{`
         .sc-hero-grid {
           display: grid;
@@ -452,6 +452,7 @@ export default function SalaryCheckPage() {
         </div>
       </section>
 
+      <div style={{ background: "#FAF9F5" }}>
       {/* 2. RESULT ON BAND BAR & METRICS STUDIO */}
       <section style={{ maxWidth: "1200px", margin: "80px auto 0", padding: "0 24px" }} id="result">
         <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 36px" }}>
@@ -1030,6 +1031,7 @@ export default function SalaryCheckPage() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }
