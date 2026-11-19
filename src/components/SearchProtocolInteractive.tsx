@@ -17,7 +17,11 @@ const STEPS: StepData[] = [
     id: "step-1",
     stepNum: "01",
     kicker: "DAY 0 · INTAKE",
-    title: "Practice Mandate & Calibration",
+    title: (
+      <>
+        Consultation &amp; <span className="title-blue">Practice Mapping</span>
+      </>
+    ),
     desc: "A focused 15-minute consultation to map your firm's practice demands, culture, and billable targets.",
     sla: "< 1 Hour Response SLA",
   },
@@ -25,7 +29,11 @@ const STEPS: StepData[] = [
     id: "step-2",
     stepNum: "02",
     kicker: "DAYS 5–7 · SOURCING",
-    title: "Screened Candidate Shortlist",
+    title: (
+      <>
+        Direct Sourcing &amp; <span className="title-blue">Screened Shortlist</span>
+      </>
+    ),
     desc: "Direct headhunting across our 100,000+ passive attorney network with verified compensation expectations.",
     sla: "5–7 Business Days",
   },
@@ -33,7 +41,11 @@ const STEPS: StepData[] = [
     id: "step-3",
     stepNum: "03",
     kicker: "START DATE · TERMS",
-    title: "Contingency Hire & 90-Day Guarantee",
+    title: (
+      <>
+        Contingency Hire &amp; <span className="title-blue">90-Day Guarantee</span>
+      </>
+    ),
     desc: "Interview finalists with zero upfront retainer. Pay standard contingency fee only on start date.",
     sla: "100% Risk-Free · Net 15",
   },
@@ -494,10 +506,6 @@ export function SearchProtocolInteractive() {
           letter-spacing: -0.015em !important;
           margin: 0 0 8px !important;
           transition: color 0.2s ease;
-        }
-
-        .protocol-step-card.active .protocol-step-title {
-          color: #1D4ED8 !important;
         }
 
         .title-blue {

@@ -2868,10 +2868,6 @@ a.rating:hover {
   transition: color 0.2s ease;
 }
 
-.protocol-step-card.active .protocol-step-title {
-  color: #1D4ED8 !important;
-}
-
 .title-blue {
   color: #1D4ED8 !important;
   font-weight: 600 !important;
