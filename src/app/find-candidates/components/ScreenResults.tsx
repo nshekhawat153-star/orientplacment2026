@@ -88,7 +88,7 @@ export function ScreenResults({
         <form
           className="fc-askbox"
           onSubmit={handleEditSubmit}
-          style={{ maxWidth: "100%", margin: "0 0 16px", padding: "10px 14px" }}
+          style={{ maxWidth: "100%", margin: "0 0 16px", padding: "8px 12px 8px 14px", borderRadius: 12 }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <textarea
@@ -96,12 +96,12 @@ export function ScreenResults({
               value={editText}
               onChange={(e) => setEditText(e.target.value)}
               placeholder="Refine criteria or paste another job posting URL..."
-              style={{ minHeight: 38, fontSize: 15 }}
+              style={{ minHeight: 46, height: 46, fontSize: 14.5, padding: "4px 0", lineHeight: 1.35, width: "100%", border: 0, outline: "none", background: "transparent", resize: "none", color: "#08142A" }}
             />
             <button
               type="submit"
               className="fc-send-btn"
-              style={{ width: 38, height: 38, borderRadius: 9 }}
+              style={{ width: 38, height: 38, borderRadius: 9, flexShrink: 0 }}
               aria-label="Re-run search"
             >
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
