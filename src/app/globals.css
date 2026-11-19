@@ -8329,6 +8329,24 @@ article h3 .mark {
     padding: 72px 0 80px !important;
   }
 
+  .cta-bg-image {
+    background-image: url("/images/bg-sec-mobile.jpg") !important;
+    background-position: 28% top !important;
+    background-size: cover !important;
+    opacity: 0.50 !important;
+    filter: brightness(1.05) contrast(1.15) !important;
+  }
+
+  .cta-bg-overlay {
+    background:
+      linear-gradient(180deg,
+        rgba(8, 20, 42, 0.50) 0%,
+        rgba(8, 20, 42, 0.20) 25%,
+        rgba(8, 20, 42, 0.60) 65%,
+        #08142A 100%),
+      radial-gradient(circle at 45% 20%, rgba(37, 99, 235, 0.20) 0%, transparent 60%) !important;
+  }
+
   .cta-card-shell {
     grid-template-columns: 1fr !important;
     gap: 36px !important;
@@ -8361,6 +8379,13 @@ article h3 .mark {
 
   .cta-band {
     padding: 56px 0 64px !important;
+  }
+
+  .cta-bg-image {
+    background-image: url("/images/bg-sec-mobile.jpg") !important;
+    background-position: 28% top !important;
+    background-size: cover !important;
+    opacity: 0.52 !important;
   }
 
   .cta-card-shell {
