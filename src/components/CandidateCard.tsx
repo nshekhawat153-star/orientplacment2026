@@ -127,9 +127,8 @@ export function CandidateCard({
   if (long) {
     return (
       <article
-        className={`cand cand-long ${selected ? "job-selected cand-selected" : ""} ${
-          onSelect ? "job-clickable" : ""
-        }`}
+        className={`cand cand-long ${selected ? "job-selected cand-selected" : ""} ${onSelect ? "job-clickable" : ""
+          }`}
         data-id={c.id}
         onClick={handleCardClick}
       >
@@ -429,9 +428,8 @@ export function CandidateCard({
 
   return (
     <article
-      className={`cand ${selected ? "job-selected cand-selected" : ""} ${
-        onSelect ? "job-clickable" : ""
-      }`}
+      className={`cand ${selected ? "job-selected cand-selected" : ""} ${onSelect ? "job-clickable" : ""
+        }`}
       data-id={c.id}
       onClick={handleCardClick}
     >
