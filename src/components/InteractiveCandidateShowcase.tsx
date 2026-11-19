@@ -20,6 +20,7 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
   const router = useRouter();
   const { setUnlocked, setUserEmail } = useSite();
   const [gateCandidate, setGateCandidate] = useState<EnrichedCandidate | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
   const rawList = [c1, c2, c3, c4, c5].filter((c): c is Candidate => Boolean(c));
 
   const titleMap: Record<string, { title: string; scope: string }> = {
@@ -80,11 +81,12 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
           };
           const bars = c.bars.length ? c.bars.join(", ") : "Not required";
           const num = String(idx + 1).padStart(2, "0");
+          const isMobileHidden = idx >= 3 && !isExpanded;
 
           return (
             <div
               key={c.id}
-              className="cand-gallery-card"
+              className={`cand-gallery-card ${isMobileHidden ? "cand-card-mobile-hidden" : ""}`}
               onClick={() => handleCardClick(c.id)}
             >
               {/* Top Row: Confidential ID badge & Availability status */}
@@ -160,6 +162,39 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
           );
         })}
       </div>
+
+      {/* Mobile Show More / Show Less Toggle (Only visible on mobile <= 900px, hidden on desktop) */}
+      {rawList.length > 3 && (
+        <div className="cand-mobile-show-more-wrap">
+          <button
+            type="button"
+            className="btn-cand-mobile-show-more"
+            onClick={() => setIsExpanded((prev) => !prev)}
+            aria-expanded={isExpanded}
+          >
+            <span>
+              {isExpanded ? "Show fewer candidates" : `Show more candidates (${rawList.length - 3} more)`}
+            </span>
+            <svg
+              viewBox="0 0 16 16"
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.2s ease",
+              }}
+              aria-hidden="true"
+            >
+              <path d="M4 6l4 4 4-4" />
+            </svg>
+          </button>
+        </div>
+      )}
 
       {/* Sleek Executive Directory Discovery Strip - Premium Dark Redesign */}
       <div className="showcase-bottom-banner">

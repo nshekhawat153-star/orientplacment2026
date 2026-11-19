@@ -4289,6 +4289,11 @@ a.id:hover {
   box-shadow: 0 16px 36px -8px rgba(37, 99, 235, 0.12), 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
+/* Mobile-only toggle wrapper - strictly hidden on desktop */
+.cand-mobile-show-more-wrap {
+  display: none !important;
+}
+
 .cand-card-topbar {
   display: flex;
   align-items: center;
@@ -4779,6 +4784,7 @@ article h3 .mark {
   .cand-gallery-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+    margin-bottom: 16px;
   }
 
   .cand-gallery-card,
@@ -4788,6 +4794,45 @@ article h3 .mark {
     width: 100%;
     max-width: 100%;
     padding: 20px 18px;
+  }
+
+  .cand-gallery-card.cand-card-mobile-hidden {
+    display: none !important;
+  }
+
+  .cand-mobile-show-more-wrap {
+    display: flex !important;
+    justify-content: center;
+    margin: 0 0 28px 0;
+    width: 100%;
+  }
+
+  .btn-cand-mobile-show-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px 20px;
+    background: #FFFFFF;
+    color: #1D4ED8;
+    border: 1.5px solid #BFDBFE;
+    border-radius: 10px;
+    font-family: var(--body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.05);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-cand-mobile-show-more:hover,
+  .btn-cand-mobile-show-more:active {
+    background: #EFF6FF;
+    border-color: #93C5FD;
+    color: #1E40AF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.10);
   }
 }
 
