@@ -105,6 +105,12 @@ export default function AboutPage() {
             grid-template-columns: 1fr;
           }
         }
+        .about-reviews-sec .rv-quote-blue,
+        #reviews .rv-quote-blue {
+          color: #1D4ED8 !important;
+          text-shadow: none !important;
+          font-weight: 600 !important;
+        }
       `}</style>
 
       {/* 1. LUXURY DARK HERO (CENTERED, NO CARDS, NO BREADCRUMBS) */}
@@ -399,7 +405,7 @@ export default function AboutPage() {
       </section>
 
       {/* 5. Reviews Wall with Tabs */}
-      <section style={{ maxWidth: "1200px", margin: "88px auto 0", padding: "0 24px" }} id="reviews">
+      <section className="about-reviews-sec" style={{ maxWidth: "1200px", margin: "88px auto 0", padding: "0 24px" }} id="reviews">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "32px", flexWrap: "wrap", gap: 16 }}>
           <div>
             <div

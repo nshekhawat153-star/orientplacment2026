@@ -230,7 +230,7 @@ export function FindCandidatesClient() {
       </div>
 
       {/* 3. MAIN CANDIDATES STREAM OR FULL PROFILE DOSSIER */}
-      <div id="results">
+      <div id="results" style={{ background: "#FAF9F5", borderBottom: "1px solid #E2E8F0", position: "relative", zIndex: 1 }}>
         {viewMode === "stream" ? (
           <ScreenResults
             seat={seat}

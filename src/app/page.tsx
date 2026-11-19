@@ -16,6 +16,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { Mark } from "@/components/Mark";
 import { Icon, AwardIcon } from "@/components/icons";
 import { findCandidate, orionLine, trust } from "@/data";
+import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 
 export const metadata: Metadata = {
   title: "Legal recruiters for small and mid-size law firms | Orion",
@@ -80,6 +81,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <ScrollRevealProvider />
         {/* 1. CINEMATIC WATER SPLASH HERO */}
         <section className="hero-cinematic" aria-labelledby="h1">
           {/* Background Water Splash Video */}
@@ -106,7 +108,7 @@ export default function HomePage() {
 
               <h1 id="h1" className="hero-display-h1">
                 Legal recruiters for small and mid-size{" "}
-                <span className="hero-accent-serif" style={{ color: "#2563EB" }}>law firms.</span>
+                <span className="hero-accent-serif" style={{ color: "#60A5FA" }}>law firms.</span>
               </h1>
 
               <p className="hero-lead-p">
@@ -153,6 +155,12 @@ export default function HomePage() {
 
         {/* 4. What It Costs - Transparent Contingency Terms */}
         <section className="block terms-sec" id="terms" aria-labelledby="terms-h2">
+          {/* Faded Background Graphic Backdrop */}
+          <div className="terms-bg-backdrop" aria-hidden="true">
+            <div className="terms-bg-image" />
+            <div className="terms-bg-overlay" />
+          </div>
+
           <div className="wrap">
             <div className="terms-head">
               <div className="terms-eyebrow">
@@ -465,20 +473,38 @@ export default function HomePage() {
             </div>
             <ResourceCards set="home" />
 
-            {/* Bottom Ungated Intelligence Reassurance Bar */}
+            {/* Bottom Ungated Intelligence Reassurance Bar - Dark Luxury Redesign */}
             <div className="resources-bottom-bar">
-              <div className="resources-bottom-left">
-                <span className="resources-bottom-tag">100% UNGATED LEGAL INTELLIGENCE</span>
-                <p className="resources-bottom-text">
-                  All compensation benchmarks, interview frameworks, and recruitment guides are publicly available.
-                  No email wall, no form to fill, and no subscription.
-                </p>
+              <div className="resources-bottom-content">
+                <div className="resources-bottom-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#60A5FA" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+                  </svg>
+                </div>
+                <div className="resources-bottom-left">
+                  <div className="resources-bottom-tag">
+                    <span className="resources-tag-dot" />
+                    <span>100% UNGATED LEGAL INTELLIGENCE</span>
+                  </div>
+                  <p className="resources-bottom-text">
+                    All compensation benchmarks, interview frameworks, and recruitment guides are <strong>publicly available</strong>.
+                    <span className="resources-text-accent"> Zero email wall, zero sign-up, and zero subscription.</span>
+                  </p>
+                </div>
               </div>
+
               <div className="resources-bottom-right">
                 <Link href="/salaries/estate-planning-attorney/houston-tx" className="btn-resources-action">
                   <span>Explore salary directory</span>
                   <span className="resources-btn-arrow" aria-hidden="true">→</span>
                 </Link>
+                <span className="resources-subtext">
+                  <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                  </svg>
+                  <span>100% Public Access · Instant Download</span>
+                </span>
               </div>
             </div>
           </div>
@@ -486,6 +512,21 @@ export default function HomePage() {
 
         {/* 11. For candidates */}
         <section className="block flush cand-band-sec" id="for-candidates">
+          <div className="cand-band-video-backdrop" aria-hidden="true">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="cand-band-video-el"
+            >
+              <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+              <source src="/media/splash.mp4" type="video/mp4" />
+            </video>
+            <div className="cand-band-video-gradient" />
+            <div className="cand-band-video-radial-aura" />
+          </div>
+
           <div className="wrap">
             <div className="cand-band">
               <div className="cand-band-content">

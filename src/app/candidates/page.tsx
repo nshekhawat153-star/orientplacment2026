@@ -591,35 +591,46 @@ export default function CandidatesPage() {
         </div>
       </section>
 
-      {/* 6. VERIFIED CANDIDATE REVIEWS */}
-      <section style={{ maxWidth: "1200px", margin: "90px auto 0", padding: "0 24px" }} id="reviews">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32, flexWrap: "wrap", gap: 14 }}>
-          <div>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                background: "rgba(29, 78, 216, 0.08)",
-                border: "1px solid rgba(29, 78, 216, 0.2)",
-                borderRadius: "100px",
-                padding: "4px 12px",
-                fontSize: "0.78rem",
-                fontWeight: 600,
-                color: "#1D4ED8",
-                marginBottom: "10px",
-              }}
-            >
-              Verified Google 5.0 Rating
+      {/* 6. VERIFIED CANDIDATE REVIEWS (HOMEPAGE-STYLE DARK LUXURY SECTION) */}
+      <section className="block reviews-sec" id="reviews">
+        <div className="wrap">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              GOOGLE REVIEWS · VERIFIED CANDIDATES &amp; ATTORNEYS
             </div>
-            <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#08142A", margin: 0, fontFamily: "var(--font-serif, Georgia, serif)" }}>
-              What Attorneys &amp; Paralegals Say
+            <h2 className="sec-title-lg">
+              What attorneys &amp; paralegals{" "}
+              <span className="serif-accent">say</span>
             </h2>
+            <div className="reviews-rating-pill">
+              <RatingBadge link />
+            </div>
           </div>
-          <RatingBadge link />
-        </div>
 
-        <ReviewsSection kind="candidate" />
+          <ReviewsSection kind="candidate" />
+
+          {/* Bottom Reassurance & All Reviews Link */}
+          <div className="reviews-bottom-bar">
+            <div className="reviews-bottom-trust">
+              <span className="reviews-bottom-dot" />
+              <span>
+                100% verified public Google reviews · Jon is named in <strong>{trust.jonNamed} of {trust.reviews}</strong> reviews
+              </span>
+            </div>
+            <a
+              href={trust.google}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-reviews-google"
+            >
+              <span>Read all {trust.reviews} reviews on Google</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* 7. CANDIDATE FAQ */}

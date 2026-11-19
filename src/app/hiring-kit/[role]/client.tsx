@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DATA, fmt, matchCandidates } from "@/data";
+import { DATA, fmt, matchCandidates, trust } from "@/data";
 import { Mark } from "@/components/Mark";
 import { TrustLine, RatingBadge } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
 import { GateForm } from "@/components/GateForm";
-import { ReviewCard } from "@/components/ReviewCard";
+import { ReviewCard, ReviewsSection } from "@/components/ReviewCard";
 import { CtaBand } from "@/components/CtaBand";
 import { Icon } from "@/components/icons";
 
@@ -670,21 +670,44 @@ export default function HiringKitClient({ roleParam }: { roleParam: string }) {
         </div>
       </section>
 
-      {/* 5. Employer reviews */}
-      <section className="block" id="reviews">
+      {/* 5. Employer reviews (Homepage-Style Dark Luxury Section) */}
+      <section className="block reviews-sec" id="reviews">
         <div className="wrap">
-          <div className="sec-head row">
-            <div>
-              <span className="eyebrow">Reviews</span>
-              <h2>What law firms say</h2>
-              <p>Rather we ran the search? Same people, same kit, and a fee only if you hire.</p>
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              GOOGLE REVIEWS · VERIFIED CLIENTS &amp; CANDIDATES
             </div>
-            <RatingBadge link={true} />
+            <h2 className="sec-title-lg">
+              What firms and candidates{" "}
+              <span className="serif-accent">say</span>
+            </h2>
+            <div className="reviews-rating-pill">
+              <RatingBadge link />
+            </div>
           </div>
-          <div className="reviews-3">
-            <ReviewCard review={DATA.reviews[0]} />
-            <ReviewCard review={DATA.reviews[1]} />
-            <ReviewCard review={DATA.reviews[3]} />
+
+          <ReviewsSection kind="employer" />
+
+          {/* Bottom Reassurance & All Reviews Link */}
+          <div className="reviews-bottom-bar">
+            <div className="reviews-bottom-trust">
+              <span className="reviews-bottom-dot" />
+              <span>
+                100% verified public Google reviews · Jon is named in <strong>{trust.jonNamed} of {trust.reviews}</strong> reviews
+              </span>
+            </div>
+            <a
+              href={trust.google}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-reviews-google"
+            >
+              <span>Read all {trust.reviews} reviews on Google</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>

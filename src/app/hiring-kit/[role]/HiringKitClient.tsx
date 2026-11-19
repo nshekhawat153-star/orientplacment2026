@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DATA, fmt, matchCandidates } from "@/data";
+import { DATA, fmt, matchCandidates, trust } from "@/data";
 import { Mark } from "@/components/Mark";
 import { TrustLine, RatingBadge } from "@/components/Rating";
 import { CandidateCard } from "@/components/CandidateCard";
 import { GateForm } from "@/components/GateForm";
-import { ReviewCard } from "@/components/ReviewCard";
+import { ReviewCard, ReviewsSection } from "@/components/ReviewCard";
 import { Icon } from "@/components/icons";
 
 export function HiringKitClient({
@@ -1290,52 +1290,45 @@ export function HiringKitClient({
       </section>
 
       {/* =========================================================================
-          SECTION 3: Managing Partner Reviews & Social Proof
+          SECTION 3: Managing Partner Reviews & Social Proof (Homepage-Style Dark Luxury Section)
           ========================================================================= */}
-      <section
-        id="reviews"
-        style={{
-          background: "#FFFFFF",
-          padding: "88px 0 96px",
-          borderBottom: "1px solid #E2E8F0"
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "36px", flexWrap: "wrap", gap: "16px" }}>
-            <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(29, 78, 216, 0.08)",
-                  border: "1px solid rgba(29, 78, 216, 0.2)",
-                  borderRadius: "100px",
-                  padding: "5px 14px",
-                  fontSize: "0.78rem",
-                  fontWeight: 700,
-                  color: "#1D4ED8",
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  marginBottom: "12px"
-                }}
-              >
-                STEP 03 · VERIFIED TRACK RECORD
-              </div>
-              <h2 style={{ fontSize: "clamp(1.9rem, 3vw, 2.4rem)", fontWeight: 700, color: "#08142A", margin: 0, fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                What Law Firm Partners{" "}
-                <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
-                  Say About Orion
-                </span>
-              </h2>
+      <section className="block reviews-sec" id="reviews">
+        <div className="wrap">
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              GOOGLE REVIEWS · VERIFIED CLIENTS &amp; CANDIDATES
             </div>
-            <RatingBadge link={true} />
+            <h2 className="sec-title-lg">
+              What firms and candidates{" "}
+              <span className="serif-accent">say</span>
+            </h2>
+            <div className="reviews-rating-pill">
+              <RatingBadge link />
+            </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
-            <ReviewCard review={DATA.reviews[0]} />
-            <ReviewCard review={DATA.reviews[1]} />
-            <ReviewCard review={DATA.reviews[3]} />
+          <ReviewsSection kind="employer" />
+
+          {/* Bottom Reassurance & All Reviews Link */}
+          <div className="reviews-bottom-bar">
+            <div className="reviews-bottom-trust">
+              <span className="reviews-bottom-dot" />
+              <span>
+                100% verified public Google reviews · Jon is named in <strong>{trust.jonNamed} of {trust.reviews}</strong> reviews
+              </span>
+            </div>
+            <a
+              href={trust.google}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-reviews-google"
+            >
+              <span>Read all {trust.reviews} reviews on Google</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>

@@ -117,6 +117,73 @@ export default function FeesPage() {
           }
         }
 
+        /* 4 Pillars - Dedicated High-Contrast Light Cards */
+        .fees-pillar-card {
+          background: #FFFFFF !important;
+          border: 1.5px solid #E2E8F0 !important;
+          border-radius: 16px !important;
+          padding: 32px 26px !important;
+          box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04) !important;
+          display: flex !important;
+          flex-direction: column !important;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .fees-pillar-card:hover {
+          transform: translateY(-4px) !important;
+          border-color: #3B82F6 !important;
+          box-shadow: 0 16px 36px rgba(37, 99, 235, 0.12) !important;
+        }
+        .fees-pillar-kicker {
+          color: #1D4ED8 !important;
+          font-family: var(--mono) !important;
+          font-size: 11px !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.1em !important;
+          text-transform: uppercase !important;
+          margin-bottom: 14px !important;
+        }
+        .fees-pillar-val {
+          font-family: var(--display) !important;
+          font-size: clamp(36px, 3.4vw, 44px) !important;
+          line-height: 1.05 !important;
+          color: #08142A !important;
+          font-weight: 500 !important;
+          letter-spacing: -0.02em !important;
+          margin-bottom: 6px !important;
+        }
+        .fees-pillar-label {
+          font-family: var(--body) !important;
+          font-size: 14.5px !important;
+          font-weight: 600 !important;
+          color: #1E293B !important;
+          margin-bottom: 10px !important;
+        }
+        .fees-pillar-desc {
+          font-size: 13.5px !important;
+          line-height: 1.6 !important;
+          color: #475569 !important;
+          margin: 0 0 20px !important;
+          flex: 1 !important;
+        }
+        .fees-pillar-badge {
+          display: inline-flex !important;
+          align-items: center !important;
+          gap: 6px !important;
+          align-self: flex-start !important;
+          background: #EFF6FF !important;
+          border: 1px solid #DBEAFE !important;
+          border-radius: 999px !important;
+          padding: 5px 12px !important;
+          font-size: 11px !important;
+          font-family: var(--mono) !important;
+          font-weight: 700 !important;
+          color: #1D4ED8 !important;
+        }
+        .fees-pillar-badge .check {
+          color: #2563EB !important;
+          font-weight: 700 !important;
+        }
+
         /* 4 Pillars Responsive */
         @media (max-width: 1024px) {
           .terms-pillars-grid {
@@ -129,8 +196,9 @@ export default function FeesPage() {
             grid-template-columns: 1fr !important;
             gap: 14px !important;
           }
+          .fees-pillar-card,
           .terms-pillar {
-            padding: 20px 18px !important;
+            padding: 22px 18px !important;
           }
         }
 
@@ -511,82 +579,90 @@ export default function FeesPage() {
           </div>
 
           <div className="terms-pillars-grid">
-            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "30px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
-              <div className="pillar-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+            {/* 01 · CONTINGENCY FEE */}
+            <div className="fees-pillar-card">
+              <div className="fees-pillar-kicker">
                 01 · CONTINGENCY FEE
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 34, fontWeight: 400, color: "#08142A", marginBottom: 4 }}>
+              <div className="fees-pillar-val">
                 23%
               </div>
-              <div className="pillar-label" style={{ fontSize: 14, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+              <div className="fees-pillar-label">
                 Of first-year base salary
               </div>
-              <p className="pillar-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 16px" }}>
+              <p className="fees-pillar-desc">
                 Calculated strictly on base salary. Discretionary bonuses, health benefits, and sign-ons are never included.
               </p>
               <div style={{ marginTop: "auto" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.2)", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, color: "#1D4ED8" }}>
-                  Contingency Only
+                <span className="fees-pillar-badge">
+                  <span className="check">✓</span>
+                  <span>Contingency Only</span>
                 </span>
               </div>
             </div>
 
-            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "30px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
-              <div className="pillar-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+            {/* 02 · REPLACEMENT WARRANTY */}
+            <div className="fees-pillar-card">
+              <div className="fees-pillar-kicker">
                 02 · REPLACEMENT WARRANTY
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 34, fontWeight: 400, color: "#08142A", marginBottom: 4 }}>
+              <div className="fees-pillar-val">
                 90 Days
               </div>
-              <div className="pillar-label" style={{ fontSize: 14, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+              <div className="fees-pillar-label">
                 Calendar day guarantee
               </div>
-              <p className="pillar-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 16px" }}>
+              <p className="fees-pillar-desc">
                 If the hire leaves or is let go within 90 days, we conduct a prioritized replacement search at zero extra fee.
               </p>
               <div style={{ marginTop: "auto" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.2)", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, color: "#1D4ED8" }}>
-                  Free Replacement
+                <span className="fees-pillar-badge">
+                  <span className="check">✓</span>
+                  <span>Free Replacement</span>
                 </span>
               </div>
             </div>
 
-            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "30px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
-              <div className="pillar-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+            {/* 03 · CLIENT FREEDOM */}
+            <div className="fees-pillar-card">
+              <div className="fees-pillar-kicker">
                 03 · CLIENT FREEDOM
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 34, fontWeight: 400, color: "#08142A", marginBottom: 4 }}>
+              <div className="fees-pillar-val">
                 Zero
               </div>
-              <div className="pillar-label" style={{ fontSize: 14, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+              <div className="fees-pillar-label">
                 Upfront retainer or lock-in
               </div>
-              <p className="pillar-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 16px" }}>
+              <p className="fees-pillar-desc">
                 No upfront cash and no exclusivity. Keep your internal referrals and other recruiting channels fully active.
               </p>
               <div style={{ marginTop: "auto" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.2)", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, color: "#1D4ED8" }}>
-                  Non-Exclusive
+                <span className="fees-pillar-badge">
+                  <span className="check">✓</span>
+                  <span>Non-Exclusive</span>
                 </span>
               </div>
             </div>
 
-            <div className="terms-pillar" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "30px 24px", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
-              <div className="pillar-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+            {/* 04 · PAYMENT SCHEDULE */}
+            <div className="fees-pillar-card">
+              <div className="fees-pillar-kicker">
                 04 · PAYMENT SCHEDULE
               </div>
-              <div className="pillar-val" style={{ fontFamily: "var(--display)", fontSize: 34, fontWeight: 400, color: "#08142A", marginBottom: 4 }}>
+              <div className="fees-pillar-val">
                 Net 15
               </div>
-              <div className="pillar-label" style={{ fontSize: 14, fontWeight: 600, color: "#08142A", marginBottom: 10 }}>
+              <div className="fees-pillar-label">
                 Invoice on physical start date
               </div>
-              <p className="pillar-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 16px" }}>
+              <p className="fees-pillar-desc">
                 We issue the invoice only when the candidate physically begins work, payable within 15 calendar days.
               </p>
               <div style={{ marginTop: "auto" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.2)", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontFamily: "var(--mono)", fontWeight: 700, color: "#1D4ED8" }}>
-                  Start Date Invoice
+                <span className="fees-pillar-badge">
+                  <span className="check">✓</span>
+                  <span>Start Date Invoice</span>
                 </span>
               </div>
             </div>

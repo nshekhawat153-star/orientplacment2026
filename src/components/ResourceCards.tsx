@@ -91,7 +91,12 @@ export function ResourceCards({
             <h3>{r.title}</h3>
             <p>{r.desc}</p>
             <div className="rget">
-              <b>You get</b>
+              <b>
+                <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: "inline-block", verticalAlign: "-1px", marginRight: 5 }}>
+                  <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                </svg>
+                You get
+              </b>
               <span className="rget-text">{r.get}</span>
             </div>
             <div className="rgo">

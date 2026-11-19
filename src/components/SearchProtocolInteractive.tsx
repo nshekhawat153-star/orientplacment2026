@@ -7,7 +7,7 @@ interface StepData {
   id: string;
   stepNum: string;
   kicker: string;
-  title: string;
+  title: React.ReactNode;
   desc: string;
   sla: string;
 }
@@ -17,7 +17,11 @@ const STEPS: StepData[] = [
     id: "step-1",
     stepNum: "01",
     kicker: "DAY 0 · INTAKE",
-    title: "Consultation & Practice Mapping",
+    title: (
+      <>
+        Consultation &amp; <span className="title-blue">Practice Mapping</span>
+      </>
+    ),
     desc: "A focused 15-minute consultation to map your firm's practice demands, culture, and billable targets.",
     sla: "< 1 Hour Response SLA",
   },
@@ -25,7 +29,11 @@ const STEPS: StepData[] = [
     id: "step-2",
     stepNum: "02",
     kicker: "DAYS 5–7 · SOURCING",
-    title: "100,000+ Sourcing & Screened Shortlist",
+    title: (
+      <>
+        <span className="title-blue">100,000+ Sourcing</span> &amp; Screened Shortlist
+      </>
+    ),
     desc: "Direct headhunting across our passive attorney network with verified compensation expectations.",
     sla: "~1 Week Turnaround",
   },
@@ -33,7 +41,11 @@ const STEPS: StepData[] = [
     id: "step-3",
     stepNum: "03",
     kicker: "START DATE · TERMS",
-    title: "Interview, Hire, Then Pay",
+    title: (
+      <>
+        Interview, Hire, <span className="title-blue">Then Pay</span>
+      </>
+    ),
     desc: "Interview finalists with zero upfront retainer. Pay standard contingency fee only on start date.",
     sla: "90-Day Full Guarantee",
   },
@@ -260,6 +272,22 @@ export function SearchProtocolInteractive() {
           justify-content: center;
           padding: 20px 0 28px;
           background-color: #FAF9F5;
+          overflow: hidden;
+        }
+
+        /* Ethereal Tech Dot Matrix Background Pattern */
+        .protocol-tech-dots {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+          background-image:
+            radial-gradient(rgba(37, 99, 235, 0.11) 1.25px, transparent 1.25px),
+            radial-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+          background-size: 24px 24px, 12px 12px;
+          background-position: 0 0, 6px 6px;
+          mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 45%, transparent 95%);
+          -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 45%, transparent 95%);
         }
 
         .protocol-container {
@@ -476,6 +504,11 @@ export function SearchProtocolInteractive() {
           color: #0F172A !important;
           line-height: 1.35 !important;
           margin: 0 0 4px !important;
+        }
+
+        .title-blue {
+          color: #1D4ED8 !important;
+          font-weight: 600 !important;
         }
 
         .protocol-step-text {
@@ -865,7 +898,9 @@ export function SearchProtocolInteractive() {
 
       {/* Pinned Viewport Container */}
       <div className="protocol-pinned-viewport">
-        <div className="wrap">
+        {/* Subtle Ethereal Tech Dot Grid Pattern */}
+        <div className="protocol-tech-dots" aria-hidden="true" />
+        <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
           <div className="protocol-container">
             {/* Section Header */}
             <div className="protocol-header-group">
@@ -1032,7 +1067,7 @@ export function SearchProtocolInteractive() {
                           <div className="clean-card-head-row">
                             <div>
                               <span className="clean-card-kicker">CALIBRATED PRACTICE MANDATE</span>
-                              <h3 className="clean-card-title">Senior Lateral Associate / Counsel</h3>
+                              <h3 className="clean-card-title">Senior <span className="title-blue">Lateral Associate</span> / Counsel</h3>
                               <p className="clean-card-subtitle">Houston Boutique · Estate Planning &amp; Probate</p>
                             </div>
                             <span className="clean-sla-pill">&lt; 1 HOUR SLA</span>
@@ -1067,7 +1102,7 @@ export function SearchProtocolInteractive() {
                           <div className="clean-card-head-row">
                             <div>
                               <span className="clean-card-kicker">CONFIDENTIAL CANDIDATE DOSSIER</span>
-                              <h3 className="clean-card-title">Candidate #TX-EP-0412</h3>
+                              <h3 className="clean-card-title">Candidate <span className="title-blue">#TX-EP-0412</span></h3>
                               <p className="clean-card-subtitle">Lateral Associate · Regional Boutique · Houston Metro</p>
                             </div>
                             <span className="clean-sla-pill green">DAY 5 MATCH</span>
@@ -1102,7 +1137,7 @@ export function SearchProtocolInteractive() {
                           <div className="clean-card-head-row">
                             <div>
                               <span className="clean-card-kicker">RISK-FREE CONTINGENCY TERMS</span>
-                              <h3 className="clean-card-title">Pay Only When Your Hire Starts</h3>
+                              <h3 className="clean-card-title">Pay Only When Your <span className="title-blue">Hire Starts</span></h3>
                               <p className="clean-card-subtitle">Zero upfront retainer · Non-exclusive search agreement</p>
                             </div>
                             <span className="clean-sla-pill blue">100% RISK-FREE</span>

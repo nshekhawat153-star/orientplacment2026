@@ -134,9 +134,19 @@ export default function EmployersPage() {
         </div>
       </section>
 
-      {/* 2. Trust Bar */}
-      <section className="trust-strip" aria-label="Orion in numbers">
-        <div className="wrap">
+      {/* 2. Trust Bar (Clean High-Contrast Light Strip) */}
+      <section
+        className="trust-strip"
+        aria-label="Orion in numbers"
+        style={{
+          background: "#FFFFFF",
+          borderTop: "1px solid #E2E8F0",
+          borderBottom: "1px solid #E2E8F0",
+          position: "relative",
+          zIndex: 5,
+        }}
+      >
+        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <TrustBar />
         </div>
       </section>
@@ -490,23 +500,23 @@ export default function EmployersPage() {
         </div>
       </section>
 
-      {/* 7. Employer reviews */}
-      <section className="block" id="reviews">
+      {/* 7. Employer reviews (Dark Luxury Surface) */}
+      <section className="block reviews-sec" id="reviews">
         <div className="wrap">
-          <div className="sec-head-premium sec-head-row">
-            <div>
-              <div className="badge-capsule">
-                <span className="badge-dot" />
-                VERIFIED GOOGLE 5.0 RATING
-              </div>
-              <h2 className="sec-title-lg">
-                What law firms <span className="serif-accent">say</span>
-              </h2>
-              <p className="who-lede">
-                Jon is named personally in <b>47 of our 60+</b> verified Google reviews.
-              </p>
+          <div className="sec-head-premium">
+            <div className="badge-capsule">
+              <span className="badge-dot" />
+              VERIFIED GOOGLE 5.0 RATING
             </div>
-            <RatingBadge link />
+            <h2 className="sec-title-lg">
+              What law firms <span className="serif-accent">say</span>
+            </h2>
+            <p className="who-lede">
+              Jon is named personally in <b>47 of our 60+</b> verified Google reviews.
+            </p>
+            <div className="reviews-rating-pill">
+              <RatingBadge link />
+            </div>
           </div>
           <ReviewsSection kind="employer" />
         </div>

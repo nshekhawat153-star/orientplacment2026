@@ -104,11 +104,12 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                   src="/images/orion-logo.png"
                   alt="Orion Placement"
                   className="ha-footer-logo-img"
-                  width={68}
-                  height={68}
+                  width={72}
+                  height={72}
                   style={{
                     borderRadius: "50%",
-                    boxShadow: "0 0 24px rgba(29, 78, 216, 0.35)",
+                    border: "2px solid #3B82F6",
+                    boxShadow: "0 0 0 1px rgba(96, 165, 250, 0.35), 0 0 24px rgba(37, 99, 235, 0.45)",
                     marginBottom: 12,
                   }}
                 />
@@ -248,8 +249,8 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                 src="/images/orion-logo.png"
                 alt="Orion Placement"
                 className="logo-img"
-                width={48}
-                height={48}
+                width={68}
+                height={68}
               />
             </Link>
             <p className="f-tagline">{orionLine}</p>
