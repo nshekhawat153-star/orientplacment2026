@@ -9,6 +9,7 @@ import { TermsTiles } from "@/components/TermsTiles";
 import { CandidateCard } from "@/components/CandidateCard";
 import { InteractiveCandidateShowcase } from "@/components/InteractiveCandidateShowcase";
 import { ReviewsSection } from "@/components/ReviewCard";
+import { SearchProtocolInteractive } from "@/components/SearchProtocolInteractive";
 import { PeopleSection } from "@/components/PeopleSection";
 import { ResourceCards } from "@/components/ResourceCards";
 import { CtaBand } from "@/components/CtaBand";
@@ -146,97 +147,8 @@ export default function HomePage() {
           <TrustTicker />
         </section>
 
-        {/* 3. The Orion Search Protocol - Asymmetric Light Editorial (Zero Clutter, Zero Cards) */}
-        <section className="how-it-works-sec light-editorial-sec" id="how-it-works" aria-labelledby="protocol-h2">
-          <div className="wrap">
-            <div className="editorial-split-grid">
-              {/* Left Column: Sticky Editorial Statement */}
-              <div className="editorial-left-col">
-                <div className="editorial-pill">
-                  <span className="editorial-pill-dot" />
-                  <span>HOW A SEARCH RUNS</span>
-                </div>
-
-                <h2 id="protocol-h2" className="editorial-h2">
-                  Built for precision,{" "}
-                  <span className="serif-accent">run for speed.</span>
-                </h2>
-
-                <p className="editorial-desc">
-                  Every search follows a disciplined, three-step hiring protocol. Zero upfront retainer, non-exclusive search, and you only pay when your candidate starts.
-                </p>
-
-                <div className="editorial-cta-wrap">
-                  <Link href="/find-candidates" className="btn-editorial-cta">
-                    <span>See candidates for your seat</span>
-                    <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                      <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Column: 3 Clean Spaced Milestones (Connected by a minimalist vertical spine) */}
-              <div className="editorial-timeline">
-                <div className="timeline-hairline" aria-hidden="true" />
-
-                {/* Step 01 */}
-                <div className="timeline-step">
-                  <div className="timeline-node">
-                    <span className="node-dot" />
-                  </div>
-                  <div className="timeline-content">
-                    <div className="step-kicker">01 · DAY 0 · INTAKE</div>
-                    <h3 className="step-title">Consultation &amp; Practice Mapping</h3>
-                    <p className="step-body">
-                      A focused 15-minute consultation with Justin to map your firm&apos;s practice demands, billable hours, bar standing, and culture. We respond to every inquiry in under one hour.
-                    </p>
-                    <div className="step-metric-inline">
-                      <span className="metric-bold">&lt; 1 Hour</span>
-                      <span className="metric-text">Response SLA to your inquiry</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Step 02 */}
-                <div className="timeline-step">
-                  <div className="timeline-node">
-                    <span className="node-dot" />
-                  </div>
-                  <div className="timeline-content">
-                    <div className="step-kicker">02 · DAYS 5–7 · SOURCING</div>
-                    <h3 className="step-title">100,000+ Sourcing &amp; Screened Shortlist</h3>
-                    <p className="step-body">
-                      We headhunt across our 100,000+ attorney network, reaching high-performing passive candidates not on public job boards. You receive tailored dossiers with verified pay expectations and fit notes.
-                    </p>
-                    <div className="step-metric-inline">
-                      <span className="metric-bold">~1 Week</span>
-                      <span className="metric-text">Average turnaround to first qualified candidate</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Step 03 */}
-                <div className="timeline-step">
-                  <div className="timeline-node">
-                    <span className="node-dot" />
-                  </div>
-                  <div className="timeline-content">
-                    <div className="step-kicker">03 · START DATE · TERMS</div>
-                    <h3 className="step-title">Interview, Hire, Then Pay</h3>
-                    <p className="step-body">
-                      You interview only the candidates you want. No upfront retainer. A standard 23% contingency fee is invoiced on your hire&apos;s start date (Net 15), backed by our full 90-day replacement guarantee.
-                    </p>
-                    <div className="step-metric-inline">
-                      <span className="metric-bold">90 Days</span>
-                      <span className="metric-text">Full replacement guarantee on every placement</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* 3. The Orion Search Protocol - Interactive Animated Showcase */}
+        <SearchProtocolInteractive />
 
         {/* 4. What It Costs - Transparent Contingency Terms */}
         <section className="block terms-sec" id="terms" aria-labelledby="terms-h2">
