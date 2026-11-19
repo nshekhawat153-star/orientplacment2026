@@ -244,7 +244,7 @@ export function JobsSearchClient() {
               )}
             </div>
 
-            <div className="indeed-sort-row">
+            <div className="indeed-sort-row desktop-sort-row">
               <span className="sort-label">Sort by: </span>
               <button
                 type="button"
@@ -261,6 +261,34 @@ export function JobsSearchClient() {
               >
                 date
               </button>
+            </div>
+          </div>
+
+          {/* MOBILE SORT & JOB COUNT ROW (VISIBLE ONLY ON MOBILE) */}
+          <div className="indeed-mobile-sort-row">
+            <div className="mobile-sort-control">
+              <span className="mobile-sort-label">Sort by:</span>
+              <div className="mobile-sort-select-pill">
+                <span className="mobile-sort-val">{sortBy === "relevance" ? "relevance" : "date"}</span>
+                <span className="chip-chevron">▾</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as "relevance" | "date")}
+                  aria-label="Sort jobs by"
+                >
+                  <option value="relevance">relevance</option>
+                  <option value="date">date</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="indeed-mobile-job-count">
+              <span className="mobile-stat-full">
+                Showing <b>{filteredJobs.length}</b> of <b>{matchingJobs.length}</b> jobs
+              </span>
+              <span className="mobile-stat-compact">
+                <b>{filteredJobs.length}</b> of <b>{matchingJobs.length}</b> jobs
+              </span>
             </div>
           </div>
 

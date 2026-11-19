@@ -14065,6 +14065,15 @@ table.data.compare td.us {
   white-space: nowrap;
 }
 
+/* Mobile Filter Dropdowns & Mobile Sort Row (Hidden on Desktop) */
+.indeed-mobile-filter-dropdowns {
+  display: none;
+}
+
+.indeed-mobile-sort-row {
+  display: none;
+}
+
 /* Legacy Filter Chips Strip (Fallback) */
 .indeed-filters-strip {
   display: flex;
@@ -15425,38 +15434,188 @@ table.data.compare td.us {
   }
 
   .indeed-filter-pills-section {
-    padding: 8px 0 6px !important;
+    padding: 10px 0 4px !important;
   }
 
   .indeed-flat-filters-bar {
+    display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
-    gap: 6px !important;
-    margin-bottom: 12px !important;
+    gap: 0 !important;
+    margin-bottom: 4px !important;
   }
 
-  .indeed-flat-chips {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    gap: 8px !important;
-    padding: 2px 0 4px !important;
-    width: 100% !important;
-  }
-
-  .indeed-flat-chips::-webkit-scrollbar {
+  .desktop-filter-chips {
     display: none !important;
   }
 
-  .indeed-flat-chips .flat-chip {
-    flex-shrink: 0 !important;
+  .desktop-results-stat {
+    display: none !important;
+  }
+
+  /* Mobile Filter Dropdowns */
+  .indeed-mobile-filter-dropdowns {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    padding: 2px 0 6px !important;
+  }
+
+  .mobile-filter-dropdown-pill {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 5px !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #CBD5E1 !important;
+    border-radius: 8px !important;
+    padding: 7px 11px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    cursor: pointer !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+    transition: all 0.18s ease !important;
+    white-space: nowrap !important;
+    user-select: none !important;
+  }
+
+  .mobile-filter-dropdown-pill.active {
+    background: #08142A !important;
+    border-color: #08142A !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 8px rgba(8, 20, 42, 0.18) !important;
+  }
+
+  .mobile-filter-dropdown-pill select {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    font-size: 16px !important; /* Prevents auto-zoom on iOS */
+  }
+
+  .mobile-filter-dropdown-pill .chip-chevron {
+    font-size: 9px !important;
+    color: #64748B !important;
+    margin-left: 2px !important;
+  }
+
+  .mobile-filter-dropdown-pill.active .chip-chevron {
+    color: #93C5FD !important;
+  }
+
+  .mobile-filter-clear-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: #FFF1F2 !important;
+    border: 1.5px solid #FECDD3 !important;
+    color: #BE123C !important;
+    font-family: var(--mono) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    padding: 7px 11px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
     white-space: nowrap !important;
   }
 
-  .indeed-results-stat {
-    font-size: 11.5px !important;
+  /* Desktop Sort Row Hidden on Mobile */
+  .desktop-sort-row {
+    display: none !important;
+  }
+
+  /* Mobile Sort Row: Sort dropdown on Left, Job Count on Right */
+  .indeed-mobile-sort-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    width: 100% !important;
+    padding: 8px 0 12px !important;
+    margin-bottom: 16px !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+  }
+
+  .mobile-sort-control {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .mobile-sort-label {
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+    color: #64748B !important;
+  }
+
+  .mobile-sort-select-pill {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #CBD5E1 !important;
+    border-radius: 7px !important;
+    padding: 4px 10px !important;
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+    color: #08142A !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  }
+
+  .mobile-sort-select-pill select {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    font-size: 16px !important; /* Prevents auto-zoom on iOS */
+  }
+
+  .mobile-sort-select-pill .chip-chevron {
+    font-size: 9px !important;
+    color: #64748B !important;
+  }
+
+  .indeed-mobile-job-count {
+    font-family: var(--mono) !important;
+    font-size: 12px !important;
+    color: #64748B !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+  }
+
+  .indeed-mobile-job-count b {
+    color: #08142A !important;
+    font-weight: 700 !important;
+  }
+
+  .indeed-results-section {
+    padding: 8px 0 52px !important;
+  }
+
+  .indeed-results-head-row {
+    margin-bottom: 2px !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+    gap: 6px !important;
+  }
+
+  .indeed-head-title {
+    font-size: clamp(1.2rem, 5vw, 1.4rem) !important;
+    line-height: 1.22 !important;
+    margin: 0 !important;
   }
 
   .search-dual-bar {
@@ -15493,13 +15652,33 @@ table.data.compare td.us {
   .indeed-results-head-row {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 8px !important;
-    margin-bottom: 14px !important;
-    padding-bottom: 10px !important;
+    gap: 6px !important;
+    margin-bottom: 2px !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
   }
 
   .indeed-head-title {
-    font-size: 1.15rem !important;
+    font-size: clamp(1.15rem, 4.8vw, 1.35rem) !important;
+    line-height: 1.22 !important;
+  }
+
+  @media (max-width: 360px) {
+    .mobile-stat-full {
+      display: none !important;
+    }
+    .mobile-stat-compact {
+      display: inline !important;
+    }
+    .mobile-filter-dropdown-pill {
+      padding: 6px 8px !important;
+      font-size: 12px !important;
+    }
+  }
+  @media (min-width: 361px) {
+    .mobile-stat-compact {
+      display: none !important;
+    }
   }
 
   .candidate-results-main,
