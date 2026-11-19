@@ -5827,10 +5827,15 @@ article h3 .mark {
   }
 
   .founder-large-photo-frame {
-    max-width: 220px !important;
-    aspect-ratio: 1 / 1 !important;
-    border-radius: 16px !important;
-    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 4 / 3.4 !important;
+    border-radius: 14px !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .founder-photo-verified-badge {
+    display: none !important;
   }
 
   .founders-promise-bar {
@@ -5904,9 +5909,15 @@ article h3 .mark {
   }
 
   .founder-large-photo-frame {
-    max-width: 140px !important;
-    aspect-ratio: 1 / 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 4 / 3.4 !important;
     border-radius: 14px !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .founder-photo-verified-badge {
+    display: none !important;
   }
 
   /* Top Bar on Mobile: single sleek line, clean badge + exp tag, wraps cleanly on narrow screens */
