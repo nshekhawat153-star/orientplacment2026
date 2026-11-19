@@ -3968,7 +3968,7 @@ a.rating:hover {
     background-image: url("/images/bg-sec-mobile.jpg") !important;
     background-position: 28% top !important;
     background-size: cover !important;
-    opacity: 0.22 !important;
+    opacity: 0.14 !important;
     filter: brightness(0.95) contrast(1.15) !important;
   }
 
