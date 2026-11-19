@@ -17,11 +17,7 @@ const STEPS: StepData[] = [
     id: "step-1",
     stepNum: "01",
     kicker: "DAY 0 · INTAKE",
-    title: (
-      <>
-        Consultation &amp; <span className="title-blue">Practice Mapping</span>
-      </>
-    ),
+    title: "Practice Mandate & Calibration",
     desc: "A focused 15-minute consultation to map your firm's practice demands, culture, and billable targets.",
     sla: "< 1 Hour Response SLA",
   },
@@ -29,25 +25,17 @@ const STEPS: StepData[] = [
     id: "step-2",
     stepNum: "02",
     kicker: "DAYS 5–7 · SOURCING",
-    title: (
-      <>
-        <span className="title-blue">100,000+ Sourcing</span> &amp; Screened Shortlist
-      </>
-    ),
-    desc: "Direct headhunting across our passive attorney network with verified compensation expectations.",
-    sla: "~1 Week Turnaround",
+    title: "Screened Candidate Shortlist",
+    desc: "Direct headhunting across our 100,000+ passive attorney network with verified compensation expectations.",
+    sla: "5–7 Business Days",
   },
   {
     id: "step-3",
     stepNum: "03",
     kicker: "START DATE · TERMS",
-    title: (
-      <>
-        Interview, Hire, <span className="title-blue">Then Pay</span>
-      </>
-    ),
+    title: "Contingency Hire & 90-Day Guarantee",
     desc: "Interview finalists with zero upfront retainer. Pay standard contingency fee only on start date.",
-    sla: "90-Day Full Guarantee",
+    sla: "100% Risk-Free · Net 15",
   },
 ];
 
@@ -370,7 +358,7 @@ export function SearchProtocolInteractive() {
         .protocol-steps-scroll-col {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 14px;
           width: 100%;
           position: relative;
         }
@@ -378,11 +366,11 @@ export function SearchProtocolInteractive() {
         .protocol-step-card {
           display: flex;
           align-items: flex-start;
-          gap: 16px;
+          gap: 18px;
           background: #FFFFFF;
-          border: 1.5px solid #E2E8F0;
-          border-radius: 12px;
-          padding: 15px 19px 14px;
+          border: 1.5px solid #BFDBFE;
+          border-radius: 14px;
+          padding: 22px 24px 20px;
           text-align: left;
           cursor: pointer;
           transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -392,7 +380,7 @@ export function SearchProtocolInteractive() {
         }
 
         .protocol-step-card:hover {
-          border-color: #CBD5E1;
+          border-color: #93C5FD;
           transform: translateY(-1px);
           box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
         }
@@ -408,18 +396,18 @@ export function SearchProtocolInteractive() {
           flex-direction: column;
           align-items: center;
           gap: 6px;
-          padding-top: 1px;
+          padding-top: 2px;
           flex-shrink: 0;
         }
 
         .protocol-step-number {
-          font: 700 11.5px/1 var(--mono);
+          font: 700 12px/1 var(--mono);
           color: #64748B;
-          width: 29px;
-          height: 29px;
-          border-radius: 7px;
-          background: #F1F5F9;
-          border: 1px solid #E2E8F0;
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: #F8FAFC;
+          border: 1px solid #BFDBFE;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -430,19 +418,19 @@ export function SearchProtocolInteractive() {
           background: #2563EB !important;
           color: #FFFFFF !important;
           border-color: #2563EB !important;
-          box-shadow: 0 3px 8px rgba(37, 99, 235, 0.3);
+          box-shadow: none !important;
         }
 
         .protocol-step-line {
           width: 2px;
-          height: 32px;
-          background: #E2E8F0;
+          height: 48px;
+          background: #DBEAFE;
           border-radius: 2px;
           transition: background 0.2s ease;
         }
 
         .protocol-step-card.active .protocol-step-line {
-          background: #BFDBFE;
+          background: #93C5FD;
         }
 
         .protocol-step-body {
@@ -455,11 +443,11 @@ export function SearchProtocolInteractive() {
           align-items: center;
           justify-content: space-between;
           gap: 8px;
-          margin-bottom: 3px;
+          margin-bottom: 8px;
         }
 
         .protocol-step-kicker {
-          font: 600 9.5px/1 var(--mono);
+          font: 600 10px/1 var(--mono);
           color: #64748B;
           letter-spacing: 0.1em;
           text-transform: uppercase;
@@ -498,12 +486,18 @@ export function SearchProtocolInteractive() {
         }
 
         .protocol-step-title {
-          font-family: var(--display) !important;
-          font-size: 16.5px !important;
-          font-weight: 500 !important;
-          color: #0F172A !important;
+          font-family: var(--body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+          font-size: 18px !important;
+          font-weight: 600 !important;
+          color: #0A1629 !important;
           line-height: 1.35 !important;
-          margin: 0 0 4px !important;
+          letter-spacing: -0.015em !important;
+          margin: 0 0 8px !important;
+          transition: color 0.2s ease;
+        }
+
+        .protocol-step-card.active .protocol-step-title {
+          color: #1D4ED8 !important;
         }
 
         .title-blue {
@@ -512,10 +506,10 @@ export function SearchProtocolInteractive() {
         }
 
         .protocol-step-text {
-          font-size: 13px !important;
-          line-height: 1.45 !important;
+          font-size: 13.5px !important;
+          line-height: 1.55 !important;
           color: #475569 !important;
-          margin: 0 0 8px !important;
+          margin: 0 0 14px !important;
           font-weight: 400 !important;
         }
 
@@ -528,7 +522,7 @@ export function SearchProtocolInteractive() {
           background: #F1F5F9;
           border: 1px solid #E2E8F0;
           border-radius: 6px;
-          padding: 3.5px 8.5px;
+          padding: 4px 9px;
           letter-spacing: 0.02em;
         }
 
@@ -550,7 +544,7 @@ export function SearchProtocolInteractive() {
           display: flex;
           flex-direction: column;
           background: #FFFFFF !important;
-          border: 1.5px solid #E2E8F0 !important;
+          border: 1.5px solid #BFDBFE !important;
           border-radius: 14px !important;
           box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02) !important;
           overflow: hidden !important;
@@ -651,7 +645,7 @@ export function SearchProtocolInteractive() {
 
         /* Right Card Inner Content Area */
         .protocol-card-anim-stage {
-          padding: 20px 24px 18px;
+          padding: 24px 28px 22px;
           display: flex;
           flex-direction: column;
           overflow: hidden;
@@ -683,29 +677,30 @@ export function SearchProtocolInteractive() {
           justify-content: space-between;
           align-items: flex-start;
           gap: 12px;
-          margin-bottom: 9px;
+          margin-bottom: 12px;
         }
 
         .clean-card-kicker {
-          font: 600 8.5px/1 var(--mono);
+          font: 600 9px/1 var(--mono);
           color: #2563EB !important;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           display: block;
-          margin-bottom: 2px;
+          margin-bottom: 5px;
         }
 
         .clean-card-title {
-          font-family: var(--display) !important;
-          font-size: 19px !important;
-          font-weight: 500 !important;
+          font-family: var(--body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+          font-size: 20px !important;
+          font-weight: 600 !important;
           color: #0F172A !important;
-          line-height: 1.25 !important;
-          margin: 0 0 2px !important;
+          line-height: 1.3 !important;
+          letter-spacing: -0.015em !important;
+          margin: 0 0 4px !important;
         }
 
         .clean-card-subtitle {
-          font-size: 12px !important;
+          font-size: 13px !important;
           color: #64748B !important;
           font-weight: 400 !important;
           margin: 0 !important;

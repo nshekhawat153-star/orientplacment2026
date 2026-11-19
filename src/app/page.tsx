@@ -285,7 +285,13 @@ export default function HomePage() {
         </section>
 
         {/* 6. Reviews */}
-        <section className="block reviews-sec" id="reviews">
+        <section className="block reviews-sec home-reviews-sec" id="reviews">
+          {/* Faded 4-2.jpg Parallax Backdrop - Homepage Only */}
+          <div className="home-reviews-bg-backdrop" aria-hidden="true">
+            <div className="home-reviews-bg-image" />
+            <div className="home-reviews-bg-overlay" />
+          </div>
+
           <div className="wrap">
             <div className="sec-head-premium">
               <div className="badge-capsule">
