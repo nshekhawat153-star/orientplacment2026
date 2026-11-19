@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -13,6 +13,19 @@ const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is buil
 export function Footer({ minimal = false }: { minimal?: boolean }) {
   const pathname = usePathname();
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleDesktopExpand = () => {
+      if (typeof window !== "undefined" && window.innerWidth > 900) {
+        document.querySelectorAll<HTMLDetailsElement>(".site-footer .fgroup").forEach((el) => {
+          el.open = true;
+        });
+      }
+    };
+    handleDesktopExpand();
+    window.addEventListener("resize", handleDesktopExpand);
+    return () => window.removeEventListener("resize", handleDesktopExpand);
+  }, []);
 
   const showToast = (msg: string) => {
     setToastMsg(msg);
@@ -318,7 +331,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
 
             {/* Salary guides */}
             <div>
-              <details className="fgroup" open>
+              <details className="fgroup">
                 <summary>
                   <h2>Salary guides</h2>
                 </summary>
@@ -341,7 +354,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
 
             {/* Cities */}
             <div>
-              <details className="fgroup" open>
+              <details className="fgroup">
                 <summary>
                   <h2>Cities</h2>
                 </summary>

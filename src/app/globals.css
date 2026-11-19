@@ -8228,6 +8228,13 @@ article h3 .mark {
   display: none !important;
 }
 
+@media (min-width: 901px) {
+  .fgroup:not([open]) > ul,
+  .fgroup > ul {
+    display: flex !important;
+  }
+}
+
 /* Base Bar */
 .site-footer .base {
   display: flex !important;
@@ -8440,6 +8447,10 @@ article h3 .mark {
 
   .fgroup[open] summary::after {
     content: "\2212" !important;
+  }
+
+  .fgroup[open] ul {
+    margin-top: 14px !important;
   }
 
   .f-bottom-row {
