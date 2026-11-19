@@ -848,16 +848,18 @@ export function SearchProtocolInteractive() {
           letter-spacing: 0.04em;
         }
 
-        /* Responsive Media Queries */
+        /* Responsive Media Queries (Mobile only - Desktop remains 100% untouched) */
         @media (max-width: 960px) {
           .protocol-scroll-track {
             height: auto !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
           }
 
           .protocol-pinned-viewport {
             position: static !important;
             min-height: auto !important;
-            padding: 40px 0 !important;
+            padding: 24px 0 36px !important;
           }
 
           .protocol-interactive-grid {
@@ -889,6 +891,23 @@ export function SearchProtocolInteractive() {
         }
 
         @media (max-width: 640px) {
+          .protocol-scroll-track {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+          }
+
+          .protocol-pinned-viewport {
+            padding: 16px 0 28px !important;
+          }
+
+          .protocol-header-group {
+            margin-bottom: 16px !important;
+          }
+
+          .editorial-pill {
+            margin-bottom: 12px !important;
+          }
+
           .protocol-card-anim-stage {
             padding: 14px;
           }
