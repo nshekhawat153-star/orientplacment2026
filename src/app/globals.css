@@ -15663,23 +15663,7 @@ table.data.compare td.us {
     line-height: 1.22 !important;
   }
 
-  @media (max-width: 360px) {
-    .mobile-stat-full {
-      display: none !important;
-    }
-    .mobile-stat-compact {
-      display: inline !important;
-    }
-    .mobile-filter-dropdown-pill {
-      padding: 6px 8px !important;
-      font-size: 12px !important;
-    }
-  }
-  @media (min-width: 361px) {
-    .mobile-stat-compact {
-      display: none !important;
-    }
-  }
+
 
   .candidate-results-main,
   .indeed-results-section>.wrap,

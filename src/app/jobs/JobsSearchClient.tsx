@@ -283,12 +283,7 @@ export function JobsSearchClient() {
             </div>
 
             <div className="indeed-mobile-job-count">
-              <span className="mobile-stat-full">
-                Showing <b>{filteredJobs.length}</b> of <b>{matchingJobs.length}</b> jobs
-              </span>
-              <span className="mobile-stat-compact">
-                <b>{filteredJobs.length}</b> of <b>{matchingJobs.length}</b> jobs
-              </span>
+              Showing <b>{filteredJobs.length}</b> of <b>{matchingJobs.length}</b> jobs
             </div>
           </div>
 
