@@ -1029,3 +1029,31 @@
   font-weight: 700 !important;
 }
 
+/* Candidate Card CTA Buttons - Exact site CTA blue (#2563EB) for both mobile & desktop */
+.fc-card-cta-btn {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+
+.fc-card-cta-btn:hover {
+  background: #1D4ED8 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45) !important;
+}
+
+.fc-card-unlocked-btn {
+  border: 1.5px solid #2563EB !important;
+  color: #2563EB !important;
+  background: #FFFFFF !important;
+  transition: all 0.2s ease !important;
+}
+
+.fc-card-unlocked-btn:hover {
+  background: #EFF6FF !important;
+  border-color: #1D4ED8 !important;
+  color: #1D4ED8 !important;
+}
+
+

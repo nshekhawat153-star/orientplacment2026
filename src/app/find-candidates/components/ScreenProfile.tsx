@@ -322,10 +322,10 @@ export function ScreenProfile({
                   </p>
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-primary fc-card-cta-btn"
                     onClick={() => onOpenGateModal(c)}
                     style={{
-                      background: "#1D4ED8",
+                      background: "#2563EB",
                       color: "#FFFFFF",
                       border: 0,
                       borderRadius: 7,
@@ -333,6 +333,7 @@ export function ScreenProfile({
                       fontSize: 14,
                       fontWeight: 600,
                       cursor: "pointer",
+                      boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
                     }}
                   >
                     Show full resume →
@@ -491,19 +492,19 @@ export function ScreenProfile({
 
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-primary fc-card-cta-btn"
                   onClick={() => onOpenTermsModal(c)}
                   style={{
                     width: "100%",
                     height: 46,
                     borderRadius: 8,
-                    background: "#1D4ED8",
+                    background: "#2563EB",
                     color: "#FFFFFF",
                     border: 0,
                     fontWeight: 600,
                     fontSize: 15,
                     cursor: "pointer",
-                    boxShadow: "0 4px 14px rgba(29, 78, 216, 0.35)",
+                    boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
                   }}
                 >
                   Meet this candidate →

@@ -346,16 +346,17 @@ export function ScreenResults({
                     />
                     <button
                       type="submit"
-                      className="btn btn-primary"
+                      className="btn btn-primary fc-card-cta-btn"
                       style={{
                         height: 44,
                         borderRadius: 8,
                         padding: "0 20px",
-                        background: "#1D4ED8",
+                        background: "#2563EB",
                         color: "#FFFFFF",
                         border: 0,
                         fontWeight: 600,
                         cursor: "pointer",
+                        boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
                       }}
                     >
                       Send me a shortlist
@@ -440,14 +441,14 @@ export function ScreenResults({
                         {isUnlocked ? (
                           <button
                             type="button"
-                            className="btn btn-ghost"
+                            className="btn btn-ghost fc-card-unlocked-btn"
                             onClick={() => onSelectCandidate(c)}
                             style={{
                               width: "100%",
                               height: 44,
                               borderRadius: 8,
-                              border: "1.5px solid #1D4ED8",
-                              color: "#1D4ED8",
+                              border: "1.5px solid #2563EB",
+                              color: "#2563EB",
                               fontWeight: 600,
                               fontSize: 14,
                               background: "#FFFFFF",
@@ -459,19 +460,19 @@ export function ScreenResults({
                         ) : (
                           <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary fc-card-cta-btn"
                             onClick={() => onOpenGateModal(c)}
                             style={{
                               width: "100%",
                               height: 44,
                               borderRadius: 8,
-                              background: "#1D4ED8",
+                              background: "#2563EB",
                               color: "#FFFFFF",
                               border: 0,
                               fontWeight: 600,
                               fontSize: 14,
                               cursor: "pointer",
-                              boxShadow: "0 4px 12px rgba(29, 78, 216, 0.25)",
+                              boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
                             }}
                           >
                             Show full resume →

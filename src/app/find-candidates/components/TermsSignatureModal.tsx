@@ -185,18 +185,19 @@ export function TermsSignatureModal({
         {readOnly ? (
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary fc-card-cta-btn"
             onClick={onClose}
             style={{
               width: "100%",
               height: 46,
               borderRadius: 8,
-              background: "#1D4ED8",
+              background: "#2563EB",
               color: "#FFFFFF",
               border: 0,
               fontWeight: 600,
               fontSize: 14.5,
               cursor: "pointer",
+              boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
             }}
           >
             Close terms
@@ -325,18 +326,18 @@ export function TermsSignatureModal({
 
               <button
                 type="submit"
-                className="btn btn-primary"
+                className="btn btn-primary fc-card-cta-btn"
                 style={{
                   width: "100%",
                   height: 48,
                   borderRadius: 8,
-                  background: "#1D4ED8",
+                  background: "#2563EB",
                   color: "#FFFFFF",
                   border: 0,
                   fontWeight: 600,
                   fontSize: 15,
                   cursor: "pointer",
-                  boxShadow: "0 4px 14px rgba(29, 78, 216, 0.35)",
+                  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
                 }}
               >
                 Sign and see the name →
@@ -415,8 +416,9 @@ export function TermsSignatureModal({
                     />
                     <button
                       type="submit"
+                      className="fc-card-cta-btn"
                       style={{
-                        background: "#1D4ED8",
+                        background: "#2563EB",
                         color: "#FFFFFF",
                         border: 0,
                         borderRadius: 6,
@@ -424,6 +426,7 @@ export function TermsSignatureModal({
                         fontSize: 13,
                         fontWeight: 600,
                         cursor: "pointer",
+                        boxShadow: "0 2px 8px rgba(37, 99, 235, 0.3)",
                       }}
                     >
                       Send sign link to partner →
