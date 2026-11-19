@@ -92,43 +92,46 @@ export function ScreenStart({
         </p>
 
         {/* THE ASK BOX */}
-        <form className="fc-askbox" onSubmit={handleSubmit} role="search" aria-label="Describe your hire">
+        <form className="fc-askbox fc-hero-prompt-form" onSubmit={handleSubmit} role="search" aria-label="Describe your hire">
           <label htmlFor="fc-prompt-q" style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0,0,0,0)", border: 0 }}>
             Describe your hire, or paste your job link
           </label>
-          <textarea
-            id="fc-prompt-q"
-            rows={2}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                if (text.trim() && !isReading) onSubmitPrompt(text.trim());
-              }
-            }}
-            placeholder="e.g. Estate planning attorney in Houston, 3–5 years, up to $145k, on-site"
-          />
-          <div className="fc-askbox-row">
-            <span className="fc-hint fc-hero-prompt-hint hide-sm">
-              A sentence is enough. We detect role, Texas market, years, pay cap, and office arrangement.
-            </span>
-            <button
-              type="submit"
-              className="fc-send-btn"
-              disabled={!text.trim() || isReading}
-              aria-label="Find candidates"
-              style={{ marginLeft: "auto" }}
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </button>
+          <div className="fc-hero-prompt-box">
+            <textarea
+              id="fc-prompt-q"
+              className="fc-hero-prompt-textarea"
+              rows={2}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  if (text.trim() && !isReading) onSubmitPrompt(text.trim());
+                }
+              }}
+              placeholder="e.g. Estate planning attorney in Houston, 3–5 years, up to $145k, on-site"
+            />
+            <div className="fc-askbox-row fc-hero-prompt-footer">
+              <span className="fc-hint fc-hero-prompt-hint hide-sm">
+                A sentence is enough. We detect role, Texas market, years, pay cap, and office arrangement.
+              </span>
+              <button
+                type="submit"
+                className="fc-send-btn fc-hero-submit-btn"
+                disabled={!text.trim() || isReading}
+                aria-label="Find candidates"
+                style={{ marginLeft: "auto" }}
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </div>
           </div>
         </form>
 
         {/* QUICK EXAMPLES */}
-        <div className="fc-examples" aria-label="Example prompts">
+        <div className="fc-examples fc-hero-examples" aria-label="Example prompts">
           {EXAMPLES.map((ex) => (
             <button
               key={ex}

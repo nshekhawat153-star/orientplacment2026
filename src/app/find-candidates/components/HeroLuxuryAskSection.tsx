@@ -125,6 +125,7 @@ export function HeroLuxuryAskSection({
             onSubmit={handleSubmit}
             role="search"
             aria-label="Describe your seat"
+            className="fc-hero-prompt-form"
             style={{
               background: "#FFFFFF",
               border: "1.5px solid rgba(255, 255, 255, 0.25)",
@@ -135,88 +136,93 @@ export function HeroLuxuryAskSection({
               transition: "border-color 0.2s, box-shadow 0.2s",
             }}
           >
-            <textarea
-              id="fc-hero-prompt-q"
-              rows={2}
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  if (text.trim() && !isReading) onSubmitPrompt(text.trim());
-                }
-              }}
-              placeholder="e.g. Estate planning attorney in Houston, 3–5 years, up to $145k, on-site"
-              style={{
-                width: "100%",
-                border: 0,
-                background: "transparent",
-                resize: "none",
-                fontFamily: "inherit",
-                fontSize: 16,
-                lineHeight: 1.45,
-                minHeight: 52,
-                outline: "none",
-                color: "#08142A",
-              }}
-            />
-            <div
-              className="fc-hero-prompt-footer"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                gap: 12,
-                marginTop: 8,
-                borderTop: "1px solid #F1F5F9",
-                paddingTop: 10,
-              }}
-            >
-              <span className="fc-hero-prompt-hint hide-sm" style={{ fontSize: 13, color: "#64748B" }}>
-                A sentence is enough. We detect role, Texas market, years, pay cap, and office mode.
-              </span>
-              <button
-                type="submit"
-                disabled={!text.trim() || isReading}
-                aria-label="Find candidates"
+            <div className="fc-hero-prompt-box">
+              <textarea
+                id="fc-hero-prompt-q"
+                className="fc-hero-prompt-textarea"
+                rows={2}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    if (text.trim() && !isReading) onSubmitPrompt(text.trim());
+                  }
+                }}
+                placeholder="e.g. Estate planning attorney in Houston, 3–5 years, up to $145k, on-site"
                 style={{
-                  width: 44,
-                  height: 44,
-                  borderRadius: 10,
-                  background: text.trim() ? "#1D4ED8" : "#E2E8F0",
-                  color: text.trim() ? "#FFFFFF" : "#94A3B8",
+                  width: "100%",
                   border: 0,
-                  cursor: text.trim() ? "pointer" : "not-allowed",
-                  display: "grid",
-                  placeItems: "center",
-                  flexShrink: 0,
-                  marginLeft: "auto",
-                  boxShadow: text.trim()
-                    ? "0 4px 14px rgba(29, 78, 216, 0.4)"
-                    : "none",
-                  transition: "all 0.15s ease",
+                  background: "transparent",
+                  resize: "none",
+                  fontFamily: "inherit",
+                  fontSize: 16,
+                  lineHeight: 1.45,
+                  minHeight: 52,
+                  outline: "none",
+                  color: "#08142A",
+                }}
+              />
+              <div
+                className="fc-hero-prompt-footer"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: 12,
+                  marginTop: 8,
+                  borderTop: "1px solid #F1F5F9",
+                  paddingTop: 10,
                 }}
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
+                <span className="fc-hero-prompt-hint hide-sm" style={{ fontSize: 13, color: "#64748B" }}>
+                  A sentence is enough. We detect role, Texas market, years, pay cap, and office mode.
+                </span>
+                <button
+                  type="submit"
+                  className="fc-hero-submit-btn"
+                  disabled={!text.trim() || isReading}
+                  aria-label="Find candidates"
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 10,
+                    background: text.trim() ? "#1D4ED8" : "#E2E8F0",
+                    color: text.trim() ? "#FFFFFF" : "#94A3B8",
+                    border: 0,
+                    cursor: text.trim() ? "pointer" : "not-allowed",
+                    display: "grid",
+                    placeItems: "center",
+                    flexShrink: 0,
+                    marginLeft: "auto",
+                    boxShadow: text.trim()
+                      ? "0 4px 14px rgba(29, 78, 216, 0.4)"
+                      : "none",
+                    transition: "all 0.15s ease",
+                  }}
                 >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </form>
         </div>
 
         {/* QUICK EXAMPLE CHIPS ON HERO */}
         <div
+          className="fc-hero-examples"
           style={{
             display: "flex",
             flexWrap: "wrap",

@@ -139,8 +139,8 @@ export function JobsSearchClient() {
   const titleText = searchQuery
     ? `${searchQuery} jobs`
     : searchLocation
-    ? `Legal jobs in ${searchLocation}`
-    : "Confidential Legal Jobs in Texas";
+      ? `Legal jobs in ${searchLocation}`
+      : "Confidential Legal Jobs in Texas";
 
   return (
     <div className="indeed-search-portal-page">

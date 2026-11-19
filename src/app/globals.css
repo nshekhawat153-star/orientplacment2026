@@ -15646,6 +15646,63 @@ table.data.compare td.us {
   .directory-sub-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Mobile Hero Smart Ask Box (/find-candidates) */
+  .fc-hero-prompt-form {
+    padding: 8px 10px 8px 14px !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .fc-hero-prompt-box {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .fc-hero-prompt-textarea {
+    flex: 1 1 auto !important;
+    width: 0 !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 6px 0 !important;
+    margin: 0 !important;
+    font-size: 14.5px !important;
+    line-height: 1.35 !important;
+    border: none !important;
+    outline: none !important;
+    resize: none !important;
+    display: block !important;
+    background: transparent !important;
+    color: #08142A !important;
+  }
+
+  .fc-hero-prompt-footer {
+    display: flex !important;
+    align-items: center !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+    flex-shrink: 0 !important;
+  }
+
+  .fc-hero-prompt-hint {
+    display: none !important;
+  }
+
+  .fc-hero-submit-btn {
+    width: 42px !important;
+    height: 42px !important;
+    margin-left: 0 !important;
+    flex-shrink: 0 !important;
+    border-radius: 10px !important;
+  }
+
+  /* Hide Example Chips on Mobile */
+  .fc-hero-examples {
+    display: none !important;
+  }
 }
 
 @media (max-width: 640px) {
@@ -15662,6 +15719,8 @@ table.data.compare td.us {
     font-size: clamp(1.15rem, 4.8vw, 1.35rem) !important;
     line-height: 1.22 !important;
   }
+
+
 
 
 
