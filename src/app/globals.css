@@ -3954,6 +3954,27 @@ a.rating:hover {
   }
 }
 
+/* Mobile-only background optimization for #terms (Desktop remains 100% untouched) */
+@media (max-width: 960px) {
+  .terms-bg-image {
+    background-image: url("/images/bg-sec-mobile.jpg") !important;
+    background-position: 28% top !important;
+    background-size: cover !important;
+    opacity: 0.45 !important;
+    filter: brightness(0.95) contrast(1.15) !important;
+  }
+
+  .terms-bg-overlay {
+    background:
+      linear-gradient(180deg,
+        rgba(8, 20, 42, 0.40) 0%,
+        rgba(8, 20, 42, 0.18) 18%,
+        rgba(8, 20, 42, 0.65) 52%,
+        #08142A 100%),
+      radial-gradient(circle at 45% 18%, rgba(37, 99, 235, 0.22) 0%, transparent 60%) !important;
+  }
+}
+
 @media (max-width: 640px) {
   .terms-sec {
     padding: 72px 0 80px !important;
