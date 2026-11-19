@@ -216,8 +216,11 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
                 different practice area, city, or experience level?
               </span>
             </h4>
-            <p className="showcase-banner-desc">
+            <p className="showcase-banner-desc showcase-desc-desktop">
               Search across <strong>100,000+ active &amp; passive attorneys, paralegals, and legal staff</strong> nationwide. Filter by practice specialty, active bar standing, and verified compensation.
+            </p>
+            <p className="showcase-banner-desc showcase-desc-mobile">
+              Search <strong>100,000+ pre-screened attorneys &amp; legal staff</strong> nationwide.
             </p>
           </div>
         </div>

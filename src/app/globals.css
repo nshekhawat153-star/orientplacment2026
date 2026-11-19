@@ -4689,6 +4689,14 @@ article h3 .mark {
   font-weight: 600;
 }
 
+.showcase-desc-desktop {
+  display: block;
+}
+
+.showcase-desc-mobile {
+  display: none !important;
+}
+
 .showcase-banner-cta-group {
   position: relative;
   z-index: 1;
@@ -4833,6 +4841,18 @@ article h3 .mark {
     color: #1E40AF;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.10);
+  }
+
+  .showcase-desc-desktop {
+    display: none !important;
+  }
+
+  .showcase-desc-mobile {
+    display: block !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    color: #CBD5E1 !important;
+    margin: 0 !important;
   }
 }
 
