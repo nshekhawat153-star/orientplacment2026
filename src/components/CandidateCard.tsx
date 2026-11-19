@@ -37,7 +37,6 @@ export function CandidateCard({
   const reqHandler = onRequest || onRequestProfile;
   const router = useRouter();
   const role = findRole(c.role);
-  const isBuilt = c.id === "EP-TX-0412";
   const bars = c.bars.length ? c.bars.join(", ") : "Not required";
 
   const handleCardClick = (e: React.MouseEvent) => {
@@ -46,7 +45,9 @@ export function CandidateCard({
     }
     if (onSelect) {
       onSelect(c);
+      return;
     }
+    router.push(`/candidate/${c.id.toLowerCase()}`);
   };
 
   const handleRequest = () => {
@@ -54,19 +55,13 @@ export function CandidateCard({
       reqHandler(c.id);
       return;
     }
-    if (isBuilt) {
-      router.push(`/candidate/${c.id.toLowerCase()}#request`);
-    } else {
-      router.push(`/find-candidates#ids=${c.id}`);
-    }
+    router.push(`/candidate/${c.id.toLowerCase()}#request`);
   };
 
-  const idHtml = isBuilt ? (
+  const idHtml = (
     <Link className="id" href={`/candidate/${c.id.toLowerCase()}`}>
       {c.id}
     </Link>
-  ) : (
-    <span className="id">{c.id}</span>
   );
 
   const top = (

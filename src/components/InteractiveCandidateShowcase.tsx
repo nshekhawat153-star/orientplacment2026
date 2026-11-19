@@ -42,11 +42,11 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
 
   const handleRequest = (e: React.MouseEvent, candidateId: string) => {
     e.stopPropagation();
-    if (candidateId === "EP-TX-0412") {
-      router.push(`/candidate/${candidateId.toLowerCase()}#request`);
-    } else {
-      router.push(`/find-candidates#ids=${candidateId}`);
-    }
+    router.push(`/candidate/${candidateId.toLowerCase()}#request`);
+  };
+
+  const handleCardClick = (candidateId: string) => {
+    router.push(`/candidate/${candidateId.toLowerCase()}`);
   };
 
   return (
@@ -59,30 +59,25 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
             scope: c.headline,
           };
           const bars = c.bars.length ? c.bars.join(", ") : "Not required";
-          const isBuilt = c.id === "EP-TX-0412";
           const num = String(idx + 1).padStart(2, "0");
 
           return (
             <div
               key={c.id}
               className="cand-gallery-card"
-              onClick={(e) => handleRequest(e, c.id)}
+              onClick={() => handleCardClick(c.id)}
             >
               {/* Top Row: Confidential ID badge & Availability status */}
               <div className="cand-card-topbar">
                 <div className="cand-card-id-badge">
                   <span className="cand-card-index">{num}</span>
-                  {isBuilt ? (
-                    <Link
-                      href={`/candidate/${c.id.toLowerCase()}`}
-                      className="cand-card-id-link"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {c.id}
-                    </Link>
-                  ) : (
-                    <span className="cand-card-id-code">{c.id}</span>
-                  )}
+                  <Link
+                    href={`/candidate/${c.id.toLowerCase()}`}
+                    className="cand-card-id-link"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {c.id}
+                  </Link>
                 </div>
 
                 <div className="cand-card-avail-badge">
