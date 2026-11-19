@@ -652,7 +652,7 @@ export default function UploadResumePage() {
                 }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1.5px solid #E2E8F0", paddingBottom: 14, marginBottom: 16 }}>
-                  <h3 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: 0, fontWeight: 600 }}>
+                  <h3 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: 0, fontWeight: 500 }}>
                     Parsed Profile
                   </h3>
                   <button
@@ -668,8 +668,8 @@ export default function UploadResumePage() {
                   {profile.src === "sample"
                     ? "Parsed from Texas Estate Planning sample."
                     : profile.src === "text"
-                    ? "Parsed from custom pasted text."
-                    : `Parsed from your file: ${fileName}`}
+                      ? "Parsed from custom pasted text."
+                      : `Parsed from your file: ${fileName}`}
                 </p>
 
                 <div className="field" style={{ marginBottom: 14 }}>
@@ -812,7 +812,7 @@ export default function UploadResumePage() {
               {/* Studio Right: Live Matches & Confidential Application Form */}
               <div>
                 <div style={{ marginBottom: 20 }}>
-                  <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "0 0 4px", fontWeight: 600 }}>
+                  <h3 style={{ fontFamily: "var(--display)", fontSize: 24, color: "#08142A", margin: "0 0 4px", fontWeight: 500 }}>
                     {matches.length ? (
                       <>
                         <Mark>{String(matches.length)}</Mark> {matches.length === 1 ? "Role Fits" : "Roles Fit"} Your Credentials
@@ -858,10 +858,10 @@ export default function UploadResumePage() {
                       applyToJobId
                         ? `Apply confidentially to Role ${applyToJobId}`
                         : matches.length === 1
-                        ? "Email me this role and new matches"
-                        : matches.length
-                        ? `Email me these ${matches.length} matching roles`
-                        : "Email me unlisted confidential matches"
+                          ? "Email me this role and new matches"
+                          : matches.length
+                            ? `Email me these ${matches.length} matching roles`
+                            : "Email me unlisted confidential matches"
                     }
                     audience="candidate"
                     button={applyToJobId ? "Submit confidential application" : "Receive match updates"}
@@ -967,7 +967,7 @@ export default function UploadResumePage() {
               <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#1D4ED8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
                 PILLAR 01 · IDENTITY
               </div>
-              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 700, margin: "0 0 8px" }}>
+              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 500, fontFamily: "var(--display)", margin: "0 0 8px" }}>
                 Anonymous ID Only
               </h3>
               <p style={{ fontSize: "0.88rem", lineHeight: 1.6, color: "#475569", margin: 0 }}>
@@ -979,7 +979,7 @@ export default function UploadResumePage() {
               <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#1D4ED8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
                 PILLAR 02 · PERMISSION
               </div>
-              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 700, margin: "0 0 8px" }}>
+              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 500, fontFamily: "var(--display)", margin: "0 0 8px" }}>
                 Zero Blind Submissions
               </h3>
               <p style={{ fontSize: "0.88rem", lineHeight: 1.6, color: "#475569", margin: 0 }}>
@@ -991,7 +991,7 @@ export default function UploadResumePage() {
               <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#1D4ED8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
                 PILLAR 03 · DISCRETION
               </div>
-              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 700, margin: "0 0 8px" }}>
+              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 500, fontFamily: "var(--display)", margin: "0 0 8px" }}>
                 Zero Current Firm Contact
               </h3>
               <p style={{ fontSize: "0.88rem", lineHeight: 1.6, color: "#475569", margin: 0 }}>
@@ -1003,7 +1003,7 @@ export default function UploadResumePage() {
               <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#1D4ED8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
                 PILLAR 04 · CONTROL
               </div>
-              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 700, margin: "0 0 8px" }}>
+              <h3 style={{ fontSize: "1.15rem", color: "#08142A", fontWeight: 500, fontFamily: "var(--display)", margin: "0 0 8px" }}>
                 Same-Day Purge Guarantee
               </h3>
               <p style={{ fontSize: "0.88rem", lineHeight: 1.6, color: "#475569", margin: 0 }}>

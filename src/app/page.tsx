@@ -31,6 +31,7 @@ export default function HomePage() {
   const c2 = findCandidate("LIT-TX-0390");
   const c3 = findCandidate("RE-TX-0274");
   const c4 = findCandidate("LIT-TX-0422");
+  const c5 = findCandidate("EP-TX-0451");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -270,8 +271,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Interactive Candidate Showcase: Left 4 Pills + Right Dossier + Bottom Banner */}
-            <InteractiveCandidateShowcase c1={c1} c2={c2} c3={c3} c4={c4} />
+            {/* Candidate Showcase: 3 in Row 1, 2 in Row 2 (Centered) + Bottom Banner */}
+            <InteractiveCandidateShowcase c1={c1} c2={c2} c3={c3} c4={c4} c5={c5} />
           </div>
         </section>
 
@@ -320,33 +321,64 @@ export default function HomePage() {
         {/* 7. Who we are */}
         <section className="block who-we-are-sec" id="who-we-are">
           <div className="wrap">
-            <div className="sec-head-premium">
-              <div className="badge-capsule">
-                <span className="badge-dot" />
-                WHO WE ARE · DIRECT FOUNDER SEARCH
+            <div className="who-head-split">
+              {/* Left Column: Eyebrow, Heading, Google Review Badge */}
+              <div className="who-head-col who-head-col-left">
+                <div className="badge-capsule">
+                  <span className="badge-dot" />
+                  WHO WE ARE · DIRECT FOUNDER SEARCH
+                </div>
+                <h2 className="sec-title-lg">
+                  Two recruiters you can call by{" "}
+                  <span className="serif-accent">name</span>
+                </h2>
+                <div className="who-head-rating">
+                  <RatingBadge size="lg" />
+                </div>
               </div>
-              <h2 className="sec-title-lg">
-                Two recruiters you can call by{" "}
-                <span className="serif-accent">name</span>
-              </h2>
-              <p className="who-lede" id="orion-line">
-                {orionLine}
-              </p>
-              <div className="who-trust-strip">
-                <RatingBadge size="lg" />
-                <span className="trust-sep">·</span>
-                <span className="jon-trust-pill">
-                  <AwardIcon />
-                  Jon is named in <b>47 of our 60</b> Google reviews
-                </span>
+
+              {/* Subtle Vertical Divider between columns on desktop */}
+              <div className="who-head-vdivider" aria-hidden="true" />
+
+              {/* Right Column: Supporting paragraph & Jon Named line */}
+              <div className="who-head-col who-head-col-right">
+                <p className="who-lede" id="orion-line">
+                  {orionLine}
+                </p>
+                <div className="who-head-jon-trust">
+                  <span className="jon-trust-pill">
+                    <AwardIcon />
+                    Jon is named in <b>47 of our 60</b> Google reviews
+                  </span>
+                </div>
               </div>
             </div>
+
+            {/* Subtle horizontal fade divider between header and founders */}
+            <div className="who-bottom-fade-divider" aria-hidden="true" />
+
             <PeopleSection />
           </div>
         </section>
 
         {/* 8. Post a job today */}
         <section className="block flush post-job-band-sec" id="post-a-job">
+          {/* Background Water Splash Video Backdrop */}
+          <div className="post-job-video-backdrop" aria-hidden="true">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="post-job-video-el"
+            >
+              <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
+              <source src="/media/splash.mp4" type="video/mp4" />
+            </video>
+            <div className="post-job-video-gradient" />
+            <div className="post-job-video-radial-aura" />
+          </div>
+
           <div className="wrap">
             <div className="post-job-band">
               <div className="post-job-content">

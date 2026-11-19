@@ -314,7 +314,7 @@ export default function SalaryCheckPage() {
                     <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#1D4ED8", textTransform: "uppercase", letterSpacing: "0.06em" }}>
                       Private Assessment
                     </span>
-                    <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#08142A", margin: "2px 0 0" }}>
+                    <h3 style={{ fontSize: "1.15rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: "2px 0 0" }}>
                       Enter Compensation Details
                     </h3>
                   </div>
@@ -572,7 +572,7 @@ export default function SalaryCheckPage() {
                 <span>●</span>
                 <span>{verdict.status === "above" ? "Above Market Benchmark" : verdict.status === "below" ? "Below Market Median" : "Within Market Band"}</span>
               </div>
-              <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px" }}>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: "0 0 8px" }}>
                 {verdict.head}
               </h3>
               <p style={{ fontSize: "0.95rem", color: "#334155", lineHeight: 1.6, margin: "0 0 14px" }}>

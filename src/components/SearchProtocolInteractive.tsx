@@ -316,27 +316,25 @@ export function SearchProtocolInteractive() {
         }
 
         .protocol-rope-shadow {
-          fill: none;
-          stroke: rgba(37, 99, 235, 0.16);
-          stroke-width: 6px;
-          stroke-linecap: round;
-          transition: d 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          display: none;
         }
 
         .protocol-rope-path {
           fill: none;
           stroke: #2563EB;
-          stroke-width: 2.5px;
+          stroke-width: 2px;
           stroke-linecap: round;
-          filter: drop-shadow(0 2px 5px rgba(37, 99, 235, 0.32));
+          opacity: 0.65;
+          filter: none;
           transition: d 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .protocol-rope-node {
           fill: #2563EB;
           stroke: #FFFFFF;
-          stroke-width: 2px;
-          filter: drop-shadow(0 1px 4px rgba(37, 99, 235, 0.45));
+          stroke-width: 1.5px;
+          opacity: 0.75;
+          filter: none;
           transition: cx 0.3s cubic-bezier(0.16, 1, 0.3, 1), cy 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 

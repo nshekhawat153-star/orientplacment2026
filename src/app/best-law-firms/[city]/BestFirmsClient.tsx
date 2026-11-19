@@ -325,7 +325,7 @@ export function BestFirmsClient({
               <span style={{ fontFamily: "monospace", fontSize: "0.82rem", fontWeight: 800, color: "#1D4ED8", marginBottom: 10 }}>
                 TEST 0{i + 1}
               </span>
-              <h3 style={{ fontSize: "1.08rem", fontWeight: 700, color: "#08142A", margin: "0 0 8px", lineHeight: 1.3 }}>
+              <h3 style={{ fontSize: "1.08rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: "0 0 8px", lineHeight: 1.3 }}>
                 {title}
               </h3>
               <p style={{ fontSize: "0.85rem", color: "#64748B", lineHeight: 1.5, margin: 0 }}>

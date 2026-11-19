@@ -386,7 +386,7 @@ export default function AboutPage() {
                       {p.audience}
                     </span>
                   </div>
-                  <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#08142A", margin: "0 0 10px", lineHeight: 1.3 }}>{p.title}</h3>
+                  <h3 style={{ fontSize: "1.15rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: "0 0 10px", lineHeight: 1.3 }}>{p.title}</h3>
                   <p style={{ fontSize: "0.9rem", color: "#475569", lineHeight: 1.6, margin: 0 }}>{p.desc}</p>
                 </div>
                 <div style={{ marginTop: "20px", paddingTop: "14px", borderTop: "1px solid #EAE7DC", fontSize: "0.82rem", color: "#1D4ED8", fontWeight: 600 }}>
@@ -563,7 +563,7 @@ export default function AboutPage() {
               >
                 INSTANT INTEGRITY CHECK
               </div>
-              <h3 style={{ fontSize: "1.35rem", fontWeight: 600, margin: "0 0 20px", color: "#08142A", fontFamily: "var(--display)" }}>
+              <h3 style={{ fontSize: "1.35rem", fontWeight: 500, margin: "0 0 20px", color: "#08142A", fontFamily: "var(--display)" }}>
                 Verify Authenticity in 60 Seconds
               </h3>
 
@@ -652,7 +652,7 @@ export default function AboutPage() {
                   <Image src={justin.photo.startsWith("/") ? justin.photo : `/${justin.photo}`} alt={justin.name} fill style={{ objectFit: "cover" }} />
                 </div>
                 <div>
-                  <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#08142A", margin: 0 }}>{justin.name}</h3>
+                  <h3 style={{ fontSize: "1.2rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: 0 }}>{justin.name}</h3>
                   <span style={{ fontSize: "0.82rem", color: "#1D4ED8", fontWeight: 600 }}>{justin.title}</span>
                 </div>
               </div>
@@ -707,7 +707,7 @@ export default function AboutPage() {
                   <Image src={jon.photo.startsWith("/") ? jon.photo : `/${jon.photo}`} alt={jon.name} fill style={{ objectFit: "cover" }} />
                 </div>
                 <div>
-                  <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#08142A", margin: 0 }}>{jon.name}</h3>
+                  <h3 style={{ fontSize: "1.2rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: 0 }}>{jon.name}</h3>
                   <span style={{ fontSize: "0.82rem", color: "#1D4ED8", fontWeight: 600 }}>{jon.title}</span>
                 </div>
               </div>
@@ -776,7 +776,7 @@ export default function AboutPage() {
               >
                 DIRECT APPOINTMENT
               </div>
-              <h3 style={{ fontSize: "1.25rem", fontWeight: 600, margin: "0 0 12px", color: "#FFFFFF", fontFamily: "var(--display)" }}>
+              <h3 style={{ fontSize: "1.25rem", fontWeight: 500, margin: "0 0 12px", color: "#FFFFFF", fontFamily: "var(--display)" }}>
                 Book 15 Minutes with Justin
               </h3>
               <p style={{ fontSize: "0.9rem", color: "rgba(255, 255, 255, 0.8)", lineHeight: 1.55, margin: 0 }}>

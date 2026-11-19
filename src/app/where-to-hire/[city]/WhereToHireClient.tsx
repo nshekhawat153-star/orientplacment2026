@@ -414,7 +414,7 @@ export function WhereToHireClient({
                 <div key={idx} className="wth-source-card">
                   <div>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: 12 }}>
-                      <h3 style={{ fontFamily: "var(--font-serif, Georgia, serif)", fontSize: 18, color: "#08142A", fontWeight: 700, margin: 0, lineHeight: 1.3 }}>
+                      <h3 style={{ fontFamily: "var(--display)", fontSize: 18, color: "#08142A", fontWeight: 500, margin: 0, lineHeight: 1.3 }}>
                         {p.name}
                       </h3>
                       <span

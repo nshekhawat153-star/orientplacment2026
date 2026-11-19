@@ -313,7 +313,7 @@ export default function CandidatesPage() {
                   Day 0
                 </span>
               </div>
-              <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "0 0 10px" }}>
+              <h3 style={{ fontSize: "1.25rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: "0 0 10px" }}>
                 Send Your Resume Confidentially
               </h3>
               <p style={{ fontSize: "0.9rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
@@ -333,7 +333,7 @@ export default function CandidatesPage() {
                   Within 48 Hours
                 </span>
               </div>
-              <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "0 0 10px" }}>
+              <h3 style={{ fontSize: "1.25rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: "0 0 10px" }}>
                 Review Roles With Pay Disclosed
               </h3>
               <p style={{ fontSize: "0.9rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
@@ -353,7 +353,7 @@ export default function CandidatesPage() {
                   When You Say Yes
                 </span>
               </div>
-              <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#08142A", margin: "0 0 10px" }}>
+              <h3 style={{ fontSize: "1.25rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: "0 0 10px" }}>
                 Meet the Law Firm on Your Terms
               </h3>
               <p style={{ fontSize: "0.9rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
@@ -425,7 +425,7 @@ export default function CandidatesPage() {
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#08142A", margin: "0 0 10px", lineHeight: 1.3 }}>
+                <h3 style={{ fontSize: "1.2rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: "0 0 10px", lineHeight: 1.3 }}>
                   <Mark>{j.title}</Mark>
                 </h3>
 

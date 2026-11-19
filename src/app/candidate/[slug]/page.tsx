@@ -379,7 +379,7 @@ export default async function CandidateProfilePage({ params }: PageProps) {
             {/* Right: What You Receive & Founder Contact */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px", boxShadow: "0 4px 16px rgba(15, 23, 42, 0.04)" }}>
-                <h3 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: "0 0 16px", fontWeight: 600 }}>
+                <h3 style={{ fontFamily: "var(--display)", fontSize: 20, color: "#08142A", margin: "0 0 16px", fontWeight: 500 }}>
                   Dossier Deliverables
                 </h3>
                 <div style={{ display: "grid", gap: 14 }}>
@@ -542,7 +542,7 @@ export default async function CandidateProfilePage({ params }: PageProps) {
           </div>
 
           <div>
-            <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 20px", fontWeight: 600 }}>
+            <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#08142A", margin: "0 0 20px", fontWeight: 500 }}>
               What happens after your request
             </h3>
             <ol className="timeline" style={{ paddingLeft: 0, listStyle: "none", display: "grid", gap: 14 }}>

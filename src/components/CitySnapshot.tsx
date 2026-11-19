@@ -50,7 +50,7 @@ export function CitySnapshot({
             style={{
               fontFamily: "var(--display)",
               fontSize: 21,
-              fontWeight: 600,
+              fontWeight: 500,
               color: "#08142A",
               margin: 0,
               lineHeight: 1.2,

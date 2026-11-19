@@ -298,7 +298,7 @@ export function CandidateCard({
           style={{
             fontFamily: "var(--display)",
             fontSize: "1.18rem",
-            fontWeight: 600,
+            fontWeight: 500,
             color: selected ? "#1D4ED8" : "#08142A",
             margin: "0 0 6px",
             lineHeight: 1.3,

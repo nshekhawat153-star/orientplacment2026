@@ -655,7 +655,7 @@ export function WhereToPostClient({
                       <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.85rem", fontWeight: 800, color: "#1D4ED8" }}>
                         {item.num}
                       </span>
-                      <h4 style={{ fontSize: "1rem", fontWeight: 700, color: "#08142A", margin: 0 }}>
+                      <h4 style={{ fontSize: "1rem", fontWeight: 500, fontFamily: "var(--display)", color: "#08142A", margin: 0 }}>
                         {item.title}
                       </h4>
                     </div>

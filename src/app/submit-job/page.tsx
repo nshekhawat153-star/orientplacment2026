@@ -1239,7 +1239,7 @@ export default function SubmitJobPage() {
                     Texas Percentiles
                   </span>
                 </div>
-                <h3 style={{ fontSize: 17, fontWeight: 600, color: "#08142A", margin: "0 0 3px", fontFamily: "var(--display)" }}>
+                <h3 style={{ fontSize: 17, fontWeight: 500, color: "#08142A", margin: "0 0 3px", fontFamily: "var(--display)" }}>
                   {roleObj.name}
                 </h3>
                 <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
@@ -1306,7 +1306,7 @@ export default function SubmitJobPage() {
             <div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 12, marginBottom: 18, borderBottom: "1.5px solid #E2E8F0", paddingBottom: 12 }}>
                 <div>
-                  <h3 style={{ fontSize: "1.35rem", fontWeight: 600, color: "#08142A", margin: 0, fontFamily: "var(--display)" }}>
+                  <h3 style={{ fontSize: "1.35rem", fontWeight: 500, color: "#08142A", margin: 0, fontFamily: "var(--display)" }}>
                     {matches.length ? (
                       <>
                         <span style={{ color: "#1D4ED8" }}>{matches.length} Candidates</span> Match This Mandate
@@ -1343,7 +1343,7 @@ export default function SubmitJobPage() {
 
               {!matches.length ? (
                 <div style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 12, padding: "36px", textAlign: "center" }}>
-                  <h4 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#08142A", margin: "0 0 8px", fontFamily: "var(--display)" }}>
+                  <h4 style={{ fontSize: "1.1rem", fontWeight: 500, color: "#08142A", margin: "0 0 8px", fontFamily: "var(--display)" }}>
                     Active Headhunting Pool Available
                   </h4>
                   <p style={{ color: "#64748B", fontSize: "0.92rem", lineHeight: 1.6, margin: "0 0 16px" }}>
