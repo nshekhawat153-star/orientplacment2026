@@ -104,7 +104,7 @@ export default function HomePage() {
 
               <h1 id="h1" className="hero-display-h1">
                 Legal recruiters for small and mid-size{" "}
-                <span className="hero-accent-serif">law firms.</span>
+                <span className="hero-accent-serif" style={{ color: "#2563EB" }}>law firms.</span>
               </h1>
 
               <p className="hero-lead-p">

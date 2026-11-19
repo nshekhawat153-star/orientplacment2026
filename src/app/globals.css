@@ -1774,7 +1774,7 @@ a.rating:hover {
 
 .hero-accent-serif {
   font-style: italic;
-  color: #93C5FD;
+  color: #2563EB !important;
 }
 
 /* Executive Centered Display H1 - Elevated desktop scale for heroes without cards */
@@ -1857,6 +1857,7 @@ a.rating:hover {
 
   .ticker-bullet {
     font-size: 24px !important;
+    filter: none !important;
   }
 
   .ticker-num {
@@ -2333,10 +2334,10 @@ a.rating:hover {
 .trust-ticker-strip {
   position: relative;
   width: 100%;
-  background: radial-gradient(ellipse 110% 130% at 50% 50%, #0d2248 0%, #081630 60%, #050E20 100%);
-  border-top: 1px solid rgba(147, 197, 253, 0.32);
-  border-bottom: 1px solid rgba(147, 197, 253, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.45), 0 16px 40px rgba(2, 6, 23, 0.5);
+  background: linear-gradient(180deg, #08142A 0%, #061022 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.4);
   padding: 44px 0;
   overflow: hidden;
 }
@@ -2383,7 +2384,7 @@ a.rating:hover {
   font-size: 20px;
   line-height: 1;
   opacity: 1;
-  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.85));
+  filter: none !important;
   display: inline-flex;
   align-items: center;
 }
