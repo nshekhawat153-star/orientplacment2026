@@ -296,7 +296,8 @@ export default function HomePage() {
             <div className="sec-head-premium">
               <div className="badge-capsule">
                 <span className="badge-dot" />
-                GOOGLE REVIEWS · VERIFIED CLIENTS &amp; CANDIDATES
+                <span className="eyebrow-text-desktop">GOOGLE REVIEWS · VERIFIED CLIENTS &amp; CANDIDATES</span>
+                <span className="eyebrow-text-mobile">GOOGLE REVIEWS · VERIFIED CLIENTS</span>
               </div>
               <h2 className="sec-title-lg">
                 What firms and candidates{" "}
@@ -466,7 +467,8 @@ export default function HomePage() {
             <div className="sec-head-premium">
               <div className="badge-capsule">
                 <span className="badge-dot" />
-                FREE HIRING TOOLS · SELF-SERVE RESOURCES
+                <span className="eyebrow-text-desktop">FREE HIRING TOOLS · SELF-SERVE RESOURCES</span>
+                <span className="eyebrow-text-mobile">FREE HIRING TOOLS · SELF-SERVE</span>
               </div>
               <h2 className="sec-title-lg">
                 Run the hire with or without{" "}

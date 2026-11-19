@@ -296,6 +296,14 @@ table,
   color: var(--accent)
 }
 
+.eyebrow-text-desktop {
+  display: inline;
+}
+
+.eyebrow-text-mobile {
+  display: none !important;
+}
+
 /* Universal Responsive Display Helpers */
 .only-mobile,
 .hero-eyebrow-mobile {
@@ -11793,6 +11801,87 @@ table.data.compare td.us {
   .reviews-sec .btn-reviews-google {
     width: 100% !important;
     justify-content: center !important;
+  }
+
+  /* Mobile eyebrow styling matching other sections */
+  .eyebrow-text-desktop {
+    display: none !important;
+  }
+
+  .eyebrow-text-mobile {
+    display: inline !important;
+  }
+
+  /* What firms and candidates say (Dark luxury section matching #terms) */
+  .reviews-sec .sec-head-premium {
+    text-align: left !important;
+    margin-bottom: 28px !important;
+  }
+
+  .reviews-sec .badge-capsule {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 999px !important;
+    padding: 5px 13px !important;
+    font: 600 11px/1 var(--mono) !important;
+    color: #93C5FD !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    margin-bottom: 16px !important;
+    text-align: left !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  .reviews-sec .badge-dot {
+    display: inline-block !important;
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: #60A5FA !important;
+    box-shadow: 0 0 6px rgba(96, 165, 250, 0.6) !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Run the hire with or without us (Light section matching #candidates, #who-we-are, protocol) */
+  .resources-sec .sec-head-premium {
+    text-align: left !important;
+    margin-bottom: 28px !important;
+  }
+
+  .resources-sec .badge-capsule {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: #EFF6FF !important;
+    border: 1px solid #BFDBFE !important;
+    border-radius: 999px !important;
+    padding: 5px 13px !important;
+    font: 600 11px/1 var(--mono) !important;
+    color: #1D4ED8 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    margin-bottom: 16px !important;
+    text-align: left !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  .resources-sec .badge-dot {
+    display: inline-block !important;
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: #2563EB !important;
+    box-shadow: none !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
   }
 }
 
