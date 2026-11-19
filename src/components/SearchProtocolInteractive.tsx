@@ -863,8 +863,8 @@ export function SearchProtocolInteractive() {
           }
 
           .protocol-interactive-grid {
-            grid-template-columns: 1fr;
-            gap: 24px;
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
           }
 
           .protocol-rope-svg {
@@ -872,16 +872,80 @@ export function SearchProtocolInteractive() {
           }
 
           .protocol-steps-scroll-col {
-            max-width: 100%;
+            max-width: 100% !important;
+            width: 100% !important;
           }
 
           .protocol-stage-column {
-            position: static;
-            max-width: 100%;
+            display: none !important;
           }
 
           .protocol-step-card {
-            padding: 15px 18px;
+            display: block !important;
+            position: relative !important;
+            padding: 18px 18px 16px !important;
+          }
+
+          .protocol-step-indicator {
+            position: absolute !important;
+            top: 16px !important;
+            right: 16px !important;
+            left: auto !important;
+            bottom: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            z-index: 2 !important;
+            flex-direction: row !important;
+            align-items: center !important;
+          }
+
+          .protocol-step-number {
+            width: 28px !important;
+            height: 28px !important;
+            font-size: 11px !important;
+            border-radius: 7px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+
+          .protocol-step-line {
+            display: none !important;
+          }
+
+          .protocol-step-body {
+            width: 100% !important;
+            display: block !important;
+          }
+
+          .protocol-step-kicker-row {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            gap: 8px !important;
+            margin-bottom: 9px !important;
+            padding-right: 36px !important;
+          }
+
+          .protocol-step-title {
+            width: 100% !important;
+            font-size: 17px !important;
+            line-height: 1.35 !important;
+            margin: 0 0 8px !important;
+            display: block !important;
+          }
+
+          .protocol-step-text {
+            width: 100% !important;
+            font-size: 13.5px !important;
+            line-height: 1.52 !important;
+            margin: 0 0 13px !important;
+            display: block !important;
+          }
+
+          .protocol-step-sla-pill {
+            display: inline-flex !important;
+            margin-top: 0 !important;
           }
 
           .protocol-heading-row {
@@ -912,8 +976,34 @@ export function SearchProtocolInteractive() {
             padding: 14px;
           }
 
+          .protocol-step-card {
+            padding: 16px 16px 15px !important;
+          }
+
+          .protocol-step-indicator {
+            top: 14px !important;
+            right: 14px !important;
+          }
+
+          .protocol-step-kicker-row {
+            padding-right: 36px !important;
+            margin-bottom: 8px !important;
+          }
+
+          .protocol-step-title {
+            font-size: 16.5px !important;
+            line-height: 1.35 !important;
+            margin: 0 0 7px !important;
+          }
+
+          .protocol-step-text {
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+            margin: 0 0 12px !important;
+          }
+
           .protocol-step-line {
-            display: none;
+            display: none !important;
           }
         }
       `}</style>
