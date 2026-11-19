@@ -14151,6 +14151,8 @@ table.data.compare td.us {
   grid-template-columns: minmax(340px, 42%) minmax(0, 58%);
   gap: 24px;
   align-items: start;
+  min-height: calc(100vh - 110px);
+  margin-bottom: 32px;
 }
 
 .indeed-feed-column {
@@ -14409,22 +14411,29 @@ table.data.compare td.us {
 .indeed-detail-column {
   position: sticky;
   top: 86px;
-  max-height: calc(100vh - 105px);
-  border-radius: 12px;
-  overflow: hidden;
+  height: calc(100vh - 110px);
+  max-height: calc(100vh - 110px);
+  box-sizing: border-box;
+  overflow: visible;
+  padding-bottom: 4px;
 }
 
 .indeed-clean-detail-pane {
   background: #FFFFFF;
-  border: 1.5px solid #E2E8F0;
+  border: 1.5px solid #CBD5E1;
+  border-bottom: 2px solid #94A3B8;
   border-radius: 14px;
-  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.04);
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .clean-detail-header {
+  flex-shrink: 0;
   padding: 24px 28px 20px;
   display: flex;
   flex-direction: column;
@@ -14552,6 +14561,7 @@ table.data.compare td.us {
 }
 
 .detail-clean-hr {
+  flex-shrink: 0;
   border: 0;
   border-top: 1px solid #E2E8F0;
   margin: 0;
@@ -14559,12 +14569,32 @@ table.data.compare td.us {
 
 /* Clean Detail Body */
 .clean-detail-body {
-  padding: 24px 28px 32px;
+  flex: 1 1 0;
+  min-height: 0;
+  padding: 24px 28px 36px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   overflow-y: auto;
-  max-height: calc(100vh - 240px);
+  box-sizing: border-box;
+  overscroll-behavior: contain;
+}
+
+.clean-detail-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.clean-detail-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.clean-detail-body::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 999px;
+}
+
+.clean-detail-body::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
 }
 
 .clean-job-details-block {
@@ -15199,9 +15229,16 @@ table.data.compare td.us {
   max-width: 580px;
   height: 100%;
   background: var(--white);
-  overflow-y: auto;
+  overflow: hidden;
   box-shadow: -6px 0 30px rgba(0, 0, 0, 0.15);
   animation: slideInRight 0.22s ease-out;
+}
+
+.mobile-detail-modal .indeed-clean-detail-pane {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  height: 100% !important;
 }
 
 @keyframes slideInRight {
