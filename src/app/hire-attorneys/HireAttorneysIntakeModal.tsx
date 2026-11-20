@@ -114,9 +114,9 @@ export function HireAttorneysIntakeModal() {
             padding: 16px !important;
           }
           .ha-modal-sheet {
-            height: 80svh !important;
-            height: 80svh !important;
-            max-height: 80svh !important;
+            height: 90svh !important;
+            height: 90svh !important;
+            max-height: 90svh !important;
             max-width: 560px !important;
             border-radius: 22px !important;
             padding: 22px 20px 24px !important;
