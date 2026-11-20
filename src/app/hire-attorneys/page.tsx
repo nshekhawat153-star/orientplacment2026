@@ -200,7 +200,7 @@ export default function HireAttorneysLandingPage() {
             padding: 0 14px !important;
           }
           .ha-terms-inner-wrap {
-            margin-top: -46px !important;
+            margin-top: -24px !important;
             padding: 0 !important;
           }
           .ha-terms-grid {
@@ -217,10 +217,12 @@ export default function HireAttorneysLandingPage() {
             border: 0 !important;
             border-radius: 0 !important;
             box-shadow: none !important;
-            padding: 13px 12px !important;
+            padding: 15px 12px 14px !important;
             display: flex !important;
             flex-direction: column !important;
             justify-content: flex-start !important;
+            align-items: center !important;
+            text-align: center !important;
           }
           .ha-term-card:nth-child(1) {
             border-right: 1px solid #DBEAFE !important;
@@ -236,27 +238,33 @@ export default function HireAttorneysLandingPage() {
             border: 0 !important;
           }
           .ha-term-label {
-            font-size: 9px !important;
+            font-size: 9.5px !important;
             letter-spacing: 0.08em !important;
-            margin-bottom: 3px !important;
+            margin-bottom: 4px !important;
             color: #64748B !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
+            text-align: center !important;
+            width: 100% !important;
           }
           .ha-term-val {
-            font-size: 22px !important;
+            font-size: 24px !important;
             line-height: 1.15 !important;
             font-weight: 600 !important;
-            margin-bottom: 3px !important;
+            margin-bottom: 4px !important;
+            text-align: center !important;
+            width: 100% !important;
           }
           .ha-term-sub {
-            font-size: 10.5px !important;
+            font-size: 11px !important;
             line-height: 1.35 !important;
             margin-top: 0 !important;
             color: #64748B !important;
+            text-align: center !important;
+            width: 100% !important;
           }
           .ha-hero-sec {
-            padding: 86px 0 36px !important;
+            padding: 86px 0 54px !important;
             min-height: auto !important;
           }
           .ha-hero-wrap {
