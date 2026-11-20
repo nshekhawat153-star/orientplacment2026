@@ -358,6 +358,14 @@ export default function HomePage() {
         {/* 7. How a search runs — shortened, moved after fees */}
         <SearchProtocolInteractive />
 
+        {/* Blue Section Divider (swiftpainting style with faded line & center diamond anchor) */}
+        <div className="section-divider-blue-container" aria-hidden="true">
+          <div className="section-divider-blue-inner">
+            <div className="section-divider-blue-line" />
+            <div className="section-divider-blue-diamond" />
+          </div>
+        </div>
+
         {/* 8. FAQ — moved up before final CTA */}
         <section className="block faq-sec" id="faq">
           <div className="wrap split">

@@ -260,7 +260,7 @@ export function SearchProtocolInteractive() {
           height: 250vh;
           background-color: #FAF9F5 !important;
           border-top: 1px solid #E5E0D5;
-          border-bottom: 1px solid #E5E0D5;
+          border-bottom: none !important;
         }
 
         .protocol-pinned-viewport {

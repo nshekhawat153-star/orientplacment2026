@@ -2730,7 +2730,7 @@ a.rating:hover {
   position: relative;
   background-color: #FAF9F5;
   border-top: 1px solid #E5E0D5;
-  border-bottom: 1px solid #E5E0D5;
+  border-bottom: none !important;
   padding: 108px 0 120px;
 }
 
@@ -2825,7 +2825,7 @@ a.rating:hover {
   height: 250vh;
   background-color: #FAF9F5 !important;
   border-top: 1px solid #E5E0D5;
-  border-bottom: 1px solid #E5E0D5;
+  border-bottom: none !important;
 }
 
 .protocol-pinned-viewport {
@@ -7723,7 +7723,7 @@ article h3 .mark {
 .faq-sec {
   background: #FAF9F5 !important;
   color: #08142A !important;
-  border-top: 1px solid #EAE7DC !important;
+  border-top: none !important;
   border-bottom: 1px solid #EAE7DC !important;
   padding: 104px 0 112px !important;
   position: relative !important;
@@ -19791,4 +19791,48 @@ footer .stars svg,
   -webkit-backdrop-filter: none !important;
   box-shadow: none !important;
 }
+
+/* Blue Section Divider (swiftpainting style with faded line & center diamond anchor) */
+.section-divider-blue-container {
+  width: 100% !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #FAF9F5 !important;
+  padding: 0 24px !important;
+  pointer-events: none !important;
+  z-index: 20 !important;
+  overflow: hidden !important;
+}
+
+.section-divider-blue-inner {
+  max-width: 1320px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.section-divider-blue-line {
+  width: 100% !important;
+  height: 2.5px !important;
+  background: linear-gradient(90deg, transparent 0%, #2563EB 50%, transparent 100%) !important;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.35) !important;
+  border-radius: 999px !important;
+}
+
+.section-divider-blue-diamond {
+  position: absolute !important;
+  width: 11px !important;
+  height: 11px !important;
+  transform: rotate(45deg) !important;
+  background-color: #2563EB !important;
+  border: 2px solid #FFFFFF !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15), 0 0 8px rgba(37, 99, 235, 0.4) !important;
+}
+
 
