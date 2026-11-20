@@ -80,6 +80,10 @@ export default function HireAttorneysLandingPage() {
           background-color: #08142A !important;
           background-image: radial-gradient(ellipse 90% 80% at 50% 0%, #0E2246 0%, #08142A 70%, #050B17 100%) !important;
         }
+        .ha-bottom-cta-sec b,
+        .ha-bottom-cta-sec strong {
+          color: #FFFFFF !important;
+        }
         .ha-hero-h1,
         .ha-split-hero-h1 {
           color: #FFFFFF !important;
@@ -1440,7 +1444,7 @@ export default function HireAttorneysLandingPage() {
 
           <p className="ha-bottom-sub" style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 28, maxWidth: 640, margin: "0 auto 28px" }}>
             Sign one simple agreement. Pre-screened attorney dossiers delivered straight to your inbox within 48–72 hours.
-            Zero upfront cost — you <b>only pay if you hire</b>.
+            Zero upfront cost — you <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>only pay if you hire</strong>.
           </p>
 
           {/* Quick trust checklist */}
