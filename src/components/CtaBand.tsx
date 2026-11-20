@@ -87,12 +87,6 @@ export function CtaBand({
 
   return (
     <section className="cta-band">
-      {/* Faded Background Graphic Backdrop */}
-      <div className="cta-bg-backdrop" aria-hidden="true">
-        <div className="cta-bg-image" />
-        <div className="cta-bg-overlay" />
-      </div>
-
       <div className="wrap">
         <div className="cta-card-shell cta-card-compact">
           <div className="cta-col-main cta-copy">

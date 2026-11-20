@@ -140,12 +140,6 @@ export default function HomePage() {
 
         {/* 4. What It Costs - Transparent Contingency Terms */}
         <section className="block terms-sec" id="terms" aria-labelledby="terms-h2">
-          {/* Faded Background Graphic Backdrop */}
-          <div className="terms-bg-backdrop" aria-hidden="true">
-            <div className="terms-bg-image" />
-            <div className="terms-bg-overlay" />
-          </div>
-
           <div className="wrap">
             <div className="terms-head">
               <div className="terms-eyebrow">
