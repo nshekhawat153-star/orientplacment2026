@@ -148,28 +148,12 @@ export function JobsSearchClient() {
       <section
         className="jobs-luxury-header-sec"
         style={{
-          background: "#08142A",
           color: "#FFFFFF",
           padding: "124px 0 64px",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Background Water Splash Video constrained to this header */}
-        <div className="hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video-el"
-          >
-            <source src="/media/splash.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-video-gradient" />
-          <div className="hero-video-radial-aura" />
-        </div>
-
         <div className="wrap" style={{ position: "relative", zIndex: 3, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div className="jobs-header-intro" style={{ textAlign: "center", margin: "0 auto 32px", maxWidth: "840px" }}>
             <div className="hero-eyebrow-capsule badge-capsule" style={{ margin: "0 auto 16px", display: "inline-flex" }}>

@@ -47,22 +47,6 @@ export default function EmployersPage() {
 
       {/* 1. CINEMATIC WATER SPLASH HERO */}
       <section className="hero-cinematic" aria-labelledby="emp-hero-h1" style={{ padding: "124px 0 76px" }}>
-        {/* Background Water Splash Video */}
-        <div className="hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video-el"
-          >
-            <source src="/media/splash.mp4" type="video/mp4" />
-            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-video-gradient" />
-          <div className="hero-video-radial-aura" />
-        </div>
-
         <div className="wrap hero-content-wrap" style={{ position: "relative", zIndex: 2, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           <div className="hero-content-center">
             <div className="hero-eyebrow-capsule">

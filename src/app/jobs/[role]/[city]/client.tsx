@@ -124,22 +124,8 @@ export default function JobsClient({
 
   return (
     <div className="jobs-role-city-page">
-      {/* 1. LUXURY MIDNIGHT NAVY HERO WITH SPLASH VIDEO & EMBEDDED SEARCH */}
+      {/* 1. LUXURY MIDNIGHT NAVY HERO & EMBEDDED SEARCH */}
       <section className="jobs-luxury-header-sec" aria-labelledby="jobs-feed-h1">
-        <div className="emp-hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="emp-hero-video"
-          >
-            <source src="/media/splash.mp4" type="video/mp4" />
-          </video>
-          <div className="emp-hero-overlay" />
-          <div className="emp-hero-glow" />
-        </div>
-
         <div className="wrap" style={{ position: "relative", zIndex: 3 }}>
           <div className="jobs-header-intro">
             <div className="badge-capsule">

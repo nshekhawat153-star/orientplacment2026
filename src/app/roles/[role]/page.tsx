@@ -159,28 +159,12 @@ export default async function RolePage({ params }: PageProps) {
         aria-labelledby="role-hero-h1"
         style={{
           position: "relative",
-          background: "#08142A",
           color: "#FFFFFF",
           padding: "124px 0 76px",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
-        <div className="hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video-el"
-          >
-            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-            <source src="/media/splash.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-video-gradient" />
-          <div className="hero-video-radial-aura" />
-        </div>
-
         <div className="wrap" style={{ position: "relative", zIndex: 3, maxWidth: 960, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           {/* Badge Capsule */}
           <div className="emp-hero-badge-wrap" style={{ marginBottom: 18 }}>

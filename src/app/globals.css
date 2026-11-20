@@ -1675,19 +1675,148 @@ a.rating:hover {
 }
 
 /* ========================================================
+   UNIVERSAL ORION LUXURY HERO BACKGROUND (PORTED FROM HIRE-ATTORNEYS)
+   Deep navy base with two radial sapphire/sky glow spots and subtle 60px grid
+   ======================================================== */
+.hero-cinematic,
+.emp-luxury-hero-sec,
+.ha-hero-sec,
+.sc-luxury-hero-sec,
+.fc-luxury-hero-sec,
+.fee-luxury-hero-sec,
+.cand-hero,
+.jobs-hero,
+.jobs-luxury-header,
+.jobs-luxury-header-sec,
+.ur-luxury-hero-sec,
+.about-hero-sec,
+.bf-luxury-hero-sec,
+.wth-luxury-hero,
+.wtp-luxury-hero-sec,
+.city-location-hero,
+.role-hub-hero,
+.salary-leaf-hero,
+.kit-hero-sec,
+.cand-dossier-hero,
+.cand-profile-hero,
+.sj-hero-sec {
+  position: relative !important;
+  background-color: #08142A !important;
+  background-image:
+    radial-gradient(circle 620px at 96% 6%, rgba(37, 99, 235, 0.42) 0%, rgba(29, 78, 216, 0.16) 45%, rgba(29, 78, 216, 0) 72%),
+    radial-gradient(circle 560px at 3% 78%, rgba(96, 165, 250, 0.24) 0%, rgba(47, 98, 184, 0.09) 45%, rgba(47, 98, 184, 0) 72%),
+    linear-gradient(180deg, #0A1A38 0%, #08142A 55%, #050B17 100%) !important;
+  color: #FFFFFF !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.hero-cinematic::before,
+.emp-luxury-hero-sec::before,
+.ha-hero-sec::before,
+.sc-luxury-hero-sec::before,
+.fc-luxury-hero-sec::before,
+.fee-luxury-hero-sec::before,
+.cand-hero::before,
+.jobs-hero::before,
+.jobs-luxury-header::before,
+.jobs-luxury-header-sec::before,
+.ur-luxury-hero-sec::before,
+.about-hero-sec::before,
+.bf-luxury-hero-sec::before,
+.wth-luxury-hero::before,
+.wtp-luxury-hero-sec::before,
+.city-location-hero::before,
+.role-hub-hero::before,
+.salary-leaf-hero::before,
+.kit-hero-sec::before,
+.cand-dossier-hero::before,
+.cand-profile-hero::before,
+.sj-hero-sec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 25%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 25%, transparent 100%);
+}
+
+@media (max-width: 640px) {
+  .hero-cinematic::before,
+  .emp-luxury-hero-sec::before,
+  .ha-hero-sec::before,
+  .sc-luxury-hero-sec::before,
+  .fc-luxury-hero-sec::before,
+  .fee-luxury-hero-sec::before,
+  .cand-hero::before,
+  .jobs-hero::before,
+  .jobs-luxury-header::before,
+  .jobs-luxury-header-sec::before,
+  .ur-luxury-hero-sec::before,
+  .about-hero-sec::before,
+  .bf-luxury-hero-sec::before,
+  .wth-luxury-hero::before,
+  .wtp-luxury-hero-sec::before,
+  .city-location-hero::before,
+  .role-hub-hero::before,
+  .salary-leaf-hero::before,
+  .kit-hero-sec::before,
+  .cand-dossier-hero::before,
+  .cand-profile-hero::before,
+  .sj-hero-sec::before {
+    background-size: 44px 44px;
+  }
+
+  .hero-cinematic,
+  .emp-luxury-hero-sec,
+  .ha-hero-sec,
+  .sc-luxury-hero-sec,
+  .fc-luxury-hero-sec,
+  .fee-luxury-hero-sec,
+  .cand-hero,
+  .jobs-hero,
+  .jobs-luxury-header,
+  .jobs-luxury-header-sec,
+  .ur-luxury-hero-sec,
+  .about-hero-sec,
+  .bf-luxury-hero-sec,
+  .wth-luxury-hero,
+  .wtp-luxury-hero-sec,
+  .city-location-hero,
+  .role-hub-hero,
+  .salary-leaf-hero,
+  .kit-hero-sec,
+  .cand-dossier-hero,
+  .cand-profile-hero,
+  .sj-hero-sec {
+    background-image:
+      radial-gradient(circle 380px at 100% 4%, rgba(37, 99, 235, 0.24) 0%, rgba(29, 78, 216, 0.08) 50%, rgba(29, 78, 216, 0) 75%),
+      radial-gradient(circle 340px at 0% 80%, rgba(96, 165, 250, 0.12) 0%, rgba(47, 98, 184, 0.04) 50%, rgba(47, 98, 184, 0) 75%),
+      linear-gradient(180deg, #08142A 0%, #060E1F 55%, #040913 100%) !important;
+  }
+}
+
+.hero-video-wrap,
+.emp-hero-video-wrap {
+  display: none !important;
+}
+
+/* ========================================================
    CINEMATIC WATER SPLASH HERO (HOMEPAGE)
    ======================================================== */
 .hero-cinematic {
-  position: relative;
   min-height: calc(100vh - 72px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #08142A;
-  overflow: hidden;
   padding: 92px 0 52px;
-  box-sizing: border-box;
 }
 
 /* Background Video Container */

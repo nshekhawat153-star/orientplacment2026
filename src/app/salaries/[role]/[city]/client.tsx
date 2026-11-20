@@ -106,22 +106,8 @@ export default function SalaryLeafClient({
 
   return (
     <div className="salary-leaf-page">
-      {/* 1. LUXURY HERO WITH VIDEO, MEDIAN CALLOUT & SALARY BAND BAR */}
+      {/* 1. LUXURY HERO, MEDIAN CALLOUT & SALARY BAND BAR */}
       <section className="emp-luxury-hero-sec salary-leaf-hero" aria-labelledby="salary-hero-h1">
-        <div className="emp-hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="emp-hero-video"
-          >
-            <source src="/media/splash.mp4" type="video/mp4" />
-          </video>
-          <div className="emp-hero-overlay" />
-          <div className="emp-hero-glow" />
-        </div>
-
         <div className="wrap emp-hero-content" style={{ maxWidth: 900 }}>
           <div className="emp-hero-badge-wrap">
             <div className="badge-capsule">

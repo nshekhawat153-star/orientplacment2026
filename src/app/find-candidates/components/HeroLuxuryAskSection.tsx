@@ -41,47 +41,12 @@ export function HeroLuxuryAskSection({
       className="emp-luxury-hero-sec fc-luxury-hero-sec"
       style={{
         position: "relative",
-        background: "#08142A",
         color: "#FFFFFF",
         padding: "128px 0 72px",
         overflow: "hidden",
         textAlign: "center",
       }}
     >
-      {/* Background Splash Video */}
-      <div className="emp-hero-video-wrap" aria-hidden="true">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="emp-hero-video"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 0.22,
-          }}
-        >
-          <source src="/media/splash.mp4" type="video/mp4" />
-        </video>
-        <div
-          className="emp-hero-overlay"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background:
-              "linear-gradient(180deg, rgba(8,20,42,0.85) 0%, rgba(8,20,42,0.96) 100%)",
-          }}
-        />
-      </div>
-
       <div
         className="wrap"
         style={{

@@ -234,21 +234,6 @@ export default function SalaryLeafClient({
           textAlign: "center",
         }}
       >
-        <div className="hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video-el"
-          >
-            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-            <source src="/media/splash.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-video-gradient" />
-          <div className="hero-video-radial-aura" />
-        </div>
-
         <div className="wrap hero-content-wrap" style={{ display: "block", position: "relative", zIndex: 3, maxWidth: 980, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           <div className="hero-content-center" style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }}>
             {/* Centered Capsule Badge */}

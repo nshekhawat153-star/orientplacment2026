@@ -139,28 +139,12 @@ export function WhereToPostClient({
         className="emp-luxury-hero-sec wtp-luxury-hero-sec"
         style={{
           position: "relative",
-          background: "#08142A",
           color: "#FFFFFF",
           padding: "112px 0 84px",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
         }}
       >
-        <div className="hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video-el"
-          >
-            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-            <source src="/media/splash.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-video-gradient" />
-          <div className="hero-video-radial-aura" />
-        </div>
-
         <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 3, textAlign: "center" }}>
           {/* Eyebrow Badge */}
           <div

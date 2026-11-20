@@ -129,33 +129,17 @@ export default function CandidatesPage() {
         }
       `}</style>
 
-      {/* 1. LUXURY DARK HERO WITH SPLASH VIDEO */}
+      {/* 1. LUXURY DARK HERO */}
       <section
         className="emp-luxury-hero-sec cand-hero"
         style={{
           position: "relative",
-          background: "#08142A",
           color: "#FFFFFF",
           padding: "124px 0 76px",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
-        <div className="hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video-el"
-          >
-            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-            <source src="/media/splash.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-video-gradient" />
-          <div className="hero-video-radial-aura" />
-        </div>
-
         <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 3, textAlign: "center" }}>
           <div>
             <div

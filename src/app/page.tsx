@@ -84,21 +84,6 @@ export default function HomePage() {
       <ScrollRevealProvider />
         {/* 1. CINEMATIC WATER SPLASH HERO */}
         <section className="hero-cinematic" aria-labelledby="h1">
-          {/* Background Water Splash Video */}
-          <div className="hero-video-wrap" aria-hidden="true">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="hero-video-el"
-            >
-              <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-            </video>
-            <div className="hero-video-gradient" />
-            <div className="hero-video-radial-aura" />
-          </div>
-
           <div className="wrap hero-content-wrap">
             <div className="hero-content-center">
               <div className="hero-eyebrow-capsule">
