@@ -543,8 +543,11 @@ button.text-link {
 }
 
 .site-header.scrolled {
-  background: rgba(8, 20, 42, 0.94);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 30px rgba(0, 0, 0, 0.35)
+  background: #08142A !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .site-header>.wrap {
@@ -575,11 +578,11 @@ button.text-link {
 }
 
 .site-header.header-on-dark.scrolled {
-  background: rgba(8, 20, 42, 0.88) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  background: #08142A !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
 }
 
 .site-header.header-on-dark .nav-top {
@@ -19772,10 +19775,15 @@ footer .stars svg,
   }
 }
 
-/* hire-attorneys navbar: same navy as the hero (solid once scrolled, so white sections never show through) */
+/* All navbars on scroll: solid Orion midnight navy (#08142A) so light sections never bleed through, identical to /hire-attorneys */
+.site-header.at-top,
+.site-header.header-on-dark.at-top,
 .site-header.header-hire-attorneys.at-top {
   background: transparent !important;
 }
+
+.site-header.scrolled,
+.site-header.header-on-dark.scrolled,
 .site-header.header-hire-attorneys.scrolled {
   background: #08142A !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
