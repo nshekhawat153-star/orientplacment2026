@@ -54,6 +54,24 @@ export default function HireAttorneysLandingPage() {
           align-items: center;
           text-align: left;
         }
+        .ha-hero-sec {
+          position: relative !important;
+          background: #08142A !important;
+          color: #FFFFFF !important;
+          padding: 124px 0 120px !important;
+          min-height: auto !important;
+          display: block !important;
+          overflow: hidden !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+          box-sizing: border-box !important;
+        }
+        .ha-terms-inner-wrap {
+          max-width: 1200px;
+          margin: -56px auto 0 !important;
+          padding: 0 24px !important;
+          position: relative;
+          z-index: 10;
+        }
         .ha-hero-h1,
         .ha-split-hero-h1 {
           color: #FFFFFF !important;
@@ -447,12 +465,12 @@ export default function HireAttorneysLandingPage() {
 
       {/* 1. LUXURY SPLIT DARK HERO WITH VIDEO BACKGROUND & LEAD CAPTURE FORM */}
       <section
-        className="hero-cinematic ha-hero-sec"
+        className="ha-hero-sec"
         style={{
           position: "relative",
           background: "#08142A",
           color: "#FFFFFF",
-          padding: "128px 0 108px",
+          padding: "124px 0 120px",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
@@ -668,7 +686,7 @@ export default function HireAttorneysLandingPage() {
           padding: "0 0 24px",
         }}
       >
-        <div className="ha-terms-inner-wrap" style={{ maxWidth: 1200, margin: "-76px auto 0", padding: "0 24px" }}>
+        <div className="ha-terms-inner-wrap" style={{ maxWidth: 1200, margin: "-56px auto 0", padding: "0 24px" }}>
           <div className="ha-terms-grid">
             {/* Card 1: Placement Fee */}
             <div

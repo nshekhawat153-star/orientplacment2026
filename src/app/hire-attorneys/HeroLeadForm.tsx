@@ -180,14 +180,14 @@ export function HeroLeadForm({
           width: 100%;
           min-height: 50px;
           border-radius: 10px;
-          background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%);
+          background: #2563EB;
           color: #FFFFFF;
           border: 0;
           font-size: 14.5px;
           font-weight: 600;
           letter-spacing: 0.01em;
           cursor: pointer;
-          box-shadow: 0 6px 18px rgba(29, 78, 216, 0.35);
+          box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -198,12 +198,12 @@ export function HeroLeadForm({
         }
         .ha-form-submit-btn:hover:not(:disabled) {
           transform: translateY(-1.5px);
-          box-shadow: 0 10px 24px rgba(29, 78, 216, 0.45);
-          background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+          box-shadow: 0 8px 22px rgba(37, 99, 235, 0.45);
+          background: #1D4ED8;
         }
         .ha-form-submit-btn:active:not(:disabled) {
           transform: translateY(0);
-          box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
         @media (max-width: 640px) {
           .ha-hero-form-card {
