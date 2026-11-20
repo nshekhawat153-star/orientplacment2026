@@ -230,6 +230,57 @@ export function HeroLeadForm({
           background: #F1F5F9;
           border-color: #94A3B8;
         }
+        @media (max-width: 768px) {
+          /* phone popup: the form fills the popup's height instead of leaving blank space */
+          .ha-modal-right {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 auto;
+          }
+          .ha-modal-right > div[id="ha-form-root"],
+          .ha-modal-right > div:last-child {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 auto;
+          }
+          .ha-modal-right .ha-hero-form-card.is-modal {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 auto;
+          }
+          .ha-modal-right .ha-form-el {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 auto;
+          }
+          .ha-modal-right .ha-form-fields {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            justify-content: space-evenly;
+            gap: 6px;
+          }
+          .ha-modal-right .ha-form-fields > div,
+          .ha-modal-right .ha-form-fields .ha-form-row-2 {
+            margin-bottom: 0 !important;
+          }
+          .ha-modal-right .ha-form-input,
+          .ha-modal-right .ha-form-select {
+            height: 54px;
+            font-size: 15px;
+          }
+          .ha-modal-right .ha-form-textarea {
+            min-height: 72px;
+            font-size: 15px;
+          }
+          .ha-modal-right .ha-form-label {
+            font-size: 12px;
+            margin-bottom: 7px;
+          }
+          .ha-modal-right .ha-form-foot {
+            margin-top: 18px;
+          }
+        }
         @media (max-width: 640px) {
           .ha-hero-form-card {
             padding: 22px 16px 18px;
@@ -414,7 +465,8 @@ export function HeroLeadForm({
             </div>
           </div>
 
-          <form onSubmit={step === 1 ? handleContinue : handleSubmit}>
+          <form className="ha-form-el" onSubmit={step === 1 ? handleContinue : handleSubmit}>
+            <div className="ha-form-fields">
             {step === 1 ? (
               <>
                 {/* STEP 1: CONTACT DETAILS (one input per row) */}
@@ -482,7 +534,7 @@ export function HeroLeadForm({
             ) : (
               <>
                 {/* STEP 2: CANDIDATE BRIEF */}
-                <div className="ha-form-row-2" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 10, marginBottom: 10 }}>
+                <div className="ha-form-row-2" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, marginBottom: 10 }}>
                   <div>
                     <label htmlFor="h-practice" className="ha-form-label">
                       Primary Practice Area
@@ -541,9 +593,8 @@ export function HeroLeadForm({
                 <div style={{ marginBottom: 13 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                     <label htmlFor="h-jd" className="ha-form-label" style={{ margin: 0 }}>
-                      Short JD / Key Requirements <span style={{ color: "#94A3B8", fontWeight: 400 }}>(Optional)</span>
+                      Short JD / Key Requirements
                     </label>
-                    <span style={{ fontSize: 11, color: "#64748B" }}>Paste brief or notes</span>
                   </div>
                   <textarea
                     id="h-jd"
@@ -556,7 +607,9 @@ export function HeroLeadForm({
                 </div>
               </>
             )}
+            </div>
 
+            <div className="ha-form-foot">
             {error && (
               <div
                 style={{
@@ -625,6 +678,7 @@ export function HeroLeadForm({
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
               <span>100% Confidential · Zero upfront retainer · Pay only if you hire</span>
+            </div>
             </div>
           </form>
         </div>

@@ -114,9 +114,9 @@ export function HireAttorneysIntakeModal() {
             padding: 16px !important;
           }
           .ha-modal-sheet {
-            height: 90vh !important;
-            height: 90svh !important;
-            max-height: 90svh !important;
+            height: 80svh !important;
+            height: 80svh !important;
+            max-height: 80svh !important;
             max-width: 560px !important;
             border-radius: 22px !important;
             padding: 22px 20px 24px !important;
@@ -124,6 +124,11 @@ export function HireAttorneysIntakeModal() {
             animation: haPopIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
           }
           .ha-modal-handle { display: none !important; }
+          .ha-modal-sheet {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .ha-modal-right { flex: 1 0 auto; display: flex; flex-direction: column; }
         }
         @media (min-width: 769px) {
           .ha-mobile-modal-overlay {
