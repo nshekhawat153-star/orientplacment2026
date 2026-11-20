@@ -211,10 +211,7 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
               <span>TALENT DIRECTORY · 100,000+ PRE-SCREENED PROFILES</span>
             </div>
             <h4 className="showcase-banner-title">
-              Looking for candidates in a{" "}
-              <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                different practice area, city, or experience level?
-              </span>
+              Looking for candidates in a different practice area, city, or experience level?
             </h4>
             <p className="showcase-banner-desc showcase-desc-desktop">
               Search across <strong>100,000+ active &amp; passive attorneys, paralegals, and legal staff</strong> nationwide. Filter by practice specialty, active bar standing, and verified compensation.

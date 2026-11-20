@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
@@ -358,16 +358,16 @@ export default function HomePage() {
         {/* 7. How a search runs — shortened, moved after fees */}
         <SearchProtocolInteractive />
 
-        {/* Blue Section Divider (swiftpainting style with faded line & center diamond anchor) */}
+        {/* Blue Section Divider — exactly at section boundary, no diamond, left-right blend */}
         <div className="section-divider-blue-container" aria-hidden="true">
           <div className="section-divider-blue-inner">
             <div className="section-divider-blue-line" />
-            <div className="section-divider-blue-diamond" />
           </div>
         </div>
 
         {/* 8. FAQ — moved up before final CTA */}
         <section className="block faq-sec" id="faq">
+
           <div className="wrap split">
             <div className="sec-head-premium sec-head-left faq-head-col">
               <div className="badge-capsule">
@@ -421,7 +421,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="faq">
-              <details>
+              <details className="faq-detail-item">
                 <summary>
                   <span>What does it cost?</span>
                   <span className="faq-toggle-icon" aria-hidden="true" />
@@ -435,7 +435,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </details>
-              <details>
+              <details className="faq-detail-item">
                 <summary>
                   <span>What if the hire leaves early?</span>
                   <span className="faq-toggle-icon" aria-hidden="true" />
@@ -447,7 +447,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </details>
-              <details>
+              <details className="faq-detail-item">
                 <summary>
                   <span>Do we have to work only with you?</span>
                   <span className="faq-toggle-icon" aria-hidden="true" />
@@ -459,7 +459,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </details>
-              <details>
+              <details className="faq-detail-item">
                 <summary>
                   <span>How do you keep candidates anonymous?</span>
                   <span className="faq-toggle-icon" aria-hidden="true" />
@@ -472,7 +472,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </details>
-              <details open>
+              <details className="faq-detail-item" open>
                 <summary>
                   <span>Which seats do you fill?</span>
                   <span className="faq-toggle-icon" aria-hidden="true" />
