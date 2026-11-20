@@ -508,7 +508,7 @@ export default function AboutPage() {
               >
                 SECURITY &amp; ANTI-SPOOFING VERIFICATION
               </div>
-              <h2 style={{ fontSize: "clamp(26px, 3.4vw, 38px)", fontWeight: 500, margin: "0 0 16px", fontFamily: "var(--display)" }}>
+              <h2 style={{ fontSize: "clamp(26px, 3.4vw, 38px)", fontWeight: 500, color: "#FFFFFF", margin: "0 0 16px", fontFamily: "var(--display)" }}>
                 Is this inbound email <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>truly from Orion?</span>
               </h2>
               <p style={{ color: "rgba(255, 255, 255, 0.82)", fontSize: "1.02rem", lineHeight: 1.6, margin: "0 0 24px" }}>
