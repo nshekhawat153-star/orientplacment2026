@@ -48,7 +48,7 @@ export const people: Person[] = [
     "email": "justin@orionplacement.com",
     "note": "11 years of recruiting industry experience, including recruitment consulting for SMBs and enterprise talent acquisition.",
     "does": "Your first call. Takes the seat brief, sends the shortlist and agrees terms with your firm.",
-    "photo": "/images/founders/justin-sofman.png",
+    "photo": "/justin-sofman.png",
     "calendly": "https://calendly.com/orionplacement/call-with-justin"
   },
   {
