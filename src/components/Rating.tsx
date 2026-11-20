@@ -78,25 +78,34 @@ export function TrustTicker() {
     { num: "100%", label: "Permanent Direct-Hire" },
   ];
 
+  const half = [...items, ...items];
+
   return (
-    <div className="ticker-wrapper" aria-hidden="true">
-      <div className="ticker-track">
-        {/* Loop Set 1 */}
-        {items.map((item, idx) => (
-          <div key={`t1-${idx}`} className="ticker-pill">
-            <span className="ticker-bullet" aria-hidden="true">✦</span>
-            <b className="ticker-num">{item.num.endsWith(" ★") ? <>{item.num.slice(0, -2)} <span style={{ color: "#FBBF24" }}>★</span></> : item.num}</b>
-            <span className="ticker-lbl">{item.label}</span>
-          </div>
-        ))}
-        {/* Loop Set 2 (for 100% seamless infinite scroll) */}
-        {items.map((item, idx) => (
-          <div key={`t2-${idx}`} className="ticker-pill">
-            <span className="ticker-bullet" aria-hidden="true">✦</span>
-            <b className="ticker-num">{item.num.endsWith(" ★") ? <>{item.num.slice(0, -2)} <span style={{ color: "#FBBF24" }}>★</span></> : item.num}</b>
-            <span className="ticker-lbl">{item.label}</span>
-          </div>
-        ))}
+    <div className="ticker-wrapper" aria-label="Key firm performance statistics">
+      <div className="ticker-track" role="list">
+        {[0, 1].map((setIdx) =>
+          half.map((item, idx) => (
+            <div
+              key={`t-${setIdx}-${idx}`}
+              className="ticker-pill"
+              role={setIdx === 0 && idx < items.length ? "listitem" : undefined}
+              aria-hidden={setIdx === 1 || idx >= items.length ? true : undefined}
+            >
+              <span className="ticker-bullet" aria-hidden="true">✦</span>
+              <span className="ticker-num">
+                {item.num.endsWith(" ★") ? (
+                  <>
+                    {item.num.slice(0, -2)}{" "}
+                    <span style={{ color: "#FBBF24" }}>★</span>
+                  </>
+                ) : (
+                  item.num
+                )}
+              </span>
+              <span className="ticker-lbl">{item.label}</span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

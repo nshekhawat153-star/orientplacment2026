@@ -1934,8 +1934,8 @@ a.rating:hover {
 /* Desktop Proportions: Hero + Trust Ticker Strip fit seamlessly in desktop viewport */
 @media (min-width: 1024px) {
   .hero-cinematic {
-    min-height: calc(100vh - 114px) !important;
-    min-height: calc(100dvh - 114px) !important;
+    min-height: calc(100vh - 80px) !important;
+    min-height: calc(100dvh - 80px) !important;
     padding: 92px 0 20px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -1983,35 +1983,39 @@ a.rating:hover {
     font-size: 14px !important;
   }
 
-  /* Desktop Trust Ticker Strip - perfectly symmetrical vertical padding */
+  /* Desktop Trust Ticker Strip - exact sizing from screenshot */
   .trust-ticker-strip {
-    padding: 32px 0 !important;
+    padding: 26px 0 30px !important;
     box-sizing: border-box !important;
   }
 
   .ticker-track {
-    gap: 72px !important;
+    gap: 0 !important;
     align-items: center !important;
-  }
-
-  .ticker-bullet {
-    font-size: 24px !important;
-    filter: none !important;
-  }
-
-  .ticker-num {
-    font-size: clamp(40px, 3.4vw, 48px) !important;
-    line-height: 1 !important;
-  }
-
-  .ticker-lbl {
-    font-size: clamp(16.5px, 1.35vw, 18.5px) !important;
-    line-height: 1.35 !important;
   }
 
   .ticker-pill {
-    gap: 18px !important;
-    align-items: center !important;
+    padding: 0 54px !important;
+    gap: 14px !important;
+    align-items: baseline !important;
+  }
+
+  .ticker-bullet {
+    font-size: 14px !important;
+  }
+
+  .ticker-num {
+    font-size: 31px !important;
+    line-height: 1 !important;
+    font-weight: 400 !important;
+  }
+
+  .ticker-lbl {
+    font-size: 13px !important;
+    font-family: var(--mono) !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: #94A3B8 !important;
   }
 }
 
@@ -2469,107 +2473,147 @@ a.rating:hover {
 
 /* ========================================================
    10. CONTINUOUS MOVING TRUST TICKER STRIP (HOMEPAGE)
+   Matches screenshot:
+   - Deep luxury navy background with subtle border
+   - Thin vertical divider between items
+   - Subtle star bullet ✦
+   - Luxury serif numbers with prominent, readable sizing
+   - Spaced uppercase mono labels
+   - Edge fades on left and right
    ======================================================== */
 .trust-ticker-strip {
-  position: relative;
-  width: 100%;
-  background: linear-gradient(180deg, #08142A 0%, #061022 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.4);
-  padding: 44px 0;
-  overflow: hidden;
+  position: relative !important;
+  width: 100% !important;
+  background: linear-gradient(180deg, #08142A 0%, #061022 100%) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.35) !important;
+  padding: 26px 0 30px !important;
+  overflow: hidden !important;
+  z-index: 2 !important;
 }
 
 .ticker-wrapper {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  user-select: none;
+  display: flex !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  user-select: none !important;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%) !important;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%) !important;
 }
 
 @keyframes tickerSlide {
   0% {
     transform: translate3d(0, 0, 0);
   }
-
   100% {
     transform: translate3d(-50%, 0, 0);
   }
 }
 
 .ticker-track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  gap: 80px;
-  animation: tickerSlide 75s linear infinite;
-  will-change: transform;
+  display: flex !important;
+  align-items: center !important;
+  width: max-content !important;
+  gap: 0 !important;
+  animation: tickerSlide 70s linear infinite !important;
+  will-change: transform !important;
 }
 
-.ticker-track:hover {
-  animation-play-state: paused;
+.trust-ticker-strip:hover .ticker-track {
+  animation-play-state: paused !important;
 }
 
 .ticker-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 18px;
-  white-space: nowrap;
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 14px !important;
+  white-space: nowrap !important;
+  padding: 0 54px !important;
+  position: relative !important;
+}
+
+/* Thin vertical divider between elements (matches screenshot) */
+.ticker-pill::after {
+  content: "" !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  width: 1px !important;
+  height: 28px !important;
+  transform: translateY(-50%) !important;
+  background: rgba(255, 255, 255, 0.14) !important;
 }
 
 .ticker-bullet {
-  color: #60A5FA;
-  font-size: 20px;
-  line-height: 1;
-  opacity: 1;
-  filter: none !important;
-  display: inline-flex;
-  align-items: center;
+  color: #7E9F95 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-right: 2px !important;
 }
 
 .ticker-num {
   font-family: var(--display) !important;
-  font-size: clamp(38px, 3.6vw, 52px) !important;
-  font-weight: 500 !important;
+  font-size: 31px !important;
+  font-weight: 400 !important;
   color: #FFFFFF !important;
   line-height: 1 !important;
-  letter-spacing: -0.02em !important;
-  text-shadow: 0 2px 24px rgba(96, 165, 250, 0.35);
+  letter-spacing: -0.01em !important;
+  text-shadow: none !important;
 }
 
 .ticker-lbl {
-  font: 500 clamp(16.5px, 1.4vw, 19.5px)/1.35 var(--body);
-  color: #E2E8F0;
-  letter-spacing: 0.015em;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  font-family: var(--mono) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #94A3B8 !important;
+  transition: color 0.2s ease !important;
 }
 
 .ticker-pill:hover .ticker-lbl {
-  color: #FFFFFF;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  color: #FFFFFF !important;
 }
 
 @media (max-width: 640px) {
   .trust-ticker-strip {
-    padding: 26px 0;
+    padding: 22px 0 24px !important;
   }
 
   .ticker-track {
-    gap: 44px;
-    animation-duration: 48s;
+    gap: 0 !important;
+    animation-duration: 55s !important;
+  }
+
+  .ticker-pill {
+    padding: 0 32px !important;
+    gap: 10px !important;
+  }
+
+  .ticker-pill::after {
+    height: 22px !important;
   }
 
   .ticker-bullet {
-    font-size: 17px;
+    font-size: 13px !important;
   }
 
   .ticker-num {
-    font-size: 28px !important;
+    font-size: 26px !important;
   }
 
   .ticker-lbl {
-    font-size: 15.5px !important;
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none !important;
   }
 }
 
