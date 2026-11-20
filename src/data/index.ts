@@ -35,7 +35,7 @@ export const trust = {
   "fee": "23%",
   "feeTerms": "Net 15 · Zero Upfront",
   "turnaround": "Within 1 Week",
-  "sweetSpot": "50–500 Employees",
+  "sweetSpot": "Small & Mid-Size Law Firms",
   "calendly": "https://calendly.com/orionplacement/call-with-justin",
   "google": "https://www.google.com/search?q=Orion+Placement+reviews"
 };

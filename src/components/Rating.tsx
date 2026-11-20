@@ -66,46 +66,35 @@ export function TrustLine({
 
 export function TrustTicker() {
   const items = [
-    { num: "200+", label: "Hires in Past 12 Months" },
-    { num: "30+", label: "Hires Facilitated Monthly" },
-    { num: "100,000+", label: "Active Legal Talent Pool" },
-    { num: "28", label: "Repeat Client Law Firms" },
+    { num: "5.0 ★", label: `Google Rating (${trust.reviews} Reviews)` },
+    { num: "Since 2022", label: "Fort Lauderdale, Florida" },
     { num: "90 Days", label: "Replacement Guarantee" },
     { num: "23%", label: "Contingency Fee · $0 Upfront" },
-    { num: "5.0 ★", label: "Google Rating (60 Reviews)" },
-    { num: "< 1 Week", label: "First Qualified Candidate" },
-    { num: "50–500", label: "Firm Sweet Spot (Attorneys)" },
-    { num: "100%", label: "Permanent Direct-Hire" },
   ];
 
-  const half = [...items, ...items];
-
   return (
-    <div className="ticker-wrapper" aria-label="Key firm performance statistics">
-      <div className="ticker-track" role="list">
-        {[0, 1].map((setIdx) =>
-          half.map((item, idx) => (
-            <div
-              key={`t-${setIdx}-${idx}`}
-              className="ticker-pill"
-              role={setIdx === 0 && idx < items.length ? "listitem" : undefined}
-              aria-hidden={setIdx === 1 || idx >= items.length ? true : undefined}
-            >
-              <span className="ticker-bullet" aria-hidden="true">✦</span>
-              <span className="ticker-num">
-                {item.num.endsWith(" ★") ? (
-                  <>
-                    {item.num.slice(0, -2)}{" "}
-                    <span style={{ color: "#FBBF24" }}>★</span>
-                  </>
-                ) : (
-                  item.num
-                )}
-              </span>
-              <span className="ticker-lbl">{item.label}</span>
-            </div>
-          ))
-        )}
+    <div className="ticker-wrapper ticker-static" aria-label="Key verifiable facts about Orion Placement" role="list">
+      <div className="ticker-track ticker-track-static">
+        {items.map((item, idx) => (
+          <div
+            key={`t-${idx}`}
+            className="ticker-pill"
+            role="listitem"
+          >
+            <span className="ticker-bullet" aria-hidden="true">✦</span>
+            <span className="ticker-num">
+              {item.num.endsWith(" ★") ? (
+                <>
+                  {item.num.slice(0, -2)}{" "}
+                  <span style={{ color: "#FBBF24" }}>★</span>
+                </>
+              ) : (
+                item.num
+              )}
+            </span>
+            <span className="ticker-lbl">{item.label}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -134,66 +123,66 @@ export function TrustBar({
   const cells =
     kind === "candidate"
       ? [
-          {
-            num: trust.rating,
-            label: (
-              <>
-                <div className="tb-stars">
-                  <Stars />
-                </div>
-                <span className="tb-sub">on Google, {trust.reviews} reviews</span>
-              </>
-            ),
-          },
-          {
-            num: (
-              <>
-                {trust.jonNamed}
-                <small className="tb-of"> of {trust.reviews}</small>
-              </>
-            ),
-            label: (
-              <span className="tb-sub">
-                reviews name Jon, who screens every candidate
-              </span>
-            ),
-          },
-          {
-            num: "$0",
-            label: <span className="tb-sub">cost to candidates, always confidential</span>,
-          },
-          {
-            num: trust.since,
-            label: (
-              <span className="tb-sub">recruiting since, based in {placeCity}</span>
-            ),
-          },
-        ]
+        {
+          num: trust.rating,
+          label: (
+            <>
+              <div className="tb-stars">
+                <Stars />
+              </div>
+              <span className="tb-sub">on Google, {trust.reviews} reviews</span>
+            </>
+          ),
+        },
+        {
+          num: (
+            <>
+              {trust.jonNamed}
+              <small className="tb-of"> of {trust.reviews}</small>
+            </>
+          ),
+          label: (
+            <span className="tb-sub">
+              reviews name Jon, who screens every candidate
+            </span>
+          ),
+        },
+        {
+          num: "$0",
+          label: <span className="tb-sub">cost to candidates, always confidential</span>,
+        },
+        {
+          num: trust.since,
+          label: (
+            <span className="tb-sub">recruiting since, based in {placeCity}</span>
+          ),
+        },
+      ]
       : [
-          {
-            num: trust.rating,
-            label: (
-              <>
-                <div className="tb-stars">
-                  <Stars />
-                </div>
-                <span className="tb-sub">on Google, {trust.reviews} reviews</span>
-              </>
-            ),
-          },
-          {
-            num: fmtNum(trust.last12MonthsPlacements || trust.placements),
-            label: <span className="tb-sub">hires in past 12 months</span>,
-          },
-          {
-            num: fmtNum(trust.activePool),
-            label: <span className="tb-sub">active legal talent pool</span>,
-          },
-          {
-            num: "90 Days",
-            label: <span className="tb-sub">full replacement guarantee</span>,
-          },
-        ];
+        {
+          num: trust.rating,
+          label: (
+            <>
+              <div className="tb-stars">
+                <Stars />
+              </div>
+              <span className="tb-sub">on Google, {trust.reviews} reviews</span>
+            </>
+          ),
+        },
+        {
+          num: fmtNum(trust.last12MonthsPlacements || trust.placements),
+          label: <span className="tb-sub">hires in past 12 months</span>,
+        },
+        {
+          num: fmtNum(trust.activePool),
+          label: <span className="tb-sub">active legal talent pool</span>,
+        },
+        {
+          num: "90 Days",
+          label: <span className="tb-sub">full replacement guarantee</span>,
+        },
+      ];
 
   return (
     <div className="trustbar">

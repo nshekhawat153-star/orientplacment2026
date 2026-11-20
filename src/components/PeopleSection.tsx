@@ -61,7 +61,7 @@ export function PersonCard({ pid }: { pid: "justin" | "jon"; row?: boolean }) {
       <p className="founder-scope-text">
         {isJustin
           ? "Your primary intake partner. Scopes practice needs with managing partners, aligns commercial terms, and directs candidate shortlists from initial brief to signed offer."
-          : "Personally interviews every lateral attorney and legal candidate before their dossier reaches your desk. Assesses active bar credentials, real matter handling, and cultural fit."}
+          : "Personally interviews every lateral attorney and legal candidate before their profile reaches your desk. Checks active bar standing, real case experience, and culture fit."}
       </p>
 
       {/* Executive Direct Quote Box with Blue Highlighting */}
@@ -69,7 +69,7 @@ export function PersonCard({ pid }: { pid: "justin" | "jon"; row?: boolean }) {
         <p className="founder-quote-text">
           {isJustin ? (
             <>
-              &ldquo;<span className="founder-quote-blue">Direct founder accountability</span> on every legal mandate. We scope your practice needs once and deliver only <span className="founder-quote-blue">screened, top-tier counsel</span>.&rdquo;
+              &ldquo;<span className="founder-quote-blue">Direct founder accountability</span> on every search. We learn your practice needs once and deliver only <span className="founder-quote-blue">screened, qualified candidates</span>.&rdquo;
             </>
           ) : (
             <>
@@ -182,7 +182,7 @@ export function PeopleSection() {
         <PersonCard pid="jon" />
       </div>
 
-      {/* The Orion Zero-Handoff Promise Reassurance Bar - Dark Luxury Redesign */}
+      {/* The Orion Direct-Access Promise Reassurance Bar */}
       <div className="founders-promise-bar">
         <div className="promise-bar-content">
           <div className="promise-bar-icon-box" aria-hidden="true">
@@ -194,18 +194,18 @@ export function PeopleSection() {
           <div className="promise-bar-left">
             <div className="promise-bar-tag">
               <span className="promise-tag-dot" />
-              <span>THE ORION ZERO-HANDOFF PROMISE</span>
+              <span>DIRECT PARTNER ACCESS — NO JUNIOR RECRUITERS</span>
             </div>
             <p className="promise-bar-text">
-              When you retain Orion Placement, your search is run <strong>directly by Justin and Jon</strong>.
-              You will <span className="promise-text-accent">never be handed off</span> to a junior recruiter, coordinator, or phone tree.
+              When you work with Orion, your search is run <strong>directly by Justin and Jon</strong>.
+              You will <span className="promise-text-accent">never be passed to a junior recruiter</span>, coordinator, or phone tree.
             </p>
           </div>
         </div>
 
         <div className="promise-bar-right">
           <Link href="/hire-attorneys" className="btn-promise-action">
-            <span>Submit open mandate</span>
+            <span>Submit your open role</span>
             <span className="promise-btn-arrow" aria-hidden="true">→</span>
           </Link>
           <span className="promise-subtext">

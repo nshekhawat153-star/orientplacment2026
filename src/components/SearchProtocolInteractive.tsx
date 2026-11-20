@@ -34,7 +34,7 @@ const STEPS: StepData[] = [
         Direct Sourcing &amp; <span className="title-blue">Screened Shortlist</span>
       </>
     ),
-    desc: "Direct headhunting across our 100,000+ passive attorney network with verified compensation expectations.",
+    desc: "Direct outreach across our vetted legal network with verified compensation expectations.",
     sla: "5–7 Business Days",
   },
   {
@@ -1178,7 +1178,7 @@ export function SearchProtocolInteractive() {
                         <div className="protocol-view-content">
                           <div className="clean-card-head-row">
                             <div>
-                              <span className="clean-card-kicker">CALIBRATED PRACTICE MANDATE</span>
+                              <span className="clean-card-kicker">FIRM PRACTICE &amp; ROLE REQUIREMENTS</span>
                               <h3 className="clean-card-title">Senior <span className="title-blue">Lateral Associate</span> / Counsel</h3>
                               <p className="clean-card-subtitle">Houston Boutique · Estate Planning &amp; Probate</p>
                             </div>
@@ -1194,14 +1194,14 @@ export function SearchProtocolInteractive() {
                           <div className="clean-highlight-box mandate">
                             <span className="clean-box-icon">⚡</span>
                             <p className="clean-box-text">
-                              Justin personally maps practice demands, culture, and billable expectations in a 15-minute call. Outreach across 100,000+ attorney network commences within 60 minutes.
+                              Justin personally reviews your firm&apos;s requirements, culture, and billable expectations in a 15-minute call. Direct outreach to matching candidates begins within 24 hours.
                             </p>
                           </div>
 
                           <div className="clean-card-bottom-line">
                             <div className="clean-bottom-left">
                               <span className="clean-status-dot blue" />
-                              <span>100,000+ Attorney Network Radar Active</span>
+                              <span>Targeted Legal Search Active</span>
                             </div>
                             <span className="clean-bottom-sla">&lt; 1 Hr First Response</span>
                           </div>
@@ -1213,7 +1213,7 @@ export function SearchProtocolInteractive() {
                         <div className="protocol-view-content">
                           <div className="clean-card-head-row">
                             <div>
-                              <span className="clean-card-kicker">CONFIDENTIAL CANDIDATE DOSSIER</span>
+                              <span className="clean-card-kicker">CONFIDENTIAL CANDIDATE PROFILE</span>
                               <h3 className="clean-card-title">Candidate <span className="title-blue">#TX-EP-0412</span></h3>
                               <p className="clean-card-subtitle">Lateral Associate · Regional Boutique · Houston Metro</p>
                             </div>

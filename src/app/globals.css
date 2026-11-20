@@ -2632,6 +2632,17 @@ a.rating:hover {
   }
 }
 
+/* Static proof-row ticker (no animation, centered) */
+.ticker-static {
+  overflow: visible !important;
+}
+.ticker-track-static {
+  animation: none !important;
+  width: 100% !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+
 /* Backward-compatible plain trustbar (candidate / compact) */
 .trust-strip {
   background: #FFFFFF !important;
