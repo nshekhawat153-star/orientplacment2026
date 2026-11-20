@@ -71,7 +71,7 @@ export default function HireAttorneysLandingPage() {
         }
         .ha-terms-inner-wrap {
           max-width: 1200px;
-          margin: -56px auto 0 !important;
+          margin: 0 auto !important;
           padding: 0 24px !important;
           position: relative;
           z-index: 10;
