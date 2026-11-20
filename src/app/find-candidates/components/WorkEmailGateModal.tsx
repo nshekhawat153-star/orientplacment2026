@@ -250,7 +250,7 @@ export function WorkEmailGateModal({
             B
           </div>
           <div>
-            <div style={{ color: "#1D4ED8", fontSize: 12, marginBottom: 2 }}>★★★★★</div>
+            <div style={{ color: "#F59E0B", fontSize: 12, marginBottom: 2 }}>★★★★★</div>
             <div>&ldquo;Justin found a perfect lateral associate for our estate planning group within days.&rdquo;</div>
             <div style={{ color: "#64748B", fontSize: 11.5, marginTop: 2 }}>Brett Z., Managing Partner · Google 5.0 Review</div>
           </div>

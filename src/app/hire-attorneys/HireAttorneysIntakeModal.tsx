@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { HeroLeadForm } from "./HeroLeadForm";
+import { GMark } from "@/components/icons";
 
 export function HireAttorneysIntakeModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,14 +23,15 @@ export function HireAttorneysIntakeModal() {
     };
 
     const handleGlobalClick = (e: MouseEvent) => {
-      // Only intercept on mobile screens (<= 768px)
-      if (window.innerWidth > 768) return;
+      const el = e.target as HTMLElement;
 
-      const target = (e.target as HTMLElement).closest(
-        'a[href="#intake-form"], a[href="#questionnaire"], .ha-trigger-intake-modal, [data-open-intake-modal]'
+      // Every request CTA (explicit trigger or a link to the form) opens the popup on every screen size
+      const explicit = el.closest(
+        '.ha-trigger-intake-modal, [data-open-intake-modal], a[href="#intake-form"], a[href="#questionnaire"]'
       );
+      const anchor = null;
 
-      if (target) {
+      if (explicit || anchor) {
         e.preventDefault();
         e.stopPropagation();
         setIsOpen(true);
@@ -97,9 +100,117 @@ export function HireAttorneysIntakeModal() {
           from { transform: translateY(100%); }
           to { transform: translateY(0); }
         }
+        @keyframes haPopIn {
+          from { opacity: 0; transform: translateY(14px) scale(0.98); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
         .ha-modal-sheet {
           animation: haSlideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .ha-modal-left { display: none; }
+        @media (max-width: 768px) {
+          .ha-mobile-modal-overlay {
+            align-items: center !important;
+            padding: 16px !important;
+          }
+          .ha-modal-sheet {
+            height: 90vh !important;
+            height: 90svh !important;
+            max-height: 90svh !important;
+            max-width: 560px !important;
+            border-radius: 22px !important;
+            padding: 22px 20px 24px !important;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5) !important;
+            animation: haPopIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          }
+          .ha-modal-handle { display: none !important; }
+        }
+        @media (min-width: 769px) {
+          .ha-mobile-modal-overlay {
+            align-items: center !important;
+            padding: 24px !important;
+          }
+          .ha-modal-sheet {
+            display: grid !important;
+            grid-template-columns: 5fr 7fr;
+            max-width: 940px !important;
+            max-height: 90vh !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            border-radius: 24px !important;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5) !important;
+            animation: haPopIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          }
+          .ha-modal-handle {
+            display: none !important;
+          }
+          .ha-modal-right {
+            padding: 30px 34px 28px;
+            overflow-y: auto;
+            max-height: 90vh;
+            min-width: 0;
+          }
+          .ha-modal-left {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 30px 28px;
+            color: #FFFFFF;
+            overflow: hidden;
+            background:
+              linear-gradient(180deg, rgba(8, 20, 42, 0.78) 0%, rgba(8, 20, 42, 0.62) 38%, rgba(5, 11, 23, 0.94) 100%),
+              url("/images/hero-executive-boardroom.jpg") 58% center / cover no-repeat;
+          }
+          .ha-modal-left::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 90% 60% at 0% 0%, rgba(29, 78, 216, 0.35) 0%, transparent 70%);
+            pointer-events: none;
+          }
+          .ha-modal-left > * { position: relative; z-index: 1; }
+        }
+        .ha-ml-brand {
+          display: flex;
+          align-items: center;
+        }
+        .ha-ml-logo {
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          object-fit: cover;
+          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 4px 14px rgba(0, 0, 0, 0.4);
+        }
+        .ha-ml-h {
+          font-family: var(--display);
+          font-size: 29px;
+          line-height: 1.16;
+          font-weight: 500;
+          letter-spacing: -0.015em;
+          color: #FFFFFF;
+          margin: 0 0 16px;
+        }
+        .ha-ml-h em { font-style: italic; color: #60A5FA; }
+        .ha-ml-trust { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+        .ha-ml-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(8, 20, 42, 0.78);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          border-radius: 999px;
+          padding: 6px 12px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #FFFFFF;
+        }
+        .ha-ml-chip span { color: #60A5FA; font-weight: 700; }
+        .ha-ml-google { display: flex; align-items: center; gap: 9px; font-size: 13px; color: #CBD5E1; }
+        .ha-ml-google .gmark { width: 20px; height: 20px; }
+        .ha-ml-google b { color: #FFFFFF; font-weight: 600; }
+        .ha-ml-google .ha-ml-gs { color: #FBBF24; letter-spacing: 1.5px; font-size: 13px; }
       `}</style>
 
       <div
@@ -118,8 +229,30 @@ export function HireAttorneysIntakeModal() {
           color: "#08142A",
         }}
       >
+        {/* Desktop-only left panel (design + trust) */}
+        <aside className="ha-modal-left" aria-hidden="true">
+          <div className="ha-ml-brand">
+            <Image src="/images/orion-logo.png" alt="Orion Placement" width={56} height={56} className="ha-ml-logo" />
+          </div>
+
+          <div>
+            <h3 className="ha-ml-h">
+              Your next attorney hire, <em>screened before you meet them.</em>
+            </h3>
+            <div className="ha-ml-google">
+              <GMark />
+              <span className="ha-ml-gs">★★★★★</span>
+              <span>
+                <b>5.0 Google Rating</b> · 60+ reviews
+              </span>
+            </div>
+          </div>
+        </aside>
+
+        <div className="ha-modal-right">
         {/* Drag handle pill */}
         <div
+          className="ha-modal-handle"
           style={{
             width: 44,
             height: 4.5,
@@ -142,19 +275,6 @@ export function HireAttorneysIntakeModal() {
           }}
         >
           <div>
-            <div
-              style={{
-                fontFamily: "var(--mono)",
-                fontSize: 10.5,
-                fontWeight: 700,
-                color: "#1D4ED8",
-                textTransform: "uppercase",
-                letterSpacing: "0.10em",
-                marginBottom: 4,
-              }}
-            >
-              100% CONTINGENCY · TEXAS LAW FIRMS
-            </div>
             <h2
               id="ha-modal-heading"
               style={{
@@ -197,6 +317,7 @@ export function HireAttorneysIntakeModal() {
 
         {/* Form Body */}
         <HeroLeadForm isModal onClose={closeModal} />
+        </div>
       </div>
     </div>
   );

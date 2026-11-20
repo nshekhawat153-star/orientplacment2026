@@ -440,7 +440,7 @@ export function BestFirmsClient({
                       {f.mode}
                     </td>
                     <td style={{ textAlign: "right", color: "#059669", fontWeight: 700 }}>
-                      ★ {f.reviews}
+                      <span style={{ color: "#F59E0B" }}>★</span> {f.reviews}
                     </td>
                   </tr>
                 ))}

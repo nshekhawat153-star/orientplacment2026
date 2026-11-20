@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { HeroLeadForm } from "./HeroLeadForm";
-import { ReviewSpotlight } from "./ReviewSpotlight";
+import { ReviewCards } from "./ReviewCards";
 import { HireAttorneysIntakeModal } from "./HireAttorneysIntakeModal";
+import { StickyRequestBar } from "./StickyRequestBar";
 import { Stars, GMark } from "@/components/icons";
 import { reviews } from "@/data";
 
@@ -41,6 +42,9 @@ export default function HireAttorneysLandingPage() {
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 24px;
         }
+        .ha-founder-quote-left {
+          display: none;
+        }
         .ha-recruiter-split {
           display: grid;
           grid-template-columns: 360px 1fr;
@@ -76,14 +80,6 @@ export default function HireAttorneysLandingPage() {
           background-color: #08142A !important;
           background-image: radial-gradient(ellipse 90% 60% at 50% 0%, #0E2246 0%, #08142A 65%, #050B17 100%) !important;
         }
-        .ha-bottom-cta-sec {
-          background-color: #08142A !important;
-          background-image: radial-gradient(ellipse 90% 80% at 50% 0%, #0E2246 0%, #08142A 70%, #050B17 100%) !important;
-        }
-        .ha-bottom-cta-sec b,
-        .ha-bottom-cta-sec strong {
-          color: #FFFFFF !important;
-        }
         @media (max-width: 768px) {
           .ha-protocol-eyebrow .hidden-mobile,
           .ha-protocol-eyebrow span.hidden-mobile {
@@ -97,6 +93,15 @@ export default function HireAttorneysLandingPage() {
         .ha-hero-h1,
         .ha-split-hero-h1 {
           color: #FFFFFF !important;
+        }
+        .ha-page .ha-hero-sec {
+          min-height: 100vh !important;
+          min-height: 100svh !important;
+          padding: 120px 0 56px !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: center !important;
+          box-sizing: border-box !important;
         }
         .ha-hover-lift {
           transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -115,7 +120,151 @@ export default function HireAttorneysLandingPage() {
         span.hidden-mobile, br.hidden-mobile {
           display: inline;
         }
+        @media (max-width: 860px) {
+          .ha-reviews-cta {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            text-align: center !important;
+            padding: 28px 22px !important;
+            gap: 20px !important;
+          }
+          .ha-reviews-cta-btn {
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+        }
+        .ha-founder-photo {
+          position: relative;
+        }
+        /* soft offset frame behind the portrait */
+        .ha-founder-photo::before {
+          content: "";
+          position: absolute;
+          inset: 16px -16px -16px 16px;
+          border: 1.5px solid #BFDBFE;
+          border-radius: 26px;
+          background: linear-gradient(135deg, rgba(219, 234, 254, 0.55) 0%, rgba(239, 246, 255, 0) 70%);
+          z-index: 0;
+        }
+        .ha-founder-card {
+          position: relative !important;
+          z-index: 1;
+          display: block !important;
+          width: 100% !important;
+          max-width: none !important;
+          aspect-ratio: 4 / 5;
+          padding: 0 !important;
+          border: 0 !important;
+          border-radius: 24px !important;
+          overflow: hidden !important;
+          background: #0A1A38 !important;
+          box-shadow: 0 34px 70px -24px rgba(8, 20, 42, 0.45) !important;
+        }
+        .ha-founder-img-wrap {
+          position: absolute !important;
+          inset: 0;
+          width: 100% !important;
+          height: 100% !important;
+          margin: 0 !important;
+          border-radius: 0 !important;
+        }
+        .ha-founder-meta {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          padding: 80px 24px 22px;
+          text-align: left;
+          background: linear-gradient(180deg, rgba(5, 11, 23, 0) 0%, rgba(5, 11, 23, 0.55) 45%, rgba(5, 11, 23, 0.92) 100%);
+        }
+        .ha-founder-meta b {
+          color: #FFFFFF !important;
+          font-size: 26px !important;
+          letter-spacing: -0.01em;
+        }
+        .ha-founder-meta span {
+          color: #CBD5E1 !important;
+          font-size: 14px !important;
+          margin-top: 4px !important;
+        }
+        @media (min-width: 1025px) {
+          .ha-recruiter-sec {
+            padding: 112px 0 120px !important;
+          }
+          .ha-recruiter-split {
+            grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+            gap: 76px;
+            align-items: center;
+          }
+          .ha-founder-right h2 {
+            font-size: clamp(34px, 3.8vw, 48px) !important;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+          }
+          .ha-founder-right h2 + p {
+            font-size: 16px !important;
+            margin-bottom: 28px !important;
+          }
+          .ha-founder-copy {
+            font-size: 16.5px !important;
+            line-height: 1.7 !important;
+            gap: 16px !important;
+            margin-bottom: 32px !important;
+          }
+          .ha-founder-copy b {
+            color: #08142A;
+          }
+          .ha-founder-stats {
+            padding: 24px 8px !important;
+            gap: 0 !important;
+            margin-bottom: 28px !important;
+            border-radius: 16px !important;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+          }
+          .ha-founder-stats > div {
+            padding: 0 24px;
+          }
+          .ha-founder-stats > div + div {
+            border-left: 1px solid #E2E8F0;
+          }
+          .ha-founder-stats > div > div:first-child {
+            font-size: 34px !important;
+            line-height: 1.1;
+            margin-bottom: 4px;
+          }
+          .ha-founder-stats > div > div:last-child {
+            font-size: 13px !important;
+          }
+          .ha-founder-quote-right {
+            display: none !important;
+          }
+          .ha-founder-quote-left {
+            display: block !important;
+            background: #FFFFFF;
+            border-left: 4px solid #1D4ED8;
+            color: #08142A;
+            font-style: italic;
+            margin: 44px 0 0 !important;
+            text-align: left;
+            font-family: var(--display);
+            font-size: 19px !important;
+            line-height: 1.5;
+            padding: 20px 24px !important;
+            border-left-width: 4px !important;
+            border-radius: 0 14px 14px 0 !important;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+          }
+          .ha-founder-btn-group a {
+            padding: 16px 32px !important;
+            font-size: 15.5px !important;
+            border-radius: 10px !important;
+          }
+        }
         @media (max-width: 1024px) {
+          .ha-founder-photo {
+            max-width: 420px;
+            margin: 0 auto;
+          }
           .ha-terms-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
@@ -191,17 +340,15 @@ export default function HireAttorneysLandingPage() {
             display: inline !important;
           }
           .hidden-mobile,
-          span.hidden-mobile {
+          .ha-page span.hidden-mobile,
+          .ha-page br.hidden-mobile {
             display: none !important;
           }
-          .ha-terms-strip-sec {
-            margin-top: 0 !important;
-            margin-bottom: 24px !important;
-            padding: 0 14px !important;
+          .ha-terms-sec {
+            padding: 44px 0 52px !important;
           }
           .ha-terms-inner-wrap {
-            margin-top: -24px !important;
-            padding: 0 !important;
+            padding: 0 14px !important;
           }
           .ha-terms-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -263,9 +410,9 @@ export default function HireAttorneysLandingPage() {
             text-align: center !important;
             width: 100% !important;
           }
-          .ha-hero-sec {
-            padding: 86px 0 54px !important;
-            min-height: auto !important;
+          .ha-page .ha-hero-sec {
+            padding: 96px 0 40px !important;
+            min-height: 100svh !important;
           }
           .ha-hero-wrap {
             padding: 0 16px !important;
@@ -411,14 +558,21 @@ export default function HireAttorneysLandingPage() {
             margin-bottom: 20px !important;
             text-align: left !important;
           }
-          .ha-founder-card {
-            max-width: 100% !important;
-            padding: 20px 16px !important;
-            box-sizing: border-box !important;
+          .ha-founder-photo::before {
+            inset: 10px -10px -10px 10px;
+            border-radius: 22px;
           }
-          .ha-founder-img-wrap {
-            max-width: 240px !important;
-            height: 240px !important;
+          .ha-founder-card {
+            border-radius: 20px !important;
+          }
+          .ha-founder-meta {
+            padding: 64px 20px 18px;
+          }
+          .ha-founder-meta b {
+            font-size: 22px !important;
+          }
+          .ha-founder-meta span {
+            font-size: 13px !important;
           }
           .ha-founder-stats {
             gap: 8px !important;
@@ -453,8 +607,6 @@ export default function HireAttorneysLandingPage() {
           }
           .ha-bottom-cta-sec {
             padding: 52px 0 60px !important;
-            background-color: #08142A !important;
-            background-image: radial-gradient(ellipse 120% 70% at 50% 0%, #0D1E3A 0%, #08142A 70%) !important;
           }
           .ha-bottom-cta-wrap {
             padding: 0 16px !important;
@@ -495,6 +647,136 @@ export default function HireAttorneysLandingPage() {
             text-align: center !important;
           }
         }
+        .ha-eb-short { display: none; }
+        .ha-hero-points-sm { display: none; }
+        @media (max-width: 640px) {
+          /* hero, phones */
+          .ha-page .ha-hero-h1,
+          .ha-page .ha-split-hero-h1 {
+            font-size: 38px !important;
+            line-height: 1.15 !important;
+            text-align: left !important;
+            align-self: stretch !important;
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 0 14px !important;
+          }
+          .ha-page .ha-hero-lead {
+            text-align: left !important;
+            align-self: stretch !important;
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 0 20px !important;
+          }
+          .ha-page .ha-gword { display: none; }
+          .ha-page .ha-hero-eyebrow {
+            align-self: flex-start !important;
+            margin: 0 0 14px !important;
+          }
+          .ha-page .ha-eb-long { display: none !important; }
+          .ha-page .ha-eb-short { display: inline !important; }
+          .ha-page .ha-hero-guarantees { display: none !important; }
+          .ha-page .ha-hero-points-sm {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 9px;
+            align-self: stretch;
+            width: 100%;
+            margin: 0 0 20px;
+            text-align: left;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #CBD5E1;
+          }
+          .ha-page .ha-hero-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+          }
+          .ha-page .ha-hero-point > span:first-child {
+            color: #60A5FA;
+            font-weight: 700;
+            flex-shrink: 0;
+          }
+          .ha-page .ha-hero-google-pill .gmark {
+            width: 14px !important;
+            height: 14px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          /* header: no CTA on phones (sticky bottom button replaces it) */
+          .site-header .ha-nav-cta { display: none !important; }
+          /* room for the sticky bar */
+          .ha-page { padding-bottom: 76px; }
+
+          /* terms cards: 4 rows, one card per row */
+          .ha-terms-inner-wrap { margin-top: 0 !important; }
+          .ha-terms-grid {
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
+            background: transparent !important;
+            border: 0 !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            overflow: visible !important;
+          }
+          .ha-term-card {
+            background: #FFFFFF !important;
+            border: 1.5px solid #BFDBFE !important;
+            border-radius: 14px !important;
+            box-shadow: 0 6px 18px rgba(29, 78, 216, 0.07) !important;
+            padding: 16px 18px !important;
+            text-align: left !important;
+            align-items: flex-start !important;
+          }
+          .ha-term-card:nth-child(n) {
+            border: 1.5px solid #BFDBFE !important;
+          }
+          .ha-term-label {
+            font-size: 10.5px !important;
+            letter-spacing: 0.07em !important;
+            min-height: 0 !important;
+            margin-bottom: 4px !important;
+            text-align: left !important;
+            width: auto !important;
+          }
+          .ha-term-val {
+            font-size: 28px !important;
+            margin-bottom: 4px !important;
+            text-align: left !important;
+            width: auto !important;
+          }
+          .ha-term-sub {
+            font-size: 13px !important;
+            line-height: 1.45 !important;
+            text-align: left !important;
+            width: auto !important;
+          }
+
+          /* section headings */
+          .ha-protocol-sec .ha-section-h2,
+          .ha-reviews-sec .ha-section-h2 { font-size: 30px !important; }
+          .ha-founder-mobile-header h2 { font-size: 30px !important; }
+          .ha-founder-mobile-header p { font-style: italic; }
+
+          /* founder: photo spacing, no CTA */
+          .ha-founder-photo { margin-bottom: 28px; }
+          .ha-founder-btn-group { display: none !important; }
+        }
+        @media (min-width: 425px) and (max-width: 640px) {
+          /* hero text sizes, large phones only */
+          .ha-page .ha-hero-h1,
+          .ha-page .ha-split-hero-h1 {
+            font-size: 46px !important;
+          }
+          .ha-page .ha-hero-lead {
+            font-size: 16.5px !important;
+          }
+          .ha-page .ha-hero-points-sm {
+            font-size: 14px !important;
+          }
+        }
       `}</style>
 
       {/* 1. LUXURY SPLIT DARK HERO WITH VIDEO BACKGROUND & LEAD CAPTURE FORM */}
@@ -504,7 +786,11 @@ export default function HireAttorneysLandingPage() {
           position: "relative",
           background: "#08142A",
           color: "#FFFFFF",
-          padding: "124px 0 120px",
+          padding: "96px 0 96px",
+          minHeight: "100svh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
@@ -551,7 +837,8 @@ export default function HireAttorneysLandingPage() {
                 }}
               >
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                <span>DIRECT INTAKE · ZERO RETAINER<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONTINGENCY</span>
+                <span className="ha-eb-long">DIRECT INTAKE · ZERO RETAINER<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONTINGENCY</span>
+                <span className="ha-eb-short">Zero upfront retainer</span>
               </div>
 
               {/* Display Heading */}
@@ -608,10 +895,6 @@ export default function HireAttorneysLandingPage() {
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: 16 }}>✓</span>
-                  <span>23% flat contingency fee — payable Net 15 only if you hire</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: 16 }}>✓</span>
                   <span>90-day replacement warranty backed by contract credit</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -648,6 +931,22 @@ export default function HireAttorneysLandingPage() {
                 </div>
               </div>
 
+              {/* The 3 value points, small phones only (<425px) */}
+              <div className="ha-hero-points-sm">
+                <div className="ha-hero-point">
+                  <span>✓</span>
+                  <span>Zero Upfront Retainer</span>
+                </div>
+                <div className="ha-hero-point">
+                  <span>✓</span>
+                  <span>90-Day Replacement Warranty</span>
+                </div>
+                <div className="ha-hero-point">
+                  <span>✓</span>
+                  <span>48–72h Turnaround with Candidate Dossiers</span>
+                </div>
+              </div>
+
               {/* Social Proof Founder Rating Badge (Bright, crisp and high-contrast) */}
               <div className="ha-hero-trust-bar" style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
                 <div
@@ -665,13 +964,14 @@ export default function HireAttorneysLandingPage() {
                     WebkitBackdropFilter: "blur(8px)",
                   }}
                 >
-                  <span style={{ color: "#60A5FA", fontSize: 13, letterSpacing: 1.5 }}>
+                  <GMark />
+                  <span style={{ color: "#FBBF24", fontSize: 14, letterSpacing: 1.5, textShadow: "0 0 8px rgba(251, 191, 36, 0.35)" }}>
                     ★★★★★
                   </span>
                   <span style={{ width: 1, height: 14, background: "rgba(255, 255, 255, 0.25)" }} />
                   <span style={{ color: "#FFFFFF" }}>
-                    <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>5.0 Google Rating</strong>
-                    <span style={{ color: "rgba(255, 255, 255, 0.8)", fontWeight: 400 }}> · Texas Law Firms</span>
+                    <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>5.0 <span className="ha-gword">Google </span>Rating</strong>
+                    <span style={{ color: "rgba(255, 255, 255, 0.72)" }}> · 60+ reviews</span>
                   </span>
                 </div>
               </div>
@@ -710,17 +1010,29 @@ export default function HireAttorneysLandingPage() {
         </div>
       </section>
 
-      {/* 2. DEDICATED ELEVATED TERMS STRIP (4 CARDS IN 1 BALANCED ROW) */}
+      {/* 2. TERMS / TRUST CARDS (4 CARDS) */}
       <section
-        className="ha-terms-strip-sec"
+        className="ha-terms-sec"
         style={{
-          background: "transparent",
           position: "relative",
-          zIndex: 10,
-          padding: "0 0 24px",
+          background: "#FFFFFF",
+          color: "#08142A",
+          padding: "64px 0 64px",
         }}
       >
-        <div className="ha-terms-inner-wrap" style={{ maxWidth: 1200, margin: "-56px auto 0", padding: "0 24px" }}>
+        {/* hairline under the cards, faded out at both ends */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 1,
+            background: "linear-gradient(90deg, rgba(218, 215, 204, 0) 0%, rgba(218, 215, 204, 0) 10%, #DAD7CC 35%, #DAD7CC 65%, rgba(218, 215, 204, 0) 90%, rgba(218, 215, 204, 0) 100%)",
+          }}
+        />
+        <div className="ha-terms-inner-wrap" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
           <div className="ha-terms-grid">
             {/* Card 1: Placement Fee */}
             <div
@@ -810,24 +1122,6 @@ export default function HireAttorneysLandingPage() {
               </div>
             </div>
           </div>
-
-          {/* ELEGANT SECTION DIVIDER */}
-          <div
-            className="ha-terms-divider-wrap"
-            style={{
-              maxWidth: 1200,
-              margin: "48px auto 0",
-              padding: "0 12px",
-            }}
-          >
-            <div
-              style={{
-                height: 1.5,
-                background: "linear-gradient(90deg, rgba(219, 234, 254, 0.15) 0%, #BFDBFE 25%, #60A5FA 50%, #BFDBFE 75%, rgba(219, 234, 254, 0.15) 100%)",
-                borderRadius: 999,
-              }}
-            />
-          </div>
         </div>
       </section>
 
@@ -838,35 +1132,13 @@ export default function HireAttorneysLandingPage() {
           position: "relative",
           background: "#FFFFFF",
           color: "#08142A",
-          padding: "68px 0 108px",
+          padding: "96px 0 108px",
           borderBottom: "1px solid #EAE7DC",
         }}
       >
         <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
           {/* Section Header */}
           <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 48px" }}>
-            <div
-              className="ha-section-eyebrow"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#EFF6FF",
-                border: "1px solid #DBEAFE",
-                borderRadius: 999,
-                padding: "6px 16px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#1D4ED8",
-                marginBottom: 18,
-              }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
-              <span className="hidden-mobile">CLIENT RESULTS · 100% VERIFIED LAW FIRM FEEDBACK</span>
-              <span className="only-mobile">CLIENT RESULTS · VERIFIED FEEDBACK</span>
-            </div>
             <h2
               className="ha-section-h2"
               style={{
@@ -894,7 +1166,7 @@ export default function HireAttorneysLandingPage() {
                 maxWidth: 680,
               }}
             >
-              Direct, unedited feedback from managing partners and firm administrators who rely on Orion for lateral attorney placements.
+              Direct feedback from managing partners and firm administrators who rely on Orion for lateral attorney placements.
             </p>
 
             {/* Google Verified Trust Pill (Light Executive Edition) */}
@@ -913,32 +1185,26 @@ export default function HireAttorneysLandingPage() {
             >
               <div style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
                 <GMark />
-                <span className="hidden-mobile" style={{ fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, color: "#08142A", letterSpacing: "0.06em" }}>
-                  GOOGLE REVIEWS
-                </span>
               </div>
-              <span className="hidden-mobile" style={{ color: "#CBD5E1" }}>|</span>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                 <span style={{ color: "#F59E0B", fontSize: 14 }}>★★★★★</span>
                 <b style={{ color: "#08142A", fontSize: 13.5 }}>5.0 Rating</b>
-                <span className="hidden-mobile" style={{ color: "#64748B", fontSize: 12.5 }}>(60 verified law firm reviews)</span>
-                <span className="only-mobile" style={{ color: "#64748B", fontSize: 12 }}>(60 reviews)</span>
+                <span className="hidden-mobile" style={{ color: "#64748B", fontSize: 12.5 }}>(60+ Google reviews)</span>
+                <span className="only-mobile" style={{ color: "#64748B", fontSize: 12 }}>(60+ reviews)</span>
               </div>
             </div>
           </div>
 
-          {/* Premium Spotlight Carousel Card */}
-          <ReviewSpotlight />
+          {/* Three employer reviews */}
+          <ReviewCards />
         </div>
       </section>
 
       {/* 4. THE CONTINGENCY PROTOCOL (EXECUTIVE LUXURY DARK MIDNIGHT ARCHITECTURE) */}
       <section
-        className="ha-protocol-sec"
+        className="ha-protocol-sec ha-dark-bg"
         style={{
           position: "relative",
-          backgroundColor: "#08142A",
-          backgroundImage: "radial-gradient(ellipse 90% 60% at 50% 0%, #0E2246 0%, #08142A 65%, #050B17 100%)",
           color: "#FFFFFF",
           padding: "100px 0 110px",
           borderTop: "1px solid rgba(255, 255, 255, 0.08)",
@@ -949,30 +1215,6 @@ export default function HireAttorneysLandingPage() {
         <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 2 }}>
           {/* Header */}
           <div style={{ textAlign: "center", maxWidth: 780, margin: "0 auto 52px" }}>
-            <div
-              className="ha-section-eyebrow ha-protocol-eyebrow"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(29, 78, 216, 0.20)",
-                border: "1px solid rgba(96, 165, 250, 0.30)",
-                borderRadius: 999,
-                padding: "6px 16px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "#93C5FD",
-                marginBottom: 18,
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-              }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA", flexShrink: 0 }} />
-              <span className="hidden-mobile">THE CONTINGENCY SEARCH PROTOCOL · ZERO FINANCIAL RISK</span>
-              <span className="only-mobile">CONTINGENCY PROTOCOL</span>
-            </div>
             <h2
               className="ha-section-h2"
               style={{
@@ -1003,7 +1245,7 @@ export default function HireAttorneysLandingPage() {
                 textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
               }}
             >
-              Sign one simple non-exclusive agreement. We deliver screened, bar-admitted attorney dossiers directly to your inbox. You interview the candidates you choose — a fee is payable only when your chosen candidate starts.
+              We deliver screened, bar-admitted attorney dossiers directly to your inbox. You interview the candidates you choose — a fee is payable only when your chosen candidate starts.
             </p>
           </div>
 
@@ -1029,23 +1271,7 @@ export default function HireAttorneysLandingPage() {
             >
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1D4ED8 0%, #60A5FA 100%)" }} />
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-                  <span
-                    style={{
-                      fontFamily: "var(--mono)",
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: "#93C5FD",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.10em",
-                      background: "rgba(29, 78, 216, 0.25)",
-                      border: "1px solid rgba(96, 165, 250, 0.3)",
-                      padding: "5px 12px",
-                      borderRadius: 6,
-                    }}
-                  >
-                    STEP 01 · INTAKE
-                  </span>
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: 22 }}>
                   <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#64748B" }}>01 / 03</span>
                 </div>
 
@@ -1058,9 +1284,6 @@ export default function HireAttorneysLandingPage() {
                   </div>
                 </div>
 
-                <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px", lineHeight: 1.3 }}>
-                  Zero upfront cost or retainer
-                </h3>
                 <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: 0 }}>
                   Nothing to pay to launch your search. We review your open seat, align on practice requirements, and begin sourcing immediately under a simple non-exclusive agreement.
                 </p>
@@ -1087,28 +1310,12 @@ export default function HireAttorneysLandingPage() {
             >
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1D4ED8 0%, #60A5FA 100%)" }} />
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-                  <span
-                    style={{
-                      fontFamily: "var(--mono)",
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: "#93C5FD",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.10em",
-                      background: "rgba(29, 78, 216, 0.25)",
-                      border: "1px solid rgba(96, 165, 250, 0.3)",
-                      padding: "5px 12px",
-                      borderRadius: 6,
-                    }}
-                  >
-                    STEP 02 · SELECTION
-                  </span>
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: 22 }}>                  
                   <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#64748B" }}>02 / 03</span>
                 </div>
 
                 <div style={{ marginBottom: 18 }}>
-                  <div style={{ fontFamily: "var(--display)", fontSize: 46, fontWeight: 600, color: "#60A5FA", lineHeight: 1 }}>
+                  <div style={{ fontFamily: "var(--display)", fontSize: 46, fontWeight: 600, color: "#FFF", lineHeight: 1 }}>
                     3–5
                   </div>
                   <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, marginTop: 6 }}>
@@ -1116,9 +1323,6 @@ export default function HireAttorneysLandingPage() {
                   </div>
                 </div>
 
-                <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px", lineHeight: 1.3 }}>
-                  Candidates who truly fit
-                </h3>
                 <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: 0 }}>
                   We pre-screen lateral attorneys for your exact practice mix, local state bar status, courtroom or deal experience, billable hour expectations, and compensation band.
                 </p>
@@ -1145,23 +1349,7 @@ export default function HireAttorneysLandingPage() {
             >
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1D4ED8 0%, #60A5FA 100%)" }} />
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-                  <span
-                    style={{
-                      fontFamily: "var(--mono)",
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: "#93C5FD",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.10em",
-                      background: "rgba(29, 78, 216, 0.25)",
-                      border: "1px solid rgba(96, 165, 250, 0.3)",
-                      padding: "5px 12px",
-                      borderRadius: 6,
-                    }}
-                  >
-                    STEP 03 · WARRANTY
-                  </span>
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: 22 }}>                 
                   <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#64748B" }}>03 / 03</span>
                 </div>
 
@@ -1174,9 +1362,6 @@ export default function HireAttorneysLandingPage() {
                   </div>
                 </div>
 
-                <h3 style={{ fontFamily: "var(--display)", fontSize: 22, color: "#FFFFFF", fontWeight: 600, margin: "0 0 12px", lineHeight: 1.3 }}>
-                  100% placement guarantee
-                </h3>
                 <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: 0 }}>
                   Our 23% contingency fee is due Net 15 only after your candidate starts. If they leave or don&apos;t work out within 90 days, we conduct a replacement search at $0 extra charge.
                 </p>
@@ -1189,8 +1374,8 @@ export default function HireAttorneysLandingPage() {
             className="ha-banner-card"
             style={{
               marginTop: 48,
-              background: "linear-gradient(180deg, rgba(15, 30, 58, 0.72) 0%, rgba(8, 20, 42, 0.88) 100%)",
-              border: "1px solid rgba(96, 165, 250, 0.18)",
+              background: "linear-gradient(135deg, #2563EB 0%, #1D4ED8 55%, #1E3A8A 100%)",
+              border: "1px solid rgba(147, 197, 253, 0.45)",
               borderRadius: 16,
               padding: "36px 40px",
               color: "#FFFFFF",
@@ -1199,19 +1384,17 @@ export default function HireAttorneysLandingPage() {
               alignItems: "center",
               flexWrap: "wrap",
               gap: 24,
-              boxShadow: "0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
+              boxShadow: "0 18px 44px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18)",
             }}
           >
             <div>
-              <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#93C5FD", textTransform: "uppercase", letterSpacing: "0.10em", fontWeight: 700, marginBottom: 6 }}>
+              <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#DBEAFE", textTransform: "uppercase", letterSpacing: "0.10em", fontWeight: 700, marginBottom: 6 }}>
                 READY TO REVIEW CANDIDATES?
               </div>
               <h3 style={{ fontFamily: "var(--display)", fontSize: 24, fontWeight: 500, margin: "0 0 6px", color: "#FFFFFF" }}>
                 Receive screened attorney dossiers for your seat.
               </h3>
-              <p style={{ color: "#CBD5E1", fontSize: 14, margin: 0 }}>
+              <p style={{ color: "#DBEAFE", fontSize: 14, margin: 0 }}>
                 Zero upfront cost · 100% contingency · 90-day replacement warranty
               </p>
             </div>
@@ -1223,14 +1406,14 @@ export default function HireAttorneysLandingPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  background: "#1D4ED8",
-                  color: "#FFFFFF",
+                  background: "#FFFFFF",
+                  color: "#1D4ED8",
                   fontWeight: 600,
                   fontSize: 14.5,
                   padding: "13px 26px",
                   borderRadius: 7,
                   textDecoration: "none",
-                  boxShadow: "0 6px 18px rgba(29, 78, 216, 0.45)",
+                  boxShadow: "0 6px 18px rgba(8, 20, 42, 0.30)",
                 }}
               >
                 <span>Request Candidate Dossiers</span>
@@ -1246,40 +1429,19 @@ export default function HireAttorneysLandingPage() {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
           {/* Mobile-Only Heading (Shows ABOVE Founder Card on mobile) */}
           <div className="only-mobile ha-founder-mobile-header">
-            <div
-              className="ha-section-eyebrow"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#EFF6FF",
-                border: "1px solid #DBEAFE",
-                borderRadius: 999,
-                padding: "6px 14px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#1D4ED8",
-                marginBottom: 12,
-              }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8", flexShrink: 0 }} />
-              <span>FOUNDER SPOTLIGHT</span>
-            </div>
-
             <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 7vw, 32px)", color: "#08142A", margin: "0 0 6px", fontWeight: 500, lineHeight: 1.2 }}>
               Hi, I&apos;m <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>Justin Sofman.</span>
             </h2>
 
-            <p style={{ fontSize: 14, color: "#64748B", margin: "0 0 4px" }}>
+            <p style={{ fontSize: 14, color: "#64748B", margin: "0 0 4px", fontStyle: "italic" }}>
               Co-Founder &amp; Managing Partner, Orion Placement
             </p>
           </div>
 
           <div className="ha-recruiter-split">
             {/* Left Column: Executive Portrait Card */}
-            <div style={{ textAlign: "center" }}>
+            <div className="ha-founder-left" style={{ textAlign: "center" }}>
+              <div className="ha-founder-photo">
               <div
                 className="ha-founder-card"
                 style={{
@@ -1295,64 +1457,48 @@ export default function HireAttorneysLandingPage() {
               >
                 <div className="ha-founder-img-wrap" style={{ position: "relative", width: 260, height: 260, margin: "0 auto 16px", borderRadius: 12, overflow: "hidden", background: "#F1F5F9" }}>
                   <Image
-                    src="/images/founders/justin-sofman.png"
+                    src="/justin-sofman.png"
                     alt="Justin Sofman"
                     fill
                     style={{ objectFit: "cover" }}
                     priority
                   />
                 </div>
-                <div>
+                <div className="ha-founder-meta">
                   <b style={{ display: "block", fontSize: 20, color: "#08142A", fontWeight: 600, fontFamily: "var(--display)" }}>Justin Sofman</b>
                   <span style={{ fontSize: 13, color: "#64748B", display: "block", marginTop: 2 }}>Co-Founder &amp; Managing Partner</span>
-                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 6, marginTop: 10, fontSize: 12, color: "#1D4ED8", fontWeight: 600 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#16A34A" }} />
-                    <span>Active Placement Partner</span>
-                  </div>
                 </div>
+              </div>
+              </div>
+
+              {/* Desktop-only quote, sits under the photo (mobile keeps it in the right column) */}
+              <div className="ha-founder-quote ha-founder-quote-left" style={{fontSize:"16px !important"}}>
+                &ldquo;I only get paid when you find the right attorney, so I&apos;m 100% invested in sending people actually worth your time.&rdquo;
               </div>
             </div>
 
             {/* Right Column: Recruiter Content */}
-            <div>
+            <div className="ha-founder-right">
               {/* Desktop-Only Heading (Shows alongside photo on desktop) */}
               <div className="hidden-mobile">
-                <div
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    background: "#EFF6FF",
-                    border: "1px solid #DBEAFE",
-                    borderRadius: 999,
-                    padding: "6px 14px",
-                    fontFamily: "var(--mono)",
-                    fontSize: 11,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#1D4ED8",
-                    marginBottom: 14,
-                  }}
-                >
-                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
-                  <span>FOUNDER SPOTLIGHT</span>
-                </div>
-
                 <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.6vw, 42px)", color: "#08142A", margin: "0 0 6px", fontWeight: 500 }}>
                   Hi, I&apos;m <span className="serif-accent" style={{ fontStyle: "italic", color: "#1D4ED8" }}>Justin Sofman.</span>
                 </h2>
 
-                <p style={{ fontSize: 15, color: "#64748B", margin: "0 0 20px" }}>
+                <p style={{ fontSize: 15, color: "#64748B", margin: "0 0 20px", fontStyle: "italic" }}>
                   Co-Founder &amp; Managing Partner, Orion Placement
                 </p>
               </div>
 
-              <div style={{ display: "grid", gap: 14, fontSize: 15, color: "#475569", lineHeight: 1.6, marginBottom: 24 }}>
+              <div className="ha-founder-copy" style={{ display: "grid", gap: 14, fontSize: 15, color: "#475569", lineHeight: 1.6, marginBottom: 24 }}>
                 <p style={{ margin: 0 }}>
                   I co-founded Orion Placement alongside Jon Missirlian to solve the biggest frustration law firms face: paying huge upfront retainers for resume spammers who have never even spoken to the attorney they&apos;re submitting.
                 </p>
                 <p style={{ margin: 0 }}>
                   With <b>11 years</b> of recruiting industry experience and Jon&apos;s <b>20 years</b> of talent acquisition expertise, we facilitate over <b>30 hires per month</b> for law firms across Texas and nationwide, backed by an active pool of <b>100,000+ legal professionals</b>.
+                </p>
+                <p style={{ margin: 0 }}>
+                  Before Orion, I spent several years consulting enterprise clients at the world&apos;s largest tech recruiting firm. I bring that same structured process to every new seat, and I hold one value above the rest: doing what we say we&apos;re going to do.
                 </p>
               </div>
 
@@ -1372,11 +1518,11 @@ export default function HireAttorneysLandingPage() {
               >
                 <div>
                   <div style={{ fontFamily: "var(--display)", fontSize: 24, fontWeight: 700, color: "#08142A" }}>11+ Yrs</div>
-                  <div style={{ fontSize: 12, color: "#64748B" }}>Legal Search Experience</div>
+                  <div style={{ fontSize: 12, color: "#64748B" }}>Search Experience</div>
                 </div>
                 <div>
                   <div style={{ fontFamily: "var(--display)", fontSize: 24, fontWeight: 700, color: "#1D4ED8" }}>30+</div>
-                  <div style={{ fontSize: 12, color: "#64748B" }}>Monthly Firm Placements</div>
+                  <div style={{ fontSize: 12, color: "#64748B" }}>Monthly Placements</div>
                 </div>
                 <div>
                   <div style={{ fontFamily: "var(--display)", fontSize: 24, fontWeight: 700, color: "#08142A" }}>100k+</div>
@@ -1384,11 +1530,11 @@ export default function HireAttorneysLandingPage() {
                 </div>
               </div>
 
-              <div style={{ background: "#FFFFFF", borderLeft: "3px solid #1D4ED8", padding: "14px 18px", borderRadius: "0 8px 8px 0", fontSize: 14.5, fontStyle: "italic", color: "#08142A", marginBottom: 24 }}>
+              <div className="ha-founder-quote ha-founder-quote-right" style={{ background: "#FFFFFF", borderLeft: "3px solid #1D4ED8", padding: "14px 18px", borderRadius: "0 8px 8px 0", fontSize: 14.5, fontStyle: "italic", color: "#08142A", marginBottom: 24 }}>
                 &ldquo;I only get paid when you find the right attorney, so I&apos;m 100% invested in sending people actually worth your time.&rdquo;
               </div>
 
-              <div className="ha-founder-btn-group" style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+              <div className="ha-founder-btn-group" style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", justifyContent: "center" }}>
                 <a
                   href="#intake-form"
                   style={{
@@ -1418,55 +1564,32 @@ export default function HireAttorneysLandingPage() {
       <section
         className="ha-bottom-cta-sec"
         style={{
-          backgroundColor: "#08142A",
-          backgroundImage: "radial-gradient(ellipse 90% 80% at 50% 0%, #0E2246 0%, #08142A 70%, #050B17 100%)",
+          background: "#FFFFFF",
           padding: "96px 0 108px",
           textAlign: "center",
-          color: "#FFFFFF",
+          color: "#08142A",
           position: "relative",
           overflow: "hidden",
         }}
       >
         <div className="ha-bottom-cta-wrap" style={{ maxWidth: 780, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
-          <div
-            className="ha-section-eyebrow ha-bottom-eyebrow"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              background: "rgba(255, 255, 255, 0.08)",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-              borderRadius: 999,
-              padding: "6px 16px",
-              fontFamily: "var(--mono)",
-              fontSize: 11,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "#93C5FD",
-              marginBottom: 18,
-            }}
-          >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA", flexShrink: 0 }} />
-            <span>100% CONTINGENCY · 90-DAY REPLACEMENT GUARANTEE</span>
-          </div>
-
           <h2
             className="ha-bottom-h2"
             style={{
               fontFamily: "var(--display)",
               fontSize: "clamp(32px, 4.2vw, 48px)",
-              color: "#FFFFFF",
+              color: "#08142A",
               margin: "0 0 16px",
               fontWeight: 500,
               lineHeight: 1.15,
             }}
           >
-            Ready to receive qualified attorney <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>candidates?</span>
+            Ready to receive qualified attorney <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>candidates?</span>
           </h2>
 
-          <p className="ha-bottom-sub" style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 28, maxWidth: 640, margin: "0 auto 28px" }}>
+          <p className="ha-bottom-sub" style={{ color: "#475569", fontSize: 17, lineHeight: 1.6, marginBottom: 28, maxWidth: 640, margin: "0 auto 28px" }}>
             Sign one simple agreement. Pre-screened attorney dossiers delivered straight to your inbox within 48–72 hours.
-            Zero upfront cost — you <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>only pay if you hire</strong>.
+            Zero upfront cost — you <b style={{ color: "#1D4ED8", fontWeight: 600 }}>only pay if you hire</b>.
           </p>
 
           {/* Quick trust checklist */}
@@ -1478,21 +1601,18 @@ export default function HireAttorneysLandingPage() {
               gap: "clamp(12px, 2.5vw, 24px)",
               flexWrap: "wrap",
               fontSize: 13.5,
-              color: "#E2E8F0",
+              color: "#334155",
               marginBottom: 32,
             }}
           >
             <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span> Zero Upfront Retainer
+              <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span> Zero Upfront Retainer
             </span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span> 23% Fee Only If You Hire
+              <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span> 90-Day Replacement Warranty
             </span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span> 90-Day Replacement Warranty
-            </span>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span> 48–72h Turnaround
+              <span style={{ color: "#1D4ED8", fontWeight: 700 }}>✓</span> 48–72h Turnaround
             </span>
           </div>
 
@@ -1512,7 +1632,7 @@ export default function HireAttorneysLandingPage() {
                 padding: "15px 36px",
                 borderRadius: 8,
                 textDecoration: "none",
-                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.45)",
+                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.32)",
               }}
             >
               <span>Submit Brief &amp; Receive Candidate Dossiers</span>
@@ -1524,6 +1644,7 @@ export default function HireAttorneysLandingPage() {
 
       {/* MOBILE POPUP INTAKE MODAL (Opens on tap of any CTA on mobile, web remains untouched) */}
       <HireAttorneysIntakeModal />
+      <StickyRequestBar />
     </div>
   );
 }

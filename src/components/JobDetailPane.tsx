@@ -66,7 +66,7 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
             </svg>
           </span>
-          <span className="firm-rating">4.8 ★</span>
+          <span className="firm-rating">4.8 <span style={{ color: "#F59E0B" }}>★</span></span>
         </div>
 
         <div className="clean-location-line">
@@ -296,7 +296,7 @@ export function JobDetailPane({ job, onCloseMobile }: JobDetailPaneProps) {
               is shared with a firm.
             </p>
             <div className="trust-links">
-              <span>★ 5.0 Rating (60 verified reviews)</span>
+              <span><span style={{ color: "#F59E0B" }}>★</span> 5.0 Rating (60+ verified reviews)</span>
               <span>·</span>
               <a href={trust.calendly} target="_blank" rel="noopener noreferrer">
                 Book 15 mins with Justin

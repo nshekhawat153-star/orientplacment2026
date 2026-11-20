@@ -84,7 +84,7 @@
   --green: var(--accent);
   --green-2: var(--accent-ink);
   --green-soft: var(--ice);
-  --star: var(--navy);
+  --star: #F59E0B;
   --brass: var(--pop);
   --brass-soft: var(--ice);
   --paper-3: var(--rule-2);
@@ -215,8 +215,6 @@ strong {
 .ha-hero-sec strong,
 .ha-hero-google-pill strong,
 .ha-hero-google-pill b,
-.ha-bottom-cta-sec b,
-.ha-bottom-cta-sec strong,
 .site-footer b,
 .site-footer strong {
   color: #FFFFFF !important;
@@ -19570,3 +19568,64 @@ table.data.compare td.us {
   background: #E2E8F0 !important;
   color: #08142A !important;
 }
+/* ---------- gold stars everywhere (light = amber, dark surfaces = brighter gold) ---------- */
+.stars,
+.stars svg,
+.founder-stars,
+.firm-star-rating {
+  color: #F59E0B !important;
+}
+.stars svg {
+  fill: #F59E0B !important;
+}
+footer .stars,
+footer .stars svg,
+.footer .stars,
+.footer .stars svg,
+.site-footer .stars,
+.site-footer .stars svg,
+.cta-band .stars,
+.cta-band .stars svg {
+  color: #FBBF24 !important;
+  fill: #FBBF24 !important;
+}
+.firm-rating {
+  color: inherit;
+}
+
+
+/* ---------- shared dark-section backgrounds (hire-attorneys landing page) ----------
+   Deep navy base with two off-centre blue glow spots (the Small Group "dark block" recipe:
+   solid dark + two radial accent-blue glows). Fixed-px circles keep the spots round on any section height.
+   Opaque base on purpose: translucent glows over the white page washed out to lavender-grey. */
+.ha-dark-bg {
+  background:
+    radial-gradient(circle 520px at 8% 16%, rgba(37, 99, 235, 0.62) 0%, rgba(29, 78, 216, 0.24) 42%, rgba(29, 78, 216, 0) 72%),
+    radial-gradient(circle 560px at 94% 84%, rgba(96, 165, 250, 0.40) 0%, rgba(47, 98, 184, 0.16) 42%, rgba(47, 98, 184, 0) 72%),
+    linear-gradient(180deg, #0A1A38 0%, #08142A 55%, #060E1F 100%);
+}
+/* hero video overlay: navy ramp plus the same two glow spots */
+.ha-page .hero-video-gradient {
+  background:
+    radial-gradient(circle 520px at 8% 14%, rgba(37, 99, 235, 0.46) 0%, rgba(29, 78, 216, 0.16) 45%, rgba(29, 78, 216, 0) 72%),
+    radial-gradient(circle 560px at 94% 90%, rgba(96, 165, 250, 0.26) 0%, rgba(96, 165, 250, 0) 70%),
+    linear-gradient(180deg,
+      rgba(11, 27, 58, 0.72) 0%,
+      rgba(8, 20, 42, 0.55) 45%,
+      rgba(6, 14, 31, 0.94) 100%);
+}
+
+/* hire-attorneys header on phones: taller at the top of the page, compact (64px) once scrolled */
+@media (max-width: 640px) {
+  .site-header.header-hire-attorneys.at-top>.wrap {
+    height: 84px;
+  }
+  .site-header.header-hire-attorneys.at-top .logo-img {
+    width: 52px;
+    height: 52px;
+  }
+  .ha-page .ha-hero-sec {
+    padding-top: 112px !important;
+  }
+}
+

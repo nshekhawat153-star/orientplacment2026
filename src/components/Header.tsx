@@ -207,17 +207,32 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
             </Link>
           )}
 
-          {/* Ad Landing Page Confidential Header Indicator (Desktop only; hidden on mobile) */}
+          {/* Ad landing page header CTA: opens the intake popup */}
           {isHireAttorneys && (
-            <div
-              className="ha-nav-indicator hidden-mobile"
-              style={{ marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "rgba(255, 255, 255, 0.9)" }}
+            <a
+              href="#intake-form"
+              data-open-intake-modal="true"
+              className="ha-nav-cta"
+              style={{
+                marginLeft: "auto",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                background: "linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%)",
+                color: "#FFFFFF",
+                fontWeight: 600,
+                fontSize: 14,
+                padding: "11px 22px",
+                borderRadius: 10,
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+                boxShadow: "0 6px 18px rgba(29, 78, 216, 0.4)",
+              }}
             >
-              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#10B981", boxShadow: "0 0 8px #10B981" }} />
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#E2E8F0" }}>
-                Texas Attorney Placement
-              </span>
-            </div>
+              <span>Request Candidates</span>
+              <span aria-hidden="true">→</span>
+            </a>
           )}
 
           {/* Desktop Nav - Hidden on /hire-attorneys ads page */}

@@ -48,11 +48,17 @@ export function HeroLeadForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [step, setStep] = useState<1 | 2>(1);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Step 1 -> Step 2: validate contact details only
+  const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!contactName.trim()) {
+      setError("Please provide your name.");
+      return;
+    }
     if (!emailRegex.test(email.trim())) {
       setError("Please provide a valid work email (e.g. name@yourfirm.com).");
       return;
@@ -61,15 +67,18 @@ export function HeroLeadForm({
       setError("Please provide your law firm name.");
       return;
     }
-    if (!contactName.trim()) {
-      setError("Please provide your name.");
-      return;
-    }
     if (phone.replace(/\D/g, "").length < 7) {
       setError("Please provide a valid direct phone number.");
       return;
     }
 
+    setError("");
+    setStep(2);
+  };
+
+  // Step 2: submit the full brief (contact + candidate requirements)
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     setError("");
     setIsSubmitting(true);
 
@@ -205,6 +214,22 @@ export function HeroLeadForm({
           transform: translateY(0);
           box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
+        .ha-form-back-btn {
+          flex: 0 0 32%;
+          min-height: 50px;
+          border-radius: 10px;
+          background: #FFFFFF;
+          color: #334155;
+          border: 1.5px solid #CBD5E1;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.15s ease, border-color 0.15s ease;
+        }
+        .ha-form-back-btn:hover {
+          background: #F1F5F9;
+          border-color: #94A3B8;
+        }
         @media (max-width: 640px) {
           .ha-hero-form-card {
             padding: 22px 16px 18px;
@@ -335,6 +360,7 @@ export function HeroLeadForm({
             type="button"
             onClick={() => {
               setIsSubmitted(false);
+              setStep(1);
               setEmail("");
               setShortJD("");
             }}
@@ -355,33 +381,6 @@ export function HeroLeadForm({
           {/* CARD HEADER (Only when rendered inline on web) */}
           {!isModal && (
             <div style={{ marginBottom: 14 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                <span
-                  style={{
-                    fontFamily: "var(--mono)",
-                    fontSize: 10.5,
-                    fontWeight: 700,
-                    color: "#1D4ED8",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    background: "#EFF6FF",
-                    border: "1px solid #DBEAFE",
-                    padding: "3px 8px",
-                    borderRadius: 6,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 5,
-                  }}
-                >
-                  DIRECT INTAKE · 48H DOSSIERS
-                </span>
-
-                <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "#059669", fontWeight: 600 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", boxShadow: "0 0 6px #10B981" }} />
-                  100% Confidential
-                </div>
-              </div>
-
               <h3
                 style={{
                   fontFamily: "var(--display)",
@@ -393,158 +392,170 @@ export function HeroLeadForm({
                   letterSpacing: "-0.015em",
                 }}
               >
-                Where should we send candidate profiles?
+                {step === 1 ? "Where should we send candidate profiles?" : "Who are you looking to hire?"}
               </h3>
 
               <p style={{ fontSize: 12.5, color: "#64748B", margin: 0, lineHeight: 1.4 }}>
-                Screened attorney dossiers matched to your brief delivered straight to your inbox.
+                {step === 1
+                  ? "Screened attorneys matched to your brief, sent to your inbox."
+                  : "Tell us the seat you need to fill and we'll match attorneys to your practice, market and seniority."}
               </p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit}>
-            {/* ROW 1: WORK EMAIL ADDRESS (EMAIL FIRST!) */}
-            <div style={{ marginBottom: 10 }}>
-              <label htmlFor="h-email" className="ha-form-label">
-                Work Email Address *
-              </label>
-              <input
-                id="h-email"
-                type="email"
-                required
-                placeholder="e.g. jdoe@apexlegal.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="ha-form-input"
-                style={{ background: "#FFFFFF", borderColor: email ? "#1D4ED8" : "#CBD5E1" }}
-              />
+          {/* STEP PROGRESS INDICATOR */}
+          <div style={{ marginBottom: 16 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 7 }}>
+              <span>Step {step} of 2: {step === 1 ? "Contact Details" : "Candidate Brief"}</span>
+              <span style={{ color: "#1D4ED8" }}>{step === 1 ? "50%" : "100%"}</span>
             </div>
-
-            {/* ROW 2: LAW FIRM NAME & YOUR NAME & ROLE */}
-            <div className="ha-form-row-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
-              <div>
-                <label htmlFor="h-firm" className="ha-form-label">
-                  Firm Legal Name *
-                </label>
-                <input
-                  id="h-firm"
-                  type="text"
-                  required
-                  placeholder="e.g. Apex Legal Group, PLLC"
-                  value={firmName}
-                  onChange={(e) => setFirmName(e.target.value)}
-                  className="ha-form-input"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="h-contact" className="ha-form-label">
-                  Your Name &amp; Role *
-                </label>
-                <input
-                  id="h-contact"
-                  type="text"
-                  required
-                  placeholder="e.g. Jane Doe · Managing Partner"
-                  value={contactName}
-                  onChange={(e) => setContactName(e.target.value)}
-                  className="ha-form-input"
-                />
-              </div>
+            <div style={{ width: "100%", height: 6, background: "#E2E8F0", borderRadius: 999, overflow: "hidden" }}>
+              <div style={{ height: "100%", width: step === 1 ? "50%" : "100%", background: "linear-gradient(90deg, #1D4ED8 0%, #60A5FA 100%)", borderRadius: 999, transition: "width 0.3s ease-out" }} />
             </div>
+          </div>
 
-            {/* ROW 3: DIRECT PHONE & TEXAS MARKET */}
-            <div className="ha-form-row-2" style={{ display: "grid", gridTemplateColumns: "1.05fr 0.95fr", gap: 10, marginBottom: 10 }}>
-              <div>
-                <label htmlFor="h-phone" className="ha-form-label">
-                  Direct Phone Number *
-                </label>
-                <input
-                  id="h-phone"
-                  type="tel"
-                  required
-                  placeholder="e.g. (512) 555-0199"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="ha-form-input"
-                />
-              </div>
+          <form onSubmit={step === 1 ? handleContinue : handleSubmit}>
+            {step === 1 ? (
+              <>
+                {/* STEP 1: CONTACT DETAILS (one input per row) */}
+                <div style={{ marginBottom: 10 }}>
+                  <label htmlFor="h-contact" className="ha-form-label">
+                    Your Name *
+                  </label>
+                  <input
+                    id="h-contact"
+                    type="text"
+                    required
+                    placeholder="e.g. Jane Doe"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    className="ha-form-input"
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="h-location" className="ha-form-label">
-                  Target Market
-                </label>
-                <select
-                  id="h-location"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  className="ha-form-select"
-                >
-                  {LOCATIONS.map((loc) => (
-                    <option key={loc} value={loc}>
-                      {loc}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+                <div style={{ marginBottom: 10 }}>
+                  <label htmlFor="h-email" className="ha-form-label">
+                    Work Email Address *
+                  </label>
+                  <input
+                    id="h-email"
+                    type="email"
+                    required
+                    placeholder="e.g. jdoe@apexlegal.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="ha-form-input"
+                  />
+                </div>
 
-            {/* ROW 4: PRACTICE AREA & TARGET SENIORITY */}
-            <div className="ha-form-row-2" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 10, marginBottom: 10 }}>
-              <div>
-                <label htmlFor="h-practice" className="ha-form-label">
-                  Primary Practice Area
-                </label>
-                <select
-                  id="h-practice"
-                  value={practiceArea}
-                  onChange={(e) => setPracticeArea(e.target.value)}
-                  className="ha-form-select"
-                >
-                  {PRACTICE_AREAS.map((p) => (
-                    <option key={p} value={p}>
-                      {p}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                <div style={{ marginBottom: 10 }}>
+                  <label htmlFor="h-firm" className="ha-form-label">
+                    Firm Name *
+                  </label>
+                  <input
+                    id="h-firm"
+                    type="text"
+                    required
+                    placeholder="e.g. Apex Legal Group, PLLC"
+                    value={firmName}
+                    onChange={(e) => setFirmName(e.target.value)}
+                    className="ha-form-input"
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="h-level" className="ha-form-label">
-                  Target Seniority
-                </label>
-                <select
-                  id="h-level"
-                  value={level}
-                  onChange={(e) => setLevel(e.target.value)}
-                  className="ha-form-select"
-                >
-                  {LEVELS.map((lvl) => (
-                    <option key={lvl} value={lvl}>
-                      {lvl}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+                <div style={{ marginBottom: 14 }}>
+                  <label htmlFor="h-phone" className="ha-form-label">
+                    Direct Phone Number *
+                  </label>
+                  <input
+                    id="h-phone"
+                    type="tel"
+                    required
+                    placeholder="e.g. (512) 555-0199"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="ha-form-input"
+                  />
+                </div>
 
-            {/* ROW 5: SHORT JD / REQUIREMENTS (SHORT ME JD) */}
-            <div style={{ marginBottom: 13 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-                <label htmlFor="h-jd" className="ha-form-label" style={{ margin: 0 }}>
-                  Short JD / Key Requirements <span style={{ color: "#94A3B8", fontWeight: 400 }}>(Optional)</span>
-                </label>
-                <span style={{ fontSize: 11, color: "#64748B" }}>Paste brief or notes</span>
-              </div>
-              <textarea
-                id="h-jd"
-                rows={2}
-                placeholder="e.g. Texas bar required, 4+ yrs estate planning / probate litigation, trial prep experience"
-                value={shortJD}
-                onChange={(e) => setShortJD(e.target.value)}
-                className="ha-form-textarea"
-              />
-            </div>
+              </>
+            ) : (
+              <>
+                {/* STEP 2: CANDIDATE BRIEF */}
+                <div className="ha-form-row-2" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 10, marginBottom: 10 }}>
+                  <div>
+                    <label htmlFor="h-practice" className="ha-form-label">
+                      Primary Practice Area
+                    </label>
+                    <select
+                      id="h-practice"
+                      value={practiceArea}
+                      onChange={(e) => setPracticeArea(e.target.value)}
+                      className="ha-form-select"
+                    >
+                      {PRACTICE_AREAS.map((p) => (
+                        <option key={p} value={p}>
+                          {p}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="h-level" className="ha-form-label">
+                      Target Seniority
+                    </label>
+                    <select
+                      id="h-level"
+                      value={level}
+                      onChange={(e) => setLevel(e.target.value)}
+                      className="ha-form-select"
+                    >
+                      {LEVELS.map((lvl) => (
+                        <option key={lvl} value={lvl}>
+                          {lvl}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ marginBottom: 10 }}>
+                  <label htmlFor="h-location" className="ha-form-label">
+                    Target Market
+                  </label>
+                  <select
+                    id="h-location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="ha-form-select"
+                  >
+                    {LOCATIONS.map((loc) => (
+                      <option key={loc} value={loc}>
+                        {loc}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div style={{ marginBottom: 13 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                    <label htmlFor="h-jd" className="ha-form-label" style={{ margin: 0 }}>
+                      Short JD / Key Requirements <span style={{ color: "#94A3B8", fontWeight: 400 }}>(Optional)</span>
+                    </label>
+                    <span style={{ fontSize: 11, color: "#64748B" }}>Paste brief or notes</span>
+                  </div>
+                  <textarea
+                    id="h-jd"
+                    rows={2}
+                    placeholder="e.g. Texas bar required, 4+ yrs estate planning / probate litigation, trial prep experience"
+                    value={shortJD}
+                    onChange={(e) => setShortJD(e.target.value)}
+                    className="ha-form-textarea"
+                  />
+                </div>
+              </>
+            )}
 
             {error && (
               <div
@@ -571,15 +582,29 @@ export function HeroLeadForm({
               </div>
             )}
 
-            {/* SINGLE PRIMARY CTA BUTTON */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="ha-form-submit-btn"
-            >
-              <span>{isSubmitting ? "Dispatching Brief to Radar…" : "Submit Brief & Receive Candidate Dossiers"}</span>
-              <span aria-hidden="true" style={{ fontSize: 16 }}>→</span>
-            </button>
+            {step === 1 ? (
+              <button type="submit" className="ha-form-submit-btn">
+                <span>Continue</span>
+                <span aria-hidden="true" style={{ fontSize: 16 }}>→</span>
+              </button>
+            ) : (
+              <div style={{ display: "flex", gap: 10 }}>
+                <button
+                  type="button"
+                  className="ha-form-back-btn"
+                  onClick={() => {
+                    setError("");
+                    setStep(1);
+                  }}
+                >
+                  ← Back
+                </button>
+                <button type="submit" disabled={isSubmitting} className="ha-form-submit-btn" style={{ flex: 1, width: "auto" }}>
+                  <span>{isSubmitting ? "Dispatching Brief…" : "Get Candidate Dossiers"}</span>
+                  <span aria-hidden="true" style={{ fontSize: 16 }}>→</span>
+                </button>
+              </div>
+            )}
 
             {/* TRUST BADGE / TERMS MICRO-COPY */}
             <div

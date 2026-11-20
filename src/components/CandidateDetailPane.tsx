@@ -71,7 +71,7 @@ export function CandidateDetailPane({
 
         <div className="clean-firm-line">
           <span className="firm-name-link">{c.years} yrs experience · {c.firmType}</span>
-          <span className="firm-rating">5.0 ★</span>
+          <span className="firm-rating">5.0 <span style={{ color: "#F59E0B" }}>★</span></span>
         </div>
 
         <div className="clean-location-line">

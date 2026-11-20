@@ -156,7 +156,7 @@ export function ScreenStart({
 
         {/* TRUST MICROCOPY */}
         <p style={{ fontSize: 13, color: "#64748B", marginTop: 24 }}>
-          <span style={{ color: "#1D4ED8" }}>★★★★★</span> <b>5.0</b> from 60 Google reviews · No fee unless you hire · Your search mandate is strictly confidential
+          <span style={{ color: "#F59E0B" }}>★★★★★</span> <b>5.0</b> from 60 Google reviews · No fee unless you hire · Your search mandate is strictly confidential
         </p>
 
         {/* 4 PROCESS PILLARS (Matching /jobs terms styling) */}

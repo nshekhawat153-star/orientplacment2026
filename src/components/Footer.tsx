@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { orionLine, sendingDomains, cities, roles } from "@/data";
 import { RatingBadge, CalendlyLink } from "./Rating";
+import { GMark } from "./icons";
 import { Mark } from "./Mark";
 
 const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is built.";
@@ -158,13 +159,14 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                   color: "#E2E8F0",
                 }}
               >
-                <span style={{ color: "#60A5FA", fontSize: 12, letterSpacing: 1 }}>
-                  ★★★★★
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  <GMark />
+                  <span style={{ color: "#FBBF24", fontSize: 13, letterSpacing: 1 }}>★★★★★</span>
                 </span>
                 <span style={{ width: 1, height: 14, background: "rgba(255, 255, 255, 0.2)" }} />
                 <span style={{ color: "#FFFFFF" }}>
-                  <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>5.0 Google Rating</strong>
-                  <span style={{ color: "rgba(255, 255, 255, 0.75)" }}> · 60+ Verified Texas Law Firm Reviews</span>
+                  <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>5.0 Rating</strong>
+                  <span style={{ color: "rgba(255, 255, 255, 0.75)" }}> · 60+ Reviews</span>
                 </span>
               </div>
             </div>
@@ -184,9 +186,6 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                 textAlign: "center",
               }}
             >
-              <p style={{ margin: "0 auto 6px", color: "#CBD5E1", maxWidth: "100%", textAlign: "center", width: "100%" }}>
-                23% flat contingency fee · 90-day replacement warranty · Payable Net 15 only if you hire
-              </p>
               <p style={{ margin: "0 auto", color: "#64748B", maxWidth: "100%", textAlign: "center", width: "100%" }}>
                 © 2026 Orion Placement LLC · Texas Legal Recruiting. All rights reserved.
               </p>

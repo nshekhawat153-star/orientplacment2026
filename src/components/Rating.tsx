@@ -85,7 +85,7 @@ export function TrustTicker() {
         {items.map((item, idx) => (
           <div key={`t1-${idx}`} className="ticker-pill">
             <span className="ticker-bullet" aria-hidden="true">✦</span>
-            <b className="ticker-num">{item.num}</b>
+            <b className="ticker-num">{item.num.endsWith(" ★") ? <>{item.num.slice(0, -2)} <span style={{ color: "#FBBF24" }}>★</span></> : item.num}</b>
             <span className="ticker-lbl">{item.label}</span>
           </div>
         ))}
@@ -93,7 +93,7 @@ export function TrustTicker() {
         {items.map((item, idx) => (
           <div key={`t2-${idx}`} className="ticker-pill">
             <span className="ticker-bullet" aria-hidden="true">✦</span>
-            <b className="ticker-num">{item.num}</b>
+            <b className="ticker-num">{item.num.endsWith(" ★") ? <>{item.num.slice(0, -2)} <span style={{ color: "#FBBF24" }}>★</span></> : item.num}</b>
             <span className="ticker-lbl">{item.label}</span>
           </div>
         ))}
