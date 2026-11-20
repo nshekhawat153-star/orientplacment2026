@@ -72,29 +72,35 @@ export function TrustTicker() {
     { num: "23%", label: "Contingency Fee · $0 Upfront" },
   ];
 
+  // Repeat sequence so that after 23% it immediately repeats with zero blank gap
+  const sequence = [...items, ...items, ...items];
+
   return (
-    <div className="ticker-wrapper ticker-static" aria-label="Key verifiable facts about Orion Placement" role="list">
-      <div className="ticker-track ticker-track-static">
-        {items.map((item, idx) => (
-          <div
-            key={`t-${idx}`}
-            className="ticker-pill"
-            role="listitem"
-          >
-            <span className="ticker-bullet" aria-hidden="true">✦</span>
-            <span className="ticker-num">
-              {item.num.endsWith(" ★") ? (
-                <>
-                  {item.num.slice(0, -2)}{" "}
-                  <span style={{ color: "#FBBF24" }}>★</span>
-                </>
-              ) : (
-                item.num
-              )}
-            </span>
-            <span className="ticker-lbl">{item.label}</span>
-          </div>
-        ))}
+    <div className="ticker-wrapper" aria-label="Key verifiable facts about Orion Placement">
+      <div className="ticker-track" role="list">
+        {[0, 1].map((setIdx) =>
+          sequence.map((item, idx) => (
+            <div
+              key={`t-${setIdx}-${idx}`}
+              className="ticker-pill"
+              role={setIdx === 0 && idx < items.length ? "listitem" : undefined}
+              aria-hidden={setIdx === 1 || idx >= items.length ? true : undefined}
+            >
+              <span className="ticker-bullet" aria-hidden="true">✦</span>
+              <span className="ticker-num">
+                {item.num.endsWith(" ★") ? (
+                  <>
+                    {item.num.slice(0, -2)}{" "}
+                    <span style={{ color: "#FBBF24" }}>★</span>
+                  </>
+                ) : (
+                  item.num
+                )}
+              </span>
+              <span className="ticker-lbl">{item.label}</span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
