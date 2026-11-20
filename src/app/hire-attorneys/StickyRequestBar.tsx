@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-// Mobile-only sticky CTA. Appears once ~60% of the hero has been scrolled past.
+// Mobile-only sticky CTA. Appears once ~40% of the hero has been scrolled past.
 export function StickyRequestBar() {
   const [show, setShow] = useState(false);
 
@@ -12,7 +12,7 @@ export function StickyRequestBar() {
       if (!hero) return;
       const r = hero.getBoundingClientRect();
       const scrolledPast = -r.top; // px of the hero scrolled out of view
-      setShow(scrolledPast >= r.height * 0.6);
+      setShow(scrolledPast >= r.height * 0.4);
     };
     update();
     window.addEventListener("scroll", update, { passive: true });

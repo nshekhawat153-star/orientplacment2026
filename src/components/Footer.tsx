@@ -140,7 +140,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                 </span>
               </div>
               <p style={{ color: "#94A3B8", fontSize: 13.5, margin: "6px auto 0", maxWidth: 480, lineHeight: 1.55, textAlign: "center" }}>
-                Direct intake legal recruiters for Texas law firms. Screened lateral attorneys and paralegals on 100% contingency.
+                Legal recruiters for Texas law firms. Screened attorneys and paralegals, no retainer, and you pay only if you hire.
               </p>
             </div>
 
@@ -187,7 +187,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
               }}
             >
               <p style={{ margin: "0 auto", color: "#64748B", maxWidth: "100%", textAlign: "center", width: "100%" }}>
-                © 2026 Orion Placement LLC · Texas Legal Recruiting. All rights reserved.
+                © 2026 Orion Placement LLC · All rights reserved.
               </p>
             </div>
           </div>

@@ -248,7 +248,7 @@ export function HireAttorneysIntakeModal() {
               <GMark />
               <span className="ha-ml-gs">★★★★★</span>
               <span>
-                <b>5.0 Google Rating</b> · 60+ reviews
+                <b>5.0 Rating</b> · 60+ reviews
               </span>
             </div>
           </div>

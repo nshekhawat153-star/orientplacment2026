@@ -449,7 +449,7 @@ export function HeroLeadForm({
               <p style={{ fontSize: 12.5, color: "#64748B", margin: 0, lineHeight: 1.4 }}>
                 {step === 1
                   ? "Screened attorneys matched to your brief, sent to your inbox."
-                  : "Tell us the seat you need to fill and we'll match attorneys to your practice, market and seniority."}
+                  : "Tell us the seat and we'll match attorneys to your brief."}
               </p>
             </div>
           )}
@@ -517,7 +517,8 @@ export function HeroLeadForm({
 
                 <div style={{ marginBottom: 14 }}>
                   <label htmlFor="h-phone" className="ha-form-label">
-                    Direct Phone Number *
+                    Phone Number *
+
                   </label>
                   <input
                     id="h-phone"

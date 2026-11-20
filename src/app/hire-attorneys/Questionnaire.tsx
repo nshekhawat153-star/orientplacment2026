@@ -878,7 +878,8 @@ export function Questionnaire() {
 
             <div style={{ gridColumn: "1 / -1" }}>
               <label style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#08142A", marginBottom: 6 }}>
-                Direct Phone Number *
+                Phone Number *
+
               </label>
               <input
                 type="tel"

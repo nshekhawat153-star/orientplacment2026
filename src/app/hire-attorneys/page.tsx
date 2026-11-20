@@ -6,6 +6,7 @@ import { HeroLeadForm } from "./HeroLeadForm";
 import { ReviewCards } from "./ReviewCards";
 import { HireAttorneysIntakeModal } from "./HireAttorneysIntakeModal";
 import { StickyRequestBar } from "./StickyRequestBar";
+import { TermsTicker } from "./TermsTicker";
 import { Stars, GMark } from "@/components/icons";
 import { reviews } from "@/data";
 
@@ -19,8 +20,6 @@ export const metadata: Metadata = {
 };
 
 export default function HireAttorneysLandingPage() {
-  const clientReviews = reviews.filter((r) => r.kind === "employer").slice(0, 3);
-
   return (
     <div className="ha-page" style={{ background: "#FFFFFF", color: "#08142A" }}>
       <style>{`
@@ -60,14 +59,43 @@ export default function HireAttorneysLandingPage() {
         }
         .ha-hero-sec {
           position: relative !important;
-          background: #08142A !important;
+          background-color: #08142A !important;
+          background-image:
+            radial-gradient(circle 620px at 96% 6%, rgba(37, 99, 235, 0.42) 0%, rgba(29, 78, 216, 0.16) 45%, rgba(29, 78, 216, 0) 72%),
+            radial-gradient(circle 560px at 3% 78%, rgba(96, 165, 250, 0.24) 0%, rgba(47, 98, 184, 0.09) 45%, rgba(47, 98, 184, 0) 72%),
+            linear-gradient(180deg, #0A1A38 0%, #08142A 55%, #050B17 100%) !important;
           color: #FFFFFF !important;
           padding: 124px 0 120px !important;
           min-height: auto !important;
           display: block !important;
           overflow: hidden !important;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+          border-bottom: 0 !important;
           box-sizing: border-box !important;
+        }
+        /* light grid pattern in the hero background, faded toward the edges */
+        .ha-hero-sec::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+          background-image:
+            linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+          background-size: 60px 60px;
+          background-position: center top;
+          -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 25%, transparent 100%);
+          mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 25%, transparent 100%);
+        }
+        @media (max-width: 640px) {
+          .ha-hero-sec::before { background-size: 44px 44px; }
+          /* phones: darker background, smaller and softer glows (the full-size ones wash the small screen out) */
+          .ha-hero-sec {
+            background-image:
+              radial-gradient(circle 380px at 100% 4%, rgba(37, 99, 235, 0.24) 0%, rgba(29, 78, 216, 0.08) 50%, rgba(29, 78, 216, 0) 75%),
+              radial-gradient(circle 340px at 0% 80%, rgba(96, 165, 250, 0.12) 0%, rgba(47, 98, 184, 0.04) 50%, rgba(47, 98, 184, 0) 75%),
+              linear-gradient(180deg, #08142A 0%, #060E1F 55%, #040913 100%) !important;
+          }
         }
         .ha-terms-inner-wrap {
           max-width: 1200px;
@@ -76,9 +104,27 @@ export default function HireAttorneysLandingPage() {
           position: relative;
           z-index: 10;
         }
+        /* "You only pay if you hire": same background as the hero (glows + grid) */
         .ha-protocol-sec {
           background-color: #08142A !important;
-          background-image: radial-gradient(ellipse 90% 60% at 50% 0%, #0E2246 0%, #08142A 65%, #050B17 100%) !important;
+          background-image:
+            radial-gradient(circle 620px at 96% 6%, rgba(37, 99, 235, 0.42) 0%, rgba(29, 78, 216, 0.16) 45%, rgba(29, 78, 216, 0) 72%),
+            radial-gradient(circle 560px at 3% 78%, rgba(96, 165, 250, 0.24) 0%, rgba(47, 98, 184, 0.09) 45%, rgba(47, 98, 184, 0) 72%),
+            linear-gradient(180deg, #0A1A38 0%, #08142A 55%, #050B17 100%) !important;
+        }
+        .ha-protocol-sec::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+          background-image:
+            linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+          background-size: 60px 60px;
+          background-position: center top;
+          -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 25%, transparent 100%);
+          mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 25%, transparent 100%);
         }
         @media (max-width: 768px) {
           .ha-protocol-eyebrow .hidden-mobile,
@@ -97,7 +143,7 @@ export default function HireAttorneysLandingPage() {
         .ha-page .ha-hero-sec {
           min-height: 100vh !important;
           min-height: 100svh !important;
-          padding: 120px 0 56px !important;
+          padding: 120px 0 150px !important;
           display: flex !important;
           flex-direction: column !important;
           justify-content: center !important;
@@ -312,7 +358,7 @@ export default function HireAttorneysLandingPage() {
           }
           .ha-hero-trust-bar {
             justify-content: center !important;
-            margin: 0 auto !important;
+            margin: 0 auto 20px !important;
           }
         }
         @media (max-width: 640px) {
@@ -411,7 +457,7 @@ export default function HireAttorneysLandingPage() {
             width: 100% !important;
           }
           .ha-page .ha-hero-sec {
-            padding: 96px 0 40px !important;
+            padding: 96px 0 124px !important;
             min-height: 100svh !important;
           }
           .ha-hero-wrap {
@@ -507,9 +553,13 @@ export default function HireAttorneysLandingPage() {
           }
           .ha-protocol-sec {
             background-color: #08142A !important;
-            background-image: radial-gradient(ellipse 120% 70% at 50% 0%, #0D1E3A 0%, #08142A 70%) !important;
+            background-image:
+              radial-gradient(circle 380px at 100% 4%, rgba(37, 99, 235, 0.24) 0%, rgba(29, 78, 216, 0.08) 50%, rgba(29, 78, 216, 0) 75%),
+              radial-gradient(circle 340px at 0% 80%, rgba(96, 165, 250, 0.12) 0%, rgba(47, 98, 184, 0.04) 50%, rgba(47, 98, 184, 0) 75%),
+              linear-gradient(180deg, #08142A 0%, #060E1F 55%, #040913 100%) !important;
             padding: 48px 0 56px !important;
           }
+          .ha-protocol-sec::before { background-size: 44px 44px; }
           .ha-protocol-eyebrow {
             background: rgba(30, 58, 138, 0.35) !important;
             border: 1px solid rgba(96, 165, 250, 0.35) !important;
@@ -648,21 +698,59 @@ export default function HireAttorneysLandingPage() {
           }
         }
         .ha-eb-short { display: none; }
-        .ha-hero-points-sm { display: none; }
+        .ha-hero-lead .ha-hl {
+          color: #FFFFFF;
+          font-weight: 600;
+          background: linear-gradient(transparent 58%, rgba(96, 165, 250, 0.38) 58%);
+          padding: 0 2px;
+          white-space: nowrap;
+          -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+        }
         @media (max-width: 640px) {
           /* hero, phones */
+          .ha-page .ha-hero-trust-bar {
+            justify-content: center !important;
+            align-self: stretch !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+          }
+          /* highlights flow inline inside the paragraph instead of jumping to the next line */
+          .ha-page .ha-hero-lead .ha-hl {
+            white-space: normal !important;
+          }
+          /* bigger submit CTA */
+          .ha-page .ha-hero-mobile-cta {
+            width: 100% !important;
+            max-width: 95vw !important;
+            margin: 24px auto 0 !important;
+          }
+          .ha-page .ha-hero-mobile-cta a {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 18px 16px !important;
+            font-size: 17px !important;
+            line-height: 1.25 !important;
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            box-sizing: border-box !important;
+            white-space: normal !important;
+            text-align: center !important;
+          }
           .ha-page .ha-hero-h1,
           .ha-page .ha-split-hero-h1 {
-            font-size: 38px !important;
-            line-height: 1.15 !important;
-            text-align: left !important;
+            font-size: 50px !important;
+            line-height: 1.1 !important;
+            text-align: center !important;
             align-self: stretch !important;
             width: 100% !important;
             max-width: none !important;
-            margin: 0 0 14px !important;
+            margin: 0 auto 14px !important;
           }
           .ha-page .ha-hero-lead {
-            text-align: left !important;
+            font-size: 18px !important;
+            line-height: 1.6 !important;
+            text-align: center !important;
             align-self: stretch !important;
             width: 100% !important;
             max-width: none !important;
@@ -670,8 +758,8 @@ export default function HireAttorneysLandingPage() {
           }
           .ha-page .ha-gword { display: none; }
           .ha-page .ha-hero-eyebrow {
-            align-self: flex-start !important;
-            margin: 0 0 14px !important;
+            align-self: center !important;
+            margin: 0 auto 14px !important;
           }
           .ha-page .ha-eb-long { display: none !important; }
           .ha-page .ha-eb-short { display: inline !important; }
@@ -727,7 +815,7 @@ export default function HireAttorneysLandingPage() {
             border-radius: 14px !important;
             box-shadow: 0 6px 18px rgba(29, 78, 216, 0.07) !important;
             padding: 16px 18px !important;
-            text-align: left !important;
+            text-align: center !important;
             align-items: flex-start !important;
           }
           .ha-term-card:nth-child(n) {
@@ -738,26 +826,26 @@ export default function HireAttorneysLandingPage() {
             letter-spacing: 0.07em !important;
             min-height: 0 !important;
             margin-bottom: 4px !important;
-            text-align: left !important;
+            text-align: center !important;
             width: auto !important;
           }
           .ha-term-val {
             font-size: 28px !important;
             margin-bottom: 4px !important;
-            text-align: left !important;
+            text-align: center !important;
             width: auto !important;
           }
           .ha-term-sub {
             font-size: 13px !important;
             line-height: 1.45 !important;
-            text-align: left !important;
+            text-align: center !important;
             width: auto !important;
           }
 
           /* section headings */
-          .ha-protocol-sec .ha-section-h2,
-          .ha-reviews-sec .ha-section-h2 { font-size: 30px !important; }
-          .ha-founder-mobile-header h2 { font-size: 30px !important; }
+          .ha-protocol-sec .ha-section-h2 { font-size: 30px !important; }
+          .ha-reviews-sec .ha-section-h2 { font-size: 32px !important; }
+          .ha-founder-mobile-header h2 { font-size: 32px !important; }
           .ha-founder-mobile-header p { font-style: italic; }
 
           /* founder: photo spacing, no CTA */
@@ -768,13 +856,33 @@ export default function HireAttorneysLandingPage() {
           /* hero text sizes, large phones only */
           .ha-page .ha-hero-h1,
           .ha-page .ha-split-hero-h1 {
-            font-size: 46px !important;
+            font-size: 50px !important;
           }
           .ha-page .ha-hero-lead {
-            font-size: 16.5px !important;
+            font-size: 18px !important;
           }
           .ha-page .ha-hero-points-sm {
             font-size: 14px !important;
+          }
+        }
+        @media (max-width: 424px) {
+          /* smaller Google rating badge, small phones only */
+          .ha-page .ha-hero-google-pill {
+            padding: 6px 12px !important;
+            gap: 7px !important;
+            font-size: 12px !important;
+            border-radius: 9px !important;
+          }
+          .ha-page .ha-hero-google-pill .gmark {
+            width: 13px !important;
+            height: 13px !important;
+          }
+          .ha-page .ha-hero-google-pill > span:nth-child(2) {
+            font-size: 11.5px !important;
+            letter-spacing: 1px !important;
+          }
+          .ha-page .ha-hero-google-pill > span:nth-child(3) {
+            height: 12px !important;
           }
         }
       `}</style>
@@ -795,33 +903,18 @@ export default function HireAttorneysLandingPage() {
           borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
-        <div className="hero-video-wrap" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video-el"
-          >
-            <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-            <source src="/media/splash.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-video-gradient" />
-          <div className="hero-video-radial-aura" />
-        </div>
-
         <div className="wrap hero-content-wrap ha-hero-wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 3 }}>
           <div className="ha-hero-split-grid">
             {/* LEFT COLUMN: HEADINGS, VALUE PROPOSITIONS & TRUST (LEFT-ALIGNED ON WEB, CENTERED ON MOBILE) */}
             <div className="ha-hero-left-col">
               {/* Eyebrow Pill Badge */}
-              <div
+                <div
                 className="ha-hero-eyebrow"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
                   gap: 8,
-                  background: "rgba(255, 255, 255, 0.08)",
+                    background: "rgba(255, 255, 255, 0.08)",
                   border: "1px solid rgba(255, 255, 255, 0.20)",
                   borderRadius: 999,
                   padding: "6px 16px",
@@ -832,20 +925,20 @@ export default function HireAttorneysLandingPage() {
                   textTransform: "uppercase",
                   color: "#E2E8F0",
                   marginBottom: 20,
-                  backdropFilter: "blur(8px)",
-                  WebkitBackdropFilter: "blur(8px)",
-                }}
-              >
+                    backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
+                  }}
+                >
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                <span className="ha-eb-long">DIRECT INTAKE · ZERO RETAINER<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONTINGENCY</span>
-                <span className="ha-eb-short">Zero upfront retainer</span>
+                <span className="ha-eb-long">PAY ONLY IF YOU HIRE</span>
+                <span className="ha-eb-short">PAY ONLY IF YOU HIRE</span>
               </div>
 
               {/* Display Heading */}
               <h1
                 className="ha-hero-h1 ha-split-hero-h1"
                 style={{
-                  fontSize: "clamp(34px, 4.2vw, 54px)",
+                  fontSize: "clamp(42px, 5vw, 64px)",
                   fontFamily: "var(--display)",
                   fontWeight: 500,
                   lineHeight: 1.14,
@@ -868,86 +961,20 @@ export default function HireAttorneysLandingPage() {
               <p
                 className="ha-hero-lead"
                 style={{
-                  fontSize: "clamp(16px, 1.6vw, 18.5px)",
-                  lineHeight: 1.6,
+                  fontSize: "clamp(18px, 1.9vw, 21px)",
+                  lineHeight: 1.7,
                   color: "rgba(255, 255, 255, 0.88)",
-                  maxWidth: 620,
+                  maxWidth: 700,
                   margin: "0 0 26px",
                   textAlign: "left",
                   textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
                 }}
               >
-                Sign one simple agreement. Pre-screened lateral attorneys matched to your exact
-                practice mix, local Texas bar admissions, and compensation band. You only pay if you hire.
+                Matched to your practice and delivered in <b className="ha-hl">48–72 hours</b>.{" "}
+                <b className="ha-hl">Pay nothing until you hire</b>: no retainer, no exclusivity, and a{" "}
+                <b className="ha-hl">90-day replacement guarantee</b>.
               </p>
 
-              {/* Value Checkmarks List (Desktop / Web) */}
-              <div
-                className="ha-hero-checkmarks hidden-mobile"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 12,
-                  marginBottom: 28,
-                  fontSize: 14.5,
-                  color: "#CBD5E1",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: 16 }}>✓</span>
-                  <span>90-day replacement warranty backed by contract credit</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: 16 }}>✓</span>
-                  <span>Fast 48–72h turnaround with verified attorney dossiers</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: 16 }}>✓</span>
-                  <span>Zero upfront retainer or exclusivity lock-in</span>
-                </div>
-              </div>
-
-              {/* Guarantees on Mobile (Centered clean guarantees) */}
-              <div
-                className="ha-hero-guarantees only-mobile"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 7,
-                  fontSize: 12.5,
-                  color: "#CBD5E1",
-                  margin: "0 auto 20px",
-                  textAlign: "center",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>23% flat contingency fee · Pay only if you hire</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>90-day replacement warranty · Zero upfront retainer</span>
-                </div>
-              </div>
-
-              {/* The 3 value points, small phones only (<425px) */}
-              <div className="ha-hero-points-sm">
-                <div className="ha-hero-point">
-                  <span>✓</span>
-                  <span>Zero Upfront Retainer</span>
-                </div>
-                <div className="ha-hero-point">
-                  <span>✓</span>
-                  <span>90-Day Replacement Warranty</span>
-                </div>
-                <div className="ha-hero-point">
-                  <span>✓</span>
-                  <span>48–72h Turnaround with Candidate Dossiers</span>
-                </div>
-              </div>
-
-              {/* Social Proof Founder Rating Badge (Bright, crisp and high-contrast) */}
               <div className="ha-hero-trust-bar" style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
                 <div
                   className="ha-hero-google-pill"
@@ -995,6 +1022,7 @@ export default function HireAttorneysLandingPage() {
                     textDecoration: "none",
                     boxShadow: "0 8px 24px rgba(29, 78, 216, 0.4)",
                     width: "100%",
+                    marginTop: "1rem"
                   }}
                 >
                   <span>Submit Brief &amp; Receive Candidates</span>
@@ -1008,121 +1036,9 @@ export default function HireAttorneysLandingPage() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* 2. TERMS / TRUST CARDS (4 CARDS) */}
-      <section
-        className="ha-terms-sec"
-        style={{
-          position: "relative",
-          background: "#FFFFFF",
-          color: "#08142A",
-          padding: "64px 0 64px",
-        }}
-      >
-        {/* hairline under the cards, faded out at both ends */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 1,
-            background: "linear-gradient(90deg, rgba(218, 215, 204, 0) 0%, rgba(218, 215, 204, 0) 10%, #DAD7CC 35%, #DAD7CC 65%, rgba(218, 215, 204, 0) 90%, rgba(218, 215, 204, 0) 100%)",
-          }}
-        />
-        <div className="ha-terms-inner-wrap" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-          <div className="ha-terms-grid">
-            {/* Card 1: Placement Fee */}
-            <div
-              className="ha-hover-lift ha-term-card"
-              style={{
-                background: "#FFFFFF",
-                border: "1.5px solid #BFDBFE",
-                borderRadius: 14,
-                padding: "24px 22px",
-                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.06)",
-              }}
-            >
-              <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-                Placement Fee
-              </div>
-              <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
-                23%
-              </div>
-              <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-                Net 15 upon candidate start date. Due only if you hire.
-              </div>
-            </div>
-
-            {/* Card 2: Warranty Period */}
-            <div
-              className="ha-hover-lift ha-term-card"
-              style={{
-                background: "#FFFFFF",
-                border: "1.5px solid #BFDBFE",
-                borderRadius: 14,
-                padding: "24px 22px",
-                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.06)",
-              }}
-            >
-              <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-                Warranty Period
-              </div>
-              <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
-                90 Days
-              </div>
-              <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-                100% replacement guarantee backed by contract credit.
-              </div>
-            </div>
-
-            {/* Card 3: Upfront Cost */}
-            <div
-              className="ha-hover-lift ha-term-card"
-              style={{
-                background: "#FFFFFF",
-                border: "1.5px solid #BFDBFE",
-                borderRadius: 14,
-                padding: "24px 22px",
-                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.06)",
-              }}
-            >
-              <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-                Upfront Retainer
-              </div>
-              <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#08142A", lineHeight: 1.1 }}>
-                $0
-              </div>
-              <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-                Zero upfront fees, retainers, or exclusivity lock-in.
-              </div>
-            </div>
-
-            {/* Card 4: Turnaround */}
-            <div
-              className="ha-hover-lift ha-term-card"
-              style={{
-                background: "#FFFFFF",
-                border: "1.5px solid #BFDBFE",
-                borderRadius: 14,
-                padding: "24px 22px",
-                boxShadow: "0 8px 24px rgba(29, 78, 216, 0.06)",
-              }}
-            >
-              <div className="ha-term-label" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>
-                Candidate Turnaround
-              </div>
-              <div className="ha-term-val" style={{ fontFamily: "var(--display)", fontSize: 32, fontWeight: 600, color: "#1D4ED8", lineHeight: 1.1 }}>
-                48–72h
-              </div>
-              <div className="ha-term-sub" style={{ fontSize: 13, color: "#64748B", marginTop: 6, lineHeight: 1.4 }}>
-                Pre-screened lateral attorney dossiers delivered directly.
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Terms ticker: part of the hero, shares its background */}
+        <TermsTicker />
       </section>
 
       {/* 3. CLIENT RESULTS / FIRMS WE'VE HELPED HIRE (LIGHT LUXURY EDITORIAL SOCIAL PROOF) */}
@@ -1202,7 +1118,7 @@ export default function HireAttorneysLandingPage() {
 
       {/* 4. THE CONTINGENCY PROTOCOL (EXECUTIVE LUXURY DARK MIDNIGHT ARCHITECTURE) */}
       <section
-        className="ha-protocol-sec ha-dark-bg"
+        className="ha-protocol-sec"
         style={{
           position: "relative",
           color: "#FFFFFF",
