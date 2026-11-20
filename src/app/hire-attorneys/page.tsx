@@ -72,6 +72,14 @@ export default function HireAttorneysLandingPage() {
           position: relative;
           z-index: 10;
         }
+        .ha-protocol-sec {
+          background-color: #08142A !important;
+          background-image: radial-gradient(ellipse 90% 60% at 50% 0%, #0E2246 0%, #08142A 65%, #050B17 100%) !important;
+        }
+        .ha-bottom-cta-sec {
+          background-color: #08142A !important;
+          background-image: radial-gradient(ellipse 90% 80% at 50% 0%, #0E2246 0%, #08142A 70%, #050B17 100%) !important;
+        }
         .ha-hero-h1,
         .ha-split-hero-h1 {
           color: #FFFFFF !important;
@@ -903,7 +911,8 @@ export default function HireAttorneysLandingPage() {
         className="ha-protocol-sec"
         style={{
           position: "relative",
-          background: "radial-gradient(ellipse 90% 70% at 50% 0%, rgba(29, 78, 216, 0.16) 0%, #08142A 70%, #050B17 100%)",
+          backgroundColor: "#08142A",
+          backgroundImage: "radial-gradient(ellipse 90% 60% at 50% 0%, #0E2246 0%, #08142A 65%, #050B17 100%)",
           color: "#FFFFFF",
           padding: "100px 0 110px",
           borderTop: "1px solid rgba(255, 255, 255, 0.08)",
@@ -1383,7 +1392,8 @@ export default function HireAttorneysLandingPage() {
       <section
         className="ha-bottom-cta-sec"
         style={{
-          background: "radial-gradient(ellipse 90% 80% at 50% -20%, rgba(29, 78, 216, 0.28) 0%, rgba(8, 20, 42, 0.98) 75%, #08142A 100%)",
+          backgroundColor: "#08142A",
+          backgroundImage: "radial-gradient(ellipse 90% 80% at 50% 0%, #0E2246 0%, #08142A 70%, #050B17 100%)",
           padding: "96px 0 108px",
           textAlign: "center",
           color: "#FFFFFF",
