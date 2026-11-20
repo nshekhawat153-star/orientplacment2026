@@ -84,6 +84,16 @@ export default function HireAttorneysLandingPage() {
         .ha-bottom-cta-sec strong {
           color: #FFFFFF !important;
         }
+        @media (max-width: 768px) {
+          .ha-protocol-eyebrow .hidden-mobile,
+          .ha-protocol-eyebrow span.hidden-mobile {
+            display: none !important;
+          }
+          .ha-protocol-eyebrow .only-mobile,
+          .ha-protocol-eyebrow span.only-mobile {
+            display: inline !important;
+          }
+        }
         .ha-hero-h1,
         .ha-split-hero-h1 {
           color: #FFFFFF !important;
@@ -180,7 +190,8 @@ export default function HireAttorneysLandingPage() {
           span.only-mobile {
             display: inline !important;
           }
-          .hidden-mobile {
+          .hidden-mobile,
+          span.hidden-mobile {
             display: none !important;
           }
           .ha-terms-strip-sec {
@@ -348,11 +359,14 @@ export default function HireAttorneysLandingPage() {
             background: rgba(30, 58, 138, 0.35) !important;
             border: 1px solid rgba(96, 165, 250, 0.35) !important;
             color: #BFDBFE !important;
-            padding: 5px 14px !important;
-            font-size: 10px !important;
-            letter-spacing: 0.10em !important;
+            padding: 4px 12px !important;
+            font-size: 9.5px !important;
+            letter-spacing: 0.08em !important;
             margin-bottom: 14px !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+            white-space: nowrap !important;
+            max-width: calc(100vw - 32px) !important;
+            box-sizing: border-box !important;
           }
           .ha-step-card {
             padding: 24px 20px !important;
@@ -949,7 +963,7 @@ export default function HireAttorneysLandingPage() {
             >
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA", flexShrink: 0 }} />
               <span className="hidden-mobile">THE CONTINGENCY SEARCH PROTOCOL · ZERO FINANCIAL RISK</span>
-              <span className="only-mobile">THE CONTINGENCY PROTOCOL</span>
+              <span className="only-mobile">CONTINGENCY PROTOCOL</span>
             </div>
             <h2
               className="ha-section-h2"

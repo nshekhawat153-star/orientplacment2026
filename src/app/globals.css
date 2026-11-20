@@ -334,7 +334,9 @@ span.hero-eyebrow-desktop {
 @media (max-width: 640px) {
 
   .hidden-mobile,
-  .hero-eyebrow-desktop {
+  span.hidden-mobile,
+  .hero-eyebrow-desktop,
+  span.hero-eyebrow-desktop {
     display: none !important;
   }
 
