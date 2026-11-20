@@ -461,7 +461,7 @@ export default function HireAttorneysLandingPage() {
             min-height: 100svh !important;
           }
           .ha-hero-wrap {
-            padding: 0 16px !important;
+            padding: 24px 16px !important;
           }
           .ha-hero-eyebrow {
             font-size: 11px !important;
