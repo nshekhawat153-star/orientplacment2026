@@ -69,10 +69,10 @@ export function TrustTicker() {
     { num: "5.0 ★", label: `Google Rating (${trust.reviews} Reviews)` },
     { num: "Since 2022", label: "Fort Lauderdale, Florida" },
     { num: "90 Days", label: "Replacement Guarantee" },
-    { num: "23%", label: "Contingency Fee · $0 Upfront" },
+    { num: "Within 1 Week", label: "Candidate Turnaround" },
   ];
 
-  // Repeat sequence so that after 23% it immediately repeats with zero blank gap
+  // Repeat sequence so that after the last item it immediately repeats with zero blank gap
   const sequence = [...items, ...items, ...items];
 
   return (

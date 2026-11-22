@@ -14,14 +14,14 @@ export interface InteractiveCandidateShowcaseProps {
   c3?: Candidate;
   c4?: Candidate;
   c5?: Candidate;
+  c6?: Candidate;
 }
 
-export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: InteractiveCandidateShowcaseProps) {
+export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5, c6 }: InteractiveCandidateShowcaseProps) {
   const router = useRouter();
   const { setUnlocked, setUserEmail } = useSite();
   const [gateCandidate, setGateCandidate] = useState<EnrichedCandidate | null>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const rawList = [c1, c2, c3, c4, c5].filter((c): c is Candidate => Boolean(c));
+  const rawList = [c1, c2, c3, c4, c5, c6].filter((c): c is Candidate => Boolean(c));
 
   const titleMap: Record<string, { title: string; scope: string }> = {
     "EP-TX-0412": {
@@ -72,7 +72,7 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
 
   return (
     <div className="cand-gallery-wrap">
-      {/* 3 + 2 Cards Layout: Row 1 has 3 cards (33% each), Row 2 has 2 cards full-width (50% each) */}
+      {/* Desktop: 3 + 3 cards. Phones: first 3 only, no toggle */}
       <div className="cand-gallery-grid">
         {rawList.map((c, idx) => {
           const meta = titleMap[c.id] || {
@@ -81,7 +81,7 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
           };
           const bars = c.bars.length ? c.bars.join(", ") : "Not required";
           const num = String(idx + 1).padStart(2, "0");
-          const isMobileHidden = idx >= 3 && !isExpanded;
+          const isMobileHidden = idx >= 3; // phones show the first 3 only; desktop shows all 6
 
           return (
             <div
@@ -164,37 +164,7 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
       </div>
 
       {/* Mobile Show More / Show Less Toggle (Only visible on mobile <= 900px, hidden on desktop) */}
-      {rawList.length > 3 && (
-        <div className="cand-mobile-show-more-wrap">
-          <button
-            type="button"
-            className="btn-cand-mobile-show-more"
-            onClick={() => setIsExpanded((prev) => !prev)}
-            aria-expanded={isExpanded}
-          >
-            <span>
-              {isExpanded ? "Show fewer candidates" : `Show more candidates (${rawList.length - 3} more)`}
-            </span>
-            <svg
-              viewBox="0 0 16 16"
-              width="14"
-              height="14"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{
-                transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-                transition: "transform 0.2s ease",
-              }}
-              aria-hidden="true"
-            >
-              <path d="M4 6l4 4 4-4" />
-            </svg>
-          </button>
-        </div>
-      )}
+     
 
       {/* Sleek Executive Directory Discovery Strip - Premium Dark Redesign */}
       <div className="showcase-bottom-banner">
@@ -206,10 +176,6 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
             </svg>
           </div>
           <div className="showcase-banner-text">
-            <div className="showcase-banner-eyebrow">
-              <span className="showcase-banner-dot" />
-              <span>TALENT DIRECTORY · 100,000+ PRE-SCREENED PROFILES</span>
-            </div>
             <h4 className="showcase-banner-title">
               Looking for candidates in a different practice area, city, or experience level?
             </h4>
@@ -229,12 +195,6 @@ export function InteractiveCandidateShowcase({ c1, c2, c3, c4, c5 }: Interactive
               <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
             </svg>
           </Link>
-          <span className="showcase-banner-subtext">
-            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-            </svg>
-            <span>Free search · No retainer required</span>
-          </span>
         </div>
       </div>
 

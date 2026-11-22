@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cities, roles, people } from "@/data";
-import { RatingBadge, TrustLine, CalendlyLink } from "./Rating";
+import { RatingBadge, CalendlyLink } from "./Rating";
 import { Chevron, BtnArrow } from "./icons";
 
 const CANDIDATE_PATHS = [
@@ -535,7 +535,7 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
 
           {/* Header CTA for standard pages */}
           {!isHireAttorneys && (
-            <Link className="btn btn-primary btn-sm header-cta" href={cta.href}>
+            <Link className={`btn btn-primary btn-sm header-cta${pathname === "/" ? " header-cta-home" : ""}`} href={cta.href}>
               {cta.label}
             </Link>
           )}
@@ -621,6 +621,54 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
         </div>
 
         <div className="mnav-body">
+          {/* Main CTAs first: large action cards (same two actions as the desktop mega menu aside) */}
+          <div className="mnav-ctas">
+            <Link
+              className="mnav-cta mnav-cta-primary"
+              href={isCandidatePage ? "/upload-resume" : "/find-candidates"}
+              onClick={() => setMobileOpen(false)}
+            >
+              <span className="mnav-cta-text">
+                <span className="mnav-cta-pill">
+                  {isCandidatePage ? "100% FREE · CONFIDENTIAL" : "SCREENED · READY NOW"}
+                </span>
+                <span className="mnav-cta-title">
+                  {isCandidatePage ? "Upload resume" : "See candidates"}
+                </span>
+                <span className="mnav-cta-sub">
+                  {isCandidatePage
+                    ? "See matching roles in seconds, in private."
+                    : "Describe your seat and see matches now."}
+                </span>
+              </span>
+              <span className="mnav-cta-arrow" aria-hidden="true">
+                <BtnArrow />
+              </span>
+            </Link>
+            <Link
+              className="mnav-cta mnav-cta-secondary"
+              href={isCandidatePage ? "/jobs" : "/submit-job"}
+              onClick={() => setMobileOpen(false)}
+            >
+              <span className="mnav-cta-text">
+                <span className="mnav-cta-pill">
+                  {isCandidatePage ? "PAY ON EVERY LISTING" : "FREE JOB POSTING"}
+                </span>
+                <span className="mnav-cta-title">
+                  {isCandidatePage ? "See open jobs" : "Post your job"}
+                </span>
+                <span className="mnav-cta-sub">
+                  {isCandidatePage
+                    ? "Confidential roles with the pay shown."
+                    : "Paste your posting; we check the pay and match."}
+                </span>
+              </span>
+              <span className="mnav-cta-arrow" aria-hidden="true">
+                <BtnArrow />
+              </span>
+            </Link>
+          </div>
+
           {/* Employers Accordion */}
           <div className="acc">
             <button
@@ -632,7 +680,14 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                 setMobileExpanded((prev) => ({ ...prev, emp: !prev.emp }))
               }
             >
-              For employers <Chevron />
+              <span className="acc-text">
+                <span className="acc-pill">HIRING TOOLS</span>
+                <span className="acc-title">For employers</span>
+                <span className="acc-sub">Fees, hiring kits and where to hire from.</span>
+              </span>
+              <span className="acc-circle">
+                <Chevron />
+              </span>
             </button>
             <div className="acc-panel" id="ma-emp" hidden={!mobileExpanded["emp"]}>
               <ul className="mega-list">
@@ -668,30 +723,6 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                     "Posting template, interview questions and a scorecard"
                   )}
                 </li>
-                <li>
-                  {renderLink(
-                    "/where-to-post/houston-tx",
-                    true,
-                    "Where to post a job",
-                    "Job boards compared on cost and time to applicants"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/where-to-hire/houston-tx",
-                    true,
-                    "Where to hire from",
-                    "Law schools, paralegal programmes and bar groups"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/employers",
-                    true,
-                    "Employers overview",
-                    "How Orion works for small and mid-size firms"
-                  )}
-                </li>
               </ul>
             </div>
           </div>
@@ -707,7 +738,14 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                 setMobileExpanded((prev) => ({ ...prev, cand: !prev.cand }))
               }
             >
-              For candidates <Chevron />
+              <span className="acc-text">
+                <span className="acc-pill">FREE · CONFIDENTIAL</span>
+                <span className="acc-title">For candidates</span>
+                <span className="acc-sub">Open jobs, your resume and a salary check.</span>
+              </span>
+              <span className="acc-circle">
+                <Chevron />
+              </span>
             </button>
             <div
               className="acc-panel"
@@ -739,22 +777,6 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                     "Compare your base with your city and level"
                   )}
                 </li>
-                <li>
-                  {renderLink(
-                    "/best-law-firms/houston-tx",
-                    true,
-                    "Best firms to work for",
-                    "Small and mid-size firms that publish their pay"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/candidates",
-                    true,
-                    "Candidates overview",
-                    "Free for candidates and confidential from the first call"
-                  )}
-                </li>
               </ul>
             </div>
           </div>
@@ -770,7 +792,14 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                 setMobileExpanded((prev) => ({ ...prev, sal: !prev.sal }))
               }
             >
-              Salary guides <Chevron />
+              <span className="acc-text">
+                <span className="acc-pill">PAY BENCHMARKS</span>
+                <span className="acc-title">Salary guides</span>
+                <span className="acc-sub">Pay by role and by city, with sources.</span>
+              </span>
+              <span className="acc-circle">
+                <Chevron />
+              </span>
             </button>
             <div className="acc-panel" id="ma-sal" hidden={!mobileExpanded["sal"]}>
               <ul className="mega-list compact">
@@ -802,33 +831,10 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
                   </li>
                 ))}
               </ul>
-              <h3>By city</h3>
-              <ul className="mega-list compact">
-                {cities.map((c) => (
-                  <li key={c.slug}>
-                    {renderLink(
-                      `/locations/${c.stateSlug}/${c.citySlug}#pay`,
-                      !!c.built,
-                      `${c.name}, ${c.state}`,
-                      `What ${c.name} firms pay`
-                    )}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
 
-        <div className="mnav-foot">
-          <Link
-            className="btn btn-primary btn-block"
-            href={cta.href}
-            onClick={() => setMobileOpen(false)}
-          >
-            {cta.label}
-          </Link>
-          <TrustLine kind={isCandidatePage ? "candidate" : "employer"} />
-        </div>
       </div>
       )}
 

@@ -201,19 +201,7 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
       <>
         <footer className="site-footer footer-minimal">
           <div className="wrap">
-            <p>
-              Orion emails come only from{" "}
-              {sendingDomains.map((d, i) => (
-                <React.Fragment key={d}>
-                  {i > 0 && " and "}
-                  <Mark>{d}</Mark>
-                </React.Fragment>
-              ))}
-              . If a message uses another domain, forward it to us before you
-              reply.
-            </p>
             <p className="fm-links">
-              <Link href="/about#email-check">Is this email from Orion?</Link>
               <Link href="/about">About Orion</Link>
               <Link href="/">orionplacement.com</Link>
             </p>
@@ -380,9 +368,6 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
                   <Link href="/about#reviews">Reviews</Link>
                 </li>
                 <li>
-                  <Link href="/about#email-check">Is this email from Orion?</Link>
-                </li>
-                <li>
                   <Link href="/about#contact">Contact</Link>
                 </li>
                 <li>
@@ -393,17 +378,6 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
           </div>
 
           <div className="base">
-            <p className="f-security-note">
-              Orion emails come only from{" "}
-              {sendingDomains.map((d, i) => (
-                <React.Fragment key={d}>
-                  {i > 0 && " and "}
-                  <Mark>{d}</Mark>
-                </React.Fragment>
-              ))}
-              . If a message uses another domain, forward it to us before you
-              reply.
-            </p>
             <div className="f-bottom-row">
               <p className="f-copyright">
                 © 2026 Orion Placement LLC · 510 Southeast 5th Avenue, Unit 1513, Fort Lauderdale, FL 33301. All rights reserved.

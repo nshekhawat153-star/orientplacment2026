@@ -4458,11 +4458,7 @@ a.id:hover {
   cursor: pointer;
 }
 
-/* Row 2: Cards 4 & 5 span 3 each = 50% width each (full-width second row) */
-.cand-gallery-card:nth-child(4),
-.cand-gallery-card:nth-child(5) {
-  grid-column: span 3;
-}
+/* 6 cards on desktop: two rows of 3 (every card spans 2 of the 6 columns) */
 
 .cand-gallery-card:hover {
   transform: translateY(-4px);
@@ -4976,9 +4972,7 @@ article h3 .mark {
     margin-bottom: 16px;
   }
 
-  .cand-gallery-card,
-  .cand-gallery-card:nth-child(4),
-  .cand-gallery-card:nth-child(5) {
+  .cand-gallery-card {
     grid-column: span 1;
     width: 100%;
     max-width: 100%;
@@ -19852,4 +19846,539 @@ footer .stars svg,
   border-radius: 0 !important;
 }
 
+
+
+
+/* Shared highlight strip (same look as hire-attorneys .ha-hl): bold text over a blue band on the lower half of the line */
+.hl-strip {
+  color: #FFFFFF;
+  font-weight: 600;
+  background: linear-gradient(transparent 58%, rgba(96, 165, 250, 0.38) 58%);
+  padding: 0 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+body.clean .faq-sec .mark,
+.faq-sec .mark {
+  color: inherit;
+  font-weight: 600;
+  background: linear-gradient(transparent 58%, rgba(29, 78, 216, 0.18) 58%);
+  border: 0;
+  padding: 0 2px;
+  border-radius: 0;
+}
+
+
+
+/* ============================================================
+   Homepage: ticker lives inside the hero, transparent, pinned low (matches hire-attorneys)
+   ============================================================ */
+.hero-cinematic {
+  position: relative !important;
+  overflow: hidden !important;
+  padding-bottom: 150px !important;
+}
+.hero-cinematic .trust-ticker-strip {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 2 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+@media (max-width: 640px) {
+  .hero-cinematic { padding-bottom: 130px !important; }
+}
+
+/* ============================================================
+   ONE highlight style across the homepage: the background strip (same as hire-attorneys .ha-hl)
+   Dark surface: white bold text on a light-blue band. Light surface: ink bold text on a deep-blue band.
+   ============================================================ */
+.hl-strip,
+.hero-cinematic .hl-strip,
+.reviews-sec .rv-quote-blue,
+.reviews-sec .review blockquote p .rv-quote-blue,
+.terms-sec .mark,
+.terms-sec .tt-v,
+.post-job-band-sec strong,
+.post-job-band-sec b,
+.post-job-band-sec .mark,
+.cand-band-sec strong,
+.cand-band-sec b,
+.cand-band-sec .mark,
+.cta-band strong,
+.cta-band b,
+.promise-text-accent,
+.promise-bar-text strong,
+.resources-text-accent {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  background: linear-gradient(transparent 58%, rgba(96, 165, 250, 0.38) 58%) !important;
+  padding: 0 2px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  text-shadow: none !important;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.rv-quote-blue,
+.founder-check-item strong,
+.faq-sec .mark,
+.faq-body strong,
+.who-we-are-sec .mark,
+.who-we-are-sec .who-lede strong,
+.candidates-sec .who-lede strong,
+.candidates-sec .mark,
+.resources-sec .who-lede strong,
+.resources-sec .mark {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+  background: linear-gradient(transparent 58%, rgba(29, 78, 216, 0.2) 58%) !important;
+  padding: 0 2px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  text-shadow: none !important;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Homepage hero sized exactly like hire-attorneys (.ha-page .ha-hero-sec): full viewport height, 120/150 padding, content centered */
+.hero-cinematic {
+  /* desktop: hero runs ~45px past the fold so only half of the ticker (about 90px tall) shows on first view */
+  min-height: calc(100vh + 45px) !important;
+  min-height: calc(100svh + 45px) !important;
+  padding: 120px 0 150px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 640px) {
+  .hero-cinematic {
+    padding: 96px 0 124px !important;
+    /* phones: ticker is ~76px tall, push it down so only half (~38px) shows on first view */
+    min-height: calc(100vh + 38px) !important;
+    min-height: calc(100svh + 38px) !important;
+  }
+  /* homepage hero button stays as on desktop: same shape, natural width (undo the site-wide pill/full-width) */
+  .hero-cinematic .btn-hero-primary {
+    width: auto !important;
+    padding: 15px 34px !important;
+    font-size: 16px !important;
+    border-radius: 7px !important;
+  }
+}
+
+/* Homepage hero: breathing room above the primary button */
+.hero-cinematic .hero-actions-group .btn-hero-primary {
+  margin-top: 28px !important;
+}
+@media (max-width: 640px) {
+  .hero-cinematic .hero-actions-group { align-items: center !important; }
+  .hero-cinematic .hero-actions-group .btn-hero-primary {
+    margin-top: 28px !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Reviews: highlighted quote text uses the same #e2e8f0 as the rest of the review text, keeping the strip */
+.reviews-sec .rv-quote-blue,
+.reviews-sec .review blockquote p .rv-quote-blue {
+  color: #e2e8f0 !important;
+}
+
+/* ============================================================
+   Homepage hero gradient: visible on every screen size.
+   The shared hero glows are fixed-pixel circles, which shrink to almost nothing on tall/narrow screens
+   (and the phone version was also much fainter). Here the glows scale with the hero and keep desktop strength.
+   ============================================================ */
+.hero-cinematic {
+  background-image:
+    radial-gradient(circle clamp(620px, 48vw, 920px) at 96% 6%, rgba(37, 99, 235, 0.42) 0%, rgba(29, 78, 216, 0.16) 45%, rgba(29, 78, 216, 0) 72%),
+    radial-gradient(circle clamp(560px, 42vw, 820px) at 3% 78%, rgba(96, 165, 250, 0.24) 0%, rgba(47, 98, 184, 0.09) 45%, rgba(47, 98, 184, 0) 72%),
+    linear-gradient(180deg, #0A1A38 0%, #08142A 55%, #050B17 100%) !important;
+}
+@media (max-width: 1023px) {
+  .hero-cinematic {
+    background-image:
+      radial-gradient(ellipse 120% 46% at 100% 0%, rgba(37, 99, 235, 0.42) 0%, rgba(29, 78, 216, 0.16) 45%, rgba(29, 78, 216, 0) 75%),
+      radial-gradient(ellipse 120% 40% at 0% 84%, rgba(96, 165, 250, 0.26) 0%, rgba(47, 98, 184, 0.09) 45%, rgba(47, 98, 184, 0) 75%),
+      linear-gradient(180deg, #0A1A38 0%, #08142A 55%, #050B17 100%) !important;
+  }
+}
+@media (max-width: 640px) {
+  .hero-cinematic {
+    background-image:
+      radial-gradient(ellipse 150% 44% at 100% 0%, rgba(37, 99, 235, 0.6) 0%, rgba(29, 78, 216, 0.26) 45%, rgba(29, 78, 216, 0) 78%),
+      radial-gradient(ellipse 150% 40% at 0% 88%, rgba(96, 165, 250, 0.36) 0%, rgba(47, 98, 184, 0.14) 45%, rgba(47, 98, 184, 0) 78%),
+      linear-gradient(180deg, #0A1A38 0%, #08142A 55%, #050B17 100%) !important;
+  }
+}
+
+/* ============================================================
+   Homepage hero font sizes: taken from hire-attorneys (.ha-hero-eyebrow / .ha-hero-h1 / .ha-hero-lead / CTA)
+   641px and up: eyebrow 11.5, headline clamp(42px, 5vw, 64px), sub clamp(18px, 1.9vw, 21px), button 15.5
+   640px and down: eyebrow 11, headline 50, sub 18, button 17
+   ============================================================ */
+.hero-cinematic .hero-eyebrow-capsule,
+.hero-cinematic .hero-eyebrow-capsule span {
+  font-size: 11.5px !important;
+}
+.hero-cinematic .hero-display-h1 {
+  font-size: clamp(42px, 5vw, 64px) !important;
+}
+.hero-cinematic .hero-lead-p {
+  font-size: clamp(18px, 1.9vw, 21px) !important;
+}
+.hero-cinematic .hero-actions-group .btn-hero-primary {
+  font-size: 15.5px !important;
+}
+@media (max-width: 640px) {
+  .hero-cinematic .hero-eyebrow-capsule,
+  .hero-cinematic .hero-eyebrow-capsule span {
+    font-size: 11px !important;
+  }
+  .hero-cinematic .hero-display-h1 {
+    font-size: 48px !important;
+  }
+  .hero-cinematic .hero-lead-p {
+    font-size: 18px !important;
+  }
+  .hero-cinematic .hero-actions-group .btn-hero-primary {
+    font-size: 17px !important;
+  }
+}
+
+/* Homepage hero spacing between headline, subheadline and button (font sizes above come from hire-attorneys) */
+@media (min-width: 425px) and (max-width: 768px) {
+  .hero-cinematic .hero-display-h1 { line-height: 1.12 !important; margin: 0 0 32px !important; }
+  .hero-cinematic .hero-lead-p { line-height: 1.6 !important; margin: 0 0 24px !important; }
+  .hero-cinematic .hero-actions-group .btn-hero-primary { margin-top: 36px !important; }
+}
+@media (max-width: 424px) {
+  .hero-cinematic .hero-display-h1 { line-height: 1.12 !important; margin: 0 0 28px !important; }
+  .hero-cinematic .hero-lead-p { line-height: 1.6 !important; margin: 0 0 20px !important; }
+  .hero-cinematic .hero-actions-group .btn-hero-primary { margin-top: 32px !important; }
+}
+
+/* Homepage bands: "See candidates" style buttons keep the normal 7px corners on phones (the old site-wide rule made them pills) */
+@media (max-width: 640px) {
+  .post-job-band-sec .btn-hero-primary,
+  .cand-band-sec .btn-hero-primary,
+  .resources-sec .btn-hero-primary {
+    border-radius: 7px !important;
+  }
+}
+
+/* Hero button top margin on phones: tighter (placed last so it wins over the earlier 28/32/36px values) */
+@media (max-width: 640px) {
+  .hero-cinematic .hero-actions-group .btn-hero-primary {
+    margin-top: 16px !important;
+  }
+}
+
+/* Homepage on phones: the header "Find candidates" button is replaced by the sticky bottom bar (HomeStickyBar) */
+@media (max-width: 640px) {
+  .site-header .header-cta.header-cta-home { display: none !important; }
+  /* with the CTA hidden, keep the hamburger at the right end of the header */
+  .site-header .header-cta-home ~ .menu-btn { margin-left: auto !important; }
+}
+
+/* "Book 15 min with Justin" in the post-a-job card: styled as a secondary button */
+.post-job-alt-action { align-items: stretch !important; width: 100% !important; }
+.post-job-alt-action > span:first-child { text-align: center !important; }
+.post-job-card .post-job-call-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  height: 48px !important;
+  padding: 0 22px !important;
+  box-sizing: border-box !important;
+  border-radius: 7px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  color: #FFFFFF !important;
+  font-size: 14.5px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.post-job-card .post-job-call-link:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #FFFFFF !important;
+}
+
+/* ============================================================
+   Phone menu (hamburger drawer): same navy look as the desktop mega menu (#08142A, dark cards),
+   with the two main CTAs on top and the three sections below.
+   ============================================================ */
+.mnav {
+  background: #08142A !important;
+  color: #FFFFFF;
+}
+.mnav-top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.mnav-close {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #FFFFFF !important;
+}
+.mnav-close:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+.mnav-ctas {
+  display: grid;
+  gap: 12px;
+  padding: 16px 0 12px;
+}
+/* Large action cards, modelled on the Swift Painting mobile menu */
+.mnav-cta {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 18px 18px;
+  border-radius: 16px;
+  text-decoration: none !important;
+  text-align: left;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.mnav-cta:active { transform: scale(0.98); }
+.mnav-cta-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+}
+.mnav-cta-pill {
+  display: inline-block;
+  font: 700 10px var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.mnav-cta-title {
+  font: 400 24px/1.15 var(--display);
+}
+.mnav-cta-sub {
+  font: 500 13px/1.35 var(--body);
+}
+.mnav-cta-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.mnav-cta-arrow svg { width: 17px; height: 17px; }
+.mnav-cta-primary {
+  background: #1D4ED8;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.4);
+}
+.mnav-cta-primary:hover { background: #2563EB; }
+.mnav-cta-primary .mnav-cta-pill { background: rgba(255, 255, 255, 0.18); color: #FFFFFF; }
+.mnav-cta-primary .mnav-cta-title { color: #FFFFFF; }
+.mnav-cta-primary .mnav-cta-sub { color: #DBEAFE; }
+.mnav-cta-primary .mnav-cta-arrow { background: #08142A; color: #93C5FD; }
+.mnav-cta-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.mnav-cta-secondary:hover { background: rgba(255, 255, 255, 0.09); border-color: rgba(96, 165, 250, 0.45); }
+.mnav-cta-secondary .mnav-cta-pill { background: rgba(96, 165, 250, 0.15); border: 1px solid rgba(96, 165, 250, 0.3); color: #60A5FA; }
+.mnav-cta-secondary .mnav-cta-title { color: #FFFFFF; }
+.mnav-cta-secondary .mnav-cta-sub { color: #94A3B8; }
+.mnav-cta-secondary .mnav-cta-arrow { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; }
+/* Sections as cards (Swift Painting style): label, serif title, one-line description, round chevron */
+.mnav .acc {
+  background: #0B1B36 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+  margin-top: 12px;
+}
+.mnav .acc-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  width: 100%;
+  min-height: 0 !important;
+  padding: 18px !important;
+  text-align: left !important;
+  color: #FFFFFF !important;
+}
+.mnav .acc-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+}
+.mnav .acc-pill {
+  display: inline-block;
+  font: 700 10px var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(96, 165, 250, 0.15);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  color: #60A5FA;
+}
+.mnav .acc-title {
+  font: 400 24px/1.15 var(--display);
+  color: #FFFFFF;
+}
+.mnav .acc-sub {
+  font: 500 13px/1.35 var(--body);
+  color: #94A3B8;
+}
+.mnav .acc-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+.mnav .acc-btn[aria-expanded=true] .acc-circle {
+  background: #1D4ED8;
+}
+.mnav .acc-btn .chev {
+  width: 14px !important;
+  height: 14px !important;
+  color: currentColor !important;
+}
+
+/* Opened section: ONE list, one row per item (no two-column grid) */
+.mnav .acc-panel {
+  padding: 8px 14px 14px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(2, 17, 36, 0.6);
+}
+.mnav .acc-panel .mega-list,
+.mnav .acc-panel .mega-list.compact {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  grid-template-columns: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.mnav .acc-panel .mega-list > li {
+  width: 100% !important;
+  margin: 0 !important;
+}
+.mnav .acc-panel .mi {
+  position: relative;
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 0 !important;
+  padding: 12px 40px 12px 14px !important;
+  background: #021124 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  transform: none !important;
+}
+.mnav .acc-panel .mi::after {
+  content: "›";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-52%);
+  font-size: 22px;
+  line-height: 1;
+  color: #60A5FA;
+}
+.mnav .acc-panel .mi b {
+  display: block !important;
+  font: 400 16px/1.3 var(--display) !important;
+  color: #FFFFFF !important;
+}
+.mnav .acc-panel .mi b::after {
+  display: none !important;
+}
+.mnav .acc-panel .mi span {
+  display: block !important;
+  margin-top: 3px !important;
+  font-size: 12.5px !important;
+  line-height: 1.4 !important;
+  color: #94A3B8 !important;
+}
+.mnav .acc-panel .mega-list.compact .mi span {
+  display: none !important;
+}
+.mnav .acc-panel .mi:hover,
+.mnav .acc-panel .mi:active {
+  background: #031d3d !important;
+  border-color: #60A5FA !important;
+  transform: none !important;
+}
+.mnav .acc-panel .mi:hover b {
+  color: #60A5FA !important;
+}
+.mnav .acc-panel .mi-feature {
+  margin: 0 !important;
+}
+.mnav .acc-panel .mi-feature .eyebrow,
+.mnav .acc-panel .mega-feature-cta {
+  color: #60A5FA !important;
+}
+.mnav .acc-panel h3 {
+  color: #94A3B8 !important;
+  padding: 14px 2px 8px !important;
+}
+.mnav-foot {
+  background: #08142A !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.mnav-foot .trust-line,
+.mnav-foot .trust-line span {
+  color: #94A3B8 !important;
+}
+.mnav-foot .trust-line b {
+  color: #FFFFFF !important;
+}
+/* the homepage sticky CTA bar must not cover the open menu */
+html.mnav-open .home-sticky-bar,
+body.mnav-open .home-sticky-bar {
+  display: none !important;
+}
+
+/* Shorter phones (e.g. 667px tall): tighten the cards so both CTAs and all three sections are visible without scrolling */
+@media (max-height: 740px) {
+  .mnav-ctas { gap: 10px; padding: 12px 0 6px; }
+  .mnav-cta { padding: 14px !important; }
+  .mnav-cta-title { font-size: 22px; }
+  .mnav .acc { margin-top: 10px; }
+  .mnav .acc-btn { padding: 14px !important; }
+  .mnav .acc-title { font-size: 22px; }
+}
+
+@media (max-height: 700px) {
+  .mnav-cta-text, .mnav .acc-text { gap: 4px; }
+  .mnav-cta, .mnav .acc-btn { padding: 12px 14px !important; }
+  .mnav-cta-title, .mnav .acc-title { font-size: 21px; }
+  .mnav-cta-arrow, .mnav .acc-circle { width: 34px; height: 34px; }
+  .mnav-body { padding-top: 0 !important; padding-bottom: 12px !important; }
+}
 

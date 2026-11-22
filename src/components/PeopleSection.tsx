@@ -21,12 +21,6 @@ export function PersonCard({ pid }: { pid: "justin" | "jon"; row?: boolean }) {
           height={400}
           priority={false}
         />
-        <div className="founder-photo-verified-badge" title="Founding Partner Verified">
-          <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true">
-            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z" />
-          </svg>
-          <span>Verified Partner</span>
-        </div>
       </div>
     </div>
   );
@@ -116,11 +110,9 @@ export function PersonCard({ pid }: { pid: "justin" | "jon"; row?: boolean }) {
 
       {/* Card Action Footer */}
       <div className="founder-footer">
-        {isJustin ? (
+        {isJustin && (
           <>
             <div className="founder-footer-meta">
-              <span className="status-ping-dot" />
-              <span>Intake calendar open</span>
             </div>
             <a
               href={p.calendly || trust.calendly}
@@ -138,21 +130,7 @@ export function PersonCard({ pid }: { pid: "justin" | "jon"; row?: boolean }) {
               <span className="founder-btn-arrow" aria-hidden="true">→</span>
             </a>
           </>
-        ) : (
-          <>
-            <div className="founder-footer-meta">
-              <span className="founder-stars" aria-hidden="true">★★★★★</span>
-              <span><strong>5.0</strong> on Google</span>
-            </div>
-            <a
-              href="#reviews"
-              className="btn-founder-cta btn-founder-secondary"
-            >
-              <span>Read Jon&apos;s reviews ({trust.jonNamed})</span>
-              <span className="founder-btn-arrow" aria-hidden="true">→</span>
-            </a>
-          </>
-        )}
+        ) }
       </div>
     </div>
   );
@@ -194,7 +172,7 @@ export function PeopleSection() {
           <div className="promise-bar-left">
             <div className="promise-bar-tag">
               <span className="promise-tag-dot" />
-              <span>DIRECT PARTNER ACCESS — NO JUNIOR RECRUITERS</span>
+              <span>DIRECT PARTNER ACCESS</span>
             </div>
             <p className="promise-bar-text">
               When you work with Orion, your search is run <strong>directly by Justin and Jon</strong>.
@@ -208,12 +186,6 @@ export function PeopleSection() {
             <span>Submit your open role</span>
             <span className="promise-btn-arrow" aria-hidden="true">→</span>
           </Link>
-          <span className="promise-subtext">
-            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-            </svg>
-            <span>Direct partner intake · 100% Confidential</span>
-          </span>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { TrustBar, TrustTicker, RatingBadge, CalendlyLink } from "@/components/Rating";
+import { TrustBar, TrustTicker, RatingBadge } from "@/components/Rating";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { TermsTiles } from "@/components/TermsTiles";
 import { CandidateCard } from "@/components/CandidateCard";
@@ -14,6 +14,7 @@ import { PeopleSection } from "@/components/PeopleSection";
 import { ResourceCards } from "@/components/ResourceCards";
 import { CtaBand } from "@/components/CtaBand";
 import { Mark } from "@/components/Mark";
+import { HomeStickyBar } from "@/components/HomeStickyBar";
 import { Icon, AwardIcon } from "@/components/icons";
 import { findCandidate, orionLine, trust } from "@/data";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
@@ -33,6 +34,7 @@ export default function HomePage() {
   const c3 = findCandidate("RE-TX-0274");
   const c4 = findCandidate("LIT-TX-0422");
   const c5 = findCandidate("EP-TX-0451");
+  const c6 = findCandidate("PL-TX-0611");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -82,26 +84,25 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ScrollRevealProvider />
+      <HomeStickyBar />
         {/* 1. CINEMATIC WATER SPLASH HERO */}
         <section className="hero-cinematic" aria-labelledby="h1">
           <div className="wrap hero-content-wrap">
             <div className="hero-content-center">
               <div className="hero-eyebrow-capsule">
                 <span className="hero-eyebrow-dot" aria-hidden="true" />
-                <span>RUN BY JUSTIN SOFMAN &amp; JON MISSIRLIAN<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />PAY ONLY IF YOU HIRE</span>
+                <span>ATTORNEY &amp; PARALEGAL RECRUITING</span>
               </div>
 
               <h1 id="h1" className="hero-display-h1">
-                Two legal recruiters, one fee only if you{" "}
-                <span className="hero-accent-serif" style={{ color: "#60A5FA" }}>hire.</span>
+                Find the right legal hire without the guesswork or the{" "}
+                <span className="hero-accent-serif" style={{ color: "#60A5FA" }}>upfront cost.</span>
               </h1>
 
               <p className="hero-lead-p">
-                Direct-hire attorneys and paralegals for small and mid-size law firms, sent straight to your inbox.{" "}
-                <span style={{ color: "#93C5FD", fontWeight: 500 }}>
-                  Non-exclusive, 23% contingency, 90-day replacement guarantee.
-                </span>{" "}
-                You only pay when you hire.
+                We work with no retainers and no exclusivity.{" "}
+                <b className="hl-strip">You pay only if you hire</b>, and every placement carries a{" "}
+                <b className="hl-strip">90-day replacement guarantee.</b>
               </p>
 
               <div className="hero-actions-group">
@@ -114,25 +115,14 @@ export default function HomePage() {
                     <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
                   </svg>
                 </Link>
-                <CalendlyLink
-                  label="Book 15 minutes with Justin"
-                  className="btn-hero-secondary"
-                />
-              </div>
-
-              <div className="hero-subline">
-                Looking for a role?{" "}
-                <Link className="hero-subline-link" href="/jobs">
-                  See open jobs →
-                </Link>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* 2. Static proof row: 4 verifiable facts */}
-        <section className="trust-ticker-strip" aria-label="Orion verified numbers">
-          <TrustTicker />
+          {/* Static proof row: part of the hero, shares its background (same as hire-attorneys) */}
+          <div className="trust-ticker-strip" aria-label="Orion verified numbers">
+            <TrustTicker />
+          </div>
         </section>
 
         {/* 3. Who we are — moved up so visitors meet Justin & Jon early */}
@@ -143,11 +133,11 @@ export default function HomePage() {
               <div className="who-head-col who-head-col-left">
                 <div className="badge-capsule">
                   <span className="badge-dot" />
-                  WHO WE ARE · DIRECT FOUNDER SEARCH
+                  WHO WE ARE
                 </div>
                 <h2 className="sec-title-lg">
-                  Two recruiters you can call by{" "}
-                  <span className="serif-accent">name</span>
+                  Two recruiters you can call{" "}
+                  <span className="serif-accent">by name.</span>
                 </h2>
                 <div className="who-head-rating">
                   <RatingBadge size="lg" />
@@ -162,15 +152,6 @@ export default function HomePage() {
                 <p className="who-lede" id="orion-line">
                   {orionLine}
                 </p>
-                <p className="who-lede" style={{ marginTop: "8px", fontSize: "0.92em", color: "#93C5FD" }}>
-                  <strong>Is this email from Orion?</strong> Every Orion email comes from <strong>@orionplacement.com</strong> — if the domain doesn&apos;t match, it&apos;s not us.
-                </p>
-                <div className="who-head-jon-trust">
-                  <span className="jon-trust-pill">
-                    <AwardIcon />
-                    Jon is named in <b>47 of our 60</b> Google reviews
-                  </span>
-                </div>
               </div>
             </div>
 
@@ -198,7 +179,7 @@ export default function HomePage() {
               </div>
               <h2 className="sec-title-lg">
                 What firms and candidates{" "}
-                <span className="serif-accent">say</span>
+                <span className="serif-accent">say.</span>
               </h2>
               <div className="reviews-rating-pill">
                 <RatingBadge link />
@@ -247,7 +228,7 @@ export default function HomePage() {
             </div>
 
             {/* Candidate Showcase: 3 in Row 1, 2 in Row 2 (Centered) + Bottom Banner */}
-            <InteractiveCandidateShowcase c1={c1} c2={c2} c3={c3} c4={c4} c5={c5} />
+            <InteractiveCandidateShowcase c1={c1} c2={c2} c3={c3} c4={c4} c5={c5} c6={c6} />
           </div>
         </section>
 
@@ -257,7 +238,7 @@ export default function HomePage() {
             <div className="terms-head">
               <div className="terms-eyebrow">
                 <span className="terms-eyebrow-dot" />
-                <span>WHAT IT COSTS · TRANSPARENT TERMS</span>
+                <span>WHAT IT COSTS</span>
               </div>
               <h2 id="terms-h2" className="terms-h2">
                 One fee, and only if you <span className="serif-accent">hire.</span>
@@ -269,17 +250,14 @@ export default function HomePage() {
 
             {/* 4 Executive Terms Pillars */}
             <div className="terms-pillars-grid">
-              {/* Pillar 01: 23% Fee */}
+              {/* Pillar 01: Turnaround */}
               <div className="terms-pillar">
-                <div className="pillar-kicker">01 · CONTINGENCY</div>
-                <div className="pillar-val">23%</div>
-                <div className="pillar-label">Fee</div>
+                <div className="pillar-kicker">01 · TURNAROUND</div>
+                <div className="pillar-val">1 Week</div>
+                <div className="pillar-label">To a shortlist</div>
                 <p className="pillar-desc">
-                  Of candidate&apos;s compensation, only if you hire someone we introduced.
+                  Screened candidates in your inbox, with a 1-on-1 vetting interview behind every one.
                 </p>
-                <div className="pillar-badge">
-                  <span>Contingency Only</span>
-                </div>
               </div>
 
               {/* Pillar 02: 90 Days */}
@@ -290,9 +268,6 @@ export default function HomePage() {
                 <p className="pillar-desc">
                   If the hire leaves in that time, we replace them at no extra charge.
                 </p>
-                <div className="pillar-badge">
-                  <span>100% Free Replacement</span>
-                </div>
               </div>
 
               {/* Pillar 03: $0 Upfront */}
@@ -303,9 +278,6 @@ export default function HomePage() {
                 <p className="pillar-desc">
                   No retainer and no exclusivity. Keep your other recruiters.
                 </p>
-                <div className="pillar-badge">
-                  <span>Non-Exclusive</span>
-                </div>
               </div>
 
               {/* Pillar 04: Net 15 */}
@@ -316,9 +288,6 @@ export default function HomePage() {
                 <p className="pillar-desc">
                   Invoice when the hire starts, due in 15 days.
                 </p>
-                <div className="pillar-badge">
-                  <span>Start Date Invoice</span>
-                </div>
               </div>
             </div>
 
@@ -372,10 +341,10 @@ export default function HomePage() {
             <div className="sec-head-premium sec-head-left faq-head-col">
               <div className="badge-capsule">
                 <span className="badge-dot" />
-                QUESTIONS &amp; ANSWERS · ZERO OBLIGATION
+                QUESTIONS &amp; ANSWERS
               </div>
               <h2 className="sec-title-lg">
-                What firms ask <span className="serif-accent">first</span>
+                What firms ask <span className="serif-accent">first.</span>
               </h2>
               <p className="who-lede">
                 Simple terms, 90-day replacement guarantee, zero retainers. Explore our complete fee schedule or speak with a founder.
@@ -385,15 +354,11 @@ export default function HomePage() {
                   Have a specific placement scenario or practice area in mind?
                 </p>
                 <div className="faq-side-actions">
-                  <Link href="/fees" className="btn-faq-fees">
-                    <span>Fee schedule &amp; terms</span>
-                    <span className="faq-arrow" aria-hidden="true">→</span>
-                  </Link>
                   <a
                     href={trust.calendly}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="faq-cal-pill"
+                    className="btn-faq-fees"
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -414,10 +379,6 @@ export default function HomePage() {
                     <span>Book 15 min with Justin</span>
                   </a>
                 </div>
-                <div className="faq-side-reassurance">
-                  <span className="reassurance-check" aria-hidden="true">✓</span>
-                  <span>Direct founder accountability on every search</span>
-                </div>
               </div>
             </div>
             <div className="faq">
@@ -428,10 +389,10 @@ export default function HomePage() {
                 </summary>
                 <div className="faq-body">
                   <p>
-                    <Mark>23% of the candidate&apos;s compensation</Mark>,
+                    A <Mark>contingency fee, only if you hire</Mark>,
                     invoiced <Mark>on their first day and due in 15 days</Mark>.
                     Nothing upfront and nothing if you do not hire. Non-exclusive
-                    contingency agreement.
+                    agreement.
                   </p>
                 </div>
               </details>
@@ -515,8 +476,8 @@ export default function HomePage() {
                   EMPLOYER PORTAL · FREE JOB POSTING
                 </div>
                 <h2 className="post-job-title">
-                  Post your open seat today,{" "}
-                  <span className="serif-accent">free</span>
+                  Post your open seat{" "}
+                  <span className="serif-accent">today, free.</span>
                 </h2>
                 <p className="post-job-lede">
                   Attorneys, paralegals and legal assistants across the US.
@@ -550,7 +511,7 @@ export default function HomePage() {
                     href="/find-candidates"
                     style={{ width: "100%", justifyContent: "center" }}
                   >
-                    <span>1. See candidates for my seat</span>
+                    <span>1. See candidates</span>
                     <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
                       <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
                     </svg>
@@ -592,12 +553,12 @@ export default function HomePage() {
             <div className="sec-head-premium">
               <div className="badge-capsule">
                 <span className="badge-dot" />
-                <span className="eyebrow-text-desktop">FREE HIRING TOOLS · SELF-SERVE RESOURCES</span>
-                <span className="eyebrow-text-mobile">FREE HIRING TOOLS · SELF-SERVE</span>
+                <span className="eyebrow-text-desktop">FREE HIRING TOOLS</span>
+                <span className="eyebrow-text-mobile">FREE HIRING TOOLS</span>
               </div>
               <h2 className="sec-title-lg">
                 Run the hire with or without{" "}
-                <span className="serif-accent">us</span>
+                <span className="serif-accent">us.</span>
               </h2>
               <p className="who-lede">
                 Verified pay data, attorney hiring kits, and recruiting directories.
@@ -632,12 +593,6 @@ export default function HomePage() {
                   <span>Explore salary directory</span>
                   <span className="resources-btn-arrow" aria-hidden="true">→</span>
                 </Link>
-                <span className="resources-subtext">
-                  <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-                  </svg>
-                  <span>100% Public Access · Instant Download</span>
-                </span>
               </div>
             </div>
           </div>
@@ -668,8 +623,8 @@ export default function HomePage() {
                   CANDIDATE PORTAL · 100% CONFIDENTIAL
                 </div>
                 <h2 className="cand-band-title">
-                  Confidential roles with the pay{" "}
-                  <span className="serif-accent">shown</span>
+                  Confidential roles with the{" "}
+                  <span className="serif-accent">pay shown.</span>
                 </h2>
                 <p className="cand-band-lede">
                   Direct lateral opportunities at leading boutique and mid-size law firms.
@@ -694,7 +649,6 @@ export default function HomePage() {
               <div className="cand-band-card">
                 <div className="cand-band-card-top">
                   <span className="cand-portal-badge">ACTIVE CAREER PORTAL</span>
-                  <span className="cand-time-badge">Free for Candidates</span>
                 </div>
                 <Link
                   className="btn-cand-submit"

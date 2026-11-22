@@ -19,14 +19,6 @@ import { WorkEmailGateModal } from "./components/WorkEmailGateModal";
 import { TermsSignatureModal } from "./components/TermsSignatureModal";
 import { ToastNotification } from "./components/ToastNotification";
 
-const STEPS = [
-  "Describe the seat",
-  "Candidates",
-  "Full resume",
-  "Terms",
-  "Interview",
-];
-
 export function FindCandidatesClient() {
   // Current view mode: "stream" (browsing candidate list) | "profile" (inspecting one candidate dossier)
   const [viewMode, setViewMode] = useState<"stream" | "profile">("stream");
@@ -178,15 +170,6 @@ export function FindCandidatesClient() {
     }
   };
 
-  // Stepper active step calculation
-  const currentStepIndex = useMemo(() => {
-    if (termsModal.open) return 3; // "Terms"
-    if (viewMode === "profile") {
-      return signedCandidateId === activeCandidate?.id ? 4 : 2; // "Interview" or "Full resume"
-    }
-    return promptText.trim() ? 1 : 0; // "Candidates" or "Describe the seat"
-  }, [termsModal.open, viewMode, signedCandidateId, activeCandidate?.id, promptText]);
-
   return (
     <div style={{ background: "#08142A", minHeight: "100vh", color: "#08142A" }}>
       {/* 1. LUXURY HERO WITH VIDEO BACKGROUND & THE SMART ASK BOX */}
@@ -195,39 +178,6 @@ export function FindCandidatesClient() {
         isReading={isReading}
         onSubmitPrompt={handleSubmitPrompt}
       />
-
-      {/* 2. PROGRESS STEPPER RAIL */}
-      <div
-        className="fc-stepper-wrap"
-        style={{
-          background: "#FFFFFF",
-          borderBottom: "1.5px solid #E2E8F0",
-          position: "sticky",
-          top: 68,
-          zIndex: 25,
-          boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
-        }}
-      >
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <ol className="fc-steps" aria-label="Candidate Search Progress">
-            {STEPS.map((stepName, idx) => {
-              const isDone = idx < currentStepIndex;
-              const isOn = idx === currentStepIndex;
-              return (
-                <li
-                  key={stepName}
-                  className={`${isDone ? "done" : ""} ${isOn ? "on" : ""}`}
-                  aria-current={isOn ? "step" : undefined}
-                >
-                  <span style={{ opacity: isOn || isDone ? 1 : 0.6 }}>
-                    {idx + 1}. {stepName}
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
-      </div>
 
       {/* 3. MAIN CANDIDATES STREAM OR FULL PROFILE DOSSIER */}
       <div id="results" style={{ background: "#FAF9F5", borderBottom: "1px solid #E2E8F0", position: "relative", zIndex: 1 }}>

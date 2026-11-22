@@ -220,7 +220,7 @@ export function SearchProtocolInteractive() {
         /* ─── Step Card ─── */
         .sp-step {
           position: relative;
-          padding: 0 20px;
+          padding: 0 10px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -249,7 +249,7 @@ export function SearchProtocolInteractive() {
           flex-shrink: 0;
           position: relative;
           z-index: 2;
-          margin-bottom: 28px;
+          margin-bottom: 20px;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
         }
@@ -460,7 +460,7 @@ export function SearchProtocolInteractive() {
 
           .sp-node {
             margin-bottom: 0;
-            margin-right: 20px;
+            margin-right: -20px; /* node is shifted -32px with left, so this leaves a 12px gap to the card */
             flex-shrink: 0;
             position: relative;
             left: -32px;
@@ -493,6 +493,7 @@ export function SearchProtocolInteractive() {
             width: 36px;
             height: 36px;
             left: -28px;
+            margin-right: -16px; /* 12px gap to the card (node shifted -28px) */
           }
 
           .sp-title {
