@@ -4,10 +4,9 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { orionLine, sendingDomains, cities, roles } from "@/data";
+import { orionLine, cities, roles } from "@/data";
 import { RatingBadge, CalendlyLink } from "./Rating";
 import { GMark } from "./icons";
-import { Mark } from "./Mark";
 
 const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is built.";
 

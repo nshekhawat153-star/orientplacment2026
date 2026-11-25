@@ -1,23 +1,17 @@
  import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { TrustBar, TrustTicker, RatingBadge } from "@/components/Rating";
-import { ProcessSteps } from "@/components/ProcessSteps";
-import { TermsTiles } from "@/components/TermsTiles";
-import { CandidateCard } from "@/components/CandidateCard";
+import { TrustTicker, RatingBadge } from "@/components/Rating";
 import { InteractiveCandidateShowcase } from "@/components/InteractiveCandidateShowcase";
 import { ReviewsSection } from "@/components/ReviewCard";
 import { SearchProtocolInteractive } from "@/components/SearchProtocolInteractive";
 import { PeopleSection } from "@/components/PeopleSection";
 import { ResourceCards } from "@/components/ResourceCards";
-import { CtaBand } from "@/components/CtaBand";
 import { Mark } from "@/components/Mark";
 import { HomeStickyBar } from "@/components/HomeStickyBar";
-import { Icon, AwardIcon } from "@/components/icons";
 import { findCandidate, orionLine, trust } from "@/data";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
+import { LazyVideo } from "@/components/LazyVideo";
 
 export const metadata: Metadata = {
   title: "Legal recruiters for small and mid-size law firms | Orion",
@@ -454,16 +448,13 @@ export default function HomePage() {
         <section className="block flush post-job-band-sec" id="post-a-job">
           {/* Background Water Splash Video Backdrop */}
           <div className="post-job-video-backdrop" aria-hidden="true">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
+            <LazyVideo
               className="post-job-video-el"
-            >
-              <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-              <source src="/media/splash.mp4" type="video/mp4" />
-            </video>
+              sources={[
+                { src: "/videos/hero-water-splash.mp4", type: "video/mp4" },
+                { src: "/media/splash.mp4", type: "video/mp4" },
+              ]}
+            />
             <div className="post-job-video-gradient" />
             <div className="post-job-video-radial-aura" />
           </div>
@@ -601,16 +592,13 @@ export default function HomePage() {
         {/* 11. For candidates — slim band, just above footer */}
         <section className="block flush cand-band-sec" id="for-candidates">
           <div className="cand-band-video-backdrop" aria-hidden="true">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
+            <LazyVideo
               className="cand-band-video-el"
-            >
-              <source src="/videos/hero-water-splash.mp4" type="video/mp4" />
-              <source src="/media/splash.mp4" type="video/mp4" />
-            </video>
+              sources={[
+                { src: "/videos/hero-water-splash.mp4", type: "video/mp4" },
+                { src: "/media/splash.mp4", type: "video/mp4" },
+              ]}
+            />
             <div className="cand-band-video-gradient" />
             <div className="cand-band-video-radial-aura" />
           </div>

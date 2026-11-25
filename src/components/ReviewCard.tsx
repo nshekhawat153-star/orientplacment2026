@@ -125,7 +125,6 @@ export function ReviewsSection({
   kind?: "employer" | "candidate" | "mixed";
   limit?: number;
 }) {
-  const { reviews } = require("@/data");
   let list: Review[] = [];
 
   if (kind === "employer") {
