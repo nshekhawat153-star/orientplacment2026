@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef, useCallback, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import "./find-candidates.css";
 
 import {
@@ -19,7 +20,27 @@ import { WorkEmailGateModal } from "./components/WorkEmailGateModal";
 import { TermsSignatureModal } from "./components/TermsSignatureModal";
 import { ToastNotification } from "./components/ToastNotification";
 
+// Reads the deep link from the homepage hero search (/find-candidates?q=<seat>&c=<candidate id>).
+// Kept in its own Suspense boundary so the rest of the page still prerenders as static HTML.
+function DeepLinkRunner({ onQuery }: { onQuery: (q: string, c: string | null) => void }) {
+  const searchParams = useSearchParams();
+  const done = useRef(false);
+  useEffect(() => {
+    if (done.current) return;
+    const q = searchParams.get("q")?.trim();
+    if (!q) return;
+    done.current = true;
+    onQuery(q, searchParams.get("c")?.trim() || null);
+  }, [searchParams, onQuery]);
+  return null;
+}
+
 export function FindCandidatesClient() {
+  // Candidate to open straight away when arriving from a homepage preview card
+  const pendingOpenId = useRef<string | null>(null);
+  // Remounts the hero ask box so it shows the query that came in through the URL
+  const [heroKey, setHeroKey] = useState(0);
+
   // Current view mode: "stream" (browsing candidate list) | "profile" (inspecting one candidate dossier)
   const [viewMode, setViewMode] = useState<"stream" | "profile">("stream");
 
@@ -94,12 +115,28 @@ export function FindCandidatesClient() {
       }
       setViewMode("stream");
 
+      // Opened from a homepage preview card: go straight to that dossier
+      if (pendingOpenId.current) {
+        const openId = pendingOpenId.current;
+        pendingOpenId.current = null;
+        if (allEnrichedCandidates.some((c) => c.id === openId)) {
+          setActiveCandidateId(openId);
+          setViewMode("profile");
+        }
+      }
+
       const resultsEl = document.getElementById("results");
       if (resultsEl) {
         resultsEl.scrollIntoView({ behavior: "smooth" });
       }
     }, isUrl ? 1100 : 650);
   };
+
+  const handleDeepLink = useCallback((q: string, c: string | null) => {
+    pendingOpenId.current = c;
+    setHeroKey((k) => k + 1);
+    handleSubmitPrompt(q);
+  }, []);
 
   // Match results
   const matchResults = useMemo(() => {
@@ -173,7 +210,12 @@ export function FindCandidatesClient() {
   return (
     <div style={{ background: "#08142A", minHeight: "100vh", color: "#08142A" }}>
       {/* 1. LUXURY HERO WITH VIDEO BACKGROUND & THE SMART ASK BOX */}
+      <Suspense fallback={null}>
+        <DeepLinkRunner onQuery={handleDeepLink} />
+      </Suspense>
+
       <HeroLuxuryAskSection
+        key={heroKey}
         initialText={promptText}
         isReading={isReading}
         onSubmitPrompt={handleSubmitPrompt}

@@ -12,6 +12,7 @@ import { HomeStickyBar } from "@/components/HomeStickyBar";
 import { findCandidate, orionLine, trust } from "@/data";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 import { LazyVideo } from "@/components/LazyVideo";
+import { HomeHeroSearch } from "@/components/HomeHeroSearch";
 
 export const metadata: Metadata = {
   title: "Legal recruiters for small and mid-size law firms | Orion",
@@ -79,38 +80,10 @@ export default function HomePage() {
       />
       <ScrollRevealProvider />
       <HomeStickyBar />
-        {/* 1. CINEMATIC WATER SPLASH HERO */}
+        {/* 1. HERO: describe the seat, see who fits (HomeHeroSearch) */}
         <section className="hero-cinematic" aria-labelledby="h1">
-          <div className="wrap hero-content-wrap">
-            <div className="hero-content-center">
-              <div className="hero-eyebrow-capsule">
-                <span className="hero-eyebrow-dot" aria-hidden="true" />
-                <span>ATTORNEY &amp; PARALEGAL RECRUITING</span>
-              </div>
-
-              <h1 id="h1" className="hero-display-h1">
-                Find the right legal hire without the guesswork or the{" "}
-                <span className="hero-accent-serif" style={{ color: "#60A5FA" }}>upfront cost.</span>
-              </h1>
-
-              <p className="hero-lead-p">
-                We work with no retainers and no exclusivity.{" "}
-                <b className="hl-strip">You pay only if you hire</b>, and every placement carries a{" "}
-                <b className="hl-strip">90-day replacement guarantee.</b>
-              </p>
-
-              <div className="hero-actions-group">
-                <Link
-                  className="btn-hero-primary"
-                  href="/find-candidates"
-                >
-                  <span>See candidates for my seat</span>
-                  <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                    <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
+          <div className="hero-content-wrap">
+            <HomeHeroSearch />
           </div>
 
           {/* Static proof row: part of the hero, shares its background (same as hire-attorneys) */}

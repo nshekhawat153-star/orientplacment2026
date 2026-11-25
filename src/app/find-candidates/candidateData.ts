@@ -166,15 +166,16 @@ export function parseSeatInput(text: string): ParsedSeat {
 
   // Role detection
   if (/paralegal|legal assistant/i.test(lower)) {
-    seat.role = "estate-planning-paralegal";
+    seat.role = /litigat|trial|discovery/i.test(lower) ? "litigation-paralegal" : "estate-planning-paralegal";
+  } else if (/real estate|condo|property/i.test(lower)) {
+    // Checked before "estate" so "real estate attorney" is not read as estate planning
+    seat.role = "real-estate-attorney";
   } else if (/estate|trust|probate|wills?\b/i.test(lower)) {
     seat.role = "estate-planning-attorney";
   } else if (/personal injury|\bp\.?i\.?\b|plaintiff/i.test(lower)) {
-    seat.role = "litigation-attorney";
+    seat.role = "personal-injury-attorney";
   } else if (/litigat|trial/i.test(lower)) {
     seat.role = "litigation-attorney";
-  } else if (/real estate|condo|property/i.test(lower)) {
-    seat.role = "real-estate-attorney";
   } else {
     // Try matching any known role slug or name
     for (const r of roles) {
@@ -250,9 +251,13 @@ export function matchEnrichedCandidates(seat: ParsedSeat): CandidateMatchResult[
       // Role match
       if (seat.role && c.role !== seat.role) {
         // Also permit general litigation fallback
-        if (
-          !(seat.role.includes("litigation") && c.role.includes("litigation"))
-        ) {
+        // Litigation attorney searches also include commercial litigation attorneys (not paralegals)
+        const bothLitigationAttorneys =
+          seat.role.includes("litigation") &&
+          c.role.includes("litigation") &&
+          seat.role.endsWith("-attorney") &&
+          c.role.endsWith("-attorney");
+        if (!bothLitigationAttorneys) {
           return false;
         }
       }
