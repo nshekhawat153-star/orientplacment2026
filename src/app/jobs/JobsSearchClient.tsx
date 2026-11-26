@@ -1,354 +1,421 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { jobs, Job, findCity, findRole, fmt } from "@/data";
-import { IndeedTopSearchBar } from "@/components/IndeedTopSearchBar";
-import { FilterChipsBar, FilterChipsState } from "@/components/FilterChipsBar";
-import { JobCard } from "@/components/JobCard";
-import { JobDetailPane } from "@/components/JobDetailPane";
-import { Mark } from "@/components/Mark";
+import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import "./jobs-redesign.css";
+import { jobs, Job, cities, trust } from "@/data";
+import { JobListCard } from "./components/JobListCard";
+import { JobSeatPane } from "./components/JobSeatPane";
+import { EXP_FILTERS, ExpFilter, matchesExp, matchesLocation, matchesQuery } from "./components/jobUtils";
+
+const PAGE = 10;
+
+type ModeFilter = "all" | "on-site" | "hybrid";
+type SortBy = "relevance" | "date" | "pay";
+
+// Markets that actually have open seats, with counts (for the quick chips)
+const MARKETS = cities
+  .map((c) => ({ name: c.name, n: jobs.filter((j) => j.city === c.slug).length }))
+  .filter((m) => m.n > 0);
+
+const POPULAR = ["Estate planning", "Litigation", "Real estate", "Paralegal"];
+
+const Caret = () => (
+  <svg className="jb-caret" viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="2.5 4.5 6 8 9.5 4.5" />
+  </svg>
+);
+
+const Check = () => (
+  <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+  </svg>
+);
+
+// Reads ?q= &l= &job= in its own Suspense boundary so the page itself prerenders as static HTML.
+function ParamsReader({ onParams }: { onParams: (q: string, l: string, job: string | null) => void }) {
+  const sp = useSearchParams();
+  useEffect(() => {
+    onParams(sp.get("q") || "", sp.get("l") || "", sp.get("job"));
+  }, [sp, onParams]);
+  return null;
+}
 
 export function JobsSearchClient() {
-  const searchParams = useSearchParams();
   const router = useRouter();
 
-  const queryParam = searchParams.get("q") || "";
-  const locationParam = searchParams.get("l") || "";
+  const [query, setQuery] = useState("");
+  const [location, setLocation] = useState("");
+  const [qInput, setQInput] = useState("");
+  const [lInput, setLInput] = useState("");
 
-  const [searchQuery, setSearchQuery] = useState(queryParam);
-  const [searchLocation, setSearchLocation] = useState(locationParam);
-  const [sortBy, setSortBy] = useState<"relevance" | "date">("relevance");
+  const [mode, setMode] = useState<ModeFilter>("all");
+  const [minPay, setMinPay] = useState<number | null>(null);
+  const [exp, setExp] = useState<ExpFilter>("any");
+  const [sortBy, setSortBy] = useState<SortBy>("relevance");
+  const [visible, setVisible] = useState(PAGE);
 
-  const [filters, setFilters] = useState<FilterChipsState>({
-    mode: "all",
-    minPay: null,
-    experience: "any",
-  });
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
 
-  const [activeJobId, setActiveJobId] = useState<string | null>(null);
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const onParams = useCallback((q: string, l: string, job: string | null) => {
+    setQuery(q);
+    setLocation(l);
+    setQInput(q);
+    setLInput(l);
+    setVisible(PAGE);
+    if (job && jobs.some((j) => j.id === job)) setActiveId(job);
+  }, []);
 
-  useEffect(() => {
-    setSearchQuery(queryParam);
-    setSearchLocation(locationParam);
-  }, [queryParam, locationParam]);
-
-  const handleSearch = (q: string, l: string) => {
-    setSearchQuery(q);
-    setSearchLocation(l);
-    const params = new URLSearchParams();
-    if (q) params.set("q", q);
-    if (l) params.set("l", l);
-    const qs = params.toString();
+  const pushSearch = (q: string, l: string) => {
+    setQuery(q);
+    setLocation(l);
+    setQInput(q);
+    setLInput(l);
+    setVisible(PAGE);
+    const p = new URLSearchParams();
+    if (q) p.set("q", q);
+    if (l) p.set("l", l);
+    const qs = p.toString();
     router.push(qs ? `/jobs?${qs}` : "/jobs", { scroll: false });
   };
 
-  const handleClearAllSearch = () => {
-    setSearchQuery("");
-    setSearchLocation("");
-    router.push("/jobs", { scroll: false });
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    pushSearch(qInput.trim(), lInput.trim());
+    window.setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
   };
 
-  // 1. FILTER BY QUERY & LOCATION
-  const matchingJobs = useMemo(() => {
-    let list = [...jobs];
+  const clearAll = () => {
+    setMode("all");
+    setMinPay(null);
+    setExp("any");
+    pushSearch("", "");
+  };
 
-    const q = searchQuery.toLowerCase().trim();
-    if (q) {
-      list = list.filter((j) => {
-        const titleMatch = j.title.toLowerCase().includes(q);
-        const mixMatch = j.mix.toLowerCase().includes(q);
-        const roleMatch = j.role.toLowerCase().includes(q);
-        const firmMatch = j.firmType.toLowerCase().includes(q);
-        return titleMatch || mixMatch || roleMatch || firmMatch;
-      });
-    }
+  // 1. text search
+  const searched = useMemo(
+    () => jobs.filter((j) => matchesQuery(j, query) && matchesLocation(j, location)),
+    [query, location]
+  );
 
-    const loc = searchLocation.toLowerCase().trim();
-    if (loc) {
-      list = list.filter((j) => {
-        const cityObj = findCity(j.city);
-        const cityName = cityObj ? cityObj.name.toLowerCase() : "";
-        const citySlug = j.city.toLowerCase();
-        const areaName = j.area.toLowerCase();
-        return (
-          cityName.includes(loc) ||
-          citySlug.includes(loc) ||
-          areaName.includes(loc) ||
-          (loc.includes("remote") && j.mode === "hybrid")
-        );
-      });
-    }
-
+  // 2. filters + sort
+  const filtered = useMemo(() => {
+    const list = searched.filter(
+      (j) => (mode === "all" || j.mode === mode) && (minPay === null || j.band[1] >= minPay) && matchesExp(j, exp)
+    );
+    if (sortBy === "date") list.sort((a, b) => b.posted.localeCompare(a.posted));
+    if (sortBy === "pay") list.sort((a, b) => b.band[1] - a.band[1]);
     return list;
-  }, [searchQuery, searchLocation]);
+  }, [searched, mode, minPay, exp, sortBy]);
 
-  // 2. APPLY FILTER PILLS
-  const filteredJobs = useMemo(() => {
-    let list = [...matchingJobs];
+  // a deep-linked job further down the list stays visible
+  const activeIdx = activeId ? filtered.findIndex((j) => j.id === activeId) : -1;
+  const shownCount = Math.max(visible, activeIdx >= 0 ? Math.ceil((activeIdx + 1) / PAGE) * PAGE : 0);
+  const shown = filtered.slice(0, shownCount);
+  const active: Job | null = filtered.find((j) => j.id === activeId) || filtered[0] || null;
 
-    if (filters.mode !== "all") {
-      list = list.filter((j) => j.mode === filters.mode);
-    }
-
-    if (filters.minPay !== null) {
-      list = list.filter((j) => j.band[1] >= filters.minPay!);
-    }
-
-    if (filters.experience !== "any") {
-      if (filters.experience === "b1") {
-        list = list.filter((j) => j.years.includes("1–3") || j.years.includes("2–4") || j.years.includes("2–5"));
-      } else if (filters.experience === "b2") {
-        list = list.filter((j) => j.years.includes("3–6") || j.years.includes("4–7") || j.years.includes("4–8") || j.years.includes("5–8"));
-      } else if (filters.experience === "b3") {
-        list = list.filter((j) => j.years.includes("6–10") || j.years.includes("7+") || j.years.includes("8+"));
-      }
-    }
-
-    if (sortBy === "date") {
-      list.sort((a, b) => new Date(b.posted).getTime() - new Date(a.posted).getTime());
-    }
-
-    return list;
-  }, [matchingJobs, filters, sortBy]);
-
-  // Sync active job
+  // lock page scroll while the mobile sheet is open; Escape closes it
   useEffect(() => {
-    if (filteredJobs.length > 0) {
-      if (!activeJobId || !filteredJobs.some((j) => j.id === activeJobId)) {
-        setActiveJobId(filteredJobs[0].id);
-      }
-    } else {
-      setActiveJobId(null);
-    }
-  }, [filteredJobs, activeJobId]);
+    if (!sheetOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSheetOpen(false);
+    const onResize = () => window.innerWidth >= 1024 && setSheetOpen(false);
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [sheetOpen]);
 
-  const activeJob = useMemo(() => {
-    return filteredJobs.find((j) => j.id === activeJobId) || filteredJobs[0] || null;
-  }, [filteredJobs, activeJobId]);
-
-  const handleSelectJob = (job: Job) => {
-    setActiveJobId(job.id);
-    if (typeof window !== "undefined" && window.innerWidth < 1024) {
-      setMobileDrawerOpen(true);
-    }
+  const select = (j: Job) => {
+    setActiveId(j.id);
+    if (window.innerWidth < 1024) setSheetOpen(true);
   };
 
-  const titleText = searchQuery
-    ? `${searchQuery} jobs`
-    : searchLocation
-      ? `Legal jobs in ${searchLocation}`
-      : "Confidential Legal Jobs in Texas";
+  const activeFilters = (mode !== "all" ? 1 : 0) + (minPay !== null ? 1 : 0) + (exp !== "any" ? 1 : 0);
+  const hasSearch = !!(query || location);
+
+  const heading = query
+    ? `${query.charAt(0).toUpperCase()}${query.slice(1)} jobs${location ? ` in ${location}` : ""}`
+    : location
+      ? `Legal jobs in ${location}`
+      : "All open seats";
 
   return (
-    <div className="indeed-search-portal-page">
-      {/* 1. LUXURY TOP SEARCH HEADER BANNER WITH CINEMATIC WATER SPLASH VIDEO */}
-      <section
-        className="jobs-luxury-header-sec"
-        style={{
-          color: "#FFFFFF",
-          padding: "124px 0 64px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div className="wrap" style={{ position: "relative", zIndex: 3, maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="jobs-header-intro" style={{ textAlign: "center", margin: "0 auto 32px", maxWidth: "840px" }}>
-            <div className="hero-eyebrow-capsule badge-capsule" style={{ margin: "0 auto 16px", display: "inline-flex" }}>
-              <span className="hero-eyebrow-dot badge-dot" />
-              <span>CONFIDENTIAL LEGAL SEARCH<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% SALARY TRANSPARENCY</span>
-            </div>
-            <h1 className="jobs-header-title" style={{ color: "#FFFFFF", textAlign: "center" }}>
-              Legal jobs in <span className="serif-accent" style={{ color: "#60A5FA" }}>Texas</span>
-            </h1>
-            <p className="jobs-header-sub" style={{ color: "#CBD5E1", textAlign: "center", margin: "0 auto", maxWidth: "680px" }}>
-              Direct lateral openings at premier boutique and mid-size law firms. Verified pay bands and exact compensation disclosed on every seat.
-            </p>
-          </div>
+    <div className="jb">
+      <Suspense fallback={null}>
+        <ParamsReader onParams={onParams} />
+      </Suspense>
 
-          <div style={{ maxWidth: "1040px", margin: "0 auto", width: "100%" }}>
-            <IndeedTopSearchBar
-              initialQuery={searchQuery}
-              initialLocation={searchLocation}
-              onSearch={handleSearch}
-            />
-          </div>
-        </div>
-      </section>
+      {/* HERO + SEARCH */}
+      <section className="jb-hero" aria-labelledby="jb-h1">
+        <div className="jb-hero-wrap">
+          <p className="jb-eyebrow">
+            <span aria-hidden="true" />
+            {jobs.length} open seats · Pay shown on every one
+          </p>
+          <h1 id="jb-h1" className="jb-h1">
+            Legal jobs in Texas, <em>with the pay up front.</em>
+          </h1>
+          <p className="jb-lead">
+            Lateral seats at boutique and mid-size firms. Every seat is screened by Justin and your name stays private
+            until you say yes.
+          </p>
 
-      {/* 2. FILTER PILLS BAR */}
-      <section className="indeed-filter-pills-section">
-        <div className="wrap">
-          <FilterChipsBar
-            filters={filters}
-            onChange={setFilters}
-            totalCount={matchingJobs.length}
-            filteredCount={filteredJobs.length}
-          />
-        </div>
-      </section>
-
-      {/* 3. MAIN JOB STREAM CONTAINER */}
-      <main className="indeed-results-section" id="results">
-        <div className="wrap">
-          {/* SUBHEAD LINE (EXACTLY MATCHING INDEED SCREENSHOT) */}
-          <div className="indeed-results-head-row">
-            <div className="indeed-head-left" style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-              <h1 className="indeed-head-title">
-                {titleText} {searchLocation && !searchQuery ? "" : searchLocation ? `in ${searchLocation}` : ""}
-              </h1>
-              {(searchQuery || searchLocation) && (
-                <button
-                  type="button"
-                  className="indeed-clear-search-pill"
-                  onClick={handleClearAllSearch}
-                  title="Clear search"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
-                    padding: "4px 10px",
-                    background: "#EFF6FF",
-                    color: "#1D4ED8",
-                    border: "1px solid #BFDBFE",
-                    borderRadius: 999,
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: "pointer",
-                  }}
-                >
-                  <span>Clear search</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
+          <form className="jb-search" role="search" aria-label="Search jobs" onSubmit={submit}>
+            <label className="jb-field">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M20 20l-3.5-3.5" />
+              </svg>
+              <span className="jb-sr">Job title or practice</span>
+              <input
+                type="text"
+                value={qInput}
+                onChange={(e) => setQInput(e.target.value)}
+                placeholder="Job title or practice area"
+              />
+              {qInput && (
+                <button type="button" className="jb-x" aria-label="Clear job title" onClick={() => pushSearch("", location)}>
+                  ×
                 </button>
               )}
-            </div>
+            </label>
+            <span className="jb-divider" aria-hidden="true" />
+            <label className="jb-field">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span className="jb-sr">City</span>
+              <input
+                type="text"
+                value={lInput}
+                onChange={(e) => setLInput(e.target.value)}
+                placeholder="City, e.g. Houston"
+                list="jb-cities"
+              />
+              <datalist id="jb-cities">
+                {MARKETS.map((m) => (
+                  <option key={m.name} value={m.name} />
+                ))}
+              </datalist>
+              {lInput && (
+                <button type="button" className="jb-x" aria-label="Clear city" onClick={() => pushSearch(query, "")}>
+                  ×
+                </button>
+              )}
+            </label>
+            <button type="submit" className="jb-go">
+              Find jobs
+            </button>
+          </form>
 
-            <div className="indeed-sort-row desktop-sort-row">
-              <span className="sort-label">Sort by: </span>
+          <div className="jb-quick">
+            <span className="jb-quick-k">Markets</span>
+            {MARKETS.map((m) => (
               <button
+                key={m.name}
                 type="button"
-                className={`sort-link ${sortBy === "relevance" ? "active" : ""}`}
-                onClick={() => setSortBy("relevance")}
+                className={`jb-qchip${location.toLowerCase() === m.name.toLowerCase() ? " is-on" : ""}`}
+                onClick={() => pushSearch(query, location.toLowerCase() === m.name.toLowerCase() ? "" : m.name)}
               >
-                relevance
+                {m.name} <small>{m.n}</small>
               </button>
-              <span className="sort-sep">-</span>
-              <button
-                type="button"
-                className={`sort-link ${sortBy === "date" ? "active" : ""}`}
-                onClick={() => setSortBy("date")}
-              >
-                date
-              </button>
-            </div>
+            ))}
           </div>
+          <div className="jb-quick">
+            <span className="jb-quick-k">Popular</span>
+            {POPULAR.map((p) => (
+              <button
+                key={p}
+                type="button"
+                className={`jb-qchip${query.toLowerCase() === p.toLowerCase() ? " is-on" : ""}`}
+                onClick={() => pushSearch(query.toLowerCase() === p.toLowerCase() ? "" : p, location)}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          {/* MOBILE SORT & JOB COUNT ROW (VISIBLE ONLY ON MOBILE) */}
-          <div className="indeed-mobile-sort-row">
-            <div className="mobile-sort-control">
-              <span className="mobile-sort-label">Sort by:</span>
-              <div className="mobile-sort-select-pill">
-                <span className="mobile-sort-val">{sortBy === "relevance" ? "relevance" : "date"}</span>
-                <span className="chip-chevron">▾</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as "relevance" | "date")}
-                  aria-label="Sort jobs by"
-                >
-                  <option value="relevance">relevance</option>
-                  <option value="date">date</option>
-                </select>
+      {/* RESULTS */}
+      <section className="jb-results" id="results" aria-labelledby="jb-h2">
+        <div className="jb-wrap" ref={resultsRef}>
+          {/* toolbar */}
+          <div className="jb-bar">
+            <div className="jb-bar-head">
+              <div>
+                <h2 id="jb-h2" className="jb-h2">
+                  {heading}
+                </h2>
+                <p className="jb-count">
+                  <b>{filtered.length}</b> of {jobs.length} seats
+                  {(hasSearch || activeFilters > 0) && (
+                    <button type="button" className="jb-clear" onClick={clearAll}>
+                      Clear all
+                    </button>
+                  )}
+                </p>
               </div>
             </div>
-
-            <div className="indeed-mobile-job-count">
-              Showing <b>{filteredJobs.length}</b> of <b>{matchingJobs.length}</b> jobs
+            <div className="jb-filters" role="group" aria-label="Filter jobs">
+              <label className={`jb-f${mode !== "all" ? " is-set" : ""}`}>
+                <span className="jb-f-k">Office</span>
+                <span className="jb-f-v">
+                  <select value={mode} onChange={(e) => {
+                      setMode(e.target.value as ModeFilter);
+                      setVisible(PAGE);
+                    }} aria-label="Office">
+                    <option value="all">Any office</option>
+                    <option value="on-site">On-site</option>
+                    <option value="hybrid">Hybrid</option>
+                  </select>
+                  <Caret />
+                </span>
+              </label>
+              <label className={`jb-f${minPay !== null ? " is-set" : ""}`}>
+                <span className="jb-f-k">Base pay</span>
+                <span className="jb-f-v">
+                  <select
+                    value={minPay === null ? "any" : String(minPay)}
+                    onChange={(e) => {
+                      setMinPay(e.target.value === "any" ? null : Number(e.target.value));
+                      setVisible(PAGE);
+                    }}
+                    aria-label="Base pay"
+                  >
+                    <option value="any">Any pay</option>
+                    <option value="110">$110k+</option>
+                    <option value="130">$130k+</option>
+                    <option value="150">$150k+</option>
+                  </select>
+                  <Caret />
+                </span>
+              </label>
+              <label className={`jb-f${exp !== "any" ? " is-set" : ""}`}>
+                <span className="jb-f-k">Experience asked</span>
+                <span className="jb-f-v">
+                  <select value={exp} onChange={(e) => {
+                      setExp(e.target.value as ExpFilter);
+                      setVisible(PAGE);
+                    }} aria-label="Experience asked">
+                    {EXP_FILTERS.map((o) => (
+                      <option key={o.id} value={o.id}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  <Caret />
+                </span>
+              </label>
+              <label className={`jb-f${sortBy !== "relevance" ? " is-set" : ""}`}>
+                <span className="jb-f-k">Sort by</span>
+                <span className="jb-f-v">
+                  <select value={sortBy} onChange={(e) => {
+                      setSortBy(e.target.value as SortBy);
+                      setVisible(PAGE);
+                    }} aria-label="Sort by">
+                    <option value="relevance">Relevance</option>
+                    <option value="date">Newest first</option>
+                    <option value="pay">Highest pay</option>
+                  </select>
+                  <Caret />
+                </span>
+              </label>
             </div>
           </div>
 
-          {/* RESULTS SPLIT OR EMPTY STATE */}
-          {filteredJobs.length === 0 ? (
-            <div className="indeed-empty-search-state">
-              <div className="empty-box">
-                <h3>No jobs found matching your criteria</h3>
-                <p>
-                  Try widening your search terms, clearing filters, or searching for &ldquo;Austin&rdquo;, &ldquo;Houston&rdquo;, or &ldquo;Estate Planning&rdquo;.
-                </p>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    setFilters({ mode: "all", minPay: null, experience: "any" });
-                    setSearchQuery("");
-                    setSearchLocation("");
-                    router.push("/jobs");
-                  }}
-                >
-                  View all open positions
+          {filtered.length === 0 ? (
+            <div className="jb-empty">
+              <h3>No seat matches that search yet.</h3>
+              <p>New seats come in every week. Upload your resume once and Justin will reach out when one fits.</p>
+              <div className="jb-empty-actions">
+                <button type="button" className="jb-btn is-dark" onClick={clearAll}>
+                  See all {jobs.length} seats
                 </button>
+                <Link href="/upload-resume" className="jb-btn is-line">
+                  Upload resume
+                </Link>
               </div>
             </div>
           ) : (
-            <div className="indeed-split-grid">
-              {/* LEFT FEED COLUMN */}
-              <div className="indeed-feed-column">
-                <div className="indeed-card-stack">
-                  {filteredJobs.map((j) => (
-                    <JobCard
-                      key={j.id}
-                      job={j}
-                      selected={activeJob?.id === j.id}
-                      onSelect={handleSelectJob}
-                    />
-                  ))}
-                </div>
+            <div className="jb-split">
+              <div className="jb-list">
+                {shown.map((j) => (
+                  <JobListCard key={j.id} job={j} selected={active?.id === j.id} onSelect={select} />
+                ))}
 
-                <div className="indeed-feed-footer-card">
-                  <p className="feed-footer-p">
-                    <b>No firm sees your name until you say yes.</b> All seats are screened with confirmed compensation ranges.
+                {filtered.length > shownCount && (
+                  <button type="button" className="jb-more" onClick={() => setVisible(shownCount + PAGE)}>
+                    Show {Math.min(PAGE, filtered.length - shownCount)} more seats
+                    <span>
+                      {shownCount} of {filtered.length}
+                    </span>
+                  </button>
+                )}
+
+                <div className="jb-listnote">
+                  <p>
+                    <b>No firm sees your name until you say yes.</b> Every seat is screened and the pay range is confirmed
+                    with the firm.
                   </p>
-                  <Link href="/upload-resume" className="btn btn-line btn-sm">
-                    Upload resume for confidential matching
-                  </Link>
+                  <Link href="/upload-resume">Upload resume for confidential matching →</Link>
                 </div>
               </div>
 
-              {/* RIGHT STICKY DETAIL PANE */}
-              <div className="indeed-detail-column">
-                <JobDetailPane
-                  job={activeJob}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* MOBILE DRAWER */}
-          {mobileDrawerOpen && activeJob && (
-            <div
-              className="mobile-detail-overlay"
-              onClick={() => setMobileDrawerOpen(false)}
-            >
-              <div
-                className="mobile-detail-modal"
-                onClick={(e) => e.stopPropagation()}
-                role="dialog"
-                aria-modal="true"
-              >
-                <JobDetailPane
-                  job={activeJob}
-                  onCloseMobile={() => setMobileDrawerOpen(false)}
-                />
-              </div>
+              <div className="jb-pane">{active && <JobSeatPane key={active.id} job={active} />}</div>
             </div>
           )}
         </div>
-      </main>
+      </section>
+
+      {/* CLOSING */}
+      <section className="jb-closing" aria-labelledby="jb-cl-h">
+        <div className="jb-wrap">
+          <div className="jb-cl-card">
+            <div className="jb-cl-copy">
+              <span className="jb-cl-k">Confidential matching</span>
+              <h2 id="jb-cl-h">
+                Don’t see the right seat? <em>Let Justin bring it to you.</em>
+              </h2>
+              <ul>
+                <li>
+                  <Check /> Your current firm is never contacted
+                </li>
+                <li>
+                  <Check /> Free for candidates, always
+                </li>
+                <li>
+                  <Check /> {trust.rating} on Google, {trust.reviews} reviews
+                </li>
+              </ul>
+            </div>
+            <div className="jb-cl-actions">
+              <Link href="/upload-resume" className="jb-btn is-primary">
+                Upload your resume
+              </Link>
+              <Link href="/salary-check" className="jb-btn is-ghost">
+                Check your salary
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MOBILE SHEET */}
+      {sheetOpen && active && (
+        <div className="jb-sheet" role="dialog" aria-modal="true" aria-label={active.title}>
+          <JobSeatPane key={active.id} job={active} onClose={() => setSheetOpen(false)} />
+        </div>
+      )}
     </div>
   );
 }
-
