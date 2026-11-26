@@ -302,7 +302,7 @@ export function HeroLuxuryAskSection({
             >
               <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
             </svg>
-            <span>23% flat contingency</span>
+            <span>Pay only if you hire</span>
           </div>
           <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>

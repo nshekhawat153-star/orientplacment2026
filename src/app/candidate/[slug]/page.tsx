@@ -149,7 +149,7 @@ export default async function CandidateProfilePage({ params }: PageProps) {
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
                   <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-                  <span>100% contingency: standard 23% fee due only if you hire</span>
+                  <span>100% contingency: one fee, due only if you hire</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "#E2E8F0" }}>
                   <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
@@ -542,7 +542,7 @@ export default async function CandidateProfilePage({ params }: PageProps) {
                   Risk-Free Warranty
                 </span>
                 <p style={{ margin: "6px 0 0", color: "#334155", fontSize: 13.5, lineHeight: 1.5 }}>
-                  23% placement fee invoiced Net 15 days following the candidate&apos;s first day, backed by our 90-day replacement guarantee.
+                  One contingency fee, invoiced Net 15 days following the candidate&apos;s first day, backed by our 90-day replacement guarantee.
                 </p>
               </li>
             </ol>
@@ -643,7 +643,7 @@ export default async function CandidateProfilePage({ params }: PageProps) {
           </h2>
 
           <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 34, maxWidth: 640, margin: "0 auto 34px" }}>
-            Complete redacted dossier provided within one business hour. Pay 23% only if you decide to hire.
+            Complete redacted dossier provided within one business hour. Pay only if you decide to hire.
           </p>
 
           <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>

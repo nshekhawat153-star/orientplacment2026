@@ -713,7 +713,7 @@ export default function SubmitJobPage() {
               <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
               </svg>
-              <span>23% flat contingency</span>
+              <span>Pay only if you hire</span>
             </div>
             <span className="sj-reassurance-dot">·</span>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
@@ -1405,7 +1405,7 @@ export default function SubmitJobPage() {
                       ? `Complete redacted resume and verified compensation history for ${requestedId}`
                       : `Full redacted resumes for all ${matches.length} matching candidates`,
                     "Verified compensation expectations, notice periods, and bar admission standing",
-                    "One-page contingency terms (23% fee due only if you hire). Zero upfront cost.",
+                    "One-page contingency terms (fee due only if you hire). Zero upfront cost.",
                   ]}
                   button={
                     requestedId
@@ -1515,7 +1515,7 @@ export default function SubmitJobPage() {
                 STEP 04 · ON START DATE
               </span>
               <div style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", marginBottom: 4, lineHeight: 1.25 }}>
-                23% Success Fee
+                One Success Fee
               </div>
               <span style={{ fontSize: 13, fontWeight: 500, color: "#64748B", marginBottom: 12 }}>
                 Net 15 invoice
@@ -1612,7 +1612,7 @@ export default function SubmitJobPage() {
                   <span style={{ color: "#1D4ED8", fontSize: "1.2rem" }}>+</span>
                 </summary>
                 <p>
-                  There is zero fee to submit a job, zero retainer, and zero fee to review candidate dossiers. Orion charges a flat 23% contingency fee calculated on the candidate&apos;s first-year base salary, invoiced 15 days after their first working day. Every placement is protected by our 90-day replacement warranty.
+                  There is zero fee to submit a job, zero retainer, and zero fee to review candidate dossiers. Orion charges one contingency fee, only if you hire, due 15 days after their first working day. Every placement is protected by our 90-day replacement warranty.
                 </p>
               </details>
             </div>

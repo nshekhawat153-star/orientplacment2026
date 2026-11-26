@@ -352,7 +352,7 @@ export function CandidateDetailPane({
             <div>
               <h4>Orion One-Fee Contingency Guarantee</h4>
               <p>
-                No retainer. You owe <b>23% of candidate&apos;s compensation</b> only if you hire {c.id},
+                No retainer. You owe <b>one contingency fee</b> only if you hire {c.id},
                 backed by our <b>90-day replacement guarantee</b>. You keep all your other
                 recruiting channels open.
               </p>

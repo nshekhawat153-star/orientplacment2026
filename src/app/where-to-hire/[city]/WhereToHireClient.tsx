@@ -892,7 +892,7 @@ export function WhereToHireClient({
           </h2>
 
           <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 34, maxWidth: 640, margin: "0 auto 34px" }}>
-            Access confidential lateral attorney and paralegal dossiers. Pay our standard 23% contingency fee only if you decide to hire.
+            Access confidential lateral attorney and paralegal dossiers. Pay our standard contingency fee only if you decide to hire.
           </p>
 
           <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap", marginBottom: 36 }}>
@@ -937,7 +937,7 @@ export function WhereToHireClient({
           </div>
 
           <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: 20, fontSize: "0.85rem", color: "#94A3B8" }}>
-            Zero upfront retainer · 23% contingency fee only upon hire · 90-day replacement warranty
+            Zero upfront retainer · Contingency fee only upon hire · 90-day replacement warranty
           </div>
         </div>
       </section>

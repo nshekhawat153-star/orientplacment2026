@@ -764,7 +764,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                     <li>{job.mix} client advisement and active matter management</li>
                     <li>{job.years} years of active practice experience</li>
                     <li>Direct compensation: {fmt.range(job.band)} with full bonus participation</li>
-                    <li>Zero candidate liability: 23% fee is payable exclusively by hiring law firm</li>
+                    <li>Zero candidate liability: any fee is payable exclusively by the hiring law firm</li>
                   </ul>
                   <button
                     type="button"

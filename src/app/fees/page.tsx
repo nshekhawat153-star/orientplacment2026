@@ -1,40 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { GateForm } from "@/components/GateForm";
-import { terms, recruiterQuestions, fmt } from "@/data";
+import { terms, trust, recruiterQuestions } from "@/data";
 
 export default function FeesPage() {
-  const [baseSalary, setBaseSalary] = useState<number>(130000);
-  const [startDate, setStartDate] = useState<string>("");
-  const [otherRate, setOtherRate] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
-
-  useEffect(() => {
-    const today = new Date();
-    today.setDate(today.getDate() + 30);
-    setStartDate(today.toISOString().slice(0, 10));
-  }, []);
-
-  const addDays = (dateStr: string, days: number): string => {
-    const d = new Date(dateStr + "T12:00:00");
-    if (isNaN(d.getTime())) return "";
-    d.setDate(d.getDate() + days);
-    return d.toISOString().slice(0, 10);
-  };
-
-  const okDate =
-    /^\d{4}-\d{2}-\d{2}$/.test(startDate) &&
-    !isNaN(new Date(startDate + "T12:00:00").getTime());
-
-  const fee = baseSalary * terms.feeRate;
-  const dueDate = okDate ? addDays(startDate, 15) : "";
-  const guaranteeDate = okDate ? addDays(startDate, terms.guaranteeDays) : "";
-
-  const otherNum = parseFloat(otherRate);
-  const otherFee = !isNaN(otherNum) && otherNum > 0 ? (baseSalary * otherNum) / 100 : 0;
-  const diff = otherFee - fee;
 
   const handleCopyQuestions = () => {
     const qs = recruiterQuestions.filter((q) => q.term).slice(0, 5);
@@ -413,14 +385,16 @@ export default function FeesPage() {
               textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
-            Zero upfront retainer, zero exclusivity, and zero hidden costs. You pay one invoice (23%)
+            Zero upfront retainer, zero exclusivity, and zero hidden costs. You pay one contingency fee,
             only when your introduced attorney starts, protected by our 90-day replacement warranty.
           </p>
 
           {/* Action CTAs */}
           <div className="fees-hero-actions hero-actions-group" style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
             <a
-              href="#calc"
+              href={trust.calendly}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -435,8 +409,8 @@ export default function FeesPage() {
                 boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
               }}
             >
-              <span>Calculate your fee</span>
-              <span aria-hidden="true">↓</span>
+              <span>Book 15 min with Justin</span>
+              <span aria-hidden="true">→</span>
             </a>
             <Link
               href="/find-candidates"
@@ -483,7 +457,7 @@ export default function FeesPage() {
               <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
               </svg>
-              <span>23% flat contingency</span>
+              <span>One contingency fee</span>
             </div>
             <span className="fees-reassurance-dot" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
@@ -552,13 +526,13 @@ export default function FeesPage() {
                 01 · CONTINGENCY FEE
               </div>
               <div className="fees-pillar-val">
-                23%
+                On hire
               </div>
               <div className="fees-pillar-label">
-                Of first-year base salary
+                One contingency fee
               </div>
               <p className="fees-pillar-desc">
-                Calculated strictly on base salary. Discretionary bonuses, health benefits, and sign-ons are never included.
+                As set out in your one-page agreement. Nothing is due unless you hire someone we introduced.
               </p>
               <div style={{ marginTop: "auto" }}>
                 <span className="fees-pillar-badge">
@@ -631,186 +605,6 @@ export default function FeesPage() {
                   <span className="check">✓</span>
                   <span>Start Date Invoice</span>
                 </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. INTERACTIVE FEE CALCULATOR */}
-      <section className="block alt" id="calc" style={{ padding: "88px 0 96px", background: "#FFFFFF", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head-premium" style={{ textAlign: "center", marginBottom: 48 }}>
-            <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 999, padding: "6px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
-              <span>INSTANT FEE ESTIMATE · ZERO COMMITMENT</span>
-            </div>
-            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 400 }}>
-              Your fee in ten <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>seconds</span>
-            </h2>
-            <p className="who-lede" style={{ fontSize: 16, color: "#64748B", maxWidth: 640, margin: "0 auto", lineHeight: 1.6 }}>
-              Enter the first-year base salary and start date. See your exact fee, invoice due date, and replacement guarantee window.
-            </p>
-          </div>
-
-          <div className="fee-calc-grid">
-            {/* Input Form Card */}
-            <form
-              className="fee-calc-form-card"
-              id="calc-form"
-              noValidate
-              aria-label="Fee calculator"
-              onSubmit={(e) => e.preventDefault()}
-              style={{
-                background: "#FAF9F5",
-                borderRadius: 14,
-                border: "1.5px solid #EAE7DC",
-                padding: "32px 28px",
-                display: "flex",
-                flexDirection: "column",
-                gap: 22,
-                boxShadow: "0 4px 16px rgba(15,23,42,0.03)",
-              }}
-            >
-              <div>
-                <label htmlFor="f-base" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 8 }}>
-                  First-year base salary ($/yr)
-                </label>
-                <div style={{ position: "relative" }}>
-                  <span style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", color: "#64748B", fontWeight: 600 }}>$</span>
-                  <input
-                    id="f-base"
-                    type="number"
-                    inputMode="numeric"
-                    min="20000"
-                    step="1000"
-                    value={baseSalary || ""}
-                    onChange={(e) => setBaseSalary(Number(e.target.value))}
-                    style={{ width: "100%", padding: "13px 16px 13px 32px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 16, fontWeight: 600, color: "#08142A", outline: "none", background: "#FFFFFF" }}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="f-start" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 8 }}>
-                  Candidate start date
-                </label>
-                <input
-                  id="f-start"
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  style={{ width: "100%", padding: "12px 16px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 15, color: "#08142A", outline: "none", background: "#FFFFFF" }}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="f-other" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#08142A", marginBottom: 8 }}>
-                  Compare with another quote (% of salary)
-                </label>
-                <div style={{ position: "relative" }}>
-                  <input
-                    id="f-other"
-                    type="number"
-                    inputMode="decimal"
-                    min="0"
-                    max="50"
-                    placeholder="e.g. 25 or 30"
-                    value={otherRate}
-                    onChange={(e) => setOtherRate(e.target.value)}
-                    style={{ width: "100%", padding: "12px 36px 12px 16px", borderRadius: 7, border: "1.5px solid #CBD5E1", fontSize: 15, color: "#08142A", outline: "none", background: "#FFFFFF" }}
-                  />
-                  <span style={{ position: "absolute", right: 16, top: "50%", transform: "translateY(-50%)", color: "#64748B", fontWeight: 600 }}>%</span>
-                </div>
-                <span style={{ display: "block", fontSize: 12, color: "#64748B", marginTop: 6 }}>
-                  Most traditional recruiters charge 25%–30% with upfront retainers.
-                </span>
-              </div>
-            </form>
-
-            {/* Output Dashboard Card */}
-            <div
-              className="fee-calc-dash-card"
-              id="calc-out"
-              style={{
-                background: "#FAF9F5",
-                borderRadius: 14,
-                border: "1.5px solid #EAE7DC",
-                padding: "32px 28px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                boxShadow: "0 4px 16px rgba(15,23,42,0.03)",
-              }}
-            >
-              <div>
-                <div className="fee-calc-dash-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, flexWrap: "wrap", gap: 10 }}>
-                  <span className="fee-calc-meta-pill" style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", background: "rgba(29,78,216,0.08)", padding: "4px 10px", borderRadius: 6, border: "1px solid rgba(29,78,216,0.18)", display: "inline-flex", alignItems: "center", whiteSpace: "nowrap", width: "fit-content", flexShrink: 0 }}>
-                    CONFIRMED 23% CONTINGENCY
-                  </span>
-                  <span style={{ fontFamily: "var(--mono)", fontSize: 11.5, color: "#64748B", fontWeight: 600 }}>Zero Upfront</span>
-                </div>
-
-                <div className="fee-primary-stat" style={{ marginBottom: 24 }}>
-                  <div className="fee-stat-number" style={{ fontFamily: "var(--display)", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 400, color: "#08142A", lineHeight: 1.1 }}>
-                    {fmt.money(fee)}
-                  </div>
-                  <div className="fee-stat-sub" style={{ fontSize: 13.5, color: "#64748B", marginTop: 4 }}>
-                    One-time contingency fee on {fmt.money(baseSalary)} base
-                  </div>
-                </div>
-
-                <div className="fee-milestones-grid" style={{ marginBottom: 24 }}>
-                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
-                    <span className="fee-milestone-label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#64748B", marginBottom: 4 }}>Invoice Date</span>
-                    <span className="fee-milestone-val" style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#08142A" }}>{okDate ? fmt.date(startDate) : "–"}</span>
-                  </div>
-                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
-                    <span className="fee-milestone-label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#64748B", marginBottom: 4 }}>Payment Due (Net 15)</span>
-                    <span className="fee-milestone-val" style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#08142A" }}>{okDate ? fmt.date(dueDate) : "–"}</span>
-                  </div>
-                  <div className="fee-milestone-box" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "12px 14px" }}>
-                    <span className="fee-milestone-label" style={{ display: "block", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#64748B", marginBottom: 4 }}>Guarantee Until</span>
-                    <span className="fee-milestone-val" style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#08142A" }}>{okDate ? fmt.date(guaranteeDate) : "–"}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="fee-verdict-box"
-                id="calc-compare"
-                style={{
-                  background: "#FFFFFF",
-                  border: "1.5px solid #E2E8F0",
-                  borderRadius: 10,
-                  padding: "16px 18px",
-                  fontSize: 13.5,
-                  color: "#334155",
-                  lineHeight: 1.55,
-                }}
-              >
-                {otherFee > 0 ? (
-                  <>
-                    <b style={{ color: "#08142A" }}>At {otherNum}%, the traditional recruiter fee would be {fmt.money(otherFee)}.</b>
-                    <br />
-                    {Math.abs(diff) < 1 ? (
-                      "The same percentage as ours, but Orion requires zero upfront retainers."
-                    ) : diff > 0 ? (
-                      <>
-                        You save <span style={{ color: "#1D4ED8", fontWeight: 700 }}>{fmt.money(diff)}</span> with Orion&apos;s flat 23% contingency fee.
-                      </>
-                    ) : (
-                      <>
-                        <span style={{ color: "#BE123C", fontWeight: 700 }}>{fmt.money(-diff)}</span> less, but ensure that quote includes a 90-day free replacement guarantee and Net 15 terms.
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <b style={{ color: "#08142A" }}>90-Day Free Replacement Guarantee:</b> If the hire leaves or is terminated before{" "}
-                    {okDate ? fmt.date(guaranteeDate) : "the 90-day window ends"}, we reopen the search and provide qualified replacements at zero extra cost.
-                  </>
-                )}
               </div>
             </div>
           </div>

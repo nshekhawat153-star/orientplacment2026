@@ -1,0 +1,343 @@
+/* ==================================================================
+   Site footer (Footer.tsx, main variant).
+   Same atmosphere as the hero: navy gradient, soft blue glow, faint grid.
+   The hire-attorneys and minimal footers keep their own styles.
+   ================================================================== */
+
+.ft {
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0 36px;
+  color: #94A3B8;
+  font-family: var(--body);
+  background-color: #08142A;
+  background-image:
+    radial-gradient(circle clamp(560px, 44vw, 860px) at 92% 0%, rgba(37, 99, 235, 0.32) 0%, rgba(29, 78, 216, 0.12) 45%, rgba(29, 78, 216, 0) 72%),
+    radial-gradient(circle clamp(480px, 38vw, 760px) at 0% 100%, rgba(96, 165, 250, 0.16) 0%, rgba(47, 98, 184, 0.06) 45%, rgba(47, 98, 184, 0) 72%),
+    linear-gradient(180deg, #0A1A38 0%, #08142A 50%, #050B17 100%);
+}
+
+/* Thin glowing rule along the top edge */
+.ft::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1140px, 90%);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(147, 197, 253, 0.55), transparent);
+}
+
+/* Faint grid, faded at the edges */
+.ft::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 100%);
+}
+
+.ft .ft-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.ft .ft-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.ft a {
+  text-decoration: none;
+}
+
+/* ---------- Brand row ---------- */
+.ft .ft-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ft .ft-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 620px;
+}
+
+.ft .ft-logo {
+  flex-shrink: 0;
+  display: inline-flex;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.45), 0 0 28px rgba(37, 99, 235, 0.45);
+}
+
+.ft .ft-logo img {
+  border-radius: 50%;
+}
+
+.ft .ft-name {
+  margin: 0 0 4px;
+  font-family: var(--display);
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+
+.ft .ft-tag {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #94A3B8;
+}
+
+.ft .ft-top-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Google rating pill, dark version */
+.ft .rating {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 8px 18px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: none !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  transition: border-color 0.2s ease;
+}
+
+.ft .rating:hover {
+  border-color: rgba(96, 165, 250, 0.5) !important;
+}
+
+.ft .rating b {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+.ft .rating .rc {
+  color: #94A3B8 !important;
+  font-size: 13.5px !important;
+}
+
+.ft .rating .stars,
+.ft .rating .stars svg {
+  color: #FBBF24 !important;
+  fill: #FBBF24 !important;
+}
+
+.ft .ft-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #93C5FD;
+}
+
+.ft .ft-call:hover {
+  color: #FFFFFF;
+}
+
+.ft .ft-call svg {
+  transition: transform 0.2s ease;
+}
+
+.ft .ft-call:hover svg {
+  transform: translateX(3px);
+}
+
+/* ---------- Columns ---------- */
+.ft .ft-cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  padding: 44px 0 40px;
+}
+
+.ft h3 {
+  margin: 0 0 18px !important;
+  font: 600 11px/1 var(--mono) !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase;
+  color: #60A5FA !important;
+  text-align: left !important;
+}
+
+.ft .ft-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.ft .ft-col a {
+  font-size: 14.5px;
+  color: #CBD5E1;
+  transition: color 0.15s ease;
+}
+
+.ft .ft-col a:hover {
+  color: #FFFFFF;
+}
+
+/* ---------- Directory (practice areas, cities) ---------- */
+.ft .ft-dir {
+  display: grid;
+  gap: 18px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ft .ft-dir-row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 24px;
+}
+
+.ft .ft-dir-row h3 {
+  margin: 0 !important;
+}
+
+.ft .ft-dir-row ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+}
+
+.ft .ft-dir-row a {
+  font-size: 13.5px;
+  color: #94A3B8;
+  transition: color 0.15s ease;
+}
+
+.ft .ft-dir-row a:hover {
+  color: #FFFFFF;
+}
+
+/* ---------- Base ---------- */
+.ft .ft-base {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+  padding-top: 26px;
+}
+
+.ft .ft-base p {
+  margin: 0;
+  font-size: 12.5px;
+  color: #64748B;
+}
+
+.ft :focus-visible {
+  outline: 2px solid #60A5FA;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1023px) {
+  .ft .ft-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ft .ft-top-side {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+  .ft .ft-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 24px;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+  .ft {
+    padding: 64px 0 28px;
+  }
+  .ft .ft-wrap {
+    padding: 0 20px;
+  }
+  .ft .ft-top {
+    gap: 22px;
+    padding-bottom: 32px;
+  }
+  .ft .ft-brand {
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .ft .ft-logo img {
+    width: 48px;
+    height: 48px;
+  }
+  .ft .ft-name {
+    font-size: 21px;
+  }
+  .ft .ft-tag {
+    font-size: 13.5px;
+  }
+  .ft .ft-cols {
+    padding: 32px 0 30px;
+    gap: 30px 20px;
+  }
+  .ft .ft-col ul {
+    gap: 11px;
+  }
+  .ft .ft-col a {
+    font-size: 14px;
+  }
+  .ft .ft-dir {
+    gap: 26px;
+  }
+  .ft .ft-dir-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .ft .ft-dir-row ul {
+    gap: 10px 20px;
+  }
+  .ft .ft-base {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ft * {
+    transition: none !important;
+  }
+}

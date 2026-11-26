@@ -51,7 +51,7 @@ export default function EmployersPage() {
           <div className="hero-content-center">
             <div className="hero-eyebrow-capsule">
               <span className="hero-eyebrow-dot" aria-hidden="true" />
-              <span>EMPLOYER PORTAL<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />23% DUE ONLY IF YOU HIRE</span>
+              <span>EMPLOYER PORTAL<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />FEE DUE ONLY IF YOU HIRE</span>
             </div>
 
             <h1 id="emp-hero-h1" className="hero-display-h1">
@@ -386,7 +386,7 @@ export default function EmployersPage() {
             <div>
               <div className="badge-capsule">
                 <span className="badge-dot" />
-                TRANSPARENT TERMS · 23% CONTINGENCY
+                TRANSPARENT TERMS · CONTINGENCY ONLY
               </div>
               <h2 className="sec-title-lg" style={{ color: "#FFFFFF" }}>
                 One fee, and only if you <span className="serif-accent" style={{ color: "#60A5FA" }}>hire</span>
@@ -396,7 +396,7 @@ export default function EmployersPage() {
               </p>
             </div>
             <Link className="btn-emp-primary" href="/fees" style={{ whiteSpace: "nowrap" }}>
-              <span>Fee schedule &amp; calculator</span>
+              <span>Fee schedule &amp; terms</span>
               <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -410,11 +410,11 @@ export default function EmployersPage() {
                 </div>
                 <span className="emp-dark-tile-label">Contingency Fee</span>
                 <span className="emp-dark-tile-val">
-                  <Mark>{Math.round(terms.feeRate * 100)}%</Mark>
+                  <Mark>On hire</Mark>
                 </span>
               </div>
               <p className="emp-dark-tile-desc">
-                Of candidate&apos;s first-year compensation, invoiced only if you hire someone we introduced.
+                One contingency fee, invoiced only if you hire someone we introduced.
               </p>
             </div>
 

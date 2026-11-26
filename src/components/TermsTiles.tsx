@@ -8,8 +8,8 @@ export function TermsTiles() {
     {
       icon: "percent",
       label: "Fee",
-      val: <Mark>{Math.round(terms.feeRate * 100)}%</Mark>,
-      desc: "of candidate's compensation, only if you hire someone we introduced",
+      val: <Mark>On hire</Mark>,
+      desc: "One contingency fee, only if you hire someone we introduced",
     },
     {
       icon: "shield",

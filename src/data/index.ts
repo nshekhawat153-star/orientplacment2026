@@ -8,8 +8,7 @@ export const orionLine = "Orion Placement is a legal recruiting firm in Fort Lau
 export const sendingDomains: string[] = ["orionplacement.com"];
 
 export const terms = {
-  "fee": "23% of candidate's compensation",
-  "feeRate": 0.23,
+  "fee": "one contingency fee, only if you hire",
   "guarantee": "90-day replacement",
   "guaranteeDays": 90,
   "guaranteeDetail": "If the hire leaves or is let go within 90 days of the start date, we search again and send replacements at no extra fee.",
@@ -32,7 +31,7 @@ export const trust = {
   "clientFirms": "200+",
   "repeatClients": "28",
   "guarantee": "90 Days",
-  "fee": "23%",
+  "fee": "Contingency only",
   "feeTerms": "Net 15 · Zero Upfront",
   "turnaround": "Within 1 Week",
   "sweetSpot": "Small & Mid-Size Law Firms",
@@ -2138,8 +2137,8 @@ export const employerTools = [
   },
   {
     "key": "fees",
-    "title": "Fees and calculator",
-    "get": "Our terms in one table, the fee on your salary, and the questions to ask any recruiter.",
+    "title": "Fees and terms",
+    "get": "Our terms in one table and the questions to ask any recruiter.",
     "time": "About 2 minutes",
     "cta": "See the terms"
   },

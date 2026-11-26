@@ -522,7 +522,7 @@ export default function SalaryLeafClient({
           </h2>
           <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 32 }}>
             {door === "employer"
-              ? "Access pre-screened attorney dossiers. Pay 23% only if you decide to hire."
+              ? "Access pre-screened attorney dossiers. Pay only if you decide to hire."
               : "Direct lateral seats with verified base compensation and partner track opportunities."}
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>

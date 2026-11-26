@@ -1,0 +1,379 @@
+/* ==================================================================
+   Homepage: How it works + The terms (HomeProcessTerms.tsx)
+   Warm paper background, editorial steps on the left,
+   a term-sheet card on the right.
+   ================================================================== */
+
+.hpt {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 120px;
+  background: #FAF9F5;
+  color: #334155;
+  font-family: var(--body);
+}
+
+/* One soft blue glow, top right */
+.hpt::before {
+  content: "";
+  position: absolute;
+  top: -220px;
+  right: -180px;
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.07) 0%, rgba(37, 99, 235, 0) 70%);
+  pointer-events: none;
+}
+
+.hpt .hpt-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+.hpt .hpt-head {
+  max-width: 980px;
+  margin: 0 0 64px;
+}
+
+.hpt .hpt-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0B1728;
+}
+
+.hpt .hpt-eyebrow span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1D4ED8;
+}
+
+.hpt .hpt-h2 {
+  margin: 0 0 18px !important;
+  font-family: var(--display) !important;
+  font-weight: 400 !important;
+  font-size: clamp(38px, 4.4vw, 58px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.025em !important;
+  color: #0B1728 !important;
+  text-align: left !important;
+}
+
+.hpt .hpt-h2 em {
+  font-style: italic;
+  color: #1D4ED8;
+}
+
+.hpt .hpt-lede {
+  margin: 0;
+  max-width: 560px;
+  font-size: 17.5px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* ---------- Body: steps | terms ---------- */
+.hpt .hpt-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 72px;
+  align-items: start;
+}
+
+/* Steps: big serif numerals joined by a hairline */
+.hpt .hpt-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hpt .hpt-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 8px;
+  padding: 0 0 44px;
+}
+
+.hpt .hpt-step:last-child {
+  padding-bottom: 0;
+}
+
+/* The line runs from one numeral to the next */
+.hpt .hpt-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 58px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(29, 78, 216, 0.35), rgba(15, 23, 42, 0.08));
+}
+
+.hpt .hpt-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 8px 20px -12px rgba(15, 23, 42, 0.25);
+  font-family: var(--display);
+  font-size: 19px;
+  color: #1D4ED8;
+}
+
+.hpt .hpt-step-text {
+  padding-top: 4px;
+}
+
+.hpt .hpt-when {
+  margin: 0 0 8px;
+  font: 500 11px/1.3 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1D4ED8;
+}
+
+.hpt .hpt-step-title {
+  margin: 0 0 10px !important;
+  font-family: var(--display) !important;
+  font-weight: 400 !important;
+  font-size: 28px !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+  color: #0B1728 !important;
+  text-align: left !important;
+}
+
+.hpt .hpt-step-body {
+  margin: 0;
+  max-width: 520px;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #475569;
+}
+
+/* ---------- Term sheet ---------- */
+.hpt .hpt-terms {
+  position: sticky;
+  top: 112px;
+  padding: 36px 36px 30px;
+  border-radius: 24px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow:
+    0 1px 0 rgba(15, 23, 42, 0.02),
+    0 30px 60px -38px rgba(15, 23, 42, 0.35);
+}
+
+/* Thin sapphire rule across the top, like a letterhead */
+.hpt .hpt-terms::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 36px;
+  right: 36px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(90deg, #1D4ED8, #60A5FA);
+}
+
+.hpt .hpt-terms-k {
+  margin: 0 0 18px;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+.hpt .hpt-fee {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 26px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.hpt .hpt-fee-num {
+  font-family: var(--display);
+  font-size: 76px;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: #0B1728;
+}
+
+.hpt .hpt-fee-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.hpt .hpt-rows {
+  margin: 0 0 28px;
+}
+
+.hpt .hpt-rows > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px dashed rgba(15, 23, 42, 0.1);
+}
+
+.hpt .hpt-rows > div:last-child {
+  border-bottom: 0;
+}
+
+.hpt .hpt-rows dt {
+  font-size: 14.5px;
+  color: #64748B;
+}
+
+.hpt .hpt-rows dd {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0B1728;
+  text-align: right;
+}
+
+.hpt .hpt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hpt .hpt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 50px;
+  border-radius: 10px;
+  background: #0B1728;
+  color: #FFFFFF !important;
+  font: 600 15px/1 var(--body);
+  text-decoration: none !important;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.hpt .hpt-btn:hover {
+  background: #1D4ED8;
+}
+
+.hpt .hpt-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1D4ED8;
+  text-decoration: none;
+}
+
+.hpt .hpt-link:hover svg,
+.hpt .hpt-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.hpt .hpt-btn svg,
+.hpt .hpt-link svg {
+  transition: transform 0.2s ease;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1023px) {
+  .hpt .hpt-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+  .hpt .hpt-terms {
+    position: relative;
+    top: 0;
+    max-width: 560px;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+  .hpt {
+    padding: 80px 0 84px;
+  }
+  .hpt .hpt-wrap {
+    padding: 0 16px;
+  }
+  .hpt .hpt-head {
+    margin-bottom: 40px;
+  }
+  .hpt .hpt-h2 {
+    font-size: 34px !important;
+  }
+  .hpt .hpt-lede {
+    font-size: 16px;
+  }
+  .hpt .hpt-step {
+    grid-template-columns: 56px minmax(0, 1fr);
+    padding-bottom: 32px;
+  }
+  .hpt .hpt-step:not(:last-child)::before {
+    left: 19px;
+    top: 48px;
+  }
+  .hpt .hpt-num {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  .hpt .hpt-step-text {
+    padding-top: 2px;
+  }
+  .hpt .hpt-step-title {
+    font-size: 23px !important;
+  }
+  .hpt .hpt-step-body {
+    font-size: 15px;
+  }
+  .hpt .hpt-terms {
+    padding: 28px 22px 24px;
+    border-radius: 20px;
+  }
+  .hpt .hpt-terms::before {
+    left: 22px;
+    right: 22px;
+  }
+  .hpt .hpt-fee {
+    gap: 14px;
+  }
+  .hpt .hpt-fee-num {
+    font-size: 60px;
+  }
+  .hpt .hpt-fee-text {
+    font-size: 13.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hpt .hpt-btn svg,
+  .hpt .hpt-link svg {
+    transition: none !important;
+  }
+}

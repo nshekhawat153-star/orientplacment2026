@@ -1,0 +1,508 @@
+/* ==================================================================
+   Homepage reviews (HomeReviews.tsx)
+   Same midnight atmosphere as the hero: navy gradient, blue glows,
+   faint grid. One large review, then the rest in glass cards.
+   ================================================================== */
+
+.hrv {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 112px;
+  color: #CBD5E1;
+  font-family: var(--body);
+  background-color: #08142A;
+  background-image:
+    radial-gradient(circle clamp(560px, 46vw, 880px) at 96% 4%, rgba(37, 99, 235, 0.38) 0%, rgba(29, 78, 216, 0.14) 45%, rgba(29, 78, 216, 0) 72%),
+    radial-gradient(circle clamp(520px, 40vw, 800px) at 2% 96%, rgba(96, 165, 250, 0.22) 0%, rgba(47, 98, 184, 0.08) 45%, rgba(47, 98, 184, 0) 72%),
+    linear-gradient(180deg, #0A1A38 0%, #08142A 55%, #0A1A38 100%);
+  /* The fees section below is also dark: end on its top colour, with a hairline between */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Faint grid, faded at the edges (same as the hero) */
+.hrv::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 40%, #000 25%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 40%, #000 25%, transparent 100%);
+}
+
+.hrv .hrv-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hrv .hrv-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Header ---------- */
+.hrv .hrv-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.hrv .hrv-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E2E8F0;
+}
+
+.hrv .hrv-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #60A5FA;
+}
+
+.hrv .hrv-h2 {
+  margin: 0 !important;
+  font-family: var(--display) !important;
+  font-weight: 400 !important;
+  font-size: clamp(38px, 4.4vw, 58px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.025em !important;
+  color: #FFFFFF !important;
+  text-align: left !important;
+  max-width: 640px;
+}
+
+.hrv .hrv-h2 span {
+  font-style: italic;
+  color: #60A5FA;
+}
+
+/* The score: big 5.0, stars and count beside it */
+.hrv .hrv-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+  padding: 16px 24px 16px 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.hrv .hrv-score:hover {
+  border-color: rgba(96, 165, 250, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.hrv .hrv-score-num {
+  font-family: var(--display);
+  font-size: 58px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+}
+
+.hrv .hrv-score-side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hrv .hrv-score-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: #CBD5E1;
+}
+
+.hrv .hrv-score-count .gmark,
+.hrv .hrv-g .gmark {
+  width: 16px;
+  height: 16px;
+}
+
+.hrv .hrv-stars {
+  display: inline-flex;
+  gap: 2px;
+  color: #F5B83D;
+}
+
+/* ---------- Featured review ---------- */
+.hrv .hrv-featured {
+  position: relative;
+  margin: 0 0 56px;
+  padding: 52px 56px 40px;
+  border-radius: 24px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(37, 99, 235, 0.18), transparent 55%),
+    rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 40px 80px -48px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.hrv .hrv-quote-mark {
+  position: absolute;
+  top: 14px;
+  left: 40px;
+  font-family: var(--display);
+  font-size: 120px;
+  line-height: 1;
+  color: rgba(96, 165, 250, 0.35);
+  pointer-events: none;
+}
+
+.hrv .hrv-featured-q {
+  position: relative;
+  margin: 0 0 32px;
+  padding: 0;
+  border: 0;
+  font-family: var(--display);
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  color: #E2E8F0;
+  quotes: none;
+}
+
+.hrv mark {
+  background: linear-gradient(transparent 62%, rgba(96, 165, 250, 0.32) 62%);
+  color: #FFFFFF;
+  padding: 0 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.hrv .hrv-featured .hrv-attr {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Attribution row (featured + cards) */
+.hrv .hrv-attr {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.hrv .hrv-avatar {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 600 12px/1 var(--mono);
+  letter-spacing: 0.04em;
+  color: #BFDBFE;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.45), rgba(29, 78, 216, 0.15));
+  border: 1px solid rgba(147, 197, 253, 0.35);
+}
+
+.hrv .hrv-who {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.hrv .hrv-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.hrv .hrv-byline {
+  font-size: 13px;
+  color: #94A3B8;
+}
+
+.hrv .hrv-g {
+  margin-left: auto;
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #FFFFFF;
+}
+
+/* ---------- Tabs ---------- */
+.hrv .hrv-tabs {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 28px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hrv .hrv-tab-pill {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  border-radius: 999px;
+  background: #FFFFFF;
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.hrv .hrv-tab-pill.is-right {
+  transform: translateX(100%);
+}
+
+.hrv .hrv-tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 150px;
+  height: 40px;
+  padding: 0 20px;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  font: 600 14px/1 var(--body);
+  color: #CBD5E1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.hrv .hrv-tab[aria-selected="true"] {
+  color: #0B1728;
+}
+
+.hrv .hrv-tab span {
+  font: 500 11px/1 var(--mono);
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+}
+
+.hrv .hrv-tab[aria-selected="true"] span {
+  background: #EFF4FF;
+  color: #1D4ED8;
+}
+
+/* ---------- Cards ----------
+   6-column grid so rows always fill: 5 cards = 3 + 2, 4 cards = 2 + 2 */
+.hrv .hrv-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px;
+  animation: hrv-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.hrv .hrv-grid > * {
+  grid-column: span 2;
+}
+
+.hrv .hrv-grid.count-4 > *,
+.hrv .hrv-grid.count-5 > :nth-child(n + 4),
+.hrv .hrv-grid.count-2 > * {
+  grid-column: span 3;
+}
+
+@keyframes hrv-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.hrv .hrv-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 26px 26px 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.hrv .hrv-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(96, 165, 250, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.hrv .hrv-card-q {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #CBD5E1;
+  quotes: none;
+}
+
+.hrv .hrv-card .hrv-attr {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Footer ---------- */
+.hrv .hrv-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hrv .hrv-foot-note {
+  margin: 0;
+  font-size: 13.5px;
+  color: #94A3B8;
+}
+
+.hrv .hrv-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: #0B1728;
+  font: 600 14.5px/1 var(--body);
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.hrv .hrv-all:hover {
+  background: #E0EAFF;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1023px) {
+  .hrv .hrv-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hrv .hrv-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hrv .hrv-grid > *,
+  .hrv .hrv-grid.count-4 > *,
+  .hrv .hrv-grid.count-5 > :nth-child(n + 4) {
+    grid-column: span 1;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+  .hrv {
+    padding: 80px 0 72px;
+  }
+  .hrv .hrv-wrap {
+    padding: 0 16px;
+  }
+  .hrv .hrv-head {
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .hrv .hrv-h2 {
+    font-size: 36px !important;
+  }
+  .hrv .hrv-score {
+    padding: 12px 18px 12px 16px;
+    gap: 14px;
+  }
+  .hrv .hrv-score-num {
+    font-size: 44px;
+  }
+  .hrv .hrv-featured {
+    margin-bottom: 36px;
+    padding: 40px 22px 24px;
+    border-radius: 20px;
+  }
+  .hrv .hrv-quote-mark {
+    top: 4px;
+    left: 18px;
+    font-size: 90px;
+  }
+  .hrv .hrv-featured-q {
+    font-size: 21px;
+    line-height: 1.45;
+    margin-bottom: 22px;
+  }
+  .hrv .hrv-tabs {
+    display: grid;
+    width: 100%;
+  }
+  .hrv .hrv-tab {
+    min-width: 0;
+  }
+  /* Swipe through the cards instead of a long column */
+  .hrv .hrv-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -16px;
+    padding: 0 16px 6px;
+    scrollbar-width: none;
+  }
+  .hrv .hrv-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .hrv .hrv-card {
+    flex: 0 0 86%;
+    margin: 0;
+    scroll-snap-align: center;
+  }
+  .hrv .hrv-foot {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .hrv .hrv-all {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hrv *,
+  .hrv *::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}

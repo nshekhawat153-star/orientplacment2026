@@ -21,8 +21,8 @@ export interface ParsedSeat {
 }
 
 export const TERMS_DATA = {
-  fee: "23%",
-  feeLong: "23% of first-year base salary",
+  fee: "On hire",
+  feeLong: "One contingency fee, only if you hire",
   guarantee: "90 days",
   payment: "Net 15 days from start",
   excl: "Zero",

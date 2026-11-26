@@ -54,9 +54,9 @@ export function ResourceCards({
       href: "/fees",
       icon: "percent",
       tag: "CONTINGENCY",
-      title: "Fee calculator",
-      desc: "Transparent contingency calculation for your target salary and 90-day replacement terms.",
-      get: "Instant fee estimate & guarantee breakdown",
+      title: "Fees and terms",
+      desc: "Our contingency terms in one place: no retainer, no exclusivity and a 90-day replacement guarantee.",
+      get: "Terms, guarantee and questions to ask any recruiter",
     },
   };
 

@@ -401,7 +401,7 @@ export function WhereToPostClient({
                       Orion Placement
                     </td>
                     <td style={{ fontWeight: 700, color: "#059669" }}>
-                      $0 Upfront · 23% Fee Due Only If You Hire
+                      $0 Upfront · Fee Due Only If You Hire
                     </td>
                     <td style={{ color: "#08142A", fontWeight: 600 }}>
                       {screenedCount} Screened {city.name} Legal Professionals
@@ -770,7 +770,7 @@ export function WhereToPostClient({
                 $0 Upfront
               </div>
               <div style={{ fontWeight: 700, color: "#14532D", fontSize: "1.05rem", marginBottom: 8 }}>
-                23% Fee Only If You Hire
+                Fee Only If You Hire
               </div>
               <p style={{ fontSize: "0.9rem", color: "#166534", lineHeight: 1.6, margin: 0 }}>
                 Curated, pre-screened candidate dossiers delivered in days. No upfront cost, non-exclusive agreement, and backed by a 90-day replacement warranty.
@@ -839,7 +839,7 @@ export function WhereToPostClient({
               margin: "0 0 34px",
             }}
           >
-            Access confidential lateral attorney and paralegal dossiers today. Zero retainer, non-exclusive terms, and our 23% fee is payable only if you decide to hire.
+            Access confidential lateral attorney and paralegal dossiers today. Zero retainer, non-exclusive terms, and our fee is payable only if you decide to hire.
           </p>
 
           <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: "36px" }}>
@@ -882,7 +882,7 @@ export function WhereToPostClient({
           </div>
 
           <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: "20px", fontSize: "0.85rem", color: "#94A3B8" }}>
-            Zero upfront retainer · 23% contingency fee only upon hire · 90-day replacement guarantee
+            Zero upfront retainer · Contingency fee only upon hire · 90-day replacement guarantee
           </div>
         </div>
       </section>

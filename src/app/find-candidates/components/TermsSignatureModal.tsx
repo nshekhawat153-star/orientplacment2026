@@ -134,7 +134,7 @@ export function TermsSignatureModal({
               {TERMS_DATA.fee}
             </span>
             <span style={{ fontSize: 12, color: "#64748B", lineHeight: 1.3 }}>
-              Of 1st-year base salary, only if you hire
+              One contingency fee, only if you hire
             </span>
           </div>
           <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 10, padding: "12px 14px" }}>
@@ -178,7 +178,7 @@ export function TermsSignatureModal({
         >
           <li>You pay nothing to view profiles, receive resumes, or conduct interviews.</li>
           <li>If your firm has actively engaged this candidate in the last 6 months, tell us within 2 business days and no fee applies.</li>
-          <li>If you hire any candidate we introduced within 12 months, our standard 23% flat contingency fee applies on start date.</li>
+          <li>If you hire any candidate we introduced within 12 months, our standard contingency fee applies on start date.</li>
           <li>If the candidate leaves or is let go within 90 calendar days, we conduct a replacement search at zero additional fee.</li>
         </ol>
 

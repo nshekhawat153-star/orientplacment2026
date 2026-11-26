@@ -1279,7 +1279,7 @@ export default function HireAttorneysLandingPage() {
                 </div>
 
                 <p style={{ fontSize: 14.5, color: "#CBD5E1", lineHeight: 1.65, margin: 0 }}>
-                  Our 23% contingency fee is due Net 15 only after your candidate starts. If they leave or don&apos;t work out within 90 days, we conduct a replacement search at $0 extra charge.
+                  Our contingency fee is due Net 15 only after your candidate starts. If they leave or don&apos;t work out within 90 days, we conduct a replacement search at $0 extra charge.
                 </p>
               </div>
             </div>

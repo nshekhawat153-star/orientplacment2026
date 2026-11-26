@@ -3,7 +3,7 @@ import React from "react";
 // Quiet, professional terms strip: small serif figures, spaced mono labels, thin dividers,
 // edges faded out. Lives inside the hero (transparent), so it shares the hero background exactly.
 const ITEMS = [
-  { num: "23%", label: "Placement fee · pay only if you hire" },
+  { num: "Net 15", label: "Fee · pay only if you hire" },
   { num: "90 days", label: "Replacement guarantee" },
   { num: "$0", label: "Upfront retainer" },
   { num: "48–72h", label: "Candidate turnaround" },

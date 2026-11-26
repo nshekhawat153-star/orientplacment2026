@@ -1,0 +1,349 @@
+/* ==================================================================
+   Homepage closing section (HomeFinalCta.tsx)
+   Light: warm paper with one soft blue glow, no video.
+   Two doors side by side: law firms (primary, navy) and candidates (white).
+   ================================================================== */
+
+.hfc {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 124px;
+  color: #475569;
+  font-family: var(--body);
+  background:
+    radial-gradient(circle clamp(520px, 44vw, 820px) at 50% 0%, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0) 70%),
+    #FAF9F5;
+}
+
+/* Very faint grid, so the light version keeps the hero's texture */
+.hfc::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 100%);
+}
+
+.hfc .hfc-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+.hfc .hfc-head {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 56px;
+}
+
+.hfc .hfc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0B1728;
+}
+
+.hfc .hfc-eyebrow span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1D4ED8;
+}
+
+.hfc .hfc-h2 {
+  margin: 0 !important;
+  font-family: var(--display) !important;
+  font-weight: 400 !important;
+  font-size: clamp(38px, 4.4vw, 58px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
+  color: #0B1728 !important;
+  text-align: center !important;
+  text-wrap: balance;
+}
+
+.hfc .hfc-h2 em {
+  display: block;
+  font-style: italic;
+  color: #1D4ED8;
+}
+
+/* ---------- Doors ---------- */
+.hfc .hfc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.hfc .hfc-door {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 40px 32px;
+  border-radius: 24px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow:
+    0 1px 0 rgba(15, 23, 42, 0.02),
+    0 30px 60px -38px rgba(15, 23, 42, 0.32);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  color: #475569;
+}
+
+.hfc .hfc-door:hover {
+  transform: translateY(-3px);
+  border-color: rgba(29, 78, 216, 0.18);
+}
+
+/* Law firms are the main audience: the navy card, like the hero */
+.hfc .hfc-door.is-firm {
+  background:
+    radial-gradient(120% 120% at 100% 0%, rgba(37, 99, 235, 0.38), transparent 55%),
+    linear-gradient(180deg, #0F2244 0%, #0B1728 100%);
+  border-color: rgba(15, 23, 42, 0.2);
+  color: #CBD5E1;
+  box-shadow: 0 40px 70px -40px rgba(11, 23, 40, 0.65);
+}
+
+.hfc .hfc-k {
+  margin: 0 0 16px;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #1D4ED8;
+}
+
+.hfc .is-firm .hfc-k {
+  color: #60A5FA;
+}
+
+.hfc .hfc-title {
+  margin: 0 0 12px !important;
+  font-family: var(--display) !important;
+  font-weight: 400 !important;
+  font-size: clamp(28px, 2.6vw, 36px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.02em !important;
+  color: #0B1728 !important;
+  text-align: left !important;
+}
+
+.hfc .is-firm .hfc-title {
+  color: #FFFFFF !important;
+}
+
+.hfc .hfc-copy {
+  margin: 0 0 24px;
+  max-width: 440px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.hfc .is-firm .hfc-copy {
+  color: #CBD5E1;
+}
+
+.hfc .hfc-facts {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 20px 0 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  display: grid;
+  gap: 12px;
+}
+
+.hfc .is-firm .hfc-facts {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.hfc .hfc-facts li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  color: #334155;
+}
+
+.hfc .is-firm .hfc-facts li {
+  color: #E2E8F0;
+}
+
+.hfc .hfc-facts svg {
+  flex-shrink: 0;
+  color: #1D4ED8;
+}
+
+.hfc .is-firm .hfc-facts svg {
+  color: #60A5FA;
+}
+
+.hfc .hfc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.hfc .hfc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 50px;
+  padding: 0 22px;
+  border-radius: 10px;
+  font: 600 15px/1 var(--body);
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.hfc .hfc-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.hfc .hfc-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.hfc .hfc-btn.is-primary {
+  background: #1D4ED8;
+  color: #FFFFFF !important;
+  box-shadow: 0 12px 28px -12px rgba(29, 78, 216, 0.9);
+}
+
+.hfc .hfc-btn.is-primary:hover {
+  background: #2563EB;
+}
+
+/* Candidates' main button: navy on the white card */
+.hfc .hfc-btn.is-light {
+  background: #0B1728;
+  color: #FFFFFF !important;
+}
+
+.hfc .hfc-btn.is-light:hover {
+  background: #1D4ED8;
+}
+
+.hfc .hfc-btn.is-ghost {
+  background: transparent;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  color: #0B1728 !important;
+}
+
+.hfc .hfc-btn.is-ghost:hover {
+  border-color: #1D4ED8;
+  color: #1D4ED8 !important;
+}
+
+.hfc .is-firm .hfc-btn.is-ghost {
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #FFFFFF !important;
+}
+
+.hfc .is-firm .hfc-btn.is-ghost:hover {
+  border-color: #60A5FA;
+  background: rgba(255, 255, 255, 0.05);
+  color: #FFFFFF !important;
+}
+
+.hfc .hfc-aside {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  margin: 18px 0 0;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #93C5FD;
+  text-decoration: none;
+}
+
+.hfc a.hfc-aside:hover {
+  color: #FFFFFF;
+}
+
+.hfc .hfc-aside.is-text {
+  color: #64748B;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1023px) {
+  .hfc .hfc-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+  .hfc {
+    padding: 80px 0 84px;
+  }
+  .hfc .hfc-wrap {
+    padding: 0 16px;
+  }
+  .hfc .hfc-head {
+    margin-bottom: 36px;
+  }
+  .hfc .hfc-h2 {
+    font-size: 34px !important;
+  }
+  .hfc .hfc-grid {
+    gap: 16px;
+  }
+  .hfc .hfc-door {
+    padding: 28px 22px 24px;
+    border-radius: 20px;
+  }
+  .hfc .hfc-title {
+    font-size: 27px !important;
+  }
+  .hfc .hfc-copy {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .hfc .hfc-facts {
+    margin-bottom: 24px;
+    padding-top: 16px;
+    gap: 10px;
+  }
+  .hfc .hfc-facts li {
+    font-size: 14px;
+  }
+  .hfc .hfc-actions {
+    flex-direction: column;
+  }
+  .hfc .hfc-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hfc .hfc-door,
+  .hfc .hfc-btn svg {
+    transition: none !important;
+  }
+  .hfc .hfc-door:hover {
+    transform: none;
+  }
+}

@@ -474,7 +474,7 @@ export function ScreenProfile({
                 <div className="fc-terms-mini-grid">
                   <div className="fc-terms-mini-tile">
                     <b>{TERMS_DATA.fee}</b>
-                    <span>of base salary, only if you hire</span>
+                    <span>one contingency fee, only if you hire</span>
                   </div>
                   <div className="fc-terms-mini-tile">
                     <b>{TERMS_DATA.guarantee}</b>

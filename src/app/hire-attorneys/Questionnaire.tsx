@@ -362,7 +362,7 @@ export function Questionnaire() {
         <div style={{ display: "flex", alignItems: "center", gap: 14, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 10, padding: "14px 18px", color: "#1E40AF", fontSize: 14 }}>
           <span style={{ fontSize: 18, flexShrink: 0 }}>✓</span>
           <div>
-            <b>100% Contingency Guarantee:</b> Zero upfront cost. 23% fee is due only 15 days after your hire starts, backed by our 90-day replacement warranty.
+            <b>100% Contingency Guarantee:</b> Zero upfront cost. The fee is due only 15 days after your hire starts, backed by our 90-day replacement warranty.
           </div>
         </div>
 
@@ -712,7 +712,7 @@ export function Questionnaire() {
               </div>
               <div style={{ flex: 1 }}>
                 <b style={{ display: "block", fontSize: 15, color: "#08142A", marginBottom: 4 }}>
-                  Zero Upfront Cost · Standard 23% Contingency
+                  Zero Upfront Cost · Contingency Only
                 </b>
                 <p style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: "0 0 10px" }}>
                   Orion works on 100% contingency. There are no retainers or exclusivity requirements. A placement fee is payable only when a candidate you interview starts at your firm, backed by our 90-day replacement warranty.

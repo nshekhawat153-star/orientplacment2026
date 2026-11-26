@@ -1259,7 +1259,7 @@ export function HiringKitClient({
                   bullets={[
                     "Unredacted resumes delivered to your inbox within 60 minutes",
                     "Explicit compensation requirements, bar status, and notice periods",
-                    "Strict 23% contingency success fee only if you extend an offer and hire"
+                    "One contingency success fee, only if you extend an offer and hire"
                   ]}
                   button="Deliver Candidate Dossiers"
                   ids={topMatches.map(r => r.c.id)}

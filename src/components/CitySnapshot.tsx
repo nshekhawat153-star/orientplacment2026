@@ -245,7 +245,7 @@ export function CitySnapshot({
           lineHeight: 1.5,
         }}
       >
-        <span style={{ fontWeight: 700 }}>100% Contingency in {c.name}:</span> Zero upfront retainer. 23% fee due 15 days after start date, protected by full 90-day replacement warranty.
+        <span style={{ fontWeight: 700 }}>100% Contingency in {c.name}:</span> Zero upfront retainer. One fee, due 15 days after start date, protected by full 90-day replacement warranty.
       </div>
     </div>
   );

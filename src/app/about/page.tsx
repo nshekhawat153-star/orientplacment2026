@@ -289,7 +289,7 @@ export default function AboutPage() {
             Two Partners Handle <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>Every Single Search</span>
           </h2>
           <p style={{ fontSize: "1.05rem", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
-            Zero anonymous call centers. No junior screeners. The legal recruiter who reaches out to you is the decision-maker who represents your search end-to-end.
+            The founders who take your brief are the ones who lead your search, from the first call to a signed offer.
           </p>
         </div>
 
@@ -351,7 +351,7 @@ export default function AboutPage() {
               {
                 step: "04",
                 audience: "Start Date Guarantee",
-                title: "Single 23% Contingency Fee",
+                title: "One Contingency Fee",
                 desc: "Invoiced 15 days following candidate start date, fully protected by Orion's 90-day replacement warranty.",
               },
             ].map((p, idx) => (

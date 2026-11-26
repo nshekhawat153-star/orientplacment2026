@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import "./header-nav.css";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cities, roles, people } from "@/data";
-import { RatingBadge, CalendlyLink } from "./Rating";
-import { Chevron, BtnArrow } from "./icons";
+import { RatingBadge } from "./Rating";
+import { Chevron } from "./icons";
 
 const CANDIDATE_PATHS = [
   "/candidates",
@@ -16,7 +17,57 @@ const CANDIDATE_PATHS = [
   "/jobs",
 ];
 
-const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is built.";
+// ---- Menu content. Every link points at a page that exists. ----
+type NavLink = { label: string; href: string; desc?: string; icon?: string };
+
+const FIRM_HIRE: NavLink[] = [
+  { label: "Find candidates", href: "/find-candidates", desc: "Describe the seat, see screened profiles", icon: "search" },
+  { label: "Submit a job", href: "/submit-job", desc: "Paste your posting, free", icon: "post" },
+  { label: "Fees and guarantee", href: "/fees", desc: "No retainer, 90-day replacement", icon: "shield" },
+  { label: "Employers overview", href: "/employers", desc: "How Orion works for law firms", icon: "users" },
+];
+
+const FIRM_TOOLS: NavLink[] = [
+  { label: "Salary guides", href: "/salaries/estate-planning-attorney/houston-tx", desc: "Pay bands by practice, city and years", icon: "chart" },
+  { label: "Hiring kits", href: "/hiring-kit/estate-planning-attorney", desc: "Job description, questions, scorecard", icon: "doc" },
+  { label: "Where to post a job", href: "/where-to-post/houston-tx", desc: "Legal job boards compared", icon: "megaphone" },
+  { label: "Where to hire from", href: "/where-to-hire/houston-tx", desc: "Law schools, programs and bar groups", icon: "school" },
+];
+
+const CAND_LINKS: NavLink[] = [
+  { label: "Open jobs", href: "/jobs", desc: "Confidential roles, pay on every listing", icon: "briefcase" },
+  { label: "Upload your resume", href: "/upload-resume", desc: "See matching roles, in private", icon: "doc" },
+  { label: "Check your salary", href: "/salary-check", desc: "Your base against your city and level", icon: "chart" },
+  { label: "Best firms to work for", href: "/best-law-firms/houston-tx", desc: "Firms that publish their pay", icon: "star" },
+  { label: "Candidates overview", href: "/candidates", desc: "Free and confidential, from the first call", icon: "users" },
+];
+
+const NV_ICONS: Record<string, React.ReactNode> = {
+  search: (<><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4 4" /></>),
+  post: (<><rect x="4" y="3.5" width="16" height="17" rx="2.5" /><path d="M8 8.5h8M8 12h8M8 15.5h5" /></>),
+  shield: (<><path d="M12 3 5 5.6v5.6c0 4.5 3 8 7 9.8 4-1.8 7-5.3 7-9.8V5.6L12 3Z" /><path d="m9 12 2.2 2.2L15.5 10" /></>),
+  users: (<><circle cx="9" cy="8.5" r="3.2" /><path d="M3.5 19c.7-3 2.9-4.6 5.5-4.6s4.8 1.6 5.5 4.6" /><path d="M15.5 5.6a3 3 0 0 1 0 5.8M17.5 14.6c1.6.6 2.6 2 3 4.4" /></>),
+  briefcase: (<><rect x="3.5" y="7" width="17" height="12.5" rx="2.5" /><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3.5 12.5h17" /></>),
+  doc: (<><path d="M14 3.5H7.5A2 2 0 0 0 5.5 5.5v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8l-4.5-4.5Z" /><path d="M14 3.5V8h4.5M9 13h6M9 16.5h4" /></>),
+  chart: (<><path d="M4 20h16" /><path d="M7 16v-4M12 16V7M17 16v-6" /></>),
+  megaphone: (<><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z" /><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" /></>),
+  school: (<><path d="m3 9 9-4.5L21 9l-9 4.5L3 9Z" /><path d="M7 11v4.5c1.4 1.3 3 2 5 2s3.6-.7 5-2V11M21 9v5" /></>),
+  star: (<path d="m12 3.8 2.5 5.1 5.6.8-4 4 .9 5.6-5-2.6-5 2.6.9-5.6-4-4 5.6-.8L12 3.8Z" />),
+};
+
+function NvIcon({ name }: { name: string }) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {NV_ICONS[name]}
+    </svg>
+  );
+}
+
+const NvArrow = () => (
+  <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M4 10h12M11 5l5 5-5 5" />
+  </svg>
+);
 
 export function Header({ minimal = false }: { minimal?: boolean }) {
   const pathname = usePathname();
@@ -46,8 +97,6 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
-  const [toastMsg, setToastMsg] = useState<string | null>(null);
-  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,14 +106,6 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const showToast = (msg: string) => {
-    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
-    setToastMsg(msg);
-    toastTimeoutRef.current = setTimeout(() => {
-      setToastMsg(null);
-    }, 3200);
-  };
 
   const isCandidatePage = CANDIDATE_PATHS.some((p) => pathname.startsWith(p));
   const isHireAttorneys = pathname.startsWith("/hire-attorneys");
@@ -81,8 +122,16 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
         setMobileOpen(false);
       }
     };
+    // Leaving phone width with the drawer open: close it
+    const handleResize = () => {
+      if (window.innerWidth > 1080) setMobileOpen(false);
+    };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   // Close menus on route change
@@ -130,43 +179,12 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
     );
   }
 
-  const renderLink = (
-    href: string,
-    built: boolean,
-    title: string,
-    desc: string,
-    className = "mi"
-  ) => {
-    if (built) {
-      return (
-        <Link
-          href={href}
-          className={className}
-          onClick={() => {
-            setActiveGroup(null);
-            setMobileOpen(false);
-          }}
-        >
-          <b>{title}</b>
-          <span>{desc}</span>
-        </Link>
-      );
-    }
-    return (
-      <a
-        href="#"
-        data-unbuilt={UNBUILT_MSG}
-        className={className}
-        onClick={(e) => {
-          e.preventDefault();
-          showToast(UNBUILT_MSG);
-        }}
-      >
-        <b>{title}</b>
-        <span>{desc}</span>
-      </a>
-    );
+  const closeAll = () => {
+    setActiveGroup(null);
+    setMobileOpen(false);
   };
+
+  const isActive = (href: string) => pathname === href.split("#")[0];
 
   return (
     <>
@@ -235,302 +253,199 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
             </a>
           )}
 
-          {/* Desktop Nav - Hidden on /hire-attorneys ads page */}
+          {/* Desktop nav (hidden on the /hire-attorneys ad page) */}
           {!isHireAttorneys && (
-            <nav className="nav" aria-label="Main">
-            <ul className="nav-list">
-              {/* 1. For employers */}
-              <li
-                className="nav-item"
-                data-group="emp"
-                onMouseEnter={() => setActiveGroup("emp")}
-                onMouseLeave={() => setActiveGroup(null)}
-              >
-                <button
-                  type="button"
-                  className="nav-top"
-                  aria-expanded={activeGroup === "emp"}
-                  aria-controls="np-emp"
-                  onClick={() =>
-                    setActiveGroup(activeGroup === "emp" ? null : "emp")
-                  }
+            <nav className="nav nv" aria-label="Main">
+              <ul className="nv-list">
+                {/* For law firms */}
+                <li
+                  className="nv-item"
+                  onMouseEnter={() => setActiveGroup("emp")}
+                  onMouseLeave={() => setActiveGroup(null)}
                 >
-                  For employers <Chevron />
-                </button>
-                <div className="mega" id="np-emp" hidden={activeGroup !== "emp"}>
-                  <div className="wrap mega-in has-aside">
-                    <div className="mega-main">
-                      <ul className="mega-list">
-                        <li>
-                          {renderLink(
-                            "/find-candidates",
-                            true,
-                            "Find candidates",
-                            "Describe the seat and see screened candidates now"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/submit-job",
-                            true,
-                            "Submit a job",
-                            "Paste your posting; we check the pay and match"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/fees",
-                            true,
-                            "Fees and guarantee",
-                            "One fee, only if you hire, with a calculator"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/hiring-kit/estate-planning-attorney",
-                            true,
-                            "Hiring kits",
-                            "Posting template, interview questions and a scorecard"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/where-to-post/houston-tx",
-                            true,
-                            "Where to post a job",
-                            "Job boards compared on cost and time to applicants"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/where-to-hire/houston-tx",
-                            true,
-                            "Where to hire from",
-                            "Law schools, paralegal programmes and bar groups"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/employers",
-                            true,
-                            "Employers overview",
-                            "How Orion works for small and mid-size firms"
-                          )}
-                        </li>
-                      </ul>
-                    </div>
-                    <aside className="mega-aside">
-                      <div className="mega-aside-talk">
-                        <span className="eyebrow">Direct partner access</span>
-                        <p>
-                          Fifteen minutes with Justin: the seat, the pay, and who is
-                          available now.
-                        </p>
-                        <CalendlyLink className="link-arrow" />
+                  <button
+                    type="button"
+                    className="nv-top"
+                    aria-expanded={activeGroup === "emp"}
+                    aria-controls="np-emp"
+                    onClick={() => setActiveGroup(activeGroup === "emp" ? null : "emp")}
+                  >
+                    For law firms <Chevron />
+                  </button>
+                  <div className="nv-panel is-wide" id="np-emp" hidden={activeGroup !== "emp"}>
+                    <div className="nv-panel-in">
+                      <div className="nv-col">
+                        <p className="nv-k">Hire with Orion</p>
+                        <ul className="nv-rich">
+                          {FIRM_HIRE.map((l) => (
+                            <li key={l.href}>
+                              <Link href={l.href} className={`nv-rich-a${isActive(l.href) ? " is-current" : ""}`} onClick={closeAll}>
+                                <span className="nv-ico">{l.icon && <NvIcon name={l.icon} />}</span>
+                                <span className="nv-rich-t">
+                                  <b>{l.label}</b>
+                                  <span>{l.desc}</span>
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      <div className="mega-aside-ctas">
-                        <Link
-                          className="btn btn-primary btn-sm btn-block mega-btn-primary"
-                          href="/find-candidates"
-                        >
-                          <span>Find candidates</span>
-                          <BtnArrow />
+                      <div className="nv-col nv-col-tools">
+                        <p className="nv-k">Free hiring tools</p>
+                        <ul className="nv-rich">
+                          {FIRM_TOOLS.map((l) => (
+                            <li key={l.href}>
+                              <Link href={l.href} className={`nv-rich-a${isActive(l.href) ? " is-current" : ""}`} onClick={closeAll}>
+                                <span className="nv-ico">{l.icon && <NvIcon name={l.icon} />}</span>
+                                <span className="nv-rich-t">
+                                  <b>{l.label}</b>
+                                  <span>{l.desc}</span>
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="nv-feature">
+                        <p className="nv-feature-k">Start a search</p>
+                        <p className="nv-feature-t">Screened candidates for your open seat.</p>
+                        <Link className="nv-feature-btn" href="/find-candidates" onClick={closeAll}>
+                          Find candidates <NvArrow />
                         </Link>
-                        <Link
-                          className="btn btn-outline btn-sm btn-block mega-btn-outline"
-                          href="/submit-job"
-                        >
-                          <span>Submit a job</span>
-                          <BtnArrow />
+                        <Link className="nv-feature-btn is-ghost" href="/submit-job" onClick={closeAll}>
+                          Submit a job, free <NvArrow />
                         </Link>
-                      </div>
-                      <div className="mega-aside-rating">
-                        <RatingBadge size="sm" dark />
-                      </div>
-                    </aside>
-                  </div>
-                </div>
-              </li>
-
-              {/* 2. For candidates */}
-              <li
-                className="nav-item"
-                data-group="cand"
-                onMouseEnter={() => setActiveGroup("cand")}
-                onMouseLeave={() => setActiveGroup(null)}
-              >
-                <button
-                  type="button"
-                  className="nav-top"
-                  aria-expanded={activeGroup === "cand"}
-                  aria-controls="np-cand"
-                  onClick={() =>
-                    setActiveGroup(activeGroup === "cand" ? null : "cand")
-                  }
-                >
-                  For candidates <Chevron />
-                </button>
-                <div
-                  className="mega"
-                  id="np-cand"
-                  hidden={activeGroup !== "cand"}
-                >
-                  <div className="wrap mega-in has-aside">
-                    <div className="mega-main">
-                      <ul className="mega-list">
-                        <li>
-                          {renderLink(
-                            "/jobs",
-                            true,
-                            "Open jobs",
-                            "Confidential roles with the pay on every listing"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/upload-resume",
-                            true,
-                            "Upload your resume",
-                            "See matching roles in seconds, in private"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/salary-check",
-                            true,
-                            "Check your salary",
-                            "Compare your base with your city and level"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/best-law-firms/houston-tx",
-                            true,
-                            "Best firms to work for",
-                            "Small and mid-size firms that publish their pay"
-                          )}
-                        </li>
-                        <li>
-                          {renderLink(
-                            "/candidates",
-                            true,
-                            "Candidates overview",
-                            "Free for candidates and confidential from the first call"
-                          )}
-                        </li>
-                      </ul>
-                    </div>
-                    <aside className="mega-aside">
-                      <div className="mega-aside-talk">
-                        <span className="eyebrow">Confidential career move</span>
-                        <p>
-                          Always 100% free for candidates. No firm sees your name until you
-                          say yes to an interview.
-                        </p>
-                      </div>
-                      <div className="mega-aside-ctas">
-                        <Link
-                          className="btn btn-primary btn-sm btn-block mega-btn-primary"
-                          href="/upload-resume"
-                        >
-                          <span>Upload resume</span>
-                          <BtnArrow />
-                        </Link>
-                        <Link
-                          className="btn btn-outline btn-sm btn-block mega-btn-outline"
-                          href="/jobs"
-                        >
-                          <span>See open jobs</span>
-                          <BtnArrow />
-                        </Link>
-                      </div>
-                      <div className="mega-aside-rating">
-                        <RatingBadge size="sm" dark />
-                      </div>
-                    </aside>
-                  </div>
-                </div>
-              </li>
-
-              {/* 3. Salary guides */}
-              <li
-                className="nav-item"
-                data-group="sal"
-                onMouseEnter={() => setActiveGroup("sal")}
-                onMouseLeave={() => setActiveGroup(null)}
-              >
-                <button
-                  type="button"
-                  className="nav-top"
-                  aria-expanded={activeGroup === "sal"}
-                  aria-controls="np-sal"
-                  onClick={() =>
-                    setActiveGroup(activeGroup === "sal" ? null : "sal")
-                  }
-                >
-                  Salary guides <Chevron />
-                </button>
-                <div className="mega" id="np-sal" hidden={activeGroup !== "sal"}>
-                  <div className="wrap mega-in is-cols">
-                    <div className="mega-main">
-                      <div className="mega-feature">
-                        <Link
-                          href="/salaries/estate-planning-attorney/houston-tx"
-                          className="mi mi-feature"
-                        >
-                          <span className="eyebrow">Featured benchmark · Houston</span>
-                          <b>Estate planning attorney pay in Houston</b>
+                        <div className="nv-feature-talk">
+                          <Image src={justin.photo} alt="" width={80} height={80} className="nv-feature-photo" />
                           <span>
-                            Bands by years of practice, the median, and verified market source
+                            Prefer to talk?{" "}
+                            <a href={justin.calendly} target="_blank" rel="noopener noreferrer" onClick={closeAll}>
+                              Book 15 min with Justin
+                            </a>
                           </span>
-                          <span className="mega-feature-cta">
-                            <span>Explore full report</span>
-                            <span className="feature-arrow" aria-hidden="true">→</span>
-                          </span>
-                        </Link>
+                        </div>
+                        <span className="nv-feature-rating">
+                          <RatingBadge size="sm" dark />
+                        </span>
                       </div>
-                      <div className="mega-col">
-                        <h3>By role</h3>
-                        <ul className="mega-list compact">
+                    </div>
+                  </div>
+                </li>
+
+                {/* For candidates */}
+                <li
+                  className="nv-item"
+                  onMouseEnter={() => setActiveGroup("cand")}
+                  onMouseLeave={() => setActiveGroup(null)}
+                >
+                  <button
+                    type="button"
+                    className="nv-top"
+                    aria-expanded={activeGroup === "cand"}
+                    aria-controls="np-cand"
+                    onClick={() => setActiveGroup(activeGroup === "cand" ? null : "cand")}
+                  >
+                    For candidates <Chevron />
+                  </button>
+                  <div className="nv-panel is-mid" id="np-cand" hidden={activeGroup !== "cand"}>
+                    <div className="nv-panel-in">
+                      <div className="nv-col">
+                        <p className="nv-k">Your next move</p>
+                        <ul className="nv-rich">
+                          {CAND_LINKS.map((l) => (
+                            <li key={l.href}>
+                              <Link href={l.href} className={`nv-rich-a${isActive(l.href) ? " is-current" : ""}`} onClick={closeAll}>
+                                <span className="nv-ico">{l.icon && <NvIcon name={l.icon} />}</span>
+                                <span className="nv-rich-t">
+                                  <b>{l.label}</b>
+                                  <span>{l.desc}</span>
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="nv-feature is-cand">
+                        <p className="nv-feature-k">Free and confidential</p>
+                        <p className="nv-feature-t">No firm sees your name until you say yes.</p>
+                        <p className="nv-feature-s">Always free for candidates. Every role shows the pay range.</p>
+                        <Link className="nv-feature-btn" href="/jobs" onClick={closeAll}>
+                          See open jobs <NvArrow />
+                        </Link>
+                        <Link className="nv-feature-btn is-ghost" href="/upload-resume" onClick={closeAll}>
+                          Upload your resume <NvArrow />
+                        </Link>
+                        <span className="nv-feature-rating">
+                          <RatingBadge size="sm" dark />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                {/* Salary guides */}
+                <li
+                  className="nv-item"
+                  onMouseEnter={() => setActiveGroup("sal")}
+                  onMouseLeave={() => setActiveGroup(null)}
+                >
+                  <button
+                    type="button"
+                    className="nv-top"
+                    aria-expanded={activeGroup === "sal"}
+                    aria-controls="np-sal"
+                    onClick={() => setActiveGroup(activeGroup === "sal" ? null : "sal")}
+                  >
+                    Salary guides <Chevron />
+                  </button>
+                  <div className="nv-panel is-wide" id="np-sal" hidden={activeGroup !== "sal"}>
+                    <div className="nv-panel-in is-sal">
+                      <Link
+                        href="/salaries/estate-planning-attorney/houston-tx"
+                        className="nv-bench"
+                        onClick={closeAll}
+                      >
+                        <span className="nv-feature-k">Featured guide</span>
+                        <span className="nv-bench-t">Estate planning attorney pay in Houston</span>
+                        <span className="nv-bench-s">Pay bands by years of practice, with the median.</span>
+                        <span className="nv-bench-go">
+                          Read the guide <NvArrow />
+                        </span>
+                      </Link>
+                      <div className="nv-col">
+                        <p className="nv-k">By practice area</p>
+                        <ul className="nv-plain is-2col">
                           {roles.map((r) => (
                             <li key={r.slug}>
-                              {renderLink(
-                                `/roles/${r.slug}`,
-                                !!r.built,
-                                r.name,
-                                `${
-                                  r.kind === "attorney"
-                                    ? "Attorney"
-                                    : r.kind === "paralegal"
-                                    ? "Paralegal"
-                                    : "Legal staff"
-                                } base pay by years, city by city`
-                              )}
+                              <Link href={`/roles/${r.slug}`} className={isActive(`/roles/${r.slug}`) ? "is-current" : undefined} onClick={closeAll}>
+                                {r.name}
+                              </Link>
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="mega-col">
-                        <h3>By city</h3>
-                        <ul className="mega-list compact">
+                      <div className="nv-col">
+                        <p className="nv-k">By city</p>
+                        <ul className="nv-plain is-2col">
                           {cities.map((c) => (
                             <li key={c.slug}>
-                              {renderLink(
-                                `/locations/${c.stateSlug}/${c.citySlug}#pay`,
-                                !!c.built,
-                                `${c.name}, ${c.state}`,
-                                `What ${c.name} firms pay, role by role`
-                              )}
+                              <Link
+                                href={`/locations/${c.stateSlug}/${c.citySlug}#pay`}
+                                className={isActive(`/locations/${c.stateSlug}/${c.citySlug}`) ? "is-current" : undefined}
+                                onClick={closeAll}
+                              >
+                                {c.name}
+                              </Link>
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
+                </li>
+
+              </ul>
+            </nav>
           )}
 
           {/* Header CTA for standard pages */}
@@ -550,7 +465,11 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
               aria-expanded={mobileOpen}
               aria-controls="mnav"
               aria-label="Open navigation menu"
-              onClick={() => setMobileOpen(true)}
+              onClick={() => {
+                // Phone menu always opens with every section closed
+                setMobileExpanded({});
+                setMobileOpen(true);
+              }}
             >
               <svg
                 width="22"
@@ -620,229 +539,92 @@ export function Header({ minimal = false }: { minimal?: boolean }) {
           </button>
         </div>
 
-        <div className="mnav-body">
-          {/* Main CTAs first: large action cards (same two actions as the desktop mega menu aside) */}
-          <div className="mnav-ctas">
+        <div className="mnav-body mn">
+          {/* Main actions first */}
+          <div className="mn-ctas">
             <Link
-              className="mnav-cta mnav-cta-primary"
-              href={isCandidatePage ? "/upload-resume" : "/find-candidates"}
-              onClick={() => setMobileOpen(false)}
+              className="mn-primary"
+              href={isCandidatePage ? "/jobs" : "/find-candidates"}
+              onClick={closeAll}
             >
-              <span className="mnav-cta-text">
-                <span className="mnav-cta-pill">
-                  {isCandidatePage ? "100% FREE · CONFIDENTIAL" : "SCREENED · READY NOW"}
-                </span>
-                <span className="mnav-cta-title">
-                  {isCandidatePage ? "Upload resume" : "See candidates"}
-                </span>
-                <span className="mnav-cta-sub">
-                  {isCandidatePage
-                    ? "See matching roles in seconds, in private."
-                    : "Describe your seat and see matches now."}
+              <span>
+                <span className="mn-primary-t">{isCandidatePage ? "See open jobs" : "Find candidates"}</span>
+                <span className="mn-primary-s">
+                  {isCandidatePage ? "Confidential roles, pay shown." : "Describe the seat, see screened profiles."}
                 </span>
               </span>
-              <span className="mnav-cta-arrow" aria-hidden="true">
-                <BtnArrow />
-              </span>
+              <NvArrow />
             </Link>
             <Link
-              className="mnav-cta mnav-cta-secondary"
-              href={isCandidatePage ? "/jobs" : "/submit-job"}
-              onClick={() => setMobileOpen(false)}
+              className="mn-primary is-ghost"
+              href={isCandidatePage ? "/upload-resume" : "/submit-job"}
+              onClick={closeAll}
             >
-              <span className="mnav-cta-text">
-                <span className="mnav-cta-pill">
-                  {isCandidatePage ? "PAY ON EVERY LISTING" : "FREE JOB POSTING"}
-                </span>
-                <span className="mnav-cta-title">
-                  {isCandidatePage ? "See open jobs" : "Post your job"}
-                </span>
-                <span className="mnav-cta-sub">
-                  {isCandidatePage
-                    ? "Confidential roles with the pay shown."
-                    : "Paste your posting; we check the pay and match."}
+              <span>
+                <span className="mn-primary-t">{isCandidatePage ? "Upload your resume" : "Submit a job, free"}</span>
+                <span className="mn-primary-s">
+                  {isCandidatePage ? "Free and private." : "Paste your posting. Nothing to pay unless you hire."}
                 </span>
               </span>
-              <span className="mnav-cta-arrow" aria-hidden="true">
-                <BtnArrow />
-              </span>
+              <NvArrow />
             </Link>
           </div>
 
-          {/* Employers Accordion */}
-          <div className="acc">
-            <button
-              type="button"
-              className="acc-btn"
-              aria-expanded={!!mobileExpanded["emp"]}
-              aria-controls="ma-emp"
-              onClick={() =>
-                setMobileExpanded((prev) => ({ ...prev, emp: !prev.emp }))
-              }
-            >
-              <span className="acc-text">
-                <span className="acc-pill">HIRING TOOLS</span>
-                <span className="acc-title">For employers</span>
-                <span className="acc-sub">Fees, hiring kits and where to hire from.</span>
-              </span>
-              <span className="acc-circle">
-                <Chevron />
-              </span>
-            </button>
-            <div className="acc-panel" id="ma-emp" hidden={!mobileExpanded["emp"]}>
-              <ul className="mega-list">
-                <li>
-                  {renderLink(
-                    "/find-candidates",
-                    true,
-                    "Find candidates",
-                    "Describe the seat and see screened candidates now"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/submit-job",
-                    true,
-                    "Submit a job",
-                    "Paste your posting; we check the pay and match"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/fees",
-                    true,
-                    "Fees and guarantee",
-                    "One fee, only if you hire, with a calculator"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/hiring-kit/estate-planning-attorney",
-                    true,
-                    "Hiring kits",
-                    "Posting template, interview questions and a scorecard"
-                  )}
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Candidates Accordion */}
-          <div className="acc">
-            <button
-              type="button"
-              className="acc-btn"
-              aria-expanded={!!mobileExpanded["cand"]}
-              aria-controls="ma-cand"
-              onClick={() =>
-                setMobileExpanded((prev) => ({ ...prev, cand: !prev.cand }))
-              }
-            >
-              <span className="acc-text">
-                <span className="acc-pill">FREE · CONFIDENTIAL</span>
-                <span className="acc-title">For candidates</span>
-                <span className="acc-sub">Open jobs, your resume and a salary check.</span>
-              </span>
-              <span className="acc-circle">
-                <Chevron />
-              </span>
-            </button>
-            <div
-              className="acc-panel"
-              id="ma-cand"
-              hidden={!mobileExpanded["cand"]}
-            >
-              <ul className="mega-list">
-                <li>
-                  {renderLink(
-                    "/jobs",
-                    true,
-                    "Open jobs",
-                    "Confidential roles with the pay on every listing"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/upload-resume",
-                    true,
-                    "Upload your resume",
-                    "See matching roles in seconds, in private"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/salary-check",
-                    true,
-                    "Check your salary",
-                    "Compare your base with your city and level"
-                  )}
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Salary Guides Accordion */}
-          <div className="acc">
-            <button
-              type="button"
-              className="acc-btn"
-              aria-expanded={!!mobileExpanded["sal"]}
-              aria-controls="ma-sal"
-              onClick={() =>
-                setMobileExpanded((prev) => ({ ...prev, sal: !prev.sal }))
-              }
-            >
-              <span className="acc-text">
-                <span className="acc-pill">PAY BENCHMARKS</span>
-                <span className="acc-title">Salary guides</span>
-                <span className="acc-sub">Pay by role and by city, with sources.</span>
-              </span>
-              <span className="acc-circle">
-                <Chevron />
-              </span>
-            </button>
-            <div className="acc-panel" id="ma-sal" hidden={!mobileExpanded["sal"]}>
-              <ul className="mega-list compact">
-                <li>
-                  {renderLink(
-                    "/salaries/estate-planning-attorney/houston-tx",
-                    true,
-                    "Estate planning attorney pay in Houston",
-                    "Bands by years of practice, the median and the source"
-                  )}
-                </li>
-              </ul>
-              <h3>By role</h3>
-              <ul className="mega-list compact">
-                {roles.map((r) => (
-                  <li key={r.slug}>
-                    {renderLink(
-                      `/roles/${r.slug}`,
-                      !!r.built,
-                      r.name,
-                      `${
-                        r.kind === "attorney"
-                          ? "Attorney"
-                          : r.kind === "paralegal"
-                          ? "Paralegal"
-                          : "Legal staff"
-                      } base pay by years`
-                    )}
+          {/* Sections */}
+          {[
+            { key: "emp", title: "For law firms", links: [...FIRM_HIRE, ...FIRM_TOOLS] },
+            { key: "cand", title: "For candidates", links: [...CAND_LINKS, { label: "Candidates overview", href: "/candidates" }] },
+            {
+              key: "sal",
+              title: "Salary guides",
+              links: [
+                { label: "Estate planning attorney pay, Houston", href: "/salaries/estate-planning-attorney/houston-tx" },
+                ...roles.map((r) => ({ label: r.name, href: `/roles/${r.slug}` })),
+              ],
+            },
+            {
+              key: "city",
+              title: "Cities",
+              links: cities.map((c) => ({ label: `${c.name}, ${c.state}`, href: `/locations/${c.stateSlug}/${c.citySlug}` })),
+            },
+          ].map((sec) => (
+            <div className="mn-sec" key={sec.key}>
+              <button
+                type="button"
+                className="mn-sec-btn"
+                aria-expanded={!!mobileExpanded[sec.key]}
+                aria-controls={`ma-${sec.key}`}
+                onClick={() => setMobileExpanded((prev) => (prev[sec.key] ? {} : { [sec.key]: true }))}
+              >
+                {sec.title}
+                <span className="mn-plus" aria-hidden="true" />
+              </button>
+              <ul className="mn-links" id={`ma-${sec.key}`} hidden={!mobileExpanded[sec.key]}>
+                {sec.links.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} onClick={closeAll}>
+                      {l.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
+          ))}
+
+          {/* Talk to Justin */}
+          <div className="mn-call">
+            <Image src={justin.photo} alt="" width={80} height={80} className="mn-call-photo" />
+            <span className="mn-call-t">
+              <b>Talk to Justin</b>
+              <span>Replies within an hour, business hours.</span>
+            </span>
+            <a className="mn-call-btn" href={justin.calendly} target="_blank" rel="noopener noreferrer" onClick={closeAll}>
+              Book 15 min
+            </a>
           </div>
         </div>
 
       </div>
-      )}
-
-      {/* Prototype Notice Toast */}
-      {toastMsg && (
-        <div className="toast show" role="status" aria-live="polite">
-          {toastMsg}
-        </div>
       )}
     </>
   );

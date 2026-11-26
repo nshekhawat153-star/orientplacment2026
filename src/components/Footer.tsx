@@ -1,55 +1,61 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "./footer.css";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { orionLine, cities, roles } from "@/data";
-import { RatingBadge, CalendlyLink } from "./Rating";
+import { orionLine, cities, roles, trust } from "@/data";
+import { RatingBadge } from "./Rating";
 import { GMark } from "./icons";
 
-const UNBUILT_MSG = "Prototype: only Houston × estate planning attorney is built.";
+// Footer columns. Every link points at a page that exists.
+const FT_COLUMNS: Array<{ title: string; links: Array<[string, string]> }> = [
+  {
+    title: "For law firms",
+    links: [
+      ["Find candidates", "/find-candidates"],
+      ["Submit a job", "/submit-job"],
+      ["Fees and guarantee", "/fees"],
+      ["Employers overview", "/employers"],
+    ],
+  },
+  {
+    title: "Hiring resources",
+    links: [
+      ["Salary guides", "/salaries/estate-planning-attorney/houston-tx"],
+      ["Hiring kits", "/hiring-kit/estate-planning-attorney"],
+      ["Where to post a job", "/where-to-post/houston-tx"],
+      ["Where to hire from", "/where-to-hire/houston-tx"],
+    ],
+  },
+  {
+    title: "For candidates",
+    links: [
+      ["Open jobs", "/jobs"],
+      ["Upload your resume", "/upload-resume"],
+      ["Check your salary", "/salary-check"],
+      ["Best firms to work for", "/best-law-firms/houston-tx"],
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      ["About Orion", "/about"],
+      ["Reviews", "/about#reviews"],
+      ["Contact", "/about#contact"],
+    ],
+  },
+];
+
+const FtArrow = () => (
+  <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M4 10h12M11 5l5 5-5 5" />
+  </svg>
+);
 
 export function Footer({ minimal = false }: { minimal?: boolean }) {
   const pathname = usePathname();
-  const [toastMsg, setToastMsg] = useState<string | null>(null);
-
-  useEffect(() => {
-    const handleDesktopExpand = () => {
-      if (typeof window !== "undefined" && window.innerWidth > 900) {
-        document.querySelectorAll<HTMLDetailsElement>(".site-footer .fgroup").forEach((el) => {
-          el.open = true;
-        });
-      }
-    };
-    handleDesktopExpand();
-    window.addEventListener("resize", handleDesktopExpand);
-    return () => window.removeEventListener("resize", handleDesktopExpand);
-  }, []);
-
-  const showToast = (msg: string) => {
-    setToastMsg(msg);
-    setTimeout(() => setToastMsg(null), 3200);
-  };
-
-  const renderLink = (href: string, built: boolean, label: string) => {
-    if (built) {
-      return <Link href={href}>{label}</Link>;
-    }
-    return (
-      <a
-        href="#"
-        data-unbuilt={UNBUILT_MSG}
-        onClick={(e) => {
-          e.preventDefault();
-          showToast(UNBUILT_MSG);
-        }}
-      >
-        {label}
-      </a>
-    );
-  };
-
   const isMinimal = minimal || pathname.startsWith("/candidate/");
   const isHireAttorneys = pathname.startsWith("/hire-attorneys");
 
@@ -207,190 +213,81 @@ export function Footer({ minimal = false }: { minimal?: boolean }) {
             <p className="small">© 2026 Orion Placement LLC. All rights reserved.</p>
           </div>
         </footer>
-        {toastMsg && (
-          <div className="toast show" role="status" aria-live="polite">
-            {toastMsg}
-          </div>
-        )}
       </>
     );
   }
 
   return (
-    <>
-      <div
-        role="separator"
-        aria-hidden="true"
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 10,
-          background: "#08142A",
-        }}
-      >
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 1140,
-            height: "1px",
-            background:
-              "linear-gradient(90deg, transparent 0%, transparent 20%, rgba(96, 165, 250, 0.12) 32%, rgba(147, 197, 253, 0.50) 50%, rgba(96, 165, 250, 0.12) 68%, transparent 80%, transparent 100%)",
-          }}
-        />
-      </div>
-      <footer className="site-footer">
-        <div className="wrap">
-          <div className="f-top">
-            <Link className="logo" href="/" aria-label="Orion Placement">
-              <Image
-                src="/images/orion-logo.png"
-                alt="Orion Placement"
-                className="logo-img"
-                width={68}
-                height={68}
-              />
+    <footer className="ft" aria-labelledby="ft-h">
+      <h2 id="ft-h" className="ft-sr">
+        Orion Placement
+      </h2>
+      <div className="ft-wrap">
+        {/* Brand row */}
+        <div className="ft-top">
+          <div className="ft-brand">
+            <Link href="/" className="ft-logo" aria-label="Orion Placement home">
+              <Image src="/images/orion-logo.png" alt="" width={56} height={56} />
             </Link>
-            <p className="f-tagline">{orionLine}</p>
-            <div className="f-rating-wrap">
-              <RatingBadge size="sm" dark />
+            <div>
+              <p className="ft-name">Orion Placement</p>
+              <p className="ft-tag">{orionLine}</p>
             </div>
           </div>
+          <div className="ft-top-side">
+            <RatingBadge size="sm" dark link />
+            <a className="ft-call" href={trust.calendly} target="_blank" rel="noopener noreferrer">
+              Book 15 min with Justin <FtArrow />
+            </a>
+          </div>
+        </div>
 
-          <div className="cols">
-            {/* For employers */}
-            <div>
-              <h2>For employers</h2>
+        {/* Link columns */}
+        <nav className="ft-cols" aria-label="Footer">
+          {FT_COLUMNS.map((col) => (
+            <div key={col.title} className="ft-col">
+              <h3>{col.title}</h3>
               <ul>
-                <li>{renderLink("/find-candidates", true, "Find candidates")}</li>
-                <li>{renderLink("/submit-job", true, "Submit a job")}</li>
-                <li>{renderLink("/fees", true, "Fees and guarantee")}</li>
-                <li>
-                  {renderLink(
-                    "/hiring-kit/estate-planning-attorney",
-                    true,
-                    "Hiring kits"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/where-to-post/houston-tx",
-                    true,
-                    "Where to post a job"
-                  )}
-                </li>
-                <li>
-                  {renderLink(
-                    "/where-to-hire/houston-tx",
-                    true,
-                    "Where to hire from"
-                  )}
-                </li>
-                <li>{renderLink("/employers", true, "Employers overview")}</li>
-              </ul>
-            </div>
-
-            {/* For candidates */}
-            <div>
-              <h2>For candidates</h2>
-              <ul>
-                <li>
-                  {renderLink(
-                    "/jobs",
-                    true,
-                    "Open jobs"
-                  )}
-                </li>
-                <li>{renderLink("/upload-resume", true, "Upload your resume")}</li>
-                <li>{renderLink("/salary-check", true, "Check your salary")}</li>
-                <li>
-                  {renderLink(
-                    "/best-law-firms/houston-tx",
-                    true,
-                    "Best firms to work for"
-                  )}
-                </li>
-                <li>{renderLink("/candidates", true, "Candidates overview")}</li>
-              </ul>
-            </div>
-
-            {/* Salary guides */}
-            <div>
-              <details className="fgroup">
-                <summary>
-                  <h2>Salary guides</h2>
-                </summary>
-                <ul>
-                  <li>
-                    {renderLink(
-                      "/salaries/estate-planning-attorney/houston-tx",
-                      true,
-                      "Estate planning attorney, Houston"
-                    )}
+                {col.links.map(([label, href]) => (
+                  <li key={href}>
+                    <Link href={href}>{label}</Link>
                   </li>
-                  {roles.map((r) => (
-                    <li key={r.slug}>
-                      {renderLink(`/roles/${r.slug}`, !!r.built, r.name)}
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </div>
-
-            {/* Cities */}
-            <div>
-              <details className="fgroup">
-                <summary>
-                  <h2>Cities</h2>
-                </summary>
-                <ul>
-                  {cities.map((c) => (
-                    <li key={c.slug}>
-                      {renderLink(
-                        `/locations/${c.stateSlug}/${c.citySlug}`,
-                        !!c.built,
-                        c.name
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </div>
-
-            {/* About */}
-            <div>
-              <h2>About</h2>
-              <ul>
-                <li>{renderLink("/about", true, "About Orion")}</li>
-                <li>
-                  <Link href="/about#reviews">Reviews</Link>
-                </li>
-                <li>
-                  <Link href="/about#contact">Contact</Link>
-                </li>
-                <li>
-                  <CalendlyLink />
-                </li>
+                ))}
               </ul>
             </div>
-          </div>
+          ))}
+        </nav>
 
-          <div className="base">
-            <div className="f-bottom-row">
-              <p className="f-copyright">
-                © 2026 Orion Placement LLC · 510 Southeast 5th Avenue, Unit 1513, Fort Lauderdale, FL 33301. All rights reserved.
-              </p>
-            </div>
+        {/* Directory: practice areas and cities as compact inline lists */}
+        <div className="ft-dir">
+          <div className="ft-dir-row">
+            <h3>Practice areas</h3>
+            <ul>
+              {roles.map((r) => (
+                <li key={r.slug}>
+                  <Link href={`/roles/${r.slug}`}>{r.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="ft-dir-row">
+            <h3>Cities</h3>
+            <ul>
+              {cities.map((c) => (
+                <li key={c.slug}>
+                  <Link href={`/locations/${c.stateSlug}/${c.citySlug}`}>{c.name}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </footer>
 
-      {toastMsg && (
-        <div className="toast show" role="status" aria-live="polite">
-          {toastMsg}
+        {/* Base */}
+        <div className="ft-base">
+          <p>© 2026 Orion Placement LLC. All rights reserved.</p>
+          <p>{trust.address}</p>
         </div>
-      )}
-    </>
+      </div>
+    </footer>
   );
 }

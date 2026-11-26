@@ -60,7 +60,7 @@ export default function DesignConceptPage() {
       <section id="executive-dark" className="dc-dark-section">
         <div className="dc-dark-wrap">
           <div className="dc-dark-header">
-            <span className="dc-eyebrow">CONTINGENCY LEGAL RECRUITING · 23% DUE ONLY IF YOU HIRE</span>
+            <span className="dc-eyebrow">CONTINGENCY LEGAL RECRUITING · FEE DUE ONLY IF YOU HIRE</span>
 
             <h1 className="dc-dark-h1">
               We&apos;re the recruiters who{" "}
@@ -68,7 +68,7 @@ export default function DesignConceptPage() {
             </h1>
 
             <p className="dc-dark-lead">
-              Direct permanent attorney placements for law firms with 50 to 500 attorneys across Texas and nationwide. Zero upfront retainer. 23% contingency fee due only when your candidate starts.
+              Direct permanent attorney placements for law firms with 50 to 500 attorneys across Texas and nationwide. Zero upfront retainer. One contingency fee, due only when your candidate starts.
             </p>
 
             <div className="dc-dark-actions">
@@ -131,7 +131,7 @@ export default function DesignConceptPage() {
                 </svg>
               </div>
               <span className="dc-card-step-badge">STEP 03 · 90-DAY GUARANTEE</span>
-              <h2 className="dc-card-title-dark">23% Contingency &amp; Net 15</h2>
+              <h2 className="dc-card-title-dark">Contingency &amp; Net 15</h2>
               <p className="dc-card-desc-dark">
                 Zero upfront retainer. Invoiced on day 1 of employment, due in 15 days. If a placed attorney leaves within 90 days, we conduct a replacement search at zero extra cost.
               </p>
@@ -238,8 +238,8 @@ export default function DesignConceptPage() {
               <div className="dc-stat-label">Legal talent pool</div>
             </div>
             <div>
-              <div className="dc-stat-num">23%</div>
-              <div className="dc-stat-label">Net 15 contingency</div>
+              <div className="dc-stat-num">Net 15</div>
+              <div className="dc-stat-label">Contingency, after start</div>
             </div>
           </div>
         </div>
@@ -377,7 +377,7 @@ export default function DesignConceptPage() {
               <div>
                 <span style={{ fontSize: 12, color: "#64748B", fontFamily: "var(--font-dm-mono, monospace)" }}>BODY EDITORIAL · INTER SANS (16px / 1.70 line-height)</span>
                 <div style={{ fontFamily: "var(--font-inter, sans-serif)", fontSize: 16, color: "#CBD5E1", maxWidth: 680, lineHeight: 1.7, marginTop: 4 }}>
-                  We operate exclusively on a non-exclusive, contingency-based model at 23% of the candidate&apos;s compensation. Clients only pay when they successfully hire. Invoiced on the first day of employment, due in 15 days.
+                  We operate exclusively on a non-exclusive, contingency-based model. Clients only pay when they successfully hire. Invoiced on the first day of employment, due in 15 days.
                 </div>
               </div>
             </div>

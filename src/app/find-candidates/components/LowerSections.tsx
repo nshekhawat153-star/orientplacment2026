@@ -268,7 +268,7 @@ export function LowerSections() {
                 transition: "all 0.2s ease",
               }}
             >
-              <span>Explore fee schedule &amp; calculator</span>
+              <span>Explore fee schedule &amp; terms</span>
               <span aria-hidden="true"> →</span>
             </Link>
           </div>
@@ -284,10 +284,10 @@ export function LowerSections() {
             {/* Pillar 1 */}
             <div className="fc-light-terms-card">
               <div className="fc-terms-kicker">01 · CONTINGENCY FEE</div>
-              <div className="fc-terms-val">23%</div>
+              <div className="fc-terms-val">On hire</div>
               <div className="fc-terms-label">Fee (contingency only)</div>
               <p className="fc-terms-desc">
-                Calculated strictly on base salary. Discretionary bonuses and health benefits are never included.
+                One fee, as set out in your one-page agreement. Nothing is due unless you hire.
               </p>
               <div className="fc-terms-badge">
                 <span className="fc-terms-check">✓</span>

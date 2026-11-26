@@ -289,7 +289,7 @@ export default async function CityLocationPage({ params }: PageProps) {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
-              <span>23% contingency fee — only pay if you hire</span>
+              <span>One contingency fee — only pay if you hire</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ color: "#60A5FA", fontWeight: 700 }}>✓</span>
@@ -823,7 +823,7 @@ export default async function CityLocationPage({ params }: PageProps) {
               </span>
             </h2>
             <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.6, margin: "0 auto", maxWidth: 680 }}>
-              {city.name} firms pay the standard 23% contingency fee. Zero upfront retainer.
+              {city.name} firms pay one contingency fee, only if they hire. Zero upfront retainer.
             </p>
           </div>
           <TermsTiles />

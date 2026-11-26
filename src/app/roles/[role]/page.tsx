@@ -848,7 +848,7 @@ export default async function RolePage({ params }: PageProps) {
           </h2>
 
           <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 34, maxWidth: 640, margin: "0 auto 34px" }}>
-            Access verified candidate dossiers ready for immediate interview. 23% fee due only if you hire.
+            Access verified candidate dossiers ready for immediate interview. Fee due only if you hire.
           </p>
 
           <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
