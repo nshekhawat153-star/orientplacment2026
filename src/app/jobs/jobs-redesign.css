@@ -192,18 +192,13 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin: 18px auto 0;
+  margin: 20px auto 0;
 }
-.jb-quick + .jb-quick {
-  margin-top: 10px;
-}
-.jb-quick-k {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #7C93B8;
-  margin-right: 4px;
+.jb-quick-sep {
+  width: 1px;
+  height: 18px;
+  margin: 0 6px;
+  background: rgba(147, 197, 253, 0.3);
 }
 .jb-qchip {
   display: inline-flex;
@@ -1265,7 +1260,7 @@
     display: none;
   }
   .jb-qchip,
-  .jb-quick-k {
+  .jb-quick-sep {
     flex: none;
   }
 

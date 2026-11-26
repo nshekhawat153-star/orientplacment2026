@@ -217,8 +217,7 @@ export function JobsSearchClient() {
             </button>
           </form>
 
-          <div className="jb-quick">
-            <span className="jb-quick-k">Markets</span>
+          <div className="jb-quick" aria-label="Quick searches">
             {MARKETS.map((m) => (
               <button
                 key={m.name}
@@ -229,9 +228,7 @@ export function JobsSearchClient() {
                 {m.name} <small>{m.n}</small>
               </button>
             ))}
-          </div>
-          <div className="jb-quick">
-            <span className="jb-quick-k">Popular</span>
+            <span className="jb-quick-sep" aria-hidden="true" />
             {POPULAR.map((p) => (
               <button
                 key={p}
