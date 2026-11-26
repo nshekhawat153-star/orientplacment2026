@@ -15,7 +15,7 @@ import {
 import { HeroLuxuryAskSection } from "./components/HeroLuxuryAskSection";
 import { ScreenResults } from "./components/ScreenResults";
 import { ScreenProfile } from "./components/ScreenProfile";
-import { LowerSections } from "./components/LowerSections";
+import { FcProcess } from "./components/FcProcess";
 import { WorkEmailGateModal } from "./components/WorkEmailGateModal";
 import { TermsSignatureModal } from "./components/TermsSignatureModal";
 import { ToastNotification } from "./components/ToastNotification";
@@ -258,8 +258,8 @@ export function FindCandidatesClient() {
         )}
       </div>
 
-      {/* 4. ORIGINAL 4-STEP WORKFLOW, 4 TERMS PILLARS, AND BOTTOM DARK CTA SECTION */}
-      <LowerSections />
+      {/* 4. HOW IT WORKS + TERMS (DARK) AND CLOSING CALL CARD (LIGHT) */}
+      <FcProcess />
 
       {/* 5. POPUP MODAL 1: WORK EMAIL GATE MODAL */}
       {gateCandidate && (
