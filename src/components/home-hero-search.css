@@ -520,9 +520,18 @@
   border-color: #60A5FA;
 }
 
+/* Candidate cards (2) beside the request card (1); the request card leaves the
+   swipe row on phones so it is always visible */
+.hero-cinematic .hhs-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
 .hero-cinematic .hhs-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
   align-items: stretch;
 }
@@ -532,16 +541,26 @@
   display: flex;
   flex-direction: column;
   background: #FFFFFF;
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 18px;
+  padding: 22px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.65);
   color: #334155;
   animation: hhs-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-.hero-cinematic .hhs-card:nth-child(2) { animation-delay: 0.08s; }
-.hero-cinematic .hhs-card:nth-child(3) { animation-delay: 0.16s; }
+.hero-cinematic .hhs-grid > * {
+  animation: hhs-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-cinematic .hhs-grid > *:nth-child(2) { animation-delay: 0.08s; }
+.hero-cinematic .hhs-grid > *:nth-child(3) { animation-delay: 0.16s; }
+
+/* Dossier cards on the dark hero get a deeper shadow */
+.hero-cinematic .hhs-grid .cdc {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 28px 60px -28px rgba(0, 0, 0, 0.75);
+}
 
 .hero-cinematic .hhs-card-top {
   display: flex;
@@ -762,7 +781,7 @@
 .hero-cinematic .hhs-req-title {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 21px;
+  font-size: 23px;
   line-height: 1.25;
   color: #FFFFFF;
   margin: 0 0 10px;
@@ -849,13 +868,8 @@
 }
 
 .hero-cinematic .hhs-req-terms {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 14px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
-  font-size: 12px;
+  margin: auto 0 0;
+  font-size: 12.5px;
   color: #94A3B8;
 }
 
@@ -883,7 +897,8 @@
 }
 
 .hero-cinematic .hhs-results-foot {
-  margin: 16px 0 0 !important;
+  margin: 18px auto 0 !important;
+  max-width: none !important;
   font-size: 12.5px;
   color: #64748B;
   text-align: center !important;
@@ -895,11 +910,8 @@
 
 /* ---------- Tablet ---------- */
 @media (max-width: 1023px) {
-  .hero-cinematic .hhs-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .hero-cinematic .hhs-card.is-request {
-    grid-column: 1 / -1;
+  .hero-cinematic .hhs-layout {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -962,7 +974,7 @@
     scrollbar-width: none;
   }
   .hero-cinematic .hhs-grid::-webkit-scrollbar { display: none; }
-  .hero-cinematic .hhs-card {
+  .hero-cinematic .hhs-grid > * {
     flex: 0 0 86%;
     scroll-snap-align: center;
   }

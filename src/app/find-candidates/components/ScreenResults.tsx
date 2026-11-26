@@ -8,6 +8,7 @@ import {
   TERMS_DATA,
 } from "../candidateData";
 import { roles, cities } from "@/data";
+import { CandidateDossierCard } from "@/components/CandidateDossierCard";
 
 interface ScreenResultsProps {
   seat: ParsedSeat;
@@ -369,117 +370,15 @@ export function ScreenResults({
                 {results.map(({ candidate: c, notes, warn }) => {
                   const isUnlocked = unlockedIds.includes(c.id);
                   return (
-                    <article
+                    <CandidateDossierCard
                       key={c.id}
-                      className="fc-candidate-card"
-                    >
-                      {/* TOP BADGE ROW */}
-                      <div className="fc-card-top-row">
-                        <span className="fc-card-id-badge">{c.id}</span>
-                        <span className="fc-card-area">{c.area}</span>
-                      </div>
-
-                      {/* HEADLINE */}
-                      <h3 className="fc-card-title">
-                        {c.headline}
-                      </h3>
-
-                      {/* FACTS GRID */}
-                      <dl className="fc-facts-grid">
-                        <div>
-                          <dt>Experience</dt>
-                          <dd>{c.years} years post-bar</dd>
-                        </div>
-                        <div>
-                          <dt>Bar</dt>
-                          <dd>{c.bars.join(", ") || "Texas"} (active)</dd>
-                        </div>
-                        <div>
-                          <dt>Base Expected</dt>
-                          <dd>${c.pay[0]}k–${c.pay[1]}k</dd>
-                        </div>
-                        <div>
-                          <dt>Availability</dt>
-                          <dd>{c.availability}</dd>
-                        </div>
-                      </dl>
-
-                      {/* PRACTICE MIX BAR */}
-                      <div className="fc-mixbar-wrap">
-                        <div className="fc-mixbar" aria-hidden="true">
-                          {c.mix.map((item, i) => (
-                            <span key={i} style={{ width: `${item[1]}%` }} />
-                          ))}
-                        </div>
-                        <div className="fc-mix-legend">
-                          {c.mix.map((item) => `${item[0]} ${item[1]}%`).join(" · ")}
-                        </div>
-                      </div>
-
-                      {/* FIT NOTE */}
-                      {notes.length > 0 && (
-                        <div className={`fc-fit-note ${warn ? "warn" : ""}`}>
-                          <span>{warn ? "⚠" : "✓"}</span>
-                          <span>{notes.join(" · ")}</span>
-                        </div>
-                      )}
-
-                      {/* VERIFICATION STAMPS */}
-                      <div className="fc-stamps-wrap">
-                        <span className="fc-stamp">✓ Spoke with Justin {c.spokeDate}</span>
-                        <span className="fc-stamp">✓ Texas Bar standing verified</span>
-                        <span className="fc-stamp">✓ Agreed to be shown</span>
-                      </div>
-
-                      {/* WHY THIS CANDIDATE */}
-                      <p className="fc-why">
-                        {c.why}
-                      </p>
-
-                      {/* CTA BUTTON */}
-                      <div style={{ marginTop: "auto", paddingTop: 8 }}>
-                        {isUnlocked ? (
-                          <button
-                            type="button"
-                            className="btn btn-ghost fc-card-unlocked-btn"
-                            onClick={() => onSelectCandidate(c)}
-                            style={{
-                              width: "100%",
-                              height: 44,
-                              borderRadius: 8,
-                              border: "1.5px solid #2563EB",
-                              color: "#2563EB",
-                              fontWeight: 600,
-                              fontSize: 14,
-                              background: "#FFFFFF",
-                              cursor: "pointer",
-                            }}
-                          >
-                            Open full resume →
-                          </button>
-                        ) : (
-                          <button
-                            type="button"
-                            className="btn btn-primary fc-card-cta-btn"
-                            onClick={() => onOpenGateModal(c)}
-                            style={{
-                              width: "100%",
-                              height: 44,
-                              borderRadius: 8,
-                              background: "#2563EB",
-                              color: "#FFFFFF",
-                              border: 0,
-                              fontWeight: 600,
-                              fontSize: 14,
-                              cursor: "pointer",
-                              boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
-                            }}
-                          >
-                            Show full resume →
-                          </button>
-                        )}
-                      </div>
-                    </article>
+                      c={c}
+                      notes={notes}
+                      warn={warn}
+                      quiet={isUnlocked}
+                      actionLabel={isUnlocked ? "Open resume" : "Show full resume"}
+                      action={{ onClick: () => (isUnlocked ? onSelectCandidate(c) : onOpenGateModal(c)) }}
+                    />
                   );
                 })}
               </div>

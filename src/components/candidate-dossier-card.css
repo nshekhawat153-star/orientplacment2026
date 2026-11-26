@@ -1,0 +1,267 @@
+/* ==================================================================
+   CandidateDossierCard: shared by the homepage preview and /find-candidates.
+   Quiet white card: where, who, what it costs, when, why. One action.
+   The whole card is clickable (the action link stretches over it).
+   ================================================================== */
+
+.cdc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #FFFFFF;
+  border: 1px solid #E8ECF2;
+  border-radius: 18px;
+  padding: 24px 24px 0;
+  text-align: left;
+  color: #334155;
+  font-family: var(--body);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 14px 34px -20px rgba(15, 23, 42, 0.24);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.cdc:hover,
+.cdc:focus-within {
+  transform: translateY(-3px);
+  border-color: #C7D7FE;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 24px 48px -22px rgba(29, 78, 216, 0.38);
+}
+
+/* Top row: location left, a gap only when something does not fit */
+.cdc .cdc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 24px;
+  margin: 0 0 14px;
+  padding: 0;
+  border: 0;
+}
+
+.cdc .cdc-loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font: 500 11px/1.2 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cdc .cdc-loc svg {
+  flex-shrink: 0;
+  color: #1D4ED8;
+}
+
+.cdc .cdc-gap {
+  flex-shrink: 0;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  color: #92400E;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: help;
+  position: relative;
+  z-index: 2; /* above the stretched link so the tooltip works */
+}
+
+.cdc .cdc-sample-tag {
+  flex-shrink: 0;
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A6A1F;
+  background: #FBF5E6;
+  border: 1px solid #EBD9A8;
+  border-radius: 999px;
+  padding: 7px 10px;
+}
+
+/* Who */
+.cdc .cdc-title {
+  font-family: var(--display) !important;
+  font-weight: 400 !important;
+  font-size: 22px !important;
+  line-height: 1.27 !important;
+  letter-spacing: -0.014em !important;
+  color: #0B1728 !important;
+  margin: 0 !important;
+  text-align: left !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.54em;
+}
+
+/* What it costs + when */
+.cdc .cdc-pay {
+  margin: 22px 0 0;
+  font-family: var(--display);
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #0B1728;
+  white-space: nowrap;
+}
+
+.cdc .cdc-pay span {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0;
+  color: #94A3B8;
+  margin-left: 2px;
+}
+
+.cdc .cdc-facts {
+  margin: 8px 0 0;
+  font-size: 13.5px;
+  color: #64748B;
+}
+
+/* Why */
+.cdc .cdc-why {
+  margin: 18px 0 0;
+  padding: 0 0 0 14px;
+  border-left: 2px solid #DBE5FF;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #475569;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Action: a quiet full-width footer link, the whole card is clickable */
+.cdc .cdc-foot {
+  margin: auto -24px 0;
+  padding: 0;
+  border: 0;
+}
+
+.cdc .cdc-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 22px;
+  padding: 16px 24px;
+  border: 0;
+  border-top: 1px solid #EEF2F7;
+  border-radius: 0 0 18px 18px;
+  background: transparent;
+  color: #1D4ED8 !important;
+  font: 600 14px/1 var(--body);
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Stretch the click area over the whole card */
+.cdc .cdc-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+}
+
+.cdc .cdc-link svg {
+  transition: transform 0.2s ease;
+}
+
+.cdc:hover .cdc-link {
+  background: #1D4ED8;
+  color: #FFFFFF !important;
+}
+
+.cdc:hover .cdc-link svg {
+  transform: translateX(3px);
+}
+
+.cdc .cdc-link:focus-visible {
+  outline: none;
+}
+
+.cdc:focus-within {
+  outline: 2px solid #60A5FA;
+  outline-offset: 3px;
+}
+
+.cdc .cdc-link.is-quiet {
+  color: #475569 !important;
+}
+
+.cdc:hover .cdc-link.is-quiet {
+  background: #F1F5F9;
+  color: #0B1728 !important;
+}
+
+/* Sample cards sit back a little */
+.cdc.is-sample {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 100%);
+}
+
+.cdc.is-sample .cdc-pay {
+  font-size: 24px;
+}
+
+/* Phones */
+@media (max-width: 640px) {
+  .cdc {
+    padding: 20px 20px 0;
+    border-radius: 16px;
+  }
+  .cdc .cdc-foot {
+    margin: auto -20px 0;
+  }
+  .cdc .cdc-link {
+    padding: 15px 20px;
+    border-radius: 0 0 16px 16px;
+    margin-top: 18px;
+  }
+  .cdc .cdc-title {
+    font-size: 20px !important;
+  }
+  .cdc .cdc-pay {
+    font-size: 27px;
+    margin-top: 18px;
+  }
+  /* On a touch screen there is no hover: keep the action visibly blue */
+  .cdc .cdc-link {
+    background: #F5F8FF;
+  }
+}
+
+@media (hover: none) {
+  .cdc:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cdc,
+  .cdc .cdc-link,
+  .cdc .cdc-link svg {
+    transition: none !important;
+  }
+  .cdc:hover,
+  .cdc:focus-within {
+    transform: none;
+  }
+}

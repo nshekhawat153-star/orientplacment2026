@@ -4,9 +4,9 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import "./home-hero-search.css";
+import { CandidateDossierCard, SampleDossierCard } from "./CandidateDossierCard";
 import { roles, cities, trust, people } from "@/data";
 import {
-  EnrichedCandidate,
   ParsedSeat,
   parseSeatInput,
   matchEnrichedCandidates,
@@ -195,108 +195,6 @@ const LockIcon = () => (
 
 /* ---------------- cards ---------------- */
 
-function CandidatePreviewCard({
-  c,
-  notes,
-  warn,
-  href,
-}: {
-  c: EnrichedCandidate;
-  notes: string[];
-  warn: boolean;
-  href: string;
-}) {
-  return (
-    <article className="hhs-card">
-      <div className="hhs-card-top">
-        <span className="hhs-id">{c.id}</span>
-        <span className="hhs-loc">{c.area}</span>
-      </div>
-      <h3 className="hhs-card-title">{c.headline}</h3>
-      <dl className="hhs-stats">
-        <div>
-          <dt>Experience</dt>
-          <dd>{c.years} years post-bar</dd>
-        </div>
-        <div>
-          <dt>Bar</dt>
-          <dd>{c.bars.length ? `${c.bars.join(", ")} (active)` : "Not required"}</dd>
-        </div>
-        <div>
-          <dt>Base expected</dt>
-          <dd>
-            ${c.pay[0]}k–${c.pay[1]}k
-          </dd>
-        </div>
-        <div>
-          <dt>Availability</dt>
-          <dd>{c.availability}</dd>
-        </div>
-      </dl>
-      <div className="hhs-mix">
-        <div className="hhs-mixbar" aria-hidden="true">
-          {c.mix.map(([k, v]) => (
-            <span key={k} style={{ width: `${v}%` }} />
-          ))}
-        </div>
-        <p className="hhs-mix-legend">{c.mix.map(([k, v]) => `${k} ${v}%`).join(" · ")}</p>
-      </div>
-      <p className={`hhs-fit${warn ? " is-warn" : ""}`}>
-        <CheckIcon />
-        <span>{notes.length ? notes.join(" · ") : "Matches your seat"}</span>
-      </p>
-      <p className="hhs-stamp">
-        <CheckIcon size={12} /> Spoke with Justin {c.spokeDate}
-      </p>
-      <Link className="hhs-card-cta" href={href}>
-        View dossier <ArrowIcon />
-      </Link>
-    </article>
-  );
-}
-
-function SamplePreviewCard({ s, onRequest }: { s: SampleProfile; onRequest: () => void }) {
-  return (
-    <article className="hhs-card is-sample">
-      <div className="hhs-card-top">
-        <span className="hhs-id is-sample">Sample profile</span>
-        <span className="hhs-loc">{s.location}</span>
-      </div>
-      <h3 className="hhs-card-title">{s.title}</h3>
-      <dl className="hhs-stats">
-        <div>
-          <dt>Experience</dt>
-          <dd>{s.experience}</dd>
-        </div>
-        <div>
-          <dt>Bar</dt>
-          <dd>Verified before intro</dd>
-        </div>
-        <div>
-          <dt>Base expected</dt>
-          <dd>{s.base}</dd>
-        </div>
-        <div>
-          <dt>Availability</dt>
-          <dd>On request</dd>
-        </div>
-      </dl>
-      <div className="hhs-redacted" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
-      <p className="hhs-sample-note">
-        Representative of the profiles we source for this seat. Names, firms and full resumes are shared once you
-        request a shortlist.
-      </p>
-      <button type="button" className="hhs-card-cta is-ghost" onClick={onRequest}>
-        Request profiles like this <ArrowIcon />
-      </button>
-    </article>
-  );
-}
-
 function RequestCard({
   seatLabel,
   inputRef,
@@ -323,17 +221,15 @@ function RequestCard({
       <span className="hhs-lock" aria-hidden="true">
         <LockIcon />
       </span>
-      <p className="hhs-req-eyebrow">Live search</p>
-      <h3 className="hhs-req-title">Get a screened shortlist for this seat</h3>
+      <h3 className="hhs-req-title">Want a shortlist for this seat?</h3>
       <p className="hhs-req-copy">
-        Justin runs a targeted search for <em>{seatLabel}</em> across {trust.activePool} legal professionals and sends
-        screened dossiers, usually within a week.
+        Justin searches {trust.activePool} legal professionals for <em>{seatLabel}</em>.
       </p>
 
       {sent ? (
         <div className="hhs-req-done" role="status">
           <CheckIcon size={16} />
-          <span>Request received. Justin replies within one business hour.</span>
+          <span>Received. Justin replies within one business hour.</span>
         </div>
       ) : (
         <form className="hhs-req-form" onSubmit={submit} noValidate>
@@ -361,20 +257,7 @@ function RequestCard({
         </form>
       )}
 
-      <ul className="hhs-req-terms">
-        <li>
-          <CheckIcon size={12} /> No retainer
-        </li>
-        <li>
-          <CheckIcon size={12} /> Pay only if you hire
-        </li>
-        <li>
-          <CheckIcon size={12} /> 90-day guarantee
-        </li>
-      </ul>
-      <a className="hhs-req-call" href={trust.calendly} target="_blank" rel="noopener noreferrer">
-        Or book 15 minutes with Justin
-      </a>
+      <p className="hhs-req-terms">No retainer · Pay only if you hire</p>
     </article>
   );
 }
@@ -650,19 +533,29 @@ export function HomeHeroSearch() {
             )}
           </div>
 
-          <div className="hhs-grid">
-            {result.real.map((m) => (
-              <CandidatePreviewCard
-                key={m.candidate.id}
-                c={m.candidate}
-                notes={m.notes}
-                warn={m.warn}
-                href={findHref(m.candidate.id)}
-              />
-            ))}
-            {result.samples.map((s) => (
-              <SamplePreviewCard key={s.key} s={s} onRequest={focusRequest} />
-            ))}
+          <div className="hhs-layout">
+            <div className="hhs-grid">
+              {result.real.map((m) => (
+                <CandidateDossierCard
+                  key={m.candidate.id}
+                  c={m.candidate}
+                  notes={m.notes}
+                  warn={m.warn}
+                  actionLabel="View dossier"
+                  action={{ href: findHref(m.candidate.id) }}
+                />
+              ))}
+              {result.samples.map((s) => (
+                <SampleDossierCard
+                  key={s.key}
+                  title={s.title}
+                  location={s.location}
+                  pay={s.base}
+                  facts={s.experience === "Per your brief" ? "Matched to your brief" : `${s.experience} · matched to your brief`}
+                  onRequest={focusRequest}
+                />
+              ))}
+            </div>
             <RequestCard seatLabel={result.seatLabel} inputRef={requestInputRef} />
           </div>
 
