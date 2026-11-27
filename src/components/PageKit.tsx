@@ -237,6 +237,13 @@ export function PkCards({
             )}
           </>
         );
+        if (c.href && c.href.startsWith("http")) {
+          return (
+            <a key={c.title} href={c.href} className="pk-card is-link" target="_blank" rel="noopener noreferrer">
+              {inner}
+            </a>
+          );
+        }
         return c.href ? (
           <Link key={c.title} href={c.href} className="pk-card is-link">
             {inner}
@@ -295,5 +302,19 @@ export function PkCallCard({
         {secondary && <CtaLink cta={secondary} kind="line" />}
       </div>
     </div>
+  );
+}
+
+/* ---------------- STATS STRIP ---------------- */
+export function PkStats({ items }: { items: Array<{ k: string; v: string }> }) {
+  return (
+    <dl className="pk-stats">
+      {items.map((s) => (
+        <div key={s.v}>
+          <dt>{s.k}</dt>
+          <dd>{s.v}</dd>
+        </div>
+      ))}
+    </dl>
   );
 }

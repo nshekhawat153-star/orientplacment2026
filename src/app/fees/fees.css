@@ -1,0 +1,131 @@
+/* /fees only (fe- prefix) */
+.fe-table {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #FFFFFF;
+  color: #08142A;
+  box-shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.7);
+}
+.fe-table-head,
+.fe-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1.1fr;
+  gap: 24px;
+  padding: 18px 26px;
+}
+.fe-table-head {
+  background: #F4F6FA;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+.fe-table-head span:last-child {
+  color: #1D4ED8;
+}
+.fe-row {
+  border-top: 1px solid #EEF2F7;
+  align-items: start;
+}
+.fe-row p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.fe-q {
+  font-weight: 600;
+  color: #08142A;
+}
+.fe-why {
+  color: #64748B;
+}
+.fe-us {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  font-weight: 600;
+}
+.fe-us::first-letter {
+  text-transform: uppercase;
+}
+.fe-table-foot {
+  margin-top: 18px;
+}
+.fe-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  font: 600 14.5px/1 var(--body);
+  cursor: pointer;
+}
+.fe-copy:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.fe-copy.is-done {
+  background: #FFFFFF;
+  color: #047857;
+}
+.fe-terms {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px;
+  align-items: start;
+}
+.fe-terms .pk-head {
+  margin-bottom: 28px;
+}
+.fe-form {
+  box-shadow: 0 30px 70px -44px rgba(8, 20, 42, 0.45);
+  border: 1px solid #E5E7EB;
+}
+.fe-bullets {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.fe-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  color: #334155;
+}
+.fe-bullets svg {
+  color: #10B981;
+}
+.fe-send {
+  width: 100%;
+  margin-top: 14px;
+}
+@media (max-width: 1080px) {
+  .fe-terms {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .fe-table-head {
+    display: none;
+  }
+  .fe-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 18px;
+  }
+  .fe-row:first-of-type {
+    border-top: 0;
+  }
+  .fe-copy {
+    width: 100%;
+    justify-content: center;
+  }
+}

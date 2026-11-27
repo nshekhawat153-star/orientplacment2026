@@ -1,0 +1,44 @@
+/* /candidates only (cd- prefix) */
+.cd-seats {
+  margin-top: 56px;
+}
+.cd-seats-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.cd-seats-head h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 26px;
+  color: #08142A;
+}
+.cd-seats-head a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #1D4ED8;
+  text-decoration: none;
+}
+.cd-seat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.cd-privacy {
+  padding-bottom: 24px;
+}
+@media (max-width: 1080px) {
+  .cd-seat-grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+}
+.cd-reviews .hrv {
+  padding-top: 64px;
+}

@@ -1,917 +1,157 @@
-"use client";
-
-import React, { useState } from "react";
-import Link from "next/link";
-import { GateForm } from "@/components/GateForm";
+import React from "react";
+import type { Metadata } from "next";
+import "./fees.css";
 import { terms, trust, recruiterQuestions } from "@/data";
+import { PkHero, PkSection, PkCards, PkFaq, PkCallCard, PkStats } from "@/components/PageKit";
+import { CopyQuestions, TermsEmail } from "./FeesClientParts";
+
+export const metadata: Metadata = {
+  title: "Fees and Guarantee: One Fee, Only If You Hire | Orion Placement",
+  description:
+    "Orion Placement charges one contingency fee, only if you hire. No retainer, no exclusivity, invoiced on the start date with Net 15 terms and a 90-day replacement guarantee.",
+  alternates: { canonical: "https://www.orionplacement.com/fees" },
+};
+
+const GUARANTEE = [
+  {
+    meta: "The fee",
+    title: "One fee, on hire",
+    text: "Set out in a one-page agreement. Nothing is due unless you hire someone Orion introduced.",
+  },
+  {
+    meta: "Replacement",
+    title: "90 calendar days",
+    text: "If the hire leaves or is let go in the first 90 days, Orion reopens the search and sends replacements at no extra fee.",
+  },
+  {
+    meta: "Freedom",
+    title: "No retainer, no lock-in",
+    text: "No upfront cash and no exclusivity. Keep your referrals, job posts and other recruiters.",
+  },
+  {
+    meta: "Payment",
+    title: "Net 15 from the start date",
+    text: "The invoice goes out on the hire’s first day and is due in 15 days. The guarantee applies once it is paid.",
+  },
+];
+
+const FAQ = [
+  {
+    q: "Do we sign an agreement before we see candidates?",
+    a: "No. You sign nothing until you want to interview someone Orion introduced. Looking at profiles commits you to nothing.",
+  },
+  {
+    q: "Do you offer a refund instead of replacement?",
+    a: "The standard term is a priority replacement search. Refund terms can be discussed for multi-hire or larger searches; ask Justin before you start.",
+  },
+  {
+    q: "What counts as the guarantee period?",
+    a: "90 calendar days from the hire’s first day in your office, covering resignation or being let go for any reason other than firm redundancy or practice group closure.",
+  },
+];
 
 export default function FeesPage() {
-  const [copied, setCopied] = useState<boolean>(false);
-
-  const handleCopyQuestions = () => {
-    const qs = recruiterQuestions.filter((q) => q.term).slice(0, 5);
-    const text =
-      "Questions to ask a legal recruiter\n" +
-      qs.map((q, i) => `${i + 1}. ${q.q}`).join("\n");
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
-
   const qs = recruiterQuestions.filter((q) => q.term).slice(0, 5);
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.orionplacement.com/",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Employers",
-        item: "https://www.orionplacement.com/employers/",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Fees",
-        item: "https://www.orionplacement.com/fees/",
-      },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.orionplacement.com/" },
+      { "@type": "ListItem", position: 2, name: "Employers", item: "https://www.orionplacement.com/employers/" },
+      { "@type": "ListItem", position: 3, name: "Fees", item: "https://www.orionplacement.com/fees/" },
     ],
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <style>{`
-        /* Hero Section Responsive */
-        @media (max-width: 768px) {
-          .fee-luxury-hero-sec {
-            padding: 88px 0 44px !important;
-          }
-          .fees-hero-h1 {
-            font-size: 32px !important;
-            line-height: 1.15 !important;
-          }
-        }
-        @media (max-width: 640px) {
-          .fees-hero-actions {
-            flex-direction: column !important;
-            align-items: stretch !important;
-            max-width: 330px !important;
-            margin: 0 auto 28px !important;
-          }
-          .fees-hero-actions a {
-            width: 100% !important;
-            justify-content: center !important;
-            box-sizing: border-box !important;
-          }
-          .fees-reassurances {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 10px 14px !important;
-            max-width: 330px !important;
-            margin: 0 auto !important;
-            text-align: left !important;
-            font-size: 12px !important;
-          }
-          .fees-reassurance-dot {
-            display: none !important;
-          }
-        }
-
-        /* 4 Pillars - Dedicated High-Contrast Light Cards */
-        .fees-pillar-card {
-          background: #FFFFFF !important;
-          border: 1.5px solid #E2E8F0 !important;
-          border-radius: 16px !important;
-          padding: 32px 26px !important;
-          box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04) !important;
-          display: flex !important;
-          flex-direction: column !important;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        }
-        .fees-pillar-card:hover {
-          transform: translateY(-4px) !important;
-          border-color: #3B82F6 !important;
-          box-shadow: 0 16px 36px rgba(37, 99, 235, 0.12) !important;
-        }
-        .fees-pillar-kicker {
-          color: #1D4ED8 !important;
-          font-family: var(--mono) !important;
-          font-size: 11px !important;
-          font-weight: 700 !important;
-          letter-spacing: 0.1em !important;
-          text-transform: uppercase !important;
-          margin-bottom: 14px !important;
-        }
-        .fees-pillar-val {
-          font-family: var(--display) !important;
-          font-size: clamp(36px, 3.4vw, 44px) !important;
-          line-height: 1.05 !important;
-          color: #08142A !important;
-          font-weight: 500 !important;
-          letter-spacing: -0.02em !important;
-          margin-bottom: 6px !important;
-        }
-        .fees-pillar-label {
-          font-family: var(--body) !important;
-          font-size: 14.5px !important;
-          font-weight: 600 !important;
-          color: #1E293B !important;
-          margin-bottom: 10px !important;
-        }
-        .fees-pillar-desc {
-          font-size: 13.5px !important;
-          line-height: 1.6 !important;
-          color: #475569 !important;
-          margin: 0 0 20px !important;
-          flex: 1 !important;
-        }
-        .fees-pillar-badge {
-          display: inline-flex !important;
-          align-items: center !important;
-          gap: 6px !important;
-          align-self: flex-start !important;
-          background: #EFF6FF !important;
-          border: 1px solid #DBEAFE !important;
-          border-radius: 999px !important;
-          padding: 5px 12px !important;
-          font-size: 11px !important;
-          font-family: var(--mono) !important;
-          font-weight: 700 !important;
-          color: #1D4ED8 !important;
-        }
-        .fees-pillar-badge .check {
-          color: #2563EB !important;
-          font-weight: 700 !important;
-        }
-
-        /* 4 Pillars Responsive */
-        @media (max-width: 1024px) {
-          .terms-pillars-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            gap: 16px !important;
-          }
-        }
-        @media (max-width: 640px) {
-          .terms-pillars-grid {
-            grid-template-columns: 1fr !important;
-            gap: 14px !important;
-          }
-          .fees-pillar-card,
-          .terms-pillar {
-            padding: 22px 18px !important;
-          }
-        }
-
-        /* Fee Calculator Responsive */
-        @media (max-width: 960px) {
-          .fee-calc-grid {
-            grid-template-columns: 1fr !important;
-            gap: 20px !important;
-          }
-        }
-        @media (max-width: 640px) {
-          .fee-calc-form-card,
-          .fee-calc-dash-card {
-            padding: 20px 16px !important;
-          }
-          .fee-calc-dash-top {
-            flex-wrap: wrap !important;
-            gap: 8px !important;
-          }
-          .fee-calc-meta-pill {
-            font-size: 10.5px !important;
-            padding: 4px 8px !important;
-            white-space: nowrap !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            width: fit-content !important;
-          }
-          .fee-milestones-grid {
-            grid-template-columns: 1fr !important;
-            gap: 8px !important;
-            margin-bottom: 18px !important;
-          }
-        }
-
-        /* 90-Day Guarantee Responsive */
-        @media (max-width: 960px) {
-          .fee-guarantee-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            gap: 16px !important;
-          }
-        }
-        @media (max-width: 640px) {
-          .fee-guarantee-grid {
-            grid-template-columns: 1fr !important;
-            gap: 14px !important;
-          }
-          .fee-guarantee-card {
-            padding: 20px 18px !important;
-          }
-        }
-
-        /* Table & Horizontal Touch Scrolling */
-        .fee-table-wrap {
-          overflow-x: auto !important;
-          -webkit-overflow-scrolling: touch !important;
-        }
-        .fee-table-scroll-hint {
-          display: none;
-        }
-        @media (max-width: 768px) {
-          .fee-table-scroll-hint {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #1D4ED8;
-            background: #EFF6FF;
-            padding: 7px 12px;
-            border-radius: 6px;
-            margin-top: 14px;
-            border: 1px solid #DBEAFE;
-          }
-        }
-        @media (max-width: 640px) {
-          .sec-head-premium {
-            text-align: left !important;
-          }
-          .sec-head-premium .badge-capsule {
-            margin-bottom: 10px !important;
-          }
-          .sec-head-premium h2 {
-            font-size: 26px !important;
-            line-height: 1.2 !important;
-          }
-          .sec-head-premium .who-lede {
-            font-size: 14.5px !important;
-          }
-          #copy-q {
-            width: 100% !important;
-            justify-content: center !important;
-          }
-        }
-
-        /* FAQ Clean Accordion Styling */
-        .fee-faq-clean details {
-          background: #FFFFFF !important;
-          border: 1.5px solid #E2E8F0 !important;
-          border-radius: 12px !important;
-          padding: 0 !important;
-          overflow: hidden !important;
-          box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
-          transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
-          margin-bottom: 12px !important;
-        }
-        .fee-faq-clean details:hover {
-          border-color: #CBD5E1 !important;
-        }
-        .fee-faq-clean details[open] {
-          border-color: #1D4ED8 !important;
-          box-shadow: 0 8px 20px -4px rgba(29, 78, 216, 0.12) !important;
-        }
-        .fee-faq-clean summary {
-          display: flex !important;
-          justify-content: space-between !important;
-          align-items: center !important;
-          gap: 16px !important;
-          padding: 18px 20px !important;
-          cursor: pointer !important;
-          list-style: none !important;
-          font-size: 15.5px !important;
-          font-weight: 600 !important;
-          color: #08142A !important;
-        }
-        .fee-faq-clean summary::-webkit-details-marker {
-          display: none !important;
-        }
-        .fee-faq-clean summary::marker {
-          display: none !important;
-        }
-        .fee-faq-clean .faq-body {
-          padding: 0 20px 20px !important;
-        }
-        .fee-faq-clean .faq-body p {
-          margin: 0 !important;
-          font-size: 14.5px !important;
-          line-height: 1.6 !important;
-          color: #475569 !important;
-        }
-      `}</style>
-
-      {/* 1. LUXURY CENTERED HERO SECTION (NO BREADCRUMBS, NO CARD CLUTTER) */}
-      <section
-        className="emp-luxury-hero-sec fee-luxury-hero-sec"
-        style={{
-          position: "relative",
-          color: "#FFFFFF",
-          padding: "128px 0 84px",
-          overflow: "hidden",
-          textAlign: "center",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
-        }}
+      <PkHero
+        eyebrow="Fees and guarantee · Contingency only"
+        title="One fee,"
+        accent="only if you hire."
+        lead="No retainer, no exclusivity and no hidden costs. You pay one contingency fee when your hire starts, covered by a 90-day replacement."
+        primary={{ label: "Book 15 min with Justin", href: trust.calendly }}
+        secondary={{ label: "See candidates", href: "/find-candidates" }}
       >
-        <div className="wrap" style={{ position: "relative", zIndex: 2, maxWidth: 840, margin: "0 auto", padding: "0 24px" }}>
-          {/* Eyebrow Capsule */}
-          <div style={{ marginBottom: 20 }}>
-            <div
-              className="hero-eyebrow-capsule badge-capsule"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.15)",
-                borderRadius: 999,
-                padding: "7px 18px",
-                fontFamily: "var(--mono)",
-                fontSize: 12,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "#93C5FD",
-              }}
-            >
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span>TRANSPARENT PRICING<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />100% CONTINGENCY</span>
-            </div>
+        <PkStats
+          items={[
+            { v: "On hire", k: "One contingency fee" },
+            { v: "90 days", k: "Free replacement" },
+            { v: "$0", k: "Upfront or retainer" },
+            { v: "Net 15", k: "From the start date" },
+          ]}
+        />
+      </PkHero>
+
+      <PkSection
+        tone="light"
+        kicker="The terms"
+        title="Everything you agree to,"
+        accent="in plain English."
+        lead="The same simple terms for every firm. Nothing to sign until you want to interview someone."
+      >
+        <PkCards items={GUARANTEE} cols={4} />
+      </PkSection>
+
+      <PkSection
+        tone="dark"
+        id="questions"
+        kicker="Before you sign with anyone"
+        title="Questions to ask"
+        accent="any recruiter."
+        lead="The fee is only half the quote. Ask these before signing an agreement, with anyone."
+      >
+        <div className="fe-table">
+          <div className="fe-table-head">
+            <span>Ask</span>
+            <span>Why it matters</span>
+            <span>Orion’s answer</span>
           </div>
-
-          {/* Main Title - Prominent Executive Scale */}
-          <h1
-            className="fees-hero-h1"
-            style={{
-              fontFamily: "var(--display)",
-              fontSize: "clamp(40px, 5.2vw, 64px)",
-              lineHeight: 1.10,
-              fontWeight: 500,
-              color: "#FFFFFF",
-              letterSpacing: "-0.025em",
-              margin: "0 auto 22px",
-              maxWidth: 920,
-              textAlign: "center",
-              textWrap: "balance",
-              textShadow: "0 2px 16px rgba(0, 0, 0, 0.45)",
-            }}
-          >
-            One fee, only if you{" "}
-            <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-              hire.
-            </span>
-          </h1>
-
-          {/* Clean Subtext - Readable Executive Scale */}
-          <p
-            style={{
-              fontSize: "clamp(18px, 1.8vw, 21px)",
-              lineHeight: 1.65,
-              color: "#CBD5E1",
-              maxWidth: 780,
-              margin: "0 auto 34px",
-              textAlign: "center",
-              textShadow: "0 1px 8px rgba(0, 0, 0, 0.4)",
-            }}
-          >
-            Zero upfront retainer, zero exclusivity, and zero hidden costs. You pay one contingency fee,
-            only when your introduced attorney starts, protected by our 90-day replacement warranty.
-          </p>
-
-          {/* Action CTAs */}
-          <div className="fees-hero-actions hero-actions-group" style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
-            <a
-              href={trust.calendly}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#1D4ED8",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 16,
-                padding: "15px 32px",
-                borderRadius: 7,
-                textDecoration: "none",
-                boxShadow: "0 8px 20px rgba(29, 78, 216, 0.35)",
-              }}
-            >
-              <span>Book 15 min with Justin</span>
-              <span aria-hidden="true">→</span>
-            </a>
-            <Link
-              href="/find-candidates"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: 16,
-                padding: "15px 28px",
-                borderRadius: 7,
-                textDecoration: "none",
-              }}
-            >
-              <span>Browse candidate dossiers</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-
-          {/* Micro Reassurances */}
-          <div
-            className="fees-reassurances"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 16,
-              fontSize: 13,
-              color: "#94A3B8",
-            }}
-          >
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-              </svg>
-              <span>Zero upfront retainer</span>
+          {qs.map((q) => (
+            <div key={q.q} className="fe-row">
+              <p className="fe-q">{q.q}</p>
+              <p className="fe-why">{q.why}</p>
+              <p className="fe-us">{(terms as Record<string, string | number>)[q.term!]}</p>
             </div>
-            <span className="fees-reassurance-dot" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-              </svg>
-              <span>One contingency fee</span>
-            </div>
-            <span className="fees-reassurance-dot" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-              </svg>
-              <span>Net 15 on start date</span>
-            </div>
-            <span className="fees-reassurance-dot" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-              </svg>
-              <span>90-day replacement warranty</span>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
-
-      {/* 2. THE 4 PILLARS OF OUR TERMS */}
-      <section style={{ padding: "88px 0 96px", background: "#FAF9F5", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          {/* Header */}
-          <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto 48px" }}>
-            <div
-              className="badge-capsule"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#EFF6FF",
-                border: "1px solid #DBEAFE",
-                borderRadius: 999,
-                padding: "6px 14px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#1D4ED8",
-                marginBottom: 12,
-              }}
-            >
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
-              <span>THE PROTOCOL · 4 CORE COMMITMENTS</span>
-            </div>
-            <h2
-              style={{
-                fontSize: "clamp(28px, 3.4vw, 40px)",
-                fontWeight: 400,
-                color: "#08142A",
-                margin: "0 0 10px",
-                fontFamily: "var(--display)",
-              }}
-            >
-              The pillars of our <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>agreement</span>
-            </h2>
-            <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem", lineHeight: 1.6 }}>
-              Simple, transparent commercial terms designed to protect small and mid-size Texas law firms.
-            </p>
-          </div>
-
-          <div className="terms-pillars-grid">
-            {/* 01 · CONTINGENCY FEE */}
-            <div className="fees-pillar-card">
-              <div className="fees-pillar-kicker">
-                01 · CONTINGENCY FEE
-              </div>
-              <div className="fees-pillar-val">
-                On hire
-              </div>
-              <div className="fees-pillar-label">
-                One contingency fee
-              </div>
-              <p className="fees-pillar-desc">
-                As set out in your one-page agreement. Nothing is due unless you hire someone we introduced.
-              </p>
-              <div style={{ marginTop: "auto" }}>
-                <span className="fees-pillar-badge">
-                  <span className="check">✓</span>
-                  <span>Contingency Only</span>
-                </span>
-              </div>
-            </div>
-
-            {/* 02 · REPLACEMENT WARRANTY */}
-            <div className="fees-pillar-card">
-              <div className="fees-pillar-kicker">
-                02 · REPLACEMENT WARRANTY
-              </div>
-              <div className="fees-pillar-val">
-                90 Days
-              </div>
-              <div className="fees-pillar-label">
-                Calendar day guarantee
-              </div>
-              <p className="fees-pillar-desc">
-                If the hire leaves or is let go within 90 days, we conduct a prioritized replacement search at zero extra fee.
-              </p>
-              <div style={{ marginTop: "auto" }}>
-                <span className="fees-pillar-badge">
-                  <span className="check">✓</span>
-                  <span>Free Replacement</span>
-                </span>
-              </div>
-            </div>
-
-            {/* 03 · CLIENT FREEDOM */}
-            <div className="fees-pillar-card">
-              <div className="fees-pillar-kicker">
-                03 · CLIENT FREEDOM
-              </div>
-              <div className="fees-pillar-val">
-                Zero
-              </div>
-              <div className="fees-pillar-label">
-                Upfront retainer or lock-in
-              </div>
-              <p className="fees-pillar-desc">
-                No upfront cash and no exclusivity. Keep your internal referrals and other recruiting channels fully active.
-              </p>
-              <div style={{ marginTop: "auto" }}>
-                <span className="fees-pillar-badge">
-                  <span className="check">✓</span>
-                  <span>Non-Exclusive</span>
-                </span>
-              </div>
-            </div>
-
-            {/* 04 · PAYMENT SCHEDULE */}
-            <div className="fees-pillar-card">
-              <div className="fees-pillar-kicker">
-                04 · PAYMENT SCHEDULE
-              </div>
-              <div className="fees-pillar-val">
-                Net 15
-              </div>
-              <div className="fees-pillar-label">
-                Invoice on physical start date
-              </div>
-              <p className="fees-pillar-desc">
-                We issue the invoice only when the candidate physically begins work, payable within 15 calendar days.
-              </p>
-              <div style={{ marginTop: "auto" }}>
-                <span className="fees-pillar-badge">
-                  <span className="check">✓</span>
-                  <span>Start Date Invoice</span>
-                </span>
-              </div>
-            </div>
-          </div>
+        <div className="fe-table-foot">
+          <CopyQuestions questions={qs.map((q) => q.q)} />
         </div>
-      </section>
+      </PkSection>
 
-      {/* 4. THE 90-DAY REPLACEMENT GUARANTEE */}
-      <section className="block" style={{ padding: "88px 0 96px", background: "#FAF9F5", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head-premium" style={{ textAlign: "center", marginBottom: 48 }}>
-            <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 999, padding: "6px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
-              <span>RISK REVERSAL · IN WRITING</span>
-            </div>
-            <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 400 }}>
-              The 90-day replacement <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>guarantee</span>
-            </h2>
-            <p className="who-lede" style={{ fontSize: 16, color: "#64748B", maxWidth: 640, margin: "0 auto", lineHeight: 1.6 }}>
-              What happens if a hire does not work out, in plain English.
-            </p>
-          </div>
-
-          <div className="fee-guarantee-grid">
-            <div className="fee-guarantee-card" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
-              <div className="fee-guarantee-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
-                01 · DURATION
-              </div>
-              <h3 className="fee-guarantee-title" style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", margin: "0 0 8px" }}>
-                90 Calendar Days
-              </h3>
-              <p className="fee-guarantee-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: 0 }}>
-                Full 90 calendar days from their first day in your office. Not business days — complete calendar protection.
-              </p>
-            </div>
-
-            <div className="fee-guarantee-card" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
-              <div className="fee-guarantee-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
-                02 · REMEDY
-              </div>
-              <h3 className="fee-guarantee-title" style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", margin: "0 0 8px" }}>
-                Priority Re-Search
-              </h3>
-              <p className="fee-guarantee-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: 0 }}>
-                We reopen the search, prioritize it above other mandates, and send screened replacements until the seat is filled. No additional fee.
-              </p>
-            </div>
-
-            <div className="fee-guarantee-card" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
-              <div className="fee-guarantee-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
-                03 · BROAD COVERAGE
-              </div>
-              <h3 className="fee-guarantee-title" style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", margin: "0 0 8px" }}>
-                Comprehensive Protection
-              </h3>
-              <p className="fee-guarantee-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: 0 }}>
-                Covers the hire resigning or being let go for any operational reason other than firm redundancy or practice group closure.
-              </p>
-            </div>
-
-            <div className="fee-guarantee-card" style={{ background: "#FFFFFF", border: "1.5px solid #E2E8F0", borderRadius: 14, padding: "28px 24px" }}>
-              <div className="fee-guarantee-kicker" style={{ color: "#1D4ED8", fontFamily: "var(--mono)", fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 10 }}>
-                04 · PAYMENT REQUIREMENT
-              </div>
-              <h3 className="fee-guarantee-title" style={{ fontFamily: "var(--display)", fontSize: 21, fontWeight: 400, color: "#08142A", margin: "0 0 8px" }}>
-                Prompt Invoice Clause
-              </h3>
-              <p className="fee-guarantee-desc" style={{ fontSize: 13.5, color: "#475569", lineHeight: 1.55, margin: 0 }}>
-                The guarantee is fully active whenever the original placement invoice is paid within our standard Net 15 terms.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. QUESTIONS TO ASK ANY RECRUITER */}
-      <section className="block alt" id="questions" style={{ padding: "88px 0 96px", background: "#FFFFFF", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
-          <div className="sec-head-premium" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16 }}>
-            <div>
-              <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 999, padding: "6px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
-                <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
-                <span>DUE DILIGENCE · MARKET COMPARISON</span>
-              </div>
-              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "8px 0 0", fontWeight: 400 }}>
-                Questions to ask any <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>recruiter</span>
-              </h2>
-              <p className="who-lede" style={{ fontSize: 16, color: "#64748B", maxWidth: 640, margin: "10px 0 0", lineHeight: 1.6 }}>
-                The fee is only half the quote. Ask these five questions before signing an agreement.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              className="btn btn-outline btn-sm"
-              style={{
-                borderRadius: 7,
-                fontWeight: 600,
-                padding: "11px 22px",
-                border: "1.5px solid #1D4ED8",
-                background: copied ? "#1D4ED8" : "transparent",
-                color: copied ? "#FFFFFF" : "#1D4ED8",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-              }}
-              id="copy-q"
-              onClick={handleCopyQuestions}
-            >
-              {copied ? "✓ Copied to clipboard" : "Copy the 5 questions"}
-            </button>
-          </div>
-
-          <div className="table-wrap fee-table-wrap" style={{ marginTop: 32, background: "#FFFFFF", borderRadius: 14, border: "1.5px solid #E2E8F0", overflowX: "auto", WebkitOverflowScrolling: "touch", boxShadow: "0 4px 16px rgba(15,23,42,0.04)" }}>
-            <table className="data" style={{ width: "100%", minWidth: 620, borderCollapse: "collapse" }}>
-              <thead>
-                <tr style={{ background: "#FAF9F5", borderBottom: "1.5px solid #E2E8F0" }}>
-                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748B", minWidth: 180 }}>Ask</th>
-                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748B", minWidth: 220 }}>Why it matters</th>
-                  <th style={{ padding: "16px 20px", textAlign: "left", fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", minWidth: 200 }}>Orion&apos;s answer</th>
-                </tr>
-              </thead>
-              <tbody id="q-rows">
-                {qs.map((q, idx) => (
-                  <tr key={idx} style={{ borderBottom: idx === qs.length - 1 ? "none" : "1px solid #F1F5F9" }}>
-                    <td data-label="Ask" style={{ padding: "18px 20px", fontSize: 14.5, fontWeight: 600, color: "#08142A" }}>
-                      {q.q}
-                    </td>
-                    <td data-label="Why it matters" style={{ padding: "18px 20px", fontSize: 14, color: "#475569", lineHeight: 1.55 }}>
-                      {q.why}
-                    </td>
-                    <td className="us" data-label="Orion's answer" style={{ padding: "18px 20px", fontSize: 14, fontWeight: 600, color: "#1D4ED8" }}>
-                      <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,78,216,0.08)", padding: "4px 10px", borderRadius: 6, border: "1px solid rgba(29,78,216,0.2)" }}>
-                        ✓ {(terms as any)[q.term!]}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="fee-table-scroll-hint" aria-hidden="true">
-            <span>← Swipe horizontally to view full comparison →</span>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. TERMS IN WRITING & GATE FORM */}
-      <section className="block" id="terms-writing" style={{ padding: "88px 0 96px", background: "#FAF9F5", borderBottom: "1px solid #E2E8F0" }}>
-        <div className="wrap split" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+      <PkSection tone="light" id="terms-writing">
+        <div className="fe-terms">
           <div>
-            <div className="sec-head-premium sec-head-left">
-              <div className="badge-capsule" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#EFF6FF", border: "1px solid #DBEAFE", borderRadius: 999, padding: "6px 14px", fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", marginBottom: 12 }}>
-                <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1D4ED8" }} />
-                <span>IN WRITING · ZERO PRESSURE</span>
-              </div>
-              <h2 className="sec-title-lg" style={{ fontFamily: "var(--display)", fontSize: "clamp(30px, 3.8vw, 44px)", color: "#08142A", margin: "0 0 14px", fontWeight: 400 }}>
-                Our terms on one <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>page</span>
+            <div className="pk-head">
+              <span className="pk-kicker">
+                <span aria-hidden="true" />
+                In writing
+              </span>
+              <h2 className="pk-h2">
+                Our terms on <em>one page.</em>
               </h2>
-              <p className="who-lede" style={{ fontSize: 16, color: "#64748B", lineHeight: 1.6 }}>
-                No retainer, one fee, 90-day replacement, and the five recruiter questions answered. Ready to forward to a managing partner.
+              <p className="pk-sec-lead">
+                No retainer, one fee, 90-day replacement. Ready to forward to a managing partner.
               </p>
             </div>
-
-            <div className="faq fee-faq-clean" style={{ marginTop: 28 }}>
-              <details>
-                <summary>
-                  <span>Do we sign an agreement before we see candidates?</span>
-                  <span className="faq-toggle-icon" aria-hidden="true" />
-                </summary>
-                <div className="faq-body">
-                  <p>
-                    No. You sign nothing until you want to interview someone we introduced. Looking at candidate profiles and dossiers commits you to nothing.
-                  </p>
-                </div>
-              </details>
-              <details>
-                <summary>
-                  <span>Do you offer a refund instead of replacement?</span>
-                  <span className="faq-toggle-icon" aria-hidden="true" />
-                </summary>
-                <div className="faq-body">
-                  <p>
-                    Our standard contract term is a priority replacement search. Cash-refund terms can be structured for multi-hire retainers or enterprise mandates; discuss with Justin prior to engagement.
-                  </p>
-                </div>
-              </details>
-            </div>
+            <PkFaq items={FAQ} />
           </div>
-
-          <div className="form-side" id="terms-gate">
-            <GateForm
-              id="terms-gate-form"
-              eyebrow="In writing"
-              title="Email me the one-page terms"
-              button="Send me the terms"
-              bullets={[
-                "The fee, guarantee and payment terms on one page",
-                "The five questions, with our answers",
-                "Ready to forward to a partner",
-              ]}
-              fine="One email with the terms. We do not add you to a list."
-              steps={[
-                [
-                  "Now",
-                  "The one-page terms are on their way. No agreement is attached and nothing to sign.",
-                  true,
-                ],
-                [
-                  "Within one business hour",
-                  "Justin replies in case you want to talk the seat through.",
-                ],
-                [
-                  "When you are ready",
-                  "See candidates for your seat. You sign only when you want to meet someone.",
-                ],
-              ]}
-            />
+          <div className="pk-form fe-form">
+            <TermsEmail />
           </div>
         </div>
-      </section>
-
-      {/* 7. BOTTOM DARK SECTION */}
-      <section className="emp-terms-dark-sec" style={{ background: "#08142A", padding: "96px 0 108px", textAlign: "center", borderTop: "1px solid rgba(255, 255, 255, 0.12)" }}>
-        <div className="wrap" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
-          <div className="emp-terms-head">
-            <div
-              className="badge-capsule"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                borderRadius: 999,
-                padding: "6px 16px",
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#93C5FD",
-                marginBottom: 18,
-              }}
-            >
-              <span className="badge-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-              <span>THE TALENT POOL · PRE-SCREENED CANDIDATES</span>
-            </div>
-            <h2
-              className="emp-terms-h2"
-              style={{
-                fontFamily: "var(--display)",
-                fontSize: "clamp(32px, 4.2vw, 48px)",
-                color: "#FFFFFF",
-                margin: "0 0 16px",
-                fontWeight: 400,
-                lineHeight: 1.15,
-              }}
-            >
-              Ready to see who you would be <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>paying for?</span>
-            </h2>
-            <p className="emp-terms-lead" style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.6, marginBottom: 34, maxWidth: 640, margin: "0 auto 34px" }}>
-              Screened lateral attorneys and paralegals matched to your firm. No retainer, and zero fee unless you hire.
-            </p>
-
-            <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap", marginTop: 32 }}>
-              <Link
-                href="/find-candidates"
-                className="btn-emp-primary"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "#1D4ED8",
-                  color: "#FFFFFF",
-                  fontWeight: 600,
-                  fontSize: 16,
-                  padding: "14px 34px",
-                  borderRadius: 7,
-                  textDecoration: "none",
-                  boxShadow: "0 4px 16px rgba(29, 78, 216, 0.4)",
-                }}
-              >
-                <span>Find candidates</span>
-                <span aria-hidden="true">→</span>
-              </Link>
-              <Link
-                href="/hire-attorneys"
-                className="btn-emp-ghost"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.22)",
-                  color: "#FFFFFF",
-                  fontWeight: 600,
-                  fontSize: 16,
-                  padding: "14px 34px",
-                  borderRadius: 7,
-                  textDecoration: "none",
-                }}
-              >
-                <span>Direct intake form</span>
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </div>
+        <div style={{ marginTop: 64 }}>
+          <PkCallCard
+            title="Ready to see who you’d be"
+            accentWords="paying for?"
+            text="Screened attorneys and paralegals matched to your seat. No retainer, and no fee unless you hire."
+            secondary={{ label: "Submit a job", href: "/submit-job" }}
+          />
         </div>
-      </section>
+      </PkSection>
+
     </>
   );
 }

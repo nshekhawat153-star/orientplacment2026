@@ -159,8 +159,8 @@ function Attribution({ r }: { r: HomeReview }) {
   );
 }
 
-export function HomeReviews() {
-  const [tab, setTab] = useState<"firms" | "candidates">("firms");
+export function HomeReviews({ initialTab = "firms" }: { initialTab?: "firms" | "candidates" } = {}) {
+  const [tab, setTab] = useState<"firms" | "candidates">(initialTab);
   const list = tab === "firms" ? FIRMS : CANDIDATES;
 
   return (

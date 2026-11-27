@@ -7,6 +7,7 @@ import "@/app/jobs/jobs-redesign.css";
 import "./upload-resume.css";
 import { roles, cities, jobs, findRole, findCity, parseResume, matchJobs, Job } from "@/data";
 import { JobListCard } from "@/app/jobs/components/JobListCard";
+import { CandidatePrivacy } from "@/components/CandidatePrivacy";
 import { PkHero, PkSection, PkFaq, PkCallCard, PkCheck, PkArrow } from "@/components/PageKit";
 
 type Mode = "any" | "on-site" | "hybrid";
@@ -30,8 +31,6 @@ const FAQ = [
   },
 ];
 
-const SHIELDED = ["Your name", "Current firm and past employers", "Law school and graduation year", "Phone, email and bar number"];
-const VISIBLE = ["Years in practice", "Practice mix and case volume", "Pay range and notice period", "Office preference"];
 
 export function UploadResumeClient() {
   const router = useRouter();
@@ -337,41 +336,7 @@ export function UploadResumeClient() {
         accent="before you say yes."
         lead="Firms see an anonymous summary. Your identity stays with Justin until you approve a specific firm."
       >
-        <div className="ur-privacy">
-          <div className="ur-pv is-hidden">
-            <span className="ur-pv-k">Hidden until you approve</span>
-            <ul>
-              {SHIELDED.map((s) => (
-                <li key={s}>
-                  <span aria-hidden="true">×</span>
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="ur-pv is-shown">
-            <span className="ur-pv-k">What the firm sees</span>
-            <ul>
-              {VISIBLE.map((s) => (
-                <li key={s}>
-                  <PkCheck />
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="ur-pv-promises">
-            <p>
-              <b>Never your current firm.</b> No references, no calls, no directories.
-            </p>
-            <p>
-              <b>Delete any time.</b> One email and your profile is removed.
-            </p>
-            <p>
-              <b>Read by a person.</b> No automated rejections. Justin reviews every profile.
-            </p>
-          </div>
-        </div>
+        <CandidatePrivacy />
       </PkSection>
 
       {/* FAQ + CALL */}

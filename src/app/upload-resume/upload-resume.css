@@ -234,90 +234,6 @@
   color: #475569;
 }
 
-/* privacy */
-.ur-privacy {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
-}
-.ur-pv {
-  padding: 24px;
-  border-radius: 18px;
-  border: 1px solid rgba(147, 197, 253, 0.16);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.025) 100%);
-}
-.ur-pv.is-shown {
-  background: #FFFFFF;
-  color: #08142A;
-}
-.ur-pv-k {
-  display: block;
-  margin-bottom: 14px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #FCA5A5;
-}
-.ur-pv.is-shown .ur-pv-k {
-  color: #047857;
-}
-.ur-pv ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 12px;
-}
-.ur-pv li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  color: #E2E8F0;
-}
-.ur-pv.is-hidden li span {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  flex: none;
-  border-radius: 50%;
-  background: rgba(248, 113, 113, 0.16);
-  color: #FCA5A5;
-  font-size: 14px;
-  line-height: 1;
-}
-.ur-pv.is-hidden li {
-  text-decoration: line-through;
-  text-decoration-color: rgba(252, 165, 165, 0.5);
-}
-.ur-pv.is-shown li {
-  color: #1E293B;
-}
-.ur-pv.is-shown li svg {
-  flex: none;
-  color: #10B981;
-}
-.ur-pv-promises {
-  display: grid;
-  gap: 10px;
-}
-.ur-pv-promises p {
-  margin: 0;
-  padding: 16px 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(147, 197, 253, 0.16);
-  font-size: 14px;
-  line-height: 1.5;
-  color: #B6C3D6;
-}
-.ur-pv-promises b {
-  display: block;
-  margin-bottom: 2px;
-  font-size: 15px;
-  color: #FFFFFF;
-}
 .ur-call {
   margin-top: 64px;
 }
@@ -339,21 +255,10 @@
   .ur-card.is-send {
     order: 3;
   }
-  .ur-privacy {
-    grid-template-columns: 1fr 1fr;
-  }
-  .ur-pv-promises {
-    grid-column: 1 / -1;
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 @media (max-width: 640px) {
   .ur-card {
     padding: 20px 18px;
-  }
-  .ur-privacy,
-  .ur-pv-promises {
-    grid-template-columns: 1fr;
   }
   .ur-call {
     margin-top: 44px;
