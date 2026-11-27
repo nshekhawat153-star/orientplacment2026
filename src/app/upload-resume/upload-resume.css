@@ -165,6 +165,14 @@
   display: grid;
   gap: 16px;
 }
+/* Desktop: basics + send form stay in view while the seats scroll.
+   Only when the screen is tall enough to show the whole column. */
+@media (min-width: 1081px) and (min-height: 860px) {
+  .ur-left {
+    position: sticky;
+    top: 88px;
+  }
+}
 .ur-card {
   padding: 24px;
   border-radius: 20px;
