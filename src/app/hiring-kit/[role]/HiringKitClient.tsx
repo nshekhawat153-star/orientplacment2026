@@ -4,12 +4,19 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DATA, fmt, matchCandidates } from "@/data";
-import { TrustLine } from "@/components/Rating";
 import { CandidateDossierCard } from "@/components/CandidateDossierCard";
-import { PkSection, PkCallCard } from "@/components/PageKit";
+import { PkHero, PkSection, PkCallCard } from "@/components/PageKit";
 import { matchEnrichedCandidates } from "@/app/find-candidates/candidateData";
 import "./hiring-kit.css";
 import { Icon } from "@/components/icons";
+
+const MODULES = [
+  { key: "posting" as const, num: "01", short: "Job post", name: "Job post template", desc: "Fills in your firm, pay and work model" },
+  { key: "questions" as const, num: "02", short: "Interview", name: "Interview questions", desc: "What to ask, and what a weak answer sounds like" },
+  { key: "scorecard" as const, num: "03", short: "Scorecard", name: "Candidate scorecard", desc: "Weighted scores, totalled for you" },
+  { key: "offer" as const, num: "04", short: "Offer letter", name: "Offer-letter outline", desc: "The clauses to include" },
+  { key: "pay" as const, num: "05", short: "Pay models", name: "Pay models", desc: "Base, bonus and origination options" },
+];
 
 export function HiringKitClient({
   roleParam
@@ -319,343 +326,54 @@ export function HiringKitClient({
         }
       `}</style>
 
-      {/* =========================================================================
-          HERO SECTION: Luxury Midnight Navy Showcase with Splash Video
-          ========================================================================= */}
-      <section
-        className="kit-hero-sec"
-        style={{
-          position: "relative",
-          color: "#FFFFFF",
-          padding: "112px 0 84px",
-          overflow: "hidden",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.12)"
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 3 }}>
-          <div className="kit-hero-grid">
-            {/* Left Column: Heading, Subtitle & Primary CTAs */}
-            <div className="kit-hero-content">
-              <div
-                className="kit-hero-eyebrow hero-eyebrow-capsule"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(29, 78, 216, 0.2)",
-                  border: "1px solid rgba(96, 165, 250, 0.35)",
-                  borderRadius: "100px",
-                  padding: "6px 14px",
-                  fontSize: "0.78rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  color: "#93C5FD",
-                  marginBottom: "20px"
-                }}
-              >
-                <span className="hero-eyebrow-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#60A5FA" }} />
-                <span>EXECUTIVE HIRING KIT<span className="eyebrow-sep"> · </span><br className="eyebrow-break" />{role.name.toUpperCase()}</span>
-              </div>
-
-              <h1
-                className="kit-hero-h1"
-                style={{
-                  fontSize: "clamp(2.4rem, 4.4vw, 3.6rem)",
-                  fontFamily: "var(--font-serif, 'Playfair Display', Georgia, serif)",
-                  fontWeight: 700,
-                  lineHeight: 1.15,
-                  color: "#FFFFFF",
-                  letterSpacing: "-0.02em",
-                  margin: "0 0 20px"
-                }}
-              >
-                {role.name} <br />
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  Hiring Kit &amp; Playbook
+      <PkHero
+        eyebrow={`Hiring kit · ${role.name}`}
+        title={`${role.name}`}
+        accent="hiring kit."
+        lead="An editable job post, interview questions, a scorecard, an offer-letter outline and pay models. Free, no sign-up."
+        side={
+          <div className="hk-index">
+            <span className="hk-index-k">Five parts</span>
+            {MODULES.map((m) => (
+              <button key={m.key} type="button" className={activeTab === m.key ? "is-on" : ""} onClick={() => handleJumpToModule(m.key)}>
+                <span className="hk-index-n">{m.num}</span>
+                <span>
+                  <b>{m.name}</b>
+                  <small>{m.desc}</small>
                 </span>
-              </h1>
-
-              <p
-                className="kit-hero-lead"
-                style={{
-                  fontSize: "1.12rem",
-                  lineHeight: 1.6,
-                  color: "#CBD5E1",
-                  maxWidth: "580px",
-                  margin: "0 0 32px"
-                }}
-              >
-                A battle-tested lateral posting template with live dynamic variables, targeted interview questions, candidate evaluation scorecard, and executive offer-letter architecture. 100% free with zero registration.
-              </p>
-
-              <div className="kit-hero-actions" style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", marginBottom: "34px" }}>
-                <button
-                  type="button"
-                  onClick={handleCopyPosting}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    background: copied ? "#059669" : "#1D4ED8",
-                    color: "#FFFFFF",
-                    padding: "13px 26px",
-                    borderRadius: "7px",
-                    fontWeight: 600,
-                    fontSize: "0.95rem",
-                    border: "none",
-                    cursor: "pointer",
-                    boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)",
-                    transition: "all 0.2s ease"
-                  }}
-                >
-                  <Icon name="copy" />
-                  <span>{copied ? "✓ Copied to Clipboard" : "Copy Live Posting"}</span>
-                </button>
-
-                <a
-                  href="#kit-modules"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.08)",
-                    border: "1px solid rgba(255, 255, 255, 0.22)",
-                    color: "#FFFFFF",
-                    padding: "13px 22px",
-                    borderRadius: "7px",
-                    fontWeight: 600,
-                    fontSize: "0.95rem",
-                    textDecoration: "none",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    transition: "all 0.2s ease"
-                  }}
-                >
-                  Explore 5-Part Playbook ↓
-                </a>
-              </div>
-
-              <div className="kit-hero-trust" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: "20px" }}>
-                <TrustLine dark />
-              </div>
-            </div>
-
-            {/* Right Column: Sleek Executive Playbook Artifact Card (Transparent Glassmorphic Style) */}
-            <div className="kit-hero-card-col">
-              <div
-                style={{
-                  background: "rgba(255, 255, 255, 0.05)",
-                  backdropFilter: "blur(24px)",
-                  WebkitBackdropFilter: "blur(24px)",
-                  border: "1px solid rgba(255, 255, 255, 0.22)",
-                  borderRadius: "16px",
-                  padding: "26px",
-                  boxShadow: "0 24px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25)"
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "18px",
-                    borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
-                    paddingBottom: "14px"
-                  }}
-                >
-                  <div>
-                    <span style={{ fontSize: "0.74rem", fontWeight: 700, letterSpacing: "0.08em", color: "#60A5FA", textTransform: "uppercase" }}>
-                      Executive Playbook Index
-                    </span>
-                    <div style={{ fontSize: "0.92rem", fontWeight: 600, color: "#FFFFFF", marginTop: "2px" }}>
-                      {role.name} Mandate
-                    </div>
-                  </div>
-                  <span
-                    style={{
-                      fontSize: "0.75rem",
-                      background: "rgba(255, 255, 255, 0.08)",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      color: "#93C5FD",
-                      padding: "4px 10px",
-                      borderRadius: "100px",
-                      fontWeight: 600
-                    }}
-                  >
-                    v2026 Edition · Free
-                  </span>
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                  {[
-                    { key: "posting" as const, num: "01", name: "Customizable Job Posting", desc: "Live dynamic variables & pay bands" },
-                    { key: "questions" as const, num: "02", name: "Structured Interview Guide", desc: "Substantive questions & red flag signals" },
-                    { key: "scorecard" as const, num: "03", name: "Weighted Candidate Scorecard", desc: "Instant mathematical suitability index" },
-                    { key: "offer" as const, num: "04", name: "Executive Offer Letter", desc: "10-part contingency & licensing outline" },
-                    { key: "pay" as const, num: "05", name: "Boutique Pay Architecture", desc: "Base + bonus + origination formulas" }
-                  ].map((item) => (
-                    <button
-                      key={item.num}
-                      type="button"
-                      onClick={() => handleJumpToModule(item.key)}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "12px",
-                        padding: "11px 14px",
-                        background: activeTab === item.key ? "rgba(29, 78, 216, 0.3)" : "rgba(255, 255, 255, 0.04)",
-                        border: activeTab === item.key ? "1px solid #60A5FA" : "1px solid rgba(255, 255, 255, 0.1)",
-                        borderRadius: "10px",
-                        backdropFilter: "blur(10px)",
-                        WebkitBackdropFilter: "blur(10px)",
-                        boxShadow: activeTab === item.key ? "0 4px 16px rgba(29, 78, 216, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)" : "none",
-                        textAlign: "left",
-                        cursor: "pointer",
-                        width: "100%",
-                        transition: "all 0.15s ease"
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontFamily: "var(--font-mono, monospace)",
-                          fontSize: "0.85rem",
-                          color: "#60A5FA",
-                          fontWeight: 700
-                        }}
-                      >
-                        {item.num}
-                      </span>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: "0.88rem", fontWeight: 600, color: "#FFFFFF" }}>{item.name}</div>
-                        <div style={{ fontSize: "0.75rem", color: "rgba(255, 255, 255, 0.65)", marginTop: "2px" }}>{item.desc}</div>
-                      </div>
-                      <span style={{ color: "#60A5FA", fontSize: "0.88rem", fontWeight: 600 }}>→</span>
-                    </button>
-                  ))}
-                </div>
-
-                <div
-                  style={{
-                    marginTop: "18px",
-                    paddingTop: "14px",
-                    borderTop: "1px solid rgba(255, 255, 255, 0.12)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    fontSize: "0.78rem",
-                    color: "rgba(255, 255, 255, 0.7)"
-                  }}
-                >
-                  <span>Click any module to configure</span>
-                  <a href="#download" style={{ color: "#60A5FA", textDecoration: "none", fontWeight: 600 }}>
-                    Download Word &amp; PDF →
-                  </a>
-                </div>
-              </div>
-            </div>
+                <span aria-hidden="true">→</span>
+              </button>
+            ))}
           </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 1: 5-Part Interactive Playbook Workspace
-          ========================================================================= */}
-      <section
-        id="kit-modules"
-        style={{
-          background: "#FFFFFF",
-          padding: "84px 0 96px",
-          borderBottom: "1px solid #E2E8F0"
-        }}
+        }
       >
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
-          {/* Section Header */}
-          <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 40px" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                background: "rgba(29, 78, 216, 0.08)",
-                border: "1px solid rgba(29, 78, 216, 0.2)",
-                borderRadius: "100px",
-                padding: "5px 14px",
-                fontSize: "0.78rem",
-                fontWeight: 700,
-                color: "#1D4ED8",
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                marginBottom: "14px"
-              }}
-            >
-              STEP 01 · 5-PART INTERACTIVE PLAYBOOK
-            </div>
-            <h2
-              style={{
-                fontSize: "clamp(2rem, 3.2vw, 2.6rem)",
-                fontWeight: 700,
-                color: "#08142A",
-                margin: "0 0 12px",
-                fontFamily: "var(--font-serif, Georgia, serif)",
-                lineHeight: 1.2
-              }}
-            >
-              Customizable Hiring Architecture for{" "}
-              <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
-                {role.name}
-              </span>
+        <div className="pk-actions">
+          <button type="button" className="pk-btn is-primary" onClick={handleCopyPosting}>
+            {copied ? "Copied" : "Copy the job post"}
+          </button>
+          <a href="#kit-modules" className="pk-btn is-ghost">
+            Open the kit
+          </a>
+        </div>
+      </PkHero>
+
+      <section id="kit-modules" className="pk-sec is-light hk-tool">
+        <div className="pk-wrap">
+          <div className="pk-head">
+            <span className="pk-kicker">
+              <span aria-hidden="true" />
+              The kit
+            </span>
+            <h2 className="pk-h2">
+              Edit it for your firm, <em>then copy.</em>
             </h2>
-            <p style={{ margin: 0, color: "#64748B", fontSize: "1.05rem", lineHeight: 1.6 }}>
-              Configure your law firm parameters below to instantly generate a tailored job posting, structured interview script, and candidate evaluation rubric.
-            </p>
+            <p className="pk-sec-lead">Fill in your firm’s details and every part of the kit updates.</p>
           </div>
 
-          {/* Navigation Tabs Pill Bar */}
-          <div
-            className="kit-tab-bar"
-            style={{
-              background: "#FAF9F5",
-              border: "1.5px solid #EAE7DC",
-              borderRadius: "12px",
-              padding: "6px",
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "6px",
-              boxShadow: "0 4px 16px rgba(8, 20, 42, 0.04)",
-              marginBottom: "36px"
-            }}
-            role="tablist"
-            aria-label="Hiring kit navigation"
-          >
-            {[
-              { id: "posting", label: "01. Posting Template" },
-              { id: "questions", label: "02. Interview Questions" },
-              { id: "scorecard", label: "03. Candidate Scorecard" },
-              { id: "offer", label: "04. Offer Letter Outline" },
-              { id: "pay", label: "05. Pay Architecture" }
-            ].map(tab => (
-              <button
-                key={tab.id}
-                type="button"
-                role="tab"
-                className="kit-tab-btn"
-                aria-selected={activeTab === tab.id}
-                onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                style={{
-                  flex: "1 1 auto",
-                  padding: "12px 18px",
-                  borderRadius: "8px",
-                  fontWeight: activeTab === tab.id ? 700 : 500,
-                  fontSize: "0.92rem",
-                  border: "none",
-                  cursor: "pointer",
-                  background: activeTab === tab.id ? "#08142A" : "transparent",
-                  color: activeTab === tab.id ? "#FFFFFF" : "#475569",
-                  boxShadow: activeTab === tab.id ? "0 2px 8px rgba(8, 20, 42, 0.2)" : "none",
-                  transition: "all 0.15s ease",
-                  textAlign: "center"
-                }}
-              >
-                {tab.label}
+          <div className="hk-tabs" role="tablist" aria-label="Hiring kit parts">
+            {MODULES.map((m) => (
+              <button key={m.key} type="button" role="tab" aria-selected={activeTab === m.key} className={activeTab === m.key ? "is-on" : ""} onClick={() => setActiveTab(m.key)}>
+                <span>{m.num}</span> {m.short}
               </button>
             ))}
           </div>

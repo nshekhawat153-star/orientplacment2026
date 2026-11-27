@@ -26,3 +26,117 @@
     margin-top: 44px;
   }
 }
+
+/* hero: five-part index card */
+.hk-index {
+  display: grid;
+  gap: 8px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  backdrop-filter: blur(6px);
+}
+.hk-index-k {
+  margin-bottom: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #93C5FD;
+}
+.hk-index button {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: #CBD5E1;
+  text-align: left;
+  font-family: var(--body);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.hk-index button:hover,
+.hk-index button.is-on {
+  background: rgba(96, 165, 250, 0.14);
+  border-color: rgba(147, 197, 253, 0.45);
+}
+.hk-index-n {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 22px;
+  color: #60A5FA;
+}
+.hk-index b {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.hk-index small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: #93A4BD;
+}
+
+/* tool tabs */
+.hk-tool {
+  scroll-margin-top: 60px;
+}
+.hk-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  width: fit-content;
+  max-width: 100%;
+}
+.hk-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  font: 600 14.5px/1 var(--body);
+  color: #475569;
+  cursor: pointer;
+}
+.hk-tabs button span {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  color: #94A3B8;
+}
+.hk-tabs button.is-on {
+  background: #08142A;
+  color: #FFFFFF;
+}
+.hk-tabs button.is-on span {
+  color: #60A5FA;
+}
+@media (max-width: 640px) {
+  .hk-index {
+    padding: 16px;
+  }
+  .hk-tabs {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .hk-tabs button {
+    flex: none;
+  }
+}
