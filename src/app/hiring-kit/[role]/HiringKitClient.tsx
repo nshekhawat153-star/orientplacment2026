@@ -135,7 +135,7 @@ export function HiringKitClient({
   const weightedTotal = ratedCount && weightSum ? (scoreSum / weightSum).toFixed(1) : "–";
 
   return (
-    <div style={{ background: "#FFFFFF", minHeight: "100vh", color: "#08142A", overflowX: "hidden" }}>
+    <div style={{ background: "#FFFFFF", minHeight: "100vh", color: "#08142A", overflowX: "clip" }}>
       <style>{`
         /* Hero Section Responsive */
         .kit-hero-grid {

@@ -140,3 +140,19 @@
     flex: none;
   }
 }
+
+/* Desktop: the side card (firm details, tips, score) stays in view while the long left column scrolls.
+   Only on screens tall enough to show the whole card. */
+@media (min-width: 961px) and (min-height: 880px) {
+  .hk-tool .kit-split-grid > .kit-sidebar-card {
+    position: sticky;
+    top: 96px;
+  }
+}
+@media (min-width: 961px) and (min-height: 560px) and (max-height: 879px) {
+  /* shorter screens: the small side cards (interview, scorecard, offer) can still stick */
+  .hk-tool .kit-split-grid > .kit-sidebar-card:not(:has(input)) {
+    position: sticky;
+    top: 96px;
+  }
+}
