@@ -3,11 +3,15 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import "./home-hero-search.css";
+import "@/app/find-candidates/find-candidates.css";
+import { WorkEmailGateModal } from "@/app/find-candidates/components/WorkEmailGateModal";
 import { CandidateDossierCard, SampleDossierCard } from "./CandidateDossierCard";
 import { roles, cities, trust, people } from "@/data";
 import {
   ParsedSeat,
+  EnrichedCandidate,
   parseSeatInput,
   matchEnrichedCandidates,
 } from "@/app/find-candidates/candidateData";
@@ -272,6 +276,9 @@ export function HomeHeroSearch() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [step, setStep] = useState(0);
   const [query, setQuery] = useState("");
+  const router = useRouter();
+  // Same popup as the cards on /find-candidates: work email first, then the full resume
+  const [gateFor, setGateFor] = useState<EnrichedCandidate | null>(null);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const requestInputRef = useRef<HTMLInputElement>(null);
@@ -541,8 +548,8 @@ export function HomeHeroSearch() {
                   c={m.candidate}
                   notes={m.notes}
                   warn={m.warn}
-                  actionLabel="View dossier"
-                  action={{ href: findHref(m.candidate.id) }}
+                  actionLabel="Show full resume"
+                  action={{ onClick: () => setGateFor(m.candidate) }}
                 />
               ))}
               {result.samples.map((s) => (
@@ -558,6 +565,22 @@ export function HomeHeroSearch() {
             </div>
             <RequestCard seatLabel={result.seatLabel} inputRef={requestInputRef} />
           </div>
+          {gateFor && (
+            <WorkEmailGateModal
+              candidate={gateFor}
+              onClose={() => setGateFor(null)}
+              onSuccess={(info) => {
+                try {
+                  window.sessionStorage.setItem("orion-lead", JSON.stringify(info));
+                } catch {
+                  /* storage unavailable */
+                }
+                const id = gateFor.id;
+                setGateFor(null);
+                router.push(`${findHref(id)}&u=1`);
+              }}
+            />
+          )}
 
           <p className="hhs-results-foot">
             Profiles stay anonymous until you ask for an introduction. Sample profiles are labelled.

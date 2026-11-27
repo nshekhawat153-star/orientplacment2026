@@ -22,7 +22,7 @@ import { ToastNotification } from "./components/ToastNotification";
 
 // Reads the deep link from the homepage hero search (/find-candidates?q=<seat>&c=<candidate id>).
 // Kept in its own Suspense boundary so the rest of the page still prerenders as static HTML.
-function DeepLinkRunner({ onQuery }: { onQuery: (q: string, c: string | null) => void }) {
+function DeepLinkRunner({ onQuery }: { onQuery: (q: string, c: string | null, unlocked: boolean) => void }) {
   const searchParams = useSearchParams();
   const done = useRef(false);
   useEffect(() => {
@@ -30,7 +30,7 @@ function DeepLinkRunner({ onQuery }: { onQuery: (q: string, c: string | null) =>
     const q = searchParams.get("q")?.trim();
     if (!q) return;
     done.current = true;
-    onQuery(q, searchParams.get("c")?.trim() || null);
+    onQuery(q, searchParams.get("c")?.trim() || null, searchParams.get("u") === "1");
   }, [searchParams, onQuery]);
   return null;
 }
@@ -132,8 +132,22 @@ export function FindCandidatesClient() {
     }, isUrl ? 1100 : 650);
   };
 
-  const handleDeepLink = useCallback((q: string, c: string | null) => {
+  const handleDeepLink = useCallback((q: string, c: string | null, unlocked: boolean) => {
     pendingOpenId.current = c;
+    // Work email already given in the homepage popup: open this profile unlocked
+    if (unlocked && c) {
+      setUnlockedIds((prev) => Array.from(new Set([...prev, c])));
+      try {
+        const saved = window.sessionStorage.getItem("orion-lead");
+        if (saved) {
+          const info = JSON.parse(saved) as { email: string; firm: string; guessName: string };
+          setLead({ name: info.guessName, title: "Partner", firm: info.firm, email: info.email });
+          setToastMessage(`Full resume unlocked. A copy has been dispatched to ${info.email}`);
+        }
+      } catch {
+        /* storage unavailable: profile still opens unlocked */
+      }
+    }
     setHeroKey((k) => k + 1);
     handleSubmitPrompt(q);
   }, []);
