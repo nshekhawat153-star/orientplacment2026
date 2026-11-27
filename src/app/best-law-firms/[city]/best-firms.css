@@ -1,0 +1,81 @@
+/* best law firms (bf- prefix; table/tabs come from where-to-hire.css) */
+.bf-tests {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+.bf-tests li {
+  padding: 22px 20px;
+  border-radius: 18px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+}
+.bf-tests span {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 32px;
+  line-height: 1;
+  color: #1D4ED8;
+}
+.bf-tests h3 {
+  margin: 14px 0 6px;
+  font-size: 16.5px;
+  font-weight: 600;
+  color: #08142A;
+}
+.bf-tests p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #475569;
+}
+.pk-sec.is-dark .bf-tabs {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(147, 197, 253, 0.2);
+}
+.pk-sec.is-dark .bf-tabs button {
+  color: #CBD5E1;
+}
+.pk-sec.is-dark .bf-tabs button.is-on {
+  background: #FFFFFF;
+  color: #08142A;
+}
+.bf-table {
+  border: 0;
+  box-shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.7);
+}
+.bf-prac {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: #1D4ED8;
+}
+.bf-pay {
+  font-weight: 600;
+  color: #08142A;
+}
+.bf-rev b {
+  color: #F59E0B;
+}
+.bf-seats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (max-width: 1080px) {
+  .bf-tests {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bf-seats {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+}
+@media (max-width: 640px) {
+  .bf-tests {
+    grid-template-columns: 1fr;
+  }
+}

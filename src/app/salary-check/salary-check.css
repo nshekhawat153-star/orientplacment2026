@@ -1,0 +1,132 @@
+/* /salary-check (sc- prefix) */
+.sc {
+  background: #FAF9F5;
+}
+.sc-go {
+  width: 100%;
+  margin-top: 16px;
+}
+.sc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 20px;
+  align-items: stretch;
+}
+.sc-band,
+.sc-verdict {
+  padding: 26px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+}
+.sc-verdict {
+  display: flex;
+  flex-direction: column;
+  border-width: 1.5px;
+}
+.sc-verdict.is-in {
+  border-color: #A7F3D0;
+  background: linear-gradient(180deg, #F0FDF8 0%, #FFFFFF 60%);
+}
+.sc-verdict.is-below {
+  border-color: #FDE68A;
+  background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 60%);
+}
+.sc-verdict.is-above {
+  border-color: #BFDBFE;
+  background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 60%);
+}
+.sc-k {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+.sc-verdict h3 {
+  margin: 8px 0 10px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  color: #08142A;
+}
+.sc-verdict p {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #334155;
+}
+.sc-bonus {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #EEF2F7;
+  font-size: 14px !important;
+}
+.sc-guide {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
+  font-weight: 600;
+  font-size: 14.5px;
+  color: #1D4ED8 !important;
+  text-decoration: none !important;
+}
+.sc-seats {
+  margin-top: 56px;
+}
+.sc-seats-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.sc-seats-head h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 26px;
+  color: #08142A;
+}
+.sc-seats-head a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #1D4ED8;
+  text-decoration: none;
+}
+.sc-seat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.sc-none {
+  font-size: 15px;
+  color: #475569;
+}
+.sc-none a {
+  color: #1D4ED8;
+  font-weight: 600;
+}
+@media (max-width: 1080px) {
+  .sc-grid {
+    grid-template-columns: 1fr;
+  }
+  .sc-seat-grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+}
+@media (max-width: 640px) {
+  .sc-band,
+  .sc-verdict {
+    padding: 20px 18px;
+  }
+}

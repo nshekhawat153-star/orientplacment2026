@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DATA, fmt, matchCandidates, trust } from "@/data";
-import { Mark } from "@/components/Mark";
-import { TrustLine, RatingBadge } from "@/components/Rating";
-import { CandidateCard } from "@/components/CandidateCard";
-import { GateForm } from "@/components/GateForm";
-import { ReviewCard, ReviewsSection } from "@/components/ReviewCard";
+import { DATA, fmt, matchCandidates } from "@/data";
+import { TrustLine } from "@/components/Rating";
+import { CandidateDossierCard } from "@/components/CandidateDossierCard";
+import { PkSection, PkCallCard } from "@/components/PageKit";
+import { matchEnrichedCandidates } from "@/app/find-candidates/candidateData";
+import "./hiring-kit.css";
 import { Icon } from "@/components/icons";
 
 export function HiringKitClient({
@@ -82,6 +82,7 @@ export function HiringKitClient({
   };
 
   // Matched candidates
+  const kitCands = matchEnrichedCandidates({ role: role.slug, city: citySlug, years: "any", mode: workMode, pay: Math.round(hiPay / 1000) });
   const matched = matchCandidates({
     role: role.slug,
     city: citySlug,
@@ -89,7 +90,6 @@ export function HiringKitClient({
     mode: workMode,
     pay: Math.max(loPay, hiPay) / 1000
   });
-  const topMatches = matched.slice(0, 3);
 
   const handleCopyPosting = async () => {
     const text = postingText();
@@ -1173,297 +1173,39 @@ export function HiringKitClient({
         </div>
       </section>
 
-      {/* =========================================================================
-          SECTION 2: Pre-Screened Matching Candidates
-          ========================================================================= */}
-      <section
+      {/* Candidates for this seat + call card (replaces old candidates, reviews and email sections) */}
+      <PkSection
+        tone="light"
         id="matches"
-        className="kit-matches-sec"
-        style={{
-          background: "#FAF9F5",
-          padding: "88px 0 96px",
-          borderBottom: "1px solid #E2E8F0"
-        }}
+        kicker="Or skip the posting"
+        title={`${matched.length} screened candidates`}
+        accent={`match this seat in ${currentCity.name}.`}
+        lead="Anonymous profiles open to a move. Names unlock when you request the profile."
       >
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
-          <div className="kit-cand-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "36px", flexWrap: "wrap", gap: "16px" }}>
-            <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(29, 78, 216, 0.08)",
-                  border: "1px solid rgba(29, 78, 216, 0.2)",
-                  borderRadius: "100px",
-                  padding: "5px 14px",
-                  fontSize: "0.78rem",
-                  fontWeight: 700,
-                  color: "#1D4ED8",
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  marginBottom: "12px"
-                }}
-              >
-                STEP 02 · ORION LATERAL TALENT PIPELINE
-              </div>
-              <h2 style={{ fontSize: "clamp(1.9rem, 3vw, 2.4rem)", fontWeight: 700, color: "#08142A", margin: "0 0 8px", fontFamily: "var(--font-serif, Georgia, serif)" }}>
-                Pre-Screened{" "}
-                <span className="serif-accent" style={{ color: "#1D4ED8", fontStyle: "italic" }}>
-                  {role.name} Candidates
-                </span>{" "}
-                Available Now
-              </h2>
-              <p style={{ margin: 0, color: "#64748B", fontSize: "1.02rem" }}>
-                <span style={{ fontWeight: 700, color: "#1D4ED8" }}>{matched.length} screened candidates</span> match your practice area, seniority level, and compensation target in {currentCity.name}.
-              </p>
-            </div>
-
-            <Link
-              href={`/find-candidates#role=${role.slug}&city=${citySlug}`}
-              style={{
-                color: "#1D4ED8",
-                fontWeight: 600,
-                fontSize: "0.95rem",
-                textDecoration: "none",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px"
-              }}
-            >
-              Browse All {matched.length} Candidates →
-            </Link>
-          </div>
-
-          <div className="kit-cand-grid">
-            <div style={{ display: "grid", gap: "20px" }}>
-              {topMatches.map(r => (
-                <CandidateCard key={r.c.id} candidate={r.c} />
-              ))}
-            </div>
-
-            <div className="kit-gate-col" style={{ position: "sticky", top: "100px" }}>
-              <div
-                className="kit-gate-col-card"
-                style={{
-                  background: "#FFFFFF",
-                  border: "1.5px solid #E2E8F0",
-                  borderRadius: "14px",
-                  padding: "32px",
-                  boxShadow: "0 8px 30px rgba(15, 23, 42, 0.05)"
-                }}
-              >
-                <GateForm
-                  eyebrow="Direct Candidate Introductions"
-                  title={topMatches.length === 1 ? "Request Complete Dossier" : `Request Dossiers for Top ${topMatches.length} Matches`}
-                  bullets={[
-                    "Unredacted resumes delivered to your inbox within 60 minutes",
-                    "Explicit compensation requirements, bar status, and notice periods",
-                    "One contingency success fee, only if you extend an offer and hire"
-                  ]}
-                  button="Deliver Candidate Dossiers"
-                  ids={topMatches.map(r => r.c.id)}
-                  role={role.slug}
-                  city={citySlug}
-                  review="brett-zimmerman"
-                />
-              </div>
-            </div>
-          </div>
+        <div className="hk-cands">
+          {kitCands.slice(0, 3).map(({ candidate, notes, warn }) => (
+            <CandidateDossierCard
+              key={candidate.id}
+              c={candidate}
+              notes={notes}
+              warn={warn}
+              actionLabel="See profile"
+              action={{ href: `/find-candidates?q=${encodeURIComponent(`${role.name} in ${currentCity.name}`)}&c=${candidate.id}` }}
+            />
+          ))}
         </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 3: Managing Partner Reviews & Social Proof (Homepage-Style Dark Luxury Section)
-          ========================================================================= */}
-      <section className="block reviews-sec" id="reviews">
-        <div className="wrap">
-          <div className="sec-head-premium">
-            <div className="badge-capsule">
-              <span className="badge-dot" />
-              GOOGLE REVIEWS · VERIFIED CLIENTS &amp; CANDIDATES
-            </div>
-            <h2 className="sec-title-lg">
-              What firms and candidates{" "}
-              <span className="serif-accent">say</span>
-            </h2>
-            <div className="reviews-rating-pill">
-              <RatingBadge link />
-            </div>
-          </div>
-
-          <ReviewsSection kind="employer" />
-
-          {/* Bottom Reassurance & All Reviews Link */}
-          <div className="reviews-bottom-bar">
-            <div className="reviews-bottom-trust">
-              <span className="reviews-bottom-dot" />
-              <span>
-                100% verified public Google reviews · Jon is named in <strong>{trust.jonNamed} of {trust.reviews}</strong> reviews
-              </span>
-            </div>
-            <a
-              href={trust.google}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-reviews-google"
-            >
-              <span>Read all {trust.reviews} reviews on Google</span>
-              <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
-                <path d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H3a1 1 0 1 1 0-2h11.6l-4.3-4.3a1 1 0 0 1 0-1.4Z" />
-              </svg>
-            </a>
-          </div>
+        <Link href={`/find-candidates?q=${encodeURIComponent(`${role.name} in ${currentCity.name}`)}`} className="hk-all">
+          See all {role.name.toLowerCase()} candidates →
+        </Link>
+        <div className="hk-call">
+          <PkCallCard
+            title="Want Orion to fill"
+            accentWords="this seat instead?"
+            text="Send the seat to Justin. No retainer, non-exclusive, and one fee only if you hire."
+            secondary={{ label: "Submit a job", href: "/submit-job" }}
+          />
         </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 4: Full Kit Download & Closing Dark Executive CTA
-          ========================================================================= */}
-      <section
-        id="download"
-        className="kit-dl-sec"
-        style={{
-          background: "#08142A",
-          color: "#FFFFFF",
-          padding: "96px 0 108px",
-          borderTop: "1px solid rgba(255, 255, 255, 0.12)"
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
-          <div className="kit-dl-grid">
-            {/* Left: Pitch, Checklist & Headhunt CTAs */}
-            <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(29, 78, 216, 0.2)",
-                  border: "1px solid rgba(96, 165, 250, 0.35)",
-                  borderRadius: "100px",
-                  padding: "5px 14px",
-                  fontSize: "0.78rem",
-                  fontWeight: 600,
-                  color: "#93C5FD",
-                  marginBottom: "18px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em"
-                }}
-              >
-                Complimentary Executive Package
-              </div>
-
-              {/* CRITICAL FIX: Explicit color: #FFFFFF so it never inherits dark ink */}
-              <h2
-                style={{
-                  fontSize: "clamp(2rem, 3.4vw, 2.75rem)",
-                  fontWeight: 700,
-                  color: "#FFFFFF",
-                  margin: "0 0 18px",
-                  fontFamily: "var(--font-serif, Georgia, serif)",
-                  lineHeight: 1.18
-                }}
-              >
-                Receive the Complete{" "}
-                <span className="serif-accent" style={{ color: "#60A5FA", fontStyle: "italic" }}>
-                  Hiring Package
-                </span>{" "}
-                via Email
-              </h2>
-
-              <p style={{ color: "#CBD5E1", fontSize: "1.06rem", lineHeight: 1.6, margin: "0 0 28px" }}>
-                Download clean, editable Word templates and ready-to-print PDF guides to distribute directly to your firm&apos;s hiring committee and managing partners.
-              </p>
-
-              <div style={{ display: "grid", gap: "12px", marginBottom: "36px" }}>
-                {[
-                  "Formatted Word document (.docx) job description template with fillable fields",
-                  "Structured lateral interview question guide with rating indicators",
-                  "Printable candidate assessment scoring matrix with weighted criteria",
-                  "Ten-clause executive offer letter outline with protective conditions",
-                  "Partner origination and associate base pay structures for boutique firms"
-                ].map((item, idx) => (
-                  <div key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                    <span style={{ color: "#60A5FA", fontWeight: 700, fontSize: "1.05rem", lineHeight: 1 }}>✓</span>
-                    <span style={{ color: "#F8FAFC", fontSize: "0.95rem", lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.12)", paddingTop: "24px" }}>
-                <div style={{ fontSize: "0.85rem", color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600, marginBottom: "12px" }}>
-                  Prefer Orion to headhunt this seat directly?
-                </div>
-                <div className="kit-dl-cta-btns" style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
-                  <Link
-                    href="/submit-job"
-                    style={{
-                      background: "#1D4ED8",
-                      color: "#FFFFFF",
-                      padding: "12px 22px",
-                      borderRadius: "7px",
-                      fontWeight: 600,
-                      fontSize: "0.92rem",
-                      textDecoration: "none",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      boxShadow: "0 4px 14px rgba(29, 78, 216, 0.4)"
-                    }}
-                  >
-                    Send Mandate to Justin →
-                  </Link>
-                  <a
-                    href="https://calendly.com/justinsofman/15min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.08)",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      color: "#FFFFFF",
-                      padding: "12px 20px",
-                      borderRadius: "7px",
-                      fontWeight: 600,
-                      fontSize: "0.92rem",
-                      textDecoration: "none",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "8px"
-                    }}
-                  >
-                    Schedule 15-Min Briefing →
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Instant Delivery Form Container */}
-            <div
-              className="kit-dl-form-card"
-              style={{
-                background: "#FFFFFF",
-                borderRadius: "14px",
-                padding: "36px",
-                color: "#08142A",
-                boxShadow: "0 20px 50px rgba(0, 0, 0, 0.35)"
-              }}
-            >
-              <GateForm
-                eyebrow="Instant Email Delivery"
-                title="Email Full Hiring Package"
-                intro={`Editable Word (.docx) & PDF package for ${role.name} seats.`}
-                button="Send Me the Kit"
-                preset="kit"
-                role={role.slug}
-                city={citySlug}
-                review="daffner-law"
-                fine="One automated delivery email. No spam, no telemarketing, and no automated sales contact."
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      </PkSection>
     </div>
   );
 }
