@@ -141,7 +141,7 @@ export function SalaryCheckClient() {
           <input inputMode="numeric" value={bonusInput} onChange={(e) => setBonusInput(e.target.value)} />
         </label>
       </div>
-      <button type="submit" className="pk-btn is-primary sc-go">
+      <button type="submit" className="pk-btn is-primary slc-go">
         Check my pay <PkArrow />
       </button>
       <p className="pk-form-fine">Nothing is saved or sent anywhere.</p>
@@ -149,7 +149,7 @@ export function SalaryCheckClient() {
   );
 
   return (
-    <div className="sc">
+    <div className="slc">
       <PkHero
         eyebrow="Salary check · Free and private"
         title="Is your legal salary"
@@ -171,18 +171,18 @@ export function SalaryCheckClient() {
         accent="sits."
         lead={`Middle half of base salaries by experience. Your level (${eBand.label}) is highlighted.`}
       >
-        <div className="sc-grid">
-          <div className="sc-band">
+        <div className="slc-grid">
+          <div className="slc-band">
             <SalaryBandBar citySlug={city} roleSlug={role} highlight={eKey} marker={base} />
           </div>
-          <div className={`sc-verdict is-${verdict?.tone || "none"}`}>
+          <div className={`slc-verdict is-${verdict?.tone || "none"}`}>
             {verdict ? (
               <>
-                <span className="sc-k">Your result</span>
+                <span className="slc-k">Your result</span>
                 <h3>{verdict.head}</h3>
                 <p>{verdict.body}</p>
                 {bonus && base ? (
-                  <p className="sc-bonus">
+                  <p className="slc-bonus">
                     With a {fmt.k(bonus)} bonus, total cash is <b>{fmt.k(base + bonus)}</b>. {bonusText}
                   </p>
                 ) : null}
@@ -193,27 +193,27 @@ export function SalaryCheckClient() {
                 <p>Your result appears here.</p>
               </>
             )}
-            <Link href={`/salaries/${role}/${city}`} className="sc-guide">
+            <Link href={`/salaries/${role}/${city}`} className="slc-guide">
               Full {cityObj.name} salary guide <PkArrow size={14} />
             </Link>
           </div>
         </div>
 
-        <div className="sc-seats">
-          <div className="sc-seats-head">
+        <div className="slc-seats">
+          <div className="slc-seats-head">
             <h3>{payingMore.length > 0 && base ? `Seats paying more than ${fmt.k(base)}` : `${cityObj.name} seats for your role`}</h3>
             <Link href={`/jobs?l=${encodeURIComponent(cityObj.name)}`}>
               All {cityObj.name} seats <PkArrow size={14} />
             </Link>
           </div>
           {payingMore.length > 0 ? (
-            <div className="sc-seat-grid">
+            <div className="slc-seat-grid">
               {payingMore.slice(0, 3).map((j) => (
                 <JobListCard key={j.id} job={j} selected={false} onSelect={(x) => router.push(`/jobs?job=${encodeURIComponent(x.id)}`)} />
               ))}
             </div>
           ) : (
-            <p className="sc-none">
+            <p className="slc-none">
               No listed seat pays more right now. <Link href="/upload-resume">Get matched privately</Link> and Justin will tell you
               when one opens.
             </p>
